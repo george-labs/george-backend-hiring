@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -15,8 +16,8 @@ public class WordCountI {
         populateStopWords();
     }
 
-    public int wordCountI() {
-        String input = getInput();
+    public int wordCountI(String inputFileName) {
+        String input = getInput(inputFileName);
 
         //Validate the input
         validateInput(input);
@@ -37,12 +38,32 @@ public class WordCountI {
                 .count();
     }
 
-    private String getInput() {
+    private String getInput(String inputFileName) {
+        if (inputFileName != null) {
+            return getInputFromFile(inputFileName);
+        }
+
         //Get a sentence from the user
         Scanner myObj = new Scanner(System.in);
         System.out.println("Enter text: ");
 
         return myObj.nextLine();
+    }
+
+    private String getInputFromFile(String inputFileName) {
+        //TODO refactor later
+        URL resource = this.getClass().getClassLoader().getResource(inputFileName);
+        if (resource != null) {
+            try (BufferedReader br = new BufferedReader(new FileReader(resource.getFile()))) {
+                return br.lines().collect(Collectors.joining(" "));
+            } catch (IOException ex) {
+                //TODO think about testing this branch
+                System.out.println("Cannot read the" + inputFileName + " file!");
+                throw new RuntimeException(ex);
+            }
+        } else {
+            throw new RuntimeException(new FileNotFoundException("The specified file could not be found!"));
+        }
     }
 
     private void validateInput(String input) {
