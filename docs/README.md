@@ -50,7 +50,7 @@ We always put ourselves into our reviewers position to improve their life when r
   pattern: `<firstname>_<lastname>_session_<session-nr>_iteration_<iteration-nr>_<pairing-partner-name>`
     - The `<pairing-partner-name>` is the name of the team member you pair in this iteration
 - Your first iteration must branch off `main`
-- Your branches won't be merged back to master
+- Your branches won't be merged back to `main`
 - Make sure every new branch is based on the previous branch
 
 ### Assumptions
@@ -74,9 +74,9 @@ You can see these rules as the definition of done for an iteration.
 
 This example might also seem a bit hypothetical, but we believe it's small but complicated enough, that it makes sense
 to come up with an Object-Oriented Design which is more sophisticated than implementing your whole solution in a single
-main method 😉.  
-The evaluation won't take longer than 1 work day.  
-In case we think your solution and way of working fits ours we will invite your for the final team matching.  
+main method 😉.
+The evaluation won't take longer than 1 work day.
+In case we think your solution and way of working fits ours, we will invite you for the final team matching.  
 If we do not continue the recruiting process with you, we will send you a detailed feedback of our evaluation.
 
 ### Requirements
@@ -97,6 +97,6 @@ In case you see the need for mocking, please hand-roll your mocks.
 4. Run `./mvnw clean verify` via your terminal
 5. Open the project in your IDE of choice
 6. Create a dummy unit test and run it
-7. Read the requirements from the _Requirements_ section  
+7. Read the requirements from the _Requirements_ section
    Please only read one iteration at a time, starting with iteration 1
 8. Please think about how you will approach this problem in code for a few minutes before you start coding
