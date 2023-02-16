@@ -22,19 +22,21 @@ public class WordCountITest {
     @Test
     public void when_valid_input_with_one_stop_word_then_word_count_printed() {
         String stopWord = "a";
-        System.setIn(new ByteArrayInputStream(("Mary had " + stopWord + " little lamb").getBytes()));
+        System.setIn(new ByteArrayInputStream(("Mary had " + stopWord + " little lamb two two").getBytes()));
 
-        int countI = wordCountI.wordCountI(null);
+        WordCountResultDto result = wordCountI.wordCountI(null);
 
-        assertEquals(4, countI);
+        assertEquals(6, result.getCount());
+        assertEquals(5, result.getUniqueCount());
 
     }
 
     @Test
     public void when_valid_input_from_file_with_one_stop_word_then_word_count_printed() {
-        int countI = wordCountI.wordCountI(INPUT_FILENAME);
+        WordCountResultDto result = wordCountI.wordCountI(INPUT_FILENAME);
 
-        assertEquals(4, countI);
+        assertEquals(6, result.getCount());
+        assertEquals(5, result.getUniqueCount());
 
     }
 
@@ -42,18 +44,20 @@ public class WordCountITest {
     public void when_only_stop_words_then_word_count_printed() {
         System.setIn(new ByteArrayInputStream("the a on off".getBytes()));
 
-        int countI = wordCountI.wordCountI(null);
+        WordCountResultDto result = wordCountI.wordCountI(null);
 
-        assertEquals(0, countI);
+        assertEquals(0, result.getCount());
+        assertEquals(0, result.getUniqueCount());
     }
 
     @Test
     public void when_valid_input_then_word_count_printed() {
         System.setIn(new ByteArrayInputStream("Mary had six little lambs".getBytes()));
 
-        int countI = wordCountI.wordCountI(null);
+        WordCountResultDto result = wordCountI.wordCountI(null);
 
-        assertEquals(5, countI);
+        assertEquals(5, result.getCount());
+        assertEquals(5, result.getUniqueCount());
 
     }
 

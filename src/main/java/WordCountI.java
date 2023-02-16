@@ -3,9 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WordCountI {
@@ -16,26 +14,29 @@ public class WordCountI {
         populateStopWords();
     }
 
-    public int wordCountI(String inputFileName) {
+    public WordCountResultDto wordCountI(String inputFileName) {
         String input = getInput(inputFileName);
 
         //Validate the input
         validateInput(input);
 
         //Slice the string by space
-        int count = getWordCount(input);
+        WordCountResultDto result = getWordCount(input);
 
         //Output the length
-        System.out.println("Number of words: " + count);
-        return count;
+        System.out.println("Number of words: " + result.getCount() + ", unique: " + result.getUniqueCount());
+        return result;
     }
 
-    private int getWordCount(String input) {
+    private WordCountResultDto getWordCount(String input) {
         String[] split = input.split(" ");
 
-        return (int) Arrays.stream(split)
+        List<String> filteredInput = Arrays.stream(split)
                 .filter(word -> !stopWords.contains(word))
-                .count();
+                .collect(Collectors.toList());
+        Set<String> uniqueInput = new HashSet<>(filteredInput);
+
+        return new WordCountResultDto(filteredInput.size(), uniqueInput.size());
     }
 
     private String getInput(String inputFileName) {
