@@ -1,11 +1,16 @@
+import io.IFileHandler;
+import io.LocalFileHandler;
+import service.WordCountService;
+
 public class JavaApplication {
 
     public static void main(String[] args) {
-        WordCountI wordCountI = new WordCountI();
+        IFileHandler fileHandler = new LocalFileHandler();
+        WordCountService wordCountService = new WordCountService(fileHandler);
         if (args.length == 0) {
-            wordCountI.wordCountI(null);
+            wordCountService.countWords(null);
         } else {
-            wordCountI.wordCountI(args[0]);
+            wordCountService.countWords(args[0]);
         }
     }
 

@@ -1,27 +1,32 @@
+package service;
+
+import dto.WordCountResultDto;
+import io.IFileHandler;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class WordCountI {
+public class WordCountService {
 
-    private Set<String> stopWords;
+    private final Set<String> stopWords;
 
-    WordCountI() {
-        stopWords = IOUtility.populateStopWords(this.getClass());
+    private final IFileHandler fileHandler;
+
+    public WordCountService(IFileHandler fileHandler) {
+        this.fileHandler = fileHandler;
+        stopWords = fileHandler.populateStopWords();
     }
 
-    public WordCountResultDto wordCountI(String inputFileName) {
-        String input = IOUtility.getInput(inputFileName);
+    public WordCountResultDto countWords(String inputFileName) {
+        String input = fileHandler.getInput(inputFileName);
 
-        //Validate the input
         validateInput(input);
 
-        //Slice the string by space
         WordCountResultDto result = getWordCount(input);
 
-        //Output the length
         System.out.println("Number of words: " + result.getCount() + ", unique: " + result.getUniqueCount());
         return result;
     }

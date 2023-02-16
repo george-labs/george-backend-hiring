@@ -1,3 +1,5 @@
+package dto;
+
 public class WordCountResultDto {
 
     private final int count;
