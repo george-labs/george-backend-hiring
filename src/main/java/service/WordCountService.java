@@ -47,7 +47,8 @@ public class WordCountService {
             throw new RuntimeException("The input string is blank!");
         }
 
-        boolean valid = input.matches("[a-zA-Z ]+");
+        //TODO needs updating the regex for e.g. ---
+        boolean valid = input.matches("[a-zA-Z -]+");
         if (!valid) {
             throw new RuntimeException("The input string contains invalid character(s)!");
         }

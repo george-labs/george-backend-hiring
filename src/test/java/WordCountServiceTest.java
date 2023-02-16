@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class WordCountServiceTest {
 
     private static final String INPUT_FILENAME = "input.txt";
+    private static final String INPUT2_FILENAME = "input2.txt";
 
     InputStream stdin = System.in;
     IFileHandler fileHandler = new LocalFileHandler();
@@ -42,6 +43,15 @@ public class WordCountServiceTest {
 
         assertEquals(6, result.getCount());
         assertEquals(5, result.getUniqueCount());
+
+    }
+
+    @Test
+    public void when_valid_input_from_input2_file_then_word_count_printed() {
+        WordCountResultDto result = wordCountService.countWords(INPUT2_FILENAME);
+
+        assertEquals(7, result.getCount());
+        assertEquals(6, result.getUniqueCount());
 
     }
 
