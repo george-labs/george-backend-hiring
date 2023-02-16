@@ -39,7 +39,7 @@ public class WordCountITest {
 
     @Test
     public void when_valid_input_then_word_count_printed() {
-        System.setIn(new ByteArrayInputStream(("Mary had six little lambs").getBytes()));
+        System.setIn(new ByteArrayInputStream("Mary had six little lambs".getBytes()));
 
         int countI = wordCountI.wordCountI();
 
