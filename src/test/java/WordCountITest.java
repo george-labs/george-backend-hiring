@@ -18,8 +18,28 @@ public class WordCountITest {
     }
 
     @Test
-    public void when_valid_input_word_count_printed() {
-        System.setIn(new ByteArrayInputStream("Mary had a little lamb".getBytes()));
+    public void when_valid_input_with_one_stop_word_then_word_count_printed() {
+        String stopWord = "a";
+        System.setIn(new ByteArrayInputStream(("Mary had " + stopWord + " little lamb").getBytes()));
+
+        int countI = wordCountI.wordCountI();
+
+        assertEquals(4, countI);
+
+    }
+
+    @Test
+    public void when_only_stop_words_then_word_count_printed() {
+        System.setIn(new ByteArrayInputStream("the a on off".getBytes()));
+
+        int countI = wordCountI.wordCountI();
+
+        assertEquals(0, countI);
+    }
+
+    @Test
+    public void when_valid_input_then_word_count_printed() {
+        System.setIn(new ByteArrayInputStream(("Mary had six little lambs").getBytes()));
 
         int countI = wordCountI.wordCountI();
 
@@ -41,7 +61,5 @@ public class WordCountITest {
 
         assertThrows(RuntimeException.class, wordCountI::wordCountI, "The input string is blank!");
     }
-
-
 
 }

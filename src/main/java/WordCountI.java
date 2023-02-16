@@ -1,6 +1,12 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class WordCountI {
+
+    private static Set<String> stopWords = Set.of("the", "a", "on", "off");
 
     public int wordCountI() {
         String input = getInput();
@@ -9,11 +15,15 @@ public class WordCountI {
         validateInput(input);
 
         //Slice the string by space
-        int wordCount = input.split(" ").length;
+        String[] split = input.split(" ");
+
+        List<String> wordCountWithoutStopWords = Arrays.stream(split)
+                .filter(word -> !stopWords.contains(word))
+                .collect(Collectors.toList());
 
         //Output the length
-        System.out.println("Number of words: " + wordCount);
-        return wordCount;
+        System.out.println("Number of words: " + wordCountWithoutStopWords.size());
+        return wordCountWithoutStopWords.size();
     }
 
     private String getInput() {
