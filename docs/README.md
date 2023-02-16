@@ -47,7 +47,7 @@ Empathy in our team is highly valued.
 We always put ourselves into our reviewers position to improve their life when reviewing our code.
 
 - For each iteration, please create a branch with the following
-  pattern: `<firstname>_<lastname>_session_<session-nr>_iteration_<iteration-nr>_<pairing-partner-name>`
+  pattern: `<firstname>_<lastname>_iteration_<iteration-nr>_<pairing-partner-name>`
     - The `<pairing-partner-name>` is the name of the team member you pair in this iteration
 - Your first iteration must branch off `main`
 - Your branches won't be merged back to `main`
@@ -92,7 +92,7 @@ In case you see the need for mocking, please hand-roll your mocks.
 
 1. Clone the repository
 2. Create a branch off `main`  
-   `<firstname>_<lastname>_sesssion_1_iteration_1_<pairing-partner-name>`
+   `<firstname>_<lastname>_iteration_1_<pairing-partner-name>`
 3. Push this branch to the repository
 4. Run `./mvnw clean verify` via your terminal
 5. Open the project in your IDE of choice
