@@ -4,10 +4,7 @@ import wordcount.CriticalAppException;
 import wordcount.InputReader;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.util.Objects;
 
 public class InputFileReader implements InputReader {
@@ -20,11 +17,12 @@ public class InputFileReader implements InputReader {
 
     @Override
     public String readInput() {
-        try {
-            Path path = Paths.get(Objects.requireNonNull(getClass().getClassLoader()
-                    .getResource(filename)).toURI());
-            return String.join(" ", Files.readAllLines(path));
-        } catch (URISyntaxException | IOException e) {
+        try (InputStream inputStream = Objects.requireNonNull(getClass().getClassLoader()
+                .getResourceAsStream(filename))) {
+            return new String(inputStream.readAllBytes())
+                    .replace(System.lineSeparator(), " ")
+                    .trim();
+        } catch (IOException e) {
             throw new CriticalAppException("Failed to read the file with input");
         }
     }
