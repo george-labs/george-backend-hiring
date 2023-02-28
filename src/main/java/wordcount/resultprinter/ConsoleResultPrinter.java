@@ -12,7 +12,7 @@ public class ConsoleResultPrinter implements ResultPrinter {
     }
 
     @Override
-    public void printResult(Integer result) {
+    public void printResult(Long result) {
         outputPrinter.print("Number of words: ");
         outputPrinter.print(result.toString());
     }

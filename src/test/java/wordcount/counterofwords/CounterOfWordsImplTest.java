@@ -3,20 +3,23 @@ package wordcount.counterofwords;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CounterOfWordsImplTest {
 
     private CounterOfWordsImpl counter;
+    private final List<String> stopWords = List.of("the", "a", "on", "off");
 
     @BeforeEach
     void setUp() {
-        counter = new CounterOfWordsImpl();
+        counter = new CounterOfWordsImpl(stopWords);
     }
 
     @Test
-    void count_fiveWords() {
-        assertEquals(5, counter.count("Mary had a little lamb"));
+    void count_fourWords() {
+        assertEquals(4, counter.count("Mary had a little lamb"));
     }
 
     @Test
@@ -26,6 +29,6 @@ class CounterOfWordsImplTest {
 
     @Test
     void count_numberInTheMiddle() {
-        assertEquals(4, counter.count("one two a3b"));
+        assertEquals(3, counter.count("one two a3b"));
     }
 }

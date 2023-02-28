@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class WordCountTest {
@@ -23,7 +24,10 @@ class WordCountTest {
 
         WordCount.main(new String[]{});
 
-        assertTrue(outputStreamCaptor.toString().contains("Number of words: 5"));
+        assertAll(
+                () -> assertTrue(outputStreamCaptor.toString().contains("Enter text:")),
+                () -> assertTrue(outputStreamCaptor.toString().contains("Number of words: 4"))
+        );
 
         System.setIn(oldInputStream);
         System.setOut(oldOut);
