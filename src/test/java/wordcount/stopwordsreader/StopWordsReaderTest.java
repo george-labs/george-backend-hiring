@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class StopWordsReaderTest {
 
     @Test
-    void raed() {
+    void read() {
         FileReader fileReader = new StopWordsReader();
-        assertEquals(List.of("the", "a", "on", "off"), fileReader.raed());
+        assertEquals(List.of("the", "a", "on", "off"), fileReader.read());
     }
 }

@@ -33,7 +33,7 @@ public class WordCount {
         InputReaderFactory inputReaderFactory = new InputReaderFactory(outputPrinter);
         inputReader = inputReaderFactory.create(filename);
         FileReader fileReader = new StopWordsReader();
-        List<String> stopWords = fileReader.raed();
+        List<String> stopWords = fileReader.read();
         counterOfWords = new CounterOfWordsImpl(stopWords);
         resultPrinter = new ConsoleResultPrinter(outputPrinter);
 
