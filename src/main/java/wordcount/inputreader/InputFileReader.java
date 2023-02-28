@@ -1,7 +1,7 @@
 package wordcount.inputreader;
 
+import wordcount.CriticalAppException;
 import wordcount.InputReader;
-import wordcount.stopwordsreader.CriticalAppException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

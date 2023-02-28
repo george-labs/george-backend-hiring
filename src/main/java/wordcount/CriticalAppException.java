@@ -1,4 +1,4 @@
-package wordcount.stopwordsreader;
+package wordcount;
 
 public class CriticalAppException extends RuntimeException {
     public CriticalAppException(String message) {

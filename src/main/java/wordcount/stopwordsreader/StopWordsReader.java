@@ -1,5 +1,6 @@
 package wordcount.stopwordsreader;
 
+import wordcount.CriticalAppException;
 import wordcount.FileReader;
 
 import java.io.IOException;

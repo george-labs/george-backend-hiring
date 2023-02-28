@@ -1,7 +1,7 @@
 package wordcount;
 
 import wordcount.counterofwords.CounterOfWordsImpl;
-import wordcount.inputreader.ConsoleInputReader;
+import wordcount.inputreader.InputReaderFactory;
 import wordcount.printer.ConsoleOutputPrinter;
 import wordcount.resultprinter.ConsoleResultPrinter;
 import wordcount.stopwordsreader.StopWordsReader;
@@ -19,8 +19,19 @@ public class WordCount {
     }
 
     public static void main(String[] args) {
+
+        if (args.length > 1) {
+            throw new CriticalAppException("Error. Only one argument supported");
+        }
+
+        String filename = null;
+        if (args.length == 1) {
+            filename = args[0];
+        }
+
         OutputPrinter outputPrinter = new ConsoleOutputPrinter();
-        inputReader = new ConsoleInputReader(outputPrinter);
+        InputReaderFactory inputReaderFactory = new InputReaderFactory(outputPrinter);
+        inputReader = inputReaderFactory.create(filename);
         FileReader fileReader = new StopWordsReader();
         List<String> stopWords = fileReader.raed();
         counterOfWords = new CounterOfWordsImpl(stopWords);
