@@ -2,5 +2,5 @@ package wordcount;
 
 public interface ResultPrinter {
 
-    void printResult(Integer result);
+    void printResult(Long result);
 }

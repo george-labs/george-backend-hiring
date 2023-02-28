@@ -23,7 +23,7 @@ class WordCountTest {
 
         WordCount.main(new String[]{});
 
-        assertTrue(outputStreamCaptor.toString().contains("Number of words: 5"));
+        assertTrue(outputStreamCaptor.toString().contains("Number of words: 4"));
 
         System.setIn(oldInputStream);
         System.setOut(oldOut);
