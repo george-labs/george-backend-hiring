@@ -6,6 +6,6 @@ public class CounterOfWordsImpl implements CounterOfWords {
 
     @Override
     public Integer count(String input) {
-        return input.split(" ").length;
+        return input.split("[^a-z,A-Z]").length;
     }
 }
