@@ -16,4 +16,14 @@ class WordCountTests {
                text = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.",
                stopWords = listOf("a", "on")))
     }
+
+    @Test
+    fun `getWords with stop words`() {
+       Assertions.assertEquals(listOf("Mary", "had", "little", "lamb"),
+               getWords("Mary had a little lamb", listOf("a", "of", "the")))
+       Assertions.assertEquals(listOf("Humpty", "Dumpty", "sat", "wall", "Humpty", "Dumpty", "had", "great", "fall"),
+               getWords(
+                   text = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.",
+                   stopWords = listOf("a", "on")))
+    }
 }
