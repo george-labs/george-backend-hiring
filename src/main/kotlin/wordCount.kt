@@ -3,14 +3,6 @@ import kotlin.system.exitProcess
 
 const val STOP_WORD_FILENAME = "stopwords.txt"
 
-/**
- * Returns the number of words in the text,
- * words hve to be separated by one or more " " (space) characters,
- * a sequence of characters containing anything else except a-z and A-Z is not a word and thus ignored
- */
-fun countWords(text: String, stopWords: List<String>) =
-    getWords(text, stopWords).count()
-
 fun getWords(text: String, stopWords: List<String>) =
     text.split(Regex("[^A-Za-z]+"))
             .filter {
@@ -36,6 +28,9 @@ fun handleWrongArguments(): Nothing {
     exitProcess(1)
 }
 
+fun reportWordCounts(words: List<String>) =
+    WordCountReport(words.count(), words.distinct().count())
+
 fun main(args: Array<String>) {
     val stopWords = readStopWords()
     val inputString = when (args.size) {
@@ -43,6 +38,6 @@ fun main(args: Array<String>) {
         1 -> readInputFromFile(args[0])
         else -> handleWrongArguments()
     }
-    val count = countWords(inputString, stopWords)
-    println("Number of words: $count")
+    val wordCountReport = reportWordCounts(getWords(inputString, stopWords))
+    println("Number of words: ${wordCountReport.totalCount}, unique: ${wordCountReport.uniqueCount}")
 }
