@@ -1,4 +1,5 @@
 import java.io.File
+import kotlin.system.exitProcess
 
 const val STOP_WORD_FILENAME = "stopwords.txt"
 
@@ -24,18 +25,18 @@ fun askUserForInput(): String {
     return readln()
 }
 
-fun handleWrongArguments() {
+fun handleWrongArguments(): Nothing {
     System.err.println("Usage: No argument or 1 argument with input filename")
-    System.exit(1)
+    exitProcess(1)
 }
 
 fun main(args: Array<String>) {
     val stopWords = readStopWords()
-    when (args.size) {
+    val inputString = when (args.size) {
         0 -> askUserForInput()
         1 -> readInputFromFile(args[0])
         else -> handleWrongArguments()
     }
-    val count = countWords(readln(), stopWords)
+    val count = countWords(inputString, stopWords)
     println("Number of words: $count")
 }
