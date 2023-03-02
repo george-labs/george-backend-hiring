@@ -16,3 +16,8 @@
 ## Iteration 5
 - Doubled or tripled etc. hyphens cannot be used to join parts of one word
 - Hyphens at the start or end of a word are not part of the word, so e.g. beautiful and beautiful- are the same word
+
+## Iteration 6
+- Average length is computed from all words, so multiple occurrences of a word do have impact on the average
+- The average is displayed rounded to 2 decimal places
+- If there are 0 words, we print N/A instead of the average

@@ -1,7 +1,10 @@
 import java.io.File
+import java.math.BigDecimal
+import java.math.RoundingMode
 import kotlin.system.exitProcess
 
 const val STOP_WORD_FILENAME = "stopwords.txt"
+const val ROUND_PLACES = 2
 
 /**
  * a word starts with 1 or more letters
@@ -31,8 +34,20 @@ fun handleWrongArguments(): Nothing {
     exitProcess(1)
 }
 
+/**
+ * Only works for non-empty list
+ */
+fun averageLength(words: List<String>) =
+   BigDecimal(words.map { it.length }.average()).setScale(ROUND_PLACES, RoundingMode.HALF_UP)
+
 fun reportWordCounts(words: List<String>) =
-    WordCountReport(words.count(), words.distinct().count())
+    WordCountReport(
+            totalCount = words.count(),
+            uniqueCount = words.distinct().count(),
+            averageWordLength = if (words.isEmpty()) null else averageLength(words))
+
+fun formatOptionalNumber(number: BigDecimal?) =
+        number?.toString() ?: "N/A"
 
 fun main(args: Array<String>) {
     val stopWords = readStopWords()
@@ -42,5 +57,5 @@ fun main(args: Array<String>) {
         else -> handleWrongArguments()
     }
     val wordCountReport = reportWordCounts(getWords(inputString, stopWords))
-    println("Number of words: ${wordCountReport.totalCount}, unique: ${wordCountReport.uniqueCount}")
+    println(wordCountReport)
 }

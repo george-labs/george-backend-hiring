@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import java.math.BigDecimal
 
 class WordCountTests {
     @Test
@@ -32,9 +33,25 @@ class WordCountTests {
 
     @Test
     fun reportWordCount() {
-        Assertions.assertEquals(WordCountReport(totalCount = 9, uniqueCount = 7),
+        Assertions.assertEquals(WordCountReport(
+                totalCount = 9,
+                uniqueCount = 7,
+                averageWordLength = BigDecimal("4.78")),
                 reportWordCounts(listOf("Humpty", "Dumpty", "sat", "wall", "Humpty", "Dumpty", "had", "great", "fall")))
-        Assertions.assertEquals(WordCountReport(totalCount = 7, uniqueCount = 6),
+        Assertions.assertEquals(WordCountReport(
+                totalCount = 7,
+                uniqueCount = 6,
+                averageWordLength = BigDecimal("6.43")),
                 reportWordCounts(listOf("Humpty-Dumpty", "sat", "wall", "Humpty-Dumpty", "had", "great", "fall")))
+        Assertions.assertEquals(WordCountReport(
+                totalCount = 3,
+                uniqueCount = 2,
+                averageWordLength = BigDecimal("3.67")),
+                reportWordCounts(listOf("aaaa", "bbb", "aaaa")))
+        Assertions.assertEquals(WordCountReport(
+                totalCount = 0,
+                uniqueCount = 0,
+                averageWordLength = null),
+                reportWordCounts(listOf()))
     }
 }
