@@ -9,9 +9,13 @@ const val STOP_WORD_FILENAME = "stopwords.txt"
  * a sequence of characters containing anything else except a-z and A-Z is not a word and thus ignored
  */
 fun countWords(text: String, stopWords: List<String>) =
-    text.split(Regex(" +"))
-            .filter { it.matches(Regex("[A-Za-z]+")) }
-            .filter { !stopWords.contains(it) }
+    text.split(Regex("[^A-Za-z]+"))
+            .filter {
+                it.isNotEmpty()
+            }
+            .filter {
+                !stopWords.contains(it)
+            }
             .count()
 
 fun readStopWords() =
