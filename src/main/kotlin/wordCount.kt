@@ -16,9 +16,26 @@ fun countWords(text: String, stopWords: List<String>) =
 fun readStopWords() =
     File(STOP_WORD_FILENAME).useLines { it.toList() }
 
-fun main() {
-    val stopWords = readStopWords()
+fun readInputFromFile(filename: String) =
+    File(filename).useLines { it.toList() }.joinToString(" ")
+
+fun askUserForInput(): String {
     print("Enter text: ")
+    return readln()
+}
+
+fun handleWrongArguments() {
+    System.err.println("Usage: No argument or 1 argument with input filename")
+    System.exit(1)
+}
+
+fun main(args: Array<String>) {
+    val stopWords = readStopWords()
+    when (args.size) {
+        0 -> askUserForInput()
+        1 -> readInputFromFile(args[0])
+        else -> handleWrongArguments()
+    }
     val count = countWords(readln(), stopWords)
     println("Number of words: $count")
 }
