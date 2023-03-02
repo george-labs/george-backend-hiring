@@ -8,7 +8,7 @@ class WordCountTests {
                 getWords("Mary had a little lamb", listOf()))
         Assertions.assertEquals(listOf("Mary", "had", "a", "little", "lamb"),
                 getWords("Mary had  a little lamb", listOf()))
-        Assertions.assertEquals(listOf("Mary", "Ann", "had", "a", "little", "lamb"),
+        Assertions.assertEquals(listOf("Mary-Ann", "had", "a", "little", "lamb"),
                 getWords("Mary-Ann had a little lamb", listOf()))
     }
 

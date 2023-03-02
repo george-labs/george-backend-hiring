@@ -7,10 +7,11 @@ const val STOP_WORD_FILENAME = "stopwords.txt"
  * a word starts with 1 or more letters
  * a word can be multiple sequences of characters connected by a single hyphen
  */
-val WORD_REGEX = Regex("[A-Za-z](?:-[A-Za-z]+)*")
+val WORD_REGEX = Regex("[A-Za-z]+(?:-[A-Za-z]+)*")
 
 fun getWords(text: String, stopWords: List<String>) =
     generateSequence(WORD_REGEX.find(text)) { it.next() }
+            .map { it.value }
             .filter { !stopWords.contains(it) }
             .toList()
 
