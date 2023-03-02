@@ -12,3 +12,7 @@
 
 ## Iteration 4
 - Change the original definition of word to be counted: A word is any non-empty sequence of letters (a-z or A-Z), any non-letter characters are just separator and never counted, words containing hyphen are counted as multiple words
+
+## Iteration 5
+- Doubled or tripled etc. hyphens cannot be used to join parts of one word
+- Hyphens at the start or end of a word are not part of the word, so e.g. beautiful and beautiful- are the same word
