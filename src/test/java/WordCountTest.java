@@ -1,15 +1,23 @@
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
+
+import java.util.Collections;
+import java.util.stream.Stream;
 
 public class WordCountTest {
 
-    @Test
-    void when_input_is_empty_return_0() {
-        WordCount wordCount = new WordCount();
-        WordCountResult result = wordCount.count("");
-        Assertions.assertEquals(0, result.getNumberOfWords());
+    @TestFactory
+    Stream<DynamicTest> dynamicTestsFromCollection() {
+        return Stream.of("-mary", "mary-", "---", "-", "Humpty--Dumpty Humpty--Dumpty", "", " ", "123").map(s ->
+                DynamicTest.dynamicTest("Test invalid input: " + s, () -> {
+                    WordCount wordCount = new WordCount();
+                    WordCountResult result = wordCount.count(s);
+                    Assertions.assertEquals(0, result.getNumberOfWords());
+                    Assertions.assertEquals(0, result.getNumberOfUniqueWords());
+        }));
     }
-
     @Test
     void when_input_is_one_word_then_return_1() {
         WordCount wordCount = new WordCount();
@@ -39,13 +47,6 @@ public class WordCountTest {
     }
 
     @Test
-    void when_input_is_a_number_then_return_0() {
-        WordCount wordCount = new WordCount();
-        WordCountResult result =  wordCount.count("123");
-        Assertions.assertEquals(0, result.getNumberOfWords());
-    }
-
-    @Test
     void when_input_contains_number_then_return_correct_number_of_words() {
         WordCount wordCount = new WordCount();
         WordCountResult result =  wordCount.count("Mary had 1 little lamb");
@@ -57,13 +58,6 @@ public class WordCountTest {
         WordCount wordCount = new WordCount();
         WordCountResult result =  wordCount.count("Mary ha@d a & little lamb!");
         Assertions.assertEquals(3, result.getNumberOfWords());
-    }
-
-    @Test
-    void when_input_only_space_then_return_0() {
-        WordCount wordCount = new WordCount();
-        WordCountResult result =  wordCount.count(" ");
-        Assertions.assertEquals(0, result.getNumberOfWords());
     }
 
     @Test
@@ -82,14 +76,6 @@ public class WordCountTest {
         Assertions.assertEquals(6, actualResult.getNumberOfUniqueWords());
     }
 
-    @Test
-    void when_input_is_empty_number_of_words_and_unique_words_0() {
-        WordCount wordCount = new WordCount();
-        String text = "";
-        WordCountResult result = wordCount.count(text);
-        Assertions.assertEquals(0, result.getNumberOfWords());
-        Assertions.assertEquals(0, result.getNumberOfUniqueWords());
-    }
 
     @Test
     void when_input_is_same_word_uppercase_and_lowercase_return_2() {
@@ -117,51 +103,6 @@ public class WordCountTest {
         WordCountResult result = wordCount.count(text);
         Assertions.assertEquals(8, result.getNumberOfWords());
         Assertions.assertEquals(6, result.getNumberOfUniqueWords());
-    }
-
-    @Test
-    void when_input_has_multiple_hypen_then_return_correct_number_of_words() {
-        WordCount wordCount = new WordCount();
-        String text = "Humpty--Dumpty Humpty--Dumpty";
-        WordCountResult result = wordCount.count(text);
-        Assertions.assertEquals(0, result.getNumberOfWords());
-        Assertions.assertEquals(0, result.getNumberOfUniqueWords());
-    }
-
-    @Test
-    void when_input_is_only_hypen_then_return_0() {
-        WordCount wordCount = new WordCount();
-        String text = "-";
-        WordCountResult result = wordCount.count(text);
-        Assertions.assertEquals(0, result.getNumberOfWords());
-        Assertions.assertEquals(0, result.getNumberOfUniqueWords());
-    }
-
-    @Test
-    void when_input_is_multiple_hypen_word_then_return_0() {
-        WordCount wordCount = new WordCount();
-        String text = "---";
-        WordCountResult result = wordCount.count(text);
-        Assertions.assertEquals(0, result.getNumberOfWords());
-        Assertions.assertEquals(0, result.getNumberOfUniqueWords());
-    }
-
-    @Test
-    void when_input_is_word_with_ends_with_hypen_then_return_0() {
-        WordCount wordCount = new WordCount();
-        String text = "mary-";
-        WordCountResult result = wordCount.count(text);
-        Assertions.assertEquals(0, result.getNumberOfWords());
-        Assertions.assertEquals(0, result.getNumberOfUniqueWords());
-    }
-
-    @Test
-    void when_input_starts_with_hypen_then_return_0() {
-        WordCount wordCount = new WordCount();
-        String text = "-mary";
-        WordCountResult result = wordCount.count(text);
-        Assertions.assertEquals(0, result.getNumberOfWords());
-        Assertions.assertEquals(0, result.getNumberOfUniqueWords());
     }
 
     @Test
