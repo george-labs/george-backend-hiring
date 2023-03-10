@@ -27,13 +27,5 @@ public class WordCount {
         return false;
     }
 
-    public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        StopWordReader stopWordReader = new StopWordReader("stopwords.txt");
-        stopWordReader.read();
-        System.out.println("Enter text:");
-        String input = sc.nextLine();
-        WordCount wordCount = new WordCount();
-        System.out.println("Number of words: " + wordCount.count(input, stopWordReader.getWordsToFilterOut()));
-    }
+
 }

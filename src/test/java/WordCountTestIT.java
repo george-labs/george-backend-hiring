@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -34,5 +35,27 @@ public class WordCountTestIT {
         WordCount wordCount = new WordCount();
         Long numberWords = wordCount.count("Mary had a little lamb", stopWordReader.getWordsToFilterOut());
         Assertions.assertEquals(5, numberWords);
+    }
+
+    @Test
+    void when_input_is_from_file_then_count_words() throws IOException {
+        StopWordReader stopWordReader = new StopWordReader(STOPWORDS_FILE);
+        stopWordReader.read();
+        TextFileReader textFileReader = new TextFileReader();
+        String text = textFileReader.read("src/test/resources/mytext.txt");
+        WordCount wordCount = new WordCount();
+        Long numberWords = wordCount.count(text, stopWordReader.getWordsToFilterOut());
+        Assertions.assertEquals(4, numberWords);
+    }
+
+    @Test
+    void when_input_file_is_empty_count_words_is_0() throws IOException {
+        StopWordReader stopWordReader = new StopWordReader(STOPWORDS_FILE);
+        stopWordReader.read();
+        TextFileReader textFileReader = new TextFileReader();
+        String text = textFileReader.read("src/test/resources/mytext_empty.txt");
+        WordCount wordCount = new WordCount();
+        Long numberWords = wordCount.count(text, stopWordReader.getWordsToFilterOut());
+        Assertions.assertEquals(0, numberWords);
     }
 }
