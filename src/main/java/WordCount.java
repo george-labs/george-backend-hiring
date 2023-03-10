@@ -46,10 +46,6 @@ public class WordCount {
     }
 
     private boolean containsSymbol(String s) {
-        for (Character c : s.toCharArray()) {
-            if (!Character.isLetter(c))
-                return true;
-        }
-        return false;
+        return !(s.matches("[a-zA-Z]+") || s.matches("[a-zA-Z]+-[a-zA-Z]+"));
     }
 }
