@@ -7,13 +7,13 @@ In this stage you have to show practical skills in the things which we discussed
 - Refactoring
 - Automated Testing (Unit & Integration Tests)
 
-### Pair-Programming Sessions
+### WordCountResult-Programming Sessions
 
 You will collaborate in five sessions with George Backend Chapter team members.
 Every session takes one hour. There will be a one-hour lunch break from 12am to 1pm.
 At the beginning of every session a new George Backend team member will join while the previous colleague leaves.
 
-In the Remote-Pair-Programming Sessions you need to share your screen so that we can follow your progress.
+In the Remote-WordCountResult-Programming Sessions you need to share your screen so that we can follow your progress.
 In case you have a dual monitor setup, please make sure that you also share your browser window.
 Of course, you can use the web to research in case you need to look up something.
 In general, it should feel as if you would have a regular day at work.
