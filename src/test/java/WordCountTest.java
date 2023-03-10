@@ -37,4 +37,39 @@ public class WordCountTest {
         Long numberWords = wordCount.count("Mary\thad a little lamb");
         Assertions.assertEquals(5, numberWords);
     }
+
+    @Test
+    void when_input_is_a_number_then_return_0() {
+        WordCount wordCount = new WordCount();
+        Long numberWords = wordCount.count("123");
+        Assertions.assertEquals(0, numberWords);
+    }
+
+    @Test
+    void when_input_contains_number_then_return_correct_number_of_words() {
+        WordCount wordCount = new WordCount();
+        Long numberWords = wordCount.count("Mary had 1 little lamb");
+        Assertions.assertEquals(4, numberWords);
+    }
+
+    @Test
+    void when_input_contains_symbol_then_return_correct_number_of_words() {
+        WordCount wordCount = new WordCount();
+        Long numberWords = wordCount.count("Mary ha@d a & little lamb!");
+        Assertions.assertEquals(3, numberWords);
+    }
+
+    @Test
+    void when_input_only_space_then_return_0() {
+        WordCount wordCount = new WordCount();
+        Long numberWords = wordCount.count(" ");
+        Assertions.assertEquals(0, numberWords);
+    }
+
+    @Test
+    void when_input_contains_punctuation_then_return_correct_number_of_words() {
+        WordCount wordCount = new WordCount();
+        Long numberWords = wordCount.count("Mary had a little lamb.");
+        Assertions.assertEquals(4, numberWords);
+    }
 }
