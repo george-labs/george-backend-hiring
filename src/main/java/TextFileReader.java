@@ -1,18 +1,28 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 public class TextFileReader {
+    private List<String> lines = new ArrayList<>();
+    private File inputFile;
 
-    public String read(String inputFile) throws FileNotFoundException {
-        List<String> text = new ArrayList<>();
-        File fileReader = new File(inputFile);
-        Scanner scanner = new Scanner(fileReader);
-        while (scanner.hasNextLine()) {
-            text.add(scanner.nextLine());
+    public TextFileReader(String inputFile) {
+        this.inputFile = new File(inputFile);
+    }
+
+    public String read() throws FileNotFoundException {
+        try (Scanner scanner = new Scanner(inputFile)) {
+            while (scanner.hasNextLine()) {
+                lines.add(scanner.nextLine());
+            }
+            return String.join(" ", lines);
         }
-        return String.join(" ", text);
+    }
+
+    public List<String> getWordsToFilterOut() {
+        return Collections.unmodifiableList(lines);
     }
 }

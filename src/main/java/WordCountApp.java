@@ -29,10 +29,10 @@ public class WordCountApp {
     }
 
     private void runFile() throws IOException {
-        StopWordReader stopWordReader = new StopWordReader("stopwords.txt");
+        TextFileReader stopWordReader = new TextFileReader("stopwords.txt");
         stopWordReader.read();
-        TextFileReader textFileReader = new TextFileReader();
-        String text = textFileReader.read(args[0]);
+        TextFileReader textFileReader = new TextFileReader(args[0]);
+        String text = textFileReader.read();
         WordCount wordCount = new WordCount();
         WordCountResult result = wordCount.count(text, stopWordReader.getWordsToFilterOut());
         System.out.println("Number of words: " + result.getNumberOfWords() + ", Number of unique words: " + result.getNumberOfUniqueWords());
@@ -40,7 +40,7 @@ public class WordCountApp {
 
     private void runConsole() throws IOException {
         Scanner sc = new Scanner(System.in);
-        StopWordReader stopWordReader = new StopWordReader("stopwords.txt");
+        TextFileReader stopWordReader = new TextFileReader("stopwords.txt");
         stopWordReader.read();
         System.out.println("Enter text:");
         String input = sc.nextLine();

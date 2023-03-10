@@ -10,7 +10,7 @@ public class WordCountTestIT {
     private final String EMPTY_STOPWORDS = "src/test/resources/stopwords_empty.txt";
     @Test
     void when_count_words_with_filter_list_words_are_filtered_out() throws IOException {
-        StopWordReader stopWordReader = new StopWordReader(STOPWORDS_FILE);
+        TextFileReader stopWordReader = new TextFileReader(STOPWORDS_FILE);
         stopWordReader.read();
         List<String> filterList = stopWordReader.getWordsToFilterOut();
         WordCount wordCount = new WordCount();
@@ -20,7 +20,7 @@ public class WordCountTestIT {
 
     @Test
     void when_input_is_empty_return_0() throws IOException {
-        StopWordReader stopWordReader = new StopWordReader(STOPWORDS_FILE);
+        TextFileReader stopWordReader = new TextFileReader(STOPWORDS_FILE);
         stopWordReader.read();
         WordCount wordCount = new WordCount();
         WordCountResult result = wordCount.count("", stopWordReader.getWordsToFilterOut());
@@ -29,7 +29,7 @@ public class WordCountTestIT {
 
     @Test
     void when_stopwords_is_empty_word_count_is_not_filtered_out() throws IOException {
-        StopWordReader stopWordReader = new StopWordReader(EMPTY_STOPWORDS);
+        TextFileReader stopWordReader = new TextFileReader(EMPTY_STOPWORDS);
         stopWordReader.read();
         WordCount wordCount = new WordCount();
         WordCountResult result= wordCount.count("Mary had a little lamb", stopWordReader.getWordsToFilterOut());
@@ -38,10 +38,10 @@ public class WordCountTestIT {
 
     @Test
     void when_input_is_from_file_then_count_words() throws IOException {
-        StopWordReader stopWordReader = new StopWordReader(STOPWORDS_FILE);
+        TextFileReader stopWordReader = new TextFileReader(STOPWORDS_FILE);
         stopWordReader.read();
-        TextFileReader textFileReader = new TextFileReader();
-        String text = textFileReader.read("src/test/resources/mytext.txt");
+        TextFileReader textFileReader = new TextFileReader("src/test/resources/mytext.txt");
+        String text = textFileReader.read();
         WordCount wordCount = new WordCount();
         WordCountResult result= wordCount.count(text, stopWordReader.getWordsToFilterOut());
         Assertions.assertEquals(4, result.getNumberOfWords());
@@ -49,10 +49,10 @@ public class WordCountTestIT {
 
     @Test
     void when_input_file_is_empty_count_words_is_0() throws IOException {
-        StopWordReader stopWordReader = new StopWordReader(STOPWORDS_FILE);
+        TextFileReader stopWordReader = new TextFileReader(STOPWORDS_FILE);
         stopWordReader.read();
-        TextFileReader textFileReader = new TextFileReader();
-        String text = textFileReader.read("src/test/resources/mytext_empty.txt");
+        TextFileReader textFileReader = new TextFileReader("src/test/resources/mytext_empty.txt");
+        String text = textFileReader.read();
         WordCount wordCount = new WordCount();
         WordCountResult result =  wordCount.count(text, stopWordReader.getWordsToFilterOut());
         Assertions.assertEquals(0, result.getNumberOfWords());
