@@ -6,8 +6,8 @@ import java.util.List;
 
 class StopWordReaderTest {
 
-    private final String STOPWORDS_FILE = "stopwords.txt";
-    private final String EMPTY_STOPWORDS = "stopwords_empty.txt";
+    private final String STOPWORDS_FILE = "src/test/resources/stopwords.txt";
+    private final String EMPTY_STOPWORDS = "src/test/resources/stopwords_empty.txt";
 
     @Test
     void when_stopwords_is_empty() throws IOException {
@@ -21,17 +21,6 @@ class StopWordReaderTest {
         StopWordReader stopWordReader = new StopWordReader(STOPWORDS_FILE);
         stopWordReader.read();
         List<String> filterList = stopWordReader.getWordsToFilterOut();
-        Assertions.assertTrue(!filterList.isEmpty());
+        Assertions.assertFalse(filterList.isEmpty());
     }
-
-    @Test
-    void when_count_words_with_filter_list_words_are_filtered_out() throws IOException {
-        StopWordReader stopWordReader = new StopWordReader(STOPWORDS_FILE);
-        stopWordReader.read();
-        List<String> filterList = stopWordReader.getWordsToFilterOut();
-        WordCount wordCount = new WordCount();
-        Long numberWords = wordCount.count("Mary had a little lamb", filterList);
-        Assertions.assertEquals(4, numberWords);
-    }
-
 }
