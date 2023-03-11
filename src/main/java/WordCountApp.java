@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
 
 public class WordCountApp {
@@ -20,36 +19,34 @@ public class WordCountApp {
     }
 
     public void run() throws IOException {
-        switch (runningType) {
-            case FILE:
-                runFile();
-                break;
-            case CONSOLE:
-                runConsole();
-                break;
+        if (runningType.equals(RUNNING_TYPE.CONSOLE)) {
+            runConsole();
         }
+        else {
+            runFile();
+        }
+
     }
 
     private void runFile() throws IOException {
-        List<String> filterList = TextFileReader.read("src/main/resources/stopwords.txt");
-        String text = TextFileReader.read(args[0], TextFileReader.JOIN_FUNCTION);
-        WordCountResult result = WordCount.count(text, filterList);
-        System.out.println(printResult(result));
+        TextFileReader stopWordReader = new TextFileReader("stopwords.txt");
+        stopWordReader.read();
+        TextFileReader textFileReader = new TextFileReader(args[0]);
+        String text = textFileReader.read();
+        WordCount wordCount = new WordCount();
+        WordCountResult result = wordCount.count(text, stopWordReader.getWordsToFilterOut());
+        System.out.println("Number of words: " + result.getNumberOfWords() + ", Number of unique words: " + result.getNumberOfUniqueWords());
     }
 
     private void runConsole() throws IOException {
         Scanner sc = new Scanner(System.in);
-        List<String> filterList = TextFileReader.read("stopwords.txt");
+        TextFileReader stopWordReader = new TextFileReader("stopwords.txt");
+        stopWordReader.read();
         System.out.println("Enter text:");
         String input = sc.nextLine();
-        WordCountResult result = WordCount.count(input, filterList);
-        System.out.println(printResult(result));
-    }
-
-    public String printResult(WordCountResult result) {
-        return "Number of words: " + result.getNumberOfWords()
-                + ", Number of unique words: " + result.getNumberOfUniqueWords()
-                + ", average word length: " + result.getAverageWordLength() + " characters";
+        WordCount wordCount = new WordCount();
+        WordCountResult result = wordCount.count(input, stopWordReader.getWordsToFilterOut());
+        System.out.println("Number of words: " + result.getNumberOfWords() + ", Number of unique words: " + result.getNumberOfUniqueWords());
     }
 
     private static RUNNING_TYPE parseArgument(String[] args) {

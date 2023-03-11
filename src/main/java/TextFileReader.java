@@ -4,25 +4,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 public class TextFileReader {
+    private List<String> lines = new ArrayList<>();
+    private File inputFile;
 
-    public static Function<List<String>, String> JOIN_FUNCTION = s -> String.join(" ", s);
+    public TextFileReader(String inputFile) {
+        this.inputFile = new File(inputFile);
+    }
 
-    public static List<String> read(String inputFile) throws FileNotFoundException {
-        File f = new File(inputFile);
-        List<String> lines = new ArrayList<>();
-        try (Scanner scanner = new Scanner(f)) {
+    public String read() throws FileNotFoundException {
+        try (Scanner scanner = new Scanner(inputFile)) {
             while (scanner.hasNextLine()) {
                 lines.add(scanner.nextLine());
             }
-            return lines;
+            return String.join(" ", lines);
         }
     }
 
-    public static String read(String inputFile, Function<List<String>, String> function) throws FileNotFoundException {
-       return function.apply(read(inputFile));
+    public List<String> getWordsToFilterOut() {
+        return Collections.unmodifiableList(lines);
     }
 }
