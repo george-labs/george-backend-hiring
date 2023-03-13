@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -15,8 +14,8 @@ public class WordCountTestIT {
         stopWordReader.read();
         List<String> filterList = stopWordReader.getWordsToFilterOut();
         WordCount wordCount = new WordCount();
-        Long numberWords = wordCount.count("Mary had a little lamb", filterList);
-        Assertions.assertEquals(4, numberWords);
+        WordCountResult result = wordCount.count("Mary had a little lamb", filterList);
+        Assertions.assertEquals(4, result.getNumberOfWords());
     }
 
     @Test
@@ -24,8 +23,8 @@ public class WordCountTestIT {
         StopWordReader stopWordReader = new StopWordReader(STOPWORDS_FILE);
         stopWordReader.read();
         WordCount wordCount = new WordCount();
-        Long numberWords = wordCount.count("", stopWordReader.getWordsToFilterOut());
-        Assertions.assertEquals(numberWords, 0);
+        WordCountResult result = wordCount.count("", stopWordReader.getWordsToFilterOut());
+        Assertions.assertEquals(0, result.getNumberOfWords());
     }
 
     @Test
@@ -33,8 +32,8 @@ public class WordCountTestIT {
         StopWordReader stopWordReader = new StopWordReader(EMPTY_STOPWORDS);
         stopWordReader.read();
         WordCount wordCount = new WordCount();
-        Long numberWords = wordCount.count("Mary had a little lamb", stopWordReader.getWordsToFilterOut());
-        Assertions.assertEquals(5, numberWords);
+        WordCountResult result= wordCount.count("Mary had a little lamb", stopWordReader.getWordsToFilterOut());
+        Assertions.assertEquals(5, result.getNumberOfWords());
     }
 
     @Test
@@ -44,8 +43,8 @@ public class WordCountTestIT {
         TextFileReader textFileReader = new TextFileReader();
         String text = textFileReader.read("src/test/resources/mytext.txt");
         WordCount wordCount = new WordCount();
-        Long numberWords = wordCount.count(text, stopWordReader.getWordsToFilterOut());
-        Assertions.assertEquals(4, numberWords);
+        WordCountResult result= wordCount.count(text, stopWordReader.getWordsToFilterOut());
+        Assertions.assertEquals(4, result.getNumberOfWords());
     }
 
     @Test
@@ -55,7 +54,7 @@ public class WordCountTestIT {
         TextFileReader textFileReader = new TextFileReader();
         String text = textFileReader.read("src/test/resources/mytext_empty.txt");
         WordCount wordCount = new WordCount();
-        Long numberWords = wordCount.count(text, stopWordReader.getWordsToFilterOut());
-        Assertions.assertEquals(0, numberWords);
+        WordCountResult result =  wordCount.count(text, stopWordReader.getWordsToFilterOut());
+        Assertions.assertEquals(0, result.getNumberOfWords());
     }
 }
