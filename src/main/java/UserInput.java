@@ -1,4 +1,4 @@
 public interface UserInput {
 
-    public void input();
+    public String input();
 }

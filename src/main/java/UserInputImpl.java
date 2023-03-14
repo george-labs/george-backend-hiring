@@ -1,17 +1,22 @@
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class UserInputImpl implements UserInput{
 
-    private Scanner sc = new Scanner(System.in);
+    public UserInputImpl(InputStream inputStream) {
+        this.sc = new Scanner(inputStream);
+    }
+
+    private Scanner sc;
 
     @Override
-    public void input() {
-        int count = 0;
+    public String input() {
+
         System.out.printf("Enter text:");
 
         String text = sc.nextLine();
-        String 
-        for(int = 0; )
+
+        return text;
 
     }
 }
