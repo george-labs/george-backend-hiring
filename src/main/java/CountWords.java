@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class CountWords {
 
     private UserInput userInput;
@@ -7,14 +10,16 @@ public class CountWords {
 
     public static final String ACCEPTED_LETTERS = "[a-zA-Z]+";
 
-    public int count(final String text) {
+    public int count(final String text, List<String> stopWords) {
 
         int count = 0;
         String[] words = text.split("\\s+");
 
         for(int i = 0; i < words.length; i++) {
             if(words[i].matches(ACCEPTED_LETTERS)) {
-                count++;
+                if (!stopWords.contains(words[i])) {
+                    count++;
+                }
             }
         }
         return count;
