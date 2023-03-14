@@ -9,8 +9,8 @@ class CountWordsTest {
 
     String inputString = "one two three";
     InputStream inputStream = new ByteArrayInputStream(inputString.getBytes());
-    UserInput input = new UserInputImpl(inputStream);
-    private final CountWords countWords = new CountWords(input);
+    UserInput userInput = new UserInputImpl(inputStream);
+    private final CountWords countWords = new CountWords(userInput);
 
     private final String TEXT = "george session";
     private final String TEXT_WITH_NOT_ACCEPTED_LETTERS = "george session 2 -words";
