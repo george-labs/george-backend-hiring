@@ -1,9 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -32,18 +30,42 @@ public class WordUtil {
     }
 
     public static long getWordsCount(String text) {
-        String[] splitText = text.split(SEPARATOR);
-        return Arrays
-                .stream(splitText)
-                .filter(word -> word.matches(VALID_PATTERN))
-                .filter(word -> !StopWordsUtil.getStopWords().contains(word))
-                .count();
+        String[] splitedText = text.split(SEPARATOR);
+        List<String> textElements = Arrays.asList(splitedText);
+        List<String> cleanedWords = getCleanedWords(textElements);
+        List<String> validatedText = getValidatedText(cleanedWords);
+        return validatedText.size();
     }
 
     public static long getWordsCount(List<String> textElements) {
+        List<String> cleanedWords = getCleanedWords(textElements);
+        List<String> validatedText = getValidatedText(cleanedWords);
+        return validatedText.size();
+    }
+
+    public static List<String> getValidatedText(List<String> textElements) {
         return textElements.stream()
                 .filter(word -> word.matches(VALID_PATTERN))
                 .filter(word -> !StopWordsUtil.getStopWords().contains(word))
-                .count();
+                .collect(Collectors.toList());
+    }
+
+    public static Set<String> getUniqueWords (List<String> textElements) {
+        List<String> cleanedWords = getCleanedWords(textElements);
+        List<String> validatedWords = getValidatedText(cleanedWords);
+        return new HashSet<>(validatedWords);
+    }
+
+    protected static List<String> getCleanedWords (List<String> words) {
+        List<String> cleanedWords = new ArrayList<>();
+        for (String word: words) {
+            if (word.contains("-")) {
+                String[] splitedWord = word.split("-");
+                cleanedWords.addAll(Arrays.asList(splitedWord));
+            } else {
+                cleanedWords.add(word.replace(".", ""));
+            }
+        }
+        return cleanedWords;
     }
 }
