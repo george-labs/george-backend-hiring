@@ -14,6 +14,7 @@ public class WordUtil {
         return Arrays
                 .stream(splitText)
                 .filter(word -> word.matches(VALID_PATTERN))
+                .filter(word -> !StopWordsUtil.getStopWords().contains(word))
                 .count();
     }
 

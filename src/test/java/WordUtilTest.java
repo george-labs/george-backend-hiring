@@ -5,20 +5,28 @@ import static org.junit.jupiter.api.Assertions.*;
 class WordUtilTest {
 
     private final static String INPUT_TEXT_ALL_VALID = "Mary had a little lamb";
+    private final static String INPUT_TEXT_ALL_VALID_No_STOP_WORDS = "Mary had little lamb";
     private final static String INPUT_TEXT_NOT_ALL_VALID = "Mary had a little lamb !";
 
     @Test
-    void shouldGetWordsCount(){
+    void shouldGetWordsCountWhenThereStopWords(){
         long wordsCount = WordUtil.getWordsCount(INPUT_TEXT_ALL_VALID);
 
-        assertEquals(5, wordsCount);
+        assertEquals(4, wordsCount);
     }
 
     @Test
-    void shouldGetWordsCountAndExcludeNotvalidChar(){
+    void shouldGetWordsCountAndExcludeNotvalidCharWhenThereStopWords(){
         long wordsCount = WordUtil.getWordsCount(INPUT_TEXT_NOT_ALL_VALID);
 
-        assertEquals(5, wordsCount);
+        assertEquals(4, wordsCount);
+    }
+
+    @Test
+    void shouldGetFullWordsCountWhenNoStopWords() {
+        long wordsCount = WordUtil.getWordsCount(INPUT_TEXT_ALL_VALID_No_STOP_WORDS);
+
+        assertEquals(4, wordsCount);
     }
 
 }
