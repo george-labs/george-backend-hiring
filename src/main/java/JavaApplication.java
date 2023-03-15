@@ -1,17 +1,15 @@
-import java.util.Scanner;
-
 public class JavaApplication {
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-
         System.out.print("Enter text: ");
-        String text = input.nextLine();
 
-        if (text == null || text.isEmpty()) {
-            System.out.println("Text is not correct");
-        }
+        String text = InputHandler.readInput();
 
-        String[] words = text.split(" ");
+        long count = WordUtil.getWordsCount(text);
+
+        System.out.println("Number of words: " + count);
+
     }
+
+
 }
