@@ -46,4 +46,9 @@ public class UtilsTest {
         Assertions.assertEquals(0, excluded.size());
     }
 
+    @Test
+    void loadInputFromFile() {
+        String input = Utils.loadInputFromFile(Utils.getFileFromResources("inputFile1.txt"));
+        Assertions.assertEquals("asd asd\non off\noff asd", input);
+    }
 }

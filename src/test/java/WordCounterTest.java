@@ -73,4 +73,8 @@ public class WordCounterTest {
         Assertions.assertEquals(0, wc.countWords("on off a the"));
     }
 
+    @Test
+    public void testNewLineInsideWord() {
+        Assertions.assertEquals(2, wc.countWords("asd\nnasd"));
+    }
 }

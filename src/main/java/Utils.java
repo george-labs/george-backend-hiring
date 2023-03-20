@@ -4,10 +4,24 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Utils {
+
+    static String loadInputFromFile(File file) {
+        String content = null;
+        try {
+            content = Files.readString(file.toPath(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            System.out.println("Error while reading file: '" + file.getName() + "'" + e);
+            e.printStackTrace();
+        }
+        return content;
+    }
 
     static List<String> loadFileByLines(File file) {
         List<String> lines = new ArrayList<>();

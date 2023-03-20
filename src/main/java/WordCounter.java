@@ -11,19 +11,20 @@ public class WordCounter implements IWordCounter {
 
     public int countWords(String text) {
         if (text == null || text.isEmpty()) return 0;
-        String[] words = text.split(" ");
+        String[] words = text.split("\\s+");
         int count = 0;
         for (String s : words) {
             if (excluded.contains(s)) continue;
-            if (s.matches("[A-Za-z]+")) count++;
+            if (s.matches("[A-Za-z]+")) {
+                count++;
+            }
         }
         return count;
     }
 
     public void loadExcludedWords(String fileName) {
         File file = Utils.getFile(fileName);
-        if (file.exists()) {
-            excluded = Utils.loadFileByLines(file);
-        }
+        if (file == null) return;
+        excluded = Utils.loadFileByLines(file);
     }
 }
