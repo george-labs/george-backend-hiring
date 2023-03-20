@@ -1,14 +1,12 @@
 import java.io.File;
 import java.util.List;
 
-public class WordCounter {
+public class WordCounter implements IWordCounter {
 
     private List<String> excluded;
 
     public WordCounter() {
-        //default excluded words from resources
-        File file = Utils.getFileFromResources("stopwords.txt");
-        excluded = Utils.loadFileByLines(file);
+        excluded = Utils.loadFileByLines(Utils.getFileFromResources("stopwords.txt"));
     }
 
     public int countWords(String text) {
@@ -21,5 +19,11 @@ public class WordCounter {
         }
         return count;
     }
-    
+
+    public void loadExcludedWords(String fileName) {
+        File file = Utils.getFile(fileName);
+        if (file.exists()) {
+            excluded = Utils.loadFileByLines(file);
+        }
+    }
 }

@@ -13,7 +13,6 @@ public class Utils {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
                 lines.add(line);
             }
         } catch (IOException e) {
@@ -21,6 +20,10 @@ public class Utils {
             e.printStackTrace();
         }
         return lines;
+    }
+
+    static File getFile(String fileName) {
+        return new File(fileName);
     }
 
     static File getFileFromResources(String filename) {

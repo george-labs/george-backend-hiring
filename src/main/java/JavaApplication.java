@@ -9,6 +9,10 @@ public class JavaApplication {
         reader.close();
 
         WordCounter wc = new WordCounter();
+
+        //try to load excluded words from app folder (if exists) -- uses default otherwise
+        wc.loadExcludedWords("./stopwords.txt");
+
         System.out.println("Number of words: " + wc.countWords(sentence));
     }
 }
