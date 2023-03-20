@@ -51,4 +51,10 @@ public class UtilsTest {
         String input = Utils.loadInputFromFile(Utils.getFileFromResources("inputFile1.txt"));
         Assertions.assertEquals("asd asd\non off\noff asd", input);
     }
+
+    @Test
+    void loadInputFromNotExistingFile() {
+        String input = Utils.loadInputFromFile(Utils.getFileFromResources("aaa.txt"));
+        Assertions.assertNull(input);
+    }
 }

@@ -1,7 +1,5 @@
 import java.io.File;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class JavaApplication {
 
@@ -12,6 +10,7 @@ public class JavaApplication {
             File inputFile = Utils.getFile(intputFileName);
             if (inputFile == null) {
                 System.out.println("Input file was not found!");
+                return;
             }
             sentence = Utils.loadInputFromFile(inputFile);
         } else {

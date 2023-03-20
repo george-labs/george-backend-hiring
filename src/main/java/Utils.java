@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 public class Utils {
 
     static String loadInputFromFile(File file) {
+        if (file == null || !file.exists()) return null;
         String content = null;
         try {
             content = Files.readString(file.toPath(), StandardCharsets.UTF_8);
@@ -26,7 +27,7 @@ public class Utils {
     static List<String> loadFileByLines(File file) {
         List<String> lines = new ArrayList<>();
         if (file == null || !file.exists()) {
-            System.out.println("File with excluded words not found! Filename: " + file.getName());
+            System.out.println("File with excluded words not found!");
             return lines;
         }
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
