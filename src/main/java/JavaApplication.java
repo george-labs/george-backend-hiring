@@ -20,10 +20,10 @@ public class JavaApplication {
             reader.close();
         }
 
-        WordCounter wc = new WordCounter();
+        //constructor - try to load excluded words from app folder (if exists) -- uses default otherwise
+        WordCounter wc = new WordCounter("./stopwords.txt");
 
-        //try to load excluded words from app folder (if exists) -- uses default otherwise
-        wc.loadExcludedWords("./stopwords.txt");
+
         CountResult results = wc.countWords(sentence);
 
         System.out.println("Number of words: " + results.getWordCount() + ", unique: " + results.getDistinctCount());

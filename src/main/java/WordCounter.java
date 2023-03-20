@@ -7,12 +7,15 @@ public class WordCounter implements IWordCounter {
 
     private List<String> excluded;
 
-    public WordCounter() {
-        excluded = Utils.loadFileByLines(Utils.getFileFromResources("stopwords.txt"));
+    public WordCounter(String maybeCustomExcluded) {
+        File file = Utils.getFile(maybeCustomExcluded);
+        excluded = (file == null) ?
+                Utils.loadFileByLines(Utils.getFileFromResources("stopwords.txt")) :
+                Utils.loadFileByLines(file);
     }
 
     public CountResult countWords(String text) {
-        if (text == null || text.isEmpty()) return new CountResult(0,0);
+        if (text == null || text.isEmpty()) return new CountResult(0, 0);
         String[] words = text.split("\\s+");
         int count = 0;
         Set<String> alreadyCounted = new HashSet<>();
@@ -27,8 +30,6 @@ public class WordCounter implements IWordCounter {
     }
 
     public void loadExcludedWords(String fileName) {
-        File file = Utils.getFile(fileName);
-        if (file == null) return;
-        excluded = Utils.loadFileByLines(file);
+
     }
 }

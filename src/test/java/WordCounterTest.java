@@ -7,7 +7,7 @@ public class WordCounterTest {
 
     @BeforeAll
     public void initWordCounter() {
-        wc = new WordCounter();
+        wc = new WordCounter(null);
     }
 
     @Test
