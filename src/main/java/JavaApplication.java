@@ -7,6 +7,6 @@ public class JavaApplication {
         System.out.println("Enter text: ");
         String sentence = reader.nextLine();
         reader.close();
-        System.out.println("Number of words: " + new WordCounter().countWords(sentence));
+        System.out.println("Number of words: " + WordCounter.countWords(sentence));
     }
 }
