@@ -28,8 +28,4 @@ public class WordCounter implements IWordCounter {
         }
         return new CountResult(count, alreadyCounted.size());
     }
-
-    public void loadExcludedWords(String fileName) {
-
-    }
 }
