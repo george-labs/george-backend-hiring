@@ -59,4 +59,10 @@ public class WordCounterTest {
     public void test2ExcludedWords() {
         Assertions.assertEquals( 4, wc.countWords(" asd \n asd on asd off asd"));
     }
+
+    @Test
+    public void testAllExcludedWords() {
+        Assertions.assertEquals( 0, wc.countWords("on off a the"));
+    }
+
 }

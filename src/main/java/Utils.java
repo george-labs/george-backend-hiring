@@ -8,16 +8,16 @@ import java.util.List;
 
 public class Utils {
 
-    static List<String> loadFileByLines(String fileName) {
+    static List<String> loadFileByLines(File file) {
         List<String> lines = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(getFileFromResources(fileName)))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
                 lines.add(line);
             }
         } catch (IOException e) {
-            System.out.println("Error while reading file: '" + fileName + "'" + e);
+            System.out.println("Error while reading file: '" + file.getName() + "'" + e);
             e.printStackTrace();
         }
         return lines;
@@ -33,5 +33,4 @@ public class Utils {
         }
         return f;
     }
-
 }
