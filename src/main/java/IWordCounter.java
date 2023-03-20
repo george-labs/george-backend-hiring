@@ -1,6 +1,6 @@
 public interface IWordCounter {
 
-    int countWords(String text);
+    CountResult countWords(String text);
 
     void loadExcludedWords(String fileName);
 

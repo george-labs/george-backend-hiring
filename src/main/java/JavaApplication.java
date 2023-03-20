@@ -24,7 +24,8 @@ public class JavaApplication {
 
         //try to load excluded words from app folder (if exists) -- uses default otherwise
         wc.loadExcludedWords("./stopwords.txt");
+        CountResult results = wc.countWords(sentence);
 
-        System.out.println("Number of words: " + wc.countWords(sentence));
+        System.out.println("Number of words: " + results.getWordCount() + ", unique: " + results.getDistinctCount());
     }
 }
