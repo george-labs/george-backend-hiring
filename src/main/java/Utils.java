@@ -11,6 +11,10 @@ public class Utils {
 
     static List<String> loadFileByLines(File file) {
         List<String> lines = new ArrayList<>();
+        if (file == null || !file.exists()) {
+            System.out.println("File with excluded words not found! Filename: " + file.getName());
+            return lines;
+        }
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -25,7 +29,9 @@ public class Utils {
 
     static File getFile(String fileName) {
         if (fileName == null || fileName.isEmpty()) return null;
-        return new File(fileName);
+        File file = new File(fileName);
+        if (!file.exists()) return null;
+        return file;
     }
 
     static File getFileFromResources(String fileName) {

@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class UtilsTest {
 
@@ -17,6 +18,11 @@ public class UtilsTest {
     }
 
     @Test
+    void getFileDoesnExists() {
+        Assertions.assertNull(Utils.getFile("aaa.txt"));
+    }
+
+    @Test
     void getFileFromResourceTest() {
         Assertions.assertNotNull(Utils.getFileFromResources("stopwords.txt"));
     }
@@ -25,5 +31,19 @@ public class UtilsTest {
     void getFileFromResourceTestFailed() {
         Assertions.assertNull(Utils.getFileFromResources("stopwords2.txt"));
     }
-    
+
+    @Test
+    void loadFileByLines() {
+        List<String> excluded = Utils.loadFileByLines(Utils.getFileFromResources("stopwords.txt"));
+        Assertions.assertNotNull(excluded);
+        Assertions.assertEquals(4, excluded.size());
+    }
+
+    @Test
+    void loadFileByLinesNotExists() {
+        List<String> excluded = Utils.loadFileByLines(Utils.getFileFromResources("aa.txt"));
+        Assertions.assertNotNull(excluded);
+        Assertions.assertEquals(0, excluded.size());
+    }
+
 }
