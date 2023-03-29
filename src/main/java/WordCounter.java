@@ -18,6 +18,7 @@ public class WordCounter implements Counter {
   public long getCount(String input) {
     if (input == null || input.isBlank())
       return 0;
+    input = input.replace("\n", " ");
     List<String> stringSplit = asList(input.split(Constants.SPACE));
     return stringSplit.stream().filter(this::isAlpha).filter(s -> !isSkipWord(s)).count();
   }

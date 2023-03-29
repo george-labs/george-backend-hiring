@@ -5,36 +5,32 @@ import java.io.InputStreamReader;
 
 public class FileInput {
 
-  private final String filePath;
+  private final InputStream inputStream;
 
-  public FileInput(String filePath) {
-    this.filePath = filePath;
+  public FileInput(InputStream inputStream) {
+    this.inputStream = inputStream;
   }
 
   /**
    * Loads and splits the file on line breaks
-   * @throws IllegalArgumentException when file path is null or file does not exist
+   *
    * @return returns contents of a file
-   * */
+   * @throws IllegalArgumentException when file path is null or file does not exist
+   */
   public String readFromFile() throws IOException {
     StringBuilder resultStringBuilder = new StringBuilder();
 
-    if (filePath == null) {
-      throw new IllegalArgumentException("File path must not be null");
+    if (this.inputStream == null) {
+      throw new IllegalArgumentException("Input stream must not be null");
     }
 
-    try (InputStream inputStream = FileInput.class.getResourceAsStream(this.filePath)) {
-
-      if (inputStream == null)
-        throw new IllegalArgumentException("File with given path does not exist: " + this.filePath);
-
-      try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-        String line;
-        while ((line = br.readLine()) != null) {
-          resultStringBuilder.append(line).append(Constants.LINE_BREAK);
-        }
+    try (BufferedReader br = new BufferedReader(new InputStreamReader(this.inputStream))) {
+      String line;
+      while ((line = br.readLine()) != null) {
+        resultStringBuilder.append(line).append(Constants.LINE_BREAK);
       }
     }
+
     return resultStringBuilder.toString();
   }
 

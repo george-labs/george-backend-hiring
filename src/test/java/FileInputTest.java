@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.junit.jupiter.api.Assertions;
@@ -12,7 +13,7 @@ class FileInputTest {
 
   @Test
   void read_from_file_should_return_contents() {
-    FileInput fi = new FileInput("/stopwords.txt");
+    FileInput fi = new FileInput(FileInput.class.getResourceAsStream("/stopwords.txt"));
     try {
       String contents = fi.readFromFile();
       assertNotNull(contents);
@@ -30,14 +31,7 @@ class FileInputTest {
   void read_from_null_path_should_throw_exception() {
     FileInput fi = new FileInput(null);
     IllegalArgumentException iae = Assertions.assertThrows(IllegalArgumentException.class, fi::readFromFile);
-    assertEquals("File path must not be null", iae.getMessage());
-  }
-
-  @Test
-  void read_from_wrong_path_should_throw_exception() {
-    FileInput fi = new FileInput("does_not_exists.txt");
-    IllegalArgumentException iae = Assertions.assertThrows(IllegalArgumentException.class, fi::readFromFile);
-    assertEquals("File with given path does not exist: does_not_exists.txt", iae.getMessage());
+    assertEquals("Input stream must not be null", iae.getMessage());
   }
 
 }
