@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,6 +11,11 @@ public class FileInput {
     this.filePath = filePath;
   }
 
+  /**
+   * Loads and splits the file on line breaks
+   * @throws IllegalArgumentException when file path is null or file does not exist
+   * @return returns contents of a file
+   * */
   public String readFromFile() throws IOException {
     StringBuilder resultStringBuilder = new StringBuilder();
 
