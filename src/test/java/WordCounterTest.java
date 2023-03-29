@@ -1,14 +1,8 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JavaApplicationTest {
-
-  @Test
-  void dummy_test() {
-
-  }
+class WordCounterTest {
 
   @Test
   void word_count_should_be_correct() {
@@ -30,6 +24,9 @@ public class JavaApplicationTest {
     assertEquals(3, wordCount);
 
     wordCount = wc.getCount("Th1s 1s n0t 4 w0rd");
+    assertEquals(0, wordCount);
+
+    wordCount = wc.getCount("This-is-not-a-word");
     assertEquals(0, wordCount);
   }
 
