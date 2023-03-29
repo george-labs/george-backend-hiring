@@ -1,13 +1,17 @@
+package com.george.wordcounter.providers;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class FileInput {
+import com.george.wordcounter.Constants;
+
+public class FileProvider implements InputProvider {
 
   private final InputStream inputStream;
 
-  public FileInput(InputStream inputStream) {
+  public FileProvider(InputStream inputStream) {
     this.inputStream = inputStream;
   }
 
@@ -17,7 +21,8 @@ public class FileInput {
    * @return returns contents of a file
    * @throws IllegalArgumentException when file path is null or file does not exist
    */
-  public String readFromFile() throws IOException {
+  @Override
+  public String readFromInput() throws IOException {
     StringBuilder resultStringBuilder = new StringBuilder();
 
     if (this.inputStream == null) {

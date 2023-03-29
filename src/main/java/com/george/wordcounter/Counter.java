@@ -1,3 +1,5 @@
+package com.george.wordcounter;
+
 public interface Counter {
 
   /**

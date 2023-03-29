@@ -1,3 +1,5 @@
+package com.george.wordcounter;
+
 import static java.util.Arrays.asList;
 
 import java.util.List;
