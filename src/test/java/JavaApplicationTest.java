@@ -12,20 +12,25 @@ public class JavaApplicationTest {
 
   @Test
   void word_count_should_be_correct() {
-    JavaApplication javaApplication = new JavaApplication();
+    WordCounter wc = new WordCounter();
 
-    int wordCount = javaApplication.wordCount("This is a test");
+    long wordCount = wc.getCount("This is a test");
     assertEquals(4, wordCount);
 
-    wordCount = javaApplication.wordCount(" ");
+    wordCount = wc.getCount(" ");
     assertEquals(0, wordCount);
 
-    wordCount = javaApplication.wordCount("    This is    a test");
+    wordCount = wc.getCount("    This is    a test");
     assertEquals(4, wordCount);
 
-    wordCount = javaApplication.wordCount(null);
+    wordCount = wc.getCount(null);
     assertEquals(0, wordCount);
 
+    wordCount = wc.getCount("Th1s is not a w0rd");
+    assertEquals(3, wordCount);
+
+    wordCount = wc.getCount("Th1s 1s n0t 4 w0rd");
+    assertEquals(0, wordCount);
   }
 
 }
