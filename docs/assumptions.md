@@ -9,3 +9,4 @@
 ## Iteration 2
 
 * stop words are case-sensitive
+* a file with stop words passed as a first argument to the program

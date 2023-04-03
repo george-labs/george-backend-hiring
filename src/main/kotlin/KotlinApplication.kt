@@ -1,9 +1,13 @@
-fun main() {
+import java.nio.file.Files
+import java.nio.file.Path
+
+fun main(args: Array<String>) {
+    val stopWords = if (args.isEmpty()) setOf<String>() else Files.readAllLines(Path.of(args.first())).toSet()
+    val counter = WordCounter(stopWords)
 
     print("Enter text: ")
-    val line = readln()
-    val counter = WordCounter(setOf())
-    val count = counter.countWords(line)
+    val inputLine = readln()
+    val count = counter.countWords(inputLine)
     println("Number of words: $count")
 
 }
