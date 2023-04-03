@@ -45,6 +45,13 @@ class WordCounterTest {
         assertEquals(5, count)
     }
 
+    @Test
+    fun `should not count stop words`() {
+        val counterWithStopWords = WordCounter(setOf("forbidden", "tomorrow"))
+        val count = counterWithStopWords.countWords("one1 Forbidden forbidden tomorrow two+ three four!")
+        assertEquals(2, count)
+    }
+
 
 }
 
