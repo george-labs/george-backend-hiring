@@ -14,52 +14,52 @@ class WordCounterTest {
 
     @Test
     fun `should count words`() {
-        val (count, unique) = counter.countWords("Hello world TEST")
-        assertEquals(3, count)
+        val result = counter.countWords("Hello world TEST")
+        assertEquals(3, result.totalCount)
     }
 
     @Test
     fun `should not count empty token as word`() {
-        val (count, unique) = counter.countWords("  test")
-        assertEquals(1, count)
+        val result = counter.countWords("  test")
+        assertEquals(1, result.totalCount)
     }
 
     @Test
     fun `should count zero for empty strings`() {
-        val (count, unique, averageLength) = counter.countWords("       ")
-        assertEquals(0, count)
-        assertNull(averageLength)
+        val result = counter.countWords("       ")
+        assertEquals(0, result.totalCount)
+        assertNull(result.averageWordLength)
     }
 
 
     @Test
     fun `should not count words with characters other than small or capital letters`() {
-        val (count, unique) = counter.countWords("one1 two+ three four!")
-        assertEquals(1, count)
+        val result = counter.countWords("one1 two+ three four!")
+        assertEquals(1, result.totalCount)
     }
 
     @Test
     fun `should not count words multiline`() {
-        val (count, unique) = counter.countWords(
+        val result = counter.countWords(
             """
             hello world
             on new line
         """.trimIndent()
         )
-        assertEquals(5, count)
+        assertEquals(5, result.totalCount)
     }
 
     @Test
     fun `should not count stop words`() {
         val counterWithStopWords = WordCounter(setOf("forbidden", "tomorrow"))
-        val (count, unique) = counterWithStopWords.countWords("one1 Forbidden forbidden tomorrow two+ three four!")
-        assertEquals(2, count)
+        val result = counterWithStopWords.countWords("one1 Forbidden forbidden tomorrow two+ three four!")
+        assertEquals(2, result.totalCount)
     }
 
     @Test
     fun `should not count dots`() {
-        val (count, unique) = counter.countWords("Hello world. David.")
-        assertEquals(3, count)
+        val result = counter.countWords("Hello world. David.")
+        assertEquals(3, result.totalCount)
     }
 
     @Test
@@ -69,9 +69,9 @@ class WordCounterTest {
                 "the", "a", "on", "off"
             )
         )
-        val (count, unique) = counterWithStopWords.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.")
-        assertEquals(7, count)
-        assertEquals(6, unique)
+        val result = counterWithStopWords.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.")
+        assertEquals(7, result.totalCount)
+        assertEquals(6, result.uniqueWords.size)
     }
 
 
@@ -102,8 +102,14 @@ class WordCounterTest {
 
     @Test
     fun `should calculate average length`() {
-        val (count, unique, averageLength) = counter.countWords("Hello world TEST")
-        assertEquals(BigDecimal("4.67"), averageLength)
+        val result = counter.countWords("Hello world TEST")
+        assertEquals(BigDecimal("4.67"), result.averageWordLength)
+    }
+
+    @Test
+    fun `should calculate index`() {
+        val result = counter.countWords("Hello world TEST")
+        assertEquals(listOf("Hello", "TEST", "world"), result.wordIndex())
     }
 
 }

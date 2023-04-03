@@ -90,7 +90,15 @@ class WordCounterApplicationKtIntegrationTest {
             }
             bos.toString()
         }
-        assertEquals("Number of words: 4, unique: 4, average word length: 4.25 characters\n", output)
+        assertEquals("""
+            Number of words: 4, unique: 4, average word length: 4.25 characters
+            Index:
+            had
+            lamb
+            little
+            Mary
+            
+            """.trimIndent(), output)
     }
 
 

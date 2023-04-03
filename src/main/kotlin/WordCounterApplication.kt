@@ -15,7 +15,7 @@ fun main(args: Array<String>) {
 
     val result = counter.countWords(inputLine)
 
-    println("Number of words: ${result.total}, unique: ${result.uniqueWords.size}, average word length: ${formatAverage(result.averageWordLength)}")
+    println("Number of words: ${result.totalCount}, unique: ${result.uniqueWords.size}, average word length: ${formatAverage(result.averageWordLength)}")
     if (indexEnabled) {
         println("Index:")
         result.wordIndex().forEach { println(it) }
