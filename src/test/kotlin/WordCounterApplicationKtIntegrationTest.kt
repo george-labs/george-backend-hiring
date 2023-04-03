@@ -30,9 +30,8 @@ class WordCounterApplicationKtIntegrationTest {
         val output = ByteArrayOutputStream().use { bos ->
             PrintStream(bos).use { outputStream ->
                 System.setOut(outputStream)
-                val stopwordsFile = WordCounterApplicationKtIntegrationTest::class.java.getResource("stopwords.txt")!!.path
 
-                main(arrayOf(stopwordsFile))
+                main(arrayOf())
 
                 outputStream.flush()
 
