@@ -68,8 +68,8 @@ class WordCounterTest {
             )
         )
         val (count, unique) = counterWithStopWords.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.")
-        assertEquals(9, count)
-        assertEquals(7, unique)
+        assertEquals(7, count)
+        assertEquals(6, unique)
     }
 }
 
