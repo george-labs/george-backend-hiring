@@ -76,4 +76,22 @@ class WordCounterApplicationKtIntegrationTest {
         assertEquals("Number of words: 4, unique: 4, average word length: 4.25 characters\n", output)
     }
 
+    @Test
+    fun `should count words for input read from file and print index`() {
+        val output = ByteArrayOutputStream().use { bos ->
+            PrintStream(bos).use { outputStream ->
+                System.setOut(outputStream)
+
+                val inputPath = WordCounterApplicationKtIntegrationTest::class.java.getResource("example_input.txt")?.path ?: error("No resource found!")
+                main(arrayOf(inputPath, "-index"))
+
+                outputStream.flush()
+
+            }
+            bos.toString()
+        }
+        assertEquals("Number of words: 4, unique: 4, average word length: 4.25 characters\n", output)
+    }
+
+
 }

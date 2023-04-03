@@ -11,11 +11,18 @@ fun main(args: Array<String>) {
     } else {
         readFromFile(args)
     }
+    val indexEnabled = indexEnabled(args)
 
-    val (total, unique, averageLength) = counter.countWords(inputLine)
+    val result = counter.countWords(inputLine)
 
-    println("Number of words: $total, unique: $unique, average word length: ${formatAverage(averageLength)}")
+    println("Number of words: ${result.total}, unique: ${result.uniqueWords.size}, average word length: ${formatAverage(result.averageWordLength)}")
+    if (indexEnabled) {
+        println("Index:")
+        result.wordIndex().forEach { println(it) }
+    }
 }
+
+fun indexEnabled(args: Array<String>): Boolean = args.lastOrNull() == Params.INDEX
 
 fun formatAverage(averageLength: BigDecimal?): String = averageLength?.let { "$it characters" } ?: "N/A"
 
@@ -32,4 +39,8 @@ private fun readFromFile(args: Array<String>) = File(args.first()).readText()
 private fun readFromStdin(): String {
     print("Enter text: ")
     return readln()
+}
+
+object Params {
+    const val INDEX = "-index"
 }

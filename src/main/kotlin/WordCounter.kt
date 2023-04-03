@@ -8,29 +8,24 @@ class WordCounter(private val stopWords: Set<String>) {
         .asSequence()
         .filter { it.matches(Regex("[a-zA-Z]+-?[a-zA-Z]*")) }
         .filter { !stopWords.contains(it) }
-        .fold(CounterAccumulator(0, 0, setOf())) { acc, word ->
+        .fold(CounterResult(0, 0, setOf())) { acc, word ->
             acc.copy(
-                totalWordCount = acc.totalWordCount.inc(),
+                total = acc.total.inc(),
                 totalWordLength = acc.totalWordLength + word.length,
-                unique = acc.unique + word
-            )
-        }
-        .let { acc ->
-            CounterResult(
-                acc.totalWordCount,
-                acc.unique.size,
-                acc.averageWordLength()
+                uniqueWords = acc.uniqueWords + word
             )
         }
 
-    private data class CounterAccumulator(val totalWordCount: Int, val totalWordLength: Long, val unique: Set<String>) {
+    data class CounterResult(val total: Int, val totalWordLength: Long, val uniqueWords: Set<String>) {
 
-        fun averageWordLength(): BigDecimal? = totalWordCount.takeIf { it > 0 }?.let { totalCount ->
-            totalWordLength.toBigDecimal().divide(totalCount.toBigDecimal(), 2, RoundingMode.HALF_UP)
-        }
+        val averageWordLength: BigDecimal?
+            get() = total.takeIf { it > 0 }?.let { totalCount ->
+                totalWordLength.toBigDecimal().divide(totalCount.toBigDecimal(), 2, RoundingMode.HALF_UP)
+            }
+
+        fun wordIndex(): List<String> = uniqueWords.sorted()
+
 
     }
-
-    data class CounterResult(val total: Int, val unique: Int, val averageLengthOfTheWord: BigDecimal?)
 
 }
