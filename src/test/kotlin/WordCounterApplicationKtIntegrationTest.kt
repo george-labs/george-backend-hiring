@@ -101,5 +101,47 @@ class WordCounterApplicationKtIntegrationTest {
             """.trimIndent(), output)
     }
 
+    @Test
+    fun `should print error if file doesn't exist`() {
+        val output = ByteArrayOutputStream().use { bos ->
+            PrintStream(bos).use { outputStream ->
+                System.setOut(outputStream)
+                main(arrayOf("/tmp/dummy_file_that_doesnt_exists.txt"))
+                outputStream.flush()
+
+            }
+            bos.toString()
+        }
+        assertEquals("Cannot read input file /tmp/dummy_file_that_doesnt_exists.txt\n", output)
+    }
+
+    @Test
+    fun `should count words for input read console and print index`() {
+        System.setIn("Hello world I am David".byteInputStream())
+
+        val output = ByteArrayOutputStream().use { bos ->
+            PrintStream(bos).use { outputStream ->
+                System.setOut(outputStream)
+
+                main(arrayOf("-index"))
+
+                outputStream.flush()
+
+            }
+            bos.toString()
+        }
+        assertEquals("""
+            Enter text: Number of words: 5, unique: 5, average word length: 3.60 characters
+            Index:
+            am
+            David
+            Hello
+            I
+            world
+            
+        """.trimIndent(), output)
+    }
+
+
 
 }
