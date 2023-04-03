@@ -8,10 +8,26 @@ fun main(args: Array<String>) {
     val counter = WordCounter(stopWords)
 
     try {
-        val indexEnabled = indexEnabled(args)
+        val arguments = ArrayDeque(args.toList())
+        var indexEnabled: Boolean = args.toList().singleOrNull { it == Params.INDEX } != null
+        var dictionaryFile = args.toList().firstOrNull { it.startsWith(Params.DICTIONARY) }
+        var inputFile: String?  = null
+        while (arguments.isNotEmpty()) {
+            val arg = arguments.removeFirst()
+            if (arg == Params.INDEX) {
+                indexEnabled = true
+            } else if (arg.startsWith(Params.DICTIONARY)) {
+                // TODO David Siro: error handling
+                dictionaryFile = arg.substring(arg.indexOf("=") + 1)
+            }
+            inputFile = arg
+        }
+
+
         val inputLine = when {
             args.isEmpty()  -> readFromStdin()
             args.size == 1 && indexEnabled  -> readFromStdin()
+            args.size == 1 && dictionaryFile != null  -> readFromStdin()
             else -> readFromFile(args)
         }
 
@@ -55,6 +71,7 @@ private fun readFromStdin(): String {
 
 object Params {
     const val INDEX = "-index"
+    const val DICTIONARY = "-dictionary"
 }
 
 class WordCountException(message: String) : RuntimeException(message)
