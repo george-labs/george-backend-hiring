@@ -52,6 +52,10 @@ class WordCounterTest {
         assertEquals(2, count)
     }
 
-
+    @Test
+    fun `should not count dots`() {
+        val count = counter.countWords("Hello world. David.")
+        assertEquals(3, count)
+    }
 }
 
