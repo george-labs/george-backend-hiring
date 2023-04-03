@@ -2,7 +2,8 @@ fun main() {
 
     print("Enter text: ")
     val line = readln()
-    val count = WordCounter.countWords(line)
+    val counter = WordCounter(setOf())
+    val count = counter.countWords(line)
     println("Number of words: $count")
 
 }
