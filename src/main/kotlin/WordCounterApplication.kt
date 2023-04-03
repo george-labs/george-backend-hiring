@@ -11,10 +11,9 @@ fun main(args: Array<String>) {
         readFromFile(args)
     }
 
-    val count = counter.countWords(inputLine)
+    val (total, unique) = counter.countWords(inputLine)
 
-    println("Number of words: $count")
-
+    println("Number of words: $total, unique: $unique")
 }
 
 private fun readStopWordsFromClasspath(): Set<String> {

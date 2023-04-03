@@ -38,8 +38,7 @@ class WordCounterApplicationKtIntegrationTest {
             }
             bos.toString()
         }
-        assertEquals("Enter text: Number of words: 4\n", output)
-
+        assertEquals("Enter text: Number of words: 5, unique: 5\n", output)
     }
 
 
@@ -57,7 +56,7 @@ class WordCounterApplicationKtIntegrationTest {
             }
             bos.toString()
         }
-        assertEquals("Number of words: 4\n", output)
+        assertEquals("Number of words: 4, unique: 4\n", output)
 
     }
 
