@@ -1,5 +1,6 @@
 import java.io.File
 import java.io.InputStreamReader
+import java.math.BigDecimal
 
 fun main(args: Array<String>) {
     val stopWords = readStopWordsFromClasspath()
@@ -11,10 +12,12 @@ fun main(args: Array<String>) {
         readFromFile(args)
     }
 
-    val (total, unique) = counter.countWords(inputLine)
+    val (total, unique, averageLength) = counter.countWords(inputLine)
 
-    println("Number of words: $total, unique: $unique")
+    println("Number of words: $total, unique: $unique, average word length: ${formatAverage(averageLength)}")
 }
+
+fun formatAverage(averageLength: BigDecimal?): String = averageLength?.let { "$it characters" } ?: "N/A"
 
 private fun readStopWordsFromClasspath(): Set<String> {
     val resourcePath = WordCounter::class.java.getResource("stopwords.txt") ?: error("Resource not found")

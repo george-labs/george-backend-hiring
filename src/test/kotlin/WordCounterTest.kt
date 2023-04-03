@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.math.BigDecimal
 
 class WordCounterTest {
 
@@ -25,8 +26,9 @@ class WordCounterTest {
 
     @Test
     fun `should count zero for empty strings`() {
-        val (count, unique) = counter.countWords("       ")
+        val (count, unique, averageLength) = counter.countWords("       ")
         assertEquals(0, count)
+        assertNull(averageLength)
     }
 
 
@@ -97,5 +99,12 @@ class WordCounterTest {
         assertEquals(0, count)
         assertEquals(0, unique)
     }
+
+    @Test
+    fun `should calculate average length`() {
+        val (count, unique, averageLength) = counter.countWords("Hello world TEST")
+        assertEquals(BigDecimal("4.67"), averageLength)
+    }
+
 }
 

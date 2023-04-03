@@ -14,3 +14,8 @@
 ## Iteration 5
 
 * hyphen only are not words
+
+
+## Iteration 6
+
+* average length of the word is calculated out of all words (including duplicates)

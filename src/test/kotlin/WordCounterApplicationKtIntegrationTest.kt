@@ -38,9 +38,26 @@ class WordCounterApplicationKtIntegrationTest {
             }
             bos.toString()
         }
-        assertEquals("Enter text: Number of words: 5, unique: 5\n", output)
+        assertEquals("Enter text: Number of words: 5, unique: 5, average word length: 3.60 characters\n", output)
     }
 
+    @Test
+    fun `should print result for empty output`() {
+        System.setIn("the a on".byteInputStream())
+
+        val output = ByteArrayOutputStream().use { bos ->
+            PrintStream(bos).use { outputStream ->
+                System.setOut(outputStream)
+
+                main(arrayOf())
+
+                outputStream.flush()
+
+            }
+            bos.toString()
+        }
+        assertEquals("Enter text: Number of words: 0, unique: 0, average word length: N/A\n", output)
+    }
 
     @Test
     fun `should count words for input read from file`() {
@@ -56,8 +73,7 @@ class WordCounterApplicationKtIntegrationTest {
             }
             bos.toString()
         }
-        assertEquals("Number of words: 4, unique: 4\n", output)
-
+        assertEquals("Number of words: 4, unique: 4, average word length: 4.25 characters\n", output)
     }
 
 }
