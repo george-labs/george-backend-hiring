@@ -71,5 +71,31 @@ class WordCounterTest {
         assertEquals(7, count)
         assertEquals(6, unique)
     }
+
+
+    @Test
+    fun `should not count hyphen only`() {
+        val counterWithStopWords = WordCounter(
+            setOf(
+                "the", "a", "on", "off"
+            )
+        )
+        val (count, unique) = counterWithStopWords.countWords("------- ---------------")
+        assertEquals(0, count)
+        assertEquals(0, unique)
+    }
+
+
+    @Test
+    fun `should not count dots only`() {
+        val counterWithStopWords = WordCounter(
+            setOf(
+                "the", "a", "on", "off"
+            )
+        )
+        val (count, unique) = counterWithStopWords.countWords(".... .... ....")
+        assertEquals(0, count)
+        assertEquals(0, unique)
+    }
 }
 

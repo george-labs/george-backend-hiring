@@ -10,3 +10,7 @@
 
 * stop words are case-sensitive
 * a file with stop words passed as a first argument to the program
+
+## Iteration 5
+
+* hyphen only are not words
