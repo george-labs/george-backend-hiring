@@ -19,7 +19,7 @@ public class AppTest {
 
     @Test
     public void testGetWordsCountWithOnlyReadWords() {
-        init("Mary had a little lamb");
+        init("Mary had one little lamb");
 
         underTest.application();
 
@@ -39,7 +39,17 @@ public class AppTest {
 
     @Test
     public void testWordsCountDeleteNumberInTheMiddleOfAWord() {
-        init("Mary had a l1ttle lamb");
+        init("Mary had one l1ttle lamb");
+
+        underTest.application();
+
+        assertEquals("Enter text: Number of words: 4", outputStreamCaptor.toString()
+                .trim());
+    }
+
+    @Test
+    public void testWordsCountDeleteAStopWord() {
+        init("Mary had the little lamb");
 
         underTest.application();
 
