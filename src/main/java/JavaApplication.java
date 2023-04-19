@@ -1,14 +1,12 @@
+import view.ReadService;
+
 import java.util.Scanner;
 
 public class JavaApplication {
 
     public static void main(String[] args) {
-        System.out.println("wordcount");
+        ReadService readService = new ReadService(new Scanner(System.in));
 
-        Scanner scanner = new Scanner(System.in);
-
-        String[] words = scanner.nextLine().split(" ");
-
-        System.out.println("Number of words: " + words.length);
+        System.out.println("Number of words:" + readService.getWordsCount());
     }
 }
