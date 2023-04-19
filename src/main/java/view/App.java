@@ -11,11 +11,11 @@ import java.util.Scanner;
 public class App {
 
     public static final String STOPWORD_FILE_NAME = "stopwords.txt";
-    private final Scanner inputStream;
+    private final Reader inputStream;
     private final CountService countService;
     private final PrintStream outputStream;
 
-    public App(Scanner inputStream, CountService countService, PrintStream outputStream) {
+    public App(Reader inputStream, CountService countService, PrintStream outputStream) {
         this.inputStream = inputStream;
         this.countService = countService;
         this.outputStream = outputStream;
@@ -25,7 +25,7 @@ public class App {
     public void application() {
         List<String> stopWords = readStopWordsFromFile();
         outputStream.print("Enter text: ");
-        String input = inputStream.nextLine();
+        String input = inputStream.readInput();
         int wordCount = countService.getWordsCount(input, stopWords);
         outputStream.println("Number of words: " + wordCount);
     }

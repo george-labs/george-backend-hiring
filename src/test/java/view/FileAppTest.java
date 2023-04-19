@@ -3,23 +3,27 @@ package view;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AppTest {
+public class FileAppTest {
 
     App underTest;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final PrintStream standardOut = System.out;
 
+    private void init(String fileName) {
+        System.setOut(new PrintStream(outputStreamCaptor));
+
+        underTest = new App(new FileReader(new Scanner(getClass().getClassLoader().getResourceAsStream(fileName))), new CountService(), System.out);
+    }
 
     @Test
-    public void testGetWordsCountWithOnlyReadWords() {
-        init("Mary had one little lamb");
+    public void testGetWordsCountWithOnlyRealWords() {
+        init("onlyrealwords.txt");
 
         underTest.application();
 
@@ -29,7 +33,7 @@ public class AppTest {
 
     @Test
     public void testWordsCountDeleteNumberInTheMiddle() {
-        init("Mary had 9 little lamb");
+        init("numberinmiddle.txt");
 
         underTest.application();
 
@@ -39,7 +43,7 @@ public class AppTest {
 
     @Test
     public void testWordsCountDeleteNumberInTheMiddleOfAWord() {
-        init("Mary had one l1ttle lamb");
+        init("numberinword.txt");
 
         underTest.application();
 
@@ -49,19 +53,12 @@ public class AppTest {
 
     @Test
     public void testWordsCountDeleteAStopWord() {
-        init("Mary had the little lamb");
+        init("containsstopword.txt");
 
         underTest.application();
 
         assertEquals("Enter text: Number of words: 4", outputStreamCaptor.toString()
                 .trim());
-    }
-
-    private void init(String input) {
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
-        System.setOut(new PrintStream(outputStreamCaptor));
-
-        underTest = new App(new Scanner(System.in), new CountService(), System.out);
     }
 
     @AfterEach
