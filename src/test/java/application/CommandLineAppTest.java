@@ -1,29 +1,27 @@
-package view;
+package application;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import service.CommandLineReader;
+import service.CountService;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class FileAppTest {
+public class CommandLineAppTest {
 
     App underTest;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final PrintStream standardOut = System.out;
 
-    private void init(String fileName) {
-        System.setOut(new PrintStream(outputStreamCaptor));
-
-        underTest = new App(new FileReader(new Scanner(getClass().getClassLoader().getResourceAsStream(fileName))), new CountService(), System.out);
-    }
 
     @Test
     public void testGetWordsCountWithOnlyRealWords() {
-        init("onlyrealwords.txt");
+        init("Mary had one little lamb");
 
         underTest.application();
 
@@ -33,7 +31,7 @@ public class FileAppTest {
 
     @Test
     public void testWordsCountDeleteNumberInTheMiddle() {
-        init("numberinmiddle.txt");
+        init("Mary had 9 little lamb");
 
         underTest.application();
 
@@ -43,7 +41,7 @@ public class FileAppTest {
 
     @Test
     public void testWordsCountDeleteNumberInTheMiddleOfAWord() {
-        init("numberinword.txt");
+        init("Mary had one l1ttle lamb");
 
         underTest.application();
 
@@ -53,12 +51,19 @@ public class FileAppTest {
 
     @Test
     public void testWordsCountDeleteAStopWord() {
-        init("containsstopword.txt");
+        init("Mary had the little lamb");
 
         underTest.application();
 
         assertEquals("Enter text: Number of words: 4", outputStreamCaptor.toString()
                 .trim());
+    }
+
+    private void init(String input) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        System.setOut(new PrintStream(outputStreamCaptor));
+
+        underTest = new App(new CommandLineReader(new Scanner(System.in)), new CountService(), System.out);
     }
 
     @AfterEach

@@ -1,6 +1,10 @@
-package view;
+package application;
 
 import org.jetbrains.annotations.Nullable;
+import service.CommandLineReader;
+import service.CountService;
+import service.FileReader;
+import service.Reader;
 
 import java.io.InputStream;
 import java.util.Scanner;

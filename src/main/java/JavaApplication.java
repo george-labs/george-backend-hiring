@@ -1,4 +1,4 @@
-import view.*;
+import application.*;
 
 public class JavaApplication {
 

@@ -1,4 +1,4 @@
-package view;
+package service;
 
 public interface Reader {
 

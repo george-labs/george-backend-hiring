@@ -1,8 +1,8 @@
-package view;
+package service;
 
 import java.util.Scanner;
 
-public class FileReader implements Reader{
+public class FileReader implements Reader {
 
     Scanner scanner;
 
@@ -14,7 +14,7 @@ public class FileReader implements Reader{
     public String readInput() {
         StringBuilder contentBuilder = new StringBuilder();
         while (scanner.hasNextLine()) {
-            contentBuilder.append(scanner.nextLine());
+            contentBuilder.append(scanner.nextLine()).append(" ");
         }
         return contentBuilder.toString();
     }

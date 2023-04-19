@@ -1,10 +1,11 @@
-package view;
+package application;
 
 import org.jetbrains.annotations.NotNull;
+import service.CountService;
+import service.FileReader;
+import service.Reader;
 
-import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,7 +20,6 @@ public class App {
         this.inputStream = inputStream;
         this.countService = countService;
         this.outputStream = outputStream;
-
     }
 
     public void application() {
@@ -32,14 +32,7 @@ public class App {
 
     @NotNull
     private List<String> readStopWordsFromFile() {
-        InputStream fileInputStream = getClass().getClassLoader().getResourceAsStream(STOPWORD_FILE_NAME);
-        Scanner sc = new Scanner(fileInputStream);
-        List<String> stopWords = new ArrayList<>();
-        while (sc.hasNextLine()) {
-            stopWords.add(sc.nextLine());
-        }
-        return stopWords;
+        Reader fileReader = new FileReader(new Scanner(getClass().getClassLoader().getResourceAsStream(STOPWORD_FILE_NAME)));
+        return List.of(fileReader.readInput().split(" "));
     }
-
-
 }

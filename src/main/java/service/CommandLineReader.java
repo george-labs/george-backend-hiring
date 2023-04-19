@@ -1,8 +1,8 @@
-package view;
+package service;
 
 import java.util.Scanner;
 
-public class CommandLineReader implements Reader{
+public class CommandLineReader implements Reader {
     Scanner scanner;
 
     public CommandLineReader(Scanner scanner) {
