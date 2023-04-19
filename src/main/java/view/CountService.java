@@ -1,20 +1,13 @@
 package view;
 
-import java.util.Scanner;
-
-public class ReadService {
+public class CountService {
 
     public static final String MATCH_ONLY_WORD_REGEX = "^[a-zA-Z]+$";
-    private final Scanner scanner;
 
-    public ReadService(Scanner scanner) {
-        this.scanner = scanner;
+    public CountService() {
     }
 
-    public int getWordsCount() {
-        System.out.print("Enter text: ");
-        String input = scanner.nextLine();
-
+    public int getWordsCount(String input) {
         String[] words = input.split(" ");
 
         return getValidWordCount(words);
