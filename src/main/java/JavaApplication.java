@@ -27,12 +27,12 @@ public class JavaApplication {
     private static void countWordsFromSystemIN(Scanner scanner, List<String> stopWords) {
         System.out.print("Enter text:");
         String line = scanner.nextLine();
-        final Counter wordCounter = new WordCounter(new Regex("[A-Za-z]+"), stopWords, line);
+        final Counter wordCounter = new WordCounter(new Regex(Constraints.WORD_CONTAINING_HYPHEN_REGEX_STRING), stopWords, line);
         wordCounter.display();
     }
 
     private static void countWordsFromFile(String fileName, List<String> stopWords) throws FileNotFoundException {
-        final Counter fileCounter = new WordCounterFileAdapter(fileName, stopWords);
+        final Counter fileCounter = new WordCounterFileAdapter(fileName, stopWords, Constraints.WORD_CONTAINING_HYPHEN_REGEX_STRING);
         fileCounter.display();
     }
 }

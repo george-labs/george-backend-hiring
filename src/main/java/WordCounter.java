@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 public class WordCounter implements Counter {
 
     final Regex regex;
+
     final List<String> stopWords;
 
     final String line;
@@ -25,7 +26,7 @@ public class WordCounter implements Counter {
 
     @Override
     public Integer unique() {
-        return  filteredLine()
+        return filteredLine()
                 .collect(Collectors.toSet())
                 .size();
     }

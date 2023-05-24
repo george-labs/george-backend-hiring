@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class WordCounterFileAdapter implements Counter{
-    private final WordCounter counter;
+public class WordCounterFileAdapter implements Counter {
+    private final Counter counter;
 
-    public WordCounterFileAdapter(String fileName, List<String> stopWords) {
-        try(BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(Constraints.RESOURCES_PATH + fileName)))) {
+    public WordCounterFileAdapter(String fileName, List<String> stopWords, String regexString) {
+        try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(Constraints.RESOURCES_PATH + fileName)))) {
             String lines = fileReader.lines().collect(Collectors.joining(" "));
-            this.counter = new WordCounter(new Regex("[A-Za-z]+"), stopWords, lines);
+            this.counter = new WordCounter(new Regex(regexString), stopWords, lines);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -39,6 +39,6 @@ public class WordCounterFileAdapter implements Counter{
 
     @Override
     public void display() {
-      this.counter.display();
+        this.counter.display();
     }
 }
