@@ -49,6 +49,7 @@ class WordCounterTest {
         Integer actual = wordCounter.count();
         Assertions.assertNotEquals(expected, actual);
     }
+
     @Test
     void countUniqueWords() {
         String example = "There is a duplicate duplicate";
