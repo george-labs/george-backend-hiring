@@ -59,5 +59,4 @@ class WordCounterTest {
         Assertions.assertNotEquals(expected, actual);
     }
 
-
 }
