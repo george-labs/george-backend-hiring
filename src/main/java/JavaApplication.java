@@ -35,7 +35,10 @@ public class JavaApplication {
     }
 
     private static void countWordsFromFile(String fileName, List<String> stopWords) throws FileNotFoundException {
-        final Counter fileCounter = new WordCounterFileAdapter(fileName, stopWords, Constraints.WORD_CONTAINING_HYPHEN_REGEX_STRING, Constraints.DEFAULT_DELIMITER_REGEX_STRING);
+        final Counter fileCounter = new WordCounterFileAdapter(fileName,
+                stopWords,
+                Constraints.WORD_CONTAINING_HYPHEN_REGEX_STRING,
+                Constraints.DEFAULT_DELIMITER_REGEX_STRING);
         fileCounter.display();
     }
 }
