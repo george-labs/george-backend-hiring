@@ -11,39 +11,42 @@ class WordCounterTest {
 
     @Test
     void countWordsInLine() {
+        //given
         final List<String> stopWords = new ArrayList<>();
         stopWords.add("the");
         stopWords.add("an");
-        final WordCounter wordCounter = new WordCounter(new Regex("[A-Za-z]+"), stopWords);
         String example = "word6 the  text";
+        final WordCounter wordCounter = new WordCounter(new Regex("[A-Za-z]+"), stopWords, example);
         Integer expected = 1;
-        Integer actual = wordCounter.countWordsInLine(example);
+
+        //When
+        Integer actual = wordCounter.countWords();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void countWordsInLineWithNoStopWords() {
         final List<String> stopWords = new ArrayList<>();
-        final WordCounter wordCounter = new WordCounter(new Regex("[A-Za-z]+"), stopWords);
         String example = "word6 the  text";
+        final WordCounter wordCounter = new WordCounter(new Regex("[A-Za-z]+"), stopWords, example);
         Integer expected = 1;
-        Integer actual = wordCounter.countWordsInLine(example);
+        Integer actual = wordCounter.countWords();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void countWordsInLineException() {
-        final WordCounter wordCounter = new WordCounter(null, Collections.emptyList());
         String example = "word6 th(s  text";
-        Assertions.assertThrows(NullPointerException.class, () -> wordCounter.countWordsInLine(example));
+        final WordCounter wordCounter = new WordCounter(null, Collections.emptyList(), example);
+        Assertions.assertThrows(NullPointerException.class, () -> wordCounter.countWords());
     }
 
     @Test
     void countWordsInLineWrongFilter() {
-        final WordCounter wordCounter = new WordCounter(new Regex("[0-9]+"), Collections.emptyList());
         String example = "word6 th(s  text";
+        final WordCounter wordCounter = new WordCounter(new Regex("[0-9]+"), Collections.emptyList(), example);
         Integer expected = 1;
-        Integer actual = wordCounter.countWordsInLine(example);
+        Integer actual = wordCounter.countWords();
         Assertions.assertNotEquals(expected, actual);
     }
 }
