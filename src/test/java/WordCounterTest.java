@@ -49,4 +49,14 @@ class WordCounterTest {
         Integer actual = wordCounter.count();
         Assertions.assertNotEquals(expected, actual);
     }
+    @Test
+    void countUniqueWords() {
+        String example = "There is a duplicate duplicate";
+        final Counter wordCounter = new WordCounter(new Regex("[0-9]+"), Collections.emptyList(), example);
+        Integer expected = 4;
+        Integer actual = wordCounter.unique();
+        Assertions.assertNotEquals(expected, actual);
+    }
+
+
 }

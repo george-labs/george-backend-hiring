@@ -3,6 +3,7 @@ import kotlin.text.Regex;
 import java.io.*;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WordCounterFileAdapter implements Counter{
     private final WordCounter counter;
@@ -24,5 +25,20 @@ public class WordCounterFileAdapter implements Counter{
             throw new RuntimeException("No WordCounter instance provided");
         }
         return this.counter.count();
+    }
+
+    @Override
+    public Integer unique() {
+        return this.counter.unique();
+    }
+
+    @Override
+    public Stream<String> filteredLine() {
+        return this.counter.filteredLine();
+    }
+
+    @Override
+    public void display() {
+      this.counter.display();
     }
 }

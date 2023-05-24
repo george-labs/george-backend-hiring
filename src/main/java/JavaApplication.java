@@ -28,13 +28,11 @@ public class JavaApplication {
         System.out.print("Enter text:");
         String line = scanner.nextLine();
         final Counter wordCounter = new WordCounter(new Regex("[A-Za-z]+"), stopWords, line);
-        final Integer numberOfWords = wordCounter.count();
-        System.out.printf("Number of words: %d%n", numberOfWords);
+        wordCounter.display();
     }
 
     private static void countWordsFromFile(String fileName, List<String> stopWords) throws FileNotFoundException {
         final Counter fileCounter = new WordCounterFileAdapter(fileName, stopWords);
-        final Integer numberOfWords = fileCounter.count();
-        System.out.printf("Number of words: %d%n", numberOfWords);
+        fileCounter.display();
     }
 }
