@@ -8,10 +8,10 @@ import java.util.stream.Stream;
 public class WordCounterFileAdapter implements Counter {
     private final Counter counter;
 
-    public WordCounterFileAdapter(String fileName, List<String> stopWords, String regexString) {
+    public WordCounterFileAdapter(String fileName, List<String> stopWords, String regexString, String delimiter) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(Constraints.RESOURCES_PATH + fileName)))) {
             String lines = fileReader.lines().collect(Collectors.joining(" "));
-            this.counter = new WordCounter(new Regex(regexString), stopWords, lines);
+            this.counter = new WordCounter(new Regex(regexString), stopWords, lines, delimiter);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

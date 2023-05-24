@@ -10,7 +10,7 @@ class WordCounterFileAdapterTest {
     void countWithExisting() {
         final Counter wordCounter = new WordCounterFileAdapter("mytext.txt",
                 Collections.emptyList(),
-                Constraints.WORD_CONTAINING_HYPHEN_REGEX_STRING);
+                Constraints.WORD_CONTAINING_HYPHEN_REGEX_STRING, Constraints.DEFAULT_DELIMITER_REGEX_STRING);
         Integer expected = 5;
         Integer actual = wordCounter.count();
         Assertions.assertEquals(expected, actual);
@@ -21,6 +21,6 @@ class WordCounterFileAdapterTest {
         Assertions.assertThrows(RuntimeException.class,
                 () -> new WordCounterFileAdapter("notExisting.txt",
                         Collections.emptyList(),
-                        Constraints.WORD_CONTAINING_HYPHEN_REGEX_STRING));
+                        Constraints.WORD_CONTAINING_HYPHEN_REGEX_STRING, Constraints.DEFAULT_DELIMITER_REGEX_STRING));
     }
 }

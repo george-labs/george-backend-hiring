@@ -13,10 +13,13 @@ public class WordCounter implements Counter {
 
     final String line;
 
-    public WordCounter(Regex regex, List<String> stopWords, String line) {
+    final String delimiter;
+
+    public WordCounter(Regex regex, List<String> stopWords, String line, String delimiter) {
         this.regex = regex;
         this.stopWords = stopWords;
         this.line = line;
+        this.delimiter = delimiter;
     }
 
     @Override
@@ -33,7 +36,7 @@ public class WordCounter implements Counter {
 
     @Override
     public Stream<String> filteredLine() {
-        return Arrays.stream(line.split("\\s"))
+        return Arrays.stream(line.split(this.delimiter))
                 .filter(regex::matches)
                 .filter(it -> !this.stopWords.contains(it));
     }
