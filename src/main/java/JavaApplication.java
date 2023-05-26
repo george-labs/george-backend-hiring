@@ -37,12 +37,7 @@ public class JavaApplication {
 
     public static void main(String[] args){
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter text: ");
-        String inputText = sc.nextLine();
-
-        int wordCount = countWords(inputText, ACCEPTED_CHARS);
-        System.out.println("Output: "+ wordCount);
-        sc.close();
+        TextProcessor textProcessor = new TextProcessor();
+        textProcessor.processText(args);
     }
 }

@@ -6,6 +6,6 @@ Valid: first second
 invalid: 2second
 
 ## Iteration 2
-Each word will be on separate line(\n)
+Each stop word will be on separate line(\n)
 Stop words are complete words and not part of a word.
 
