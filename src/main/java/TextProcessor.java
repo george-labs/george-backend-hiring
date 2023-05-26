@@ -1,19 +1,12 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
 import java.util.Scanner;
 
 public class TextProcessor {
 
-    public List<String> readFromFile(String fileName){
-        try {
-            return Files.readAllLines(Path.of(fileName));
-        } catch (IOException e) {
-            System.err.println("Exception while processing/opening the file. Message: "+e.getMessage());
-            throw new RuntimeException(e);
-        }
+    public FileProcessor fileProcessor;
 
+
+    public TextProcessor(FileProcessor fileProcessor){
+        this.fileProcessor = fileProcessor;
     }
 
     public String readFromConsole(){
@@ -29,14 +22,14 @@ public class TextProcessor {
         String inputText = "";
 
         if(args.length > 0){
-            inputText =  String.join(" ",readFromFile(args[0])) ;
+            inputText =  String.join(" ", fileProcessor.getListOfLinesFromFile(args[0])) ;
         } else {
             inputText = readFromConsole();
         }
 
-        WordProcessor wordProcessor = new WordProcessor();
+        WordProcessor wordProcessor = new WordProcessor(fileProcessor);
 
-        int wordCount = wordProcessor.countWords(inputText, Constants.ACCEPTED_CHARS, Constants.STOP_WORD_INPUT_SOURCE);
+        int wordCount = wordProcessor.countWords(inputText, Constants.ACCEPTED_CHARS, Constants.RESOURCE_PATH+Constants.STOP_WORD_INPUT_SOURCE);
         System.out.println("Output: "+ wordCount);
     }
 

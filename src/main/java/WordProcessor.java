@@ -1,24 +1,17 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class WordProcessor {
 
 
+    public FileProcessor fileProcessor;
 
-    public static List<String> getStopWordsFromFile(String fileName){
-        try {
-            return Files.readAllLines(Path.of(fileName));
-        } catch (IOException e) {
-            System.err.println("Exception while processing/opening the file. Message: "+e.getMessage());
-            throw new RuntimeException(e);
-        }
+    public WordProcessor(FileProcessor fileProcessor){
+        this.fileProcessor = fileProcessor;
     }
 
-    public static int countWords(String input, String regex, String stopWordFileName){
-        List<String> stopWords = getStopWordsFromFile(Constants.RESOURCE_PATH+stopWordFileName);
+    public int countWords(String input, String regex, String stopWordFileName){
+        List<String> stopWords = fileProcessor.getListOfLinesFromFile(stopWordFileName) ;
         int wordCount = 0;
 
         String[] inputWords = input.split(" ");
