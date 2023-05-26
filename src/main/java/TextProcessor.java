@@ -27,14 +27,16 @@ public class TextProcessor {
 
     public void processText(String[] args){
         String inputText = "";
-        System.out.println("**");
+
         if(args.length > 0){
             inputText =  String.join(" ",readFromFile(args[0])) ;
         } else {
             inputText = readFromConsole();
         }
 
-        int wordCount = JavaApplication.countWords(inputText, JavaApplication.ACCEPTED_CHARS);
+        WordProcessor wordProcessor = new WordProcessor();
+
+        int wordCount = wordProcessor.countWords(inputText, Constants.ACCEPTED_CHARS, Constants.STOP_WORD_INPUT_SOURCE);
         System.out.println("Output: "+ wordCount);
     }
 
