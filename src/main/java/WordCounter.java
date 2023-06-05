@@ -17,14 +17,12 @@ public class WordCounter {
         int counter = 0;
         Pattern pattern = Pattern.compile(REGEX);
 
-        String[] words = input.split(" ");
+        String[] words = input.split("\\s");
         for (String word : words) {
-
             if (pattern.matcher(word).matches() && !stopWords.contains(word)) {
                 counter++;
             }
         }
-
         return counter;
     }
 }

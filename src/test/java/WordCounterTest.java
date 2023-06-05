@@ -10,40 +10,97 @@ public class WordCounterTest {
 
     @Test
     public void getCountOfWords_emptyInput() {
-        String emptyInput = "";
+        String input = "";
 
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(emptyInput, stopWords);
+        int result = wordCounter.getCountOfWords(input, stopWords);
 
         Assertions.assertEquals(0, result);
     }
 
     @Test
-    public void getCountOfWords_withAStopWord() {
-        String emptyInput = "Mary had a little lamb";
+    public void getCountOfWords_nullInput() {
+        WordCounter wordCounter = new WordCounter();
+        int result = wordCounter.getCountOfWords(null, stopWords);
+
+        Assertions.assertEquals(0, result);
+    }
+
+    @Test
+    public void getCountOfWords_blankInput() {
+        String input = "    ";
+        WordCounter wordCounter = new WordCounter();
+        int result = wordCounter.getCountOfWords(input, stopWords);
+
+        Assertions.assertEquals(0, result);
+    }
+
+    @Test
+    public void getCountOfWords_withTab() {
+        String input = "agafsg\tafgh";
 
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(emptyInput, stopWords);
+        int result = wordCounter.getCountOfWords(input, stopWords);
+
+        Assertions.assertEquals(2, result);
+    }
+
+    @Test
+    public void getCountOfWords_withLineBreak() {
+        String input = "agafsg\nafgh";
+
+        WordCounter wordCounter = new WordCounter();
+        int result = wordCounter.getCountOfWords(input, stopWords);
+
+        Assertions.assertEquals(2, result);
+    }
+
+    @Test
+    public void getCountOfWords_withAStopWord() {
+        String input = "Mary had a little lamb";
+
+        WordCounter wordCounter = new WordCounter();
+        int result = wordCounter.getCountOfWords(input, stopWords);
 
         Assertions.assertEquals(4, result);
     }
 
     @Test
     public void getCountOfWords_withMultipleStopWords() {
-        String emptyInput = "Mary had a little lamb the on";
+        String input = "Mary had a little lamb the on";
 
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(emptyInput, stopWords);
+        int result = wordCounter.getCountOfWords(input, stopWords);
 
         Assertions.assertEquals(4, result);
     }
 
     @Test
     public void getCountOfWords_withoutAStopWord() {
-        String emptyInput = "Mary had little lamb";
+        String input = "Mary had little lamb";
 
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(emptyInput, stopWords);
+        int result = wordCounter.getCountOfWords(input, stopWords);
+
+        Assertions.assertEquals(4, result);
+    }
+
+    @Test
+    public void getCountOfWords_withANumber() {
+        String input = "Mary had little lamb 0";
+
+        WordCounter wordCounter = new WordCounter();
+        int result = wordCounter.getCountOfWords(input, stopWords);
+
+        Assertions.assertEquals(4, result);
+    }
+
+    @Test
+    public void getCountOfWords_withANonWord() {
+        String input = "Mary had little lamb w0rd1";
+
+        WordCounter wordCounter = new WordCounter();
+        int result = wordCounter.getCountOfWords(input, stopWords);
 
         Assertions.assertEquals(4, result);
     }
