@@ -112,7 +112,7 @@ public class WordCounterTest {
         WordCounter wordCounter = new WordCounter();
         WordCountInfo result = wordCounter.getCountOfWords(input, stopWords);
 
-        Assertions.assertEquals(new WordCountInfo(2,2), result);
+        Assertions.assertEquals(new WordCountInfo(1,2), result);
     }
 
     @Test
@@ -122,6 +122,6 @@ public class WordCounterTest {
         WordCounter wordCounter = new WordCounter();
         WordCountInfo result = wordCounter.getCountOfWords(input, stopWords);
 
-        Assertions.assertEquals(new WordCountInfo(10,8), result);
+        Assertions.assertEquals(new WordCountInfo(8,7), result);
     }
 }

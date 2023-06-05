@@ -30,4 +30,12 @@ public class WordCountInfo {
     public int hashCode() {
         return Objects.hash(getCountOfAllWords(), getCountOfUniqueWords());
     }
+
+    @Override
+    public String toString() {
+        return "WordCountInfo{" +
+                "countOfAllWords=" + countOfAllWords +
+                ", countOfUniqueWords=" + countOfUniqueWords +
+                '}';
+    }
 }
