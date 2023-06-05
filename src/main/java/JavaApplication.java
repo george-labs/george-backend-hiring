@@ -18,9 +18,13 @@ public class JavaApplication {
         }
 
         WordCounter wordCounter = new WordCounter();
-        WordCountInfo wordCountInfo = wordCounter.getCountOfWords(input, stopWordList);
+        WordCountInfo wordCountInfo = wordCounter.getWordCountInfo(input, stopWordList);
         System.out.println("Number of words: " + wordCountInfo.getCountOfAllWords() +
-                ", unique: " + wordCountInfo.getCountOfUniqueWords());
+                ", unique: " + wordCountInfo.getCountOfUniqueWords() +
+                "; average word length: " + wordCountInfo.getAverageLength() +
+                " characters");
+
+
 
     }
 

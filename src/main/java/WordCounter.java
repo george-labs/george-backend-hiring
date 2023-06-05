@@ -10,13 +10,14 @@ public class WordCounter {
     public WordCounter() {
     }
 
-    public WordCountInfo getCountOfWords(String input, List<String> stopWords) {
+    public WordCountInfo getWordCountInfo(String input, List<String> stopWords) {
 
         if (input == null || input.isBlank()) {
-            return new WordCountInfo(0, 0);
+            return new WordCountInfo(0, 0, 0);
         }
 
         int counter = 0;
+        int totalLength = 0;
         Set<String> uniqueWords = new HashSet<>();
         Pattern pattern = Pattern.compile(REGEX);
 
@@ -25,8 +26,10 @@ public class WordCounter {
             if (pattern.matcher(word).matches() && !stopWords.contains(word)) {
                 counter++;
                 uniqueWords.add(word);
+                totalLength += word.length();
             }
         }
-        return new WordCountInfo(counter, uniqueWords.size());
+        double averageLength = (double) totalLength/counter;
+        return new WordCountInfo(counter, uniqueWords.size(), averageLength);
     }
 }
