@@ -27,7 +27,7 @@ public class StopWordsReader {
 
         try (InputStreamReader streamReader =
                      new InputStreamReader(is, StandardCharsets.UTF_8);
-             BufferedReader reader = new BufferedReader(streamReader);) {
+             BufferedReader reader = new BufferedReader(streamReader)) {
 
             String line;
             while ((line = reader.readLine()) != null) {

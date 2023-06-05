@@ -6,7 +6,7 @@ import java.util.List;
 
 public class WordCounterTest {
 
-    private List<String> stopWords = Arrays.asList("the", "a", "on", "off");
+    private final List<String> stopWords = Arrays.asList("the", "a", "on", "off");
 
     @Test
     public void getCountOfWords_emptyInput() {
