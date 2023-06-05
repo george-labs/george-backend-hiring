@@ -8,8 +8,6 @@ import java.util.List;
 
 public class StopWordsReader {
 
-//    private final static String FILENAME = "stopWords.txt";
-
     public List<String> getWordsFromResources(String fileName) {
 
         ClassLoader classLoader = getClass().getClassLoader();
