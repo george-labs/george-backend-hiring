@@ -8,22 +8,22 @@ import java.util.List;
 
 public class StopWordsReader {
 
-    private final static String FILENAME = "stopWords.txt";
+//    private final static String FILENAME = "stopWords.txt";
 
-    public List<String> getStopWordsFromResources() {
+    public List<String> getWordsFromResources(String fileName) {
 
         ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream(FILENAME);
+        InputStream inputStream = classLoader.getResourceAsStream(fileName);
 
         if (inputStream == null) {
-            throw new IllegalArgumentException("file not found! " + FILENAME);
+            throw new IllegalArgumentException("file not found! " + fileName);
         } else {
-            return getStopWords(inputStream);
+            return getWords(inputStream);
         }
     }
 
-    private List<String> getStopWords(InputStream is) {
-        List<String> stopWords = new ArrayList<>();
+    private List<String> getWords(InputStream is) {
+        List<String> words = new ArrayList<>();
 
         try (InputStreamReader streamReader =
                      new InputStreamReader(is, StandardCharsets.UTF_8);
@@ -31,12 +31,12 @@ public class StopWordsReader {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                stopWords.add(line);
+                words.add(line);
             }
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return stopWords;
+        return words;
     }
 }
