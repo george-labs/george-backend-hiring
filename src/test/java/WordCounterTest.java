@@ -104,4 +104,24 @@ public class WordCounterTest {
 
         Assertions.assertEquals(4, result);
     }
+
+    @Test
+    public void getCountOfWords_withDash() {
+        String input = "Humpty-Dumpty";
+
+        WordCounter wordCounter = new WordCounter();
+        int result = wordCounter.getCountOfWords(input, stopWords);
+
+        Assertions.assertEquals(2, result);
+    }
+
+    @Test
+    public void getCountOfWords_withAllSymbols() {
+        String input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall! What?";
+
+        WordCounter wordCounter = new WordCounter();
+        int result = wordCounter.getCountOfWords(input, stopWords);
+
+        Assertions.assertEquals(10, result);
+    }
 }

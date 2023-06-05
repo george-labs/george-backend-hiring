@@ -15,6 +15,5 @@ public class StopWordsReaderTest {
         List<String> result = stopWordsReader.getWordsFromResources(FILENAME_STOP_WORDS);
 
         Assertions.assertEquals(Arrays.asList("the", "a", "on", "off"), result);
-
     }
 }

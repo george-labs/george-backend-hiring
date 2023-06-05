@@ -17,6 +17,7 @@ public class WordCounter {
         int counter = 0;
         Pattern pattern = Pattern.compile(REGEX);
 
+        input = input.replaceAll("[\\-.?!]", " ");
         String[] words = input.split("\\s");
         for (String word : words) {
             if (pattern.matcher(word).matches() && !stopWords.contains(word)) {
