@@ -1,4 +1,6 @@
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class WordCounter {
@@ -8,21 +10,23 @@ public class WordCounter {
     public WordCounter() {
     }
 
-    public int getCountOfWords(String input, List<String> stopWords) {
+    public WordCountInfo getCountOfWords(String input, List<String> stopWords) {
 
         if (input == null || input.isBlank()) {
-            return 0;
+            return new WordCountInfo(0, 0);
         }
 
         int counter = 0;
+        Set<String> uniqueWords = new HashSet<>();
         Pattern pattern = Pattern.compile(REGEX);
 
         String[] words = input.split("[\\-.?!\\s]");
         for (String word : words) {
             if (pattern.matcher(word).matches() && !stopWords.contains(word)) {
                 counter++;
+                uniqueWords.add(word);
             }
         }
-        return counter;
+        return new WordCountInfo(counter, uniqueWords.size());
     }
 }

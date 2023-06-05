@@ -13,26 +13,26 @@ public class WordCounterTest {
         String input = "";
 
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(input, stopWords);
+        WordCountInfo result = wordCounter.getCountOfWords(input, stopWords);
 
-        Assertions.assertEquals(0, result);
+        Assertions.assertEquals(new WordCountInfo(0,0), result);
     }
 
     @Test
     public void getCountOfWords_nullInput() {
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(null, stopWords);
+        WordCountInfo result = wordCounter.getCountOfWords(null, stopWords);
 
-        Assertions.assertEquals(0, result);
+        Assertions.assertEquals(new WordCountInfo(0,0), result);
     }
 
     @Test
     public void getCountOfWords_blankInput() {
         String input = "    ";
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(input, stopWords);
+        WordCountInfo result = wordCounter.getCountOfWords(input, stopWords);
 
-        Assertions.assertEquals(0, result);
+        Assertions.assertEquals(new WordCountInfo(0,0), result);
     }
 
     @Test
@@ -40,9 +40,9 @@ public class WordCounterTest {
         String input = "agafsg\tafgh";
 
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(input, stopWords);
+        WordCountInfo result = wordCounter.getCountOfWords(input, stopWords);
 
-        Assertions.assertEquals(2, result);
+        Assertions.assertEquals(new WordCountInfo(2,2), result);
     }
 
     @Test
@@ -50,9 +50,9 @@ public class WordCounterTest {
         String input = "agafsg\nafgh";
 
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(input, stopWords);
+        WordCountInfo result = wordCounter.getCountOfWords(input, stopWords);
 
-        Assertions.assertEquals(2, result);
+        Assertions.assertEquals(new WordCountInfo(2,2), result);
     }
 
     @Test
@@ -60,9 +60,9 @@ public class WordCounterTest {
         String input = "Mary had a little lamb";
 
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(input, stopWords);
+        WordCountInfo result = wordCounter.getCountOfWords(input, stopWords);
 
-        Assertions.assertEquals(4, result);
+        Assertions.assertEquals(new WordCountInfo(4,4), result);
     }
 
     @Test
@@ -70,9 +70,9 @@ public class WordCounterTest {
         String input = "Mary had a little lamb the on";
 
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(input, stopWords);
+        WordCountInfo result = wordCounter.getCountOfWords(input, stopWords);
 
-        Assertions.assertEquals(4, result);
+        Assertions.assertEquals(new WordCountInfo(4,4), result);
     }
 
     @Test
@@ -80,9 +80,9 @@ public class WordCounterTest {
         String input = "Mary had little lamb";
 
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(input, stopWords);
+        WordCountInfo result = wordCounter.getCountOfWords(input, stopWords);
 
-        Assertions.assertEquals(4, result);
+        Assertions.assertEquals(new WordCountInfo(4,4), result);
     }
 
     @Test
@@ -90,9 +90,9 @@ public class WordCounterTest {
         String input = "Mary had little lamb 0";
 
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(input, stopWords);
+        WordCountInfo result = wordCounter.getCountOfWords(input, stopWords);
 
-        Assertions.assertEquals(4, result);
+        Assertions.assertEquals(new WordCountInfo(4,4), result);
     }
 
     @Test
@@ -100,9 +100,9 @@ public class WordCounterTest {
         String input = "Mary had little lamb w0rd1";
 
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(input, stopWords);
+        WordCountInfo result = wordCounter.getCountOfWords(input, stopWords);
 
-        Assertions.assertEquals(4, result);
+        Assertions.assertEquals(new WordCountInfo(4,4), result);
     }
 
     @Test
@@ -110,9 +110,9 @@ public class WordCounterTest {
         String input = "Humpty-Dumpty";
 
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(input, stopWords);
+        WordCountInfo result = wordCounter.getCountOfWords(input, stopWords);
 
-        Assertions.assertEquals(2, result);
+        Assertions.assertEquals(new WordCountInfo(2,2), result);
     }
 
     @Test
@@ -120,8 +120,8 @@ public class WordCounterTest {
         String input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall! What?";
 
         WordCounter wordCounter = new WordCounter();
-        int result = wordCounter.getCountOfWords(input, stopWords);
+        WordCountInfo result = wordCounter.getCountOfWords(input, stopWords);
 
-        Assertions.assertEquals(10, result);
+        Assertions.assertEquals(new WordCountInfo(10,8), result);
     }
 }

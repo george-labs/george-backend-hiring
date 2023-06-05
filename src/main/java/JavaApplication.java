@@ -18,11 +18,14 @@ public class JavaApplication {
         }
 
         WordCounter wordCounter = new WordCounter();
-        System.out.println(wordCounter.getCountOfWords(input, stopWordList));
+        WordCountInfo wordCountInfo = wordCounter.getCountOfWords(input, stopWordList);
+        System.out.println("Number of words: " + wordCountInfo.getCountOfAllWords() +
+                ", unique: " + wordCountInfo.getCountOfUniqueWords());
 
     }
 
     private static String getInputFromUser() {
+        System.out.print("Enter text: ");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
