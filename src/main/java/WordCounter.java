@@ -10,15 +10,14 @@ public class WordCounter {
 
     public int getCountOfWords(String input, List<String> stopWords) {
 
-        if (input == null || input.isEmpty() || input.isBlank()) {
+        if (input == null || input.isBlank()) {
             return 0;
         }
 
         int counter = 0;
         Pattern pattern = Pattern.compile(REGEX);
 
-        input = input.replaceAll("[\\-.?!]", " ");
-        String[] words = input.split("\\s");
+        String[] words = input.split("[\\-.?!\\s]");
         for (String word : words) {
             if (pattern.matcher(word).matches() && !stopWords.contains(word)) {
                 counter++;
