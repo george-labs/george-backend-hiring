@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class WordCounter {
 
-    private final static String REGEX = "[a-zA-Z]+";
+    private final static String REGEX = "[\\-a-zA-Z]+";
 
     public WordCounter() {
     }
@@ -20,7 +20,7 @@ public class WordCounter {
         Set<String> uniqueWords = new HashSet<>();
         Pattern pattern = Pattern.compile(REGEX);
 
-        String[] words = input.split("[\\-.?!\\s]");
+        String[] words = input.split("[.?!\\s]");
         for (String word : words) {
             if (pattern.matcher(word).matches() && !stopWords.contains(word)) {
                 counter++;
