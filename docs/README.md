@@ -101,7 +101,7 @@ In case you see the need for mocking, please hand-roll your mocks.
 ### Let's Get Started
 
 1. Clone the repository
-2. Create a branch off `main`  
+2. Create a branch off `home_assignment_main`  
    `<firstname>_<lastname>_iteration_1_homeassignment`
 3. Push this branch to the repository
 4. Run `./mvnw clean verify` via your terminal
