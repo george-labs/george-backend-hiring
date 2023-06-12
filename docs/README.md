@@ -9,14 +9,14 @@ In this stage you have to show practical skills in the things which we discussed
 
 This stage is split into two parts
 
-    Home Assignment (expected effort: 3 hours)
-    Remote-Pair-Programming Sessions (3 hours)
+    Part 1: Home Assignment (expected effort: 3 hours)
+    Part 2: Remote-Pair-Programming Sessions (3 hours)
 
 Please note: The home assignment is the precondition for the Remote-Pair-Programming Sessions. Only if we are happy with part 1 you will be invited to part 2 of our coding challenge stage.
 
 ### Home Assignment
 
-We expect you to work 3 hours on the example application which we soon will explain to you in more detail. Of course, we can't prevent you from putting more hours in, which we for sure don't expect. Please, don't finish more than a maximum of 3 iterations even though this could mean that your spend less than 3 hours. Please, as soon as you have finished the home assignment (3 hours of work) let us know, so that we can start with the evaluation.
+We expect you to work 3 hours on the exercise which we soon will explain to you in more detail. Of course, we can't prevent you from putting more hours in, which we for sure don't expect. Please, don't finish more than a maximum of 3 iterations even though this could mean that your spend less than 3 hours. Please, as soon as you have finished the home assignment (3 hours of work) let us know, so that we can start with the evaluation.
 
 ### Pair-Programming Sessions
 
@@ -85,8 +85,7 @@ You can see these rules as the definition of done for an iteration.
 This example might also seem a bit hypothetical, but we believe it's small but complicated enough, that it makes sense
 to come up with an Object-Oriented Design which is more sophisticated than implementing your whole solution in a single
 main method 😉.  
-The evaluation won't take longer than 1 work day.  
-In case we think your solution and way of working fits ours we will invite your for the final team matching.  
+The evaluation won't take longer than 1 work day.
 If we do not continue the recruiting process with you, we can send you a detailed feedback of our evaluation.
 
 ### Requirements
