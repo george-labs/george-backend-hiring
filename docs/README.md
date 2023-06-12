@@ -7,11 +7,22 @@ In this stage you have to show practical skills in the things which we discussed
 - Refactoring
 - Automated Testing (Unit & Integration Tests)
 
+This stage is split into two parts
+
+    Home Assignment (expected effort: 3 hours)
+    Remote-Pair-Programming Sessions (3 hours)
+
+Please note: The home assignment is the precondition for the Remote-Pair-Programming Sessions. Only if we are happy with part 1 you will be invited to part 2 of our coding challenge stage.
+
+### Home Assignment
+
+We expect you to work 3 hours on the example application which we soon will explain to you in more detail. Of course, we can't prevent you from putting more hours in, which we for sure don't expect. Please, don't finish more than a maximum of 3 iterations even though this could mean that your spend less than 3 hours. Please, as soon as you have finished the home assignment (3 hours of work) let us know, so that we can start with the evaluation.
+
 ### Pair-Programming Sessions
 
-You will collaborate in five sessions with George Backend Chapter team members.
-Every session takes one hour. There will be a one-hour lunch break from 12am to 1pm.
-At the beginning of every session a new George Backend team member will join while the previous colleague leaves.
+Considering your home assignment was successful, you will be invited to the 2nd part of this stage.
+You will collaborate in three sessions with George Backend Chapter team members.
+Every session takes one hour. At the beginning of every session a new George Backend team member will join while the previous colleague leaves.
 
 In the Remote-Pair-Programming Sessions you need to share your screen so that we can follow your progress.
 In case you have a dual monitor setup, please make sure that you also share your browser window.
@@ -47,10 +58,9 @@ Empathy in our team is highly valued.
 We always put ourselves into our reviewers position to improve their life when reviewing our code.
 
 - For each iteration, please create a branch with the following
-  pattern: `<firstname>_<lastname>_session_<session-nr>_iteration_<iteration-nr>_<pairing-partner-name>`
-    - The `<pairing-partner-name>` is the name of the team member you pair in this iteration
-- Your first iteration must branch off `main`
-- Your branches won't be merged back to master
+  pattern: `<firstname>_<lastname>_iteration_<iteration-nr>_homeassignment`
+- Your first iteration must branch off `home_assignment_main`
+- Your branches won't be merged back to home_assignment_main
 - Make sure every new branch is based on the previous branch
 
 ### Assumptions
@@ -77,7 +87,7 @@ to come up with an Object-Oriented Design which is more sophisticated than imple
 main method 😉.  
 The evaluation won't take longer than 1 work day.  
 In case we think your solution and way of working fits ours we will invite your for the final team matching.  
-If we do not continue the recruiting process with you, we will send you a detailed feedback of our evaluation.
+If we do not continue the recruiting process with you, we can send you a detailed feedback of our evaluation.
 
 ### Requirements
 
@@ -92,7 +102,7 @@ In case you see the need for mocking, please hand-roll your mocks.
 
 1. Clone the repository
 2. Create a branch off `main`  
-   `<firstname>_<lastname>_sesssion_1_iteration_1_<pairing-partner-name>`
+   `<firstname>_<lastname>_iteration_1_homeassignment`
 3. Push this branch to the repository
 4. Run `./mvnw clean verify` via your terminal
 5. Open the project in your IDE of choice
