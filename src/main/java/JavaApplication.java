@@ -3,11 +3,18 @@ import java.util.Scanner;
 
 public class JavaApplication {
     public static void main(String[] args) {
-        FileReader fileReader = new FileReader("src/main/resources/stopwords.txt");
-        List<String> forbiddenWords = fileReader.readWordsFromFile();
+        String input = "";
+        FileReader fileReader = new FileReader();
 
-        WordCounter wordCounter = new WordCounter(readFromInput(), forbiddenWords);
+        if (args.length == 0) {
+            input = readFromInput();
+        } else {
+            fileReader.readFileFromArguments(args[0]);
+        }
 
+        List<String> forbiddenWords = fileReader.readWordsFromFile("src/main/resources/stopwords.txt");
+
+        WordCounter wordCounter = new WordCounter(input, forbiddenWords);
         System.out.println("Number of words: " + wordCounter.countWords());
     }
 
