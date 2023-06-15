@@ -30,20 +30,20 @@ public class WordCounter {
         }
     }
 
-    private void filterForbiddenWords() {
+    private void filterStopWords() {
         this.listOfWords.removeAll(this.listOfStopWords);
     }
 
     public int countWords() {
         this.filterWordsConsistingOfLetters(this.text);
-        this.filterForbiddenWords();
+        this.filterStopWords();
 
         return listOfWords.size();
     }
 
     public int countUniqueWords() {
         this.filterWordsConsistingOfLetters(this.text);
-        this.filterForbiddenWords();
+        this.filterStopWords();
 
         return (int) listOfWords.stream().distinct().count();
     }
