@@ -45,4 +45,22 @@ public class WordCounter {
 
         return (int) listOfWords.stream().distinct().count();
     }
+
+    public double countAverageWordLength() {
+        double sum = 0;
+        int numberOfWords = countWords();
+
+        for (String word : listOfWords) {
+            sum += word.length();
+        }
+
+        return Math.floor((sum / numberOfWords) * 100) / 100;
+    }
+
+    @Override
+    public String toString() {
+        return "Number of words: " + countWords() +
+                ", unique: " + countUniqueWords() +
+                "; average word length: " + countAverageWordLength();
+    }
 }

@@ -15,7 +15,7 @@ public class JavaApplication {
         List<String> forbiddenWords = fileReader.readWordsFromFile("src/main/resources/stopwords.txt");
 
         WordCounter wordCounter = new WordCounter(input, forbiddenWords);
-        System.out.print("Number of words: " + wordCounter.countWords() + ", unique: " + wordCounter.countUniqueWords());
+        System.out.print(wordCounter);
     }
 
     private static String readFromInput() {

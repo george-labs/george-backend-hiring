@@ -8,3 +8,5 @@ If there is an argument passed as a filename, and the file does not exist, then 
 ## Iteration 4
 I assumed that we are checking the uniqueness of the already filtered string (that does not contain the forbidden words)
 ## Iteration 5
+## Iteration 6
+I am assuming that we are counting the average length of valid words, not unique ones. 

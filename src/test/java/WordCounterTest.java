@@ -51,4 +51,13 @@ class WordCounterTest {
         assertEquals(7, underTest.countWords());
         assertEquals(6, underTest.countUniqueWords());
     }
+
+    @Test
+    public void testAverageWordLength() {
+        String text = "Humpty Dumpty Mary";
+
+        underTest = new WordCounter(text);
+
+        assertEquals(5.33, underTest.countAverageWordLength());
+    }
 }

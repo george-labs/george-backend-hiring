@@ -7,8 +7,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class FileReader {
-    public FileReader() {
-    }
 
     public List<String> readWordsFromFile(String path) {
         List<String> words;
