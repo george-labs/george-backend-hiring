@@ -1,10 +1,14 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class JavaApplication {
     public static void main(String[] args) {
-        WordCounter wordCounter = new WordCounter(readFromInput());
+        FileReader fileReader = new FileReader("src/main/resources/stopwords.txt");
+        List<String> forbiddenWords = fileReader.readWordsFromFile();
 
-        System.out.println("Number of words: " +  wordCounter.countWords());
+        WordCounter wordCounter = new WordCounter(readFromInput(), forbiddenWords);
+
+        System.out.println("Number of words: " + wordCounter.countWords());
     }
 
     private static String readFromInput() {

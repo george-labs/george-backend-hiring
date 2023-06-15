@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WordCounterTest {
@@ -18,5 +21,14 @@ class WordCounterTest {
         underTest = new WordCounter("Mary had 5 little lambs");
 
         assertEquals(4, underTest.countWords());
+    }
+
+    @Test
+    public void testCountWordsWithForbiddenWords() {
+        List<String> forbiddenWords = Arrays.asList("Mary", "had");
+
+        underTest = new WordCounter("Mary had 5 little lambs", forbiddenWords);
+
+        assertEquals(2, underTest.countWords());
     }
 }
