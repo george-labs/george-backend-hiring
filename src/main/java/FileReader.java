@@ -1,16 +1,13 @@
 import exception.WordCounterException;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Scanner;
 
 public class FileReader {
     public FileReader() {
-
     }
 
     public List<String> readWordsFromFile(String path) {
@@ -26,15 +23,9 @@ public class FileReader {
         return words;
     }
 
-    public String readFileFromArguments(String fileName) {
-        StringBuilder stringBuilder = new StringBuilder();
+    public String readWordsFromFileAsString(String fileName) {
+        List<String> wordsAsList = this.readWordsFromFile(fileName);
 
-        Scanner reader = new Scanner(new FileInputStream(fileName));
-
-        while (reader.hasNext()) {
-            stringBuilder.append(" ").append(reader.nextLine());
-        }
-
-        return stringBuilder.toString();
+        return String.join(" ", wordsAsList);
     }
 }

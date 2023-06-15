@@ -3,13 +3,13 @@ import java.util.Scanner;
 
 public class JavaApplication {
     public static void main(String[] args) {
-        String input = "";
+        String input;
         FileReader fileReader = new FileReader();
 
         if (args.length == 0) {
             input = readFromInput();
         } else {
-            fileReader.readFileFromArguments(args[0]);
+            input = fileReader.readWordsFromFileAsString(args[0]);
         }
 
         List<String> forbiddenWords = fileReader.readWordsFromFile("src/main/resources/stopwords.txt");
