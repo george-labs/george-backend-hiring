@@ -1,3 +1,5 @@
+package util;
+
 import exception.WordCounterException;
 
 import java.io.IOException;

@@ -1,27 +1,29 @@
+import util.PrintResult;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class WordCounter {
-    private final String wordToCount;
+    private final String text;
     private final List<String> listOfWords = new ArrayList<>();
-    private final List<String> listOfForbiddenWords;
+    private final List<String> listOfStopWords;
 
-    public WordCounter(String wordToCount) {
-        this.wordToCount = wordToCount;
-        this.listOfForbiddenWords = Collections.emptyList();
+    public WordCounter(String text) {
+        this.text = text;
+        this.listOfStopWords = Collections.emptyList();
     }
 
-    public WordCounter(String wordToCount, List<String> listOfForbiddenWords) {
-        this.wordToCount = wordToCount;
-        this.listOfForbiddenWords = listOfForbiddenWords;
+    public WordCounter(String text, List<String> listOfStopWords) {
+        this.text = text;
+        this.listOfStopWords = listOfStopWords;
     }
 
-    private void filterWordsConsistingOfLetters(String word) {
-        word = word.replaceAll("[^a-zA-Z-]", " ");
-        String[] stringsSeparatedByWhitespace = word.split(" ");
+    private void filterWordsConsistingOfLetters(String text) {
+        text = text.replaceAll("[^a-zA-Z-]", " ");
+        String[] potentialWords = text.split(" ");
 
-        for (String s : stringsSeparatedByWhitespace) {
+        for (String s : potentialWords) {
             if (s.matches("[a-zA-Z-]+") && !s.matches("-+")) {
                 listOfWords.add(s);
             }
@@ -29,18 +31,18 @@ public class WordCounter {
     }
 
     private void filterForbiddenWords() {
-        this.listOfWords.removeAll(this.listOfForbiddenWords);
+        this.listOfWords.removeAll(this.listOfStopWords);
     }
 
     public int countWords() {
-        this.filterWordsConsistingOfLetters(this.wordToCount);
+        this.filterWordsConsistingOfLetters(this.text);
         this.filterForbiddenWords();
 
         return listOfWords.size();
     }
 
     public int countUniqueWords() {
-        this.filterWordsConsistingOfLetters(this.wordToCount);
+        this.filterWordsConsistingOfLetters(this.text);
         this.filterForbiddenWords();
 
         return (int) listOfWords.stream().distinct().count();
@@ -57,10 +59,9 @@ public class WordCounter {
         return Math.floor((sum / numberOfWords) * 100) / 100;
     }
 
-    @Override
-    public String toString() {
-        return "Number of words: " + countWords() +
-                ", unique: " + countUniqueWords() +
-                "; average word length: " + countAverageWordLength();
+    public PrintResult count() {
+        return new PrintResult(countWords(),
+                countUniqueWords(),
+                countAverageWordLength());
     }
 }

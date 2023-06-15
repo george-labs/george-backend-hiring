@@ -1,5 +1,6 @@
 import exception.WordCounterException;
 import org.junit.jupiter.api.Test;
+import util.FileReader;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,21 +1,26 @@
+import util.FileReader;
+import util.PrintResult;
+
 import java.util.List;
 import java.util.Scanner;
 
 public class JavaApplication {
     public static void main(String[] args) {
-        String input;
         FileReader fileReader = new FileReader();
+        List<String> stopWords = fileReader.readWordsFromFile("src/main/resources/stopwords.txt");
 
+        WordCounter wordCounter = new WordCounter(getInput(args, fileReader), stopWords);
+        PrintResult result = wordCounter.count();
+
+        System.out.print(result);
+    }
+
+    private static String getInput(String[] args, FileReader fileReader) {
         if (args.length == 0) {
-            input = readFromInput();
+            return readFromInput();
         } else {
-            input = fileReader.readWordsFromFileAsString(args[0]);
+            return fileReader.readWordsFromFileAsString(args[0]);
         }
-
-        List<String> forbiddenWords = fileReader.readWordsFromFile("src/main/resources/stopwords.txt");
-
-        WordCounter wordCounter = new WordCounter(input, forbiddenWords);
-        System.out.print(wordCounter);
     }
 
     private static String readFromInput() {
