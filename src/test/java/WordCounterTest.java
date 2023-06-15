@@ -33,12 +33,22 @@ class WordCounterTest {
     }
 
     @Test
-    public void testCountUniqueWords() {
+    public void testCountUniqueWordsWithoutHyphen() {
         List<String> forbiddenWords = Arrays.asList("the", "a", "on", "off");
 
-        underTest = new WordCounter("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", forbiddenWords);
+        underTest = new WordCounter("Humpty Dumpty sat on a wall. Humpty Dumpty had a great fall.", forbiddenWords);
 
         assertEquals(9, underTest.countWords());
         assertEquals(7, underTest.countUniqueWords());
+    }
+
+    @Test
+    public void testCountUniqueWordsWithHyphen() {
+        List<String> forbiddenWords = Arrays.asList("the", "a", "on", "off");
+
+        underTest = new WordCounter("Humpty-Dumpty sat on a wall - Humpty-Dumpty had a great fall.", forbiddenWords);
+
+        assertEquals(7, underTest.countWords());
+        assertEquals(6, underTest.countUniqueWords());
     }
 }

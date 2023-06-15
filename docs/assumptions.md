@@ -7,3 +7,4 @@ I am assuming that whenever a user wants to get a wordCount with a file that con
 If there is an argument passed as a filename, and the file does not exist, then the program stops working.
 ## Iteration 4
 I assumed that we are checking the uniqueness of the already filtered string (that does not contain the forbidden words)
+## Iteration 5

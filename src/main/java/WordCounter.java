@@ -18,11 +18,11 @@ public class WordCounter {
     }
 
     private void filterWordsConsistingOfLetters(String word) {
-        word = word.replaceAll("[^a-zA-Z]", " ");
+        word = word.replaceAll("[^a-zA-Z-]", " ");
         String[] stringsSeparatedByWhitespace = word.split(" ");
 
         for (String s : stringsSeparatedByWhitespace) {
-            if (s.matches("[a-zA-Z]+")) {
+            if (s.matches("[a-zA-Z-]+") && !s.matches("-+")) {
                 listOfWords.add(s);
             }
         }
