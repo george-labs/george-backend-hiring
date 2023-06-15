@@ -31,4 +31,14 @@ class WordCounterTest {
 
         assertEquals(2, underTest.countWords());
     }
+
+    @Test
+    public void testCountUniqueWords() {
+        List<String> forbiddenWords = Arrays.asList("the", "a", "on", "off");
+
+        underTest = new WordCounter("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", forbiddenWords);
+
+        assertEquals(9, underTest.countWords());
+        assertEquals(7, underTest.countUniqueWords());
+    }
 }

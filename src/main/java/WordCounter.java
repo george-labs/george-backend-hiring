@@ -18,6 +18,7 @@ public class WordCounter {
     }
 
     private void filterWordsConsistingOfLetters(String word) {
+        word = word.replaceAll("[^a-zA-Z]", " ");
         String[] stringsSeparatedByWhitespace = word.split(" ");
 
         for (String s : stringsSeparatedByWhitespace) {
@@ -36,5 +37,12 @@ public class WordCounter {
         this.filterForbiddenWords();
 
         return listOfWords.size();
+    }
+
+    public int countUniqueWords() {
+        this.filterWordsConsistingOfLetters(this.wordToCount);
+        this.filterForbiddenWords();
+
+        return (int) listOfWords.stream().distinct().count();
     }
 }
