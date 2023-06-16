@@ -1,5 +1,6 @@
 package process;
 
+import exception.IterationException;
 import read.Reader;
 
 import java.io.IOException;
@@ -14,10 +15,10 @@ public class WordCounter implements Counter {
     }
 
     @Override
-    public int count() throws IOException {
-        Stream<String> filter = wordFilter.filter();
+    public int count() throws IOException, IterationException {
+        Stream<String> filteredWords = wordFilter.filter();
 
-        return (int) filter.count();
+        return (int) filteredWords.count();
     }
 
 }

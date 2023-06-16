@@ -1,5 +1,7 @@
 package read;
 
+import exception.IterationException;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,7 +16,11 @@ public class FileReader extends Reader {
     }
 
     @Override
-    public Stream<String> read() throws IOException {
-        return Files.lines(Paths.get(this.fileName));
+    public Stream<String> read() throws IOException, IterationException {
+        Stream<String> lines = Files.lines(Paths.get(this.fileName));
+
+        validateSentence(lines.toString());
+
+        return lines;
     }
 }

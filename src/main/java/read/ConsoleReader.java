@@ -1,5 +1,7 @@
 package read;
 
+import exception.IterationException;
+
 import java.util.stream.Stream;
 
 public class ConsoleReader extends Reader {
@@ -11,7 +13,8 @@ public class ConsoleReader extends Reader {
     }
 
     @Override
-    public Stream<String> read() {
+    public Stream<String> read() throws IterationException {
+        validateSentence(this.sentence);
         return Stream.of(this.sentence);
     }
 }
