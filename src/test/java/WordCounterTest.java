@@ -1,30 +1,38 @@
 import exception.IterationException;
-import org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import process.StopWordFilter;
+import process.WordCounter;
+import process.WordFilter;
+import read.FileReader;
 
 import java.io.IOException;
+import java.io.Reader;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class JavaApplicationTest {
+class WordCounterTest {
 
     @Test
     void testCount_whenEmptySentence_returnIterationException() throws IOException {
         String sentence = "";
         String fileName = "stopwords.txt";
-        JavaApplication javaApplication = new JavaApplication(fileName);
+        FileReader stopWordReader = new FileReader(fileName);
+        StopWordFilter stopWordFilter = new StopWordFilter(stopWordReader, )
+        WordFilter wordFilter = new StopWordFilter()
+        WordCounter wordCounter = new WordCounter();
 
         assertThrows(IterationException.class,
-                () -> javaApplication.count(sentence));
+                () -> simpleWordCounter.count(sentence));
     }
 
     @Test
     void testCount_whenCorrectSentence_returnExpectedResult() throws IOException, IterationException {
         String sentence = "Mary had a little lamb";
         String fileName = "src/test/resources/stopwords.txt";
-        JavaApplication javaApplication = new JavaApplication(fileName);
+        SimpleWordCounter simpleWordCounter = new SimpleWordCounter(fileName);
 
-        int count = javaApplication.count(sentence);
+        int count = simpleWordCounter.count(sentence);
 
         assertEquals(4, count);
     }
@@ -33,9 +41,9 @@ class JavaApplicationTest {
     void testCount_whenDuplicateWordInSentence_returnExpectedResult() throws IOException, IterationException {
         String sentence = "Mary had had a little lamb lamb";
         String fileName = "src/test/resources/stopwords.txt";
-        JavaApplication javaApplication = new JavaApplication(fileName);
+        SimpleWordCounter simpleWordCounter = new SimpleWordCounter(fileName);
 
-        int count = javaApplication.count(sentence);
+        int count = simpleWordCounter.count(sentence);
 
         assertEquals(6, count);
     }
@@ -44,9 +52,9 @@ class JavaApplicationTest {
     void testCount_whenDuplicateStopWordInSentence_returnExpectedResult() throws IOException, IterationException {
         String sentence = "Mary had the little the lamb";
         String fileName = "src/test/resources/stopwords.txt";
-        JavaApplication javaApplication = new JavaApplication(fileName);
+        SimpleWordCounter simpleWordCounter = new SimpleWordCounter(fileName);
 
-        int count = javaApplication.count(sentence);
+        int count = simpleWordCounter.count(sentence);
 
         assertEquals(4, count);
     }
@@ -55,9 +63,9 @@ class JavaApplicationTest {
     void testCount_whenExtraCharactersInSentence_returnExpectedResult() throws IOException, IterationException {
         String sentence = "Mary, had a little lamb.";
         String fileName = "src/test/resources/stopwords.txt";
-        JavaApplication javaApplication = new JavaApplication(fileName);
+        SimpleWordCounter simpleWordCounter = new SimpleWordCounter(fileName);
 
-        int count = javaApplication.count(sentence);
+        int count = simpleWordCounter.count(sentence);
 
         assertEquals(4, count);
     }
@@ -66,9 +74,9 @@ class JavaApplicationTest {
     void testCount_whenExtraCharactersInStopWordsInSentence_returnExpectedResult() throws IOException, IterationException {
         String sentence = "Mary had a, little lamb.";
         String fileName = "src/test/resources/stopwords.txt";
-        JavaApplication javaApplication = new JavaApplication(fileName);
+        SimpleWordCounter simpleWordCounter = new SimpleWordCounter(fileName);
 
-        int count = javaApplication.count(sentence);
+        int count = simpleWordCounter.count(sentence);
 
         assertEquals(4, count);
     }
