@@ -1,9 +1,12 @@
 package process;
 
 import exception.IterationException;
-import read.Reader;
+import model.WordCountModel;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WordCounter implements Counter {
@@ -15,10 +18,14 @@ public class WordCounter implements Counter {
     }
 
     @Override
-    public int count() throws IOException, IterationException {
-        Stream<String> filteredWords = wordFilter.filter();
+    public WordCountModel count() throws IOException, IterationException {
+        Stream<String> filteredStreams = wordFilter.filter();
+        List<String> filteredWords = filteredStreams.collect(Collectors.toList());
 
-        return (int) filteredWords.count();
+        int uniqueWordsCount = new HashSet<>(filteredWords)
+                .size();
+
+        return new WordCountModel(filteredWords.size(), uniqueWordsCount);
     }
 
 }

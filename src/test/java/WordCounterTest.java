@@ -1,4 +1,5 @@
 import exception.IterationException;
+import model.WordCountModel;
 import org.junit.jupiter.api.Test;
 import process.StopWordFilter;
 import process.WordCounter;
@@ -35,9 +36,9 @@ class WordCounterTest {
         StopWordFilter stopWordFilter = new StopWordFilter(stopWordReader, inputReader);
         WordCounter wordCounter = new WordCounter(stopWordFilter);
 
-        int count = wordCounter.count();
+        WordCountModel wordCountModel = wordCounter.count();
 
-        assertEquals(4, count);
+        assertEquals(4, wordCountModel.getWordsCount());
     }
 
     @Test
@@ -49,9 +50,9 @@ class WordCounterTest {
         StopWordFilter stopWordFilter = new StopWordFilter(stopWordReader, inputReader);
         WordCounter wordCounter = new WordCounter(stopWordFilter);
 
-        int count = wordCounter.count();
+        WordCountModel wordCountModel = wordCounter.count();
 
-        assertEquals(6, count);
+        assertEquals(6, wordCountModel.getWordsCount());
     }
 
     @Test
@@ -63,9 +64,9 @@ class WordCounterTest {
         StopWordFilter stopWordFilter = new StopWordFilter(stopWordReader, inputReader);
         WordCounter wordCounter = new WordCounter(stopWordFilter);
 
-        int count = wordCounter.count();
+        WordCountModel wordCountModel = wordCounter.count();
 
-        assertEquals(4, count);
+        assertEquals(4, wordCountModel.getWordsCount());
     }
 
     @Test
@@ -77,9 +78,9 @@ class WordCounterTest {
         StopWordFilter stopWordFilter = new StopWordFilter(stopWordReader, inputReader);
         WordCounter wordCounter = new WordCounter(stopWordFilter);
 
-        int count = wordCounter.count();
+        WordCountModel wordCountModel = wordCounter.count();
 
-        assertEquals(4, count);
+        assertEquals(4, wordCountModel.getWordsCount());
     }
 
     @Test
@@ -91,8 +92,23 @@ class WordCounterTest {
         StopWordFilter stopWordFilter = new StopWordFilter(stopWordReader, inputReader);
         WordCounter wordCounter = new WordCounter(stopWordFilter);
 
-        int count = wordCounter.count();
+        WordCountModel wordCountModel = wordCounter.count();
 
-        assertEquals(4, count);
+        assertEquals(4, wordCountModel.getWordsCount());
+    }
+
+    @Test
+    void testCount_whenCorrectSentenceWithStopWordsFilter_returnCorrectWordCountModel() throws IOException, IterationException {
+        String sentence = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        String fileName = "src/test/resources/stopwords.txt";
+        ConsoleReader inputReader = new ConsoleReader(sentence);
+        FileReader stopWordReader = new FileReader(fileName);
+        StopWordFilter stopWordFilter = new StopWordFilter(stopWordReader, inputReader);
+        WordCounter wordCounter = new WordCounter(stopWordFilter);
+
+        WordCountModel wordCountModel = wordCounter.count();
+
+        assertEquals(7, wordCountModel.getWordsCount());
+        assertEquals(6, wordCountModel.getUniqueWordsCount());
     }
 }

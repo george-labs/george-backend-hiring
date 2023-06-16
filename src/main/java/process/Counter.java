@@ -1,12 +1,12 @@
 package process;
 
 import exception.IterationException;
-import read.Reader;
+import model.WordCountModel;
 
 import java.io.IOException;
 
 public interface Counter {
 
-    int count() throws IOException, IterationException;
+    WordCountModel count() throws IOException, IterationException;
 
 }
