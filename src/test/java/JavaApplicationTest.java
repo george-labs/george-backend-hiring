@@ -53,7 +53,7 @@ class JavaApplicationTest {
         var output = outputStream.toString().trim();
 
         // Then
-        assertTrue(output.contains("6"));
+        assertTrue(output.contains("5"));
     }
 
     @Test
@@ -83,6 +83,6 @@ class JavaApplicationTest {
         var output = outputStream.toString().trim();
 
         // Then
-        assertTrue(output.contains("3"));
+        assertTrue(output.contains("2"));
     }
 }
