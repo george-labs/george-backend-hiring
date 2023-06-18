@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.util.Scanner;
 
 /**
- * The InputService class provides a method to read text input from the user.
+ * The InputService class provides methods for reading text input from the user or a file.
  */
 public class InputService {
     private final Scanner scanner;

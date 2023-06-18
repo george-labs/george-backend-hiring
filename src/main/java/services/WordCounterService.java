@@ -40,7 +40,7 @@ public class WordCounterService {
     }
 
     /**
-     * Determines whether a word is valid, meaning it consists solely of alphabetical characters.
+     * Determines whether a word is valid, meaning it consists solely of alphabetical characters and is not a stop word.
      *
      * @param word the word to be checked
      * @return {@code true} if the word is valid, {@code false} otherwise
@@ -55,7 +55,9 @@ public class WordCounterService {
      * This means that if the file contains the word 'the',
      * then none of the following words will be counted: 'the', 'The', and 'THE'.
      *
+     * @param stopWordsFilename the filename of the stop words file
      * @return a set of stop words
+     * @throws RuntimeException if an error occurs while loading the stop words
      */
     private Set<String> loadStopWords(String stopWordsFilename) {
         Set<String> stopWordsInternal = new HashSet<>();
