@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -78,6 +79,37 @@ class InputServiceTest {
 
         // Then
         assertEquals("It's just a flesh wound!", userInput);
+    }
+
+    @Test
+    void testReadWordsFromFile() {
+        // Given
+        String filename = "/testfile.txt";
+        String filePath = Objects.requireNonNull(getClass().getResource(filename)).getPath();
+        String expectedInput = "Well, there's egg and spam;\nspam sausage spam spam bacon spam tomato and spam";
+        setSystemInput("never read");
+        inputService = new InputService();
+
+        // When
+        String actualInput = inputService.readWordsFromFile(filePath);
+
+        // Then
+        assertEquals(expectedInput, actualInput);
+    }
+
+    @Test
+    void testReadWordsFromFile_fileNotFound() {
+        // Given
+        String filePath = "/nonexistent_testfile.txt";
+        String expectedInput = "";
+        setSystemInput("never read");
+        inputService = new InputService();
+
+        // When
+        String actualInput = inputService.readWordsFromFile(filePath);
+
+        // Then
+        assertEquals(expectedInput, actualInput);
     }
 
     private void setSystemInput(String input) {

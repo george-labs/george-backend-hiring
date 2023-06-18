@@ -7,7 +7,13 @@ public class JavaApplication {
         var wordCounterService = new WordCounterService(STOP_WORDS);
         var inputService = new InputService();
 
-        var userInput = inputService.readWords();
+        String userInput;
+        if (args.length > 0) {
+            userInput = inputService.readWordsFromFile(args[0]);
+        } else {
+            userInput = inputService.readWords();
+        }
+
         var numberOfWords = wordCounterService.countWords(userInput);
         System.out.println("Number of words: " + numberOfWords);
 

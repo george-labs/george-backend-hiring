@@ -1,5 +1,8 @@
 package services;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 /**
@@ -31,5 +34,22 @@ public class InputService {
      */
     public void close() {
         scanner.close();
+    }
+
+    /**
+     * Read the text from a file.
+     *
+     * @param filename the name of the file to read
+     * @return the text read from the file
+     */
+    public String readWordsFromFile(String filename) {
+        try {
+            Path filePath = Path.of(filename);
+            return Files.readString(filePath);
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+
+        return "";
     }
 }
