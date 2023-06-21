@@ -74,4 +74,27 @@ public class WordServiceTest {
         assertEquals(7, wordService.countWords(input, wordsNotToCount));
         assertEquals(6, wordService.countUniqueWords(input, wordsNotToCount));
     }
+
+    @Test
+    public void testCalculateAverageLength_shouldCalculateTheAverage_whenValidWordsAreGiven() {
+        List<String> input = List.of("four", "four");
+        assertEquals(4, wordService.calculateAverageLength(input));
+    }
+    @Test
+    public void testCalculateAverageLength_shouldCalculateTheAverage_whenOneWordIsGiven() {
+        List<String> input = List.of("four");
+        assertEquals(4, wordService.calculateAverageLength(input));
+    }
+
+    @Test
+    public void testCalculateAverageLength_shouldReturnZeroAsAverage_whenEmptyListIsUsed() {
+        List<String> input = List.of();
+        assertEquals(0.0, wordService.calculateAverageLength(input));
+    }
+
+    @Test
+    public void testCalculateAverageLength_shouldReturnZeroAsAverage_whenEmptyWithEmptyStringIsUsed() {
+        List<String> input = List.of("");
+        assertEquals(0.0, wordService.calculateAverageLength(input));
+    }
 }

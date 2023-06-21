@@ -15,8 +15,10 @@ public class JavaApplication {
 
         int wordCount = wordService.countWords(inputString, wordsNotToCount);
         int uniqueWordCount = wordService.countUniqueWords(inputString, wordsNotToCount);
+        double averageLength = wordService.calculateAverageLength(inputString);
 
-        System.out.println("Number of words: " + wordCount + ", unique words: " + uniqueWordCount);
+        System.out.println("Number of words: " + wordCount + ", unique words: " + uniqueWordCount +
+                " average word length: " + averageLength + " characters");
     }
 
 }

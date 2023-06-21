@@ -16,3 +16,6 @@ The "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall." sentence cont
 
 ## Iteration 5
 I assume strings with only dashes count as strings.
+
+## Iteration 6
+There is no example in the description so I do not think I should use the stopwords array.

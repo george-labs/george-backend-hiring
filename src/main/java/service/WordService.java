@@ -3,13 +3,13 @@ package service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class WordService {
 
     private final String REGEX = "[a-zA-Z-]+";
+
     public int countWords(List<String> inputWords, List<String> wordsNotToCount) {
         Pattern pattern = Pattern.compile(REGEX);
         int wordsWithoutSpecialCharactersCounter = 0;
@@ -32,5 +32,15 @@ public class WordService {
             }
         }
         return uniqueWordSet.size();
+    }
+
+    public double calculateAverageLength(List<String> inputString) {
+        int numberOfWords = inputString.size();
+        long sumOfWordLengths = inputString.stream().mapToInt(String::length).sum();
+        if (numberOfWords == 0) {
+            return 0;
+//            throw new RuntimeException("Division by zero is not supported");
+        }
+        return (double) sumOfWordLengths / numberOfWords;
     }
 }
