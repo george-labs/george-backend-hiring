@@ -1,0 +1,48 @@
+package service;
+
+import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayInputStream;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+public class ReaderServiceTest {
+
+    private final ReaderService readerService = new ReaderService();
+
+    @Test
+    public void testRead_shouldReadFromConsole_whenInputFileIsBlank() {
+        String data = "Mary had a lamb";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        List<String> inputStrings = readerService.read("");
+        assertEquals(4, inputStrings.size());
+        List<String> expectedWords = Arrays.asList(data.split(" "));
+        for (int i = 0; i < expectedWords.size(); i++) {
+            assertEquals(expectedWords.get(i), inputStrings.get(i));
+        }
+    }
+
+    @Test
+    public void testRead_shouldReadFromConsole_whenInputFileIsBlankAndInputTextIsBlank() {
+        String data = "\n";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        List<String> inputStrings = readerService.read("");
+        assertEquals(1, inputStrings.size());
+    }
+
+    @Test
+    public void testRead_shouldReadFromFile_whenInputFileIsGiven() {
+        String fileName = "wordsToCount.txt";
+        List<String> inputStrings = readerService.read(fileName);
+        assertEquals(5, inputStrings.size());
+    }
+
+    @Test
+    public void testRead_shouldThrowException_whenReadFromFileHasInvalidFile() {
+        String fileName = "test.txt";
+        assertThrows(RuntimeException.class, () -> readerService.read(fileName));
+    }
+}

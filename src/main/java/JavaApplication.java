@@ -6,14 +6,13 @@ import java.util.List;
 public class JavaApplication {
 
     public static void main(String... args) {
-        System.out.print("Enter text: ");
+        ReaderService readerService = new ReaderService();
+        WordService wordService = new WordService();
 
-        List<String> wordsNotToCount = ReaderService.readFromFile("stopwords.txt");
-        String inputFileName = ReaderService.readFromConsole();
-        List<String> inputString = ReaderService.readFromFile(inputFileName);
-        String concatenatedInputString = String.join(" ", inputString);
-
-        int wordCount = WordService.countWords(concatenatedInputString, wordsNotToCount);
+        List<String> wordsNotToCount = readerService.read("stopwords.txt");
+        String inputFileName = args.length == 0 ? "" : args[0];
+        List<String> inputString = readerService.read(inputFileName);
+        int wordCount = wordService.countWords(inputString, wordsNotToCount);
 
         System.out.println("Number of words: " + wordCount);
     }
