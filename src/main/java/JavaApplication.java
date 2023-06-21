@@ -9,8 +9,11 @@ public class JavaApplication {
         System.out.print("Enter text: ");
 
         List<String> wordsNotToCount = ReaderService.readFromFile("stopwords.txt");
-        String inputString = ReaderService.readFromConsole();
-        int wordCount = WordService.countWords(inputString, wordsNotToCount);
+        String inputFileName = ReaderService.readFromConsole();
+        List<String> inputString = ReaderService.readFromFile(inputFileName);
+        String concatenatedInputString = String.join(" ", inputString);
+
+        int wordCount = WordService.countWords(concatenatedInputString, wordsNotToCount);
 
         System.out.println("Number of words: " + wordCount);
     }
