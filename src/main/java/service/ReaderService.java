@@ -18,6 +18,12 @@ public class ReaderService {
             List<String> inputFromFile = readFromFile(inputFileName);
             inputString = String.join(" ", inputFromFile);
         }
+        return manipulateInputString(inputString);
+    }
+
+    private List<String> manipulateInputString(String inputString) {
+        inputString = inputString.replaceAll("\\.", "");
+        inputString = inputString.replaceAll("-", " ");
         return Arrays.asList(inputString.split(" "));
     }
 

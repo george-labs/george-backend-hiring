@@ -19,10 +19,7 @@ public class ReaderServiceTest {
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         List<String> inputStrings = readerService.read("");
         assertEquals(4, inputStrings.size());
-        List<String> expectedWords = Arrays.asList(data.split(" "));
-        for (int i = 0; i < expectedWords.size(); i++) {
-            assertEquals(expectedWords.get(i), inputStrings.get(i));
-        }
+        assertResult(data, inputStrings);
     }
 
     @Test
@@ -44,5 +41,33 @@ public class ReaderServiceTest {
     public void testRead_shouldThrowException_whenReadFromFileHasInvalidFile() {
         String fileName = "test.txt";
         assertThrows(RuntimeException.class, () -> readerService.read(fileName));
+    }
+
+    @Test
+    public void testRead_shouldReadFromConsole_whenInputIsConnectedWithDashAndDots() {
+        String data = "Mary-had-a-lamb. Mary-had-two-lambs.";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        List<String> inputStrings = readerService.read("");
+        assertEquals(8, inputStrings.size());
+
+        String expectedResult = "Mary had a lamb Mary had two lambs";
+        assertResult(expectedResult, inputStrings);
+    }
+    @Test
+    public void testRead_shouldReadFromConsole_whenInputIsConnectedWithDashAndMultipleDots() {
+        String input = "Mary-had..... Mary-had......";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        List<String> inputStrings = readerService.read("");
+        assertEquals(4, inputStrings.size());
+
+        String expected = "Mary had Mary had";
+        assertResult(expected, inputStrings);
+    }
+
+    private void assertResult(String expected, List<String> actual) {
+        List<String> expectedWords = Arrays.asList(expected.split(" "));
+        for (int i = 0; i < expectedWords.size(); i++) {
+            assertEquals(expectedWords.get(i), actual.get(i));
+        }
     }
 }

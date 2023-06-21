@@ -48,4 +48,23 @@ public class WordServiceTest {
         List<String> emptyWordsNotToCount = List.of();
         assertEquals(4, wordService.countWords(input, emptyWordsNotToCount));
     }
+
+    @Test
+    public void testUniqueWordCount_shouldReturnUniqueWords_whenValidStringIsGiven() {
+        List<String> input = List.of("Humpty", "Dumpty", "sat", "on", "a", "wall",
+                 "Humpty", "Dumpty", "had", "a", "great", "fall");
+        assertEquals(7, wordService.countUniqueWords(input, wordsNotToCount));
+    }
+
+    @Test
+    public void testUniqueWordCount_shouldReturnUniqueWords_whenSameWordsAreGiven() {
+        List<String> input = List.of("Humpty", "Humpty", "Humpty", "Humpty", "Humpty", "Humpty", "Humpty", "Humpty");
+        assertEquals(1, wordService.countUniqueWords(input, wordsNotToCount));
+    }
+
+    @Test
+    public void testUniqueWordCount_shouldReturnZero_whenOnlyWordsNotToCountAreGiven() {
+        List<String> input = List.of("the", "a", "on", "off");
+        assertEquals(0, wordService.countUniqueWords(input, wordsNotToCount));
+    }
 }

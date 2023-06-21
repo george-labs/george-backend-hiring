@@ -13,8 +13,9 @@ public class JavaApplication {
         String inputFileName = args.length == 0 ? "" : args[0];
         List<String> inputString = readerService.read(inputFileName);
         int wordCount = wordService.countWords(inputString, wordsNotToCount);
+        int uniqueWordCount = wordService.countUniqueWords(inputString, wordsNotToCount);
 
-        System.out.println("Number of words: " + wordCount);
+        System.out.println("Number of words: " + wordCount + ", unique words: " + uniqueWordCount);
     }
 
 }
