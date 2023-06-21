@@ -48,9 +48,9 @@ public class ReaderServiceTest {
         String data = "Mary-had-a-lamb. Mary-had-two-lambs.";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         List<String> inputStrings = readerService.read("");
-        assertEquals(8, inputStrings.size());
+        assertEquals(2, inputStrings.size());
 
-        String expectedResult = "Mary had a lamb Mary had two lambs";
+        String expectedResult = "Mary-had-a-lamb Mary-had-two-lambs";
         assertResult(expectedResult, inputStrings);
     }
     @Test
@@ -58,9 +58,31 @@ public class ReaderServiceTest {
         String input = "Mary-had..... Mary-had......";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         List<String> inputStrings = readerService.read("");
-        assertEquals(4, inputStrings.size());
+        assertEquals(2, inputStrings.size());
 
-        String expected = "Mary had Mary had";
+        String expected = "Mary-had Mary-had";
+        assertResult(expected, inputStrings);
+    }
+
+    @Test
+    public void testRead_shouldReadFromConsole_whenInputIsConnectedWithDashes() {
+        String input = "Mary-had-two-huge-lambs.";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        List<String> inputStrings = readerService.read("");
+        assertEquals(1, inputStrings.size());
+
+        String expected = "Mary-had-two-huge-lambs";
+        assertResult(expected, inputStrings);
+    }
+
+    @Test
+    public void testRead_shouldReadFromConsole_whenOnlyDashIsGiven() {
+        String input = "-";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        List<String> inputStrings = readerService.read("");
+        assertEquals(1, inputStrings.size());
+
+        String expected = "-";
         assertResult(expected, inputStrings);
     }
 

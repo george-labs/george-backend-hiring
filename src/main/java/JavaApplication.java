@@ -12,6 +12,7 @@ public class JavaApplication {
         List<String> wordsNotToCount = readerService.read("stopwords.txt");
         String inputFileName = args.length == 0 ? "" : args[0];
         List<String> inputString = readerService.read(inputFileName);
+
         int wordCount = wordService.countWords(inputString, wordsNotToCount);
         int uniqueWordCount = wordService.countUniqueWords(inputString, wordsNotToCount);
 

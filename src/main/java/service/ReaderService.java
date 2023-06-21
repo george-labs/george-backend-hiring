@@ -23,7 +23,6 @@ public class ReaderService {
 
     private List<String> manipulateInputString(String inputString) {
         inputString = inputString.replaceAll("\\.", "");
-        inputString = inputString.replaceAll("-", " ");
         return Arrays.asList(inputString.split(" "));
     }
 

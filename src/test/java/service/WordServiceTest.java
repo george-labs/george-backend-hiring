@@ -2,7 +2,6 @@ package service;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.Reader;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -52,7 +51,7 @@ public class WordServiceTest {
     @Test
     public void testUniqueWordCount_shouldReturnUniqueWords_whenValidStringIsGiven() {
         List<String> input = List.of("Humpty", "Dumpty", "sat", "on", "a", "wall",
-                 "Humpty", "Dumpty", "had", "a", "great", "fall");
+                "Humpty", "Dumpty", "had", "a", "great", "fall");
         assertEquals(7, wordService.countUniqueWords(input, wordsNotToCount));
     }
 
@@ -66,5 +65,13 @@ public class WordServiceTest {
     public void testUniqueWordCount_shouldReturnZero_whenOnlyWordsNotToCountAreGiven() {
         List<String> input = List.of("the", "a", "on", "off");
         assertEquals(0, wordService.countUniqueWords(input, wordsNotToCount));
+    }
+
+    @Test
+    public void testUniqueWordCount_shouldExactWordCountAndUniqueCount_whenSentenceContainsDashAndDot() {
+        List<String> input = List.of("Humpty-Dumpty", "sat", "on", "a", "wall",
+                "Humpty-Dumpty", "had", "a", "great", "fall");
+        assertEquals(7, wordService.countWords(input, wordsNotToCount));
+        assertEquals(6, wordService.countUniqueWords(input, wordsNotToCount));
     }
 }
