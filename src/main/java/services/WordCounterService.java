@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 public class WordCounterService {
     private final Set<String> stopWords;
     private static final String SPLIT_REGEX = "\\s+";
+    private static final String PUNCTUATION_REGEX = "[.,?]";
 
 
     /**
@@ -51,6 +52,10 @@ public class WordCounterService {
         var wordSet = new HashSet<>(wordList);
 
         return wordSet.stream().filter(this::isValidWord).count();
+    }
+
+    public String sanitizeText(String phrase) {
+        phrase = phrase.replaceAll()
     }
 
     private List<String> splitPhraseIntoWords(String phrase) {
