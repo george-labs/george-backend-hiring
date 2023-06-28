@@ -86,7 +86,7 @@ class InputServiceTest {
         // Given
         String filename = "/testfile.txt";
         String filePath = Objects.requireNonNull(getClass().getResource(filename)).getPath();
-        String expectedInput = "Well, there's egg and spam;\nspam sausage spam spam bacon spam tomato and spam";
+        String expectedInput = "Mary had\na little\nlamb";
         setSystemInput("never read");
         inputService = new InputService();
 

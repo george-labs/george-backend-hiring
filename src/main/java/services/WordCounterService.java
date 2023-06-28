@@ -15,6 +15,7 @@ import java.util.stream.Stream;
  */
 public class WordCounterService {
     private final Set<String> stopWords;
+    private static final String SPLIT_REGEX = "\\s+";
 
     /**
      * Constructs a WordCounterService object and loads the stop words from the stopwords file (optional).
@@ -34,7 +35,7 @@ public class WordCounterService {
             return 0;
         }
 
-        var wordList = Arrays.asList(phrase.split(" "));
+        var wordList = Arrays.asList(phrase.split(SPLIT_REGEX));
 
         return wordList.stream().filter(this::isValidWord).count();
     }

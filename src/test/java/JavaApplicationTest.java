@@ -95,7 +95,7 @@ class JavaApplicationTest {
         var output = outputStream.toString().trim();
 
         // Then
-        assertTrue(output.contains("10"));
+        assertTrue(output.contains("4"));
     }
 
     @Test
