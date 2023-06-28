@@ -2,7 +2,8 @@
 
 ## Iteration 1
 - The user will input one line of text at a time.
-- When a phrase contains invalid words, those words will be ignored and not counted.
+- When a phrase contains invalid words, those words will be ignored and not counted. Valid words are words that contain letters (a-z,A-Z).
+- The words were seperated by whitespace.
 ## Iteration 2
 - If the stopwords file does not exist, all valid words in the phrases will be counted.
 - The stopwords file should be in the resource folder.
