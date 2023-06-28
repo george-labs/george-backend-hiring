@@ -1,22 +1,15 @@
 package services;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * The WordCounterService class provides a method to count the number of words in a given phrase.
  */
 public class WordCounterService {
-    private final Set<String> stopWords;
     private static final String VALID_WORD_REGEX = "[a-zA-Z]+";
     private static final String SPLIT_REGEX = "\\s+";
     private static final String PUNCTUATION_REGEX = "[.,?!]";
@@ -24,19 +17,12 @@ public class WordCounterService {
 
 
     /**
-     * Constructs a WordCounterService object and loads the stop words from the stopwords file (optional).
-     */
-    public WordCounterService(String stopWordsFilename) {
-        stopWords = loadStopWords(stopWordsFilename);
-    }
-
-    /**
      * Counts the number of words in a given phrase.
      *
      * @param phrase the input phrase
      * @return the number of words in the phrase
      */
-    public long countWords(String phrase) {
+    public long countWords(String phrase, Set<String> stopWords) {
         if (phrase.isEmpty()) {
             return 0;
         }
@@ -46,10 +32,10 @@ public class WordCounterService {
 
         var wordList = splitPhraseIntoWords(sanitizedPhraseHyphenCharacter);
 
-        return wordList.stream().filter(this::isValidWord).count();
+        return wordList.stream().filter(word -> isValidWord(word, stopWords)).count();
     }
 
-    public long countUniqueWords(String phrase) {
+    public long countUniqueWords(String phrase, Set<String> stopWords) {
         if (phrase.isEmpty()) {
             return 0;
         }
@@ -60,7 +46,7 @@ public class WordCounterService {
         var wordList = splitPhraseIntoWords(sanitizedPhraseHyphenCharacter);
         var wordSet = new HashSet<>(wordList);
 
-        return wordSet.stream().filter(this::isValidWord).count();
+        return wordSet.stream().filter(word -> isValidWord(word, stopWords)).count();
     }
 
     private String sanitizeHyphenCharacter(String phrase) {
@@ -87,43 +73,8 @@ public class WordCounterService {
      * @param word the word to be checked
      * @return {@code true} if the word is valid, {@code false} otherwise
      */
-    private boolean isValidWord(String word) {
+    private boolean isValidWord(String word, Set<String> stopWords) {
         return word.matches(VALID_WORD_REGEX) &&
                 !stopWords.contains(word.toLowerCase());
-    }
-
-    /**
-     * Loads the stop words from the stopwords file.
-     * An assumption is made that the letter case of stopwords is irrelevant.
-     * This means that if the file contains the word 'the',
-     * then none of the following words will be counted: 'the', 'The', and 'THE'.
-     *
-     * @param stopWordsFilename the filename of the stop words file
-     * @return a set of stop words
-     * @throws RuntimeException if an error occurs while loading the stop words
-     */
-    private Set<String> loadStopWords(String stopWordsFilename) {
-        Set<String> stopWordsInternal = new HashSet<>();
-
-        if (stopWordsFilename == null || stopWordsFilename.isEmpty()) {
-            return stopWordsInternal;
-        }
-
-        try {
-            URL stopWordsURL = getClass().getResource(stopWordsFilename);
-            if (stopWordsURL != null) {
-                Path stopwordsPath = Path.of(stopWordsURL.toURI());
-                try (Stream<String> lines = Files.lines(stopwordsPath)) {
-                    lines.map(String::toLowerCase)
-                            .forEach(stopWordsInternal::add);
-                }
-            } else {
-                System.out.println("No stop words file found.");
-            }
-        } catch (IOException | URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-
-        return stopWordsInternal;
     }
 }
