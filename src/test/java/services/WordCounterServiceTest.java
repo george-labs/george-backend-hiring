@@ -78,4 +78,32 @@ class WordCounterServiceTest {
         // Then
         assertEquals(expectedCount, actualCount);
     }
+
+    @Test
+    void testCountWords_withPunctuation() {
+        // Given
+        wordCounterService = new WordCounterService("/stopwords.txt");
+        var phrase = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        var expectedCount = 9;
+
+        // When
+        var actualCount = wordCounterService.countWords(phrase);
+
+        // Then
+        assertEquals(expectedCount, actualCount);
+    }
+
+    @Test
+    void countUniqueWords_withPunctuation() {
+        // Given
+        wordCounterService = new WordCounterService("/stopwords.txt");
+        var phrase = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        var expectedCount = 7;
+
+        // When
+        var actualCount = wordCounterService.countUniqueWords(phrase);
+
+        // Then
+        assertEquals(expectedCount, actualCount);
+    }
 }

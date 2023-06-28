@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -16,6 +17,7 @@ import java.util.stream.Stream;
 public class WordCounterService {
     private final Set<String> stopWords;
     private static final String SPLIT_REGEX = "\\s+";
+
 
     /**
      * Constructs a WordCounterService object and loads the stop words from the stopwords file (optional).
@@ -35,10 +37,26 @@ public class WordCounterService {
             return 0;
         }
 
-        var wordList = Arrays.asList(phrase.split(SPLIT_REGEX));
+        var wordList = splitPhraseIntoWords(phrase);
 
         return wordList.stream().filter(this::isValidWord).count();
     }
+
+    public long countUniqueWords(String phrase) {
+        if (phrase.isEmpty()) {
+            return 0;
+        }
+
+        var wordList = splitPhraseIntoWords(phrase);
+        var wordSet = new HashSet<>(wordList);
+
+        return wordSet.stream().filter(this::isValidWord).count();
+    }
+
+    private List<String> splitPhraseIntoWords(String phrase) {
+        return Arrays.asList(phrase.split(SPLIT_REGEX));
+    }
+
 
     /**
      * Determines whether a word is valid, meaning it consists solely of alphabetical characters and is not a stop word.
