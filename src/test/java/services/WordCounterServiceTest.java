@@ -56,7 +56,7 @@ class WordCounterServiceTest {
     void testCountWords_phraseWithSpecialCharacters() {
         // Given
         var phrase = "Help me, Obi-Wan Kenobi.";
-        var expectedCount = 1;
+        var expectedCount = 3;
 
         // When
         var actualCount = wordCounterService.countWords(phrase);
@@ -80,11 +80,11 @@ class WordCounterServiceTest {
     }
 
     @Test
-    void testCountWords_withPunctuation() {
+    void testCountWords_withStopWordsFile_withPunctuation() {
         // Given
         wordCounterService = new WordCounterService("/stopwords.txt");
         var phrase = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
-        var expectedCount = 9;
+        var expectedCount = 5;
 
         // When
         var actualCount = wordCounterService.countWords(phrase);
@@ -94,9 +94,37 @@ class WordCounterServiceTest {
     }
 
     @Test
-    void countUniqueWords_withPunctuation() {
+    void testCountWords_withOutStopWordsFile_withPunctuation() {
+        // Given
+        wordCounterService = new WordCounterService("");
+        var phrase = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        var expectedCount = 8;
+
+        // When
+        var actualCount = wordCounterService.countWords(phrase);
+
+        // Then
+        assertEquals(expectedCount, actualCount);
+    }
+
+    @Test
+    void countUniqueWords_withStopWordsFile_withPunctuation() {
         // Given
         wordCounterService = new WordCounterService("/stopwords.txt");
+        var phrase = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        var expectedCount = 5;
+
+        // When
+        var actualCount = wordCounterService.countUniqueWords(phrase);
+
+        // Then
+        assertEquals(expectedCount, actualCount);
+    }
+
+    @Test
+    void countUniqueWords_withOutStopWordsFile_withPunctuation() {
+        // Given
+        wordCounterService = new WordCounterService("");
         var phrase = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
         var expectedCount = 7;
 

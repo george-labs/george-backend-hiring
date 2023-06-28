@@ -38,7 +38,8 @@ public class WordCounterService {
             return 0;
         }
 
-        var wordList = splitPhraseIntoWords(phrase);
+        var sanitizedPhrase = sanitizeText(phrase);
+        var wordList = splitPhraseIntoWords(sanitizedPhrase);
 
         return wordList.stream().filter(this::isValidWord).count();
     }
@@ -48,14 +49,15 @@ public class WordCounterService {
             return 0;
         }
 
-        var wordList = splitPhraseIntoWords(phrase);
+        var sanitizedPhrase = sanitizeText(phrase);
+        var wordList = splitPhraseIntoWords(sanitizedPhrase);
         var wordSet = new HashSet<>(wordList);
 
         return wordSet.stream().filter(this::isValidWord).count();
     }
 
-    public String sanitizeText(String phrase) {
-        phrase = phrase.replaceAll()
+    private String sanitizeText(String phrase) {
+        return phrase.replaceAll(PUNCTUATION_REGEX, "");
     }
 
     private List<String> splitPhraseIntoWords(String phrase) {
@@ -85,6 +87,10 @@ public class WordCounterService {
      */
     private Set<String> loadStopWords(String stopWordsFilename) {
         Set<String> stopWordsInternal = new HashSet<>();
+
+        if (stopWordsFilename == null || stopWordsFilename.isEmpty()) {
+            return stopWordsInternal;
+        }
 
         try {
             URL stopWordsURL = getClass().getResource(stopWordsFilename);
