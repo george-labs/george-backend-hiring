@@ -55,7 +55,7 @@ class WordCounterServiceTest {
     @Test
     void testCountWords_phraseWithSpecialCharacters() {
         // Given
-        var phrase = "Help me, Obi-Wan Kenobi.";
+        var phrase = "Help me, Obi/Wan Kenobi.";
         var expectedCount = 3;
 
         // When
@@ -84,7 +84,7 @@ class WordCounterServiceTest {
         // Given
         wordCounterService = new WordCounterService("/stopwords.txt");
         var phrase = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
-        var expectedCount = 5;
+        var expectedCount = 7;
 
         // When
         var actualCount = wordCounterService.countWords(phrase);
@@ -98,7 +98,7 @@ class WordCounterServiceTest {
         // Given
         wordCounterService = new WordCounterService("");
         var phrase = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
-        var expectedCount = 8;
+        var expectedCount = 10;
 
         // When
         var actualCount = wordCounterService.countWords(phrase);
@@ -112,7 +112,7 @@ class WordCounterServiceTest {
         // Given
         wordCounterService = new WordCounterService("/stopwords.txt");
         var phrase = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
-        var expectedCount = 5;
+        var expectedCount = 6;
 
         // When
         var actualCount = wordCounterService.countUniqueWords(phrase);
@@ -126,7 +126,7 @@ class WordCounterServiceTest {
         // Given
         wordCounterService = new WordCounterService("");
         var phrase = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
-        var expectedCount = 7;
+        var expectedCount = 8;
 
         // When
         var actualCount = wordCounterService.countUniqueWords(phrase);

@@ -18,6 +18,7 @@ public class WordCounterService {
     private final Set<String> stopWords;
     private static final String SPLIT_REGEX = "\\s+";
     private static final String PUNCTUATION_REGEX = "[.,?]";
+    private static final String HYPHEN = "-";
 
 
     /**
@@ -57,6 +58,7 @@ public class WordCounterService {
     }
 
     private String sanitizeText(String phrase) {
+        phrase = phrase.replace(HYPHEN, "");
         return phrase.replaceAll(PUNCTUATION_REGEX, "");
     }
 
