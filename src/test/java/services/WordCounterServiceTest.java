@@ -134,4 +134,17 @@ class WordCounterServiceTest {
         // Then
         assertEquals(expectedCount, actualCount);
     }
+
+    @Test
+    void countUniqueWords_emptyPhrase() {
+        // Given
+        var emptyPhrase = "";
+        var expectedCount = 0;
+
+        // When
+        var actualCount = wordCounterService.countUniqueWords(emptyPhrase);
+
+        // Then
+        assertEquals(expectedCount, actualCount);
+    }
 }

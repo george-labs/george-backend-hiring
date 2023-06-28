@@ -10,3 +10,6 @@
 - An assumption is made that the letter case of stopwords is irrelevant. This means that if the stopfile contains the word 'the', then none of the following words will be counted: 'the', 'The', and 'THE'.
 ## Iteration 4
 -  Valid words are words that contain letters (a-z,A-Z).
+## Iteration 5
+-  Valid words are words that contain letters (a-z,A-Z) and a hyphen. 
+- Any punctuation (.,?!) is removed from the input phrase
