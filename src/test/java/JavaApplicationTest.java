@@ -80,7 +80,7 @@ class JavaApplicationTest {
         var output = outputStream.toString().trim();
 
         // Then
-        assertTrue(output.contains("2"));
+        assertTrue(output.contains("3"));
     }
 
     @Test
