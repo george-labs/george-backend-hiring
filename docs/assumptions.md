@@ -13,3 +13,5 @@
 ## Iteration 5
 -  Valid words are words that contain letters (a-z,A-Z) and a hyphen. 
 - Any punctuation (.,?!) is removed from the input phrase
+- Words that start or end with the hyphen character are not considered valid
+- If the hyphen character is in the middle of a word, it will be removed, regardless of how many times it occurs.

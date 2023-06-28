@@ -108,6 +108,20 @@ class WordCounterServiceTest {
     }
 
     @Test
+    void testCountWords_withOutStopWordsFile_withPunctuation_withInvalidHyphenPlacement() {
+        // Given
+        wordCounterService = new WordCounterService("");
+        var phrase = "Humpty-Dumpty -sat on a wall. Humpty-Dumpty had- a great fall.";
+        var expectedCount = 8;
+
+        // When
+        var actualCount = wordCounterService.countWords(phrase);
+
+        // Then
+        assertEquals(expectedCount, actualCount);
+    }
+
+    @Test
     void countUniqueWords_withStopWordsFile_withPunctuation() {
         // Given
         wordCounterService = new WordCounterService("/stopwords.txt");
@@ -143,6 +157,20 @@ class WordCounterServiceTest {
 
         // When
         var actualCount = wordCounterService.countUniqueWords(emptyPhrase);
+
+        // Then
+        assertEquals(expectedCount, actualCount);
+    }
+
+    @Test
+    void countUniqueWords_withOutStopWordsFile_withPunctuation_withInvalidHyphenPlacement() {
+        // Given
+        wordCounterService = new WordCounterService("");
+        var phrase = "Humpty-Dumpty -sat on a wall. Humpty-Dumpty had- a great fall.";
+        var expectedCount = 6;
+
+        // When
+        var actualCount = wordCounterService.countUniqueWords(phrase);
 
         // Then
         assertEquals(expectedCount, actualCount);

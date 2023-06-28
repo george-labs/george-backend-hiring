@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -16,6 +17,7 @@ import java.util.stream.Stream;
  */
 public class WordCounterService {
     private final Set<String> stopWords;
+    private static final String VALID_WORD_REGEX = "[a-zA-Z]+";
     private static final String SPLIT_REGEX = "\\s+";
     private static final String PUNCTUATION_REGEX = "[.,?!]";
     private static final String HYPHEN = "-";
@@ -39,8 +41,10 @@ public class WordCounterService {
             return 0;
         }
 
-        var sanitizedPhrase = sanitizeText(phrase);
-        var wordList = splitPhraseIntoWords(sanitizedPhrase);
+        var sanitizedPhrasePunctuation = sanitizePunctuation(phrase);
+        var sanitizedPhraseHyphenCharacter = sanitizeHyphenCharacter(sanitizedPhrasePunctuation);
+
+        var wordList = splitPhraseIntoWords(sanitizedPhraseHyphenCharacter);
 
         return wordList.stream().filter(this::isValidWord).count();
     }
@@ -50,15 +54,25 @@ public class WordCounterService {
             return 0;
         }
 
-        var sanitizedPhrase = sanitizeText(phrase);
-        var wordList = splitPhraseIntoWords(sanitizedPhrase);
+        var sanitizedPhrasePunctuation = sanitizePunctuation(phrase);
+        var sanitizedPhraseHyphenCharacter = sanitizeHyphenCharacter(sanitizedPhrasePunctuation);
+
+        var wordList = splitPhraseIntoWords(sanitizedPhraseHyphenCharacter);
         var wordSet = new HashSet<>(wordList);
 
         return wordSet.stream().filter(this::isValidWord).count();
     }
 
-    private String sanitizeText(String phrase) {
-        phrase = phrase.replace(HYPHEN, "");
+    private String sanitizeHyphenCharacter(String phrase) {
+        var words = splitPhraseIntoWords(phrase);
+        var wordsWithoutHyphenIssue = words.stream().filter(s -> !s.startsWith(HYPHEN) &&
+                        !s.endsWith(HYPHEN))
+                .collect(Collectors.joining (" "));
+
+        return wordsWithoutHyphenIssue.replace(HYPHEN, "");
+    }
+
+    private String sanitizePunctuation(String phrase) {
         return phrase.replaceAll(PUNCTUATION_REGEX, "");
     }
 
@@ -74,7 +88,8 @@ public class WordCounterService {
      * @return {@code true} if the word is valid, {@code false} otherwise
      */
     private boolean isValidWord(String word) {
-        return word.matches("[a-zA-Z]+") && !stopWords.contains(word.toLowerCase());
+        return word.matches(VALID_WORD_REGEX) &&
+                !stopWords.contains(word.toLowerCase());
     }
 
     /**
