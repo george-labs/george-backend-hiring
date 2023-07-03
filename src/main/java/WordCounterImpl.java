@@ -1,6 +1,17 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class WordCounterImpl implements WordCounter {
+
+    Set<String> stopWords;
+
+    WordCounterImpl() {
+        stopWords = new HashSet<>();
+    }
+
+    WordCounterImpl(Set<String> stopWords) {
+        this.stopWords = stopWords;
+    }
+
     @Override
     public int countWords() {
         Scanner scanner = new Scanner(System.in);
@@ -10,7 +21,7 @@ public class WordCounterImpl implements WordCounter {
         int count = 0;
 
         for(String token : tokens) {
-            if(containsOnlyAlphabetic(token)) {
+            if(containsOnlyAlphabetic(token) && !stopWords.contains(token)) {
                 count++;
             }
         }
