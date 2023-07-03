@@ -1,11 +1,7 @@
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestWordStretches {
 
@@ -39,11 +35,7 @@ public class TestWordStretches {
         String inputString = "";
         int expectedNum = 0;
 
-
-
-        assertThrows(NoSuchElementException.class, () -> {
-            testWordCountFromGivenInput(inputString, expectedNum);
-        });
+        testWordCountFromGivenInput(inputString, expectedNum);
     }
 
     @Test
@@ -80,9 +72,9 @@ public class TestWordStretches {
     }
 
     private void testWordCountFromGivenInput(String inputString, int expectedNum) {
-        WordCounter wordCounter = new WordCounterImpl(new ByteArrayInputStream(inputString.getBytes()));
+        WordCounter wordCounter = new WordCounterImpl();
 
-        int numberOfWords = wordCounter.countWords();
+        int numberOfWords = wordCounter.countWords(inputString);
         assertEquals(expectedNum, numberOfWords);
     }
 

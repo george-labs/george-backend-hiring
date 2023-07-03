@@ -7,19 +7,20 @@ public class JavaApplication {
 
         Set<String> stopWords;
 
-        InputStream inputStream;
+        InputReader inputReader;
 
         if (args.length > 0) {
-            String filePathString = args[0];
-            File file = new File(filePathString);
-            try {
-                inputStream = new BufferedInputStream(new FileInputStream(file));
-            } catch (IOException ioException) {
-                System.out.println("IOException occured. " + ioException.getMessage());
-                return;
-            }
+            inputReader = new FileInputReader(args[0]);
         } else {
-            inputStream = System.in;
+            inputReader = new ConsoleInputReader();
+        }
+
+        String inputString;
+        try {
+            inputString = inputReader.readInput();
+        } catch (IOException ioException) {
+            System.out.println("IOException while reading input " + ioException.getMessage());
+            return;
         }
 
         StopWordReader stopWordReader = new StopWordReader();
@@ -30,9 +31,9 @@ public class JavaApplication {
             return;
         }
 
-        WordCounter wordCounter = new WordCounterImpl(stopWords, inputStream);
+        WordCounter wordCounter = new WordCounterImpl(stopWords);
 
-        int numberWords = wordCounter.countWords();
+        int numberWords = wordCounter.countWords(inputString);
 
         System.out.println("Number of words: " + numberWords);
 

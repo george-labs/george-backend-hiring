@@ -1,5 +1,5 @@
 public interface WordCounter {
 
-    int countWords();
+    int countWords(String s);
 
 }

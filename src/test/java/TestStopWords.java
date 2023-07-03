@@ -1,7 +1,5 @@
 import org.junit.jupiter.api.Test;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -72,9 +70,9 @@ public class TestStopWords {
 
     private void testWordCountFromGivenInput(String inputString, int expectedNum, String stopWordPath) throws IOException {
         Set<String> stopWords = stopWordReader.readStopWordsFromFile(stopWordPath);
-        WordCounter wordCounter = new WordCounterImpl(stopWords, new ByteArrayInputStream(inputString.getBytes()));
+        WordCounter wordCounter = new WordCounterImpl(stopWords);
 
-        int numberOfWords = wordCounter.countWords();
+        int numberOfWords = wordCounter.countWords(inputString);
         assertEquals(expectedNum, numberOfWords);
     }
 
