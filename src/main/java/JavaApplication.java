@@ -1,4 +1,4 @@
-import java.io.IOException;
+import java.io.*;
 import java.util.Set;
 
 public class JavaApplication {
@@ -6,6 +6,21 @@ public class JavaApplication {
     public static void main(String[] args) {
 
         Set<String> stopWords;
+
+        InputStream inputStream;
+
+        if (args.length > 0) {
+            String filePathString = args[0];
+            File file = new File(filePathString);
+            try {
+                inputStream = new BufferedInputStream(new FileInputStream(file));
+            } catch (IOException ioException) {
+                System.out.println("IOException occured. " + ioException.getMessage());
+                return;
+            }
+        } else {
+            inputStream = System.in;
+        }
 
         StopWordReader stopWordReader = new StopWordReader();
         try {
@@ -15,7 +30,7 @@ public class JavaApplication {
             return;
         }
 
-        WordCounter wordCounter = new WordCounterImpl(stopWords);
+        WordCounter wordCounter = new WordCounterImpl(stopWords, inputStream);
 
         int numberWords = wordCounter.countWords();
 

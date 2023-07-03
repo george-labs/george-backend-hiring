@@ -72,14 +72,10 @@ public class TestStopWords {
 
     private void testWordCountFromGivenInput(String inputString, int expectedNum, String stopWordPath) throws IOException {
         Set<String> stopWords = stopWordReader.readStopWordsFromFile(stopWordPath);
-        WordCounter wordCounter = new WordCounterImpl(stopWords);
-
-        InputStream stdin = System.in;
-        System.setIn(new ByteArrayInputStream(inputString.getBytes()));
+        WordCounter wordCounter = new WordCounterImpl(stopWords, new ByteArrayInputStream(inputString.getBytes()));
 
         int numberOfWords = wordCounter.countWords();
         assertEquals(expectedNum, numberOfWords);
-        System.setIn(stdin);
     }
 
 

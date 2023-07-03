@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestWordStretches {
 
-    WordCounter wordCounter = new WordCounterImpl();
 
     @Test
     public void testTwoWords() {
@@ -81,12 +80,10 @@ public class TestWordStretches {
     }
 
     private void testWordCountFromGivenInput(String inputString, int expectedNum) {
-        InputStream stdin = System.in;
-        System.setIn(new ByteArrayInputStream(inputString.getBytes()));
+        WordCounter wordCounter = new WordCounterImpl(new ByteArrayInputStream(inputString.getBytes()));
 
         int numberOfWords = wordCounter.countWords();
         assertEquals(expectedNum, numberOfWords);
-        System.setIn(stdin);
     }
 
 }
