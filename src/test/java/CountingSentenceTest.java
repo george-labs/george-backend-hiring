@@ -2,13 +2,22 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 class CountingSentenceTest {
     private Sentence sentence;
 
+    private StopWords stopWords;
+
+    private FileReaderText fileReaderText;
+
     @BeforeEach
-    void setUp() {
-        sentence = new Sentence();
+    void setUp() throws IOException {
+        stopWords = new StopWords();
+        fileReaderText = new FileReaderText();
+        stopWords.setStopWords(fileReaderText.readingTxtFileConvertingToListOfString("stopwords.txt"));
+        sentence = new Sentence(stopWords);
     }
 
     @Test
@@ -50,5 +59,10 @@ class CountingSentenceTest {
     void countingWordsWithEmptyStringCasesTest(){
 
         assertEquals(0, sentence.countingWordsOnlyLetter(""));
+    }
+
+    @Test
+    void countingWordsExcludedStopWordsFromFileTest(){
+        assertEquals(4, sentence.countingWordsOnlyLetter("Mary had a little lamb"));
     }
 }

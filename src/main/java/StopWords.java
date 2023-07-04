@@ -1,12 +1,14 @@
+import java.util.List;
+
 public class StopWords {
 
-    private String[] stopWords;
+    private List<String> stopWords;
 
-    public StopWords(String[] stopWords) {
+    public void setStopWords(List<String> stopWords) {
         this.stopWords = stopWords;
     }
 
-    public String[] getStopWords() {
+    public List<String> getStopWords() {
         return stopWords;
     }
 }
