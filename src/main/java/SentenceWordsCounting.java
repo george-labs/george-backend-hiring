@@ -1,4 +1,3 @@
 public interface SentenceWordsCounting {
-
-    int countingWordsOnlyLetter(String sentence);
+    long countingWordsOnlyLetter(String sentence);
 }

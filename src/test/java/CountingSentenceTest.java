@@ -3,8 +3,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-public class CountingSentenceTest {
+class CountingSentenceTest {
     private Sentence sentence;
 
     @BeforeEach
@@ -13,42 +12,42 @@ public class CountingSentenceTest {
     }
 
     @Test
-    public void countingWordsInSentenceWithEmptySpacesAtBeginingTest() {
+    void countingWordsInSentenceWithEmptySpacesAtBeginningTest() {
 
         assertEquals(1, sentence.countingWordsOnlyLetter("     word     "));
     }
 
     @Test
-    public void countingWordsWithoutEmptySpacesAndNumbersTest() {
+    void countingWordsWithoutEmptySpacesAndNumbersTest() {
 
         assertEquals(1, sentence.countingWordsOnlyLetter("word"));
     }
 
     @Test
-    public void countingWordsWithThreeWordInSentenceTest(){
+    void countingWordsWithThreeWordInSentenceTest(){
 
         assertEquals(3, sentence.countingWordsOnlyLetter("word word word"));
     }
 
     @Test
-    public void countingWordsWithNumbersInSentence() {
+    void countingWordsWithNumbersInSentenceTest() {
 
         assertEquals(2, sentence.countingWordsOnlyLetter("wor3d word word"));
     }
     @Test
-    public void countingWordsWithSpecialCasesTest(){
+    void countingWordsWithSpecialCasesTest(){
 
         assertEquals(1, sentence.countingWordsOnlyLetter("wo$$d word"));
     }
 
     @Test
-    public void countingWordsWithComasDotsAndQuestionMarksCasesTest(){
+    void countingWordsWithComasDotsAndQuestionMarksCasesTest(){
 
         assertEquals(1, sentence.countingWordsOnlyLetter("word. word, word? word! word"));
     }
 
     @Test
-    public void countingWordsWithEmptyStringCasesTest(){
+    void countingWordsWithEmptyStringCasesTest(){
 
         assertEquals(0, sentence.countingWordsOnlyLetter(""));
     }
