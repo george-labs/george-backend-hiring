@@ -9,3 +9,6 @@ Unique words are not case-sensitive.
 
 ## Iteration 5
 Requirements change - words separated other than hyphen are considered as 2 words.
+
+## Iteration 6
+Round of average length mathematically to 2 decimal points.

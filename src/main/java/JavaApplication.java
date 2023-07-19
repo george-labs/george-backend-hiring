@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class JavaApplication {
@@ -7,14 +8,20 @@ public class JavaApplication {
     static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        List<String> words;
         if (args.length != 0) {
             String filePath = args[0];
             String fileResult = fileReader.getSentenceFromFile(filePath);
-            System.out.println("Number of words: " + wordCounter.countWords(fileResult) + ", unique: " + wordCounter.countUniqueWords(fileResult));
+            words = wordCounter.filterWords(fileResult);
+            System.out.println("Number of words: " + wordCounter.countWords(words) + "" +
+                    ", unique: " + wordCounter.countUniqueWords(words) + "" +
+                    "; average word length: " + wordCounter.countAvgLength(words));
         } else {
             System.out.println("Enter text: ");
-            String userInput = scanner.nextLine();
-            System.out.println("Number of words: " + wordCounter.countWords(userInput) + ", unique: " + wordCounter.countUniqueWords(userInput));
+            words = wordCounter.filterWords(scanner.nextLine());
+            System.out.println("Number of words: " + wordCounter.countWords(words) + "" +
+                    ", unique: " + wordCounter.countUniqueWords(words) + "" +
+                    "; average word length: " + wordCounter.countAvgLength(words));
         }
     }
 }
