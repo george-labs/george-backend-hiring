@@ -51,4 +51,12 @@ public class WordCounterTest {
 
         assertEquals(7, result);
     }
+
+    @Test
+    public void testCountUniqueWords() {
+        String testSentence = "Mary had a little lamb. Had also other sentence.";
+        long result = wordCounter.countUniqueWords(testSentence);
+
+        assertEquals(7, result);
+    }
 }

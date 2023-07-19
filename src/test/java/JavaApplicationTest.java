@@ -21,13 +21,13 @@ public class JavaApplicationTest {
     public void testCountFromInput() {
         JavaApplication.main(new String[]{});
 
-        assertEquals("Enter text: \r\nNumber of words: 2", outputStreamCaptor.toString().trim());
+        assertEquals("Enter text: \r\nNumber of words: 2, unique: 2", outputStreamCaptor.toString().trim());
     }
 
     @Test
     public void testCountFromFile() {
         JavaApplication.main(new String[]{"src/test/resources/testFile.txt"});
 
-        assertEquals("Number of words: 6", outputStreamCaptor.toString().trim());
+        assertEquals("Number of words: 8, unique: 7", outputStreamCaptor.toString().trim());
     }
 }

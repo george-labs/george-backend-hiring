@@ -10,10 +10,11 @@ public class JavaApplication {
         if (args.length != 0) {
             String filePath = args[0];
             String fileResult = fileReader.getSentenceFromFile(filePath);
-            System.out.println("Number of words: " + wordCounter.countWords(fileResult));
+            System.out.println("Number of words: " + wordCounter.countWords(fileResult) + ", unique: " + wordCounter.countUniqueWords(fileResult));
         } else {
             System.out.println("Enter text: ");
-            System.out.println("Number of words: " + wordCounter.countWords(scanner.nextLine()));
+            String userInput = scanner.nextLine();
+            System.out.println("Number of words: " + wordCounter.countWords(userInput) + ", unique: " + wordCounter.countUniqueWords(userInput));
         }
     }
 }
