@@ -34,4 +34,12 @@ public class WordCounterTest {
 
         Assertions.assertEquals(4, result);
     }
+
+    @Test
+    public void testCountWords_withStopWords() {
+        String testSentence = "This is the test sentence";
+        long result = wordCounter.countWords(testSentence);
+
+        Assertions.assertEquals(4, result);
+    }
 }
