@@ -59,4 +59,20 @@ public class WordCounterTest {
 
         assertEquals(7, result);
     }
+
+    @Test
+    public void testCountWords_separatedByDot() {
+        String testSentence = "Humpty.Dumpty eats wall.";
+        long result = wordCounter.countWords(testSentence);
+
+        assertEquals(4, result);
+    }
+
+    @Test
+    public void testCountWords_separatedByHyphen() {
+        String testSentence = "Humpty-Dumpty eats wall.";
+        long result = wordCounter.countWords(testSentence);
+
+        assertEquals(3, result);
+    }
 }

@@ -6,3 +6,6 @@ When sentence ends with dot/exclamation mark etc. it should still count as a wor
 
 ## Iteration 4
 Unique words are not case-sensitive.
+
+## Iteration 5
+Requirements change - words separated other than hyphen are considered as 2 words.

@@ -26,7 +26,7 @@ public class WordCounter {
     }
 
     private List<String> filterWords(String input) {
-        String[] words = input.replaceAll("[^a-zA-Z ]", "").split("\\s");
+        String[] words = input.replaceAll("[^a-zA-Z -]", " ").split("\\s");
         List<String> stopWords = fileReader.readWordsFromFile("src/main/resources/stopwords.txt");
 
         return Arrays.stream(words)

@@ -28,6 +28,6 @@ public class JavaApplicationTest {
     public void testCountFromFile() {
         JavaApplication.main(new String[]{"src/test/resources/testFile.txt"});
 
-        assertEquals("Number of words: 8, unique: 7", outputStreamCaptor.toString().trim());
+        assertEquals("Number of words: 7, unique: 6", outputStreamCaptor.toString().trim());
     }
 }

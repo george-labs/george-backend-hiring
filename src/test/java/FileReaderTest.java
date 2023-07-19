@@ -15,8 +15,8 @@ public class FileReaderTest {
         List<String> result = fileReader.readWordsFromFile(TEST_FILE);
 
         assertFalse(result.isEmpty());
-        assertEquals(9, result.size());
-        assertTrue(result.containsAll(Arrays.asList("Mary", "had", "a", "little", "lamb.", "Had", "also", "other", "sentence.")));
+        assertEquals(10, result.size());
+        assertTrue(result.containsAll(Arrays.asList("Humpty-Dumpty", "sat", "on", "a", "wall.", "Humpty-Dumpty", "had", "a", "great", "fall.")));
     }
 
     @Test
@@ -31,6 +31,6 @@ public class FileReaderTest {
         String result = fileReader.getSentenceFromFile(TEST_FILE);
 
         assertFalse(result.isEmpty());
-        assertEquals("Mary had a little lamb. Had also other sentence.", result);
+        assertEquals("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", result);
     }
 }
