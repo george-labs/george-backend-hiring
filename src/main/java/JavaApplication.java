@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.Scanner;
 
 public class JavaApplication {
@@ -8,9 +7,9 @@ public class JavaApplication {
     static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        String filePath = args[0];
-        String fileResult = fileReader.getSentenceFromFile(filePath);
-        if (!fileResult.isEmpty()) {
+        if (args.length != 0) {
+            String filePath = args[0];
+            String fileResult = fileReader.getSentenceFromFile(filePath);
             System.out.println("Number of words: " + wordCounter.countWords(fileResult));
         } else {
             System.out.println("Enter text: ");
