@@ -12,4 +12,5 @@ public class WordCount implements IWordCount {
                 .filter(word -> word.matches(REGEX))
                 .count();
     }
+
 }
