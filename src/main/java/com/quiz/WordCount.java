@@ -6,11 +6,11 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WordCount implements IWordCount {
     private static final String REGEX = "[a-zA-Z]+";
     private FileReader stopWordsReader;
-
 
     public WordCount() {
     }
@@ -21,6 +21,15 @@ public class WordCount implements IWordCount {
 
     @Override
     public long count(String text) {
+        return process(text).count();
+    }
+
+    @Override
+    public long unique(String text) {
+        return process(text).distinct().count();
+    }
+
+    private Stream<String> process(String text) {
         Set<String> stopWords;
         if (stopWordsReader == null) {
             stopWords = Set.of();
@@ -28,9 +37,11 @@ public class WordCount implements IWordCount {
             stopWords = Arrays.stream(stopWordsReader.read().split("\n"))
                     .collect(Collectors.toSet());
         }
-        return Arrays.stream(Objects.toString(text, "").replace("\n", " ").split(" "))
-                .filter(word -> word.matches(REGEX) && !stopWords.contains(word))
-                .count();
+        return Arrays.stream(Objects.toString(text, "")
+                        .replace("\n", " ")
+                        .replace("-", " ").split(" "))
+                .filter(word -> word.matches(REGEX) && !stopWords.contains(word));
     }
+
 
 }

@@ -1,5 +1,6 @@
 package com.quiz;
 
+import com.quiz.reader.FileReader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -36,5 +37,12 @@ class WordCountTest {
     void should_CountWords_When_InputNullProvided() {
         IWordCount wordCount = new WordCount();
         Assertions.assertEquals(0, wordCount.count(null));
+    }
+
+    @Test
+    void should_CountUniqueWords_WhenInputTextProvided() {
+        String text = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        IWordCount wordCount = new WordCount(new FileReader("stopwords.txt"));
+        Assertions.assertEquals(7, wordCount.unique(text));
     }
 }
