@@ -17,4 +17,13 @@ public class JavaApplicationTest {
         JavaApplication.main(new String[]{});
         Assertions.assertTrue(outputStream.toString().contains(output));
     }
+
+    @Test
+    void should_PrintWordCount_When_InputTextProvidedByFile() {
+        String output = "Number of words: 4";
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        JavaApplication.main(new String[]{"mytext.txt"});
+        Assertions.assertTrue(outputStream.toString().contains(output));
+    }
 }
