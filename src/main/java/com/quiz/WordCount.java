@@ -28,7 +28,7 @@ public class WordCount implements IWordCount {
             stopWords = Arrays.stream(stopWordsReader.read().split("\n"))
                     .collect(Collectors.toSet());
         }
-        return Arrays.stream(Objects.toString(text, "").split(" "))
+        return Arrays.stream(Objects.toString(text, "").replace("\n", " ").split(" "))
                 .filter(word -> word.matches(REGEX) && !stopWords.contains(word))
                 .count();
     }
