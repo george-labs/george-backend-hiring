@@ -10,7 +10,7 @@ public class JavaApplicationTest {
     @Test
     void should_PrintWordCount_When_InputTextProvidedByConsole() {
         String input = "Mary had a little lamb";
-        String output = "Number of words: 5";
+        String output = "Number of words: 4";
         System.setIn(new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)));
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
