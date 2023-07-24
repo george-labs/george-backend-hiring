@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WordCount implements IWordCount {
-    private static final String REGEX = "[a-zA-Z]+";
+    private static final String REGEX = "[a-zA-Z]+\\.?";
     private FileReader stopWordsReader;
 
     public WordCount() {
@@ -38,8 +38,7 @@ public class WordCount implements IWordCount {
                     .collect(Collectors.toSet());
         }
         return Arrays.stream(Objects.toString(text, "")
-                        .replace("\n", " ")
-                        .replace("-", " ").split(" "))
+                        .replace("\n", " ").split("[\\s-]"))
                 .filter(word -> word.matches(REGEX) && !stopWords.contains(word));
     }
 
