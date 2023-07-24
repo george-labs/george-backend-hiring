@@ -40,9 +40,16 @@ class WordCountTest {
     }
 
     @Test
+    void should_CountWords_WhenInputTextProvided() {
+        String text = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        IWordCount wordCount = new WordCount(new FileReader("stopwords.txt"));
+        Assertions.assertEquals(7, wordCount.count(text));
+    }
+
+    @Test
     void should_CountUniqueWords_WhenInputTextProvided() {
         String text = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
         IWordCount wordCount = new WordCount(new FileReader("stopwords.txt"));
-        Assertions.assertEquals(7, wordCount.unique(text));
+        Assertions.assertEquals(6, wordCount.unique(text));
     }
 }
