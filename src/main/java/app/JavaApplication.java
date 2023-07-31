@@ -15,7 +15,6 @@ public class JavaApplication {
         String text = scanner.nextLine();
         scanner.close();
 
-
         String stopWordsFilePath = "stopwords.txt";
         InputStream inputStream = JavaApplication.class.getClassLoader().getResourceAsStream(stopWordsFilePath);
         if(inputStream == null){
@@ -27,7 +26,5 @@ public class JavaApplication {
 
         long wordCount = wordAnalyzer.countWords();
         System.out.println("Number of words: "+wordCount);
-
-
     }
 }

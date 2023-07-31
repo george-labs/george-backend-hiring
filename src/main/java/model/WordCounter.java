@@ -3,7 +3,6 @@ package model;
 import java.util.Set;
 
 public class WordCounter implements WordAnalyzer {
-
     private String text;
     private Set<String> stopWords;
 
