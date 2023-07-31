@@ -4,9 +4,10 @@ import model.WordAnalyzer;
 import model.WordAnalyzerFactory;
 import model.WordCounterFactory;
 
-import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -39,14 +40,13 @@ public class JavaApplication {
         System.out.println("Number of words: "+wordCount);
     }
 
-    private static String readTextFromFile(String fileName) {
+    public static String readTextFromFile(String fileName) {
 
-        InputStream inputStream = JavaApplication.class.getClassLoader().getResourceAsStream(fileName);
-        if(inputStream == null){
+        Path filePath = Path.of(fileName);
+        try{
+            return Files.lines(filePath).collect(Collectors.joining("\n"));
+        } catch (IOException e){
             throw new RuntimeException("File not found: "+ fileName);
         }
-        return new BufferedReader(new InputStreamReader(inputStream))
-                .lines().collect(Collectors.joining("\n"));
-
     }
 }

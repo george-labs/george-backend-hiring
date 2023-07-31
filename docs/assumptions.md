@@ -1,5 +1,10 @@
 # Assumptions per iteration
 
+## Iteration 3
+
+1. I have kept the mytext.txt under project file structure.
+2. Made changes in JavaApplication file itself, to get text from either file or user input.
+3. Written the test in TextFileWordsLoaderTest to validate readFromFile functionality.
 
 ## Iteration 2
 

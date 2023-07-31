@@ -1,29 +1,37 @@
 package app;
 
 import org.junit.jupiter.api.Test;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import org.junit.jupiter.api.io.TempDir;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 public class TextFileWordsLoaderTest {
 
-
     @Test
-    public void readTextFromFile(){
-
+    public void readTextFromFile(@TempDir Path tempDir) throws IOException {
         String testText = "This is a test";
 
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(testText.getBytes());
+        Path tempFile = tempDir.resolve("test_mytext.txt");
+        Files.write(tempFile, testText.getBytes());
 
-        ClassLoader classLoader = new ClassLoader() {
-            @Override
-            public InputStream getResourceAsStream(String name) {
-                return byteArrayInputStream;
-            }
-        };
+        String result = JavaApplication.readTextFromFile(tempFile.toString());
+        assertEquals(testText, result);
+    }
 
-        JavaApplication.class.getClassLoader();
+    @Test
+    public void readTextFromFileNonExistenceFile(){
+        try{
+            JavaApplication.readTextFromFile("non_existent.txt");
+            fail("Excepted RuntimeException to be thrown, but it wasn't.");
+        } catch (RuntimeException e){
+            System.out.println("Exception is Expected");
+        }
     }
 }
 
