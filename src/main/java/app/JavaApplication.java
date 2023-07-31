@@ -37,7 +37,8 @@ public class JavaApplication {
         WordAnalyzer wordAnalyzer = wordAnalyzerFactory.createWordAnalyzer(text);
 
         long wordCount = wordAnalyzer.countWords();
-        System.out.println("Number of words: "+wordCount);
+        long uniqueWordCount = wordAnalyzer.uniqueWords();
+        System.out.println("Number of words: "+wordCount+", unique: "+uniqueWordCount);
     }
 
     public static String readTextFromFile(String fileName) {

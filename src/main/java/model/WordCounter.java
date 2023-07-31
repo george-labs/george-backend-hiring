@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class WordCounter implements WordAnalyzer {
@@ -14,7 +15,7 @@ public class WordCounter implements WordAnalyzer {
     @Override
     public long countWords() {
 
-        String[] words = text.trim().split("\\s+");
+        String[] words = tokenizeText(text);
         long count = 0;
         for(String word : words){
             if(isWord(word) && !stopWords.contains(word.toLowerCase())){
@@ -22,6 +23,23 @@ public class WordCounter implements WordAnalyzer {
             }
         }
         return count;
+    }
+
+    @Override
+    public long uniqueWords() {
+        Set<String> uniqueWords = new HashSet<>();
+        String[] words = tokenizeText(text);
+
+        for(String word : words){
+            if(isWord(word) && !stopWords.contains(word.toLowerCase())){
+                uniqueWords.add(word.toLowerCase());
+            }
+        }
+        return uniqueWords.size();
+    }
+
+    private String[] tokenizeText(String text) {
+        return text.replaceAll("[.,?]", "").split("[\\s-]+");
     }
 
     private boolean isWord(String word){

@@ -39,6 +39,7 @@ public class WordAnalyzerTest {
         assertNotNull(wordAnalyzer);
         long wordCount = wordAnalyzer.countWords();
         assertEquals(expectedWordCount, wordCount);
+
     }
 
     @Test
@@ -73,12 +74,12 @@ public class WordAnalyzerTest {
 
     @Test
     public void testCreateWordAnalyzerWithSpecialCharsAndNumeric(){
-        assertWordCount("He said hello!      3CC      ??word   ;;bye  end", 3);
+        assertWordCount("He said hello!      3CC      ??word   ;;bye  end", 4);
     }
 
     @Test
     public void testCreateWordAnalyzerWithSpecialCharsAndNumericWithStopWord(){
-        assertWordCount("He said the hello!      3CC      ??word   ;;bye  a end off", 3);
+        assertWordCount("He said the hello!      3CC      ??word   ;;bye  a end off", 4);
     }
 
     @Test

@@ -1,5 +1,12 @@
 # Assumptions per iteration
 
+
+## Iteration 4
+
+1. After writing functionality for this iteration, I have found that with these changes the behaviour of entire change as I required to change the test cases for previous written test cases. 
+2. Have written test cases for it in separate file name : UniqueWordCountTest
+3. Have considered the words not case-sensitive as it was not given in problem statement.
+
 ## Iteration 3
 
 1. I have kept the mytext.txt under project file structure.
