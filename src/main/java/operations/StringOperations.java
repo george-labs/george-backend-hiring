@@ -1,13 +1,40 @@
 package operations;
 
-public class StringOperations
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class StringOperations implements AlphabeticOperations
 {
-    public static int countWords(String sentence, String separator)
+    private List<String> blacklist;
+
+    public StringOperations()
     {
-        return sentence.split(" ").length;
+        blacklist = new ArrayList<>();
     }
 
-    public static int countWords(String sentence)
+    public StringOperations(String blacklistedWords)
+    {
+        blacklist = Arrays.asList(blacklistedWords.split(","));
+    }
+
+    public int countWords(String sentence, String separator)
+    {
+        String[] sentenceArray = sentence.split(separator);
+        int count = 0;
+        for (String word: sentenceArray)
+        {
+            if(blacklist.contains(word))
+            {
+                continue;
+            }
+            count++;
+
+        }
+        return count;
+    }
+
+    public int countWords(String sentence)
     {
         return countWords(sentence, " ");
     }
