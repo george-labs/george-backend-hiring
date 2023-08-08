@@ -8,7 +8,7 @@ public class JavaApplication
         String sentence = IOOperations.fetchSentence();
         if(sentence!=null)
         {
-            System.out.println("Total words: " + StringOperations.countWords(sentence));
+            System.out.println("Number of words: " + StringOperations.countWords(sentence));
         }
         else
         {

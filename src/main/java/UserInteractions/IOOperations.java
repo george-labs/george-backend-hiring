@@ -10,7 +10,7 @@ public class IOOperations
 {
     public static String fetchSentence()
     {
-        System.out.println("Please enter the sentence: ");
+        System.out.println("Enter text: ");
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(System.in));
         try {
