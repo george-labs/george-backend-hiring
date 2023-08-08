@@ -18,7 +18,7 @@ public class StringOperations implements AlphabeticOperations
         blacklist = Arrays.asList(blacklistedWords.split(","));
     }
 
-    public int countWords(String sentence, String separator)
+    public List<String> countWords(String sentence, String separator)
     {
         String[] sentenceArray = sentence.split(separator);
         List<String> sentenceList = new ArrayList<>();
@@ -29,7 +29,7 @@ public class StringOperations implements AlphabeticOperations
                 sentenceList.add(word);
             }
         }
-        return sentenceList.size();
+        return sentenceList;
     }
 
     public int countUniqueWords(String sentence, String separator)
@@ -48,6 +48,6 @@ public class StringOperations implements AlphabeticOperations
 
     public int countWords(String sentence)
     {
-        return countWords(sentence, " ");
+        return countWords(sentence, " ").size();
     }
 }

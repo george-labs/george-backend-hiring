@@ -3,6 +3,8 @@ import operations.AlphabeticOperations;
 import operations.FileOperations;
 import operations.StringOperations;
 
+import java.util.List;
+
 public class JavaApplication
 {
     public static void main(String[] args)
@@ -24,6 +26,7 @@ public class JavaApplication
             sentence = IOOperations.fetchSentence();
 
         }
-        System.out.println("Number of words: " + operations.countWords(sentence,"[: .,-]")+", unique: " + operations.countUniqueWords(sentence,"[: .,-]"));
+        List<String> sentenceList = operations.countWords(sentence,"[: .,-]");
+        System.out.println("Number of words: " + sentenceList.size()+", unique: " + sentenceList.stream().distinct().count());
     }
 }
