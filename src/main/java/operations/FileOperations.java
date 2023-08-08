@@ -4,7 +4,7 @@ import java.io.*;
 
 public class FileOperations
 {
-    public static String readFromFile(String filePath){
+    public static String readFromFile(String filePath, String separator){
         File file = new File(filePath);
         InputStream inputStream = null;
         try {
@@ -17,7 +17,7 @@ public class FileOperations
                      = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = br.readLine()) != null) {
-                resultStringBuilder.append(line).append(",");
+                resultStringBuilder.append(line).append(separator);
             }
         }
         catch (IOException ioException)

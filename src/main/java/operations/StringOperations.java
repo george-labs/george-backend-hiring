@@ -21,6 +21,14 @@ public class StringOperations implements AlphabeticOperations
     public int countWords(String sentence, String separator)
     {
         String[] sentenceArray = sentence.split(separator);
+        if(sentenceArray.length==1)
+        {
+            if(sentenceArray[0].compareTo("")==0)
+            {
+                return 0;
+            }
+
+        }
         int count = 0;
         for (String word: sentenceArray)
         {

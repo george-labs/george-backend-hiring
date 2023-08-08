@@ -35,4 +35,10 @@ public class JavaApplicationTest
         Assertions.assertEquals(4, operationsWithBlacklist.countWords("a set allowed of words"));
         Assertions.assertEquals(0, operationsWithBlacklist.countWords("not allowed"," "));
     }
+
+    @Test
+    public void countWordsWithEmptyInput()
+    {
+        Assertions.assertEquals(0, operationsWithBlacklist.countWords(""));
+    }
 }

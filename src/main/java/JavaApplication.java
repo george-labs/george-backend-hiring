@@ -7,14 +7,23 @@ public class JavaApplication
 {
     public static void main(String[] args)
     {
-        AlphabeticOperations operations = new StringOperations(FileOperations.readFromFile(args[0]));
-        String sentence = IOOperations.fetchSentence();
-        if(sentence!=null)
+        AlphabeticOperations operations;
+        String sentence;
+
+        if(args.length>0)
         {
-            System.out.println("Number of words: " + operations.countWords(sentence));
+            operations = new StringOperations(FileOperations.readFromFile(args[0],","));
+            if(args.length==2)
+                sentence = FileOperations.readFromFile(args[1]," ");
+            else
+                sentence = IOOperations.fetchSentence();
         }
-        else {
-            System.out.println("Invalid Input");
+        else
+        {
+            operations = new StringOperations();
+            sentence = IOOperations.fetchSentence();
+
         }
+        System.out.println("Number of words: " + operations.countWords(sentence));
     }
 }
