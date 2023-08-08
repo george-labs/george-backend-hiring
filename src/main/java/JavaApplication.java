@@ -24,6 +24,6 @@ public class JavaApplication
             sentence = IOOperations.fetchSentence();
 
         }
-        System.out.println("Number of words: " + operations.countWords(sentence));
+        System.out.println("Number of words: " + operations.countWords(sentence,"[: .,-]")+", unique: " + operations.countUniqueWords(sentence,"[: .,-]"));
     }
 }

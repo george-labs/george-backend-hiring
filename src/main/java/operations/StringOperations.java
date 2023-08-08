@@ -21,25 +21,29 @@ public class StringOperations implements AlphabeticOperations
     public int countWords(String sentence, String separator)
     {
         String[] sentenceArray = sentence.split(separator);
-        if(sentenceArray.length==1)
+        List<String> sentenceList = new ArrayList<>();
+        for(String word: sentenceArray)
         {
-            if(sentenceArray[0].compareTo("")==0)
+            if(word.compareTo("")!=0 && !blacklist.contains(word))
             {
-                return 0;
+                sentenceList.add(word);
             }
-
         }
-        int count = 0;
-        for (String word: sentenceArray)
+        return sentenceList.size();
+    }
+
+    public int countUniqueWords(String sentence, String separator)
+    {
+        String[] sentenceArray = sentence.split(separator);
+        List<String> sentenceList = new ArrayList<>();
+        for(String word: sentenceArray)
         {
-            if(blacklist.contains(word))
+            if(word.compareTo("")!=0 && !blacklist.contains(word) && !sentenceList.contains(word))
             {
-                continue;
+                sentenceList.add(word);
             }
-            count++;
-
         }
-        return count;
+        return sentenceList.size();
     }
 
     public int countWords(String sentence)
