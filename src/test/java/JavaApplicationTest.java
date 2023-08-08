@@ -53,4 +53,10 @@ public class JavaApplicationTest
     {
         Assertions.assertEquals(5,operationsWithBlacklist.countWords("a set-set allowed of words words").size());
     }
+
+    @Test
+    public void countWordsWithBlacklistingTestAvg()
+    {
+        Assertions.assertEquals(2.75,operationsWithBlacklist.averageCountOfWords(operationsWithBlacklist.countWords("a set allowed of words")));
+    }
 }

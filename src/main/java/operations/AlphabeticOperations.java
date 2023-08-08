@@ -6,4 +6,5 @@ public interface AlphabeticOperations
 {
     List<String> countWords(String sentence);
     long uniqueWords(List<String> words);
+    float averageCountOfWords(List<String> words);
 }

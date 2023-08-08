@@ -38,4 +38,17 @@ public class StringOperations implements AlphabeticOperations
     {
         return words.stream().distinct().count();
     }
+
+    public float averageCountOfWords(List<String> words)
+    {
+        float sum = 0;
+        int count = 0;
+        for(String word: words)
+        {
+            sum = sum + word.length();
+            count++;
+        }
+        return sum/count;
+    }
+
 }

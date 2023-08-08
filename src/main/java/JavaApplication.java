@@ -26,6 +26,8 @@ public class JavaApplication
             sentence = IOOperations.fetchSentence();
         }
         List<String> sentenceList = operations.countWords(sentence);
-        System.out.println("Number of words: " + sentenceList.size()+", unique: " + operations.uniqueWords(sentenceList));
+        System.out.println("Number of words: " + sentenceList.size() +
+                ", unique: " + operations.uniqueWords(sentenceList) +
+                "; average word length: " + operations.averageCountOfWords(sentenceList) +" characters");
     }
 }
