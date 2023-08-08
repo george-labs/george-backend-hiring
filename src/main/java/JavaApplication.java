@@ -1,4 +1,5 @@
 import UserInteractions.IOOperations;
+import operations.StringOperations;
 
 public class JavaApplication
 {
@@ -7,7 +8,11 @@ public class JavaApplication
         String sentence = IOOperations.fetchSentence();
         if(sentence!=null)
         {
-            System.out.println("Total ");
+            System.out.println("Total words: " + StringOperations.countWords(sentence));
+        }
+        else
+        {
+            System.out.println("Invalid Input");
         }
     }
 }
