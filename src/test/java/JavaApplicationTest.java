@@ -26,7 +26,7 @@ public class JavaApplicationTest
     public void countWordsTest()
     {
         Assertions.assertEquals(4,operations.countWords("a set of words").size());
-        Assertions.assertEquals(4,operations.countWords("a set of words").size());
+        Assertions.assertEquals(5,operations.countWords("a set of words different    ").size());
     }
 
     @Test
@@ -46,5 +46,11 @@ public class JavaApplicationTest
     public void countWordsWithEmptyInput()
     {
         Assertions.assertEquals(0, operationsWithBlacklist.countWords("").size());
+    }
+
+    @Test
+    public void countWordsWithBlacklistingTestUniqueHyphen()
+    {
+        Assertions.assertEquals(5,operationsWithBlacklist.countWords("a set-set allowed of words words").size());
     }
 }

@@ -8,7 +8,7 @@ public class StringOperations implements AlphabeticOperations
 {
 
     private List<String> blacklist;
-    private String separator = "[: .,-]";
+    private final String separator = "[: .,]";
 
     public StringOperations()
     {

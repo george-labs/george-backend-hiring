@@ -24,7 +24,6 @@ public class JavaApplication
         {
             operations = new StringOperations();
             sentence = IOOperations.fetchSentence();
-
         }
         List<String> sentenceList = operations.countWords(sentence);
         System.out.println("Number of words: " + sentenceList.size()+", unique: " + operations.uniqueWords(sentenceList));
