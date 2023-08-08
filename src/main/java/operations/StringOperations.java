@@ -8,6 +8,7 @@ public class StringOperations implements AlphabeticOperations
 {
 
     private List<String> blacklist;
+    private String separator = "[: .,-]";
 
     public StringOperations()
     {
@@ -16,10 +17,10 @@ public class StringOperations implements AlphabeticOperations
 
     public StringOperations(String blacklistedWords)
     {
-        blacklist = Arrays.asList(blacklistedWords.split(","));
+        blacklist = Arrays.asList(blacklistedWords.split(separator));
     }
 
-    public List<String> countWords(String sentence, String separator)
+    public List<String> countWords(String sentence)
     {
         String[] sentenceArray = sentence.split(separator);
         List<String> sentenceList = new ArrayList<>();
@@ -33,8 +34,8 @@ public class StringOperations implements AlphabeticOperations
         return sentenceList;
     }
 
-    public int countWords(String sentence)
+    public long uniqueWords(List<String> words)
     {
-        return countWords(sentence, " ").size();
+        return words.stream().distinct().count();
     }
 }

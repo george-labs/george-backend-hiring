@@ -25,20 +25,26 @@ public class JavaApplicationTest
     @Test
     public void countWordsTest()
     {
-        Assertions.assertEquals(4,operations.countWords("a set of words"));
-        Assertions.assertEquals(4,operations.countWords("a set of words"," "));
+        Assertions.assertEquals(4,operations.countWords("a set of words").size());
+        Assertions.assertEquals(4,operations.countWords("a set of words").size());
     }
 
     @Test
     public void countWordsWithBlacklistingTest()
     {
-        Assertions.assertEquals(4, operationsWithBlacklist.countWords("a set allowed of words"));
-        Assertions.assertEquals(0, operationsWithBlacklist.countWords("not allowed"," "));
+        Assertions.assertEquals(4, operationsWithBlacklist.countWords("a set allowed of words").size());
+        Assertions.assertEquals(0, operationsWithBlacklist.countWords("not allowed").size());
+    }
+
+    @Test
+    public void countWordsWithBlacklistingTestUnique()
+    {
+        Assertions.assertEquals(4,operationsWithBlacklist.uniqueWords(operationsWithBlacklist.countWords("a set allowed of words words")));
     }
 
     @Test
     public void countWordsWithEmptyInput()
     {
-        Assertions.assertEquals(0, operationsWithBlacklist.countWords(""));
+        Assertions.assertEquals(0, operationsWithBlacklist.countWords("").size());
     }
 }

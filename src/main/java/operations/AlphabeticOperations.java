@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface AlphabeticOperations
 {
-    List<String> countWords(String sentence, String separator);
-    int countWords(String sentence);
+    List<String> countWords(String sentence);
+    long uniqueWords(List<String> words);
 }
