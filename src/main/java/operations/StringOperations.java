@@ -6,6 +6,7 @@ import java.util.List;
 
 public class StringOperations implements AlphabeticOperations
 {
+
     private List<String> blacklist;
 
     public StringOperations()
@@ -30,20 +31,6 @@ public class StringOperations implements AlphabeticOperations
             }
         }
         return sentenceList;
-    }
-
-    public int countUniqueWords(String sentence, String separator)
-    {
-        String[] sentenceArray = sentence.split(separator);
-        List<String> sentenceList = new ArrayList<>();
-        for(String word: sentenceArray)
-        {
-            if(word.compareTo("")!=0 && !blacklist.contains(word) && !sentenceList.contains(word))
-            {
-                sentenceList.add(word);
-            }
-        }
-        return sentenceList.size();
     }
 
     public int countWords(String sentence)
