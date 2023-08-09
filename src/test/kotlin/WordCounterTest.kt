@@ -1,8 +1,31 @@
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
+import java.util.stream.Stream
 
 class WordCounterTest {
+
+    companion object {
+
+        @JvmStatic
+        fun getCounterTestValues(): Stream<Arguments> {
+            return Stream.of(
+                Arguments.of("Mary had a little lamb", WordCounterResult(5, 5, 3.6)),
+                Arguments.of("Hell0, my n4me is Markus", WordCounterResult(3, 3, 3.3333333333333335)),
+                Arguments.of("Hello, my name is Markus.", WordCounterResult(5, 5, 3.8)),
+                Arguments.of("", WordCounterResult.ZERO),
+                Arguments.of(" ", WordCounterResult.ZERO),
+                Arguments.of("Mary   had a  little       lamb  ", WordCounterResult(5, 5, 3.6)),
+                Arguments.of(
+                    "Humpty-Dumpty -Test sat on a wall. Humpty-Dumpty had a great fall.",
+                    WordCounterResult(10, 8, 4.9)
+                ),
+            )
+        }
+    }
 
     private lateinit var counter: WordCounterImpl
 
@@ -11,23 +34,11 @@ class WordCounterTest {
         counter = WordCounterImpl()
     }
 
-    private val pairs = listOf(
-        "Mary had a little lamb" to WordCounterResult(5, 5, 3.6),
-        "Hell0, my n4me is Markus" to WordCounterResult(3, 3, 3.3333333333333335),
-        "Hello, my name is Markus." to WordCounterResult(5, 5, 3.8),
-        "" to WordCounterResult.ZERO,
-        "   " to WordCounterResult.ZERO,
-        "Mary   had a  little       lamb  " to WordCounterResult(5, 5, 3.6),
-        "Hell0, my n4me: is Markus." to WordCounterResult(3, 3, 3.3333333333333335),
-        "Humpty-Dumpty -Test sat on a wall. Humpty-Dumpty had a great fall." to WordCounterResult(10, 8, 4.9)
-    )
-
-    @Test
-    fun `words counter params test`() {
-        for (item in pairs) {
-            val actual = counter.countWords(item.first)
-            assertEquals(item.second, actual, "For input: ${item.first}")
-        }
+    @ParameterizedTest
+    @MethodSource("getCounterTestValues")
+    fun `words counter params test`(input: String, expected: WordCounterResult) {
+        val actual = counter.countWords(input)
+        assertEquals(expected, actual)
     }
 
     @Test
