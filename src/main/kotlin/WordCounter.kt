@@ -1,11 +1,12 @@
-class WordCounter {
+class WordCounter(
+    private val stopWordsProvider: StopWordsProvider = EmptyStopWordsProvider(),
+) {
 
-    //a-z,A-Z
-    // Hello, my name is Markus.
     fun countWords(input: String): Int {
         return input.split(" ")
             .map { removeSpecialSymbols(it) }
             .filter { alphabetCheck(it) }
+            .filter { !stopWordsProvider.isBanned(it) }
             .size
     }
 
@@ -14,7 +15,7 @@ class WordCounter {
         return regex.matches(input)
     }
 
-    fun removeSpecialSymbols(input: String): String {
+    private fun removeSpecialSymbols(input: String): String {
         return input.filterNot { SPECIAL_SYMBOLS.indexOf(it) > -1 }
     }
 
