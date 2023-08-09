@@ -1,12 +1,16 @@
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
+import java.text.DecimalFormat
 
-class WordCounterInput(
-    private val wordCounter: WordCounter
-) {
+class WordCounterInput(private val wordFilter: WordFilter) {
 
-    fun process(inputFile: String? = null): WordCounterResult {
+    private val wordCounter = WordsCounterConsumer()
+    private val wordAverage = WordsAverageConsumer()
+    private val wordUnique = WordsUniqueConsumer()
+    private val wordsIndex = WordsIndexConsumer()
+
+    fun process(inputFile: String? = null) {
         val inputString = if (inputFile == null) {
             println("Enter text: ")
             BufferedReader(InputStreamReader(System.`in`)).use {
@@ -15,6 +19,37 @@ class WordCounterInput(
         } else {
             File(inputFile).readText().replace("\n", " ")
         }
-        return wordCounter.countWords(inputString)
+        printResults(inputString, false)
+    }
+
+    fun processWithIndex() {
+        println("Enter text: ")
+        val inputString = BufferedReader(InputStreamReader(System.`in`)).use {
+            it.readLine()
+        }
+        printResults(inputString, true)
+    }
+
+    private fun printResults(input: String, index: Boolean) {
+        val words = wordFilter.filter(input)
+        val result = buildString {
+            append("Number of words: ")
+            append(wordCounter.accept(words))
+            append(" , unique: ")
+            append(wordUnique.accept(words))
+            append("; average word length: ")
+            append(FORMATTER.format(wordAverage.accept(words)))
+            if (index) {
+                appendLine()
+                appendLine("Index:")
+                val indexedWords = wordsIndex.accept(words)
+                indexedWords.forEach { appendLine(it) }
+            }
+        }
+        println(result)
+    }
+
+    companion object {
+        val FORMATTER = DecimalFormat("#.##")
     }
 }
