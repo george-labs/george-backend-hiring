@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test
 
 class WordCounterTest {
 
-    private lateinit var counter: WordCounter
+    private lateinit var counter: WordCounterImpl
 
     @BeforeEach
     fun setUp() {
-        counter = WordCounter()
+        counter = WordCounterImpl()
     }
 
     private val pairs = listOf(
