@@ -4,7 +4,6 @@ class WordCounterImpl(
 
     override fun countWords(input: String): WordCounterResult {
         val words = input.split(" ")
-            .flatMap { splitWords(it) }
             .map { removeSpecialSymbols(it) }
             .filter { alphabetCheck(it) }
             .filter { !stopWordsProvider.isBanned(it) }
@@ -15,18 +14,8 @@ class WordCounterImpl(
         )
     }
 
-    internal fun splitWords(input: String): List<String> {
-        val index = input.indexOf("-")
-        return if (index != -1 && index != input.length - 1) {
-            listOf(input.substring(0, index), input.substring(index + 1, input.length))
-        } else {
-            listOf(input)
-        }
-    }
-
-    private fun alphabetCheck(input: String): Boolean {
-        val regex = Regex("[a-zA-Z]+?")
-        return regex.matches(input)
+    internal fun alphabetCheck(input: String): Boolean {
+        return MAIN_REGEX.matches(input) || HYPHEN_REGEX.matches(input)
     }
 
     private fun removeSpecialSymbols(input: String): String {
@@ -35,5 +24,8 @@ class WordCounterImpl(
 
     companion object {
         const val SPECIAL_SYMBOLS = ".,;:"
+
+        val MAIN_REGEX = Regex("[a-zA-Z]+?")
+        val HYPHEN_REGEX = Regex("[a-zA-Z]+-[a-zA-Z]+\\.?")
     }
 }
