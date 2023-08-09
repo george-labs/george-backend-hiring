@@ -1,4 +1,5 @@
 import java.io.File
+import java.text.DecimalFormat
 
 object KotlinApplication {
 
@@ -9,6 +10,13 @@ object KotlinApplication {
         val wordCounter = WordCounterImpl(stopWordsProvider)
         val wordCounterInput = WordCounterInput(wordCounter)
         val result = wordCounterInput.process(args.firstOrNull())
-        println("Number of words: ${result.numberOfWords} , unique: ${result.unique}")
+        val formatter = DecimalFormat("#.##");
+        println(
+            "Number of words: ${result.numberOfWords} , unique: ${result.unique}; average word length: ${
+                formatter.format(
+                    result.averageWordLength
+                )
+            } characters"
+        )
     }
 }

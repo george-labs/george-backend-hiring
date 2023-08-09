@@ -11,7 +11,17 @@ class WordCounterImpl(
         return WordCounterResult(
             numberOfWords = words.size,
             unique = words.toSet().size,
+            averageWordLength = getAverageWords(words),
         )
+    }
+
+    internal fun getAverageWords(words: List<String>): Double {
+        if (words.isEmpty()) {
+            return 0.0
+        }
+        var counter = 0.0
+        words.forEach { counter += it.length }
+        return counter / words.size.toDouble()
     }
 
     internal fun alphabetCheck(input: String): Boolean {

@@ -12,14 +12,14 @@ class WordCounterTest {
     }
 
     private val pairs = listOf(
-        "Mary had a little lamb" to WordCounterResult(5, 5),
-        "Hell0, my n4me is Markus" to WordCounterResult(3, 3),
-        "Hello, my name is Markus." to WordCounterResult(5, 5),
+        "Mary had a little lamb" to WordCounterResult(5, 5, 3.6),
+        "Hell0, my n4me is Markus" to WordCounterResult(3, 3, 3.3333333333333335),
+        "Hello, my name is Markus." to WordCounterResult(5, 5, 3.8),
         "" to WordCounterResult.ZERO,
         "   " to WordCounterResult.ZERO,
-        "Mary   had a  little       lamb  " to WordCounterResult(5, 5),
-        "Hell0, my n4me: is Markus." to WordCounterResult(3, 3),
-        "Humpty-Dumpty -Test sat on a wall. Humpty-Dumpty had a great fall." to WordCounterResult(10, 8)
+        "Mary   had a  little       lamb  " to WordCounterResult(5, 5, 3.6),
+        "Hell0, my n4me: is Markus." to WordCounterResult(3, 3, 3.3333333333333335),
+        "Humpty-Dumpty -Test sat on a wall. Humpty-Dumpty had a great fall." to WordCounterResult(10, 8, 4.9)
     )
 
     @Test
@@ -38,5 +38,12 @@ class WordCounterTest {
         assertEquals(false, counter.alphabetCheck("Hell0"))
         assertEquals(false, counter.alphabetCheck("He\$l0"))
         assertEquals(false, counter.alphabetCheck("-Test"))
+    }
+
+    @Test
+    fun `calculate average words`() {
+        assertEquals(3.0, counter.getAverageWords(listOf("abc")))
+        assertEquals(1.5, counter.getAverageWords(listOf("a", "bc")))
+        assertEquals(0.0, counter.getAverageWords(listOf()))
     }
 }

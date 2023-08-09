@@ -40,7 +40,7 @@ class WordCounterInputTest {
 
         override fun countWords(input: String): WordCounterResult {
             inputs.add(input)
-            return WordCounterResult(0, 0)
+            return WordCounterResult.ZERO
         }
     }
 }
