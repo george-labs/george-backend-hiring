@@ -17,7 +17,7 @@ class WordCounterInputTest {
     @Test
     fun `process with program argument`() {
         val actual = wordCounterInput.process("./mytext.txt")
-        assertEquals(0, actual)
+        assertEquals(WordCounterResult.ZERO, actual)
         val inputs = wordsCounter.inputs
         assertEquals(1, inputs.size)
         assertEquals("Mary had a little lamb", inputs.first())
@@ -28,7 +28,7 @@ class WordCounterInputTest {
         val tmpStream = ByteArrayInputStream("Mary had".toByteArray())
         System.setIn(tmpStream)
         val actual = wordCounterInput.process()
-        assertEquals(0, actual)
+        assertEquals(WordCounterResult.ZERO, actual)
         val inputs = wordsCounter.inputs
         assertEquals(1, inputs.size)
         assertEquals("Mary had", inputs.first())
@@ -38,9 +38,9 @@ class WordCounterInputTest {
 
         val inputs = ArrayList<String>()
 
-        override fun countWords(input: String): Int {
+        override fun countWords(input: String): WordCounterResult {
             inputs.add(input)
-            return 0
+            return WordCounterResult(0, 0)
         }
     }
 }

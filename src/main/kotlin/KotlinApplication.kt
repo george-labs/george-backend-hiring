@@ -9,6 +9,6 @@ object KotlinApplication {
         val wordCounter = WordCounterImpl(stopWordsProvider)
         val wordCounterInput = WordCounterInput(wordCounter)
         val result = wordCounterInput.process(args.firstOrNull())
-        println("Number of words: $result")
+        println("Number of words: ${result.numberOfWords} , unique: ${result.unique}")
     }
 }

@@ -12,13 +12,14 @@ class WordCounterTest {
     }
 
     private val pairs = listOf(
-        "Mary had a little lamb" to 5,
-        "Hell0, my n4me is Markus" to 3,
-        "Hello, my name is Markus." to 5,
-        "" to 0,
-        "   " to 0,
-        "Mary   had a  little       lamb  " to 5,
-        "Hell0, my n4me: is Markus." to 3,
+        /**"Mary had a little lamb" to WordCounterResult(5, 5),
+        "Hell0, my n4me is Markus" to WordCounterResult(3, 3),
+        "Hello, my name is Markus." to WordCounterResult(5, 5),
+        "" to WordCounterResult.ZERO,
+        "   " to WordCounterResult.ZERO,
+        "Mary   had a  little       lamb  " to WordCounterResult(5, 5),
+        "Hell0, my n4me: is Markus." to WordCounterResult(3, 3),**/
+        "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall." to WordCounterResult(9, 7)
     )
 
     @Test

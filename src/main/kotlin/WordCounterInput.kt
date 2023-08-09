@@ -6,7 +6,7 @@ class WordCounterInput(
     private val wordCounter: WordCounter
 ) {
 
-    fun process(inputFile: String? = null): Int {
+    fun process(inputFile: String? = null): WordCounterResult {
         val inputString = if (inputFile == null) {
             println("Enter text: ")
             BufferedReader(InputStreamReader(System.`in`)).use {

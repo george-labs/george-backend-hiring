@@ -1,4 +1,4 @@
 interface WordCounter {
 
-    fun countWords(input: String): Int
+    fun countWords(input: String): WordCounterResult
 }

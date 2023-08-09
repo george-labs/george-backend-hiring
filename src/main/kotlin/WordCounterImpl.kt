@@ -2,12 +2,16 @@ class WordCounterImpl(
     private val stopWordsProvider: StopWordsProvider = EmptyStopWordsProvider(),
 ) : WordCounter {
 
-    override fun countWords(input: String): Int {
-        return input.split(" ")
+    override fun countWords(input: String): WordCounterResult {
+        val words = input.split(" ")
             .map { removeSpecialSymbols(it) }
             .filter { alphabetCheck(it) }
             .filter { !stopWordsProvider.isBanned(it) }
-            .size
+
+        return WordCounterResult(
+            numberOfWords = words.size,
+            unique = words.toSet().size,
+        )
     }
 
     private fun alphabetCheck(input: String): Boolean {
