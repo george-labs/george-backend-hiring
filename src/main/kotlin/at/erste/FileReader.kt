@@ -11,7 +11,7 @@ class FileReader {
         val content = this.javaClass.getResource(fileName)?.readText()
         val skippedWords = mutableListOf<String>()
         content?.split("\n")?.forEach {
-            skippedWords.add(it)
+            skippedWords.add(it.replace("\r", ""))
         }
         return skippedWords
     }

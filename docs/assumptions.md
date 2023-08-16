@@ -24,7 +24,6 @@ Text length is limited to 10000 characters. And the word count fits into the int
 
 ## Iteration 2
 * The file is on the classpath of the application.
-* Each line contains new word to be excluded in the exact form ended with the line break. So if there is a space at the end of the line, 
-  the line will not be matched as the word can't contain the space.
-* The word skiping is case-insensitive, so no matter the case in file is, the word should be skipped
+* The line is read from the input and trimmed, so the unwanted space at the end is removed then counting the words.
+* The word skipping is case-insensitive, so no matter the case in file is, the word should be skipped
 * 

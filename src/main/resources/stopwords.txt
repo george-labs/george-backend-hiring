@@ -1,5 +1,4 @@
-and
-or
-a
 the
-of
+a
+on
+off
