@@ -1,18 +1,21 @@
-package at.erste
+package at.erste.io
 
-class FileReader {
+/**
+ * generic filesystem file reader, other methods to be added
+ */
+class ResourceFileReader : FileReader {
 
     /**
      * Reads a file and returns a list of lines
      * @param fileName the name of the file to read
      * @return a list of unique words or an empty list if the file is not found
      */
-    fun readByLine(fileName: String = "/stopwords.txt"): List<String> {
+    override fun readByLine(fileName: String): List<String> {
         val content = this.javaClass.getResource(fileName)?.readText()
-        val skippedWords = mutableListOf<String>()
+        val lines = mutableListOf<String>()
         content?.split("\n")?.forEach {
-            skippedWords.add(it.replace("\r", ""))
+            lines.add(it.replace("\r", ""))
         }
-        return skippedWords
+        return lines
     }
 }

@@ -1,19 +1,26 @@
-import at.erste.FileReader
 import at.erste.WordCounter
+import at.erste.io.ConsoleOutputWriter
+import at.erste.io.FileReader
+import at.erste.io.OutputWriter
+import at.erste.io.ResourceFileReader
 
 fun main(args: Array<String>) {
     print("Enter text:")
-    val stringInput = readLine()!!
-    KotlinApplication().processUserInput(stringInput)
+    val stringInput = readln()
+    // app initialization
+    val resourceFileReader = ResourceFileReader()
+    val outputWriter = ConsoleOutputWriter()
+    val kotlinApplication = KotlinApplication(resourceFileReader, outputWriter)
+    // execution
+    kotlinApplication.processUserInput(stringInput)
 }
 
-class KotlinApplication {
-    // should be normally managed by the spring context, this will allow us also do the mocking for the integration tests
-    private val fileReader: FileReader = FileReader()
-    private val skippedWords: List<String> = fileReader.readByLine("/stopwords.txt")
+class KotlinApplication(private val filesystemFileReader: FileReader, private val outputWriter: OutputWriter) {
+
+    private val skippedWords: List<String> = filesystemFileReader.readByLine("/stopwords.txt")
 
     fun processUserInput(input: String) {
         val wordCounter = WordCounter(skippedWords)
-        println("You entered: $input with ${wordCounter.countWords(input)} words")
+        outputWriter.write("Number of words: ${wordCounter.countWords(input)}")
     }
 }
