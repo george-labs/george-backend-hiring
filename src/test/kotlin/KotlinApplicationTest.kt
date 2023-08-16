@@ -20,4 +20,11 @@ class KotlinApplicationTest {
         application.processUserInput()
         assertEquals("Number of words: 4", outputWriter.output)
     }
+
+    @Test
+    fun testProcessUserInputFile() {
+        val application = KotlinApplication(inputReader, fileReader, outputWriter)
+        application.processUserInput()
+        assertEquals("Number of words: 4", outputWriter.output)
+    }
 }

@@ -6,7 +6,8 @@ class WordCounter {
         this.skippedWords = skippedWords.map { it.trim().lowercase() }.toSet()
     }
     fun countWords(input: String): Int {
-        val wordCandidates = input.split(" ")
+        val wordCandidates = input
+            .split(" ", "\r\n", "\n")
             .filter { it.matches("([a-zA-Z]+)([.,?!]*)".toRegex()) }
             .filter { !skippedWords.contains(it.lowercase()) }
         return wordCandidates.size

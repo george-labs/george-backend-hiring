@@ -21,9 +21,13 @@ Hello, my name is Markus!!! (5)
 Each sentence has a space after the punctuation.
 
 Text length is limited to 10000 characters. And the word count fits into the integer.
+The user input is one line only.
 
 ## Iteration 2
 * The file is on the classpath of the application.
 * The line is read from the input and trimmed, so the unwanted space at the end is removed then counting the words.
 * The word skipping is case-insensitive, so no matter the case in file is, the word should be skipped
-* 
+
+## Iteration 3
+* file path is provided relative to the project root or absolute
+* if nonexisting file is provided, the application shows and exception
