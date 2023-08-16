@@ -18,13 +18,13 @@ class KotlinApplicationTest {
     fun testProcessUserInput() {
         val application = KotlinApplication(inputReader, fileReader, outputWriter)
         application.processUserInput()
-        assertEquals("Number of words: 4", outputWriter.output)
+        assertEquals("Number of words: 4, unique: 4", outputWriter.output)
     }
 
     @Test
     fun testProcessUserInputFile() {
         val application = KotlinApplication(inputReader, fileReader, outputWriter)
         application.processUserInput()
-        assertEquals("Number of words: 4", outputWriter.output)
+        assertEquals("Number of words: 4, unique: 4", outputWriter.output)
     }
 }

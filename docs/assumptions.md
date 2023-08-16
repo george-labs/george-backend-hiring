@@ -31,3 +31,6 @@ The user input is one line only.
 ## Iteration 3
 * file path is provided relative to the project root or absolute
 * if nonexisting file is provided, the application shows and exception
+
+## Iteration 4
+* uniqueness of the words is case-sensitive, so same word with different capitalization produce unique occurrence

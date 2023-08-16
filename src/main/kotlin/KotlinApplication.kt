@@ -28,6 +28,7 @@ class KotlinApplication(
     fun processUserInput() {
         val userInput = inputReader.readUserInput("Enter text:")
         val wordCounter = WordCounter(skippedWords)
-        outputWriter.write("Number of words: ${wordCounter.countWords(userInput)}")
+        val count = wordCounter.countWords(userInput)
+        outputWriter.write("Number of words: ${count.words}, unique: ${count.uniqueWords}")
     }
 }
