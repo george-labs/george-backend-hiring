@@ -1,6 +1,4 @@
-package at.erste
-
-import at.erste.io.FileReader
+package at.erste.io
 
 class ListFileReader : FileReader {
     var lines: List<String>? = null

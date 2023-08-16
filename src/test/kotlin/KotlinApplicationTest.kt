@@ -1,4 +1,5 @@
-import at.erste.ListFileReader
+import at.erste.io.ListFileReader
+import at.erste.io.TestInputReader
 import at.erste.io.TestOutputWriter
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -9,11 +10,14 @@ class KotlinApplicationTest {
     }
 
     val outputWriter = TestOutputWriter()
+    val inputReader = TestInputReader().apply {
+        input = "Mary had a little lamb"
+    }
 
     @Test
     fun testProcessUserInput() {
-        val application = KotlinApplication(fileReader, outputWriter)
-        application.processUserInput("dummy")
-        assertEquals("Number of words: 1", outputWriter.output)
+        val application = KotlinApplication(inputReader, fileReader, outputWriter)
+        application.processUserInput()
+        assertEquals("Number of words: 4", outputWriter.output)
     }
 }
