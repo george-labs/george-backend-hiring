@@ -19,3 +19,5 @@ Hello, my name is Markus. (5)
 Hello, my name is Markus!!! (5)
 
 Each sentence has a space after the punctuation.
+
+Text length is limited to 10000 characters. And the word count fits into the integer.
