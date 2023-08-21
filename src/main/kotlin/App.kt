@@ -1,5 +1,4 @@
 import java.io.FileNotFoundException
-import kotlin.system.exitProcess
 
 class App(private var args: List<String>) {
     private var stopFilePath: String? = null
