@@ -16,11 +16,14 @@ fun main(args: Array<String>) {
         val content = if (words.isEmpty()) readUserInput() else words.joinToString(separator=" ")
         val (wordCount, uniqueWordCount) = WordCounter.wordCount(content, stopWords)
         println("Number of words: $wordCount, unique: $uniqueWordCount")
-    } catch(e: InvalidNumberOfArgsException) {
-        println(e.message)
-        exitProcess(1)
-    } catch (e: FileNotFoundException) {
-        println(e.message)
-        exitProcess(2)
+    } catch(e: Exception) {
+        when(e) {
+            is InvalidNumberOfArgsException,
+            is FileNotFoundException-> {
+                println(e.message)
+                exitProcess(1)
+            }
+            else -> throw e
+        }
     }
 }
