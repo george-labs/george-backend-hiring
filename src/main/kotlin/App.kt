@@ -14,8 +14,7 @@ class App(private var args: List<String>) {
                 this.stopFilePath = args[1]
             }
             else -> {
-                println("Error usage: wordcount [mytext.txt] [stopwords.txt]")
-                exitProcess(1)
+                throw InvalidNumberOfArgsException("Error usage: wordcount [mytext.txt] [stopwords.txt]")
             }
         }
     }
@@ -42,8 +41,7 @@ class App(private var args: List<String>) {
         try {
             return file.readLines().map { it.trim() }.filter { it.isNotEmpty() }
         } catch (e: FileNotFoundException) {
-            println("Error file path '$path' does not exist")
-            exitProcess(2)
+            throw FileNotFoundException("Error file path '$path' does not exist")
         }
     }
 }

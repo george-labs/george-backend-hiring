@@ -1,0 +1,1 @@
+class InvalidNumberOfArgsException(message: String) : Exception(message)

@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException
+import kotlin.system.exitProcess
+
 fun readUserInput(): String {
     print("Enter text: ")
     return readln()
@@ -6,11 +9,18 @@ fun readUserInput(): String {
 
 // resources/mytext.txt resources/stopwords.txt
 fun main(args: Array<String>) {
-    val app = App(args.toList())
-    val stopWords = app.readStopWordsFile()
-    val words = app.readTextFile()
-    val content = if (words.isEmpty()) readUserInput() else words.joinToString(separator=" ")
-    val (wordCount, uniqueWordCount) = WordCounter.wordCount(content, stopWords)
-
-    println("Number of words: $wordCount, unique: $uniqueWordCount")
+    try {
+        val app = App(args.toList())
+        val stopWords = app.readStopWordsFile()
+        val words = app.readTextFile()
+        val content = if (words.isEmpty()) readUserInput() else words.joinToString(separator=" ")
+        val (wordCount, uniqueWordCount) = WordCounter.wordCount(content, stopWords)
+        println("Number of words: $wordCount, unique: $uniqueWordCount")
+    } catch(e: InvalidNumberOfArgsException) {
+        println(e.message)
+        exitProcess(1)
+    } catch (e: FileNotFoundException) {
+        println(e.message)
+        exitProcess(2)
+    }
 }
