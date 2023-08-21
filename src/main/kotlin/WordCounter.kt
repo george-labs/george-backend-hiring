@@ -1,13 +1,22 @@
 class WordCounter {
     companion object {
-        fun wordCount(content: String, stopWords: List<String>): Int {
-            val words = content.trim().split(" ").map { it.trim() }.filter { it.isNotEmpty() }
+        fun wordCount(content: String, stopWords: List<String>): Pair<Int, Int> {
+            val words = content.trim().split(" ", "-", ".").map {
+                it.trim().lowercase()
+            }.filter {
+                it.isNotEmpty()
+            }
+
             val regex = """[a-zA-Z]*""".toRegex()
             var wordCount = 0
+            val uniqueWordsSet: MutableSet<String> = mutableSetOf()
             for (word in words) {
-                wordCount = if (!stopWords.contains(word) && regex.matches(word)) wordCount + 1 else wordCount
+                if (!stopWords.contains(word) && regex.matches(word)) {
+                    wordCount++
+                    uniqueWordsSet.add(word)
+                }
             }
-            return wordCount
+            return Pair(wordCount, uniqueWordsSet.size)
         }
     }
 }

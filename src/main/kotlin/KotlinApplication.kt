@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
     val stopWords = app.readStopWordsFile()
     val words = app.readTextFile()
     val content = if (words.isEmpty()) readUserInput() else words.joinToString(separator=" ")
-    val wordCount = WordCounter.wordCount(content, stopWords)
+    val (wordCount, uniqueWordCount) = WordCounter.wordCount(content, stopWords)
 
-    println("Number of words: $wordCount")
+    println("Number of words: $wordCount, unique: $uniqueWordCount")
 }
