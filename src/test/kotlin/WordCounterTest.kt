@@ -1,8 +1,7 @@
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-class KotlinApplicationTest {
+class WordCounterTest {
     @ParameterizedTest
     @CsvSource(
         "      word  word     ,2",
@@ -16,7 +15,7 @@ class KotlinApplicationTest {
     )
     fun testWordCount(input: String, expected: Int) {
         val stopWords = listOf("the","a", "on", "off")
-        val got = KotlinApplication.wordCount(input, stopWords)
+        val got = WordCounter.wordCount(input, stopWords)
         assert(expected == got) {
             "wordCount: Expected $expected, Got $got"
         }
