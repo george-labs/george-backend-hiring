@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.io.TempDir
+import java.io.FileNotFoundException
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.io.path.pathString
@@ -17,7 +19,19 @@ class AppTest {
         val args = listOf(myTexts.pathString)
         val got = App(args).readTextFile()
         val expected = listOf("cat", "is", "at", "the", "door no", "3")
-        assert(expected == got) { "App.readStopWordsFile: Expected $expected, Got: $got" }
+        assert(expected == got) { "App.readTextFile: Expected $expected, Got: $got" }
+    }
+
+    @Test
+    fun testReadTextFileThrowsFileNotFoundException() {
+        val args = listOf("mytest.txt")
+        val exception = assertThrows<FileNotFoundException> {
+            App(args).readTextFile()
+        }
+        val expected = "Error file path 'mytest.txt' does not exist"
+        val got = exception.message
+
+        assert(expected == got) { "App.readTextFile: Expected $expected, Got: $got" }
     }
 
     @Test
@@ -34,5 +48,31 @@ class AppTest {
         val got = App(args).readStopWordsFile()
         val expected = listOf("a", "the")
         assert(expected == got) { "App.readStopWordsFile: Expected $expected, Got: $got" }
+    }
+
+    @Test
+    fun testReadStopWordsFileThrowsFileNotFoundException() {
+        // Note: implementation requires us to pass mytext.txt file
+        // because usage is like this wordcount [mytext.txt] [stopwords.txt]
+        val args = listOf("mytest.txt", "stopwords.txt")
+        val exception = assertThrows<FileNotFoundException> {
+            App(args).readStopWordsFile()
+        }
+        val expected = "Error file path 'stopwords.txt' does not exist"
+        val got = exception.message
+
+        assert(expected == got) { "App.readStopWordsFile: Expected $expected, Got: $got" }
+    }
+
+    @Test
+    fun testAppConstructorThrowsInvalidNumberOfArgsException() {
+        val args = listOf("mytest.txt", "stopwords.txt", "anotherfile.txt")
+        val exception = assertThrows<InvalidNumberOfArgsException> {
+            App(args)
+        }
+        val expected = "Error usage: wordcount [mytext.txt] [stopwords.txt]"
+        val got = exception.message
+
+        assert(expected == got) { "App.init: Expected $expected, Got: $got" }
     }
 }
