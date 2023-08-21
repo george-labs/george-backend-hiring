@@ -14,3 +14,8 @@
 - Both `mytext.txt` and `stopwords.txt` are optional argument to the CLI application
 - Usage of CLI looks like
   * `Usage: wordcount [mytext.txt] [stopwords.txt]` here both `mytext.txt` and `stopwords.txt` are optional and should be on this order if present
+
+
+## Iteration 4
+- Words are case insensitive (e.g. Hello & hello are same)
+- Words are seperated by (-, ., SPACE)
