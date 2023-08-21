@@ -22,3 +22,4 @@
 
 ## Iteration 5
 - Words are seperated by (., SPACE) only
+- Words with hyphen are valid words now (e.g. -world, hello-, hello-world)
