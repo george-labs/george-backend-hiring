@@ -19,3 +19,6 @@
 ## Iteration 4
 - Words are case insensitive (e.g. Hello & hello are same)
 - Words are seperated by (-, ., SPACE)
+
+## Iteration 5
+- Words are seperated by (., SPACE) only
