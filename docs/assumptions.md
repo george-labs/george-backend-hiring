@@ -1,4 +1,4 @@
-~~# Assumptions per iteration
+# Assumptions per iteration
 
 ## Iteration 2
 
@@ -14,3 +14,10 @@
 ## Iteration 6
 
 - I assume that the average word length should be 0 if we have 0 words
+
+## Iteration 7
+
+- Based on the example output I assume the indexed words needs to be in a case-insensitive alphabetical order
+- If I find a unique word, then it's first appearance format should be used in the indexed words, for example: "Mary mary" should return Mary as the indexed
+  word
+- I assume that the -index will be case-sensitive, so -Index or -INDEX will not be accepted

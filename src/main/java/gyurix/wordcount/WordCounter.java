@@ -5,10 +5,7 @@ import gyurix.wordcount.dto.WordCounterOutput;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class WordCounter {
   private final HashSet<String> stopWords = new HashSet<>();
@@ -29,14 +26,16 @@ public class WordCounter {
 
   public WordCounterOutput countWords(String in) {
     WordCounterOutput wordCounterOutput = new WordCounterOutput();
-    Set<String> uniqueWords = new HashSet<>();
+    Map<String, String> uniqueWords = new TreeMap<>();
     for (String word : in.split("[\\s.]+")) {
       if (word.matches("^[a-zA-Z\\-]+$") && !stopWords.contains(word.toLowerCase())) {
         wordCounterOutput.addWord(word.length());
-        uniqueWords.add(word.toLowerCase());
+        String wordLowerCase = word.toLowerCase();
+        uniqueWords.putIfAbsent(wordLowerCase, word);
       }
     }
     wordCounterOutput.setUniqueWords(uniqueWords.size());
+    wordCounterOutput.setIndexedWords(new ArrayList<>(uniqueWords.values()));
     return wordCounterOutput;
   }
 }

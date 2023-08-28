@@ -1,10 +1,21 @@
 package gyurix.wordcount.dto;
 
+import java.util.List;
+
 public class WordCounterOutput {
   private int words;
   private int uniqueWords;
 
   private int totalWordLength;
+  private List<String> indexedWords;
+
+  public List<String> getIndexedWords() {
+    return indexedWords;
+  }
+
+  public void setIndexedWords(List<String> indexedWords) {
+    this.indexedWords = indexedWords;
+  }
 
   public int getWords() {
     return words;

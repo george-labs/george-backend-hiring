@@ -1,10 +1,12 @@
 package gyurix.wordcount;
 
 import gyurix.wordcount.dto.WordCounterOutput;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -35,5 +37,10 @@ public class WordCounterTest {
           "7,Mary had off little off lamb yet again so"})
   public void testStopWords(int expectedCount, String inputString) {
     assertEquals(expectedCount, wordCounter.countWords(inputString).getWords());
+  }
+
+  @Test
+  public void testIndex() {
+    assertEquals(List.of("one", "thRee", "two"), wordCounter.countWords("one thRee three One THREE ONE two").getIndexedWords());
   }
 }
