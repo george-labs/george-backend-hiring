@@ -51,10 +51,15 @@ public class WordCounterConsoleRunner implements Runnable {
   }
 
   public void userInputRunner() {
-    Scanner scanner = new Scanner(System.in);
-    System.out.print("Enter text: ");
-    String inputText = scanner.nextLine();
-    runClientAndShowResult(new StringInputClient(inputText));
+    while (true) {
+      Scanner scanner = new Scanner(System.in);
+      System.out.print("Enter text: ");
+      String inputText = scanner.nextLine();
+      if (inputText.isEmpty()) {
+        return;
+      }
+      runClientAndShowResult(new StringInputClient(inputText));
+    }
   }
 
   public void fileInputRunner() throws IOException {
