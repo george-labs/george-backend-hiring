@@ -1,19 +1,14 @@
-import gyurix.wordcount.WordCounter;
-import gyurix.wordcount.WordCounterImpl;
+import gyurix.wordcount.WordCounterConsoleRunner;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class JavaApplication {
   public static void main(String[] args) throws IOException {
-    countWordsFromInputString(new WordCounterImpl());
-  }
-
-  public static void countWordsFromInputString(WordCounter wordCounter) {
-    Scanner scanner = new Scanner(System.in);
-    System.out.print("Enter text: ");
-    String inputText = scanner.nextLine();
-    int numberOfWords = wordCounter.countWords(inputText);
-    System.out.println("Number of words: " + numberOfWords);
+    WordCounterConsoleRunner wordCounterConsoleRunner = new WordCounterConsoleRunner();
+    if (args.length == 0) {
+      wordCounterConsoleRunner.userInputRunner();
+      return;
+    }
+    wordCounterConsoleRunner.fileInputRunner(args[0]);
   }
 }

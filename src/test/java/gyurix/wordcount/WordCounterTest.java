@@ -1,19 +1,11 @@
 package gyurix.wordcount;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class WordCounterImplTest {
-  private static WordCounter wordCounter;
-
-  @BeforeAll
-  public static void setUp() throws IOException {
-    wordCounter = new WordCounterImpl();
-  }
+public class WordCounterTest {
+  private static final WordCounter wordCounter = new WordCounter();
 
   @Test
   public void test1word() {
@@ -51,5 +43,10 @@ public class WordCounterImplTest {
     assertEquals(4, wordCounter.countWords("Mary had a little lamb"));
     assertEquals(4, wordCounter.countWords("Mary had on little lamb on   on "));
     assertEquals(4, wordCounter.countWords("Mary had off little off lamb"));
+  }
+
+  @Test
+  public void testNewLineCharacters() {
+    assertEquals(7, wordCounter.countWords("line 1\n\rline second\r   \t third line \r fourth line"));
   }
 }
