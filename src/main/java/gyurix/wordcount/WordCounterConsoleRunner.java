@@ -6,14 +6,17 @@ import gyurix.wordcount.client.StringInputClient;
 import gyurix.wordcount.dto.WordCounterOutput;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class WordCounterConsoleRunner {
   private static void runClientAndShowResult(InputClient inputClient) {
     try {
+      DecimalFormat decimalFormat = new DecimalFormat("##0.##");
       WordCounterOutput wordCounterOutput = inputClient.countWords();
       System.out.println("Number of words: " + wordCounterOutput.getWords() +
-              ", unique: " + wordCounterOutput.getUniqueWords());
+              ", unique: " + wordCounterOutput.getUniqueWords() +
+              ", average word length: " + decimalFormat.format(wordCounterOutput.getAverageWordLength()) + " characters");
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

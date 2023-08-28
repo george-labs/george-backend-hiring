@@ -4,24 +4,28 @@ import gyurix.wordcount.dto.WordCounterOutput;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.text.DecimalFormat;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WordCounterTest {
   private static final WordCounter wordCounter = new WordCounter();
+  private static final DecimalFormat decimalFormat = new DecimalFormat("##0.##");
 
   @ParameterizedTest
-  @CsvSource({"1,1,word",
-          "2,1,word word",
-          "2,1,        word         word          ",
-          "1,1, wo3rd wo@@rd word",
-          "0,0,word?",
-          "3,2,word- word. word! word? word",
-          "7,4,line 1\tline second\t third line \r fourth line",
-          "7,6,Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."})
-  public void testBasicWordCount(int expectedWords, int expectedUniqueWords, String inputString) {
+  @CsvSource({"1,1,4,word",
+          "2,1,4,word word",
+          "2,1,4,        word         word          ",
+          "1,1,4, wo3rd wo@@rd word",
+          "0,0,0,word?",
+          "3,2,4.33,word- word. word! word? word",
+          "7,4,4.71,line 1\tline second\t third line \r fourth line",
+          "7,6,6.43,Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."})
+  public void testBasicWordCount(int expectedWords, int expectedUniqueWords, String expectedAverageLength, String inputString) {
     WordCounterOutput wordCounterOutput = wordCounter.countWords(inputString);
     assertEquals(expectedWords, wordCounterOutput.getWords());
     assertEquals(expectedUniqueWords, wordCounterOutput.getUniqueWords());
+    assertEquals(expectedAverageLength, decimalFormat.format(wordCounterOutput.getAverageWordLength()));
   }
 
   @ParameterizedTest
