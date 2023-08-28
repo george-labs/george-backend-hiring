@@ -7,31 +7,33 @@ import gyurix.wordcount.dto.WordCounterOutput;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.List;
 import java.util.Scanner;
 
 public class WordCounterConsoleRunner implements Runnable {
-  private final String fileName;
-  private final boolean index;
+  private String fileName;
+  private String dictionary;
+  private boolean index;
 
   public WordCounterConsoleRunner(String[] args) {
-    List<String> argList = List.of(args);
-    int indexId = argList.indexOf("-index");
-    index = indexId != -1;
-    if (args.length == 0 || args.length == 1 && index) {
-      fileName = null;
-      return;
+    for (String arg : args) {
+      if (!arg.startsWith("-") && fileName == null) {
+        fileName = arg;
+      } else if (arg.equals("-index")) {
+        index = true;
+      } else if (arg.startsWith("-dictionary=") && dictionary == null) {
+        dictionary = arg.substring("-dictionary=".length());
+      }
     }
-    fileName = indexId == 0 ? args[1] : args[0];
   }
 
-  private static void runClientAndShowResult(InputClient inputClient, boolean showIndex) {
+  private void runClientAndShowResult(InputClient inputClient) {
     try {
+      inputClient.setDictionary(dictionary);
       DecimalFormat decimalFormat = new DecimalFormat("##0.##");
       WordCounterOutput wordCounterOutput = inputClient.countWords();
       System.out.println("Number of words: " + wordCounterOutput.getWords() + ", unique: " + wordCounterOutput.getUniqueWords() +
               ", average word length: " + decimalFormat.format(wordCounterOutput.getAverageWordLength()) + " characters");
-      if (showIndex) {
+      if (index) {
         System.out.println("Index:\n" + String.join("\n", wordCounterOutput.getIndexedWords()));
       }
     } catch (IOException e) {
@@ -51,11 +53,11 @@ public class WordCounterConsoleRunner implements Runnable {
     Scanner scanner = new Scanner(System.in);
     System.out.print("Enter text: ");
     String inputText = scanner.nextLine();
-    runClientAndShowResult(new StringInputClient(inputText), index);
+    runClientAndShowResult(new StringInputClient(inputText));
   }
 
   public void fileInputRunner() throws IOException {
-    runClientAndShowResult(new FileInputClient(fileName), index);
+    runClientAndShowResult(new FileInputClient(fileName));
   }
 
   @Override

@@ -21,3 +21,9 @@
 - If I find a unique word, then it's first appearance format should be used in the indexed words, for example: "Mary mary" should return Mary as the indexed
   word
 - I assume that the -index will be case-sensitive, so -Index or -INDEX will not be accepted
+
+## Iteration 8
+
+- I assume that filenames can not start with '-'
+- I assume that the arguments of the application are case-sensitive and they can be in any order
+- I assume that if multiple dictionary arguments are used then only the first one should be taken into account

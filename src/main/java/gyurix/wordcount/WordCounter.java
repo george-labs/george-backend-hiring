@@ -2,13 +2,16 @@ package gyurix.wordcount;
 
 import gyurix.wordcount.dto.WordCounterOutput;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class WordCounter {
-  private final HashSet<String> stopWords = new HashSet<>();
+  private final Set<String> stopWords = new HashSet<>();
+
+  private Set<String> dictionary;
 
   public WordCounter() {
     try {
@@ -18,10 +21,20 @@ public class WordCounter {
     }
   }
 
+  public void loadDictionary(String fileName) throws IOException {
+    try (FileInputStream fis = new FileInputStream(fileName)) {
+      dictionary = Set.of(new String(fis.readAllBytes(), StandardCharsets.UTF_8).split("\\s"));
+    }
+  }
+
   public void loadStopWords(InputStream stream) throws IOException {
     stopWords.clear();
     byte[] stopWordBytes = stream.readAllBytes();
     Collections.addAll(stopWords, new String(stopWordBytes, StandardCharsets.UTF_8).split("\\s"));
+  }
+
+  private boolean isWordInDictionary(String lowercaseWord) {
+    return dictionary == null || dictionary.contains(lowercaseWord);
   }
 
   public WordCounterOutput countWords(String in) {
@@ -31,7 +44,7 @@ public class WordCounter {
       if (word.matches("^[a-zA-Z\\-]+$") && !stopWords.contains(word.toLowerCase())) {
         wordCounterOutput.addWord(word.length());
         String wordLowerCase = word.toLowerCase();
-        uniqueWords.putIfAbsent(wordLowerCase, word);
+        uniqueWords.putIfAbsent(wordLowerCase, isWordInDictionary(wordLowerCase) ? word : word + "*");
       }
     }
     wordCounterOutput.setUniqueWords(uniqueWords.size());
