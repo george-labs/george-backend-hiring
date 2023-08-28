@@ -55,8 +55,8 @@ public class WordCounterConsoleRunner implements Runnable {
   }
 
   public void userInputRunner() {
+    Scanner scanner = new Scanner(System.in);
     while (true) {
-      Scanner scanner = new Scanner(System.in);
       System.out.print("Enter text: ");
       String inputText = scanner.nextLine();
       if (inputText.isEmpty()) {

@@ -2,8 +2,11 @@ package gyurix.wordcount;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -74,5 +77,23 @@ public class WordCounterConsoleRunnerTest {
             "lamb*\n" +
             "little\n" +
             "Mary*\n", bos.toString().replace("\r", ""));
+  }
+
+  @Test
+  public void testMultipleInputs() {
+    PrintStream oldOutput = System.out;
+    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+    PrintStream newOutput = new PrintStream(bos);
+    System.setOut(newOutput);
+
+    InputStream oldInput = System.in;
+    System.setIn(new ByteArrayInputStream("first test\nsecond test\nthird one test\n\n".getBytes(StandardCharsets.UTF_8)));
+    new WordCounterConsoleRunner(new String[0]).run();
+    System.setOut(oldOutput);
+    System.setIn(oldInput);
+    assertEquals("Enter text: Number of words: 2, unique: 2, average word length: 4.5 characters\n" +
+            "Enter text: Number of words: 2, unique: 2, average word length: 5 characters\n" +
+            "Enter text: Number of words: 3, unique: 3, average word length: 4 characters\n" +
+            "Enter text: ", bos.toString().replace("\r", ""));
   }
 }
