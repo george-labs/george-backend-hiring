@@ -30,8 +30,8 @@ public class WordCounter {
   public WordCounterOutput countWords(String in) {
     WordCounterOutput wordCounterOutput = new WordCounterOutput();
     Set<String> uniqueWords = new HashSet<>();
-    for (String word : in.split("[\\s.-]+")) {
-      if (word.matches("^[a-zA-Z]+$") && !stopWords.contains(word.toLowerCase())) {
+    for (String word : in.split("[\\s.]+")) {
+      if (word.matches("^[a-zA-Z\\-]+$") && !stopWords.contains(word.toLowerCase())) {
         wordCounterOutput.incWords();
         uniqueWords.add(word.toLowerCase());
       }

@@ -15,9 +15,9 @@ public class WordCounterTest {
           "2,1,        word         word          ",
           "1,1, wo3rd wo@@rd word",
           "0,0,word?",
-          "3,1,word- word. word! word? word",
+          "3,2,word- word. word! word? word",
           "7,4,line 1\tline second\t third line \r fourth line",
-          "9,7,Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."})
+          "7,6,Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."})
   public void testBasicWordCount(int expectedWords, int expectedUniqueWords, String inputString) {
     WordCounterOutput wordCounterOutput = wordCounter.countWords(inputString);
     assertEquals(expectedWords, wordCounterOutput.getWords());
