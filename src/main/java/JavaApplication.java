@@ -1,9 +1,7 @@
 import gyurix.wordcount.WordCounterConsoleRunner;
 
-import java.io.IOException;
-
 public class JavaApplication {
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) {
     new WordCounterConsoleRunner(args).run();
   }
 }

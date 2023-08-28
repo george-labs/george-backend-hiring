@@ -53,10 +53,26 @@ public class WordCounterConsoleRunnerTest {
     new WordCounterConsoleRunner(new String[]{"mytext.txt", "-index"}).run();
     System.setOut(oldOutput);
     assertEquals("Number of words: 4, unique: 4, average word length: 4.25 characters\n" +
-            "Index:\n" +
+            "Index (unknown: 0):\n" +
             "had\n" +
             "lamb\n" +
             "little\n" +
             "Mary\n", bos.toString().replace("\r", ""));
+  }
+
+  @Test
+  public void testDictionary() {
+    PrintStream oldOutput = System.out;
+    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+    PrintStream newOutput = new PrintStream(bos);
+    System.setOut(newOutput);
+    new WordCounterConsoleRunner(new String[]{"mytext.txt", "-index", "-dictionary=dict.txt"}).run();
+    System.setOut(oldOutput);
+    assertEquals("Number of words: 4, unique: 4, average word length: 4.25 characters\n" +
+            "Index (unknown: 2):\n" +
+            "had\n" +
+            "lamb*\n" +
+            "little\n" +
+            "Mary*\n", bos.toString().replace("\r", ""));
   }
 }

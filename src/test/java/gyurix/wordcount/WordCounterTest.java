@@ -43,4 +43,5 @@ public class WordCounterTest {
   public void testIndex() {
     assertEquals(List.of("one", "thRee", "two"), wordCounter.countWords("one thRee three One THREE ONE two").getIndexedWords());
   }
+
 }

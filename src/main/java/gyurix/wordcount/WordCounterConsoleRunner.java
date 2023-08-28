@@ -34,7 +34,8 @@ public class WordCounterConsoleRunner implements Runnable {
       System.out.println("Number of words: " + wordCounterOutput.getWords() + ", unique: " + wordCounterOutput.getUniqueWords() +
               ", average word length: " + decimalFormat.format(wordCounterOutput.getAverageWordLength()) + " characters");
       if (index) {
-        System.out.println("Index:\n" + String.join("\n", wordCounterOutput.getIndexedWords()));
+        System.out.println("Index (unknown: " + wordCounterOutput.getWordsNotInDictionary() + "):\n"
+                + String.join("\n", wordCounterOutput.getIndexedWords()));
       }
     } catch (IOException e) {
       throw new RuntimeException(e);
