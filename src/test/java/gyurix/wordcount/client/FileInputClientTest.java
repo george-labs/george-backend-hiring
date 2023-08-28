@@ -12,11 +12,11 @@ public class FileInputClientTest {
 
   @Test
   public void testValidFile() throws IOException {
-    assertEquals(4, new FileInputClient("mytext.txt").countWords());
+    assertEquals(4, new FileInputClient("mytext.txt").countWords().getWords());
   }
 
   @Test
   public void testInvalidFile() {
-    assertThrows(FileNotFoundException.class, () -> new FileInputClient("invalid file").countWords());
+    assertThrows(FileNotFoundException.class, () -> new FileInputClient("invalid file"));
   }
 }

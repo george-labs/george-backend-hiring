@@ -3,6 +3,7 @@ package gyurix.wordcount;
 import gyurix.wordcount.client.FileInputClient;
 import gyurix.wordcount.client.InputClient;
 import gyurix.wordcount.client.StringInputClient;
+import gyurix.wordcount.dto.WordCounterOutput;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -10,8 +11,9 @@ import java.util.Scanner;
 public class WordCounterConsoleRunner {
   private static void runClientAndShowResult(InputClient inputClient) {
     try {
-      int numberOfWords = inputClient.countWords();
-      System.out.println("Number of words: " + numberOfWords);
+      WordCounterOutput wordCounterOutput = inputClient.countWords();
+      System.out.println("Number of words: " + wordCounterOutput.getWords() +
+              ", unique: " + wordCounterOutput.getUniqueWords());
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

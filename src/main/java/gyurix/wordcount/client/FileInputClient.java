@@ -1,6 +1,7 @@
 package gyurix.wordcount.client;
 
 import gyurix.wordcount.WordCounter;
+import gyurix.wordcount.dto.WordCounterOutput;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class FileInputClient implements InputClient {
   }
 
   @Override
-  public int countWords() {
+  public WordCounterOutput countWords() {
     return wordCounter.countWords(inputData);
   }
 }

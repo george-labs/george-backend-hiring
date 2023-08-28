@@ -1,6 +1,7 @@
 package gyurix.wordcount.client;
 
 import gyurix.wordcount.WordCounter;
+import gyurix.wordcount.dto.WordCounterOutput;
 
 /**
  * A client used for counting words from a direct string input
@@ -15,7 +16,7 @@ public class StringInputClient implements InputClient {
 
 
   @Override
-  public int countWords() {
+  public WordCounterOutput countWords() {
     return wordCounter.countWords(inputText);
   }
 }

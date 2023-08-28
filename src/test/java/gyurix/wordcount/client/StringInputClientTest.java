@@ -8,11 +8,11 @@ public class StringInputClientTest {
 
   @Test
   public void testZeroWords() {
-    assertEquals(0, new StringInputClient("zero.words").countWords());
+    assertEquals(0, new StringInputClient("zero*words").countWords().getWords());
   }
 
   @Test
   public void testTwoLetterWord() {
-    assertEquals(2, new StringInputClient("invalid file").countWords());
+    assertEquals(2, new StringInputClient("invalid file").countWords().getWords());
   }
 }
