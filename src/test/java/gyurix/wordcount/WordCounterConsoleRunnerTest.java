@@ -53,7 +53,7 @@ public class WordCounterConsoleRunnerTest {
     new WordCounterConsoleRunner(new String[]{"mytext.txt", "-index"}).run();
     System.setOut(oldOutput);
     assertEquals("Number of words: 4, unique: 4, average word length: 4.25 characters\n" +
-            "Index (unknown: 0):\n" +
+            "Index:\n" +
             "had\n" +
             "lamb\n" +
             "little\n" +
