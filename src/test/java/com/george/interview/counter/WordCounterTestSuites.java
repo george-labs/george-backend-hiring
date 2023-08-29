@@ -15,7 +15,8 @@ public class WordCounterTestSuites {
             new Pair<>(" word, word| word? word! 123 $$ word", 1L),
             new Pair<>("      word!       word ", 1L),
             new Pair<>(null, 0L),
-            new Pair<>("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 12L)
+            new Pair<>("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 10L),
+            new Pair<>(".-.", 1L)
 
     );
     public static final List<Pair<String, Long>> testSuiteBadWords = Arrays.asList(
@@ -23,12 +24,12 @@ public class WordCounterTestSuites {
             new Pair<>("on", 0L),
             new Pair<>("Hello the Hello", 2L),
             new Pair<>("the a on off", 0L),
-            new Pair<>("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 9L)
+            new Pair<>("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 7L)
 
     );
     public static final List<Pair<String, Long>> testSuiteUnique = Arrays.asList(
-            new Pair<>("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 7L),
-            new Pair<>("Humpty-Dumpty sat on a wall. dawd! dawd@", 4L)
+            new Pair<>("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 6L),
+            new Pair<>("Humpty-Dumpty sat on a wall. dawd! dawd@", 3L)
 
     );
     public static final List<String> excludedWords = Arrays.asList("the", "a", "on", "off");

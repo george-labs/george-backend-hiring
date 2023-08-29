@@ -25,9 +25,9 @@ public class WordCounter implements Counter {
             return Collections.emptyList();
         }
 
-        String[] splitInput = input.split("[\\s.-]+");
+        String[] splitInput = input.split("[\\s.]+");
         return Arrays.stream(splitInput)
-                .filter(word -> word.matches("[a-zA-Z]+"))
+                .filter(word -> word.matches("[a-zA-Z\\-]+"))
                 .filter(word -> !excludeWords.contains(word))
                 .collect(Collectors.toList());
     }
