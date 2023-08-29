@@ -1,14 +1,11 @@
-package com.george.interview;
+package com.george.interview.counter;
 
 import kotlin.Pair;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class WordCounterTest {
-
+public class WordCounterTestSuites {
     public static final List<Pair<String, Long>> testSuite = Arrays.asList(
             new Pair<>("Hello World", 2L),
             new Pair<>("Hello  World!", 1L),
@@ -20,10 +17,12 @@ public class WordCounterTest {
             new Pair<>(null, 0L)
 
     );
+    public static final List<Pair<String, Long>> testSuiteBadWords = Arrays.asList(
+            new Pair<>("Hello the", 1L),
+            new Pair<>("on", 0L),
+            new Pair<>("Hello the Hello", 2L),
+            new Pair<>("the a on off", 0L)
 
-    @Test
-    void wordCounterTest() {
-        Counter counter = new WordCounter();
-        testSuite.forEach(pair -> Assertions.assertEquals(pair.getSecond().longValue(), counter.count(pair.getFirst()).longValue()));
-    }
+    );
+    public static final List<String> excludedWords = Arrays.asList("the", "a", "on", "off");
 }

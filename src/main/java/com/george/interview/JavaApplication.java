@@ -1,14 +1,17 @@
 package com.george.interview;
 
+import com.george.interview.processor.Processor;
+import com.george.interview.processor.WordProcessor;
+
 import java.util.Scanner;
 
 public class JavaApplication {
 
     public static void main(String[] args) {
-        Counter counter = new WordCounter();
         Scanner scanner = new Scanner(System.in);
+        Processor processor = new WordProcessor();
         System.out.println("Enter text:");
         String userInput  = scanner.nextLine();
-        System.out.println("Number of words: " + counter.count(userInput));
+        processor.process(userInput);
     }
 }
