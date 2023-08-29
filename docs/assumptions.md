@@ -13,3 +13,7 @@
 ## Iteration 3
 
 - if file not found user will provide input text
+
+## Iteration 6
+
+- if we do not have any words then average is 0

@@ -41,4 +41,15 @@ public class WordCounterTest {
                 )
         );
     }
+
+    @Test
+    void wordCounterTestForAverage() {
+        Counter counter = new WordCounter();
+        testSuiteAverage.forEach(pair ->
+                Assertions.assertEquals(
+                        pair.getSecond().doubleValue(),
+                        counter.count(pair.getFirst(), excludedWords).getAverageWordLength()
+                )
+        );
+    }
 }

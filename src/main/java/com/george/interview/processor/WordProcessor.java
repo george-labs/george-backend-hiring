@@ -32,6 +32,13 @@ public class WordProcessor implements Processor {
             System.out.println("Error reading excluded word: " + e.getMessage());
         }
         CounterResultData result = counter.count(input, excludedWords);
-        System.out.println("Number of words: " + result.getCount() + ", unique: " + result.getCountUnique());
+        StringBuilder resultPrint = new StringBuilder()
+                .append("Number of words: ")
+                .append(result.getCount())
+                .append(", unique: ").append(result.getCountUnique())
+                .append(", average word length: ")
+                .append(String.format("%.2f", result.getAverageWordLength()))
+                .append(" characters");
+        System.out.println(resultPrint);
     }
 }

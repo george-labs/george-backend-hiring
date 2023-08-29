@@ -12,12 +12,20 @@ public class WordCounter implements Counter {
         List<String> preparedInput = prepareInput(input, excludeWords);
         return new CounterResultData(
                 (long) preparedInput.size(),
-                countUnique(preparedInput)
+                countUnique(preparedInput),
+                countAverage(preparedInput)
         );
     }
 
     private Long countUnique(List<String> input) {
         return input.stream().distinct().count();
+    }
+
+    private Double countAverage(List<String> input) {
+        return input.stream()
+                .mapToInt(String::length)
+                .average()
+                .orElse(0);
     }
 
     private List<String> prepareInput(String input, List<String> excludeWords) {

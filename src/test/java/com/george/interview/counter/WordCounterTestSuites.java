@@ -32,5 +32,13 @@ public class WordCounterTestSuites {
             new Pair<>("Humpty-Dumpty sat on a wall. dawd! dawd@", 3L)
 
     );
+    public static final List<Pair<String, Double>> testSuiteAverage = Arrays.asList(
+            new Pair<>("Wello world we can do this", 3.5),
+            new Pair<>("Wello world we. can do this. Wello world we. can do this", 3.5),
+            new Pair<>("", 0.0),
+            new Pair<>(".", 0.0),
+            new Pair<>("-", 1.0)
+
+    );
     public static final List<String> excludedWords = Arrays.asList("the", "a", "on", "off");
 }
