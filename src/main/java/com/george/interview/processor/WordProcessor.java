@@ -40,11 +40,11 @@ public class WordProcessor implements Processor {
                 .append(", average word length: ")
                 .append(String.format("%.2f", result.getAverageWordLength()))
                 .append(" characters");
-        appedIndexTable(input.isIndexTableAllowed(), result, resultPrint);
+        appendIndexTable(input.isIndexTableAllowed(), result, resultPrint);
         System.out.println(resultPrint);
     }
 
-    private void appedIndexTable(boolean indexTableAllowed, CounterResultData result, StringBuilder resultPrint) {
+    private void appendIndexTable(boolean indexTableAllowed, CounterResultData result, StringBuilder resultPrint) {
         if (indexTableAllowed) {
             resultPrint.append("\nIndex table: ");
             result.getIndexTable().forEach((value) ->
