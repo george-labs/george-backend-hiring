@@ -1,6 +1,7 @@
 package com.george.interview.processor;
 
 import com.george.interview.counter.Counter;
+import com.george.interview.counter.CounterResultData;
 import com.george.interview.file.FileReader;
 import com.george.interview.file.FileUtils;
 
@@ -30,6 +31,7 @@ public class WordProcessor implements Processor {
         } catch (IOException | URISyntaxException e) {
             System.out.println("Error reading excluded word: " + e.getMessage());
         }
-        System.out.println("Number of words: " + counter.count(input, excludedWords));
+        CounterResultData result = counter.count(input, excludedWords);
+        System.out.println("Number of words: " + result.getCount() + ", unique: " + result.getCountUnique());
     }
 }
