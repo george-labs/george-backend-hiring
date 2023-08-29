@@ -11,8 +11,7 @@ class LocalSystemFileReaderTest {
     @Test
     void readLocalFileTest() throws IOException, URISyntaxException {
         FileReader localSystemFileReaderTest = new LocalSystemFileReader();
-        byte[] content = localSystemFileReaderTest.read("/stopwords.txt");
-        Assertions.assertDoesNotThrow(() -> {localSystemFileReaderTest.read("/stopwords.txt");});
+        byte[] content = localSystemFileReaderTest.read("stopwords.txt");
         Assertions.assertTrue(content.length > 0);
     }
 }

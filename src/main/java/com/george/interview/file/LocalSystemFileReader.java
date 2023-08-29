@@ -12,12 +12,11 @@ import java.security.InvalidParameterException;
 public class LocalSystemFileReader implements FileReader {
     @Override
     public byte[] read(String fileName) throws IOException, URISyntaxException {
-        //read byte content from local resouce file based on fileName
         if (fileName == null || fileName.isEmpty()) {
             throw new InvalidParameterException("Filename cannot be null or empty");
         }
         try {
-            URL fileURL = getClass().getResource(fileName);
+            URL fileURL = getClass().getResource("/" + fileName);
             if (fileURL == null) {
                 throw new FileNotFoundException("File not found: " + fileName);
             }
