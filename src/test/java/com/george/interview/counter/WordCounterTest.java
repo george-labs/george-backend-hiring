@@ -15,7 +15,7 @@ public class WordCounterTest {
         testSuite.forEach(pair ->
                 Assertions.assertEquals(
                         pair.getSecond().longValue(),
-                        counter.count(pair.getFirst(), Collections.emptyList())
+                        counter.count(pair.getFirst(), Collections.emptyList()).getCount()
                 )
         );
     }
@@ -26,7 +26,18 @@ public class WordCounterTest {
         testSuiteBadWords.forEach(pair ->
                 Assertions.assertEquals(
                         pair.getSecond().longValue(),
-                        counter.count(pair.getFirst(), excludedWords)
+                        counter.count(pair.getFirst(), excludedWords).getCount()
+                )
+        );
+    }
+
+    @Test
+    void wordCounterTestForUnique() {
+        Counter counter = new WordCounter();
+        testSuiteUnique.forEach(pair ->
+                Assertions.assertEquals(
+                        pair.getSecond().longValue(),
+                        counter.count(pair.getFirst(), excludedWords).getCountUnique()
                 )
         );
     }

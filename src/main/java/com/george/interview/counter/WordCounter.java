@@ -10,7 +10,10 @@ public class WordCounter implements Counter {
     @Override
     public CounterResultData count(String input, List<String> excludeWords) {
         List<String> preparedInput = prepareInput(input, excludeWords);
-        return new CounterResultData((long) preparedInput.size(), countUnique(preparedInput));
+        return new CounterResultData(
+                (long) preparedInput.size(),
+                countUnique(preparedInput)
+        );
     }
 
     private Long countUnique(List<String> input) {
@@ -22,7 +25,7 @@ public class WordCounter implements Counter {
             return Collections.emptyList();
         }
 
-        String[] splitInput = input.split("\\s+");
+        String[] splitInput = input.split("[\\s.-]+");
         return Arrays.stream(splitInput)
                 .filter(word -> word.matches("[a-zA-Z]+"))
                 .filter(word -> !excludeWords.contains(word))
