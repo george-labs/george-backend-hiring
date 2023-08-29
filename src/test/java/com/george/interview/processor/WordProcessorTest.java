@@ -8,6 +8,8 @@ import com.george.interview.handler.InputData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+
 public class WordProcessorTest {
 
 
@@ -17,7 +19,7 @@ public class WordProcessorTest {
         Counter counter = new WordCounter();
         Processor wordProcessor = new WordProcessor(fileReader, counter);
         Assertions.assertDoesNotThrow(() -> {
-            wordProcessor.process(new InputData("hello hello", false));
+            wordProcessor.process(new InputData("hello hello", false, new HashSet<>()));
         });
 
     }

@@ -5,10 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import static com.george.interview.counter.WordCounterTestSuites.*;
 
-public class WordCounterTest {
+class WordCounterTest {
 
     @Test
     void wordCounterTest() {
@@ -59,6 +60,18 @@ public class WordCounterTest {
         Counter counter = new WordCounter();
         testIndexTable.forEach(pair -> {
                     List<String> table = counter.count(pair.getFirst(), excludedWords, true).getIndexTable();
+                    for (int i = 0; i < table.size(); i++) {
+                        Assertions.assertEquals(table.get(i), pair.getSecond().get(i));
+                    }
+                }
+        );
+    }
+
+    @Test
+    void wordCounterTestForIndexTableWithDictionary() {
+        Counter counter = new WordCounter();
+        testIndexTableDictionary.forEach(pair -> {
+                    List<String> table = counter.count(pair.getFirst(), excludedWords, true, Set.of("had", "little")).getIndexTable();
                     for (int i = 0; i < table.size(); i++) {
                         Assertions.assertEquals(table.get(i), pair.getSecond().get(i));
                     }

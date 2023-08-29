@@ -32,7 +32,16 @@ public class WordProcessor implements Processor {
         } catch (IOException | URISyntaxException e) {
             System.out.println("Error reading excluded word: " + e.getMessage());
         }
-        CounterResultData result = counter.count(input.getWordInput(), excludedWords, input.isIndexTableAllowed());
+        CounterResultData result = counter.count(
+                input.getWordInput(),
+                excludedWords,
+                input.isIndexTableAllowed(),
+                input.getDictionaryWords()
+        );
+        printResultOfProcessing(result, input);
+    }
+
+    private void printResultOfProcessing(CounterResultData result, InputData input) {
         StringBuilder resultPrint = new StringBuilder()
                 .append("Number of words: ")
                 .append(result.getCount())
@@ -40,13 +49,18 @@ public class WordProcessor implements Processor {
                 .append(", average word length: ")
                 .append(String.format("%.2f", result.getAverageWordLength()))
                 .append(" characters");
-        appendIndexTable(input.isIndexTableAllowed(), result, resultPrint);
+        appendIndexTable(result, resultPrint, input.isIndexTableAllowed(), !input.getDictionaryWords().isEmpty());
         System.out.println(resultPrint);
     }
 
-    private void appendIndexTable(boolean indexTableAllowed, CounterResultData result, StringBuilder resultPrint) {
+    private void appendIndexTable(CounterResultData result, StringBuilder resultPrint, boolean indexTableAllowed, boolean isDictionaryFilled) {
         if (indexTableAllowed) {
+            long unknownWords = result.getIndexTable().stream()
+                    .filter((value) -> value.contains("*")).count();
             resultPrint.append("\nIndex table: ");
+            if (isDictionaryFilled) {
+                resultPrint.append("(unknown: ").append(unknownWords).append(")");
+            }
             result.getIndexTable().forEach((value) ->
                     resultPrint
                             .append("\n")

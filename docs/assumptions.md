@@ -21,3 +21,10 @@
 ## Iteration 7
 
 - all parameters come before the file name e.g. -index -example mytext.txt
+
+## Iteration 8
+
+- dictionary parameter do have the file name after it e.g. -dictionary=mydictionary.txt
+- input parameters are case sensitive (lower case)
+- program can continue without dictionary file
+- assume that all file are txt files

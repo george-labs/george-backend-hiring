@@ -5,7 +5,7 @@ import com.george.interview.file.FileUtils;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Scanner;
+import java.util.*;
 
 public class InputHandler {
 
@@ -19,10 +19,13 @@ public class InputHandler {
     public InputData getUserInput(String[] args) {
         String input = null;
         boolean index = false;
+        Set<String> dictionaryWords = Collections.emptySet();
         for (String arg : args) {
             if (arg.equals("-index")) {
                 index = true;
-                break;
+            }
+            if (arg.contains("-dictionary")) {
+                dictionaryWords = new HashSet<>(getFileLines(arg.split("=")[1]));
             }
         }
 
@@ -38,7 +41,7 @@ public class InputHandler {
             input = getUserConsoleInput();
         }
 
-        return new InputData(input, index);
+        return new InputData(input, index, dictionaryWords);
     }
 
     private String getUserFileInput(String fileName) {
@@ -46,10 +49,21 @@ public class InputHandler {
         try {
             input = String.join(" ", FileUtils.getFileLines(fileReader.read(fileName)));
         } catch (IOException | URISyntaxException e) {
-            System.out.println("File not found. Please provide your input via console.");
+            System.out.println("File " + fileName + " not found or opened. Please provide your input via console.");
         }
         return input;
     }
+
+    private List<String> getFileLines(String fileName) {
+        List<String> input = Collections.emptyList();
+        try {
+            input = FileUtils.getFileLines(fileReader.read(fileName));
+        } catch (IOException | URISyntaxException e) {
+            System.out.println("File " + fileName + " not found or opened.");
+        }
+        return input;
+    }
+
 
     private String getUserConsoleInput() {
         String input;

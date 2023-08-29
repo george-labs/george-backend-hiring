@@ -3,24 +3,41 @@ package com.george.interview.counter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WordCounter implements Counter {
 
     @Override
     public CounterResultData count(String input, List<String> excludeWords) {
-        return count(input, excludeWords, false);
+        return count(input, excludeWords, false, Collections.emptySet());
     }
 
     @Override
     public CounterResultData count(String input, List<String> excludeWords, boolean indexTableAllowed) {
+        return count(input, excludeWords, indexTableAllowed, Collections.emptySet());
+    }
+
+    @Override
+    public CounterResultData count(String input, List<String> excludeWords, boolean indexTableAllowed, Set<String> dictionaryWords) {
         List<String> preparedInput = prepareInput(input, excludeWords);
+        List<String> countedIndexTable = countIndexTable(preparedInput, indexTableAllowed);
         return new CounterResultData(
                 (long) preparedInput.size(),
                 countUnique(preparedInput),
                 countAverage(preparedInput),
-                countIndexTable(preparedInput, indexTableAllowed)
+                modifyIndexTable(countedIndexTable, dictionaryWords)
         );
+    }
+
+    private List<String> modifyIndexTable(List<String> countedIndexTable, Set<String> dictionaryWords) {
+        if (dictionaryWords.isEmpty()) {
+            return countedIndexTable;
+        } else {
+            return countedIndexTable.stream()
+                    .map(word -> !dictionaryWords.contains(word) ? word + "*" : word)
+                    .collect(Collectors.toList());
+        }
     }
 
     private List<String> countIndexTable(List<String> preparedInput, boolean indexTableAllowed) {
