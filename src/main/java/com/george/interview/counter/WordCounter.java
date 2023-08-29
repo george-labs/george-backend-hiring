@@ -9,12 +9,29 @@ public class WordCounter implements Counter {
 
     @Override
     public CounterResultData count(String input, List<String> excludeWords) {
+        return count(input, excludeWords, false);
+    }
+
+    @Override
+    public CounterResultData count(String input, List<String> excludeWords, boolean indexTableAllowed) {
         List<String> preparedInput = prepareInput(input, excludeWords);
         return new CounterResultData(
                 (long) preparedInput.size(),
                 countUnique(preparedInput),
-                countAverage(preparedInput)
+                countAverage(preparedInput),
+                countIndexTable(preparedInput, indexTableAllowed)
         );
+    }
+
+    private List<String> countIndexTable(List<String> preparedInput, boolean indexTableAllowed) {
+        if (!indexTableAllowed) {
+            return Collections.emptyList();
+        } else {
+            return preparedInput.stream()
+                    .distinct()
+                    .sorted(String::compareToIgnoreCase)
+                    .collect(Collectors.toList());
+        }
     }
 
     private Long countUnique(List<String> input) {

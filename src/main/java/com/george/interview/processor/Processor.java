@@ -1,5 +1,7 @@
 package com.george.interview.processor;
 
+import com.george.interview.handler.InputData;
+
 public interface Processor {
-    void process(String input);
+    void process(InputData input);
 }

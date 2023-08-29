@@ -4,6 +4,7 @@ import com.george.interview.counter.Counter;
 import com.george.interview.counter.WordCounter;
 import com.george.interview.file.FileReader;
 import com.george.interview.file.LocalSystemFileReader;
+import com.george.interview.handler.InputData;
 import com.george.interview.handler.InputHandler;
 import com.george.interview.processor.Processor;
 import com.george.interview.processor.WordProcessor;
@@ -17,7 +18,7 @@ public class JavaApplication {
         Processor processor = new WordProcessor(fileReader, counter);
 
         InputHandler inputHandler = new InputHandler(fileReader);
-        String input = inputHandler.getUserInput(args);
+        InputData input = inputHandler.getUserInput(args);
 
         processor.process(input);
     }

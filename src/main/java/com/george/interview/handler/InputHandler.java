@@ -16,18 +16,29 @@ public class InputHandler {
 
     }
 
-    public String getUserInput(String[] args) {
+    public InputData getUserInput(String[] args) {
         String input = null;
+        boolean index = false;
+        for (String arg : args) {
+            if (arg.equals("-index")) {
+                index = true;
+                break;
+            }
+        }
+
 
         if (args.length > 0) {
-            input = getUserFileInput(args[0]);
+            String fileName = args[args.length - 1];
+            if (fileName.contains(".txt")) {
+                input = getUserFileInput(args[args.length - 1]);
+            }
         }
 
         if (input == null) {
             input = getUserConsoleInput();
         }
 
-        return input;
+        return new InputData(input, index);
     }
 
     private String getUserFileInput(String fileName) {

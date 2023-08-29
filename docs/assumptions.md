@@ -17,3 +17,7 @@
 ## Iteration 6
 
 - if we do not have any words then average is 0
+
+## Iteration 7
+
+- all parameters come before the file name e.g. -index -example mytext.txt

@@ -1,14 +1,27 @@
 package com.george.interview.counter;
 
+import java.util.List;
+
 public class CounterResultData {
     private Long count;
     private Double averageWordLength;
     private Long countUnique;
 
-    public CounterResultData(Long count, Long countUnique, Double averageWordLength) {
+    private List<String> indexTable;
+
+    public CounterResultData(Long count, Long countUnique, Double averageWordLength, List<String> indexTable) {
         this.count = count;
         this.countUnique = countUnique;
         this.averageWordLength = averageWordLength;
+        this.indexTable = indexTable;
+    }
+
+    public List<String> getIndexTable() {
+        return indexTable;
+    }
+
+    public void setIndexTable(List<String> indexTable) {
+        this.indexTable = indexTable;
     }
 
     public Long getCount() {

@@ -40,5 +40,9 @@ public class WordCounterTestSuites {
             new Pair<>("-", 1.0)
 
     );
+    public static final List<Pair<String, List<String>>> testIndexTable = Arrays.asList(
+            new Pair<>("Mary had a little lamb", Arrays.asList("had", "lamb", "little", "Mary"))
+
+    );
     public static final List<String> excludedWords = Arrays.asList("the", "a", "on", "off");
 }

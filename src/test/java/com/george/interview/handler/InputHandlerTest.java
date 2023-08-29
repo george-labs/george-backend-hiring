@@ -7,13 +7,26 @@ import org.junit.jupiter.api.Test;
 
 public class InputHandlerTest {
 
+
     @Test
-    public void getUserFileInputTest() {
+    public void getUserFileInputTestWithFile() {
         FileReader fileReader = new LocalSystemFileReader();
         InputHandler inputHandler = new InputHandler(fileReader);
-        String fileInput = inputHandler.getUserInput(new String[]{"mytext.txt"});
-        Assertions.assertNotNull(fileInput);
-        Assertions.assertEquals("Mary had a little lamb", fileInput);
+        InputData inputData = inputHandler.getUserInput(new String[]{"mytext.txt"});
+        Assertions.assertNotNull(inputData);
+        Assertions.assertNotNull(inputData.getWordInput());
+        Assertions.assertEquals("Mary had a little lamb", inputData.getWordInput());
+        Assertions.assertFalse(inputData.isIndexTableAllowed());
+    }
 
+    @Test
+    public void getUserFileInputTestWithFileAndTable() {
+        FileReader fileReader = new LocalSystemFileReader();
+        InputHandler inputHandler = new InputHandler(fileReader);
+        InputData inputData = inputHandler.getUserInput(new String[]{"-index", "mytext.txt"});
+        Assertions.assertNotNull(inputData);
+        Assertions.assertNotNull(inputData.getWordInput());
+        Assertions.assertEquals("Mary had a little lamb", inputData.getWordInput());
+        Assertions.assertTrue(inputData.isIndexTableAllowed());
     }
 }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
+import java.util.List;
 
 import static com.george.interview.counter.WordCounterTestSuites.*;
 
@@ -50,6 +51,18 @@ public class WordCounterTest {
                         pair.getSecond().doubleValue(),
                         counter.count(pair.getFirst(), excludedWords).getAverageWordLength()
                 )
+        );
+    }
+
+    @Test
+    void wordCounterTestForIndexTable() {
+        Counter counter = new WordCounter();
+        testIndexTable.forEach(pair -> {
+                    List<String> table = counter.count(pair.getFirst(), excludedWords, true).getIndexTable();
+                    for (int i = 0; i < table.size(); i++) {
+                        Assertions.assertEquals(table.get(i), pair.getSecond().get(i));
+                    }
+                }
         );
     }
 }
