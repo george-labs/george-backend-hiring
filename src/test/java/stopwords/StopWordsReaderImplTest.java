@@ -1,27 +1,22 @@
 package stopwords;
 
+import filereader.FileReaderService;
+import filereader.FileReaderServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class StopWordsReaderImplTest {
 
-    @Test
-    void should_throw_exception_if_not_found() {
-        // prepare data
-        final StopWordsReader stopWordsReader = createStopWordsReader("some-nonsense.txt");
-        final String expectedErrorMessage = "File 'some-nonsense.txt' not found";
+    private FileReaderService fileReaderService;
 
-        // call the actual getStopWordsList method
-        final Exception exception = assertThrows(StopWordsException.class, stopWordsReader::getStopWordsList);
-
-        // assert exception message
-        final String actualExceptionMessage = exception.getMessage();
-
-        assertEquals(expectedErrorMessage, actualExceptionMessage);
+    @BeforeEach
+    void setup() {
+        fileReaderService = new FileReaderServiceImpl();
     }
 
     @Test
@@ -37,11 +32,11 @@ class StopWordsReaderImplTest {
         assertTrue(expectedStopWords.containsAll(actualStopWords));
     }
 
-    static StopWordsReader createStopWordsReader(final String stopWordsFileName) {
+    StopWordsReader createStopWordsReader(final String stopWordsFileName) {
         final StopWordsReaderConfiguration stopWordsReaderConfiguration =
                 new StopWordsReaderConfiguration(stopWordsFileName);
 
-        return new StopWordsReaderImpl(stopWordsReaderConfiguration);
+        return new StopWordsReaderImpl(stopWordsReaderConfiguration, fileReaderService);
     }
 
 }

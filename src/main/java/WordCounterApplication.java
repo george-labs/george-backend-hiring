@@ -1,6 +1,10 @@
+import filereader.FileReaderService;
+import filereader.FileReaderServiceImpl;
 import stopwords.StopWordsReader;
 import stopwords.StopWordsReaderConfiguration;
 import stopwords.StopWordsReaderImpl;
+import userinput.ConsoleUserInputReaderImpl;
+import userinput.UserInputReader;
 import wordcounter.WordCounter;
 import wordcounter.WordCounterImpl;
 import wordcounter.WordCounterService;
@@ -20,7 +24,15 @@ public class WordCounterApplication {
 
         final WordCounterService wordCounterService = new WordCounterServiceImpl(wordCounter, stopWordsReader);
 
-        wordCounterService.countWords();
+        final String userInput = getUserInput();
+
+        wordCounterService.countWords(userInput);
+    }
+
+    private static String getUserInput() {
+        final UserInputReader consoleUserInputReader = new ConsoleUserInputReaderImpl();
+
+        return consoleUserInputReader.getUserInput();
     }
 
     private static Optional<String> getWordFileName(final String[] applicationArguments) {
@@ -43,6 +55,8 @@ public class WordCounterApplication {
         final StopWordsReaderConfiguration stopWordsReaderConfiguration =
                 new StopWordsReaderConfiguration(STOP_WORDS_FILE_NAME);
 
-        return new StopWordsReaderImpl(stopWordsReaderConfiguration);
+        final FileReaderService fileReaderService = new FileReaderServiceImpl();
+
+        return new StopWordsReaderImpl(stopWordsReaderConfiguration, fileReaderService);
     }
 }

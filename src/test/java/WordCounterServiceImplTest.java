@@ -1,3 +1,5 @@
+import filereader.FileReaderService;
+import filereader.FileReaderServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -10,9 +12,7 @@ import wordcounter.WordCounterImpl;
 import wordcounter.WordCounterService;
 import wordcounter.WordCounterServiceImpl;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.stream.Stream;
 
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WordCounterServiceImplTest {
 
-    private static final String EXPECTED_RESULT_TEMPLATE = "Enter text: Number of words: %s\n";
+    private static final String EXPECTED_RESULT_TEMPLATE = "Number of words: %s\n";
 
     private WordCounterService wordCounterService;
 
@@ -31,7 +31,9 @@ class WordCounterServiceImplTest {
         final StopWordsReaderConfiguration stopWordsReaderConfiguration =
                 new StopWordsReaderConfiguration("stopwords.txt");
 
-        final StopWordsReader stopWordsReader = new StopWordsReaderImpl(stopWordsReaderConfiguration);
+        final FileReaderService fileReaderService = new FileReaderServiceImpl();
+
+        final StopWordsReader stopWordsReader = new StopWordsReaderImpl(stopWordsReaderConfiguration, fileReaderService);
 
         wordCounterService = new WordCounterServiceImpl(wordCounter, stopWordsReader);
     }
@@ -40,11 +42,10 @@ class WordCounterServiceImplTest {
     @MethodSource("wordCountsParameters")
     void should_test_console_word_counts(String userInput, String expectedConsoleMessage) {
         // prepare data
-        mockUserInput(userInput);
         final ByteArrayOutputStream consoleByteArrayOutStream = createConsoleByteArrayOutStream();
 
         // call the actual word counter service
-        wordCounterService.countWords();
+        wordCounterService.countWords(userInput);
 
         // assert the result
         final String actualConsoleMessage = consoleByteArrayOutStream.toString();
@@ -59,12 +60,6 @@ class WordCounterServiceImplTest {
                 Arguments.of("wo3rd word1", createExpectedConsoleOutput(0)),
                 Arguments.of(" word     word word3   wo22rd word", createExpectedConsoleOutput(3))
         );
-    }
-
-    private static void mockUserInput(final String userInput) {
-        final InputStream inputStream = new ByteArrayInputStream(userInput.getBytes());
-
-        System.setIn(inputStream);
     }
 
     private static ByteArrayOutputStream createConsoleByteArrayOutStream() {
