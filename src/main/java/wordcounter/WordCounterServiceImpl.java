@@ -21,6 +21,7 @@ public class WordCounterServiceImpl implements WordCounterService {
 
     @Override
     public void countWords() {
+        //todo: it's either this or input from application argument text file
         final String userInput = readUserInputFromConsole();
 
         final Set<String> stopWords = stopWordsReader.getStopWordsList();
