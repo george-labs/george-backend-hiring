@@ -9,7 +9,7 @@ public class WordCounterImpl implements WordCounter {
     private static final String ALPHABET_REGEX = "[a-zA-Z]+";
 
     @Override
-    public long countWords(String inputSentence, Set<String> stopWords) {
+    public long countWords(final String inputSentence, final Set<String> stopWords) {
         if (inputSentence == null) {
             return 0;
         }
