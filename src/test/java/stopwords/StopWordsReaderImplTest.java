@@ -35,7 +35,7 @@ class StopWordsReaderImplTest {
         final Collection<String> actualStopWords = stopWordsReader.getStopWordsList();
 
         // assert the black list values
-        System.out.println("");
+        assertEquals(expectedStopWords, actualStopWords);
     }
 
     static StopWordsReader createStopWordsReader(final String stopWordsFileName) {
