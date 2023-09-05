@@ -29,7 +29,7 @@ class WordCounterServiceImplTest {
         mockUserInput(userInput);
         final ByteArrayOutputStream consoleByteArrayOutStream = createConsoleByteArrayOutStream();
 
-        // call the actual service
+        // call the actual word counter service
         wordCounterService.countWords();
 
         // assert the result
