@@ -35,6 +35,8 @@ public class WordCounterApplication {
         return consoleUserInputReader.getUserInput();
     }
 
+    //todo: work in progress. Based on the result of this method either FileUserInputReaderImpl
+    // or ConsoleUserInputReaderImpl will be called
     private static Optional<String> getWordFileName(final String[] applicationArguments) {
         if (applicationArguments.length == 0) {
             return Optional.empty();
