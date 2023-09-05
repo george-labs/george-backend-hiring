@@ -24,7 +24,7 @@ class WordCounterServiceImplTest {
 
     @ParameterizedTest
     @MethodSource("wordCountsParameters")
-    void should(String userInput, String expectedConsoleMessage) {
+    void should_test_console_word_counts(String userInput, String expectedConsoleMessage) {
         // prepare data
         mockUserInput(userInput);
         final ByteArrayOutputStream consoleByteArrayOutStream = createConsoleByteArrayOutStream();
