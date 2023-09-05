@@ -27,7 +27,6 @@ class WordCounterImplTest {
                 Arguments.of(" word     word?     wo22rd word", 2),
                 Arguments.of("", 0),
                 Arguments.of(null, 0)
-
         );
     }
 }

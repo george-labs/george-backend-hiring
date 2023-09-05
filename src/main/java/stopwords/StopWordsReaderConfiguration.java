@@ -1,9 +1,10 @@
+package stopwords;
 
-class BlackListReadeConfiguration {
+class StopWordsReaderConfiguration {
 
     private final String stopWordsFileName;
 
-    public BlackListReadeConfiguration(String stopWordsFileName) {
+    public StopWordsReaderConfiguration(String stopWordsFileName) {
         this.stopWordsFileName = stopWordsFileName;
     }
 
