@@ -1,12 +1,10 @@
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WordCounterImplTest {
 
@@ -15,7 +13,7 @@ class WordCounterImplTest {
     void should_count_words(String inputSentence, int expectedWordCount) {
         final WordCounter wordCounter = new WordCounterImpl();
 
-        final int actualWordCounts = wordCounter.countWords(inputSentence);
+        final long actualWordCounts = wordCounter.countWords(inputSentence);
 
         assertEquals(expectedWordCount, actualWordCounts);
     }
@@ -27,7 +25,8 @@ class WordCounterImplTest {
                 Arguments.of("  word                               ", 1),
                 Arguments.of("wo3rd", 0),
                 Arguments.of(" word     word?     wo22rd word", 2),
-                Arguments.of("", 0)
+                Arguments.of("", 0),
+                Arguments.of(null, 0)
 
         );
     }
