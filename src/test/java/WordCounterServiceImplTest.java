@@ -3,6 +3,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import stopwords.StopWordsReader;
+import stopwords.StopWordsReaderConfiguration;
+import stopwords.StopWordsReaderImpl;
 
 import java.io.*;
 import java.util.stream.Stream;
@@ -19,7 +22,12 @@ class WordCounterServiceImplTest {
     void setup() {
         final WordCounter wordCounter = new WordCounterImpl();
 
-        wordCounterService = new WordCounterServiceImpl(wordCounter);
+        final StopWordsReaderConfiguration stopWordsReaderConfiguration =
+                new StopWordsReaderConfiguration("stopwords.txt");
+
+        final StopWordsReader stopWordsReader = new StopWordsReaderImpl(stopWordsReaderConfiguration);
+
+        wordCounterService = new WordCounterServiceImpl(wordCounter, stopWordsReader);
     }
 
     @ParameterizedTest
@@ -39,11 +47,11 @@ class WordCounterServiceImplTest {
 
     private static Stream<Arguments> wordCountsParameters() {
         return Stream.of(
-                Arguments.of("word word", createExpectedConsoleOutput(2)),
-                Arguments.of("word word word", createExpectedConsoleOutput(3)),
-                Arguments.of("  word                    ", createExpectedConsoleOutput(1)),
-                Arguments.of("wo3rd", createExpectedConsoleOutput(0)),
-                Arguments.of(" word     word   wo22rd word", createExpectedConsoleOutput(3))
+                Arguments.of("word word word1 word2", createExpectedConsoleOutput(2)),
+                Arguments.of("word word word word3", createExpectedConsoleOutput(3)),
+                Arguments.of("  word            word1        ", createExpectedConsoleOutput(1)),
+                Arguments.of("wo3rd word1", createExpectedConsoleOutput(0)),
+                Arguments.of(" word     word word3   wo22rd word", createExpectedConsoleOutput(3))
         );
     }
 

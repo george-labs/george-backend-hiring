@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Set;
 
 class WordCounterImpl implements WordCounter {
 
@@ -6,7 +7,7 @@ class WordCounterImpl implements WordCounter {
     private static final String ALPHABET_REGEX = "[a-zA-Z]+";
 
     @Override
-    public long countWords(String inputSentence) {
+    public long countWords(String inputSentence, Set<String> stopWords) {
         if (inputSentence == null) {
             return 0;
         }
@@ -15,6 +16,7 @@ class WordCounterImpl implements WordCounter {
 
         return Arrays.stream(inputSentenceFragments)
                 .filter(word -> word.matches(ALPHABET_REGEX))
+                .filter(word -> !stopWords.contains(word))
                 .count();
     }
 }

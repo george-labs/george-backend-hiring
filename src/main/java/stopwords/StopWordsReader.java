@@ -1,9 +1,10 @@
 package stopwords;
 
 import java.util.Collection;
+import java.util.Set;
 
 public interface StopWordsReader {
 
-    Collection<String> getStopWordsList();
+    Set<String> getStopWordsList();
 
 }

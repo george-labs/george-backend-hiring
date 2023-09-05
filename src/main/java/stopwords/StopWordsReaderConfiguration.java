@@ -1,6 +1,6 @@
 package stopwords;
 
-class StopWordsReaderConfiguration {
+public class StopWordsReaderConfiguration {
 
     private final String stopWordsFileName;
 

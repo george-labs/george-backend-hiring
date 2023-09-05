@@ -7,6 +7,9 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class StopWordsReaderImpl implements StopWordsReader {
 
@@ -17,13 +20,17 @@ public class StopWordsReaderImpl implements StopWordsReader {
     }
 
     @Override
-    public Collection<String> getStopWordsList() {
+    public Set<String> getStopWordsList() {
         final URL stopWordsResourceUrl = getStopWordsResourceUrl();
 
         try {
             final File stopWordsFile = new File(stopWordsResourceUrl.toURI());
 
-            return Files.readAllLines(stopWordsFile.toPath(), StandardCharsets.UTF_8);
+            final List<String> stopWords = Files.readAllLines(stopWordsFile.toPath(), StandardCharsets.UTF_8);
+
+            return stopWords
+                    .stream()
+                    .collect(Collectors.toUnmodifiableSet());
         } catch (IOException | URISyntaxException e) {
 
             throw new StopWordsException("There was an error while reading the black list file", e);

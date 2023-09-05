@@ -1,4 +1,7 @@
+import stopwords.StopWordsReader;
+
 import java.util.Scanner;
+import java.util.Set;
 
 class WordCounterServiceImpl implements WordCounterService {
 
@@ -6,16 +9,21 @@ class WordCounterServiceImpl implements WordCounterService {
     private static final String NUMBER_OF_WORDS_TEMPLATE = "Number of words: %s";
 
     private final WordCounter wordCounter;
+    private final StopWordsReader stopWordsReader;
 
-    public WordCounterServiceImpl(final WordCounter wordCounter) {
+    public WordCounterServiceImpl(final WordCounter wordCounter,
+                                  final StopWordsReader stopWordsReader) {
         this.wordCounter = wordCounter;
+        this.stopWordsReader = stopWordsReader;
     }
 
     @Override
     public void countWords() {
         final String userInput = readUserInputFromConsole();
 
-        final long wordCounts = wordCounter.countWords(userInput);
+        final Set<String> stopWords = stopWordsReader.getStopWordsList();
+
+        final long wordCounts = wordCounter.countWords(userInput, stopWords);
 
         printWordCountsToConsole(wordCounts);
     }
