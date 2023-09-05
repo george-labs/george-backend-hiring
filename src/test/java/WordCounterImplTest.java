@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -8,13 +9,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WordCounterImplTest {
 
+    private WordCounter wordCounter;
+
+    @BeforeEach
+    void setup() {
+        wordCounter = new WordCounterImpl();
+    }
+
     @ParameterizedTest
     @MethodSource("wordCountsParameters")
     void should_count_words(String inputSentence, int expectedWordCount) {
-        final WordCounter wordCounter = new WordCounterImpl();
-
+        // call the actual count words method
         final long actualWordCounts = wordCounter.countWords(inputSentence);
 
+        // assert the expected result
         assertEquals(expectedWordCount, actualWordCounts);
     }
 

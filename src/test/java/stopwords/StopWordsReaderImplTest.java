@@ -16,10 +16,10 @@ class StopWordsReaderImplTest {
         final StopWordsReader stopWordsReader = createStopWordsReader("some-nonsense.txt");
         final String expectedErrorMessage = "File 'some-nonsense.txt' not found";
 
-        Exception exception = assertThrows(StopWordsException.class, () -> {
-            stopWordsReader.getStopWordsList();
-        });
+        // call the actual getStopWordsList method
+        final Exception exception = assertThrows(StopWordsException.class, stopWordsReader::getStopWordsList);
 
+        // assert exception message
         final String actualExceptionMessage = exception.getMessage();
 
         assertEquals(expectedErrorMessage, actualExceptionMessage);
