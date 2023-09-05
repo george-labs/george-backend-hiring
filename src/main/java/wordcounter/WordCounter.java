@@ -1,3 +1,5 @@
+package wordcounter;
+
 import java.util.Set;
 
 public interface WordCounter {

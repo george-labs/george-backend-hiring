@@ -1,6 +1,10 @@
 import stopwords.StopWordsReader;
 import stopwords.StopWordsReaderConfiguration;
 import stopwords.StopWordsReaderImpl;
+import wordcounter.WordCounter;
+import wordcounter.WordCounterImpl;
+import wordcounter.WordCounterService;
+import wordcounter.WordCounterServiceImpl;
 
 public class WordCounterApplication {
 

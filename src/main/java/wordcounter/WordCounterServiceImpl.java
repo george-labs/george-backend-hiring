@@ -1,9 +1,11 @@
+package wordcounter;
+
 import stopwords.StopWordsReader;
 
 import java.util.Scanner;
 import java.util.Set;
 
-class WordCounterServiceImpl implements WordCounterService {
+public class WordCounterServiceImpl implements WordCounterService {
 
     private static final String ENTER_TEXT = "Enter text: ";
     private static final String NUMBER_OF_WORDS_TEMPLATE = "Number of words: %s";

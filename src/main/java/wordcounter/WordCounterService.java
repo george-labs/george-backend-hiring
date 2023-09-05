@@ -1,3 +1,5 @@
+package wordcounter;
+
 public interface WordCounterService {
 
     /**

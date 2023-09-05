@@ -1,11 +1,14 @@
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import stopwords.StopWordsReader;
 import stopwords.StopWordsReaderConfiguration;
 import stopwords.StopWordsReaderImpl;
+import wordcounter.WordCounter;
+import wordcounter.WordCounterImpl;
+import wordcounter.WordCounterService;
+import wordcounter.WordCounterServiceImpl;
 
 import java.io.*;
 import java.util.stream.Stream;

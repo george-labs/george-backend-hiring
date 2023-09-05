@@ -1,7 +1,9 @@
+package wordcounter;
+
 import java.util.Arrays;
 import java.util.Set;
 
-class WordCounterImpl implements WordCounter {
+public class WordCounterImpl implements WordCounter {
 
     private static final String SPLIT_WORDS_REGEX = "\\s+";
     private static final String ALPHABET_REGEX = "[a-zA-Z]+";
