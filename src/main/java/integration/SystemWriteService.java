@@ -1,4 +1,4 @@
-package service.integration;
+package integration;
 
 public class SystemWriteService implements IWriteService {
     private static final String PREFIX_ANSWER = "Number of words:%s";

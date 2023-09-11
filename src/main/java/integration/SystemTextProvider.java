@@ -1,8 +1,8 @@
-package service.integration;
+package integration;
 
 import java.util.Scanner;
 
-public class SystemTextService implements ITextService {
+public class SystemTextProvider implements ITextProvider {
     private static final String WELCOME_TEXT = "Enter text:";
 
     @Override

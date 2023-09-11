@@ -6,3 +6,6 @@
 ## Iteration 2
     Words in the file are case insensitive.
     The path to the file is constant.
+
+## Iteration 3
+    words can be splittered by space and \n

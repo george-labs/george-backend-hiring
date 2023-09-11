@@ -1,13 +1,13 @@
 import service.*;
-import service.integration.ITextService;
-import service.integration.IWriteService;
+import integration.ITextProvider;
+import integration.IWriteService;
 
 public class WordCountApplication {
-    private final ITextService textService;
+    private final ITextProvider textService;
     private final ICountService countService;
     private final IWriteService writeService;
 
-    public WordCountApplication(ITextService textService, ICountService countService, IWriteService writeService) {
+    public WordCountApplication(ITextProvider textService, ICountService countService, IWriteService writeService) {
         this.textService = textService;
         this.countService = countService;
         this.writeService = writeService;
