@@ -1,14 +1,17 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import service.*;
+import service.integration.ITextService;
+import service.integration.IWriteService;
+import service.stop_word.StopWordProvider;
+import service.stop_word.StopWordService;
 
 public class WordCountApplicationTest {
     private final WriterService writeService = new WriterService();
     private final TextService textService = new TextService();
-    private final MemoryStopWordProvider stopWordProvider = new MemoryStopWordProvider("one", "two", "three");
 
     private final WordCountApplication application = new WordCountApplication(textService,
-            new WordCountService(new WordService(new StopWordService(stopWordProvider))), writeService);
+            new WordCountService(new WordService(new StopWordService(new StopWordProvider()))), writeService);
 
     @Test
     public void testWrongWords() {

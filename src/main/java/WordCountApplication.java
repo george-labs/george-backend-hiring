@@ -1,4 +1,6 @@
 import service.*;
+import service.integration.ITextService;
+import service.integration.IWriteService;
 
 public class WordCountApplication {
     private final ITextService textService;

@@ -2,9 +2,12 @@ package service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import service.stop_word.IStopWordProvider;
+import service.stop_word.StopWordProvider;
+import service.stop_word.StopWordService;
 
 public class WordCountServiceTest {
-    MemoryStopWordProvider stopWordProvider = new MemoryStopWordProvider("one");
+    IStopWordProvider stopWordProvider = new StopWordProvider();
     ICountService service = new WordCountService(new WordService(new StopWordService(stopWordProvider)));
 
 
@@ -45,7 +48,7 @@ public class WordCountServiceTest {
     }
     @Test
     public void testStopWord() {
-        String str = "one two three";
+        String str = "one two three four five";
         Assertions.assertEquals(2, service.countWordsInString(str));
     }
 

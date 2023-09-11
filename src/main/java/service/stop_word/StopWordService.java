@@ -1,4 +1,4 @@
-package service;
+package service.stop_word;
 
 import java.util.HashSet;
 import java.util.Set;

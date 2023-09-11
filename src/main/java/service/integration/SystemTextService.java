@@ -1,4 +1,4 @@
-package service;
+package service.integration;
 
 import java.util.Scanner;
 

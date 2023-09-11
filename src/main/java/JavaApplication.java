@@ -1,4 +1,10 @@
 import service.*;
+import service.integration.ITextService;
+import service.integration.IWriteService;
+import service.integration.SystemTextService;
+import service.integration.SystemWriteService;
+import service.stop_word.StopWordProvider;
+import service.stop_word.StopWordService;
 
 public class JavaApplication {
 
