@@ -1,3 +1,8 @@
 # Assumptions per iteration
 
 ## Iteration 1
+    The delimiter is a space
+
+## Iteration 2
+    Words in the file are case insensitive.
+    The path to the file is constant.

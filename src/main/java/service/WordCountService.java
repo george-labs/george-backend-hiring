@@ -16,7 +16,7 @@ public class WordCountService implements ICountService {
         String[] split = string.split(DELIMITER);
         int count = 0;
         for (String str : split) {
-            if (wordService.isWord(str)) {
+            if (wordService.isWordForCount(str)) {
                 count++;
             }
         }

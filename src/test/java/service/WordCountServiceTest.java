@@ -4,8 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class WordCountServiceTest {
+    MemoryStopWordProvider stopWordProvider = new MemoryStopWordProvider("one");
+    ICountService service = new WordCountService(new WordService(new StopWordService(stopWordProvider)));
 
-    ICountService service = new WordCountService(new WordService());
 
     @Test
     public void testEmptyStringCount() {
@@ -41,6 +42,11 @@ public class WordCountServiceTest {
     public void testOtherSymbols2() {
         String str = " qwe$$rty    @555fasd sdfg98sdf76!   rfvtgb  ";
         Assertions.assertEquals(1, service.countWordsInString(str));
+    }
+    @Test
+    public void testStopWord() {
+        String str = "one two three";
+        Assertions.assertEquals(2, service.countWordsInString(str));
     }
 
 }

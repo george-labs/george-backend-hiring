@@ -1,5 +1,5 @@
 package service;
 
 public interface IWordService {
-    boolean isWord(String str);
+    boolean isWordForCount(String str);
 }

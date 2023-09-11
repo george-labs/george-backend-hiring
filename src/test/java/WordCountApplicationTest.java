@@ -1,20 +1,18 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import service.ITextService;
-import service.IWriteService;
-import service.WordCountService;
-import service.WordService;
+import service.*;
 
 public class WordCountApplicationTest {
     private final WriterService writeService = new WriterService();
     private final TextService textService = new TextService();
+    private final MemoryStopWordProvider stopWordProvider = new MemoryStopWordProvider("one", "two", "three");
 
     private final WordCountApplication application = new WordCountApplication(textService,
-            new WordCountService(new WordService()), writeService);
+            new WordCountService(new WordService(new StopWordService(stopWordProvider))), writeService);
 
     @Test
     public void testWrongWords() {
-        textService.input = "word wo2rd  !qwe  ";
+        textService.input = "word wo2rd  one !qwe  ";
         application.countWords();
         Assertions.assertEquals(1, writeService.out);
     }
