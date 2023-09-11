@@ -5,33 +5,42 @@ import org.junit.jupiter.api.Test;
 
 public class WordCountServiceTest {
 
-    ICountService service = new WordCountService();
+    ICountService service = new WordCountService(new WordService());
 
     @Test
     public void testEmptyStringCount() {
         String str = "";
-        String delimiter = " ";
-        Assertions.assertEquals(0, service.countWordsInString(str, delimiter));
+        Assertions.assertEquals(0, service.countWordsInString(str));
     }
 
     @Test
     public void testStringWithoutDelimiters() {
         String str = "somethinglong";
-        String delimiter = " ";
-        Assertions.assertEquals(1, service.countWordsInString(str, delimiter));
+        Assertions.assertEquals(1, service.countWordsInString(str));
     }
 
     @Test
     public void testStringWithDelimiters() {
         String str = "something long in this string";
-        String delimiter = " ";
-        Assertions.assertEquals(5, service.countWordsInString(str, delimiter));
+        Assertions.assertEquals(5, service.countWordsInString(str));
     }
 
     @Test
-    public void testDelimiter() {
-        String str = "something long in this string";
-        String delimiter = "_";
-        Assertions.assertEquals(1, service.countWordsInString(str, delimiter));
+    public void testOtherSymbols() {
+        String str = "something123 543 long in this string00";
+        Assertions.assertEquals(3, service.countWordsInString(str));
     }
+
+    @Test
+    public void testAllOtherSymbols() {
+        String str = "234 555 9876";
+        Assertions.assertEquals(0, service.countWordsInString(str));
+    }
+
+    @Test
+    public void testOtherSymbols2() {
+        String str = " qwe$$rty    @555fasd sdfg98sdf76!   rfvtgb  ";
+        Assertions.assertEquals(1, service.countWordsInString(str));
+    }
+
 }
