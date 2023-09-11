@@ -19,21 +19,21 @@ public class WordCountServiceTest {
     public void testWrongWords() {
         textService.input = "word wo2rd  one !qwe  ";
         application.countWords();
-        Assertions.assertEquals(1, writeService.getOut());
+        Assertions.assertEquals(1, writeService.getCount());
     }
 
     @Test
     public void testGoodWords() {
         textService.input = "  word   word  qwerty  ";
         application.countWords();
-        Assertions.assertEquals(3, writeService.getOut());
+        Assertions.assertEquals(3, writeService.getCount());
     }
 
     @Test
     public void testTextWithoutWords() {
         textService.input = "  !word   wo##rd  qwerty%%%  ,,";
         application.countWords();
-        Assertions.assertEquals(0, writeService.getOut());
+        Assertions.assertEquals(0, writeService.getCount());
     }
 
     private static class TextProvider implements ITextProvider {

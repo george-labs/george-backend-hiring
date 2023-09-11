@@ -10,3 +10,8 @@
 ## Iteration 3
     words can be splittered by space and \n
     file always exists
+
+## Iteration 4
+    words "one" and "OnE" are the same
+    a word can have a dot in the end
+    '-' is a delimiter

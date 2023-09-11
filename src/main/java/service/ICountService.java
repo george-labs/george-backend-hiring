@@ -1,5 +1,7 @@
 package service;
 
+import domain.CountResult;
+
 public interface ICountService {
-    int countWordsInString(String string);
+    CountResult countWordsInString(String string);
 }

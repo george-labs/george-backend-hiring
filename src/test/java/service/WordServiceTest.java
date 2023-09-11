@@ -14,7 +14,17 @@ public class WordServiceTest {
     private final IWordService wordService = new WordService(stopWordService);
 
     @Test
-    public void testWordForCount() {
+    public void testSimpleWordInStopList() {
         Assertions.assertFalse(wordService.isWordForCount("one"));
     }
+
+    @Test
+    public void testWordWithDotInStopList() {
+        Assertions.assertFalse(wordService.isWordForCount("one."));
+    }
+    @Test
+    public void testWordWithDot() {
+        Assertions.assertTrue(wordService.isWordForCount("second."));
+    }
+
 }

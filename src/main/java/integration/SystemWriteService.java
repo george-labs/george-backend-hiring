@@ -1,10 +1,12 @@
 package integration;
 
+import domain.CountResult;
+
 public class SystemWriteService implements IWriteService {
-    private static final String PREFIX_ANSWER = "Number of words:%s";
+    private static final String ANSWER_TEMPLATE = "Number of words: %s, unique: %s";
 
     @Override
-    public void writeWordCount(int count) {
-        System.out.printf(PREFIX_ANSWER, count);
+    public void writeWordCount(CountResult result) {
+        System.out.printf(ANSWER_TEMPLATE, result.getCount(), result.getUniqueCount());
     }
 }

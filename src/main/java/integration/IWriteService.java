@@ -1,5 +1,7 @@
 package integration;
 
+import domain.CountResult;
+
 public interface IWriteService {
-    void writeWordCount(int count);
+    void writeWordCount(CountResult result);
 }

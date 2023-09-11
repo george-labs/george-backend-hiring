@@ -1,16 +1,21 @@
 package util;
 
+import domain.CountResult;
 import integration.IWriteService;
 
 public class WriterService implements IWriteService {
-    int out;
+    CountResult result;
 
     @Override
-    public void writeWordCount(int count) {
-        out = count;
+    public void writeWordCount(CountResult result) {
+        this.result = result;
     }
 
-    public int getOut() {
-        return out;
+    public int getCount() {
+        return result.getCount();
+    }
+
+    public int getUniqueCount() {
+        return result.getUniqueCount();
     }
 }

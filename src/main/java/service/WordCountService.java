@@ -1,5 +1,6 @@
 package service;
 
+import domain.CountResult;
 import integration.ITextProvider;
 import integration.IWriteService;
 
@@ -16,7 +17,7 @@ public class WordCountService implements IWordCountService {
 
     @Override
     public void countWords() {
-        int count = countService.countWordsInString(textService.getString());
-        writeService.writeWordCount(count);
+        CountResult countResult = countService.countWordsInString(textService.getString());
+        writeService.writeWordCount(countResult);
     }
 }

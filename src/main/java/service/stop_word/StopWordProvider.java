@@ -9,11 +9,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class StopWordProvider implements IStopWordProvider {
-    private static final String FILE_PATH = "stopwords.txt";
+    private final String fileName;
+
+    public StopWordProvider() {
+        fileName = "stopwords.txt";
+    }
+
+    public StopWordProvider(String fileName) {
+        this.fileName = fileName;
+    }
 
     @Override
     public Set<String> getStopWords() {
-        URL url = StopWordProvider.class.getClassLoader().getResource(FILE_PATH);
+        URL url = StopWordProvider.class.getClassLoader().getResource(fileName);
         try (BufferedReader reader = new BufferedReader(new FileReader(Objects.requireNonNull(url).getFile()))) {
             return reader.lines().collect(Collectors.toSet());
         } catch (IOException e) {

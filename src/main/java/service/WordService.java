@@ -13,6 +13,9 @@ public class WordService implements IWordService {
 
     @Override
     public boolean isWordForCount(String str) {
+        if (str.endsWith(".")) {
+            str = str.substring(0, str.length() - 1);
+        }
         return str.matches(LETTER_WORD_PATTERN) && !stopWordService.isStopWord(str);
     }
 }
