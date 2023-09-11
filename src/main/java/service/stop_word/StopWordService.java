@@ -10,7 +10,6 @@ public class StopWordService implements IStopWordService {
         stopWordProvider.getStopWords()
                 .forEach(word -> stopWords.add(word.toLowerCase()));
     }
-
     @Override
     public boolean isStopWord(String str) {
         return stopWords.contains(str.toLowerCase());

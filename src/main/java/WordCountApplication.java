@@ -1,20 +1,19 @@
+import integration.*;
+import integration.factory.TextProviderFactory;
 import service.*;
-import integration.ITextProvider;
-import integration.IWriteService;
+import service.stop_word.IStopWordService;
+import service.stop_word.StopWordProvider;
+import service.stop_word.StopWordService;
 
 public class WordCountApplication {
-    private final ITextProvider textService;
-    private final ICountService countService;
-    private final IWriteService writeService;
 
-    public WordCountApplication(ITextProvider textService, ICountService countService, IWriteService writeService) {
-        this.textService = textService;
-        this.countService = countService;
-        this.writeService = writeService;
-    }
+    public static void main(String[] args) {
+        ITextProvider textProvider = TextProviderFactory.getTextProvider(args);
+        IStopWordService stopWordService = new StopWordService(new StopWordProvider());
+        ICountService countService = new CountService(new WordService(stopWordService));
+        IWriteService writeService = new SystemWriteService();
 
-    public void countWords() {
-        int count = countService.countWordsInString(textService.getString());
-        writeService.writeWordCount(count);
+        IWordCountService application = new WordCountService(textProvider, countService, writeService);
+        application.countWords();
     }
 }

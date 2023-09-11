@@ -6,9 +6,9 @@ import service.stop_word.IStopWordProvider;
 import service.stop_word.StopWordProvider;
 import service.stop_word.StopWordService;
 
-public class WordCountServiceTest {
+public class CountServiceTest {
     IStopWordProvider stopWordProvider = new StopWordProvider();
-    ICountService service = new WordCountService(new WordService(new StopWordService(stopWordProvider)));
+    ICountService service = new CountService(new WordService(new StopWordService(stopWordProvider)));
 
 
     @Test

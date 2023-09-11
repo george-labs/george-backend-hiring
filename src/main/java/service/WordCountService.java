@@ -1,25 +1,22 @@
 package service;
 
-public class WordCountService implements ICountService {
-    private static final String DELIMITER = " ";
-    private final IWordService wordService;
+import integration.ITextProvider;
+import integration.IWriteService;
 
-    public WordCountService(IWordService wordService) {
-        this.wordService = wordService;
+public class WordCountService implements IWordCountService {
+    private final ITextProvider textService;
+    private final ICountService countService;
+    private final IWriteService writeService;
+
+    public WordCountService(ITextProvider textService, ICountService countService, IWriteService writeService) {
+        this.textService = textService;
+        this.countService = countService;
+        this.writeService = writeService;
     }
 
     @Override
-    public int countWordsInString(String string) {
-        if (string == null || string.length() == 0) {
-            return 0;
-        }
-        String[] split = string.split(DELIMITER);
-        int count = 0;
-        for (String str : split) {
-            if (wordService.isWordForCount(str)) {
-                count++;
-            }
-        }
-        return count;
+    public void countWords() {
+        int count = countService.countWordsInString(textService.getString());
+        writeService.writeWordCount(count);
     }
 }

@@ -1,4 +1,8 @@
-package integration;
+package integration.factory;
+
+import integration.FileTextProvider;
+import integration.ITextProvider;
+import integration.SystemTextProvider;
 
 public class TextProviderFactory {
     public static ITextProvider getTextProvider(String[] args) {
