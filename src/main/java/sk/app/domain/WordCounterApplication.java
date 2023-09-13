@@ -1,9 +1,15 @@
 package sk.app.domain;
 
 import sk.app.api.WordCounter;
+import sk.app.api.WordFilter;
 
 public class WordCounterApplication implements WordCounter {
 
+	private final WordFilter wordFilter;
+
+	public WordCounterApplication(WordFilter wordFilter) {
+		this.wordFilter = wordFilter;
+	}
 
 	@Override
 	public int countWords(String text) {
@@ -23,7 +29,7 @@ public class WordCounterApplication implements WordCounter {
 	}
 
 	private boolean isWord(String token) {
-		if (token.isBlank()) {
+		if (token.isBlank() || wordFilter.isStopWord(token)) {
 			return false;
 		}
 		for (int i = 0; i < token.length(); i++) {

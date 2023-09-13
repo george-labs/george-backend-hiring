@@ -2,6 +2,8 @@ package sk.app;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import sk.app.api.WordCounter;
 import sk.app.domain.WordCounterApplication;
 
@@ -11,7 +13,7 @@ public class WordCounterApplicationTest {
 
 	@Test
 	public void testWordCounter() {
-		WordCounter wordCounter = new WordCounterApplication();
+		WordCounter wordCounter = new WordCounterApplication(new TestingWordFilter());
 
 		assertEquals(2, wordCounter.countWords("hello world"));
 		assertEquals(1, wordCounter.countWords("word"));
@@ -22,4 +24,12 @@ public class WordCounterApplicationTest {
 		assertEquals(1, wordCounter.countWords("word wo$$d"));
 		assertEquals(1, wordCounter.countWords("word? word. word"));
 	}
+
+	@Test
+	public void testWordCounterFilter() {
+		WordCounter wordCounter = new WordCounterApplication(new TestingWordFilter(List.of("the", "a", "on", "off")));
+
+		assertEquals(4, wordCounter.countWords("Mary had a little lamb"));
+	}
+
 }
