@@ -4,21 +4,21 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import sk.app.adaptor.console.ConsoleUserInterface;
+import sk.app.adaptor.input.InputTextUserInterface;
+import sk.app.domain.api.WordCounter;
 import sk.app.domain.api.incoming.InputTextReader;
 import sk.app.domain.api.outcoming.UserInterface;
-import sk.app.domain.api.WordCounter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ConsoleUserInterfaceIntegrationTest {
+public class InputTextUserInterfaceIntegrationTest {
 
 	@Test
-	public void testConsoleUserInterfaceIntegrationTest() throws IOException {
+	public void testInputTextUserInterfaceIntegrationTest() throws IOException {
 
 		MockedWordCounter mockedWordCounter = new MockedWordCounter();
 
-		UserInterface userInterface = new ConsoleUserInterface(mockedWordCounter, new MockedReader("some text"));
+		UserInterface userInterface = new InputTextUserInterface(mockedWordCounter, new MockedReader("some text"));
 		userInterface.countWords();
 
 		assertEquals(1, mockedWordCounter.getCount());
