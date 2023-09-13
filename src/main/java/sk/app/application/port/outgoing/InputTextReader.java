@@ -1,4 +1,4 @@
-package sk.app.application.port.api.incoming;
+package sk.app.application.port.outgoing;
 
 import java.io.IOException;
 

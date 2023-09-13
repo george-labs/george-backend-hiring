@@ -1,9 +1,9 @@
-package sk.app.domain;
+package sk.app.application.domain;
 
 import java.util.List;
 
-import sk.app.domain.api.WordFilter;
-import sk.app.domain.api.incoming.WordReader;
+import sk.app.application.api.WordFilter;
+import sk.app.application.port.outgoing.WordReader;
 
 public class WordFilterService implements WordFilter {
 

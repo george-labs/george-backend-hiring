@@ -1,13 +1,13 @@
 import java.io.IOException;
 
 import sk.app.adaptor.input.InputReaderFactory;
-import sk.app.adaptor.input.InputTextUserInterface;
+import sk.app.adaptor.ui.InputTextUserInterface;
 import sk.app.adaptor.word.reader.FileWordResourceReader;
-import sk.app.domain.WordCounterApplication;
-import sk.app.domain.WordFilterService;
-import sk.app.domain.api.WordCounter;
-import sk.app.domain.api.WordFilter;
-import sk.app.domain.api.outcoming.UserInterface;
+import sk.app.application.port.incoming.WordCounter;
+import sk.app.application.api.WordFilter;
+import sk.app.application.domain.WordCounterApplication;
+import sk.app.application.domain.WordFilterService;
+import sk.app.adaptor.ui.UserInterface;
 
 public class JavaApplication {
 
@@ -22,8 +22,8 @@ public class JavaApplication {
 		WordFilter wordFilter = new WordFilterService(new FileWordResourceReader("stopwords.txt"));
 		WordCounter wordCounter = new WordCounterApplication(wordFilter);
 
-		UserInterface consoleUserInterface = new InputTextUserInterface(wordCounter, inputReaderFactory.createInputReader());
+		UserInterface ui = new InputTextUserInterface(wordCounter, inputReaderFactory.createInputReader());
 
-		consoleUserInterface.countWords();
+		ui.countWords();
 	}
 }

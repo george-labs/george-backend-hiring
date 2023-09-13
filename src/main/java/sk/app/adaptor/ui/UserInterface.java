@@ -1,4 +1,4 @@
-package sk.app.application.port.incoming;
+package sk.app.adaptor.ui;
 
 import java.io.IOException;
 

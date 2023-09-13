@@ -1,6 +1,6 @@
 package sk.app.adaptor.input;
 
-import sk.app.domain.api.incoming.InputTextReader;
+import sk.app.application.port.outgoing.InputTextReader;
 
 public class InputReaderFactory {
 

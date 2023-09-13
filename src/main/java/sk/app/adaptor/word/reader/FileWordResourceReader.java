@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import sk.app.domain.api.incoming.WordReader;
+import sk.app.application.port.outgoing.WordReader;
 import sk.app.adaptor.exception.InvalidFileException;
 
 public class FileWordResourceReader implements WordReader {

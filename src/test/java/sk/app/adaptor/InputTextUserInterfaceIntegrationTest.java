@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import sk.app.adaptor.input.InputTextUserInterface;
-import sk.app.domain.api.WordCounter;
-import sk.app.domain.api.incoming.InputTextReader;
-import sk.app.domain.api.outcoming.UserInterface;
+import sk.app.adaptor.ui.InputTextUserInterface;
+import sk.app.application.port.incoming.WordCounter;
+import sk.app.application.port.outgoing.InputTextReader;
+import sk.app.adaptor.ui.UserInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

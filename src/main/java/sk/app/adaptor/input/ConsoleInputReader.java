@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import sk.app.domain.api.incoming.InputTextReader;
+import sk.app.application.port.outgoing.InputTextReader;
 
 public class ConsoleInputReader implements InputTextReader {
 

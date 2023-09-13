@@ -1,11 +1,10 @@
-package sk.app.domain;
+package sk.app.application.domain;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import sk.app.ListWordReader;
-import sk.app.application.domain.WordFilterService;
+import sk.app.application.ListWordReader;
 import sk.app.application.api.WordFilter;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

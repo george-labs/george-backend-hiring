@@ -1,4 +1,4 @@
-package sk.app.application.api;
+package sk.app.application.port.incoming;
 
 public interface WordCounter {
 

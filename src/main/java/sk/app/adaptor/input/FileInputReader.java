@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import sk.app.domain.api.incoming.InputTextReader;
+import sk.app.application.port.outgoing.InputTextReader;
 
 public class FileInputReader implements InputTextReader {
 

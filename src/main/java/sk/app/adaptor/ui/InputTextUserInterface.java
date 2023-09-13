@@ -1,10 +1,9 @@
-package sk.app.adaptor.input;
+package sk.app.adaptor.ui;
 
 import java.io.IOException;
 
 import sk.app.application.port.outgoing.InputTextReader;
-import sk.app.application.port.api.WordCounter;
-import sk.app.application.port.incoming.UserInterface;
+import sk.app.application.port.incoming.WordCounter;
 
 public class InputTextUserInterface implements UserInterface {
 

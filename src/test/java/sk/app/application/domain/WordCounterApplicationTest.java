@@ -1,13 +1,11 @@
-package sk.app.domain;
+package sk.app.application.domain;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import sk.app.ListWordReader;
-import sk.app.application.domain.WordCounterApplication;
-import sk.app.application.domain.WordFilterService;
-import sk.app.application.api.WordCounter;
+import sk.app.application.ListWordReader;
+import sk.app.application.port.incoming.WordCounter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
