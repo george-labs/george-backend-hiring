@@ -4,9 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import sk.app.adaptor.api.Reader;
-import sk.app.adaptor.api.UserInterface;
-import sk.app.api.WordCounter;
+import sk.app.adaptor.console.ConsoleUserInterface;
+import sk.app.domain.api.incoming.InputTextReader;
+import sk.app.domain.api.outcoming.UserInterface;
+import sk.app.domain.api.WordCounter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -38,7 +39,7 @@ public class ConsoleUserInterfaceIntegrationTest {
 		}
 	}
 
-	private static class MockedReader implements Reader {
+	private static class MockedReader implements InputTextReader {
 
 		private final String text;
 

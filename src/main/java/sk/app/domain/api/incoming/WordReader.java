@@ -1,4 +1,4 @@
-package sk.app.adaptor.api;
+package sk.app.domain.api.incoming;
 
 import java.util.List;
 

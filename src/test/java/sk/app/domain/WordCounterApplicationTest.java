@@ -1,11 +1,11 @@
-package sk.app;
+package sk.app.domain;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import sk.app.api.WordCounter;
-import sk.app.domain.WordCounterApplication;
+import sk.app.ListWordReader;
+import sk.app.domain.api.WordCounter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,7 +13,7 @@ public class WordCounterApplicationTest {
 
 	@Test
 	public void testWordCounter() {
-		WordCounter wordCounter = new WordCounterApplication(new TestingWordFilter());
+		WordCounter wordCounter = new WordCounterApplication(new WordFilterService(new ListWordReader()));
 
 		assertEquals(2, wordCounter.countWords("hello world"));
 		assertEquals(1, wordCounter.countWords("word"));
@@ -27,7 +27,9 @@ public class WordCounterApplicationTest {
 
 	@Test
 	public void testWordCounterFilter() {
-		WordCounter wordCounter = new WordCounterApplication(new TestingWordFilter(List.of("the", "a", "on", "off")));
+		WordFilterService wordFilter = new WordFilterService(new ListWordReader(List.of("the", "a", "on", "off")));
+
+		WordCounter wordCounter = new WordCounterApplication(wordFilter);
 
 		assertEquals(4, wordCounter.countWords("Mary had a little lamb"));
 	}

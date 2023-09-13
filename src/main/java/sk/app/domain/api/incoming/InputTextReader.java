@@ -1,8 +1,8 @@
-package sk.app.adaptor.api;
+package sk.app.domain.api.incoming;
 
 import java.io.IOException;
 
-public interface Reader {
+public interface InputTextReader {
 
 	String readText() throws IOException;
 }

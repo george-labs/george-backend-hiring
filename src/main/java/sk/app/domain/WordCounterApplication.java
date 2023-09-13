@@ -1,7 +1,7 @@
 package sk.app.domain;
 
-import sk.app.api.WordCounter;
-import sk.app.api.WordFilter;
+import sk.app.domain.api.WordCounter;
+import sk.app.domain.api.WordFilter;
 
 public class WordCounterApplication implements WordCounter {
 

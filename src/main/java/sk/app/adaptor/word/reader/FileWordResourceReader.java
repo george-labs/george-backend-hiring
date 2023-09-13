@@ -1,4 +1,4 @@
-package sk.app.adaptor;
+package sk.app.adaptor.word.reader;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -9,26 +9,19 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import sk.app.domain.api.incoming.WordReader;
 import sk.app.adaptor.exception.InvalidFileException;
-import sk.app.api.WordFilter;
 
-public class FileWordFilter implements WordFilter {
+public class FileWordResourceReader implements WordReader {
 
 	private final String fileName;
-	private final List<String> stopWords;
 
-	public FileWordFilter(String fileName, sk.app.adaptor.api.WordReader wordReader) {
+	public FileWordResourceReader(String fileName) {
 		this.fileName = fileName;
-		this.stopWords = wordReader.readWords();
 	}
 
-	@Override
-	public boolean isStopWord(String word) {
-		return stopWords.stream().anyMatch(line -> line.equals(word));
-	}
-
-	public List<String> readFiles() {
-		try (InputStream inputStream = FileWordFilter.class.getClassLoader().getResourceAsStream(fileName)) {
+	public List<String> readWords() {
+		try (InputStream inputStream = FileWordResourceReader.class.getClassLoader().getResourceAsStream(fileName)) {
 			if (inputStream == null) {
 				throw new FileNotFoundException(String.format("Cannot find file: %s", fileName));
 			}

@@ -1,4 +1,4 @@
-package sk.app.adaptor.api;
+package sk.app.domain.api.outcoming;
 
 import java.io.IOException;
 

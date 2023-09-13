@@ -1,17 +1,17 @@
-package sk.app.adaptor;
+package sk.app.adaptor.console;
 
 import java.io.IOException;
 
-import sk.app.adaptor.api.Reader;
-import sk.app.adaptor.api.UserInterface;
-import sk.app.api.WordCounter;
+import sk.app.domain.api.incoming.InputTextReader;
+import sk.app.domain.api.outcoming.UserInterface;
+import sk.app.domain.api.WordCounter;
 
 public class ConsoleUserInterface implements UserInterface {
 
 	private final WordCounter wordCounter;
-	private final Reader reader;
+	private final InputTextReader reader;
 
-	public ConsoleUserInterface(WordCounter wordCounter, Reader reader) {
+	public ConsoleUserInterface(WordCounter wordCounter, InputTextReader reader) {
 		this.wordCounter = wordCounter;
 		this.reader = reader;
 	}
