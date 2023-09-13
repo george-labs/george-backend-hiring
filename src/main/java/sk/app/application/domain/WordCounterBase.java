@@ -1,31 +1,31 @@
 package sk.app.application.domain;
 
-import sk.app.application.port.incoming.WordCounter;
+import java.util.ArrayList;
+import java.util.List;
+
 import sk.app.application.api.WordFilter;
 
-public class WordCounterApplication implements WordCounter {
+abstract class WordCounterBase {
 
 	private final WordFilter wordFilter;
 
-	public WordCounterApplication(WordFilter wordFilter) {
+	public WordCounterBase(WordFilter wordFilter) {
 		this.wordFilter = wordFilter;
 	}
 
-	@Override
-	public int countWords(String text) {
+	protected List<String> findAllWords(String text) {
 		if (text == null) {
-			return 0;
+			return new ArrayList<>();
 		}
-		String[] tokens = text.split("\\s+");
+		List<String> words = new ArrayList<>();
+		String[] tokens = text.split("[\\s+]|[-]");
 
-		int counter = 0;
 		for (String token : tokens) {
 			if (isWord(token)) {
-				counter++;
+				words.add(token);
 			}
 		}
-
-		return counter;
+		return words;
 	}
 
 	private boolean isWord(String token) {
@@ -34,6 +34,9 @@ public class WordCounterApplication implements WordCounter {
 		}
 		for (int i = 0; i < token.length(); i++) {
 			char character = token.charAt(i);
+			if (i == token.length() -1 && character == '.') {
+				return true;
+			}
 			if (!Character.isLetter(character)) {
 				return false;
 			}
