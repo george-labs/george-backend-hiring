@@ -10,10 +10,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class UniqueWordCounterServiceTest {
 
 	@Test
-	public void testWordCounter() {
+	public void testUniqueWordCounterBaseCase() {
 		WordCounter wordCounter = new UniqueWordCounterService(new WordFilterService(new ListWordReader())); // no word filter
 
-		assertEquals(9, wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."));
+		assertEquals(9, wordCounter.countWords("Humpty Dumpty sat on a wall. Humpty Dumpty had a great fall."));
+	}
+
+	@Test
+	public void testUniqueWordCounterDashes() {
+		WordCounter wordCounter = new UniqueWordCounterService(new WordFilterService(new ListWordReader())); // no word filter
+
+		assertEquals(8, wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."));
 	}
 
 

@@ -23,8 +23,14 @@ public class WordCounterServiceTest {
 		assertEquals(0, wordCounter.countWords("wor3d"));
 		assertEquals(1, wordCounter.countWords("word wo$$d"));
 		assertEquals(2, wordCounter.countWords("word? word. word"));
-		assertEquals(2, wordCounter.countWords("hello-world"));
 		assertEquals(2, wordCounter.countWords("some text."));
+	}
+
+	@Test
+	public void testWordCounterDashCase() {
+		WordCounter wordCounter = new WordCounterService(new WordFilterService(new ListWordReader()));
+
+		assertEquals(1, wordCounter.countWords("hello-world"));
 	}
 
 	@Test

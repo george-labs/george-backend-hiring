@@ -18,7 +18,7 @@ abstract class WordCounterBase {
 			return new ArrayList<>();
 		}
 		List<String> words = new ArrayList<>();
-		String[] tokens = text.split("[\\s+]|[-]");
+		String[] tokens = text.split("[\\s+]");
 
 		for (String token : tokens) {
 			if (isWord(token)) {
@@ -37,7 +37,7 @@ abstract class WordCounterBase {
 			if (i == token.length() -1 && character == '.') {
 				return true;
 			}
-			if (!Character.isLetter(character)) {
+			if (!Character.isLetter(character) && character != '-') {
 				return false;
 			}
 		}
