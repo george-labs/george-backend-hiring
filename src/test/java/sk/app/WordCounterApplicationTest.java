@@ -2,6 +2,9 @@ package sk.app;
 
 import org.junit.jupiter.api.Test;
 
+import sk.app.api.WordCounter;
+import sk.app.domain.WordCounterApplication;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WordCounterApplicationTest {

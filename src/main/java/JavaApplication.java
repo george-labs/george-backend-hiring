@@ -1,15 +1,17 @@
 import java.io.IOException;
 
-import sk.adaptor.ConsoleUserInterface;
-import sk.app.WordCounter;
-import sk.app.WordCounterApplication;
+import sk.app.adaptor.ConsoleUserInterface;
+import sk.app.adaptor.InputReader;
+import sk.app.adaptor.api.UserInterface;
+import sk.app.api.WordCounter;
+import sk.app.domain.WordCounterApplication;
 
 public class JavaApplication {
 
 	public static void main(String[] args) throws IOException {
 
 		WordCounter wordCounter = new WordCounterApplication();
-		ConsoleUserInterface consoleUserInterface = new ConsoleUserInterface(wordCounter);
+		UserInterface consoleUserInterface = new ConsoleUserInterface(wordCounter, new InputReader());
 
 		consoleUserInterface.countWords();
 	}
