@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import sk.app.ListWordReader;
-import sk.app.domain.api.WordCounter;
+import sk.app.application.domain.WordCounterApplication;
+import sk.app.application.domain.WordFilterService;
+import sk.app.application.api.WordCounter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

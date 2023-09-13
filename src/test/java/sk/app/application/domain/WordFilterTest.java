@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import sk.app.ListWordReader;
-import sk.app.domain.api.WordFilter;
+import sk.app.application.domain.WordFilterService;
+import sk.app.application.api.WordFilter;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

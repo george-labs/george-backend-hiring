@@ -3,7 +3,7 @@ package sk.app;
 import java.util.ArrayList;
 import java.util.List;
 
-import sk.app.domain.api.incoming.WordReader;
+import sk.app.application.port.outgoing.WordReader;
 
 public class ListWordReader implements WordReader {
 

@@ -1,4 +1,4 @@
-package sk.app.domain.api.incoming;
+package sk.app.application.port.api.incoming;
 
 import java.util.List;
 
