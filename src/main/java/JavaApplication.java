@@ -6,6 +6,7 @@ import sk.app.adaptor.ui.UserInterface;
 import sk.app.adaptor.word.reader.FileWordResourceReader;
 import sk.app.application.api.WordFilter;
 import sk.app.application.domain.UniqueWordCounterService;
+import sk.app.application.domain.WordCalculationService;
 import sk.app.application.domain.WordCounterService;
 import sk.app.application.domain.WordFilterService;
 import sk.app.application.port.incoming.WordCounter;
@@ -24,7 +25,9 @@ public class JavaApplication {
 		WordCounter wordCounter = new WordCounterService(wordFilter);
 		WordCounter uniqueWordCounter = new UniqueWordCounterService(wordFilter);
 
-		UserInterface ui = new InputTextUserInterface(wordCounter, uniqueWordCounter, inputReaderFactory.createInputReader());
+		UserInterface ui = new InputTextUserInterface(wordCounter, uniqueWordCounter,
+				new WordCalculationService(new WordCounterService(wordFilter)),
+				inputReaderFactory.createInputReader());
 
 		ui.countWords();
 	}

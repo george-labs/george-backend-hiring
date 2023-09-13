@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import sk.app.adaptor.ui.InputTextUserInterface;
 import sk.app.adaptor.ui.UserInterface;
+import sk.app.application.port.incoming.WordCalculation;
 import sk.app.application.port.incoming.WordCounter;
 import sk.app.application.port.outgoing.InputTextReader;
 
@@ -18,12 +19,15 @@ public class InputTextUserInterfaceIntegrationTest {
 
 		MockedWordCounter mockedWordCounter = new MockedWordCounter();
 		MockedWordCounter mockedUniqueWordCounter = new MockedWordCounter();
+		WordCalculation mockedWordCalculation = new MockedWordCalculation();
 
-		UserInterface userInterface = new InputTextUserInterface(mockedWordCounter, mockedUniqueWordCounter, new MockedReader("some text"));
+		UserInterface userInterface = new InputTextUserInterface(mockedWordCounter, mockedUniqueWordCounter,
+				mockedWordCalculation, new MockedReader("some text"));
 		userInterface.countWords();
 
 		assertEquals(1, mockedWordCounter.getCount());
 		assertEquals(1, mockedUniqueWordCounter.getCount());
+		assertEquals(10, mockedWordCalculation.calculateAverageWordLength("some text"));
 	}
 
 	private static class MockedWordCounter implements WordCounter {
@@ -52,6 +56,14 @@ public class InputTextUserInterfaceIntegrationTest {
 		@Override
 		public String readText() throws IOException {
 			return text;
+		}
+	}
+
+	private static class MockedWordCalculation implements WordCalculation {
+
+		@Override
+		public double calculateAverageWordLength(String text) {
+			return 10;
 		}
 	}
 }

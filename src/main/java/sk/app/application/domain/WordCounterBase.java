@@ -5,7 +5,7 @@ import java.util.List;
 
 import sk.app.application.api.WordFilter;
 
-abstract class WordCounterBase {
+public abstract class WordCounterBase {
 
 	private final WordFilter wordFilter;
 
