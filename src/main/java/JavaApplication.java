@@ -33,5 +33,7 @@ public class JavaApplication {
     // write results to a console
     log.info(
         "Number of words: " + countWordResponse.getWordCount() + ", unique: " + countWordResponse.getUniqueWordCount());
+//            + "; average word length: {} characters"");
+//    countWordResponse.getAvgLength()
   }
 }

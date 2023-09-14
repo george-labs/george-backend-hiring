@@ -36,16 +36,20 @@ public class WordCounter {
     String[] result = input.split("[\\s+.?!,;:]");
 
     Set<String> setOfUniqueWords = new HashSet<>();
+    double totalLength = 0;
 
     // for loop through items, and check they are correct words
     for (String item : result) {
       if (isValidWord(item)) {
         response.setWordCount(response.getWordCount()+1);
         setOfUniqueWords.add(item);
+        totalLength += item.length();
       }
     }
 
     response.setUniqueWordCount(setOfUniqueWords.size());
+    response.setAvgLength(totalLength / response.getWordCount());
+
     return response;
   }
 
