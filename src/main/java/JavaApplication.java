@@ -15,14 +15,12 @@ public class JavaApplication {
 
     log.info("Enter text");
 
-    String s = in.nextLine();
+    String input = in.nextLine();
 
     // call the service WordCounter with an input
     WordCounter wordCounter = new WordCounter();
 
-    wordCounter.countWords(s);
-
     // write results to a console
-    log.info("Number of words: " + wordCounter.countWords(s));
+    log.info("Number of words: " + wordCounter.countWords(input));
   }
 }

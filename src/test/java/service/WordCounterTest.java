@@ -26,7 +26,7 @@ class WordCounterTest {
 
   @Test
   void test_withSpaces_withInvalidWords() {
-    String input = "  WoRd     hi the$re hello54   5468$ .?oa!";
+    String input = "  WoRd     hi the$re hello54   5468$ .?oa!  ";
 
     int result = wordCounter.countWords(input);
 

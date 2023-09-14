@@ -1,6 +1,6 @@
 package serivces;
 
-import java.util.Map;
+import java.util.Set;
 
 import loaders.StopWordsLoader;
 
@@ -10,12 +10,18 @@ import loaders.StopWordsLoader;
 public class WordCounter {
 
   // key = word, value = word
-  private final Map<String, String> map;
+  private final Set<String> setOfStopWords;
 
   public WordCounter() {
-    map = StopWordsLoader.loadStopWords();
+    setOfStopWords = StopWordsLoader.loadStopWords();
   }
 
+  /**
+   * calculate number of words in an input
+   *
+   * @param input - input from a user
+   * @return number valid words
+   */
   public int countWords(String input) {
     int resultCount = 0;
 
@@ -37,7 +43,12 @@ public class WordCounter {
     return resultCount;
   }
 
+  /**
+   * check if word is valid based on requirements
+   * @param item - string
+   * @return true if item is a valid word, otherwise false
+   */
   private boolean isValidWord(String item) {
-    return item.matches("[a-zA-Z]+") && !map.containsKey(item);
+    return item.matches("[a-zA-Z]+") && !setOfStopWords.contains(item);
   }
 }
