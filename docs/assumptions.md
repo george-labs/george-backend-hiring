@@ -15,3 +15,6 @@ Q: Does in input parameters new line means new word?
 A: new line is like a space, so word cannot be split in two lines
 
 I assume that stopwords.txt is in our resources (not check for a null resource here)
+
+## Iteration 4
+I assume that these (-.?!,;:) are split characters for words based on example from requirements

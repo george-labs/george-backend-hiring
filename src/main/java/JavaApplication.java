@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 import managers.FileManager;
+import model.CountWordResponse;
 import serivces.WordCounter;
 
 public class JavaApplication {
@@ -27,7 +28,10 @@ public class JavaApplication {
       input = in.nextLine();
     }
 
+    CountWordResponse countWordResponse = wordCounter.countWords(input);
+
     // write results to a console
-    log.info("Number of words: " + wordCounter.countWords(input));
+    log.info(
+        "Number of words: " + countWordResponse.getWordCount() + ", unique: " + countWordResponse.getUniqueWordCount());
   }
 }

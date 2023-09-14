@@ -1,15 +1,17 @@
 package serivces;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import managers.FileManager;
+import model.CountWordResponse;
 
 /**
  * WordCounter is a service that counts words in a given text.
  */
 public class WordCounter {
 
-  // key = word, value = word
+  // set of stop words
   private final Set<String> setOfStopWords;
 
   public WordCounter() {
@@ -22,25 +24,29 @@ public class WordCounter {
    * @param input - input from a user
    * @return number valid words
    */
-  public int countWords(String input) {
-    int resultCount = 0;
+  public CountWordResponse countWords(String input) {
+    CountWordResponse response = new CountWordResponse();
 
     // check if null or empty
     if (null == input || input.isEmpty()) {
-      return resultCount;
+      return response;
     }
 
-    // split the whole string into items without spaces
-    String[] result = input.split("\\s+");
+    // split the whole string into items without spaces based on multiple delimiters
+    String[] result = input.split("[\\s+-.?!,;:]");
+
+    Set<String> setOfUniqueWords = new HashSet<>();
 
     // for loop through items, and check they are correct words
     for (String item : result) {
       if (isValidWord(item)) {
-        resultCount++;
+        response.setWordCount(response.getWordCount()+1);
+        setOfUniqueWords.add(item);
       }
     }
 
-    return resultCount;
+    response.setUniqueWordCount(setOfUniqueWords.size());
+    return response;
   }
 
   /**
