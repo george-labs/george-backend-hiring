@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import serivce.WordCounter;
+import serivces.WordCounter;
 
 public class JavaApplication {
 
