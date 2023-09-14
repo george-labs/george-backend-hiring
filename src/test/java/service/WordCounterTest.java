@@ -23,7 +23,7 @@ class WordCounterTest {
     CountWordResponse result = wordCounter.countWords(input);
 
     assertEquals(4, result.getWordCount());
-    assertEquals(4, result.getUniqueWordCount());
+    assertEquals(4, result.getUniqueWords().size());
   }
 
   @Test
@@ -33,7 +33,7 @@ class WordCounterTest {
     CountWordResponse result = wordCounter.countWords(input);
 
     assertEquals(3, result.getWordCount());
-    assertEquals(3, result.getUniqueWordCount());
+    assertEquals(3, result.getUniqueWords().size());
   }
 
   @Test
@@ -45,7 +45,7 @@ class WordCounterTest {
     CountWordResponse result = wordCounter.countWords(input);
 
     assertEquals(0, result.getWordCount());
-    assertEquals(0, result.getUniqueWordCount());
+    assertEquals(0, result.getUniqueWords().size());
   }
 
   @Test
@@ -57,7 +57,7 @@ class WordCounterTest {
     CountWordResponse result = wordCounter.countWords(input);
 
     assertEquals(2, result.getWordCount());
-    assertEquals(2, result.getUniqueWordCount());
+    assertEquals(2, result.getUniqueWords().size());
   }
 
   @Test
@@ -69,7 +69,7 @@ class WordCounterTest {
     CountWordResponse result = wordCounter.countWords(input);
 
     assertEquals(7, result.getWordCount());
-    assertEquals(6, result.getUniqueWordCount());
+    assertEquals(6, result.getUniqueWords().size());
   }
 
   @Test
@@ -81,7 +81,7 @@ class WordCounterTest {
     CountWordResponse result = wordCounter.countWords(input);
 
     assertEquals(1, result.getWordCount());
-    assertEquals(1, result.getUniqueWordCount());
+    assertEquals(1, result.getUniqueWords().size());
   }
 
   @Test
@@ -105,4 +105,6 @@ class WordCounterTest {
 
     assertEquals(0.00, result.getAvgLength());
   }
+
+  // TODO: tests for index functionality
 }

@@ -35,20 +35,20 @@ public class WordCounter {
     // split the whole string into items without spaces based on multiple delimiters
     String[] result = input.split("[\\s+.?!,;:]");
 
-    Set<String> setOfUniqueWords = new HashSet<>();
+    // TODO: refactor, fix getter in CountWordResponse to not use this extra set
+    Set<String> uniqueWords = new HashSet<>();
     double totalLength = 0;
 
     // for loop through items, and check they are correct words
     for (String item : result) {
       if (isValidWord(item)) {
         response.setWordCount(response.getWordCount() + 1);
-        setOfUniqueWords.add(item);
+        uniqueWords.add(item);
         totalLength += item.length();
       }
     }
 
-    // set unique word count
-    response.setUniqueWordCount(setOfUniqueWords.size());
+    response.setUniqueWords(uniqueWords);
 
     // set average length
     if (response.getWordCount() != 0) {
