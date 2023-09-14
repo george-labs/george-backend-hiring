@@ -18,7 +18,7 @@ public class WordCounter {
     }
 
     // split the whole string into items without spaces
-    String result[] = input.trim().split("\\s*,\\s*");
+    String[] result = input.split("\\s+");
 
     // for loop through items, and check they are correct words
     for (String item : result) {
@@ -31,8 +31,6 @@ public class WordCounter {
   }
 
   private boolean isValidWord(String item) {
-    // TODO: implement this method
-
-    return false;
+    return item.matches("[a-zA-Z]+");
   }
 }
