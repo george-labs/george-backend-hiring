@@ -1,5 +1,11 @@
 package serivce;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -8,6 +14,39 @@ import java.util.logging.Logger;
 public class WordCounter {
 
   Logger logger = Logger.getLogger(WordCounter.class.getName());
+
+  // key = word, value = word
+  private final Map<String, String> map = new HashMap<>();
+
+  public WordCounter() {
+    loadStopWords();
+  }
+
+  private void loadStopWords() {
+    try {
+      InputStream is = this.getClass().getResourceAsStream("/stopwords.txt");
+      if (null == is) {
+        logger.warning("File not found");
+        return;
+      }
+
+      InputStreamReader isr = new InputStreamReader(is);
+      BufferedReader reader = new BufferedReader(isr);
+
+      String line = reader.readLine();
+
+      while (line != null) {
+        // add to the map before reading another line
+        map.put(line, line);
+
+        // add stop word to a map
+        line = reader.readLine();
+
+      }
+    } catch (IOException e) {
+      logger.warning("Error reading file");
+    }
+  }
 
   public int countWords(String input) {
     int resultCount = 0;
@@ -31,6 +70,6 @@ public class WordCounter {
   }
 
   private boolean isValidWord(String item) {
-    return item.matches("[a-zA-Z]+");
+    return item.matches("[a-zA-Z]+") && !map.containsKey(item);
   }
 }

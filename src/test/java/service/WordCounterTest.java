@@ -41,4 +41,13 @@ class WordCounterTest {
 
     assertEquals(0, result);
   }
+
+  @Test
+  void test_usingStopWords() {
+    String input = "the a on off correct word";
+
+    int result = wordCounter.countWords(input);
+
+    assertEquals(2, result);
+  }
 }
