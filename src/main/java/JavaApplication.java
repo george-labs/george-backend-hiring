@@ -30,10 +30,11 @@ public class JavaApplication {
 
     CountWordResponse countWordResponse = wordCounter.countWords(input);
 
+    String avg = String.format("%.2f", countWordResponse.getAvgLength());
+
     // write results to a console
     log.info(
-        "Number of words: " + countWordResponse.getWordCount() + ", unique: " + countWordResponse.getUniqueWordCount());
-//            + "; average word length: {} characters"");
-//    countWordResponse.getAvgLength()
+        "Number of words: " + countWordResponse.getWordCount() + ", unique: " + countWordResponse.getUniqueWordCount()
+            + "; average word length: " + avg + " characters");
   }
 }

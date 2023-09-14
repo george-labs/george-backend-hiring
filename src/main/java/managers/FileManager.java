@@ -47,6 +47,12 @@ public class FileManager {
 
     try {
       BufferedReader reader = getBufferedReader(fileName);
+
+      // if file not found, return empty string
+      if (null == reader) {
+        return "";
+      }
+
       String line = reader.readLine();
 
       while (line != null) {
@@ -71,17 +77,14 @@ public class FileManager {
    */
   private static BufferedReader getBufferedReader(String fileName) {
     InputStream is = FileManager.class.getClassLoader().getResourceAsStream(fileName);
+
+    // if file not found, return null
+    if (null == is) {
+      logger.warning("File not found");
+      return null;
+    }
+
     InputStreamReader isr = new InputStreamReader(Objects.requireNonNull(is));
     return new BufferedReader(isr);
-  }
-
-  /**
-   * Check if file is in our resources
-   *
-   * @param fileName - name of the file
-   * @return true if file is in our resources, false otherwise
-   */
-  public static boolean isFileInOurResources(String fileName) {
-    return FileManager.class.getClassLoader().getResource(fileName) != null;
   }
 }

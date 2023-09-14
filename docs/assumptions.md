@@ -2,12 +2,13 @@
 
 ## Iteration 1
 
-
 ## Iteration 2
-Q: will the stopwords be all in lowercase? 
+
+Q: will the stopwords be all in lowercase?
 A: I assume that stopwords match case sensitive
 
 ## Iteration 3
+
 Q: are those files stored in our resources?
 A: I assume that the files are stored in our resources
 
@@ -17,7 +18,14 @@ A: new line is like a space, so word cannot be split in two lines
 I assume that stopwords.txt is in our resources (not check for a null resource here)
 
 ## Iteration 4
+
 I assume that these (-.?!,;:) are split characters for words based on example from requirements
 
 ## Iteration 5
+
 I assume that hypen (-) is not a valid word
+
+## Iteration 6
+
+during refactor I came up to an assumption, if we will get a file name in args, and file doesn't exist, I will return 0
+as a result (words, unique, avg)

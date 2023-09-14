@@ -41,14 +41,19 @@ public class WordCounter {
     // for loop through items, and check they are correct words
     for (String item : result) {
       if (isValidWord(item)) {
-        response.setWordCount(response.getWordCount()+1);
+        response.setWordCount(response.getWordCount() + 1);
         setOfUniqueWords.add(item);
         totalLength += item.length();
       }
     }
 
+    // set unique word count
     response.setUniqueWordCount(setOfUniqueWords.size());
-    response.setAvgLength(totalLength / response.getWordCount());
+
+    // set average length
+    if (response.getWordCount() != 0) {
+      response.setAvgLength(totalLength / response.getWordCount());
+    }
 
     return response;
   }
@@ -60,6 +65,7 @@ public class WordCounter {
    * @return true if item is a valid word, otherwise false
    */
   private boolean isValidWord(String item) {
+    // - is not a valid word
     if (item.equals("-")) {
       return false;
     }

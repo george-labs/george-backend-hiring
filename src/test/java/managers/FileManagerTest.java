@@ -1,8 +1,6 @@
 package managers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,27 +19,5 @@ class FileManagerTest {
     String result = FileManager.loadTextFromFile(fileName);
 
     assertEquals(expected, result);
-  }
-
-  @Test
-  void test_isFileInOurResources_true() {
-    // given
-    String fileName = "mytext.txt";
-
-    // when
-    boolean result = FileManager.isFileInOurResources(fileName);
-
-    assertTrue(result);
-  }
-
-  @Test
-  void test_isFileInOurResources_false() {
-    // given
-    String fileName = "nonExisting.txt";
-
-    // when
-    boolean result = FileManager.isFileInOurResources(fileName);
-
-    assertFalse(result);
   }
 }

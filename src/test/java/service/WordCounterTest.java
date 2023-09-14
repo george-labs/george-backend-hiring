@@ -38,8 +38,10 @@ class WordCounterTest {
 
   @Test
   void test_emptyInput() {
+    // when
     String input = "";
 
+    // given
     CountWordResponse result = wordCounter.countWords(input);
 
     assertEquals(0, result.getWordCount());
@@ -48,8 +50,10 @@ class WordCounterTest {
 
   @Test
   void test_usingStopWords() {
+    // when
     String input = "the a on off correct word";
 
+    // given
     CountWordResponse result = wordCounter.countWords(input);
 
     assertEquals(2, result.getWordCount());
@@ -58,8 +62,10 @@ class WordCounterTest {
 
   @Test
   void test_usingNotUniqueWords() {
+    // when
     String input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
 
+    // given
     CountWordResponse result = wordCounter.countWords(input);
 
     assertEquals(7, result.getWordCount());
@@ -68,11 +74,35 @@ class WordCounterTest {
 
   @Test
   void test_hypenAsAWord() {
+    // when
     String input = "- valid invalid4";
 
+    // given
     CountWordResponse result = wordCounter.countWords(input);
 
     assertEquals(1, result.getWordCount());
     assertEquals(1, result.getUniqueWordCount());
+  }
+
+  @Test
+  void test_avgLenght_valid() {
+    // given
+    String input = "hi hu ha";
+
+    // when
+    CountWordResponse result = wordCounter.countWords(input);
+
+    assertEquals(2.00, result.getAvgLength());
+  }
+
+  @Test
+  void test_avgLenght_emptyInput() {
+    // given
+    String input = "";
+
+    // when
+    CountWordResponse result = wordCounter.countWords(input);
+
+    assertEquals(0.00, result.getAvgLength());
   }
 }
