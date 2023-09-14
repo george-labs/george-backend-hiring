@@ -62,7 +62,17 @@ class WordCounterTest {
 
     CountWordResponse result = wordCounter.countWords(input);
 
-    assertEquals(9, result.getWordCount());
-    assertEquals(7, result.getUniqueWordCount());
+    assertEquals(7, result.getWordCount());
+    assertEquals(6, result.getUniqueWordCount());
+  }
+
+  @Test
+  void test_hypenAsAWord() {
+    String input = "- valid invalid4";
+
+    CountWordResponse result = wordCounter.countWords(input);
+
+    assertEquals(1, result.getWordCount());
+    assertEquals(1, result.getUniqueWordCount());
   }
 }

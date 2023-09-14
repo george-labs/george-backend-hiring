@@ -33,7 +33,7 @@ public class WordCounter {
     }
 
     // split the whole string into items without spaces based on multiple delimiters
-    String[] result = input.split("[\\s+-.?!,;:]");
+    String[] result = input.split("[\\s+.?!,;:]");
 
     Set<String> setOfUniqueWords = new HashSet<>();
 
@@ -56,6 +56,10 @@ public class WordCounter {
    * @return true if item is a valid word, otherwise false
    */
   private boolean isValidWord(String item) {
-    return item.matches("[a-zA-Z]+") && !setOfStopWords.contains(item);
+    if (item.equals("-")) {
+      return false;
+    }
+
+    return item.matches("[a-zA-Z-]+") && !setOfStopWords.contains(item);
   }
 }

@@ -18,3 +18,6 @@ I assume that stopwords.txt is in our resources (not check for a null resource h
 
 ## Iteration 4
 I assume that these (-.?!,;:) are split characters for words based on example from requirements
+
+## Iteration 5
+I assume that hypen (-) is not a valid word
