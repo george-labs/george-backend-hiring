@@ -10,25 +10,20 @@ public class JavaApplication {
 
     Logger log = Logger.getLogger(JavaApplication.class.getName());
 
-    // show the Enter the text
-    // read the consoleInput from the user
-    Scanner in = new Scanner(System.in);
-
-    // starting text for a user
-    log.info("Enter a file name:");
-
-    String consoleInput = in.nextLine();
-
     // call the service WordCounter with an consoleInput
     WordCounter wordCounter = new WordCounter();
 
     String input = "";
-    if (consoleInput.contains(".txt") && FileManager.isFileInOurResources(consoleInput)) {
-      // use file as an consoleInput
-      input = FileManager.loadTextFromFile(consoleInput);
+
+    // if there is a name of the file in args, use that as an input
+    if (args.length > 0) {
+      input = FileManager.loadTextFromFile(args[0]);
     } else {
+      // continue with the Scanner
+      // show the start text
       log.info("Enter text:");
-      // use the consoleInput as it is
+      Scanner in = new Scanner(System.in);
+
       input = in.nextLine();
     }
 
