@@ -2,7 +2,7 @@ package serivces;
 
 import java.util.Set;
 
-import loaders.StopWordsLoader;
+import managers.FileManager;
 
 /**
  * WordCounter is a service that counts words in a given text.
@@ -13,7 +13,7 @@ public class WordCounter {
   private final Set<String> setOfStopWords;
 
   public WordCounter() {
-    setOfStopWords = StopWordsLoader.loadStopWords();
+    setOfStopWords = FileManager.loadStopWords();
   }
 
   /**
@@ -45,6 +45,7 @@ public class WordCounter {
 
   /**
    * check if word is valid based on requirements
+   *
    * @param item - string
    * @return true if item is a valid word, otherwise false
    */
