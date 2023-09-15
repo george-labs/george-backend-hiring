@@ -20,8 +20,8 @@ In general, it should feel as if you would have a regular day at work.
 
 ### Exercise: Word Count Kata
 
-Please find the requirements for the Word Count Kata on https://ccd-school.de/coding-dojo/#cd8.
-At the bottom of that page you will find all requirements split into 9 iterations.
+The requirements of the Word Count Kata are located in [requirements](requirements).
+You will find all requirements split into 9 iterations.
 The goal of this exercise is __not__ to finish as many iterations as possible.
 We will evaluate your solution based on __quality over quantity__.
 
