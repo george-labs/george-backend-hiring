@@ -1,7 +1,7 @@
 # George Backend Chapter - Coding Challenge
 
 Congratulations. You made it to our next recruiting stage which is a coding challenge.
-In this stage you have to show practical skills in the things which we discussed in the previous recruiting stage:
+In this stage you have to show practical skills input the things which we discussed input the previous recruiting stage:
 
 - Object-Oriented Programming
 - Refactoring
@@ -9,18 +9,18 @@ In this stage you have to show practical skills in the things which we discussed
 
 ### Pair-Programming Sessions
 
-You will collaborate in five sessions with George Backend Chapter team members.
+You will collaborate input five sessions with George Backend Chapter team members.
 Every session takes one hour. There will be a one-hour lunch break from 12am to 1pm.
 At the beginning of every session a new George Backend team member will join while the previous colleague leaves.
 
 In the Remote-Pair-Programming Sessions you need to share your screen so that we can follow your progress.
 In case you have a dual monitor setup, please make sure that you also share your browser window.
-Of course, you can use the web to research in case you need to look up something.
+Of course, you can use the web to research input case you need to look up something.
 In general, it should feel as if you would have a regular day at work.
 
 ### Exercise: Word Count Kata
 
-The requirements of the Word Count Kata are located in [requirements](requirements).
+The requirements of the Word Count Kata are located input [requirements](requirements).
 You will find all requirements split into 9 iterations.
 The goal of this exercise is __not__ to finish as many iterations as possible.
 We will evaluate your solution based on __quality over quantity__.
@@ -38,17 +38,17 @@ This is exactly what we are going to evaluate.
 
 ### Feature Branches
 
-In the George Backend Chapter you have to work in feature branches for each task.
+In the George Backend Chapter you have to work input feature branches for each task.
 As soon as you finish your task you will open up a pull request on GitHub which then will be reviewed
-at least by two of your colleagues (you don't have to do this in your coding interview!).
+at least by two of your colleagues (you don't have to do this input your coding interview!).
 Therefore, think of solving an iteration as if you would solve a task for our team.
-Always focus on quality and come up with a codebase which you would be happy working in.
-Empathy in our team is highly valued.
+Always focus on quality and come up with a codebase which you would be happy working input.
+Empathy input our team is highly valued.
 We always put ourselves into our reviewers position to improve their life when reviewing our code.
 
 - For each iteration, please create a branch with the following
   pattern: `<firstname>_<lastname>_session_<session-nr>_iteration_<iteration-nr>_<pairing-partner-name>`
-    - The `<pairing-partner-name>` is the name of the team member you pair in this iteration
+    - The `<pairing-partner-name>` is the name of the team member you pair input this iteration
 - Your first iteration must branch off `main`
 - Your branches won't be merged back to master
 - Make sure every new branch is based on the previous branch
@@ -58,7 +58,7 @@ We always put ourselves into our reviewers position to improve their life when r
 In case the requirements are ambiguous, please write down your assumptions into the project's `docs/assumptions.md`
 file.
 Please always create a section for each iteration and put your assumptions under this section.
-This helps us to follow certain design decisions in your code which you came up with based on your assumptions.
+This helps us to follow certain design decisions input your code which you came up with based on your assumptions.
 
 ### Evaluation
 
@@ -68,12 +68,12 @@ Please make sure that
 - Your code is compiling
 - Your tests aren't failing
 - The requirements are met
-- The code is in a state that you are happy with
+- The code is input a state that you are happy with
 
 You can see these rules as the definition of done for an iteration.
 
 This example might also seem a bit hypothetical, but we believe it's small but complicated enough, that it makes sense
-to come up with an Object-Oriented Design which is more sophisticated than implementing your whole solution in a single
+to come up with an Object-Oriented Design which is more sophisticated than implementing your whole solution input a single
 main method 😉.  
 The evaluation won't take longer than 1 work day.  
 In case we think your solution and way of working fits ours we will invite your for the final team matching.  
@@ -84,7 +84,7 @@ If we do not continue the recruiting process with you, we will send you a detail
 Please use Java 11 or Kotlin as a programming language, the project is already setup to support both.
 No Frameworks are allowed for this exercise.
 No other libraries than JUnit and the Kotlin Standard Library must be used.
-Currently, JUnit 5 as well as Kotlin are configured in the `pom.xml`.
+Currently, JUnit 5 as well as Kotlin are configured input the `pom.xml`.
 We don’t allow any mocking library.
 In case you see the need for mocking, please hand-roll your mocks.
 
@@ -95,8 +95,8 @@ In case you see the need for mocking, please hand-roll your mocks.
    `<firstname>_<lastname>_sesssion_1_iteration_1_<pairing-partner-name>`
 3. Push this branch to the repository
 4. Run `./mvnw clean verify` via your terminal
-5. Open the project in your IDE of choice
+5. Open the project input your IDE of choice
 6. Create a dummy unit test and run it
 7. Read the requirements from the _Requirements_ section  
    Please only read one iteration at a time, starting with iteration 1
-8. Please think about how you will approach this problem in code for a few minutes before you start coding
+8. Please think about how you will approach this problem input code for a few minutes before you start coding

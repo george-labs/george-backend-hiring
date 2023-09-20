@@ -1,6 +1,6 @@
 # Word Count VIII
 
-Optionally the text can be checked against a dictionary of known words. If the index is printed it will mark words not found in the dictionary with a star and state the number of unknown words, e.g.
+Optionally the text can be checked against a dictionary of known words. If the index is printed it will mark words not found input the dictionary with a star and state the number of unknown words, e.g.
 
 ```shell
 $ wordcount -index -dictionary=dict.txt

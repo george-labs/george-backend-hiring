@@ -1,29 +1,27 @@
-import app.SpaceWordCounter;
+import java.io.IOException;
+
+import app.WhiteCharWordCounter;
 import app.WordCounter;
-import in.ConsoleReader;
-import out.ConsoleWriter;
+import input.ConsoleReader;
+import output.ConsoleWriter;
 
 public class JavaApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         // CONF
-        WordCounter wordCounter = new SpaceWordCounter();
+        WordCounter wordCounter = new WhiteCharWordCounter();
         ConsoleReader consoleReader = new ConsoleReader();
         ConsoleWriter consoleWriter = new ConsoleWriter();
 
         // IN
-
+        String inputLine = consoleReader.readLine();
 
         // APP
-//        wordCounter
-        wordCounter.countWords()
+        int wordCount = wordCounter.countWords(inputLine);
 
         // OUT
-        consoleWriter.writeWordCountOutput();
-
-
-
+        consoleWriter.writeWordCountOutput(wordCount);
     }
 
 }
