@@ -8,10 +8,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class IngnoredWordsReader {
+public class IgnoredWordsReader {
 
-    private static final String IGNORED_WORDS_FILE_PATH = "stopwords.txt";
-
+    private static final String IGNORED_WORDS_FILE_PATH = "src/main/resources/stopwords.txt";
 
     public Set<String> readIgnoredWords() throws IOException {
         Set<String> ignoredWords;

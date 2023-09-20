@@ -1,32 +1,25 @@
 import java.io.IOException;
 
-import app.WhiteCharWordCounter;
-import app.WordCounter;
+import app.*;
 import app.validation.InputValidator;
-import config.IngnoredWordsReader;
+import config.IgnoredWordsReader;
 import input.ConsoleReader;
+import input.InputReader;
 import output.ConsoleWriter;
+import output.OutputWriter;
 
 public class JavaApplication {
 
     public static void main(String[] args) throws IOException {
-
         // CONF
-        WordCounter wordCounter = new WhiteCharWordCounter();
-        ConsoleReader consoleReader = new ConsoleReader();
-        ConsoleWriter consoleWriter = new ConsoleWriter();
+        InputReader consoleReader = new ConsoleReader();
+        OutputWriter consoleWriter = new ConsoleWriter();
         InputValidator inputValidator = new InputValidator();
-        IngnoredWordsReader ignoreWordsReader
+        IgnoredWordsReader ignoreWordsReader = new IgnoredWordsReader();
+        WordCounter wordCounter = new FilteredWordCounter(ignoreWordsReader.readIgnoredWords());
 
-        // IN
-        String inputLine = consoleReader.readLine();
-
-        // APP
-        inputValidator.validateInputLine(inputLine);
-        long wordCount = wordCounter.countWords(inputLine);
-
-        // OUT
-        consoleWriter.writeWordCountOutput(wordCount);
+        new WordCountApp(consoleReader, consoleWriter, inputValidator, wordCounter)
+                .run();
     }
 
 }

@@ -12,4 +12,5 @@
 
 ## Iteration 2 
 - stopwords.txt is in UTF-8
-- We agreed with Martin that stopwords is little bit misleading and better name for it would be ignored word
+- We agreed with Martin that stopwords may be little bit misleading and better name for it would be ignored words,
+  therefore, I use IgnoredWords in the code.

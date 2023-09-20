@@ -1,8 +1,9 @@
 package output;
 
-public class ConsoleWriter {
+public class ConsoleWriter implements OutputWriter {
 
-    public void writeWordCountOutput(long count) {
+    @Override
+    public void writeOutput(long count) {
         System.out.println("Number of words: " + count);
     }
 
