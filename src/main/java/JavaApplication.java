@@ -3,6 +3,7 @@ import java.io.IOException;
 import app.WhiteCharWordCounter;
 import app.WordCounter;
 import app.validation.InputValidator;
+import config.IngnoredWordsReader;
 import input.ConsoleReader;
 import output.ConsoleWriter;
 
@@ -15,6 +16,7 @@ public class JavaApplication {
         ConsoleReader consoleReader = new ConsoleReader();
         ConsoleWriter consoleWriter = new ConsoleWriter();
         InputValidator inputValidator = new InputValidator();
+        IngnoredWordsReader ignoreWordsReader
 
         // IN
         String inputLine = consoleReader.readLine();

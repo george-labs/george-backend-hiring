@@ -10,3 +10,6 @@
 - Error handling - TODO
 
 
+## Iteration 2 
+- stopwords.txt is in UTF-8
+- We agreed with Martin that stopwords is little bit misleading and better name for it would be ignored word
