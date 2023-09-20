@@ -2,6 +2,6 @@ package app;
 
 public interface WordCounter {
 
-    int countWords(String inputString);
+    long countWords(String inputString);
 
 }

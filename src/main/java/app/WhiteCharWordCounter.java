@@ -5,18 +5,15 @@ import java.util.regex.Pattern;
 
 public class WhiteCharWordCounter implements WordCounter {
 
+    private static final Pattern WHITECHARACTERS_PATTERN = Pattern.compile("\\s+");
     private static final Pattern AZ_PATTERN = Pattern.compile("[a-zA-Z]+");
 
     @Override
-    public int countWords(String inputString) {
-        return filterWords(inputString.split("\\s+"))
-                .length;
-    }
+    public long countWords(String inputString) {
 
-    private String[] filterWords(String[] words) {
-        return Arrays.stream(words)
+        return Arrays.stream(WHITECHARACTERS_PATTERN.split(inputString))
                 .filter(word -> AZ_PATTERN.matcher(word).matches())
-                .toArray(String[]::new);
+                .count();
     }
 
 }
