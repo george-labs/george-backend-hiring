@@ -22,7 +22,7 @@ public class JavaApplication {
 
         var wordCounter = new WordCounter(ui.getIgnoredWords());
 
-        System.out.println("Number of words: " + wordCounter.countWords(sentence));
+        ui.printOutput(sentence,wordCounter);
     }
 
 

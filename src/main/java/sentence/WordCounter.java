@@ -17,11 +17,20 @@ public class WordCounter {
         this.ignoreList = ignoreList;
     }
 
-    public int countWords(Sentence sentence) {
-        int result = 0;
+    public long countWords(Sentence sentence) {
+        return this.filterIgnoredWords(sentence).size();
+    }
+
+    public long countUnique(Sentence sentence) {
+        var words = this.filterIgnoredWords(sentence);
+        return words.stream().distinct().count();
+    }
+
+    private List<Word> filterIgnoredWords(Sentence sentence){
+        var result = new LinkedList<Word>();
         for(Word word: sentence.getWords()){
             if(!this.ignoreList.contains(word.toString())){
-                result++;
+                result.add(word);
             }
         }
         return result;

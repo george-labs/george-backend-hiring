@@ -39,4 +39,12 @@ public class WordCounterTest {
         var wordCounter = new WordCounter(Arrays.asList("a", "b"));
         Assertions.assertEquals(expected, wordCounter.countWords(sentence));
     }
+
+    @Test
+    public void Count_unique_words(){
+        var expected = 4;
+        var sentence  = new Sentence("This is a test: a magnificent test");
+        var wordCounter = new WordCounter(Arrays.asList("a", "b"));
+        Assertions.assertEquals(expected, wordCounter.countUnique(sentence));
+    }
 }

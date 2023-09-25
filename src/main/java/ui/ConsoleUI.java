@@ -3,6 +3,8 @@ package ui;
 import input.ConsoleInput;
 import input.FileInput;
 import input.Input;
+import sentence.Sentence;
+import sentence.WordCounter;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -50,6 +52,13 @@ public class ConsoleUI {
             throw new RuntimeException(e);
         }
         return new ArrayList<>();
+    }
+
+
+    public void printOutput(Sentence sentence, WordCounter wordCounter){
+        var output = "Number of words: "+ wordCounter.countWords(sentence);
+        output = output + ", unique: "+ wordCounter.countUnique(sentence);
+        System.out.println(output);
     }
 
 

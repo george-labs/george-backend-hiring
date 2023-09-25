@@ -22,3 +22,5 @@
 * 
 
 ## Iteration 4
+
+* Unique check is cases sensitive
