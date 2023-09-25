@@ -11,7 +11,7 @@ public class Sentence {
     public  Sentence(String sentence){
         this.words = new ArrayList<>();
 
-        var test = sentence.split("[^A-Za-z]");
+        var test = sentence.split("[^A-Za-z\\-]");
         for(String word_str:test){
             if(word_str.isEmpty())
                 continue;

@@ -45,6 +45,15 @@ public class SentenceTest {
     }
 
     @Test
+    public void Init_String_HyphenWord(){
+        var test_str = "hello world-test";
+        var expected = stringArrToWordItr(new String[]{"hello", "world-test"});
+        var sentence  = new Sentence(test_str);
+        Assertions.assertEquals(sentence.getWords().size(), 2);
+        Assertions.assertIterableEquals(expected, sentence.getWords());
+    }
+
+    @Test
     public void Init_String_Special_char(){
         var test_str = "hello@world.fizz,buzz&foo*bar";
         var expected = stringArrToWordItr(new String[]{"hello", "world", "fizz", "buzz", "foo", "bar"});

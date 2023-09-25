@@ -54,7 +54,6 @@ public class ConsoleUI {
         return new ArrayList<>();
     }
 
-
     public void printOutput(Sentence sentence, WordCounter wordCounter){
         var output = "Number of words: "+ wordCounter.countWords(sentence);
         output = output + ", unique: "+ wordCounter.countUnique(sentence);
