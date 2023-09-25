@@ -3,17 +3,12 @@ package ui;
 import input.ConsoleInput;
 import input.FileInput;
 import input.Input;
-import sentence.WordCounter;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.lang.System.exit;
 
 public class ConsoleUI {
     private static final int TEXT_INVALID_EXIT = 5;
@@ -30,30 +25,31 @@ public class ConsoleUI {
         Input input;
         if(this.args.length >= 1){
             try {
-                input = new FileInput(args[0]);
+                return new FileInput(args[0]).getString();
             } catch (FileNotFoundException e) {
-                System.err.println("Cannot read input: '"+ args[0] + "'");;
+                System.err.println("Cannot read input: '"+ args[0] + "'");
+                throw new RuntimeException(e);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }else{
-            input = new ConsoleInput("Enter text:");
+            return new ConsoleInput("Enter text:").getString();
         }
-        return input.getString();
+
     }
 
     public List<String> getIgnoredWords(){
         var ignorePath = "./stopwords.txt";
-        try{
-            var ignoreStr = readFile(ignorePath);
-            return Arrays.asList(ignoreStr.split(" "));
-        } catch (FileNotFoundException ignore) {
+        try {
+            var input = new FileInput(ignorePath);
+            return Arrays.asList(input.getString().split(" "));
+        } catch (FileNotFoundException ignore){
             System.out.println("Ignore file: '" + ignorePath + "' not found.");
-        } catch (IOException ignore) {
+        } catch (IOException e) {
             System.out.println("Cannot access : '" + ignorePath + "'");
-            exit(FILE_ACCESS_EXIT);
+            throw new RuntimeException(e);
         }
-        return new ArrayList<String>();
+        return new ArrayList<>();
     }
 
 
