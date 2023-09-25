@@ -1,18 +1,18 @@
 import sentence.Sentence;
-import sentence.Word;
+import sentence.WordCounter;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
+import java.io.*;
 import static java.lang.System.exit;
-import static java.lang.System.setOut;
+
 
 public class JavaApplication {
     private static final int TEXT_INVALID_EXIT = 5;
 
 
     public static void main(String[] args) {
+        File ignoreFile = new File("./stopwords.txt");
+        WordCounter wordCounter = new WordCounter(ignoreFile);
+
         System.out.print("Enter text: ");
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(System.in));
@@ -27,6 +27,6 @@ public class JavaApplication {
         }
         var sentence = new Sentence(input);
 
-        System.out.println("Number of words: " + sentence.getWords().size());
+        System.out.println("Number of words: " + wordCounter.countWords(sentence));
     }
 }
