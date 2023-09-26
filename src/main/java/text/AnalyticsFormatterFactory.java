@@ -1,21 +1,14 @@
 package text;
 
-import java.util.Arrays;
+import input.AppArguments;
 
 public class AnalyticsFormatterFactory {
 
-    public AnalyticsFormatter createTextAnalyticsFormatter(String[] args) {
+    public AnalyticsFormatter createTextAnalyticsFormatter(AppArguments appArguments) {
         AnalyticsFormatter analyticsFormatter = new SimpleAnalyticsFormatter();
-        if (includeIndex(args)) {
-            analyticsFormatter = new IndexedAnalyticsDecorator(analyticsFormatter);
+        if (appArguments.isIndexed()) {
+            analyticsFormatter = new IndexedAnalyticsDecorator(analyticsFormatter, appArguments.getDictionary());
         }
         return analyticsFormatter;
-    }
-
-    private boolean includeIndex(String[] args) {
-        if (args == null || args.length == 0) {
-            return false;
-        }
-        return Arrays.asList(args).contains("-index");
     }
 }
