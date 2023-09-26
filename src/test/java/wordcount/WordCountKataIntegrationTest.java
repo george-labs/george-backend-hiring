@@ -31,7 +31,7 @@ public class WordCountKataIntegrationTest {
 
         TextAnalytics result = wordCountKata.countWords(args, "integration_test_stopwords.txt");
 
-        Assertions.assertEquals(new TextAnalytics(9,7), result);
+        Assertions.assertEquals(new TextAnalytics(7,6), result);
     }
 
     @Test

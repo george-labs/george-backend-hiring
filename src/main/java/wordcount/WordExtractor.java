@@ -19,7 +19,7 @@ public class WordExtractor {
     }
 
     private static Matcher getWordPattern(String text) {
-        var pattern = Pattern.compile("\\w+");
+        var pattern = Pattern.compile("\\b[\\w-]+\\b");
         return pattern.matcher(text);
     }
 }

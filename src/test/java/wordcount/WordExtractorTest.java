@@ -37,6 +37,15 @@ public class WordExtractorTest {
     }
 
     @Test
+    public void testCountNumberOfWordsCountHyphenAsOne() {
+        String input = "Mary-had a little lamb.";
+
+        var extracted = new WordExtractor().getWords(input);
+
+        Assertions.assertEquals(List.of("Mary-had", "a", "little", "lamb"), extracted);
+    }
+
+    @Test
     public void testCountNumberOfWordsWithDifferentCases() {
         String input = "MAry HAD a lIttle lamb.";
 
