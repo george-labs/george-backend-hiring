@@ -1,4 +1,4 @@
-package wordcount;
+package text;
 
 import java.util.ArrayList;
 import java.util.List;

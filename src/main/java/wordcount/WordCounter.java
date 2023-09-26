@@ -1,5 +1,7 @@
 package wordcount;
 
+import text.TextAnalytics;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -24,7 +26,15 @@ public class WordCounter {
         var filteredWords = getFilteredWords(words);
         int count = filteredWords.size();
         int uniqueCount = new HashSet<>(filteredWords).size();
-        return new TextAnalytics(count, uniqueCount);
+        double averageWordLength = calculateAverageWordLength(filteredWords);
+        return new TextAnalytics(count, uniqueCount, averageWordLength);
+    }
+
+    private double calculateAverageWordLength(List<String> filteredWords) {
+        return filteredWords.stream()
+                .mapToDouble(String::length)
+                .average()
+                .orElse(0.0);
     }
 
     public List<String> getFilteredWords(Collection<String> words) {

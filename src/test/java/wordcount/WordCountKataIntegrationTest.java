@@ -5,6 +5,8 @@ import input.InputReaderFactory;
 import input.InputReaderFactoryMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import text.TextAnalytics;
+import text.WordExtractor;
 
 import java.io.ByteArrayInputStream;
 
@@ -19,7 +21,7 @@ public class WordCountKataIntegrationTest {
 
         TextAnalytics result = wordCountKata.countWords(args, "integration_test_stopwords.txt");
 
-        Assertions.assertEquals(new TextAnalytics(4,4), result);
+        Assertions.assertEquals(new TextAnalytics(4,4, 4.25), result);
     }
 
     @Test
@@ -31,7 +33,7 @@ public class WordCountKataIntegrationTest {
 
         TextAnalytics result = wordCountKata.countWords(args, "integration_test_stopwords.txt");
 
-        Assertions.assertEquals(new TextAnalytics(7,6), result);
+        Assertions.assertEquals(new TextAnalytics(7,6, 6.428571428571429), result);
     }
 
     @Test
@@ -41,6 +43,6 @@ public class WordCountKataIntegrationTest {
 
         TextAnalytics result  = wordCountKata.countWords(args, "integration_test_stopwords.txt");
 
-        Assertions.assertEquals(new TextAnalytics(4,4), result);
+        Assertions.assertEquals(new TextAnalytics(4,4, 4.25), result);
     }
 }

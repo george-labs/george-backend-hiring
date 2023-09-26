@@ -2,6 +2,8 @@ package wordcount;
 
 import file.FileHandler;
 import input.InputReaderFactory;
+import text.TextAnalytics;
+import text.WordExtractor;
 
 public class WordCountKata {
 
