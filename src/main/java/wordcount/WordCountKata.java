@@ -17,7 +17,7 @@ public class WordCountKata {
         this.inputReaderFactory = inputReaderFactory;
     }
 
-    public TextAnalytics countWords(String[] args, String stopWordsFileName) {
+    public TextAnalytics getTextAnalytics(String[] args, String stopWordsFileName) {
         String stopWordsInput = fileHandler.readFileToString(stopWordsFileName);
         var stopWords = wordExtractor.getWords(stopWordsInput);
 
@@ -25,6 +25,6 @@ public class WordCountKata {
 
         var wordsToCount = wordExtractor.getWords(inputText);
 
-        return new WordCounter(stopWords).countNumberOfWords(wordsToCount);
+        return new TextAnalyzer(stopWords).analyzeWords(wordsToCount);
     }
 }

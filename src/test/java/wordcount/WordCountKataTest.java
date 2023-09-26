@@ -9,40 +9,45 @@ import text.TextAnalytics;
 import text.WordExtractor;
 
 import java.io.ByteArrayInputStream;
+import java.util.List;
 
-public class WordCountKataIntegrationTest {
+public class WordCountKataTest {
 
     @Test
-    public void testWordCountFlowNoArgs() {
+    public void testUserInputAnalytics() {
         String[] args = new String[]{};
         String inputString = "Mary had a little lamb";
         var inputStream = new ByteArrayInputStream(inputString.getBytes());
         var wordCountKata = new WordCountKata(new FileHandler(), new WordExtractor(), new InputReaderFactoryMock(inputStream));
 
-        TextAnalytics result = wordCountKata.countWords(args, "integration_test_stopwords.txt");
+        TextAnalytics result = wordCountKata.getTextAnalytics(args, "integration_test_stopwords.txt");
 
-        Assertions.assertEquals(new TextAnalytics(4,4, 4.25, words), result);
+        List<String> expectedWords = List.of("Mary", "had", "little", "lamb");
+        TextAnalytics expectedAnalytics = new TextAnalytics(4, 4, 4.25, expectedWords);
+        Assertions.assertEquals(expectedAnalytics, result);
     }
 
     @Test
-    public void testWordCountFlowNoArgsComplexInput() {
+    public void testComplexUserInputAnalytics() {
         String[] args = new String[]{};
         String inputString = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
         var inputStream = new ByteArrayInputStream(inputString.getBytes());
         var wordCountKata = new WordCountKata(new FileHandler(), new WordExtractor(), new InputReaderFactoryMock(inputStream));
 
-        TextAnalytics result = wordCountKata.countWords(args, "integration_test_stopwords.txt");
+        TextAnalytics result = wordCountKata.getTextAnalytics(args, "integration_test_stopwords.txt");
 
-        Assertions.assertEquals(new TextAnalytics(7,6, 6.428571428571429, words), result);
+        List<String> expectedWords = List.of("Humpty-Dumpty", "sat", "on", "wall", "had", "great", "fall");
+        Assertions.assertEquals(new TextAnalytics(7,6, 6.428571428571429, expectedWords), result);
     }
 
     @Test
-    public void testWordCountFlowFileInputArgs() {
+    public void textFileInputAnalytics() {
         String[] args = new String[]{"integration_test_input.txt"};
         var wordCountKata = new WordCountKata(new FileHandler(), new WordExtractor(), new InputReaderFactory());
 
-        TextAnalytics result  = wordCountKata.countWords(args, "integration_test_stopwords.txt");
+        TextAnalytics result  = wordCountKata.getTextAnalytics(args, "integration_test_stopwords.txt");
 
-        Assertions.assertEquals(new TextAnalytics(4,4, 4.25, words), result);
+        List<String> expectedWords = List.of("Mary", "had", "little", "lamb");
+        Assertions.assertEquals(new TextAnalytics(4,4, 4.25, expectedWords), result);
     }
 }

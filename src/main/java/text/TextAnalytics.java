@@ -8,7 +8,7 @@ public class TextAnalytics {
     private final int wordCount;
     private final int uniqueWordCount;
     private final double averageWordLength;
-    private final Collection<String> words;
+    private final List<String> words;
 
     public TextAnalytics() {
         wordCount = 0;
@@ -17,7 +17,7 @@ public class TextAnalytics {
         words = List.of();
     }
 
-    public TextAnalytics(int wordCount, int uniqueWordCount, double averageWordLength, Collection<String> words) {
+    public TextAnalytics(int wordCount, int uniqueWordCount, double averageWordLength, List<String> words) {
         this.wordCount = wordCount;
         this.uniqueWordCount = uniqueWordCount;
         this.averageWordLength = averageWordLength;

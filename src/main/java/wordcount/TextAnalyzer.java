@@ -8,18 +8,18 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class WordCounter {
+public class TextAnalyzer {
     private final Set<String> stopWords;
 
-    public WordCounter() {
+    public TextAnalyzer() {
         stopWords = Set.of();
     }
 
-    public WordCounter(List<String> stopWords) {
+    public TextAnalyzer(List<String> stopWords) {
         this.stopWords = new HashSet<>(stopWords);
     }
 
-    public TextAnalytics countNumberOfWords(Collection<String> words) {
+    public TextAnalytics analyzeWords(List<String> words) {
         if (words == null) {
             return new TextAnalytics();
         }
