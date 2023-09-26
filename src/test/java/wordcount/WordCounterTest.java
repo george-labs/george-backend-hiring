@@ -12,15 +12,30 @@ public class WordCounterTest {
 
     @Test
     public void testWordCountNoStopWords() {
-        int count = new WordCounter().countNumberOfWords(INPUT_WORDS);
+        TextAnalytics result  = new WordCounter().countNumberOfWords(INPUT_WORDS);
 
-        Assertions.assertEquals(5, count);
+        Assertions.assertEquals(5, result.getWordCount());
     }
 
     @Test
     public void testWordCountUseStopWords() {
-        int count = new WordCounter(STOP_WORDS).countNumberOfWords(INPUT_WORDS);
+        TextAnalytics result  = new WordCounter(STOP_WORDS).countNumberOfWords(INPUT_WORDS);
 
-        Assertions.assertEquals(4, count);
+        Assertions.assertEquals(4, result.getWordCount());
+    }
+
+
+    @Test
+    public void testUniqueWordCountNoStopWords() {
+        TextAnalytics result  = new WordCounter().countNumberOfWords(INPUT_WORDS);
+
+        Assertions.assertEquals(5, result.getUniqueWordCount());
+    }
+
+    @Test
+    public void testUniqueWordCountUseStopWords() {
+        TextAnalytics result  = new WordCounter(STOP_WORDS).countNumberOfWords(INPUT_WORDS);
+
+        Assertions.assertEquals(4, result.getUniqueWordCount());
     }
 }

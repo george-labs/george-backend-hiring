@@ -17,9 +17,21 @@ public class WordCountKataIntegrationTest {
         var inputStream = new ByteArrayInputStream(inputString.getBytes());
         var wordCountKata = new WordCountKata(new FileHandler(), new WordExtractor(), new InputReaderFactoryMock(inputStream));
 
-        int count = wordCountKata.countWords(args, "integration_test_stopwords.txt");
+        TextAnalytics result = wordCountKata.countWords(args, "integration_test_stopwords.txt");
 
-        Assertions.assertEquals(4, count);
+        Assertions.assertEquals(new TextAnalytics(4,4), result);
+    }
+
+    @Test
+    public void testWordCountFlowNoArgsComplexInput() {
+        String[] args = new String[]{};
+        String inputString = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        var inputStream = new ByteArrayInputStream(inputString.getBytes());
+        var wordCountKata = new WordCountKata(new FileHandler(), new WordExtractor(), new InputReaderFactoryMock(inputStream));
+
+        TextAnalytics result = wordCountKata.countWords(args, "integration_test_stopwords.txt");
+
+        Assertions.assertEquals(new TextAnalytics(9,7), result);
     }
 
     @Test
@@ -27,8 +39,8 @@ public class WordCountKataIntegrationTest {
         String[] args = new String[]{"integration_test_input.txt"};
         var wordCountKata = new WordCountKata(new FileHandler(), new WordExtractor(), new InputReaderFactory());
 
-        int count = wordCountKata.countWords(args, "integration_test_stopwords.txt");
+        TextAnalytics result  = wordCountKata.countWords(args, "integration_test_stopwords.txt");
 
-        Assertions.assertEquals(4, count);
+        Assertions.assertEquals(new TextAnalytics(4,4), result);
     }
 }
