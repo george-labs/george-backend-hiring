@@ -1,20 +1,31 @@
 package wordcount;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
-import java.util.regex.Pattern;
+import java.util.Set;
 
 public class WordCounter {
-    public int countNumberOfWords(String input) {
-        if (input == null || input.isBlank()) {
+    private final Set<String> stopWords;
+
+    public WordCounter() {
+        stopWords = Set.of();
+    }
+
+    public WordCounter(List<String> stopWords) {
+        this.stopWords = new HashSet<>(stopWords);
+    }
+
+    public int countNumberOfWords(Collection<String> words) {
+        if (words == null) {
             return 0;
         }
-        var pattern = Pattern.compile("\\w+");
-        var matcher = pattern.matcher(input);
-        List<String> words = new ArrayList<>();
-        while (matcher.find()) {
-            words.add(matcher.group());
+        int count = 0;
+        for (String word : words) {
+            if (! stopWords.contains(word)) {
+                count++;
+            }
         }
-        return words.size();
+        return count;
     }
 }

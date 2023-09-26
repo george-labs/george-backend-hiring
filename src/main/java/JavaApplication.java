@@ -1,13 +1,12 @@
+import file.FileHandler;
 import input.UserInputHandler;
-import wordcount.WordCounter;
+import wordcount.WordCountKata;
+import wordcount.WordExtractor;
 
 public class JavaApplication {
-    private static final UserInputHandler userInputHandler = new UserInputHandler();
-    private static final WordCounter wordCounter = new WordCounter();
     public static void main(String[] args) {
         System.out.print("Enter text: ");
-        String inputText = userInputHandler.readUserInput(System.in);
-        int wordCount = wordCounter.countNumberOfWords(inputText);
-        System.out.println("Number of words:" + wordCount);
+        int count = new WordCountKata( new UserInputHandler(inputStream), new FileHandler(), new WordExtractor()).countWords();
+        System.out.println("Number of words:" + count);
     }
 }
