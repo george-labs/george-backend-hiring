@@ -19,7 +19,7 @@ public class WordCountKata {
         String stopWordsInput = fileHandler.readFileToString(stopWordsFileName);
         var stopWords = wordExtractor.getWords(stopWordsInput);
 
-        String inputText = userInputHandler.readUserInput(System.in);
+        String inputText = userInputHandler.readUserInput();
 
         var wordsToCount = wordExtractor.getWords(inputText);
 

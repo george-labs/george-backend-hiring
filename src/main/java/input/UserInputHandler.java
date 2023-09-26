@@ -10,7 +10,7 @@ public class UserInputHandler {
         this.inputStream = inputStream;
     }
 
-    public String readUserInput(InputStream inputStream) {
+    public String readUserInput() {
         if (inputStream == null) {
             return null;
         }

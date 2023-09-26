@@ -12,7 +12,7 @@ public class UserInputHandlerTest {
         String inputString = "dummy text";
         var inputStream = new ByteArrayInputStream(inputString.getBytes());
 
-        String readOutput = new UserInputHandler(inputStream).readUserInput(inputStream);
+        String readOutput = new UserInputHandler(inputStream).readUserInput();
 
         Assertions.assertEquals(inputString, readOutput);
     }
@@ -22,7 +22,7 @@ public class UserInputHandlerTest {
         String inputString = "";
         var inputStream = new ByteArrayInputStream(inputString.getBytes());
 
-        String readOutput = new UserInputHandler(inputStream).readUserInput(inputStream);
+        String readOutput = new UserInputHandler(inputStream).readUserInput();
 
         Assertions.assertNull(readOutput);
     }
@@ -31,7 +31,7 @@ public class UserInputHandlerTest {
     public void testReadNullStream() {
         InputStream inputStream = null;
 
-        String readOutput = new UserInputHandler(inputStream).readUserInput(inputStream);
+        String readOutput = new UserInputHandler(inputStream).readUserInput();
 
         Assertions.assertNull(readOutput);
     }
