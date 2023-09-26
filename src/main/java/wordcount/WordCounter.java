@@ -27,7 +27,7 @@ public class WordCounter {
         int count = filteredWords.size();
         int uniqueCount = new HashSet<>(filteredWords).size();
         double averageWordLength = calculateAverageWordLength(filteredWords);
-        return new TextAnalytics(count, uniqueCount, averageWordLength);
+        return new TextAnalytics(count, uniqueCount, averageWordLength, words);
     }
 
     private double calculateAverageWordLength(List<String> filteredWords) {

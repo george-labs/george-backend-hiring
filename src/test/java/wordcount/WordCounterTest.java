@@ -59,13 +59,13 @@ public class WordCounterTest {
     public void testWordCountNoInput() {
         TextAnalytics result  = new WordCounter(STOP_WORDS).countNumberOfWords(List.of());
 
-        Assertions.assertEquals(new TextAnalytics(0, 0, 0.0), result);
+        Assertions.assertEquals(new TextAnalytics(0, 0, 0.0, words), result);
     }
 
     @Test
     public void testWordCountNullInput() {
         TextAnalytics result  = new WordCounter(STOP_WORDS).countNumberOfWords(null);
 
-        Assertions.assertEquals(new TextAnalytics(0, 0, 0.0), result);
+        Assertions.assertEquals(new TextAnalytics(0, 0, 0.0, words), result);
     }
 }

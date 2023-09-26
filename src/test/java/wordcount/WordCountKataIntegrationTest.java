@@ -21,7 +21,7 @@ public class WordCountKataIntegrationTest {
 
         TextAnalytics result = wordCountKata.countWords(args, "integration_test_stopwords.txt");
 
-        Assertions.assertEquals(new TextAnalytics(4,4, 4.25), result);
+        Assertions.assertEquals(new TextAnalytics(4,4, 4.25, words), result);
     }
 
     @Test
@@ -33,7 +33,7 @@ public class WordCountKataIntegrationTest {
 
         TextAnalytics result = wordCountKata.countWords(args, "integration_test_stopwords.txt");
 
-        Assertions.assertEquals(new TextAnalytics(7,6, 6.428571428571429), result);
+        Assertions.assertEquals(new TextAnalytics(7,6, 6.428571428571429, words), result);
     }
 
     @Test
@@ -43,6 +43,6 @@ public class WordCountKataIntegrationTest {
 
         TextAnalytics result  = wordCountKata.countWords(args, "integration_test_stopwords.txt");
 
-        Assertions.assertEquals(new TextAnalytics(4,4, 4.25), result);
+        Assertions.assertEquals(new TextAnalytics(4,4, 4.25, words), result);
     }
 }

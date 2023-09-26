@@ -1,6 +1,6 @@
 import file.FileHandler;
 import input.InputReaderFactory;
-import text.TextAnalyticsFormatter;
+import text.TextAnalyticsFormatterFactory;
 import text.WordExtractor;
 import wordcount.WordCountKata;
 
@@ -11,6 +11,7 @@ public class JavaApplication {
         var wordCountKata = new WordCountKata(new FileHandler(), new WordExtractor(), new InputReaderFactory());
         var textAnalytics = wordCountKata.countWords(args,"stopwords.txt");
 
-        System.out.println(new TextAnalyticsFormatter(textAnalytics).getFormattedData());
+        var formatter = new TextAnalyticsFormatterFactory().createTextAnalyticsFormatter(args);
+        System.out.println(formatter.getFormattedData(textAnalytics));
     }
 }
