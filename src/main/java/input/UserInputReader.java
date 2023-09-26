@@ -3,14 +3,14 @@ package input;
 import java.io.InputStream;
 import java.util.Scanner;
 
-public class UserInputHandler {
+public class UserInputReader implements InputReader {
     private final InputStream inputStream;
 
-    public UserInputHandler(InputStream inputStream) {
+    public UserInputReader(InputStream inputStream) {
         this.inputStream = inputStream;
     }
 
-    public String readUserInput() {
+    public String getInputText() {
         if (inputStream == null) {
             return null;
         }

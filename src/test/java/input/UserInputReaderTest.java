@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-public class UserInputHandlerTest {
+public class UserInputReaderTest {
     @Test
     public void testReadUserInput() {
         String inputString = "dummy text";
         var inputStream = new ByteArrayInputStream(inputString.getBytes());
 
-        String readOutput = new UserInputHandler(inputStream).readUserInput();
+        String readOutput = new UserInputReader(inputStream).getInputText();
 
         Assertions.assertEquals(inputString, readOutput);
     }
@@ -22,7 +22,7 @@ public class UserInputHandlerTest {
         String inputString = "";
         var inputStream = new ByteArrayInputStream(inputString.getBytes());
 
-        String readOutput = new UserInputHandler(inputStream).readUserInput();
+        String readOutput = new UserInputReader(inputStream).getInputText();
 
         Assertions.assertNull(readOutput);
     }
@@ -31,7 +31,7 @@ public class UserInputHandlerTest {
     public void testReadNullStream() {
         InputStream inputStream = null;
 
-        String readOutput = new UserInputHandler(inputStream).readUserInput();
+        String readOutput = new UserInputReader(inputStream).getInputText();
 
         Assertions.assertNull(readOutput);
     }

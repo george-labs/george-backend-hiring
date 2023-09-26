@@ -1,25 +1,25 @@
 package wordcount;
 
 import file.FileHandler;
-import input.UserInputHandler;
+import input.InputReaderFactory;
 
 public class WordCountKata {
 
-    private final UserInputHandler userInputHandler;
     private final FileHandler fileHandler;
     private final WordExtractor wordExtractor;
+    private final InputReaderFactory inputReaderFactory;
 
-    public WordCountKata(UserInputHandler userInputHandler, FileHandler fileHandler, WordExtractor wordExtractor) {
-        this.userInputHandler = userInputHandler;
+    public WordCountKata(FileHandler fileHandler, WordExtractor wordExtractor, InputReaderFactory inputReaderFactory) {
         this.fileHandler = fileHandler;
         this.wordExtractor = wordExtractor;
+        this.inputReaderFactory = inputReaderFactory;
     }
 
-    public int countWords(String stopWordsFileName) {
+    public int countWords(String[] args, String stopWordsFileName) {
         String stopWordsInput = fileHandler.readFileToString(stopWordsFileName);
         var stopWords = wordExtractor.getWords(stopWordsInput);
 
-        String inputText = userInputHandler.readUserInput();
+        String inputText = inputReaderFactory.createInputReader(args).getInputText();
 
         var wordsToCount = wordExtractor.getWords(inputText);
 
