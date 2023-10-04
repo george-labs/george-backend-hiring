@@ -1,4 +1,4 @@
-package george;
+package george.words;
 
 import java.util.List;
 import org.junit.jupiter.api.Assertions;

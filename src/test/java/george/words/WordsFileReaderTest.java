@@ -1,4 +1,4 @@
-package george;
+package george.words;
 
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
@@ -9,7 +9,7 @@ class WordsFileReaderTest {
   @Test
   void readWordsWithoutBlankLines() {
     WordsFileReader wordsFileReader = new WordsFileReader(
-        "src/test/resources/george/stopwords.txt");
+        "src/test/resources/george/words/stopwords.txt");
 
     List<String> strings = wordsFileReader.read();
 
@@ -21,7 +21,7 @@ class WordsFileReaderTest {
   @Test
   void readWordsWithBlankLines() {
     WordsFileReader wordsFileReader = new WordsFileReader(
-        "src/test/resources/george/stopwordsWithBlankLines.txt");
+        "src/test/resources/george/words/stopwordsWithBlankLines.txt");
 
     List<String> strings = wordsFileReader.read();
 

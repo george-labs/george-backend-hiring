@@ -1,7 +1,5 @@
 package george.reader;
 
-import george.TextReader;
-
 public class TextReaderFactory {
 
   public static TextReader createReader(String filename) {

@@ -2,7 +2,10 @@ package george;
 
 import george.filter.StopWordsFilter;
 import george.filter.UniquenessWordsFilter;
+import george.reader.TextReader;
 import george.reader.TextReaderFactory;
+import george.words.WordsFileReader;
+import george.words.WordsSplitter;
 import java.util.HashSet;
 import java.util.List;
 

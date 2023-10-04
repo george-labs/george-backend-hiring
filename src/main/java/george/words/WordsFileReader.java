@@ -1,4 +1,4 @@
-package george;
+package george.words;
 
 import java.io.IOException;
 import java.nio.file.Files;

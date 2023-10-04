@@ -1,6 +1,5 @@
 package george.reader;
 
-import george.TextReader;
 import java.io.Console;
 
 public class TextConsoleReader implements TextReader {

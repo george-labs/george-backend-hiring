@@ -1,6 +1,5 @@
 package george.reader;
 
-import george.TextReader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

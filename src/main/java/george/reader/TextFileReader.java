@@ -1,6 +1,5 @@
 package george.reader;
 
-import george.TextReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

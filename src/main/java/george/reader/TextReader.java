@@ -1,4 +1,4 @@
-package george;
+package george.reader;
 
 public interface TextReader {
 
