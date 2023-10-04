@@ -16,9 +16,9 @@ public class JavaApplication {
     WordsFilter wordsFilter = new WordsFilter(new HashSet<>(filterWords));
 
     String text = reader.read();
-    List<String> strings = splitter.split(text);
-    strings = wordsFilter.filter(strings);
+    List<String> words = splitter.split(text);
+    words = wordsFilter.filter(words);
 
-    System.out.println("Number of words: " + strings.size());
+    System.out.println("Number of words: " + words.size());
   }
 }
