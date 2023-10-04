@@ -1,5 +1,6 @@
 package george;
 
+import george.reader.TextReaderFactory;
 import java.util.HashSet;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class JavaApplication {
     WordsFileReader wordsFileReader = new WordsFileReader("stopwords.txt");
     List<String> filterWords = wordsFileReader.read();
 
-    TextReader reader = new TextReader();
+    TextReader reader = TextReaderFactory.createReader(args.length == 1 ? args[0] : null);
     WordsSplitter splitter = new WordsSplitter();
     WordsFilter wordsFilter = new WordsFilter(new HashSet<>(filterWords));
 

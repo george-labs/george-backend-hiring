@@ -8,7 +8,8 @@ class WordsFileReaderTest {
 
   @Test
   void readWordsWithoutBlankLines() {
-    WordsFileReader wordsFileReader = new WordsFileReader("src/test/java/stopwords.txt");
+    WordsFileReader wordsFileReader = new WordsFileReader(
+        "src/test/resources/george/stopwords.txt");
 
     List<String> strings = wordsFileReader.read();
 
@@ -20,7 +21,7 @@ class WordsFileReaderTest {
   @Test
   void readWordsWithBlankLines() {
     WordsFileReader wordsFileReader = new WordsFileReader(
-        "src/test/java/stopwordsWithBlankLines.txt");
+        "src/test/resources/george/stopwordsWithBlankLines.txt");
 
     List<String> strings = wordsFileReader.read();
 
