@@ -32,4 +32,31 @@ class WordsSplitterTest {
     Assertions.assertEquals(2, strings.size());
   }
 
+  @Test
+  void splitWhenWordWithHyphenThen2Items() {
+    List<String> strings = wordsSplitter.split("qqqq-ffere");
+
+    Assertions.assertEquals(2, strings.size());
+  }
+
+  @Test
+  void splitWhenWordWithDoubleHyphenThen2Items() {
+    List<String> strings = wordsSplitter.split("qqqq--ffere");
+
+    Assertions.assertEquals(2, strings.size());
+  }
+
+  @Test
+  void splitWhenWordWithHyphenOnEdgesThen2Items() {
+    List<String> strings = wordsSplitter.split("-qqqq ffere-");
+
+    Assertions.assertEquals(2, strings.size());
+  }
+
+  @Test
+  void splitWhenTwoWordsAndHyphenThen2Items() {
+    List<String> strings = wordsSplitter.split("www - eee");
+
+    Assertions.assertEquals(2, strings.size());
+  }
 }

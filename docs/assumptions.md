@@ -9,3 +9,8 @@ The words can be separated by multiple spaces
 
 The stopwords file has to be in the same folder as java application.
 The stopwords file can contain empty/blank lines
+
+## Iteration 5
+
+In case of multiple hyphens treat them as one
+Ignoring any standalone hyphens
