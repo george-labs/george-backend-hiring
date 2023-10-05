@@ -23,12 +23,4 @@ public class ConsoleIO implements IO {
 
         return input;
     }
-
-    public void print(String text) {
-        System.out.print(text);
-    }
-
-    public void println(String text) {
-        System.out.println(text);
-    }
 }

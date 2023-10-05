@@ -1,9 +1,11 @@
 package bootstrap;
 
 import counter.WordCounter;
+import handler.ConsoleHandler;
+import handler.FileHandler;
+import handler.Handler;
 import io.ConsoleIO;
 import io.FileReader;
-import io.IO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,20 +15,34 @@ import java.io.IOException;
 public class BootstrapTest {
 
     @Test
-    public void testApplicationFlow() {
+    public void testApplicationFlowWithoutFile() {
         String inputText = "Mary had a little lamb";
 
-        IO consoleIo = new ConsoleIO(new ByteArrayInputStream(inputText.getBytes()));
-        FileReader fileReader = new FileReader("stopwords.txt");
+        Handler handler = new ConsoleHandler(new ConsoleIO(new ByteArrayInputStream(inputText.getBytes())));
+        FileReader fileReader = new FileReader(",", "stopwords.txt");
 
         try {
             WordCounter wordCounter = new WordCounter(fileReader.read());
+            Bootstrap bootstrap = new Bootstrap(wordCounter, handler);
 
-            String readText = consoleIo.read();
-            Assertions.assertEquals(inputText, readText, "ConsoleIO read did not return the right text.");
+            int numberOfWords = bootstrap.count();
+            Assertions.assertEquals(4, numberOfWords, "Word counter did not return the right amount of words.");
+        } catch (IOException e) {
+            Assertions.fail();
+        }
+    }
 
-            int numberOfWords = wordCounter.count(readText);
-            Assertions.assertEquals(5, numberOfWords, "Word counter did not return the right amount of words.");
+    @Test
+    public void testApplicationFlowWithFile() {
+        Handler handler = new FileHandler(new FileReader(" ", "mytext.txt"));
+        FileReader fileReader = new FileReader(",", "stopwords.txt");
+
+        try {
+            WordCounter wordCounter = new WordCounter(fileReader.read());
+            Bootstrap bootstrap = new Bootstrap(wordCounter, handler);
+
+            int numberOfWords = bootstrap.count();
+            Assertions.assertEquals(4, numberOfWords, "Word counter did not return the right amount of words.");
         } catch (IOException e) {
             Assertions.fail();
         }

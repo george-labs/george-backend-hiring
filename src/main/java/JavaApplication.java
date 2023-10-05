@@ -1,8 +1,24 @@
 import bootstrap.Bootstrap;
+import counter.WordCounter;
+import handler.Handler;
+import handler.HandlerFactory;
+import io.FileReader;
+
+import java.io.IOException;
 
 public class JavaApplication {
 
     public static void main(String[] args) {
-        new Bootstrap().start();
+        FileReader fileReader = new FileReader(",", "stopwords.txt");
+
+        try {
+            WordCounter wordCounter = new WordCounter(fileReader.read());
+            Handler handler = HandlerFactory.create(args);
+
+            int wordCount = new Bootstrap(wordCounter, handler).count();
+            System.out.println("Number of words: " + wordCount);
+        } catch (IOException e) {
+            System.err.println("An error occurred while counting words. Message: " + e.getMessage());
+        }
     }
 }

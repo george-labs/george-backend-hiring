@@ -1,28 +1,28 @@
 package bootstrap;
 
 import counter.WordCounter;
-import io.ConsoleIO;
-import io.FileReader;
+import handler.Handler;
 
 import java.io.IOException;
 
 public class Bootstrap {
+    private final WordCounter wordCounter;
+    private final Handler handler;
 
-    public void start() {
-        ConsoleIO consoleIo = new ConsoleIO(System.in);
+    public Bootstrap(WordCounter wordCounter, Handler handler) {
+        this.wordCounter = wordCounter;
+        this.handler = handler;
+    }
 
-        consoleIo.print("Enter text: ");
+    public int count() throws IOException {
+        return wordCounter.count(handler.handle());
+    }
 
-        try {
-            FileReader fileReader = new FileReader("stopwords.txt");
-            WordCounter wordCounter = new WordCounter(fileReader.read());
-
-            String input = consoleIo.read();
-            int wordCount = wordCounter.count(input);
-
-            consoleIo.println("Number of words: " + wordCount);
-        } catch (IOException e) {
-            consoleIo.println("Error: " + e.getMessage());
+    private String getFilePath(String[] args) {
+        if (args.length == 0) {
+            return null;
         }
+
+        return args[0];
     }
 }
