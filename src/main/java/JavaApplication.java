@@ -4,6 +4,7 @@ import counter.WordCounter;
 import handler.InputHandler;
 import handler.InputHandlerFactory;
 import io.FileReader;
+import io.OutputPrinter;
 
 import java.io.IOException;
 
@@ -17,16 +18,7 @@ public class JavaApplication {
             InputHandler inputHandler = InputHandlerFactory.create(args);
 
             CounterResult counterResult = new Bootstrap(wordCounter, inputHandler).count();
-
-            String output = "Number of words: " +
-                    counterResult.getNumberOfWords() +
-                    ", unique: " +
-                    counterResult.getNumberOfUniqueWords() +
-                    "; average word length: " +
-                    counterResult.getAverageWordLength() +
-                    " characters";
-
-            System.out.println(output);
+            OutputPrinter.printOutput(counterResult);
         } catch (IOException e) {
             System.err.println("An error occurred while counting words. Message: " + e.getMessage());
         }
