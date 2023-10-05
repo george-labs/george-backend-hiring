@@ -18,7 +18,7 @@ public class JavaApplication {
             InputHandler inputHandler = InputHandlerFactory.create(args);
 
             CounterResult counterResult = new Bootstrap(wordCounter, inputHandler).count();
-            OutputPrinter.printOutput(counterResult);
+            OutputPrinter.printOutput(args, counterResult);
         } catch (IOException e) {
             System.err.println("An error occurred while counting words. Message: " + e.getMessage());
         }

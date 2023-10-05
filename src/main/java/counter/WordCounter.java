@@ -1,9 +1,6 @@
 package counter;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -27,13 +24,16 @@ public class WordCounter {
                 .average()
                 .orElse(0);
 
-        return new CounterResult(numberOfWords, numberOfUniqueWords, averageWordLength);
+        return new CounterResult(filteredWords, numberOfWords, numberOfUniqueWords, averageWordLength);
     }
 
     private List<String> filterWords(String input) {
-        String[] words = input.split("\\s");
+        List<String> words = Arrays.stream(input.split("\\s"))
+                .sorted((word1, word2) -> word2.toLowerCase().compareTo(word1.toLowerCase()))
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
 
-        return Arrays.stream(words)
+        return words.stream()
                 .filter(word -> Pattern.matches("^[a-zA-Z-]+[.!,]?$", word))
                 .filter(word -> !stopWords.contains(word))
                 .collect(Collectors.toList());
