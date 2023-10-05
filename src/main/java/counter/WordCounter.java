@@ -26,7 +26,7 @@ public class WordCounter {
     }
 
     private List<String> filterWords(String input) {
-        String[] words = input.split("\\s|-");
+        String[] words = input.split("\\s");
 
         return Arrays.stream(words)
                 .filter(word -> Pattern.matches("^[a-zA-Z-]+[.!,]?$", word))

@@ -72,7 +72,7 @@ public class WordCounterTest {
 
         CounterResult counterResult = wordCounter.process(inputText);
 
-        Assertions.assertEquals(9, counterResult.getNumberOfWords(), "Word counter did not return the right amount of words.");
-        Assertions.assertEquals(7, counterResult.getNumberOfUniqueWords(), "Word counter did not return the right amount of unique words.");
+        Assertions.assertEquals(7, counterResult.getNumberOfWords(), "Word counter did not return the right amount of words.");
+        Assertions.assertEquals(6, counterResult.getNumberOfUniqueWords(), "Word counter did not return the right amount of unique words.");
     }
 }
