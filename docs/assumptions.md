@@ -1,3 +1,4 @@
 # Assumptions per iteration
 
-## Iteration 1
+## Iteration 2
+- Stopwords are case sensitive. This means that "The" and "the" are considered different words.

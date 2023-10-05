@@ -2,6 +2,7 @@ package bootstrap;
 
 import counter.WordCounter;
 import io.ConsoleIO;
+import io.FileReader;
 import io.IO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,9 +17,11 @@ public class BootstrapTest {
         String inputText = "Mary had a little lamb";
 
         IO consoleIo = new ConsoleIO(new ByteArrayInputStream(inputText.getBytes()));
-        WordCounter wordCounter = new WordCounter();
+        FileReader fileReader = new FileReader("stopwords.txt");
 
         try {
+            WordCounter wordCounter = new WordCounter(fileReader.read());
+
             String readText = consoleIo.read();
             Assertions.assertEquals(inputText, readText, "ConsoleIO read did not return the right text.");
 

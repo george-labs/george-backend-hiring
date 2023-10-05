@@ -24,12 +24,10 @@ public class ConsoleIO implements IO {
         return input;
     }
 
-    @Override
     public void print(String text) {
         System.out.print(text);
     }
 
-    @Override
     public void println(String text) {
         System.out.println(text);
     }
