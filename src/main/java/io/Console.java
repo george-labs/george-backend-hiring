@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class ConsoleIO implements IO {
+public class Console implements InputOutput {
 
     private final BufferedReader bufferedReader;
 
-    public ConsoleIO(InputStream inputStream) {
+    public Console(InputStream inputStream) {
         this.bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
     }
 

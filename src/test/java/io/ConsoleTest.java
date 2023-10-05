@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-public class ConsoleIOTest {
+public class ConsoleTest {
 
     @Test
     public void consoleIoReadMustReturnTheRightText() {
         String inputText = "Mary had a little lamb";
-        ConsoleIO consoleIO = new ConsoleIO(new ByteArrayInputStream(inputText.getBytes()));
+        Console consoleIO = new Console(new ByteArrayInputStream(inputText.getBytes()));
 
         try {
             String readText = consoleIO.read();
@@ -24,7 +24,7 @@ public class ConsoleIOTest {
     @Test
     public void consoleIoReadMustHandleEmptyText() {
         String inputText = "";
-        ConsoleIO consoleIO = new ConsoleIO(new ByteArrayInputStream(inputText.getBytes()));
+        Console consoleIO = new Console(new ByteArrayInputStream(inputText.getBytes()));
 
         try {
             String readText = consoleIO.read();

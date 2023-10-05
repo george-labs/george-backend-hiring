@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.stream.Collectors;
 
-public class FileReader implements IO {
+public class FileReader implements InputOutput {
 
     private final String delimiter;
     private final URL fileUrl;

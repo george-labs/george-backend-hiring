@@ -3,14 +3,14 @@ package handler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class HandlerFactoryTest {
+public class InputInputHandlerFactoryTest {
 
     @Test
     public void createWithoutArgumentsMustReturnTheRightHandler() {
         String[] args = new String[0];
-        Handler handler = HandlerFactory.create(args);
+        InputHandler inputHandler = InputHandlerFactory.create(args);
 
-        Assertions.assertInstanceOf(ConsoleHandler.class, handler);
+        Assertions.assertInstanceOf(ConsoleInputHandler.class, inputHandler);
     }
 
     @Test
@@ -18,8 +18,8 @@ public class HandlerFactoryTest {
         String[] args = new String[1];
         args[0] = "mytext.txt";
 
-        Handler handler = HandlerFactory.create(args);
+        InputHandler inputHandler = InputHandlerFactory.create(args);
 
-        Assertions.assertInstanceOf(FileHandler.class, handler);
+        Assertions.assertInstanceOf(FileInputHandler.class, inputHandler);
     }
 }

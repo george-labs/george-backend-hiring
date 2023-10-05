@@ -1,28 +1,20 @@
 package bootstrap;
 
 import counter.WordCounter;
-import handler.Handler;
+import handler.InputHandler;
 
 import java.io.IOException;
 
 public class Bootstrap {
     private final WordCounter wordCounter;
-    private final Handler handler;
+    private final InputHandler inputHandler;
 
-    public Bootstrap(WordCounter wordCounter, Handler handler) {
+    public Bootstrap(WordCounter wordCounter, InputHandler inputHandler) {
         this.wordCounter = wordCounter;
-        this.handler = handler;
+        this.inputHandler = inputHandler;
     }
 
     public int count() throws IOException {
-        return wordCounter.count(handler.handle());
-    }
-
-    private String getFilePath(String[] args) {
-        if (args.length == 0) {
-            return null;
-        }
-
-        return args[0];
+        return wordCounter.count(inputHandler.handle());
     }
 }

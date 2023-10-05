@@ -2,7 +2,7 @@ package handler;
 
 import java.io.IOException;
 
-public interface Handler {
+public interface InputHandler {
 
     String handle() throws IOException;
 }
