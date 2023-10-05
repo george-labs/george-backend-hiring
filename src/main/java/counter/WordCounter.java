@@ -22,7 +22,12 @@ public class WordCounter {
         Set<String> uniqueWords = new HashSet<>(filteredWords);
         int numberOfUniqueWords = uniqueWords.size();
 
-        return new CounterResult(numberOfWords, numberOfUniqueWords);
+        double averageWordLength = filteredWords.stream()
+                .mapToInt(String::length)
+                .average()
+                .orElse(0);
+
+        return new CounterResult(numberOfWords, numberOfUniqueWords, averageWordLength);
     }
 
     private List<String> filterWords(String input) {

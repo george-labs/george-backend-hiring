@@ -75,4 +75,16 @@ public class WordCounterTest {
         Assertions.assertEquals(7, counterResult.getNumberOfWords(), "Word counter did not return the right amount of words.");
         Assertions.assertEquals(6, counterResult.getNumberOfUniqueWords(), "Word counter did not return the right amount of unique words.");
     }
+
+    @Test
+    public void averageWordLengthShouldBeShown() {
+        String inputText = "this is cool test";
+        WordCounter wordCounter = new WordCounter("");
+
+        CounterResult counterResult = wordCounter.process(inputText);
+
+        Assertions.assertEquals(4, counterResult.getNumberOfWords(), "Word counter did not return the right amount of words.");
+        Assertions.assertEquals(4, counterResult.getNumberOfUniqueWords(), "Word counter did not return the right amount of unique words.");
+        Assertions.assertEquals(3.5, counterResult.getAverageWordLength(), "Word counter did not return the right average word length.");
+    }
 }

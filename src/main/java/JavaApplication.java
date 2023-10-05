@@ -17,7 +17,16 @@ public class JavaApplication {
             InputHandler inputHandler = InputHandlerFactory.create(args);
 
             CounterResult counterResult = new Bootstrap(wordCounter, inputHandler).count();
-            System.out.println("Number of words: " + counterResult.getNumberOfWords() + ", unique: " + counterResult.getNumberOfUniqueWords());
+
+            String output = "Number of words: " +
+                    counterResult.getNumberOfWords() +
+                    ", unique: " +
+                    counterResult.getNumberOfUniqueWords() +
+                    "; average word length: " +
+                    counterResult.getAverageWordLength() +
+                    " characters";
+
+            System.out.println(output);
         } catch (IOException e) {
             System.err.println("An error occurred while counting words. Message: " + e.getMessage());
         }
