@@ -25,7 +25,7 @@ public class WordCounter {
         return new CounterResult(numberOfWords, numberOfUniqueWords);
     }
 
-    public List<String> filterWords(String input) {
+    private List<String> filterWords(String input) {
         String[] words = input.split("\\s|-");
 
         return Arrays.stream(words)
