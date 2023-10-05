@@ -1,5 +1,6 @@
 package bootstrap;
 
+import counter.CounterResult;
 import counter.WordCounter;
 import handler.InputHandler;
 
@@ -14,7 +15,7 @@ public class Bootstrap {
         this.inputHandler = inputHandler;
     }
 
-    public int count() throws IOException {
-        return wordCounter.count(inputHandler.handle());
+    public CounterResult count() throws IOException {
+        return wordCounter.process(inputHandler.handle());
     }
 }

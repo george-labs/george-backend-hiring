@@ -10,9 +10,9 @@ public class WordCounterTest {
         String inputText = "Mary had a little lamb";
         WordCounter wordCounter = new WordCounter("");
 
-        int numberOfWords = wordCounter.count(inputText);
+        CounterResult counterResult = wordCounter.process(inputText);
 
-        Assertions.assertEquals(5, numberOfWords, "Word counter did not return the right amount of words.");
+        Assertions.assertEquals(5, counterResult.getNumberOfWords(), "Word counter did not return the right amount of words.");
     }
 
     @Test
@@ -20,9 +20,9 @@ public class WordCounterTest {
         String inputText = "Mary had a little lamb ,,, ;;; 123 abc";
         WordCounter wordCounter = new WordCounter("");
 
-        int numberOfWords = wordCounter.count(inputText);
+        CounterResult counterResult = wordCounter.process(inputText);
 
-        Assertions.assertEquals(6, numberOfWords, "Word counter did not return the right amount of words.");
+        Assertions.assertEquals(6, counterResult.getNumberOfWords(), "Word counter did not return the right amount of words.");
     }
 
     @Test
@@ -30,9 +30,9 @@ public class WordCounterTest {
         String inputText = "";
         WordCounter wordCounter = new WordCounter("");
 
-        int numberOfWords = wordCounter.count(inputText);
+        CounterResult counterResult = wordCounter.process(inputText);
 
-        Assertions.assertEquals(0, numberOfWords, "Word counter did not return the right amount of words.");
+        Assertions.assertEquals(0, counterResult.getNumberOfWords(), "Word counter did not return the right amount of words.");
     }
 
     @Test
@@ -40,9 +40,9 @@ public class WordCounterTest {
         String inputText = "Mary had a the little lamb";
         WordCounter wordCounter = new WordCounter("the,a");
 
-        int numberOfWords = wordCounter.count(inputText);
+        CounterResult counterResult = wordCounter.process(inputText);
 
-        Assertions.assertEquals(4, numberOfWords, "Word counter did not return the right amount of words.");
+        Assertions.assertEquals(4, counterResult.getNumberOfWords(), "Word counter did not return the right amount of words.");
     }
 
     @Test
@@ -50,8 +50,29 @@ public class WordCounterTest {
         String inputText = "Mary had a the little lamb";
         WordCounter wordCounter = new WordCounter("");
 
-        int numberOfWords = wordCounter.count(inputText);
+        CounterResult counterResult = wordCounter.process(inputText);
 
-        Assertions.assertEquals(6, numberOfWords, "Word counter did not return the right amount of words.");
+        Assertions.assertEquals(6, counterResult.getNumberOfWords(), "Word counter did not return the right amount of words.");
+    }
+
+    @Test
+    public void wordsEndingWithSpecialCharacterNeedToBeCounted() {
+        String inputText = "Hello, World!";
+        WordCounter wordCounter = new WordCounter("");
+
+        CounterResult counterResult = wordCounter.process(inputText);
+
+        Assertions.assertEquals(2, counterResult.getNumberOfWords(), "Word counter did not return the right amount of words.");
+    }
+
+    @Test
+    public void uniqueWordsShouldBeShown() {
+        String inputText = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        WordCounter wordCounter = new WordCounter("on,a");
+
+        CounterResult counterResult = wordCounter.process(inputText);
+
+        Assertions.assertEquals(9, counterResult.getNumberOfWords(), "Word counter did not return the right amount of words.");
+        Assertions.assertEquals(7, counterResult.getNumberOfUniqueWords(), "Word counter did not return the right amount of unique words.");
     }
 }

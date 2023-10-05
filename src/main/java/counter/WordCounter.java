@@ -1,6 +1,8 @@
 package counter;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -13,12 +15,22 @@ public class WordCounter {
         this.stopWords = Arrays.stream(stopWordsString.split(",")).collect(Collectors.toSet());
     }
 
-    public int count(String input) {
-        String[] words = input.split(" ");
+    public CounterResult process(String input) {
+        List<String> filteredWords = this.filterWords(input);
+        int numberOfWords = filteredWords.size();
 
-        return (int) Arrays.stream(words)
-                .filter(word -> Pattern.matches("^[a-zA-Z]+$", word))
+        Set<String> uniqueWords = new HashSet<>(filteredWords);
+        int numberOfUniqueWords = uniqueWords.size();
+
+        return new CounterResult(numberOfWords, numberOfUniqueWords);
+    }
+
+    public List<String> filterWords(String input) {
+        String[] words = input.split("\\s|-");
+
+        return Arrays.stream(words)
+                .filter(word -> Pattern.matches("^[a-zA-Z-]+[.!,]?$", word))
                 .filter(word -> !stopWords.contains(word))
-                .count();
+                .collect(Collectors.toList());
     }
 }
