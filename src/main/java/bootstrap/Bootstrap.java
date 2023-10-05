@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Bootstrap {
 
     public void start() {
-        IO consoleIo = new ConsoleIO();
+        IO consoleIo = new ConsoleIO(System.in);
         WordCounter wordCounter = new WordCounter();
 
         consoleIo.print("Enter text: ");

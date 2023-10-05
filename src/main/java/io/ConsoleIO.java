@@ -2,15 +2,26 @@ package io;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class ConsoleIO implements IO {
 
-    private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    private final BufferedReader bufferedReader;
+
+    public ConsoleIO(InputStream inputStream) {
+        this.bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+    }
 
     @Override
     public String read() throws IOException {
-        return bufferedReader.readLine();
+        String input = bufferedReader.readLine();
+
+        if (input == null) {
+            return "";
+        }
+
+        return input;
     }
 
     @Override
