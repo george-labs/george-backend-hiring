@@ -1,6 +1,8 @@
+package wordcounter;
+
 import java.util.List;
 
-public interface WordValidator {
-    boolean isValidWord(String word);
+public interface StopListValidator {
+
     boolean isOnStopList(List<String> stopWords, String targetWord);
 }

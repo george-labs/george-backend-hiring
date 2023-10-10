@@ -1,3 +1,7 @@
+package wordcounter.reader;
+
+import wordcounter.LineReader;
+
 import java.util.Scanner;
 
 public class ConsoleLineReader implements LineReader {
