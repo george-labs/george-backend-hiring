@@ -5,11 +5,13 @@ import org.junit.jupiter.api.Test;
 class OneSpaceWordCounterTest {
     WordCounter counter;
     WordValidator validator;
+    StopWordsFileReader fileReader;
 
     @BeforeEach
     void setup(){
         validator = new EuropeanWordValidator();
-        counter = new OneSpaceWordCounter(validator);
+        fileReader = new StopWordsFileReader();
+        counter = new OneSpaceWordCounter(validator, fileReader);
     }
     @Test
     void countWords() {
