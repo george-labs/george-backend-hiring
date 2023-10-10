@@ -20,6 +20,9 @@ public class JavaApplication {
 
         String stringFromInput = stringProvider.getStringFromInput(consoleLineReader, fileName);
 
-        System.out.println("Number of words: " + counter.countWords(stringFromInput) + " unique: "  + counter.countUniqueWords(stringFromInput));
+        System.out.println("Number of words: "
+                + counter.countWords(stringFromInput)
+                + " unique: "  + counter.countUniqueWords(stringFromInput)
+        + " average word length:" + counter.getAverage(stringFromInput));
     }
 }

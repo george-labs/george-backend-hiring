@@ -32,8 +32,12 @@ public class OneSpaceWordCounter implements WordCounter {
                 .count();
     }
 
-    public double getAverage(String line){
-        return getWordsStream(line).map(line -> line.s)
+    public double getAverage(String line) {
+        long size = getWordsStream(line).count();
+        if (size == 0) return 0;
+        return getWordsStream(line)
+                .map(String::length)
+                .reduce(0, Integer::sum) / (double) size;
     }
 
     private Stream<String> getWordsStream(String line) {

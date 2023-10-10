@@ -60,4 +60,13 @@ class OneSpaceWordCounterTest {
         count = counter.countUniqueWords("the a on off hat the a on off hat");
         Assertions.assertEquals(1, count);
     }
+
+    @Test
+    void testAverageWordSize(){
+        double average = counter.getAverage("abc");
+        Assertions.assertEquals(3.0, average);
+
+        average = counter.getAverage("111 bac cab tree spaceCadet");
+        Assertions.assertEquals(5.0, average);
+    }
 }
