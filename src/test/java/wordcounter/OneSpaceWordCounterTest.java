@@ -12,11 +12,12 @@ class OneSpaceWordCounterTest {
     WordValidator validator;
     WordsFileReader fileReader;
     FileStopListValidator fileStopListValidator;
+    private static final String STOPLIST_FILE_NAME= "stopwords.txt";
 
     @BeforeEach
     void setup(){
         validator = new EuropeanWordValidator();
-        fileReader = new WordsFileReader();
+        fileReader = new WordsFileReader(STOPLIST_FILE_NAME);
         fileStopListValidator = new FileStopListValidator();
 
         counter = new OneSpaceWordCounter(validator, fileReader, fileStopListValidator);

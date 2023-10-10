@@ -3,6 +3,7 @@ package wordcounter.reader;
 import wordcounter.WordReader;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,21 +18,23 @@ public class WordsFileReader implements WordReader {
 
     public String readWords() {
         List<String> stopWords = new ArrayList<>();
-        BufferedReader reader;
 
-        try {
-            reader = new BufferedReader(new FileReader("src/main/resources/" + fileName));
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/" + fileName))) {
             String line = reader.readLine();
 
             while (line != null) {
                 stopWords.add(line);
                 line = reader.readLine();
             }
-
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            return String.join(" ", stopWords);
+        }catch (FileNotFoundException e) {
+            System.err.println("File not found. Please provide a string in the console.");
+            return "";
         }
-        return String.join(" ", stopWords);
+        catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
+
 }
