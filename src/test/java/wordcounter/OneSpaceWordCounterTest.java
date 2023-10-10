@@ -7,6 +7,8 @@ import wordcounter.reader.WordsFileReader;
 import wordcounter.validator.EuropeanWordValidator;
 import wordcounter.validator.FileStopListValidator;
 
+import java.util.List;
+
 class OneSpaceWordCounterTest {
     WordCounter counter;
     WordValidator validator;
@@ -68,5 +70,12 @@ class OneSpaceWordCounterTest {
 
         average = counter.getAverage("111 bac cab tree spaceCadet");
         Assertions.assertEquals(5.0, average);
+    }
+
+    @Test
+    void testGetAllWords(){
+        List<String> retrievedWords = counter.getUniqueWords("summer winter summer winter spring");
+        List<String> expected = List.of("spring", "summer", "winter");
+        Assertions.assertEquals(expected, retrievedWords);
     }
 }

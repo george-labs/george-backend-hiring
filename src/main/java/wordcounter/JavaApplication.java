@@ -6,7 +6,7 @@ import wordcounter.validator.EuropeanWordValidator;
 import wordcounter.validator.FileStopListValidator;
 
 public class JavaApplication {
-    private static final String STOPLIST_FILE_NAME= "stopwords.txt";
+    private static final String STOPLIST_FILE_NAME = "stopwords.txt";
 
     public static void main(String[] args) {
         StringProvider stringProvider = new StringProvider();
@@ -22,7 +22,14 @@ public class JavaApplication {
 
         System.out.println("Number of words: "
                 + counter.countWords(stringFromInput)
-                + " unique: "  + counter.countUniqueWords(stringFromInput)
-        + " average word length:" + counter.getAverage(stringFromInput));
+                + " unique: " + counter.countUniqueWords(stringFromInput)
+                + " average word length:" + counter.getAverage(stringFromInput) + " characters");
+        
+        if (args.length > 0) {
+            if (args[0].equals("-index")) {
+                System.out.println("Index: ");
+                counter.getUniqueWords(stringFromInput).forEach(System.out::println);
+            }
+        }
     }
 }

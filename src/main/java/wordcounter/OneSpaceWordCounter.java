@@ -4,6 +4,8 @@ import wordcounter.reader.WordsFileReader;
 import wordcounter.validator.FileStopListValidator;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class OneSpaceWordCounter implements WordCounter {
@@ -38,6 +40,12 @@ public class OneSpaceWordCounter implements WordCounter {
         return getWordsStream(line)
                 .map(String::length)
                 .reduce(0, Integer::sum) / (double) size;
+    }
+    public List<String> getUniqueWords(String line){
+        return getWordsStream(line)
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     private Stream<String> getWordsStream(String line) {
