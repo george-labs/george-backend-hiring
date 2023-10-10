@@ -1,3 +1,3 @@
 public interface WordCounter {
-    Integer countWords(String line);
+    long countWords(String line);
 }
