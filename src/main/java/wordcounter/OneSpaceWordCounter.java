@@ -32,6 +32,10 @@ public class OneSpaceWordCounter implements WordCounter {
                 .count();
     }
 
+    public double getAverage(String line){
+        return getWordsStream(line).map(line -> line.s)
+    }
+
     private Stream<String> getWordsStream(String line) {
         fileReader = new WordsFileReader(STOPLIST_FILE_NAME);
         String stopWords = fileReader.readWords();
