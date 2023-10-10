@@ -1,12 +1,12 @@
 package wordcounter.reader;
 
-import wordcounter.LineReader;
+import wordcounter.WordReader;
 
 import java.util.Scanner;
 
-public class ConsoleLineReader implements LineReader {
+public class ConsoleLineReader implements WordReader {
     @Override
-    public String readLine() {
+    public String readWords() {
         Scanner in = new Scanner(System.in);
         return in.nextLine();
     }

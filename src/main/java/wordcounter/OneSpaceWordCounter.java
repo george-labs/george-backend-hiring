@@ -1,6 +1,6 @@
 package wordcounter;
 
-import wordcounter.reader.StopWordsFileReader;
+import wordcounter.reader.WordsFileReader;
 import wordcounter.validator.FileStopListValidator;
 
 import java.util.Arrays;
@@ -9,10 +9,12 @@ import java.util.List;
 public class OneSpaceWordCounter implements WordCounter{
 
     WordValidator wordValidator;
-    StopWordsFileReader fileReader;
+    WordsFileReader fileReader;
     FileStopListValidator fileStopListValidator;
 
-    public OneSpaceWordCounter(WordValidator wordValidator, StopWordsFileReader fileReader,FileStopListValidator fileStopListValidator) {
+    private static final String STOPLIST_FILE_NAME= "stopwords.txt";
+
+    public OneSpaceWordCounter(WordValidator wordValidator, WordsFileReader fileReader, FileStopListValidator fileStopListValidator) {
         this.wordValidator = wordValidator;
         this.fileReader = fileReader;
         this.fileStopListValidator = fileStopListValidator;
@@ -20,7 +22,7 @@ public class OneSpaceWordCounter implements WordCounter{
 
     @Override
     public long countWords(String line) {
-        List<String> stopWords = fileReader.getWordsFromFile();
+        List<String> stopWords = fileReader.readWords(STOPLIST_FILE_NAME);
         return Arrays.stream(line.split(" "))
                 .filter(wordValidator::isValidWord)
                 .filter(word -> !fileStopListValidator.isOnStopList(stopWords, word))

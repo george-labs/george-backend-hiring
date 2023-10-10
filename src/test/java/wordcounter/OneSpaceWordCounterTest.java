@@ -3,20 +3,20 @@ package wordcounter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import wordcounter.reader.StopWordsFileReader;
+import wordcounter.reader.WordsFileReader;
 import wordcounter.validator.EuropeanWordValidator;
 import wordcounter.validator.FileStopListValidator;
 
 class OneSpaceWordCounterTest {
     WordCounter counter;
     WordValidator validator;
-    StopWordsFileReader fileReader;
+    WordsFileReader fileReader;
     FileStopListValidator fileStopListValidator;
 
     @BeforeEach
     void setup(){
         validator = new EuropeanWordValidator();
-        fileReader = new StopWordsFileReader();
+        fileReader = new WordsFileReader();
         fileStopListValidator = new FileStopListValidator();
 
         counter = new OneSpaceWordCounter(validator, fileReader, fileStopListValidator);
