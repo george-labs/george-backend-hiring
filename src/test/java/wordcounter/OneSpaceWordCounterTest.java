@@ -27,16 +27,16 @@ class OneSpaceWordCounterTest {
         long count = counter.countWords("asd 123 bb b23 -*/-*/ sss");
         Assertions.assertEquals(3, count);
 
-        count = counter.countWords(" -----");
-        Assertions.assertEquals(0, count);
+        count = counter.countWords("Humpty-Dumpty");
+        Assertions.assertEquals(1, count);
 
         count = counter.countWords("  ");
         Assertions.assertEquals(0, count);
 
-        count = counter.countWords("𡨸漢 cat 123 ---");
+        count = counter.countWords("𡨸漢 cat 123 *{}");
         Assertions.assertEquals(1, count);
 
-        count = counter.countWords("𡨸漢  cat  123 ---");
+        count = counter.countWords("𡨸漢  cat  123 *{}");
         Assertions.assertEquals(1, count);
     }
 
@@ -46,6 +46,18 @@ class OneSpaceWordCounterTest {
         Assertions.assertEquals(0, count);
 
         count = counter.countWords("the a on off hat");
+        Assertions.assertEquals(1, count);
+    }
+
+    @Test
+    void countUniqueWords() {
+        long count = counter.countUniqueWords("summer winter summer winter spring");
+        Assertions.assertEquals(3, count);
+
+        count = counter.countUniqueWords("unique words counted here");
+        Assertions.assertEquals(4, count);
+
+        count = counter.countUniqueWords("the a on off hat the a on off hat");
         Assertions.assertEquals(1, count);
     }
 }

@@ -18,8 +18,8 @@ public class JavaApplication {
 
         String fileName = consoleLineReader.readWords();
 
-        String s = stringProvider.getStringFromInput(consoleLineReader, fileName);
+        String stringFromInput = stringProvider.getStringFromInput(consoleLineReader, fileName);
 
-        System.out.println("Number of words: " + counter.countWords(s));
+        System.out.println("Number of words: " + counter.countWords(stringFromInput) + " unique: "  + counter.countUniqueWords(stringFromInput));
     }
 }
