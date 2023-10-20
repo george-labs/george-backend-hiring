@@ -10,7 +10,7 @@ public class WordCounterTest {
     @DisplayName("Given a text it returns the number of words")
     @Test
     public void wordCount(){
-        String text = "Mary had a little lamb";
+        String text = "Mary had two little lambs";
         long result = wordCounter.countWords(text);
         assertEquals(result, 5);
     }
@@ -20,7 +20,7 @@ public class WordCounterTest {
     public void wordCountWithNumbers(){
         String text = "Mary2 had a little l7";
         long result = wordCounter.countWords(text);
-        assertEquals(result, 3);
+        assertEquals(result, 2);
     }
 
     @DisplayName("Given a text with special characters the words should not be counted")
@@ -28,6 +28,14 @@ public class WordCounterTest {
     public void wordCountWithSpecialCharacter(){
         String text = "Mary2 had, a little l7";
         long result = wordCounter.countWords(text);
-        assertEquals(result, 2);
+        assertEquals(result, 1);
+    }
+
+    @DisplayName("Given a text with a stop word then the stop word should not be counted ")
+    @Test
+    public void wordCountWithStopWords(){
+        String text = "Mary had a little lamb";
+        long result = wordCounter.countWords(text);
+        assertEquals(result, 4);
     }
 }
