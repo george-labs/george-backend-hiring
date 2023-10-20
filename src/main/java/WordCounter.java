@@ -1,11 +1,21 @@
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 public class WordCounter {
 
-    public String countWords(String words){
-        long count = Arrays.stream(words.split("\\s+")).count();
-        return "Number of words: " + count;
+    private static Pattern validWords = Pattern.compile("[a-zA-Z]+");
+
+
+    public long countWords(String words){
+        return Arrays.stream(words.split("\\s+"))
+                .filter(this::isWordValid)
+                .count();
     }
+
+    private boolean isWordValid(String word){
+        return validWords.matcher(word).matches();
+    }
+
 }
 
 

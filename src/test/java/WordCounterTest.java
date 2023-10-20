@@ -11,15 +11,23 @@ public class WordCounterTest {
     @Test
     public void wordCount(){
         String text = "Mary had a little lamb";
-        String result = wordCounter.countWords(text);
-        assertEquals(result, "Number of words: 5");
+        long result = wordCounter.countWords(text);
+        assertEquals(result, 5);
     }
 
     @DisplayName("Given a text with numbers or wrong characters the words should not be counted")
     @Test
     public void wordCountWithNumbers(){
         String text = "Mary2 had a little l7";
-        String result = wordCounter.countWords(text);
-        assertEquals(result, "Number of words: 3");
+        long result = wordCounter.countWords(text);
+        assertEquals(result, 3);
+    }
+
+    @DisplayName("Given a text with special characters the words should not be counted")
+    @Test
+    public void wordCountWithSpecialCharacter(){
+        String text = "Mary2 had, a little l7";
+        long result = wordCounter.countWords(text);
+        assertEquals(result, 2);
     }
 }
