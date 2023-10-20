@@ -12,7 +12,15 @@ public class WordCounter {
     private static Pattern validWords = Pattern.compile("[a-zA-Z]+");
 
 
-    public long countWords(String words){
+    public long countWordsFromFile(String fileName){
+        List<String> words = readInputTextFromFile(fileName);
+        return words.stream()
+                .filter(this::isWordValid)
+                .filter(this::containStopWords)
+                .count();
+    }
+
+    public long countWordsFromText(String words){
         return Arrays.stream(words.split("\\s+"))
                 .filter(this::isWordValid)
                 .filter(this::containStopWords)
@@ -37,6 +45,21 @@ public class WordCounter {
             e.printStackTrace();
         }
         return stopwords;
+   }
+
+   public List<String> readInputTextFromFile(String fileName){
+        List<String> inputText = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
+            String line = "";
+            while((line = br.readLine()) != null){
+                for(String word: line.split("\\s+")){
+                    inputText.add(word);
+                }
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return inputText;
    }
 
 }

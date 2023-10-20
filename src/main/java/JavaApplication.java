@@ -3,11 +3,18 @@ import java.util.Scanner;
 public class JavaApplication {
 
     public static void main(String[] args){
+        long output;
+        String fileName = "mytext.txt";
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter text: ");
-        String input = scanner.nextLine();
         WordCounter wordCounter = new WordCounter();
-        long output = wordCounter.countWords(input);
-        System.out.println("Number of words: " + output);
+        if(fileName.isEmpty()){
+            String input = scanner.nextLine();
+            output = wordCounter.countWordsFromText(input);
+            System.out.println("Number of words: " + output);
+        }else{
+            System.out.print("Enter text: ");
+            output = wordCounter.countWordsFromFile(fileName);
+            System.out.println("Number of words: " + output);
+        }
     }
 }
