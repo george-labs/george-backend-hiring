@@ -2,8 +2,12 @@
 
 ## Iteration 1
 
+### Session 1:
 Requirements:
 1. Input to the Command line
 2. Output Number of words (result ends with NL) -> `Number of words: 5`
 3. Word is the (a-z,A-Z)
 4. Input Validation -> start with `Enter text: `
+
+### Session 2:
+Note: Validation will be omited due to wrong understanding. The program will paste for the user the inital text: `Enter text: ` 

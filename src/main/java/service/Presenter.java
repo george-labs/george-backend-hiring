@@ -1,7 +1,8 @@
 package service;
 
+import model.Output;
 import model.Words;
 
 public interface Presenter {
-    void present(Words words);
+    Output present(Words words);
 }
