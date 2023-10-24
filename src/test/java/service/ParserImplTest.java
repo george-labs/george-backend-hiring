@@ -18,7 +18,7 @@ public class ParserImplTest {
 
         Words words = parser.parse(input);
 
-        assertEquals(words.getCountedWords(), expectedResult);
+        assertEquals(expectedResult, words.getCountedWords());
     }
 
     @Test
@@ -28,7 +28,7 @@ public class ParserImplTest {
 
         Words words = parser.parse(input);
 
-        assertEquals(words.getCountedWords(), expectedResult);
+        assertEquals(expectedResult, words.getCountedWords());
     }
 
     @Test
@@ -38,7 +38,7 @@ public class ParserImplTest {
 
         Words words = parser.parse(input);
 
-        assertEquals(words.getCountedWords(), expectedResult);
+        assertEquals(expectedResult, words.getCountedWords());
     }
 
 }

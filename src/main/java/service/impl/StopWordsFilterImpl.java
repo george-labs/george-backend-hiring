@@ -6,14 +6,15 @@ import service.Filter;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class StopWordsFilterImpl implements Filter {
 
-    private final StopWordsRepository repository;
+    private final StopWordsRepository stopWordsRepository;
 
-    public StopWordsFilterImpl(StopWordsRepository repository) {
-        this.repository = repository;
+    public StopWordsFilterImpl(StopWordsRepository stopWordsRepository) {
+        this.stopWordsRepository = stopWordsRepository;
     }
 
     @Override
@@ -26,14 +27,17 @@ public class StopWordsFilterImpl implements Filter {
     }
 
     private Words filterOutStopWords(Words words) {
+        Set<String> stopWords = stopWordsRepository.fetchAll();
+
         List<String> collect = words.getWords().stream()
-                .filter(this::isNonStopWord)
+                .filter(word -> isNonStopWord(stopWords, word))
                 .collect(Collectors.toList());
+
         words.setWords(collect);
         return words;
     }
 
-    private boolean isNonStopWord(String word) {
-        return !repository.fetch().contains(word);
+    private boolean isNonStopWord(Set<String> stopWords, String word) {
+        return !stopWords.contains(word);
     }
 }

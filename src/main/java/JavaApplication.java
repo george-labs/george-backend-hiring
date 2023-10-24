@@ -15,11 +15,12 @@ import view.impl.CommandLineUI;
 
 public class JavaApplication {
 
+    private final static String STOP_WORDS_FILENAME = "stopwords.txt";
 
     public static void main(String[] args) {
         Fetcher fetcher = new FetcherImpl();
         Parser parser = new ParserImpl();
-        StopWordsRepository stopWordsRepository = new StopWordsFileRepositoryImpl();
+        StopWordsRepository stopWordsRepository = new StopWordsFileRepositoryImpl(STOP_WORDS_FILENAME);
         Filter stopWordsFilter = new StopWordsFilterImpl(stopWordsRepository);
         Presenter presenter = new PresenterImpl();
         WordCountProcessor processor = new WordCountProcessorImpl(fetcher, parser, presenter, stopWordsFilter);

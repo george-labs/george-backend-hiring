@@ -11,7 +11,6 @@ public class FetcherImpl implements Fetcher {
     }
 
     private Input build(String input) {
-        //TODO potential improvment to add a mapper
         return new Input(input);
     }
 

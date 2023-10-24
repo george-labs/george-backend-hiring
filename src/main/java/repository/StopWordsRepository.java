@@ -1,8 +1,8 @@
 package repository;
 
-import java.util.List;
+import java.util.Set;
 
 public interface StopWordsRepository {
 
-    List<String> fetch();
+    Set<String> fetchAll();
 }
