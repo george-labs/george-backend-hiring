@@ -1,4 +1,4 @@
-package service;
+package processor;
 
 public interface WordCountProcessor {
 

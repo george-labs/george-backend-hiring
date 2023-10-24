@@ -1,32 +1,35 @@
 package service;
 
+import factory.FilterFactory;
 import model.Words;
 import org.junit.jupiter.api.Test;
-import repository.StopWordsRepository;
-import repository.impl.StopWordsFileRepositoryImpl;
-import service.impl.StopWordsFilterImpl;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StopWordsFilterImplIntegrationTest {
-
-    private final Filter stopWordFilter;
-
-    public StopWordsFilterImplIntegrationTest() {
-        StopWordsRepository stopWordsRepository = new StopWordsFileRepositoryImpl("stopwords-test.txt");
-        this.stopWordFilter = new StopWordsFilterImpl(stopWordsRepository);
-    }
 
     @Test
     void testGivenStopWordsAfterFilteringReturnFilteredWords() {
         int expectedSizeFilteredWords = 4;
+        String stopWordsFilename = "stopwords-test.txt";
+        Filter stopWordsFilter = FilterFactory.createWith(stopWordsFilename);
         Words words = createWords();
 
-        Words filter = stopWordFilter.filter(words);
+        Words filteredWords = stopWordsFilter.filter(words);
 
-        assertEquals(expectedSizeFilteredWords, filter.getWords().size());
+        assertEquals(expectedSizeFilteredWords, filteredWords.getWords().size());
+    }
+
+    @Test
+    void testGivenWrongFileNameThenThrowAnException() {
+        String nonExistingFilename = "dummyFilename.txt";
+        Filter stopWordsFilter = FilterFactory.createWith(nonExistingFilename);
+        Words words = createWords();
+
+        assertThrows(IllegalArgumentException.class, () -> stopWordsFilter.filter(words));
     }
 
     private Words createWords(){

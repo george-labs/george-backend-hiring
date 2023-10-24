@@ -1,4 +1,4 @@
-package service.impl;
+package processor.impl;
 
 import model.Input;
 import model.Output;
@@ -7,7 +7,7 @@ import service.Fetcher;
 import service.Filter;
 import service.Parser;
 import service.Presenter;
-import service.WordCountProcessor;
+import processor.WordCountProcessor;
 
 public class WordCountProcessorImpl implements WordCountProcessor {
 

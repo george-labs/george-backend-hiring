@@ -1,6 +1,6 @@
 package view.impl;
 
-import service.WordCountProcessor;
+import processor.WordCountProcessor;
 import view.UI;
 
 import java.io.BufferedReader;
