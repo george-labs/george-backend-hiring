@@ -17,8 +17,7 @@ public class ParserImpl implements Parser {
 
     private Words countWords(Input input) {
         List<String> words = splitIntoWords(input);
-        Integer countedWords = words.size();
-        return new Words(countedWords);
+        return new Words(words);
     }
 
     private List<String> splitIntoWords(Input input) {
@@ -28,7 +27,6 @@ public class ParserImpl implements Parser {
     }
 
     private boolean isAlphabetical(String word) {
-//        TODO test it
         return word.matches("[a-zA-Z]+");
     }
 }

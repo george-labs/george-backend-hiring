@@ -21,4 +21,13 @@ Initial design thoughts:
    //  Outputer -> the class responsible for output the data
 
 ### Session 2:
-Note: Validation will be omited due to wrong understanding. The program will paste for the user the inital text: `Enter text: ` 
+Note: Validation will be omited due to wrong understanding. The program will paste for the user the inital text: `Enter text: `
+
+### Session 3:
+New Requirements:
+1. Store a file with stop words
+2. Filter out those words from counting 
+
+Potential improvements in data layer:
+// 1. Create dao (with local cash) -> StopWordsRepository just once and then will cash the value
+// 2. the filter StopWordsFilter will dao.
