@@ -9,5 +9,16 @@ Requirements:
 3. Word is the (a-z,A-Z)
 4. Input Validation -> start with `Enter text: `
 
+Initial design thoughts:
+   //Where data come from
+   // UI -> responsible for UI
+   //Core:
+   // Validator -> to check the commandline structure
+   // Fetcher -> to get the data
+   // Parser -> to count the words
+   // Presenter -> create the output
+   //Where data go after
+   //  Outputer -> the class responsible for output the data
+
 ### Session 2:
 Note: Validation will be omited due to wrong understanding. The program will paste for the user the inital text: `Enter text: ` 
