@@ -25,10 +25,11 @@ public class WordCountProcessorImpl implements WordCountProcessor {
 
     @Override
     public String processWordCounting(String input) {
-        Input fetchInput = fetcher.fetch(input);
+        Input fetchInput = fetcher.fetch();
         Words words = parser.parse(fetchInput);
         Words filteredWords = stopWordsFilter.filter(words);
         Output presentedOutput = presenter.present(filteredWords);
         return presentedOutput.getOutput();
     }
+
 }

@@ -31,3 +31,16 @@ New Requirements:
 Potential improvements in data layer:
 // 1. Create dao (with local cash) -> StopWordsRepository just once and then will cash the value
 // 2. the filter StopWordsFilter will dao.
+
+### Session 4:
+// The factory for Filter were introduced due to increased complexity of creating the object
+
+### Session 5:
+// create a factory  to decide how to process the counting
+// new implementaiton of the Fetcher
+//BONUS -> 
+
+//Things that didn't manage to make in time:
+1. Add FetcherFactory
+2. Cover tests
+3. Create general approach to read from files
