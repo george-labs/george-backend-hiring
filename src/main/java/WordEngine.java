@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class WordEngine {
 
@@ -8,13 +9,13 @@ public class WordEngine {
     public void execute(String filename) {
         try {
             String str = inputService.getInput(filename);
-            read(str);
+            System.out.println(read(str));
         } catch (RuntimeException ex) {
           ex.printStackTrace();
         }
     }
 
-    public int read(String input) {
+    public WordCountDTO read(String input) {
         ArrayList<String> list = new ArrayList<>();
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -33,12 +34,11 @@ public class WordEngine {
             list.add(stringBuilder.toString());
         }
 
-        System.out.println(String.format("Number of words: %s", list.size()));
-        return list.size();
+        HashSet<String> set = new HashSet<>(list);
+        return new WordCountDTO(list.size(), set.size());
     }
 
-    //65-90 97-122(toLowercase?)
-    public boolean isLetter (int ch) {
+    private boolean isLetter (int ch) {
         return (ch > 64 && ch < 91) || (ch > 96 && ch < 123);
     }
 

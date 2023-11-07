@@ -4,7 +4,8 @@ import java.nio.file.Path;
 import java.util.Scanner;
 
 public class InputService {
-
+    private static final String EMPTY_FILE = "Empty File";
+    private static final String EMPTY_STRING = "";
     String getInput(String input) {
         try {
             if (!input.isEmpty()) {
@@ -23,10 +24,11 @@ public class InputService {
             }
         } catch (IOException ex) {
             ex.printStackTrace();
-            return "";
+            return EMPTY_STRING;
         } catch (IndexOutOfBoundsException ex) {
             ex.printStackTrace();
-            return "Empty FIle";
+            System.out.println(EMPTY_FILE);
+            return EMPTY_STRING;
         }
     }
 
