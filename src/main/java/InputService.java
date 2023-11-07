@@ -11,7 +11,7 @@ public class InputService {
                 Path of = Path.of(input);
                 if (Files.exists(of)) {
                     return Files.readString(of);
-                } else {//TODO refactor
+                } else {
                     Scanner scanner = new Scanner(System.in);
                     System.out.print("Enter text: ");
                     return scanner.nextLine();
