@@ -1,36 +1,17 @@
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Scanner;
 
 public class WordEngine {
-    HashSet<String> stopwords = new HashSet<>();
 
-    WordEngine(String path) {
+    private final InputService inputService = new InputService();
+    private final DictionaryService dictionaryService = new DictionaryService("C:\\Users\\Memes\\Desktop\\george-backend-hiring\\src\\main\\resources\\stopwords.txt");
+
+    public void execute(String filename) {
         try {
-            stopwords = new HashSet<String>(Files.readAllLines(Paths.get(path)));
-
-           System.out.println(stopwords);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void execute() {
-        try {
-            String str = scan();
+            String str = inputService.getInput(filename);
             read(str);
         } catch (RuntimeException ex) {
           ex.printStackTrace();
         }
-    }
-    public String scan(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter text: ");
-        return scanner.nextLine();
     }
 
     public int read(String input) {
@@ -42,13 +23,13 @@ public class WordEngine {
                if (isLetter(input.charAt(i))) {
                    stringBuilder.append(input.charAt(i));
                } else {
-                   if (stringBuilder.length() != 0 && !stopwords.contains(stringBuilder.toString())) {
+                   if (stringBuilder.length() != 0 && !dictionaryService.contains(stringBuilder.toString())) {
                        list.add(stringBuilder.toString());
                    }
                        stringBuilder.setLength(0);
                }
         }
-        if (stringBuilder.length() != 0 && !stopwords.contains(stringBuilder.toString())) { //TODO remove
+        if (stringBuilder.length() != 0 && !dictionaryService.contains(stringBuilder.toString())) { //TODO remove
             list.add(stringBuilder.toString());
         }
 

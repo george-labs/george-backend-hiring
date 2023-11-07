@@ -7,7 +7,7 @@ public class JavaApplicationTest {
     WordEngine wordEngine;
     @BeforeEach
     void init(){
-        wordEngine = new WordEngine("C:\\Users\\Memes\\Desktop\\george-backend-hiring\\src\\main\\resources\\stopwords.txt");
+        wordEngine = new WordEngine();
     }
     @Test
     public void test() {
@@ -32,8 +32,8 @@ public class JavaApplicationTest {
         Assertions.assertEquals(4, wordEngine.read("Mary had a little lamb"));
         Assertions.assertEquals(2, wordEngine.read("w0rd"));
         Assertions.assertEquals(0, wordEngine.read("the a on off"));
-
     }
+
 
 
 }
