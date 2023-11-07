@@ -26,4 +26,12 @@ public class JavaApplicationTest {
         Assertions.assertTrue(wordEngine.isLetter('z'));
         Assertions.assertFalse(wordEngine.isLetter('5'));
     }
+
+    @Test
+    public void readingTest() {
+        Assertions.assertEquals(3, wordEngine.read("Mary too Mary"));
+        Assertions.assertEquals(1, wordEngine.read("\"         word                 \""));
+        Assertions.assertEquals(5, wordEngine.read("Mary had a little lamb"));
+
+    }
 }
