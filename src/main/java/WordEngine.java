@@ -39,7 +39,7 @@ public class WordEngine {
     }
 
     private boolean isLetter (int ch) {
-        return (ch > 64 && ch < 91) || (ch > 96 && ch < 123);
+        return (ch > 64 && ch < 91) || (ch > 96 && ch < 123) || ch == 45 ;
     }
 
 }

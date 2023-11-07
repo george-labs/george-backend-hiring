@@ -20,7 +20,6 @@ public class InputServiceTest {
                 "a little\r\n" +
                 "lamb";
         Path of = Path.of("emptyFile.txt");
-
         Assertions.assertEquals(expected, inputService.getInput("mytext.txt"));
         Files.createFile(of);
         Assertions.assertEquals("" ,inputService.getInput("emptyFile.txt"));
