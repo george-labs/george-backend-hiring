@@ -1,15 +1,13 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.logging.LoggerFactory;
 
-import java.util.logging.Logger;
 
 public class JavaApplicationTest {
     WordEngine wordEngine;
     @BeforeEach
     void init(){
-        wordEngine = new WordEngine();
+        wordEngine = new WordEngine("C:\\Users\\Memes\\Desktop\\george-backend-hiring\\src\\main\\resources\\stopwords.txt");
     }
     @Test
     public void test() {
@@ -31,7 +29,11 @@ public class JavaApplicationTest {
     public void readingTest() {
         Assertions.assertEquals(3, wordEngine.read("Mary too Mary"));
         Assertions.assertEquals(1, wordEngine.read("\"         word                 \""));
-        Assertions.assertEquals(5, wordEngine.read("Mary had a little lamb"));
+        Assertions.assertEquals(4, wordEngine.read("Mary had a little lamb"));
+        Assertions.assertEquals(2, wordEngine.read("w0rd"));
+        Assertions.assertEquals(0, wordEngine.read("the a on off"));
 
     }
+
+
 }
