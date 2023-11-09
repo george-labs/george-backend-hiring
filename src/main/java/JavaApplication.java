@@ -12,8 +12,14 @@ public class JavaApplication {
 
     static public void main(String[] args) throws FileNotFoundException {
 
-        Scanner scanner = new Scanner(System.in);
-        LineReader lineReader = new ConsoleLineReader(scanner);
+        LineReader lineReader;
+        if(args.length > 0) {
+            Scanner scanner = new Scanner(new File(args[0]));
+            lineReader = new FileLineReader(scanner);
+        } else {
+            Scanner scanner = new Scanner(System.in);
+            lineReader = new ConsoleLineReader(scanner);
+        }
 
         LineReader stopWordReader = new FileLineReader(new Scanner(new File("stopwords.txt")));
         Dictionary stopWordsDict = new Dictionary(stopWordReader);
