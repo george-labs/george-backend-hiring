@@ -1,13 +1,11 @@
+import dictionary.Dictionary;
 import org.junit.jupiter.api.Test;
-import textProcessing.ConsoleLineReader;
-import textProcessing.LineProcessor;
-import textProcessing.WordFetcher;
+import textProcessing.*;
 import wordFilter.AlphabeticWordFilter;
+import wordFilter.StopWordFilter;
 import wordsStats.WordCounter;
 
-import java.io.ByteArrayInputStream;
-import java.io.Console;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,32 +19,54 @@ public class JavaApplicationTest {
         assertTrue(Boolean.TRUE);
     }
 
-    @Test
-    public void parseWordsFromConsole() {
-        InputStream in = new ByteArrayInputStream("Aleksa is my name".getBytes());
-        System.setIn(in);
+    public List<String> parseWordsFromConsole() {
+        Scanner scanner = new Scanner(System.in);
+
+        ConsoleLineReader consoleLineReader = new ConsoleLineReader(scanner);
+        LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter());
+        String line = consoleLineReader.getLine();
+        return lineProcessor.getWords(line);
+    }
+
+    public WordCounter prepareWordCounterForAlphabeticWordsTests() {
         Scanner scanner = new Scanner(System.in);
 
         ConsoleLineReader consoleLineReader = new ConsoleLineReader(scanner);
         LineProcessor lineProcessor = new LineProcessor();
-        String line = consoleLineReader.getLine();
-        List<String> words = lineProcessor.getWords(line);
+        lineProcessor.addFilter(new AlphabeticWordFilter()).addFilter(new AlphabeticWordFilter());
+        WordFetcher wordFetcher = new WordFetcher(consoleLineReader, lineProcessor);
+        return new WordCounter(wordFetcher);
+    }
 
-        assertEquals(words, List.of("Aleksa", "is", "my", "name"));
+    public WordCounter prepareWordCounterForStopWordsTests() {
+        Scanner scanner = new Scanner(System.in);
+        ConsoleLineReader consoleLineReader = new ConsoleLineReader(scanner);
+        LineReader stopWordReader = null;
+        try {
+            stopWordReader = new FileLineReader(new Scanner(new File("stopwords.txt")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Dictionary stopWordsDict = new Dictionary(stopWordReader);
+        LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter()).addFilter(new StopWordFilter(stopWordsDict));
+        WordFetcher wordFetcher = new WordFetcher(consoleLineReader, lineProcessor);
+        return new WordCounter(wordFetcher);
+    }
+
+    @Test
+    public void parseCorrectWordsFromConsole() {
+        InputStream in = new ByteArrayInputStream("Aleksa is my name".getBytes());
+        System.setIn(in);
+        List<String> words = parseWordsFromConsole();
+        assertEquals(List.of("Aleksa", "is", "my", "name"), words);
     }
 
     @Test
     public void parseWordsFromConsoleWithWhiteSpaces() {
         InputStream in = new ByteArrayInputStream("  Aleksa is my name ".getBytes());
         System.setIn(in);
-        Scanner scanner = new Scanner(System.in);
-
-        ConsoleLineReader consoleLineReader = new ConsoleLineReader(scanner);
-        LineProcessor lineProcessor = new LineProcessor();
-        String line = consoleLineReader.getLine();
-        List<String> words = lineProcessor.getWords(line);
-
-        assertEquals(words, List.of("Aleksa", "is", "my", "name"));
+        List<String> words = parseWordsFromConsole();
+        assertEquals(List.of("Aleksa", "is", "my", "name"), words);
     }
 
     @Test
@@ -54,12 +74,7 @@ public class JavaApplicationTest {
         InputStream in = new ByteArrayInputStream("Aleksa33 is my3 name".getBytes());
         System.setIn(in);
         Scanner scanner = new Scanner(System.in);
-
-        ConsoleLineReader consoleLineReader = new ConsoleLineReader(scanner);
-        LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter());
-        String line = consoleLineReader.getLine();
-        List<String> words = lineProcessor.getWords(line);
-
+        List<String> words = parseWordsFromConsole();
         assertEquals(List.of("is", "name"), words);
     }
 
@@ -67,13 +82,7 @@ public class JavaApplicationTest {
     public void countWordsFromConsole() {
         InputStream in = new ByteArrayInputStream("Mary had a little lamb".getBytes());
         System.setIn(in);
-        Scanner scanner = new Scanner(System.in);
-
-        ConsoleLineReader consoleLineReader = new ConsoleLineReader(scanner);
-        LineProcessor lineProcessor = new LineProcessor();
-        lineProcessor.addFilter(new AlphabeticWordFilter()).addFilter(new AlphabeticWordFilter());
-        WordFetcher wordFetcher = new WordFetcher(consoleLineReader, lineProcessor);
-        WordCounter wordCounter = new WordCounter(wordFetcher);
+        WordCounter wordCounter = prepareWordCounterForAlphabeticWordsTests();
         assertEquals(5, wordCounter.getCount());
     }
 
@@ -81,12 +90,7 @@ public class JavaApplicationTest {
     public void countWordsWithNumbersFromConsole() {
         InputStream in = new ByteArrayInputStream("Mary had3 a little3 lamb".getBytes());
         System.setIn(in);
-        Scanner scanner = new Scanner(System.in);
-
-        ConsoleLineReader consoleLineReader = new ConsoleLineReader(scanner);
-        LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter());
-        WordFetcher wordFetcher = new WordFetcher(consoleLineReader, lineProcessor);
-        WordCounter wordCounter = new WordCounter(wordFetcher);
+        WordCounter wordCounter = prepareWordCounterForAlphabeticWordsTests();
         assertEquals(3, wordCounter.getCount());
     }
 
@@ -94,12 +98,7 @@ public class JavaApplicationTest {
     public void countNoWordsFromConsole() {
         InputStream in = new ByteArrayInputStream("\n".getBytes());
         System.setIn(in);
-        Scanner scanner = new Scanner(System.in);
-
-        ConsoleLineReader consoleLineReader = new ConsoleLineReader(scanner);
-        LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter());
-        WordFetcher wordFetcher = new WordFetcher(consoleLineReader, lineProcessor);
-        WordCounter wordCounter = new WordCounter(wordFetcher);
+        WordCounter wordCounter = prepareWordCounterForAlphabeticWordsTests();
         assertEquals(0, wordCounter.getCount());
     }
 
@@ -107,12 +106,23 @@ public class JavaApplicationTest {
     public void countBlanksFromConsole() {
         InputStream in = new ByteArrayInputStream("    ".getBytes());
         System.setIn(in);
-        Scanner scanner = new Scanner(System.in);
+        WordCounter wordCounter = prepareWordCounterForAlphabeticWordsTests();
+        assertEquals(0, wordCounter.getCount());
+    }
 
-        ConsoleLineReader consoleLineReader = new ConsoleLineReader(scanner);
-        LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter());
-        WordFetcher wordFetcher = new WordFetcher(consoleLineReader, lineProcessor);
-        WordCounter wordCounter = new WordCounter(wordFetcher);
+    @Test
+    public void countWordsWithStopWordsAndNumbersFromConsole() {
+        InputStream in = new ByteArrayInputStream("Mary had a little3 lamb".getBytes());
+        System.setIn(in);
+        WordCounter wordCounter = prepareWordCounterForStopWordsTests();
+        assertEquals(3, wordCounter.getCount());
+    }
+
+    @Test
+    public void countWordsWithAllStopWordsFromConsole() {
+        InputStream in = new ByteArrayInputStream("the a on off".getBytes());
+        System.setIn(in);
+        WordCounter wordCounter = prepareWordCounterForStopWordsTests();
         assertEquals(0, wordCounter.getCount());
     }
 }
