@@ -22,7 +22,7 @@ public class LineProcessor {
     }
 
     public List<String> getWords(String line) {
-        Stream<String> words = Stream.of(line.trim().split(" "));
+        Stream<String> words = Stream.of(line.trim().split("[ |.]"));
         for(WordFilter f : filters) {
             words = words.filter(f::isWord);
         }

@@ -4,6 +4,8 @@ import textProcessing.*;
 import wordFilter.AlphabeticWordFilter;
 import wordFilter.StopWordFilter;
 import wordsStats.WordCounter;
+import wordsStats.WordOperation;
+import wordsStats.WordsStas;
 
 import java.io.*;
 import java.util.List;
@@ -35,7 +37,10 @@ public class JavaApplicationTest {
         LineProcessor lineProcessor = new LineProcessor();
         lineProcessor.addFilter(new AlphabeticWordFilter()).addFilter(new AlphabeticWordFilter());
         WordFetcher wordFetcher = new WordFetcher(consoleLineReader, lineProcessor);
-        return new WordCounter(wordFetcher);
+        WordCounter wordCounter = new WordCounter();
+        WordsStas wordStats = new WordsStas(wordFetcher).addOperation(wordCounter);
+        wordStats.generateStats();
+        return wordCounter;
     }
 
     public WordCounter prepareWordCounterForStopWordsTests() {
@@ -50,8 +55,30 @@ public class JavaApplicationTest {
         Dictionary stopWordsDict = new Dictionary(stopWordReader);
         LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter()).addFilter(new StopWordFilter(stopWordsDict));
         WordFetcher wordFetcher = new WordFetcher(consoleLineReader, lineProcessor);
-        return new WordCounter(wordFetcher);
+        WordCounter wordCounter = new WordCounter();
+        WordsStas wordsStas = new  WordsStas(wordFetcher).addOperation(wordCounter);
+        wordsStas.generateStats();
+        return wordCounter;
     }
+
+    public WordCounter prepareWordCounterForReadFromFile(StringReader sr){
+        Scanner scanner = new Scanner(sr);
+        LineReader lineReader = new FileLineReader(scanner);
+        LineReader stopWordReader = null;
+        try {
+            stopWordReader = new FileLineReader(new Scanner(new File("stopwords.txt")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Dictionary stopWordsDict = new Dictionary(stopWordReader);
+        LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter()).addFilter(new StopWordFilter(stopWordsDict));
+        WordFetcher wordFetcher = new WordFetcher(lineReader, lineProcessor);
+        WordCounter wordCounter = new WordCounter();
+        WordsStas wordsStas = new WordsStas(wordFetcher).addOperation(wordCounter);
+        wordsStas.generateStats();
+        return wordCounter;
+    }
+
 
     @Test
     public void parseCorrectWordsFromConsole() {
@@ -126,22 +153,6 @@ public class JavaApplicationTest {
         assertEquals(0, wordCounter.getCount());
     }
 
-
-    public WordCounter prepareWordCounterForReadFromFile(StringReader sr){
-        Scanner scanner = new Scanner(sr);
-        LineReader lineReader = new FileLineReader(scanner);
-        LineReader stopWordReader = null;
-        try {
-            stopWordReader = new FileLineReader(new Scanner(new File("stopwords.txt")));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        Dictionary stopWordsDict = new Dictionary(stopWordReader);
-        LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter()).addFilter(new StopWordFilter(stopWordsDict));
-        WordFetcher wordFetcher = new WordFetcher(lineReader, lineProcessor);
-
-        return new WordCounter(wordFetcher);
-    }
     @Test
     public void countWordsFromFile() {
         StringReader sr = new StringReader("Mary had\na little\nlamb\n");

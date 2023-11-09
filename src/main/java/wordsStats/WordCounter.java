@@ -2,19 +2,23 @@ package wordsStats;
 
 import textProcessing.WordFetcher;
 
-public class WordCounter {
-    private final WordFetcher wordFetcher;
+public class WordCounter implements WordOperation{
+
     private long counter = 0;
 
-    public WordCounter(WordFetcher wordFetcher) {
-        this.wordFetcher = wordFetcher;
+    public WordCounter() {};
+
+    @Override
+    public void ingestWord(String word) {
+        counter++;
+    }
+    @Override
+    public String getStatSummary() {
+        return "Number of words: " + counter;
     }
 
     public long getCount() {
-        String word;
-        while((word = wordFetcher.getNextWord()) != null) {
-            counter++;
-        }
         return counter;
     }
+
 }

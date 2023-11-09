@@ -3,6 +3,9 @@ import textProcessing.*;
 import wordFilter.AlphabeticWordFilter;
 import wordFilter.StopWordFilter;
 import wordsStats.WordCounter;
+import wordsStats.WordOperation;
+import wordsStats.WordUnique;
+import wordsStats.WordsStas;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,7 +29,10 @@ public class JavaApplication {
         LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter()).addFilter(new StopWordFilter(stopWordsDict));
         WordFetcher wordFetcher = new WordFetcher(lineReader, lineProcessor);
 
-        WordCounter wordCounter = new WordCounter(wordFetcher);
-        System.out.print("Number of words: " + wordCounter.getCount());
+        WordOperation wordCount = new WordCounter();
+        WordOperation wordUnique = new WordUnique();
+        WordsStas wordStats = new WordsStas(wordFetcher).addOperation(wordCount).addOperation(wordUnique);
+        wordStats.generateStats();
+        System.out.print(wordStats.collectStatsSummary());
     }
 }
