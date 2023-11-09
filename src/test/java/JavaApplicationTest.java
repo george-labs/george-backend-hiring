@@ -4,7 +4,7 @@ import textProcessing.*;
 import wordFilter.AlphabeticWordFilter;
 import wordFilter.StopWordFilter;
 import wordsStats.WordCounter;
-import wordsStats.WordOperation;
+import wordsStats.WordUnique;
 import wordsStats.WordsStas;
 
 import java.io.*;
@@ -110,7 +110,7 @@ public class JavaApplicationTest {
         InputStream in = new ByteArrayInputStream("Mary had a little lamb".getBytes());
         System.setIn(in);
         WordCounter wordCounter = prepareWordCounterForAlphabeticWordsTests();
-        assertEquals(5, wordCounter.getCount());
+        assertEquals(5, wordCounter.getStat());
     }
 
     @Test
@@ -118,7 +118,7 @@ public class JavaApplicationTest {
         InputStream in = new ByteArrayInputStream("Mary had3 a little3 lamb".getBytes());
         System.setIn(in);
         WordCounter wordCounter = prepareWordCounterForAlphabeticWordsTests();
-        assertEquals(3, wordCounter.getCount());
+        assertEquals(3, wordCounter.getStat());
     }
 
     @Test
@@ -126,7 +126,7 @@ public class JavaApplicationTest {
         InputStream in = new ByteArrayInputStream("\n".getBytes());
         System.setIn(in);
         WordCounter wordCounter = prepareWordCounterForAlphabeticWordsTests();
-        assertEquals(0, wordCounter.getCount());
+        assertEquals(0, wordCounter.getStat());
     }
 
     @Test
@@ -134,7 +134,7 @@ public class JavaApplicationTest {
         InputStream in = new ByteArrayInputStream("    ".getBytes());
         System.setIn(in);
         WordCounter wordCounter = prepareWordCounterForAlphabeticWordsTests();
-        assertEquals(0, wordCounter.getCount());
+        assertEquals(0, wordCounter.getStat());
     }
 
     @Test
@@ -142,7 +142,7 @@ public class JavaApplicationTest {
         InputStream in = new ByteArrayInputStream("Mary had a little3 lamb".getBytes());
         System.setIn(in);
         WordCounter wordCounter = prepareWordCounterForStopWordsTests();
-        assertEquals(3, wordCounter.getCount());
+        assertEquals(3, wordCounter.getStat());
     }
 
     @Test
@@ -150,33 +150,57 @@ public class JavaApplicationTest {
         InputStream in = new ByteArrayInputStream("the a on off".getBytes());
         System.setIn(in);
         WordCounter wordCounter = prepareWordCounterForStopWordsTests();
-        assertEquals(0, wordCounter.getCount());
+        assertEquals(0, wordCounter.getStat());
     }
 
     @Test
     public void countWordsFromFile() {
         StringReader sr = new StringReader("Mary had\na little\nlamb\n");
         WordCounter wordCounter = prepareWordCounterForReadFromFile(sr);
-        assertEquals(4, wordCounter.getCount());
+        assertEquals(4, wordCounter.getStat());
     }
 
     @Test
     public void countWordsAllStopWordsFromFile() {
         StringReader sr = new StringReader("The a\nA\n");
         WordCounter wordCounter = prepareWordCounterForReadFromFile(sr);
-        assertEquals(0, wordCounter.getCount());
+        assertEquals(0, wordCounter.getStat());
     }
     @Test
     public void countWordsEmptyFile() {
         StringReader sr = new StringReader("");
         WordCounter wordCounter = prepareWordCounterForReadFromFile(sr);
-        assertEquals(0, wordCounter.getCount());
+        assertEquals(0, wordCounter.getStat());
     }
 
     @Test
     public void countWordsBlanksInFile() {
         StringReader sr = new StringReader("     \n  \n\n");
         WordCounter wordCounter = prepareWordCounterForReadFromFile(sr);
-        assertEquals(0, wordCounter.getCount());
+        assertEquals(0, wordCounter.getStat());
+    }
+
+    @Test
+    public void countUniqueWordsFromConsole() {
+        InputStream in = new ByteArrayInputStream("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.".getBytes());
+        System.setIn(in);
+        Scanner scanner = new Scanner(System.in);
+        ConsoleLineReader consoleLineReader = new ConsoleLineReader(scanner);
+        LineProcessor lineProcessor = new LineProcessor();
+        LineReader stopWordReader = null;
+        try {
+            stopWordReader = new FileLineReader(new Scanner(new File("stopwords.txt")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Dictionary stopWordsDict = new Dictionary(stopWordReader);
+        lineProcessor.addFilter(new AlphabeticWordFilter()).addFilter(new AlphabeticWordFilter()).addFilter(new StopWordFilter(stopWordsDict));
+        WordFetcher wordFetcher = new WordFetcher(consoleLineReader, lineProcessor);
+        WordCounter wordCounter = new WordCounter();
+        WordUnique wordUnique = new WordUnique();
+        WordsStas wordStats = new WordsStas(wordFetcher).addOperation(wordCounter).addOperation(wordUnique);
+        wordStats.generateStats();
+
+        assertEquals(7, wordUnique.getStat());
     }
 }

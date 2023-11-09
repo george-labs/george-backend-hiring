@@ -2,9 +2,9 @@ package wordsStats;
 
 import java.util.HashSet;
 
-public class WordUnique implements WordOperation {
+public class WordUnique implements WordOperation<Long> {
 
-    private HashSet<String> wordSet;
+    private final HashSet<String> wordSet;
     private long uniqueCount = 0;
 
     public WordUnique() {
@@ -22,5 +22,9 @@ public class WordUnique implements WordOperation {
     @Override
     public String getStatSummary() {
         return "unique: " + uniqueCount;
+    }
+
+    public Long getStat() {
+        return uniqueCount;
     }
 }

@@ -29,9 +29,7 @@ public class JavaApplication {
         LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter()).addFilter(new StopWordFilter(stopWordsDict));
         WordFetcher wordFetcher = new WordFetcher(lineReader, lineProcessor);
 
-        WordOperation wordCount = new WordCounter();
-        WordOperation wordUnique = new WordUnique();
-        WordsStas wordStats = new WordsStas(wordFetcher).addOperation(wordCount).addOperation(wordUnique);
+        WordsStas wordStats = new WordsStas(wordFetcher).addOperation(new WordCounter()).addOperation(new WordUnique());
         wordStats.generateStats();
         System.out.print(wordStats.collectStatsSummary());
     }

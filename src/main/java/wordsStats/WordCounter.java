@@ -2,7 +2,7 @@ package wordsStats;
 
 import textProcessing.WordFetcher;
 
-public class WordCounter implements WordOperation{
+public class WordCounter implements WordOperation<Long>{
 
     private long counter = 0;
 
@@ -17,7 +17,7 @@ public class WordCounter implements WordOperation{
         return "Number of words: " + counter;
     }
 
-    public long getCount() {
+    public Long getStat() {
         return counter;
     }
 
