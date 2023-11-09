@@ -1,6 +1,9 @@
 import textProcessing.ConsoleLineReader;
 import textProcessing.LineProcessor;
 import textProcessing.LineReader;
+import textProcessing.WordFetcher;
+import wordFilter.AlphabeticWordFilter;
+import wordsStats.WordCounter;
 
 import java.util.Scanner;
 
@@ -10,11 +13,10 @@ public class JavaApplication {
 
         Scanner scanner = new Scanner(System.in);
         LineReader lineReader = new ConsoleLineReader(scanner);
-        LineProcessor lineProcessor = new LineProcessor();
+        LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter());
+        WordFetcher wordFetcher = new WordFetcher(lineReader, lineProcessor);
 
-        String line = lineReader.getLine();
-        System.out.print(lineProcessor.getWords(line));
-
-
+        WordCounter wordCounter = new WordCounter(wordFetcher);
+        System.out.print("Number of words: " + wordCounter.getCount());
     }
 }
