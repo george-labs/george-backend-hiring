@@ -2,10 +2,7 @@ import dictionary.Dictionary;
 import textProcessing.*;
 import wordFilter.AlphabeticWordFilter;
 import wordFilter.StopWordFilter;
-import wordsStats.WordCounter;
-import wordsStats.WordOperation;
-import wordsStats.WordUnique;
-import wordsStats.WordsStas;
+import wordsStats.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,7 +26,7 @@ public class JavaApplication {
         LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter()).addFilter(new StopWordFilter(stopWordsDict));
         WordFetcher wordFetcher = new WordFetcher(lineReader, lineProcessor);
 
-        WordsStas wordStats = new WordsStas(wordFetcher).addOperation(new WordCounter()).addOperation(new WordUnique());
+        wordsStas wordStats = new wordsStas(wordFetcher).addOperation(new WordCounter()).addOperation(new WordUnique()).addOperation(new WordAverage());
         wordStats.generateStats();
         System.out.print(wordStats.collectStatsSummary());
     }

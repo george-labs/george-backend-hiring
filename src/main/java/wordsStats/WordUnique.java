@@ -7,6 +7,8 @@ public class WordUnique implements WordOperation<Long> {
     private final HashSet<String> wordSet;
     private long uniqueCount = 0;
 
+
+
     public WordUnique() {
         this.wordSet = new HashSet<>();
     }
@@ -21,7 +23,8 @@ public class WordUnique implements WordOperation<Long> {
 
     @Override
     public String getStatSummary() {
-        return "unique: " + uniqueCount;
+        String delimiter = "; ";
+        return "unique: " + uniqueCount + delimiter;
     }
 
     public Long getStat() {

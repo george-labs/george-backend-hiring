@@ -6,7 +6,8 @@ public class WordCounter implements WordOperation<Long>{
 
     private long counter = 0;
 
-    public WordCounter() {};
+    public WordCounter() {
+    };
 
     @Override
     public void ingestWord(String word) {
@@ -14,7 +15,8 @@ public class WordCounter implements WordOperation<Long>{
     }
     @Override
     public String getStatSummary() {
-        return "Number of words: " + counter;
+        String delimiter = ", ";
+        return "Number of words: " + counter + delimiter;
     }
 
     public Long getStat() {

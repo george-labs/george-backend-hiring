@@ -3,9 +3,10 @@ import org.junit.jupiter.api.Test;
 import textProcessing.*;
 import wordFilter.AlphabeticWordFilter;
 import wordFilter.StopWordFilter;
+import wordsStats.WordAverage;
 import wordsStats.WordCounter;
 import wordsStats.WordUnique;
-import wordsStats.WordsStas;
+import wordsStats.wordsStas;
 
 import java.io.*;
 import java.util.List;
@@ -38,7 +39,7 @@ public class JavaApplicationTest {
         lineProcessor.addFilter(new AlphabeticWordFilter()).addFilter(new AlphabeticWordFilter());
         WordFetcher wordFetcher = new WordFetcher(consoleLineReader, lineProcessor);
         WordCounter wordCounter = new WordCounter();
-        WordsStas wordStats = new WordsStas(wordFetcher).addOperation(wordCounter);
+        wordsStas wordStats = new wordsStas(wordFetcher).addOperation(wordCounter);
         wordStats.generateStats();
         return wordCounter;
     }
@@ -56,9 +57,28 @@ public class JavaApplicationTest {
         LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter()).addFilter(new StopWordFilter(stopWordsDict));
         WordFetcher wordFetcher = new WordFetcher(consoleLineReader, lineProcessor);
         WordCounter wordCounter = new WordCounter();
-        WordsStas wordsStas = new  WordsStas(wordFetcher).addOperation(wordCounter);
+        wordsStas wordsStas = new wordsStas(wordFetcher).addOperation(wordCounter);
         wordsStas.generateStats();
         return wordCounter;
+    }
+
+    public WordAverage prepareWordAvgForStopWordsTests() {
+        Scanner scanner = new Scanner(System.in);
+        ConsoleLineReader consoleLineReader = new ConsoleLineReader(scanner);
+        LineReader stopWordReader = null;
+        try {
+            stopWordReader = new FileLineReader(new Scanner(new File("stopwords.txt")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Dictionary stopWordsDict = new Dictionary(stopWordReader);
+        LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter()).addFilter(new StopWordFilter(stopWordsDict));
+        WordFetcher wordFetcher = new WordFetcher(consoleLineReader, lineProcessor);
+        WordCounter wordCounter = new WordCounter();
+        WordAverage wordAverage = new WordAverage();
+        wordsStas wordsStas = new wordsStas(wordFetcher).addOperation(wordCounter).addOperation(wordAverage);
+        wordsStas.generateStats();
+        return wordAverage;
     }
 
     public WordCounter prepareWordCounterForReadFromFile(StringReader sr){
@@ -74,7 +94,7 @@ public class JavaApplicationTest {
         LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter()).addFilter(new StopWordFilter(stopWordsDict));
         WordFetcher wordFetcher = new WordFetcher(lineReader, lineProcessor);
         WordCounter wordCounter = new WordCounter();
-        WordsStas wordsStas = new WordsStas(wordFetcher).addOperation(wordCounter);
+        wordsStas wordsStas = new wordsStas(wordFetcher).addOperation(wordCounter);
         wordsStas.generateStats();
         return wordCounter;
     }
@@ -198,7 +218,7 @@ public class JavaApplicationTest {
         WordFetcher wordFetcher = new WordFetcher(consoleLineReader, lineProcessor);
         WordCounter wordCounter = new WordCounter();
         WordUnique wordUnique = new WordUnique();
-        WordsStas wordStats = new WordsStas(wordFetcher).addOperation(wordCounter).addOperation(wordUnique);
+        wordsStas wordStats = new wordsStas(wordFetcher).addOperation(wordCounter).addOperation(wordUnique);
         wordStats.generateStats();
 
         assertEquals(6, wordUnique.getStat());
@@ -210,5 +230,21 @@ public class JavaApplicationTest {
         System.setIn(in);
         WordCounter wordCounter = prepareWordCounterForStopWordsTests();
         assertEquals(7, wordCounter.getStat());
+    }
+
+    @Test
+    public void avgWordLenFromConsole() {
+        InputStream in = new ByteArrayInputStream("aaa bbb cc d".getBytes());
+        System.setIn(in);
+        WordAverage wordAverage = prepareWordAvgForStopWordsTests();
+        assertEquals(2.25, wordAverage.getStat());
+    }
+
+    @Test
+    public void avgWordLenWithStopWordFromConsole() {
+        InputStream in = new ByteArrayInputStream("aaa bbb a".getBytes());
+        System.setIn(in);
+        WordAverage wordAverage = prepareWordAvgForStopWordsTests();
+        assertEquals(3, wordAverage.getStat());
     }
 }
