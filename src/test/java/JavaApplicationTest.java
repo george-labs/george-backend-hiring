@@ -201,6 +201,14 @@ public class JavaApplicationTest {
         WordsStas wordStats = new WordsStas(wordFetcher).addOperation(wordCounter).addOperation(wordUnique);
         wordStats.generateStats();
 
-        assertEquals(7, wordUnique.getStat());
+        assertEquals(6, wordUnique.getStat());
+    }
+
+    @Test
+    public void countWordsWithHyphenFromConsole() {
+        InputStream in = new ByteArrayInputStream("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.".getBytes());
+        System.setIn(in);
+        WordCounter wordCounter = prepareWordCounterForStopWordsTests();
+        assertEquals(7, wordCounter.getStat());
     }
 }
