@@ -20,7 +20,7 @@ public class Dictionary {
     private void loadAllWords() {
         String word;
         while((word = fileReader.getLine()) != null) {
-            this.dictionary.add(word);
+            this.dictionary.add(word.toLowerCase());
         }
     }
 

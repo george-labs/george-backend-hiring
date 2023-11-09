@@ -125,4 +125,47 @@ public class JavaApplicationTest {
         WordCounter wordCounter = prepareWordCounterForStopWordsTests();
         assertEquals(0, wordCounter.getCount());
     }
+
+
+    public WordCounter prepareWordCounterForReadFromFile(StringReader sr){
+        Scanner scanner = new Scanner(sr);
+        LineReader lineReader = new FileLineReader(scanner);
+        LineReader stopWordReader = null;
+        try {
+            stopWordReader = new FileLineReader(new Scanner(new File("stopwords.txt")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Dictionary stopWordsDict = new Dictionary(stopWordReader);
+        LineProcessor lineProcessor = new LineProcessor().addFilter(new AlphabeticWordFilter()).addFilter(new StopWordFilter(stopWordsDict));
+        WordFetcher wordFetcher = new WordFetcher(lineReader, lineProcessor);
+
+        return new WordCounter(wordFetcher);
+    }
+    @Test
+    public void countWordsFromFile() {
+        StringReader sr = new StringReader("Mary had\na little\nlamb\n");
+        WordCounter wordCounter = prepareWordCounterForReadFromFile(sr);
+        assertEquals(4, wordCounter.getCount());
+    }
+
+    @Test
+    public void countWordsAllStopWordsFromFile() {
+        StringReader sr = new StringReader("The a\nA\n");
+        WordCounter wordCounter = prepareWordCounterForReadFromFile(sr);
+        assertEquals(0, wordCounter.getCount());
+    }
+    @Test
+    public void countWordsEmptyFile() {
+        StringReader sr = new StringReader("");
+        WordCounter wordCounter = prepareWordCounterForReadFromFile(sr);
+        assertEquals(0, wordCounter.getCount());
+    }
+
+    @Test
+    public void countWordsBlanksInFile() {
+        StringReader sr = new StringReader("     \n  \n\n");
+        WordCounter wordCounter = prepareWordCounterForReadFromFile(sr);
+        assertEquals(0, wordCounter.getCount());
+    }
 }

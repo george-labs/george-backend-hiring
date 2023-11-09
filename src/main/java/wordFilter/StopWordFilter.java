@@ -11,6 +11,6 @@ public class StopWordFilter implements WordFilter{
     }
     @Override
     public boolean isWord(String word) {
-        return !this.dictionary.isInDict(word);
+        return !this.dictionary.isInDict(word.toLowerCase());
     }
 }
