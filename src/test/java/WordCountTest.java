@@ -11,15 +11,15 @@ public class WordCountTest {
     @BeforeEach
     void init() {
 
-        wordCount = new WordCount("stopWordsFileName");
+        wordCount = new WordCount("stopWords.txt");
     }
 
     @Test
     public void testWithNumbers() throws IOException {
 
-        WordCount  wordCount = new WordCount(stopWordsFileName);
 
-       int actual = WordCount.wordCount("I have 2  apples");
+
+       int actual = wordCount.getWordsCount("I have 2  apples");
 
         Assertions.assertEquals(3, actual);
     }
@@ -27,28 +27,28 @@ public class WordCountTest {
     @Test
     public void testWithMix() throws IOException {
 
-        int actual = WordCount.wordCount("I have222 two apples");
+        int actual = wordCount.getWordsCount("I have222 two apples");
 
         Assertions.assertEquals(3, actual);
     }
     @Test
     public void testWithLetters() throws IOException {
 
-        int actual = WordCount.wordCount("I have UU apples");
+        int actual = wordCount.getWordsCount("I have UU apples");
 
         Assertions.assertEquals(4, actual);
     }
     @Test
     public void testWithSigns() throws IOException {
 
-        int actual = WordCount.wordCount("I have &  *");
+        int actual = wordCount.getWordsCount("I have &  *");
 
         Assertions.assertEquals(2, actual);
     }
     @Test
     public void testWithEmpty() throws IOException {
 
-        int actual = WordCount.wordCount(" ");
+        int actual = wordCount.getWordsCount(" ");
 
         Assertions.assertEquals(0, actual);
     }
@@ -56,14 +56,14 @@ public class WordCountTest {
     @Test
     public void testWithoutStopWords() throws IOException {
 
-        int actual = WordCount.wordCount("The  sun is beautiful");
+        int actual = wordCount.getWordsCount("The  sun is beautiful");
 
         Assertions.assertEquals(4, actual);
     }
     @Test
     public void testWithOneStopWord() throws IOException {
 
-        int actual = WordCount.wordCount("the  sun is beautiful");
+        int actual = wordCount.getWordsCount("the  sun is beautiful");
 
         Assertions.assertEquals(3, actual);
     }
@@ -71,12 +71,20 @@ public class WordCountTest {
     @Test
     public void testWithTwoStopWords() throws IOException {
 
-        int actual = WordCount.wordCount("a radio is off");
+        int actual = wordCount.getWordsCount("a radio is off");
 
         Assertions.assertEquals(2, actual);
     }
 
+    @Test
+    public void testWithWrongStopFileName() throws IOException {
 
+        WordCount wordCount2 = new WordCount("stoWords.txt");
+
+        int actual = wordCount2.getWordsCount("a radio is off");
+
+        Assertions.assertEquals(4, actual);
+    }
 
 
 

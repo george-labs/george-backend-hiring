@@ -10,7 +10,6 @@ public class Main {
 
 
         final String stopWordsFileName = "stopwords.txt";
-        final String argsTextFileName = "mytext.txt";
 
         String text = "";
 
@@ -23,12 +22,13 @@ public class Main {
 
         WordCount  wordCount = new WordCount(stopWordsFileName);
 
-        int counter = wordCount.wordCount(text);
+        int counter = wordCount.getWordsCount(text);
         System.out.println("The  word count  is:" + counter);
 
     }
 
-    private static String readFromConsole() {
+
+    public static String readFromConsole() {
 
         System.out.println("Please  enter text:");
         Scanner scanner = new Scanner(System.in);
@@ -38,7 +38,7 @@ public class Main {
 
     }
 
-    private static String readFromArgs(String[] args, int number) throws IOException {
+    public static String readFromArgs(String[] args, int number) throws IOException {
 
         String fileName = args[number];
         FileReader fileReader = new FileReader(fileName);

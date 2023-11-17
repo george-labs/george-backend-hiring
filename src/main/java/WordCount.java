@@ -1,19 +1,15 @@
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.Set;
 
 
 public class WordCount {
-
-    private  boolean fileInput ;
-    private String fileName;
     private static String stopWordFileName;
 
     public WordCount(String stopWordFileName) {
         this.stopWordFileName  = stopWordFileName;
     }
 
-    public  int wordCount(String text) throws IOException {
+    public  int getWordsCount(String text) throws IOException {
         if (text == null || text.isEmpty())
             return 0;
 
