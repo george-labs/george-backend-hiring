@@ -11,9 +11,22 @@ public class WordCount {
 
     }
     private static int wordCount(String text){
-        String[] splited = text.split("\\s+");
+        if  (text == null || text.isEmpty())
+                return  0;
 
-        return splited.length;
+
+
+
+        String[] splited = text.split("\\s+");
+        boolean atleastOneAlpha;
+        int counter =0;
+
+        for( String  s: splited) {
+            if (atleastOneAlpha = s.matches("^[a-zA-Z]*$"))
+                counter++;
+        }
+
+        return counter;
 
     }
 }
