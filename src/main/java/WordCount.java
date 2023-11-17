@@ -5,6 +5,7 @@ public class WordCount {
         Scanner  scanner = new Scanner(System.in);
         System.out.println("Please enter  text:");
         String  text  = scanner.nextLine();
+        scanner.close();
         int counter  = wordCount(text);
         System.out.println("The  word count  is:"+counter );
 
