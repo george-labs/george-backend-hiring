@@ -8,7 +8,7 @@ public class FileReader {
         this.fileName = fileName;
     }
 
-    public String readStopFile() throws IOException {
+    public String readFile() throws IOException {
         ClassLoader classLoader = WordCount.class.getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(fileName);
         String data = "";

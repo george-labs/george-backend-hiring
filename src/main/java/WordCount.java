@@ -6,29 +6,47 @@ import java.util.Set;
 public class WordCount {
     public static void main(String[] args) throws IOException {
 
-        Scanner  scanner = new Scanner(System.in);
-        System.out.println("Please enter  text:");
-        String  text  = scanner.nextLine();
-        scanner.close();
-        int counter  = wordCount(text);
-        System.out.println("The  word count  is:"+counter );
+        String text = "";
+
+        if (args.length > 0) {
+            if (!args[0].isEmpty()) {
+
+                String fileName = args[0];
+                FileReader fileReader = new FileReader(fileName);
+                text = fileReader.readFile();
+
+                System.out.println("file name  is:" + fileName);
+            }
+        } else {
+            System.out.println("Please  enter text:");
+            Scanner scanner = new Scanner(System.in);
+
+            text = scanner.nextLine();
+            scanner.close();
+        }
+
+
+        int counter = wordCount(text);
+        System.out.println("The  word count  is:" + counter);
 
 
     }
-    public static int wordCount(String text ) throws IOException {
-        if  (text == null || text.isEmpty())
-                return  0;
+
+
+    public static int wordCount(String text) throws IOException {
+        if (text == null || text.isEmpty())
+            return 0;
 
         String[] splited = text.split("\\s+");
         FileReader fileReader = new FileReader("stopwords.txt");
-        Set<String> stopWords = Set.of(fileReader.readStopFile().split("\\n"));
+        Set<String> stopWords = Set.of(fileReader.readFile().split("\\n"));
 
-        int counter =0;
+        int counter = 0;
 
-        for( String  word: splited) {
+        for (String word : splited) {
 
             if (word.matches("^[a-zA-Z]*$"))
-                if(!stopWords.contains(word))
+                if (!stopWords.contains(word))
                     counter++;
         }
 
