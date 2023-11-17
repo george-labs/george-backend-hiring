@@ -10,10 +10,9 @@ public class WordCount {
 
 
     }
-    private static int wordCount(String text){
+    public static int wordCount(String text){
         if  (text == null || text.isEmpty())
                 return  0;
-
 
 
 
