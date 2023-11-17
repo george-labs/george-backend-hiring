@@ -10,6 +10,14 @@ public class WordCountTest {
 
         Assertions.assertEquals(3, actual);
     }
+
+    @Test
+    public void testWithMix() {
+
+        int actual = WordCount.wordCount("I have222 two apples");
+
+        Assertions.assertEquals(3, actual);
+    }
     @Test
     public void testWithLetters() {
 
