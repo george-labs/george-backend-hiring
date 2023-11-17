@@ -43,18 +43,26 @@ public class WordCountTest {
     }
 
     @Test
-    public void testWithOneStopWords() throws IOException {
+    public void testWithoutStopWords() throws IOException {
 
         int actual = WordCount.wordCount("The  sun is beautiful");
 
         Assertions.assertEquals(4, actual);
     }
     @Test
-    public void testWithOneStopWords2() throws IOException {
+    public void testWithOneStopWord() throws IOException {
 
         int actual = WordCount.wordCount("the  sun is beautiful");
 
         Assertions.assertEquals(3, actual);
+    }
+
+    @Test
+    public void testWithTwoStopWords() throws IOException {
+
+        int actual = WordCount.wordCount("a radio is off");
+
+        Assertions.assertEquals(2, actual);
     }
 
 
