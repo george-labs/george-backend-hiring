@@ -4,42 +4,22 @@ import java.util.Set;
 
 
 public class WordCount {
-    public static void main(String[] args) throws IOException {
 
-        String text = "";
+    private  boolean fileInput ;
+    private String fileName;
+    private static String stopWordFileName;
 
-        if (args.length > 0) {
-            if (!args[0].isEmpty()) {
-
-                String fileName = args[0];
-                FileReader fileReader = new FileReader(fileName);
-                text = fileReader.readFile();
-
-                System.out.println("file name  is:" + fileName);
-            }
-        } else {
-            System.out.println("Please  enter text:");
-            Scanner scanner = new Scanner(System.in);
-
-            text = scanner.nextLine();
-            scanner.close();
-        }
-
-
-        int counter = wordCount(text);
-        System.out.println("The  word count  is:" + counter);
-
-
+    public WordCount(String stopWordFileName) {
+        this.stopWordFileName  = stopWordFileName;
     }
 
-
-    public static int wordCount(String text) throws IOException {
+    public  int wordCount(String text) throws IOException {
         if (text == null || text.isEmpty())
             return 0;
 
         String[] splited = text.split("\\s+");
-        FileReader fileReader = new FileReader("stopwords.txt");
-        Set<String> stopWords = Set.of(fileReader.readFile().split("\\n"));
+
+        Set<String> stopWords = getSetStopWords(stopWordFileName);
 
         int counter = 0;
 
@@ -53,4 +33,11 @@ public class WordCount {
         return counter;
 
     }
+    private  Set<String> getSetStopWords(String fileName) throws IOException {
+
+        FileReader fileReader = new FileReader(fileName);
+        return Set.of(fileReader.readFile().split("\\n"));
+    }
+
+
 }

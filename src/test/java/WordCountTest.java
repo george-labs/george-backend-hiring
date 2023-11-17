@@ -1,12 +1,23 @@
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 public class WordCountTest {
 
+    private WordCount  wordCount;
+
+    @BeforeEach
+    void init() {
+
+        wordCount = new WordCount("stopWordsFileName");
+    }
+
     @Test
     public void testWithNumbers() throws IOException {
+
+        WordCount  wordCount = new WordCount(stopWordsFileName);
 
        int actual = WordCount.wordCount("I have 2  apples");
 
@@ -64,6 +75,7 @@ public class WordCountTest {
 
         Assertions.assertEquals(2, actual);
     }
+
 
 
 
