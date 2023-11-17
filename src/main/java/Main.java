@@ -4,9 +4,7 @@ import java.util.Scanner;
 public class Main {
 
 
-
-    public  static void main(String[] args) throws IOException {
-
+    public static void main(String[] args) throws IOException {
 
 
         final String stopWordsFileName = "stopwords.txt";
@@ -14,23 +12,23 @@ public class Main {
         String text = "";
 
 
-        if (args.length > 0)
+        if (args.length > 0) {
             if (!args[0].isEmpty())
-               text = readFromArgs(args, 0);
-        else
-               text = readFromConsole();
+                text = readFromArgs(args, 0);
+        } else
+            text = readFromConsole();
 
-        WordCount  wordCount = new WordCount(stopWordsFileName);
+        WordCount wordCount = new WordCount(stopWordsFileName);
 
         int counter = wordCount.getWordsCount(text);
-        System.out.println("The  word count  is:" + counter);
+        System.out.println("Number of words: " + counter);
 
     }
 
 
     public static String readFromConsole() {
 
-        System.out.println("Please  enter text:");
+        System.out.print("Enter text: ");
         Scanner scanner = new Scanner(System.in);
         String text = scanner.nextLine();
         scanner.close();
