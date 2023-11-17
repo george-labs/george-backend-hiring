@@ -18,11 +18,10 @@ public class WordCount {
 
 
         String[] splited = text.split("\\s+");
-        boolean atleastOneAlpha;
         int counter =0;
 
         for( String  s: splited) {
-            if (atleastOneAlpha = s.matches("^[a-zA-Z]*$"))
+            if (s.matches("^[a-zA-Z]*$"))
                 counter++;
         }
 
