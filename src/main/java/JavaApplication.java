@@ -1,6 +1,7 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class JavaApplication {
@@ -31,9 +32,9 @@ public class JavaApplication {
         StopWordList stopWordList = StopWordList.of(stopWordInputStream);
         WordCounter wordCounter = new WordCounter(new Tokenizer(), stopWordList);
 
-        WordCounts wordCounts = wordCounter.countWords(input);
+        Statistics wordCounts = wordCounter.countWords(input);
 
-        writer.write(String.format("Number of words: %d, unique: %d", wordCounts.getWordCount(), wordCounts.getUniqueWordCount()));
+        writer.write(String.format(Locale.US, "Number of words: %d, unique: %d; average word length: %.2f characters", wordCounts.getWordCount(), wordCounts.getUniqueWordCount(), wordCounts.getAverageWordLength()));
         writer.flush();
     }
 }

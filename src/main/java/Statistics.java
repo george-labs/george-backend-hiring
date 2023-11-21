@@ -1,10 +1,12 @@
-public class WordCounts {
+public class Statistics {
     private final long wordCount;
     private final long uniqueWordCount;
+    private final double averageWordLength;
 
-    public WordCounts(long wordCount, long uniqueWordCount) {
+    public Statistics(long wordCount, long uniqueWordCount, double averageWordLength) {
         this.wordCount = wordCount;
         this.uniqueWordCount = uniqueWordCount;
+        this.averageWordLength = averageWordLength;
     }
 
     public long getWordCount() {
@@ -13,5 +15,9 @@ public class WordCounts {
 
     public long getUniqueWordCount() {
         return uniqueWordCount;
+    }
+
+    public double getAverageWordLength() {
+        return averageWordLength;
     }
 }

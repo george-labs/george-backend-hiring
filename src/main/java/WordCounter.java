@@ -15,9 +15,9 @@ public class WordCounter {
         this.stopWordList = stopWordList;
     }
 
-    public WordCounts countWords(String input) {
+    public Statistics countWords(String input) {
         if (input == null) {
-            return new WordCounts(0, 0);
+            return new Statistics(0, 0, 0);
         }
 
         Stream<String> filteredStream =  tokenizer.tokenize(input)
@@ -25,7 +25,8 @@ public class WordCounter {
 
         List<String> words = filteredStream.collect(Collectors.toList());
         Set<String> uniqueWordSet = new HashSet<>(words);
+        double averageWordLength = words.stream().mapToDouble(String::length).average().orElse(0);
 
-        return new WordCounts(words.size(), uniqueWordSet.size());
+        return new Statistics(words.size(), uniqueWordSet.size(), averageWordLength);
     }
 }
