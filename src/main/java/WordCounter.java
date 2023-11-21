@@ -25,7 +25,9 @@ public class WordCounter {
             return 0;
         }
 
-        String[] candidateWords = input.split(this.delimiter);
+        String[] candidateWords = input
+                .replaceAll("\\r\\n|\\r|\\n", " ") // replace line breaks with spaces
+                .split(this.delimiter);
         return Arrays.stream(candidateWords)
                 .filter(word -> this.pattern.matcher(word).matches())
                 .filter(word -> !this.stopWordList.isStopWord(word))
