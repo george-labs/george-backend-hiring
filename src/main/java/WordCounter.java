@@ -1,6 +1,9 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WordCounter {
     private final String delimiter;
@@ -20,17 +23,19 @@ public class WordCounter {
         this.stopWordList = stopWordList;
     }
 
-    public long countWords(String input) {
+    public WordCounts countWords(String input) {
         if (input == null) {
-            return 0;
+            return new WordCounts(0, 0);
         }
 
         String[] candidateWords = input
                 .replaceAll("\\r\\n|\\r|\\n", " ") // replace line breaks with spaces
                 .split(this.delimiter);
-        return Arrays.stream(candidateWords)
+
+        Stream<String> filteredStream =  Arrays.stream(candidateWords)
                 .filter(word -> this.pattern.matcher(word).matches())
-                .filter(word -> !this.stopWordList.isStopWord(word))
-                .count();
+                .filter(word -> !this.stopWordList.isStopWord(word));
+
+        return new WordCounts(filteredStream.count(), -1); // TODO
     }
 }
