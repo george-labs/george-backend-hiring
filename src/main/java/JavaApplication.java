@@ -29,11 +29,11 @@ public class JavaApplication {
         }
 
         StopWordList stopWordList = StopWordList.of(stopWordInputStream);
-        WordCounter wordCounter = new WordCounter(WordCounter.SPACE_DELIMITER, WordCounter.ALPHABETIC_WORD_PATTERN, stopWordList);
+        WordCounter wordCounter = new WordCounter(new Tokenizer(), stopWordList);
 
-        long wordCount = wordCounter.countWords(input);
+        WordCounts wordCounts = wordCounter.countWords(input);
 
-        writer.write(String.format("Number of words: %d", wordCount));
+        writer.write(String.format("Number of words: %d, unique: %d", wordCounts.getWordCount(), wordCounts.getUniqueWordCount()));
         writer.flush();
     }
 }

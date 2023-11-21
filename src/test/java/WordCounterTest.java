@@ -12,7 +12,7 @@ class WordCounterTest {
     @MethodSource("provideStringsForTest")
     void testWordCounter(String input, int expectedResult) {
         WordCounter wordCounter = new WordCounter();
-        Assertions.assertEquals(expectedResult, wordCounter.countWords(input));
+        Assertions.assertEquals(expectedResult, wordCounter.countWords(input).getWordCount());
     }
 
     @Test
@@ -21,8 +21,8 @@ class WordCounterTest {
         long expectedResult = 4;
 
         StopWordList stopWordList = new StopWordList(stopWords());
-        WordCounter wordCounter = new WordCounter(WordCounter.SPACE_DELIMITER, WordCounter.ALPHABETIC_WORD_PATTERN, stopWordList);
-        Assertions.assertEquals(expectedResult, wordCounter.countWords(input));
+        WordCounter wordCounter = new WordCounter(new Tokenizer(), stopWordList);
+        Assertions.assertEquals(expectedResult, wordCounter.countWords(input).getWordCount());
     }
 
     private static Stream<Arguments> provideStringsForTest() {
