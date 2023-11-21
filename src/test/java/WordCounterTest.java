@@ -37,7 +37,8 @@ class WordCounterTest {
                 Arguments.of("      word          wo33rd", 1, 1),
                 Arguments.of("     word,        word.    word!      word ", 4, 1),
                 Arguments.of("2a", 0, 0),
-                Arguments.of("a2b", 0, 0) // words need to be separated by a whitespace character
+                Arguments.of("a2b", 0, 0), // words need to be separated by a whitespace character
+                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 10, 8) // word with hyphenation character is not split, i.e. counted as one word
         );
     }
 

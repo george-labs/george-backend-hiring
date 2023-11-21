@@ -10,3 +10,7 @@ Tokenizer is adapted to handle cases where words end with a punctuation characte
 Otherwise, the WordCounter would produce unexpected results.
 
 In addition, it seems that `Humpty-Dumpty` should be interpreted as two words.
+
+## Iteration 5
+
+We assume that a word does not occur in the input that starts or ends with the `-` character.

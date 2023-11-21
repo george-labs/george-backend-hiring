@@ -51,7 +51,7 @@ class JavaApplicationTest {
     @Test
     void testCountWordsWithStopWords_readFromInputStream_uniqueWordCountDiffers() throws IOException {
         String input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
-        String expectedOutput = "Enter text: Number of words: 9, unique: 7";
+        String expectedOutput = "Enter text: Number of words: 7, unique: 6";
 
         try (InputStream userInputStream = new ByteArrayInputStream(input.getBytes());
              InputStream stopWordInputStream = JavaApplication.class.getClassLoader().getResourceAsStream("stopwords.txt");

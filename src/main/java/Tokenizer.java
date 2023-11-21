@@ -4,7 +4,7 @@ import java.util.stream.Stream;
 
 public class Tokenizer {
     public static String SPACE_DELIMITER = " ";
-    public static String ALPHABETIC_WORD_PATTERN = "[A-Za-z]+";
+    public static String ALPHABETIC_WORD_PATTERN = "[A-Za-z-]+"; // TODO regex could be improved to ignore words starting or ending with -
 
     private final String delimiter;
     private final Pattern pattern;
@@ -21,7 +21,6 @@ public class Tokenizer {
     public Stream<String> tokenize(String input) {
         String[] tokens = input
                 .replaceAll("\\r\\n|\\r|\\n|\\.|,|!|\\?]", " ") // replace line breaks with spaces and other punctuation characters
-                .replace('-', ' ')
                 .split(this.delimiter);
 
         return Arrays.stream(tokens).filter(word -> this.pattern.matcher(word).matches());
