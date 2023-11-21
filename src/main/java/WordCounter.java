@@ -20,10 +20,14 @@ public class WordCounter {
             return new Statistics(0, 0, 0);
         }
 
-        Stream<String> filteredStream =  tokenizer.tokenize(input)
+        Stream<String> tokens =  tokenizer.tokenize(input)
                 .filter(word -> !this.stopWordList.isStopWord(word));
 
-        List<String> words = filteredStream.collect(Collectors.toList());
+        return generateStatistics(tokens);
+    }
+
+    private Statistics generateStatistics(Stream<String> tokens) {
+        List<String> words = tokens.collect(Collectors.toList());
         Set<String> uniqueWordSet = new HashSet<>(words);
         double averageWordLength = words.stream().mapToDouble(String::length).average().orElse(0);
 
