@@ -1,6 +1,5 @@
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class WordCounter {
     private final Tokenizer tokenizer;
@@ -17,20 +16,13 @@ public class WordCounter {
 
     public Statistics countWords(String input) {
         if (input == null) {
-            return new Statistics(0, 0, 0);
+            return Statistics.of();
         }
 
-        Stream<String> tokens =  tokenizer.tokenize(input)
-                .filter(word -> !this.stopWordList.isStopWord(word));
+        List<String> tokens =  tokenizer.tokenize(input)
+                .filter(word -> !this.stopWordList.isStopWord(word))
+                .collect(Collectors.toList());
 
-        return generateStatistics(tokens);
-    }
-
-    private Statistics generateStatistics(Stream<String> tokens) {
-        List<String> words = tokens.collect(Collectors.toList());
-        Set<String> uniqueWordSet = new HashSet<>(words);
-        double averageWordLength = words.stream().mapToDouble(String::length).average().orElse(0);
-
-        return new Statistics(words.size(), uniqueWordSet.size(), averageWordLength);
+        return Statistics.of(tokens);
     }
 }

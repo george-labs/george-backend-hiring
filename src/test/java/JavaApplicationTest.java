@@ -11,7 +11,7 @@ class JavaApplicationTest {
 
         try (InputStream inputStream = new ByteArrayInputStream(input.getBytes());
              ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-            JavaApplication.countWords(new String[0], inputStream, InputStream.nullInputStream(), outputStream);
+            JavaApplication.countWords(CLIParser.parse(new String[0]), inputStream, InputStream.nullInputStream(), outputStream);
             String output = outputStream.toString();
 
             Assertions.assertEquals(expectedOutput, output);
@@ -26,7 +26,7 @@ class JavaApplicationTest {
         try (InputStream userInputStream = new ByteArrayInputStream(input.getBytes());
              InputStream stopWordInputStream = JavaApplication.class.getClassLoader().getResourceAsStream("stopwords.txt");
              ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-            JavaApplication.countWords(new String[0], userInputStream, stopWordInputStream, outputStream);
+            JavaApplication.countWords(CLIParser.parse(new String[0]), userInputStream, stopWordInputStream, outputStream);
             String output = outputStream.toString();
 
             Assertions.assertEquals(expectedOutput, output);
@@ -41,7 +41,7 @@ class JavaApplicationTest {
         try (InputStream userInputStream = InputStream.nullInputStream();
              InputStream stopWordInputStream = JavaApplication.class.getClassLoader().getResourceAsStream("stopwords.txt");
              ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-            JavaApplication.countWords(new String[] { filePath }, userInputStream, stopWordInputStream, outputStream);
+            JavaApplication.countWords(CLIParser.parse(new String[] { filePath }), userInputStream, stopWordInputStream, outputStream);
             String output = outputStream.toString();
 
             Assertions.assertEquals(expectedOutput, output);
@@ -56,7 +56,7 @@ class JavaApplicationTest {
         try (InputStream userInputStream = new ByteArrayInputStream(input.getBytes());
              InputStream stopWordInputStream = JavaApplication.class.getClassLoader().getResourceAsStream("stopwords.txt");
              ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-            JavaApplication.countWords(new String[0], userInputStream, stopWordInputStream, outputStream);
+            JavaApplication.countWords(CLIParser.parse(new String[0]), userInputStream, stopWordInputStream, outputStream);
             String output = outputStream.toString();
 
             Assertions.assertEquals(expectedOutput, output);
@@ -71,7 +71,22 @@ class JavaApplicationTest {
         try (InputStream userInputStream = new ByteArrayInputStream(input.getBytes());
              InputStream stopWordInputStream = JavaApplication.class.getClassLoader().getResourceAsStream("stopwords.txt");
              ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-            JavaApplication.countWords(new String[0], userInputStream, stopWordInputStream, outputStream);
+            JavaApplication.countWords(CLIParser.parse(new String[0]), userInputStream, stopWordInputStream, outputStream);
+            String output = outputStream.toString();
+
+            Assertions.assertEquals(expectedOutput, output);
+        }
+    }
+
+    @Test
+    void testCountWordsWithStopWords_readFromInputStream_printIndex() throws IOException {
+        String input = "Mary had a little lamb";
+        String expectedOutput = "Enter text: Number of words: 4, unique: 4; average word length: 4.25 characters\nIndex:\nhad\nlamb\nlittle\nMary\n";
+
+        try (InputStream userInputStream = new ByteArrayInputStream(input.getBytes());
+             InputStream stopWordInputStream = JavaApplication.class.getClassLoader().getResourceAsStream("stopwords.txt");
+             ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+            JavaApplication.countWords(CLIParser.parse(new String[] { "-index" }), userInputStream, stopWordInputStream, outputStream);
             String output = outputStream.toString();
 
             Assertions.assertEquals(expectedOutput, output);

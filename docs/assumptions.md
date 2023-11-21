@@ -22,3 +22,10 @@ I use the US locale for formatting the average word length such that the `.` is 
 
 **The documentation does not specify the contents of file `sometext.txt`.**
 I created my own test case in method `testCountWordsWithStopWords_readFromInputStream_averageWordCount` with input `This is our special test`.
+
+## Iteration 7
+
+I assume that options always come before arguments on the CLI. 
+In addition to that I assume that options do not have a value, i.e. only boolean options are considered.
+
+The ordering of my test case `testCountWordsWithStopWords_readFromInputStream_printIndex` differs, probably due to Mary having an uppercase character at the beginning.
