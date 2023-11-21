@@ -3,16 +3,19 @@ import java.util.Scanner;
 
 public class JavaApplication {
     public static void main(String[] args) throws IOException {
-        countWords(System.in, System.out);
+        try (InputStream stopWordInputStream = JavaApplication.class.getClassLoader().getResourceAsStream("stopwords.txt")) {
+            countWords(System.in, stopWordInputStream, System.out);
+        }
     }
 
-    public static void countWords(InputStream inputStream, OutputStream outputStream) throws IOException {
+    public static void countWords(InputStream userInputStream, InputStream stopWordInputStream, OutputStream outputStream) throws IOException {
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
         writer.write("Enter text: ");
         writer.flush();
 
-        WordCounter wordCounter = new WordCounter();
-        Scanner sc = new Scanner(inputStream);
+        StopWordList stopWordList = StopWordList.of(stopWordInputStream);
+        WordCounter wordCounter = new WordCounter(WordCounter.SPACE_DELIMITER, WordCounter.ALPHABETIC_WORD_PATTERN, stopWordList);
+        Scanner sc = new Scanner(userInputStream);
 
         if (sc.hasNextLine()) {
             String line = sc.nextLine();
