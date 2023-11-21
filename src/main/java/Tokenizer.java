@@ -20,11 +20,11 @@ public class Tokenizer {
 
     public Stream<String> tokenize(String input) {
         String[] tokens = input
-                .replaceAll("\\r\\n|\\r|\\n", " ") // replace line breaks with spaces
+                .replaceAll("\\r\\n|\\r|\\n|\\.|,|!|\\?]", " ") // replace line breaks with spaces and other punctuation characters
+                .replace('-', ' ')
                 .split(this.delimiter);
 
         return Arrays.stream(tokens).filter(word -> this.pattern.matcher(word).matches());
     }
-
 
 }
