@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,34 +24,18 @@ public class WordCount {
         return true;
     }
 
-    protected List<String> loadFileIntoList(String filename) {
-        List<String> fileItems = new ArrayList<>();
-        try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filename);
-            if (inputStream != null) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                String line = reader.readLine();
-                while(line != null) {
-                    fileItems.add(line);
-                    line = reader.readLine();
-                }
-                reader.close();
-            } else {
-                System.out.println("stopwords file not found");
-            }
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        return fileItems;
-    }
-
     public long countText(String text) {
         if(text.isEmpty()) return 0;
         String[] wordArray = text.split(WHITESPACE_PATTERN);
         if(!containsOnlyLetters(wordArray)) {
             throw new IllegalArgumentException("Text containing non allowed characters");
         }
-        List<String> stopWords = loadFileIntoList(STOPWORDS_FILENAME);
-        return Arrays.stream(wordArray).filter(word -> !stopWords.contains(word)).count();
+        try {
+            List<String> stopWords = WordFileReader.loadFileIntoList(STOPWORDS_FILENAME);
+            return Arrays.stream(wordArray).filter(word -> !stopWords.contains(word)).count();
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage() + STOPWORDS_FILENAME);
+        }
+        return Arrays.stream(wordArray).count();
     }
 }
