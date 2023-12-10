@@ -4,16 +4,20 @@ import static org.junit.jupiter.api.Assertions.*;
 public class WordCountTest {
     @Test
     public void testCountTextWithValidWords() {
-        String testString = "this is text";
+        String testString = "Mary had a little lamb";
         int resultValue =  WordCount.countText(testString);
-        assertEquals(3, resultValue);
+        assertEquals(5, resultValue);
     }
 
     @Test
     public void testCountTextWithInvalidWords() {
-        String testString = "Hello 465388 $%&//§";
-        int resultValue =  WordCount.countText(testString);
-        assertEquals(0, resultValue);
+        String testString = "M€ry h&d a li%%ttl3 lamb!";
+        try {
+            WordCount.countText(testString);
+            fail("Did not throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Text containing non allowed characters", e.getMessage());
+        }
     }
 
     @Test
