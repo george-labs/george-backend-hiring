@@ -8,7 +8,8 @@ public class WordCount {
     private final static String WHITESPACE_PATTERN = "\\s+";
     private final static String STOPWORDS_FILENAME = "stopwords.txt";
 
-    private WordCount() {}
+    private WordCount() {
+    }
 
     public static synchronized WordCount getInstance() {
         if (INSTANCE == null) INSTANCE = new WordCount();
@@ -16,18 +17,13 @@ public class WordCount {
     }
 
     private boolean containsOnlyLetters(String[] wordArray) {
-        for (String word : wordArray) {
-            if (!word.matches(WORD_LETTER_PATTERN)) {
-                return false;
-            }
-        }
-        return true;
+        return Arrays.stream(wordArray).allMatch(word -> word.matches(WORD_LETTER_PATTERN));
     }
 
     public long countText(String text) {
-        if(text.isEmpty()) return 0;
+        if (text.isEmpty()) return 0;
         String[] wordArray = text.split(WHITESPACE_PATTERN);
-        if(!containsOnlyLetters(wordArray)) {
+        if (!containsOnlyLetters(wordArray)) {
             throw new IllegalArgumentException("Text containing non allowed characters");
         }
         try {
@@ -36,6 +32,6 @@ public class WordCount {
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage() + STOPWORDS_FILENAME);
         }
-        return Arrays.stream(wordArray).count();
+        return wordArray.length;
     }
 }

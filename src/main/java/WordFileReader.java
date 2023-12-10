@@ -1,22 +1,17 @@
 import java.io.*;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class WordFileReader {
+    private static final String RESOURCES_PATH = "src/main/resources/";
+
     public static List<String> loadFileIntoList(String filename) throws IOException {
-        List<String> fileItems = new ArrayList<>();
-        InputStream inputStream = WordFileReader.class.getClassLoader().getResourceAsStream(filename);
-        if (inputStream != null) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String line = reader.readLine();
-            while(line != null) {
-                fileItems.add(line);
-                line = reader.readLine();
-            }
-            reader.close();
-            return fileItems;
-        } else {
+        Path filePath = Paths.get(RESOURCES_PATH + filename);
+        if (!Files.exists(filePath)) {
             throw new FileNotFoundException("File Does not exist");
         }
+        return Files.readAllLines(filePath);
     }
 }

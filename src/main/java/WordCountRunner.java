@@ -9,7 +9,7 @@ public class WordCountRunner {
             long count = wordCount.countText(scanner.nextLine());
             System.out.println("Number of words: " + count);
         } catch (IllegalArgumentException e) {
-            System.out.println("Error: "+ e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
         scanner.close();
     }
