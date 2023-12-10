@@ -6,10 +6,9 @@ public class WordCountRunner {
         System.out.print("Enter text: ");
         Scanner scanner = new Scanner(System.in);
         try {
-            int count = wordCount.countText(scanner.nextLine());
-            System.out.println("Number of words: " + count);
+            System.out.println("Number of words: " + wordCount.countText(scanner.nextLine()));
         } catch (IllegalArgumentException e) {
-            System.out.println("Error: "+ e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
         scanner.close();
     }
