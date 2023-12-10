@@ -22,4 +22,14 @@ public class WordFileReaderTest {
             assertEquals("File Does not exist", e.getMessage());
         }
     }
+
+    @Test
+    public void testIsValidFileName() {
+        String validFileName = "validfile.txt";
+        String invalidFileName = "Invalid Fi(&le Name. txt";
+        boolean valid = WordFileReader.isValidFileName(validFileName);
+        boolean invalid = WordFileReader.isValidFileName(invalidFileName);
+        assertTrue(valid);
+        assertFalse(invalid);
+    }
 }

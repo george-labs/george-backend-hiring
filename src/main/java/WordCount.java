@@ -34,4 +34,15 @@ public class WordCount {
         }
         return wordArray.length;
     }
+
+    public long countText(String text, boolean isFileName) {
+        try {
+            if (!isFileName) countText(text);
+            List<String> inputText = WordFileReader.loadFileIntoList(text);
+            return countText(String.join(" ", inputText));
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage() + " " + text);
+        }
+        return 0;
+    }
 }

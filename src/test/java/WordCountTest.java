@@ -48,4 +48,18 @@ public class WordCountTest {
         long resultValue = wordCount.countText(testString);
         assertEquals(0, resultValue);
     }
+
+    @Test
+    public void testCountTextWithProvidedValidTextFile() {
+        String testString = "mytext.txt";
+        long resultValue = wordCount.countText(testString, true);
+        assertEquals(4, resultValue);
+    }
+
+    @Test
+    public void testCountTextWithInValidTextFile() {
+        String testString = "cats.txt";
+        long resultValue = wordCount.countText(testString, true);
+        assertEquals(0, resultValue);
+    }
 }
