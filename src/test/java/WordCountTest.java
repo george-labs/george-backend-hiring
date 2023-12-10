@@ -18,9 +18,16 @@ public class WordCountTest {
 
     @Test
     public void testCountTextWithValidWords() {
-        String testString = "Mary had a little lamb";
-        int resultValue =  wordCount.countText(testString);
+        String testString = "Mary had two little lambs";
+        long resultValue = wordCount.countText(testString);
         assertEquals(5, resultValue);
+    }
+
+    @Test
+    public void testCountTextWithValidWordsWithStopSords() {
+        String testString = "Mary had a little lambs";
+        long resultValue = wordCount.countText(testString);
+        assertEquals(4, resultValue);
     }
 
     @Test
@@ -37,7 +44,7 @@ public class WordCountTest {
     @Test
     public void testCountTextWithEmptyText() {
         String testString = "";
-        int resultValue =  wordCount.countText(testString);
+        long resultValue = wordCount.countText(testString);
         assertEquals(0, resultValue);
     }
 }
