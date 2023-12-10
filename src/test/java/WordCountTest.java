@@ -19,7 +19,7 @@ public class WordCountTest {
     @Test
     public void testCountTextWithValidWords() {
         String testString = "Mary had a little lamb";
-        int resultValue =  wordCount.countText(testString);
+        int resultValue = wordCount.countText(testString);
         assertEquals(5, resultValue);
     }
 
@@ -37,7 +37,7 @@ public class WordCountTest {
     @Test
     public void testCountTextWithEmptyText() {
         String testString = "";
-        int resultValue =  wordCount.countText(testString);
+        int resultValue = wordCount.countText(testString);
         assertEquals(0, resultValue);
     }
 }
