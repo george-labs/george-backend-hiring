@@ -27,4 +27,17 @@ class StopWordsReaderTest {
         Assertions.assertThrows(WordCountException.class, stopWordsReader::read, "We have troubles reading the file!");
     }
 
+    @Test
+    public void GIVEN_stopWordFile_WHEN_read_THEN_exactListOfStopwordsReturned() {
+        //GIVEN
+        StopWordsReader stopWordsReader = new StopWordsReader("src/test/resources/stopwords.txt");
+        Set<String> expectedStopwords = Set.of("the", "a", "on", "off");
+
+        //WHEN
+        Set<String> actualStopwords = stopWordsReader.read();
+
+        // THEN
+        Assertions.assertTrue(expectedStopwords.containsAll(actualStopwords));
+    }
+
 }
