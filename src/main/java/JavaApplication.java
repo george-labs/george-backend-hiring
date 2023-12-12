@@ -1,14 +1,31 @@
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class JavaApplication {
 
-    public static void main(String args[]) {
-        WordCounter wordCounter = new WordCounter();
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter the text: ");
+    private InputStream input;
+    private PrintStream output;
 
-        long wordsCount = wordCounter.count(input.nextLine());
-        System.out.println("Number of words: " + wordsCount);
+
+    public static void main(String args[]) {
+        JavaApplication javaApplication = new JavaApplication(System.in, System.out);
+        javaApplication.countWords();
     }
 
+    public void countWords() {
+        WordCounter wordCounter = new WordCounter();
+        Scanner scannerInput = new Scanner(input);
+        output.println("Enter the text: ");
+
+        long wordsCount = wordCounter.count(scannerInput.nextLine());
+
+        output.println("Number of words: " );
+        output.print(wordsCount);
+    }
+
+    public JavaApplication(InputStream input, PrintStream output) {
+        this.input = input;
+        this.output = output;
+    }
 }
