@@ -11,12 +11,12 @@ public class JavaApplicationTest {
     @Test
     public void GIVEN_words_WHEN_countTheWords_THEN_wordsCounted() throws IOException {
         //GIVEN
-        String wordToCount = "Hello world";
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(wordToCount.getBytes());
+        String wordsToCount = "Mary had a little lamb";
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(wordsToCount.getBytes());
         final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(outputStreamCaptor);
         JavaApplication javaApplication = new JavaApplication(inputStream, printStream);
-        String expectedOutput = "Enter the text: Number of words: 2";
+        String expectedOutput = "Enter the text: Number of words: 4";
 
         //WHEN
         javaApplication.countWords();
