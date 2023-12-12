@@ -5,7 +5,7 @@ public class WordCounter {
 
     private static final String REGEX = "[a-zA-Z]+";
     private static final String WORD_DELIMITER = " ";
-    private static Pattern pattern = Pattern.compile(REGEX);
+    private static final Pattern pattern = Pattern.compile(REGEX);
 
     public long count(String sentence) {
         String[] words = splitSentence(sentence);

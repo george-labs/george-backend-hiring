@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class JavaApplication {
 
-    private InputStream input;
-    private PrintStream output;
+    private final InputStream input;
+    private final PrintStream output;
 
 
     public static void main(String args[]) {
@@ -16,11 +16,11 @@ public class JavaApplication {
     public void countWords() {
         WordCounter wordCounter = new WordCounter();
         Scanner scannerInput = new Scanner(input);
-        output.println("Enter the text: ");
+        output.print("Enter the text: ");
 
         long wordsCount = wordCounter.count(scannerInput.nextLine());
 
-        output.println("Number of words: " );
+        output.print("Number of words: " );
         output.print(wordsCount);
     }
 
