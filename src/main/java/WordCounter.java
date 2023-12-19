@@ -1,9 +1,12 @@
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -37,7 +40,7 @@ public class WordCounter {
 
     public WordCount countWords(String input) {
         if (input == null) {
-            return new WordCount(0, 0);
+            return new WordCount(0, 0, 0);
         }
         return countWords(Arrays.asList(input.split(splitRegex)));
     }
@@ -54,11 +57,19 @@ public class WordCounter {
                 .mapToLong(value -> value)
                 .sum();
 
+        var wordsLengthTotal = 0L;
+        for (Map.Entry<String, Long> entry : wordsCountMap.entrySet()) {
+            wordsLengthTotal += entry.getKey().length() * entry.getValue();
+        }
+
         var uniqueWords = wordsCountMap.values()
                 .stream()
                 .filter(n -> n == 1)
                 .count();
 
-        return new WordCount(wordsCount, uniqueWords);
+        var averageWordsLength = wordsCount == 0 ? 0 : new BigDecimal((double) wordsLengthTotal /wordsCount).round(
+                new MathContext(3)).doubleValue();
+
+        return new WordCount(wordsCount, uniqueWords, averageWordsLength);
     }
 }

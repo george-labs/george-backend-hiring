@@ -17,7 +17,8 @@ public class JavaApplication {
     }
 
     private static void printResult(WordCount wordCount) {
-        System.out.print("Number of words: " + wordCount.getWordCount() + ", unique: " + wordCount.getUniqueWords());
+        System.out.print(
+                "Number of words: " + wordCount.getWordCount() + ", unique: " + wordCount.getUniqueWords() + ", average word length: " + wordCount.getAverageWordLength() + " characters");
     }
 
 }
