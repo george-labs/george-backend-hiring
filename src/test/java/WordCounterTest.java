@@ -5,6 +5,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -28,21 +29,57 @@ class WordCounterTest {
     @ParameterizedTest
     @MethodSource("testSource")
     void tesWordCount(String input, List<String> ignoredWords, WordCount expectedOutput) {
-        var wordCounter = new WordCounter(ignoredWords, false);
-        Assertions.assertEquals(expectedOutput, wordCounter.countWords(input));
+        var wordCounter = new WordCounter(ignoredWords, new TestParamParserNoIndex(), () -> input);
+        Assertions.assertEquals(expectedOutput, wordCounter.countWords());
     }
 
     @Test
     void testWordCountFromFile() {
-        var wordCounter = new WordCounter(List.of(), false);
-        var wordCount = wordCounter.countWordsFromFile("mytext.txt");
+        var wordCounter = new WordCounter(List.of(), new TestParamParserNoIndex(), () -> "mytext.txt");
+        var wordCount = wordCounter.countWords();
         Assertions.assertEquals(new WordCount(5, 5, 3.6, Set.of()), wordCount);
     }
 
     @Test
     void testWordCountWithIndex() {
-        var wordCounter = new WordCounter(List.of("a"), true);
-        var wordCount = wordCounter.countWords("Mary had a little lamb");
+        var wordCounter = new WordCounter(List.of("a"), new TestParamParserWithIndex(), () -> "Mary had a little lamb");
+        var wordCount = wordCounter.countWords();
         Assertions.assertEquals(Set.of("Mary", "had", "little", "lamb"), wordCount.getCountedWords());
+    }
+
+    private class TestParamParserNoIndex implements ParamParser {
+
+        @Override
+        public boolean shouldCreateIndex() {
+            return false;
+        }
+
+        @Override
+        public Optional<String> getFileName() {
+            return Optional.of("mytext.txt");
+        }
+
+        @Override
+        public Optional<String> getDictionaryFileName() {
+            return Optional.empty();
+        }
+    }
+
+    private class TestParamParserWithIndex implements ParamParser {
+
+        @Override
+        public boolean shouldCreateIndex() {
+            return true;
+        }
+
+        @Override
+        public Optional<String> getFileName() {
+            return Optional.of("mytext.txt");
+        }
+
+        @Override
+        public Optional<String> getDictionaryFileName() {
+            return Optional.empty();
+        }
     }
 }

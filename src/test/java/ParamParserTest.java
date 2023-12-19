@@ -7,13 +7,19 @@ class ParamParserTest {
 
     @Test
     void testShouldCreateIndex() {
-        var paramParser = new ParamParser(new String[]{"-index"});
+        var paramParser = new ParamParserImpl(new String[]{"-index"});
         Assertions.assertTrue(paramParser.shouldCreateIndex());
     }
 
     @Test
     void testGetFilename() {
-        var paramParser = new ParamParser(new String[]{"-index", "test.txt", "test1.txt"});
+        var paramParser = new ParamParserImpl(new String[]{"-index", "test.txt", "test1.txt"});
         Assertions.assertEquals(Optional.of("test.txt"), paramParser.getFileName());
+    }
+
+    @Test
+    void testGetDictionaryFilename() {
+        var paramParser = new ParamParserImpl(new String[]{"-index", "test.txt", "-dictionary=dict.txt"});
+        Assertions.assertEquals(Optional.of("dict.txt"), paramParser.getDictionaryFileName());
     }
 }
