@@ -1,11 +1,13 @@
 import java.util.Objects;
+import java.util.Set;
 
 public class WordCount {
     private final long wordCount;
     private final long uniqueWords;
     private final double averageWordLength;
+    private final Set<String> countedWords;
 
-    public WordCount(long wordCount, long uniqueWords, double averageWordLength) {
+    public WordCount(long wordCount, long uniqueWords, double averageWordLength, Set<String> countedWords) {
         if (wordCount < 0) {
             throw new IllegalArgumentException("Invalid word count");
         }
@@ -15,6 +17,10 @@ public class WordCount {
         if (averageWordLength < 0) {
             throw new IllegalArgumentException("Invalid average word length");
         }
+        if (countedWords == null) {
+            throw new IllegalArgumentException("Invalid counted words param");
+        }
+        this.countedWords = countedWords;
         this.averageWordLength = averageWordLength;
         this.wordCount = wordCount;
         this.uniqueWords = uniqueWords;
@@ -32,12 +38,17 @@ public class WordCount {
         return averageWordLength;
     }
 
+    public Set<String> getCountedWords() {
+        return countedWords;
+    }
+
     @Override
     public String toString() {
         return "WordCount{" +
                 "wordCount=" + wordCount +
                 ", uniqueWords=" + uniqueWords +
                 ", averageWordLength=" + averageWordLength +
+                ", countedWords=" + countedWords +
                 '}';
     }
 
@@ -47,7 +58,8 @@ public class WordCount {
         if (o == null || getClass() != o.getClass()) return false;
         WordCount wordCount1 = (WordCount) o;
         return wordCount == wordCount1.wordCount && uniqueWords == wordCount1.uniqueWords && Double.compare(
-                averageWordLength, wordCount1.averageWordLength) == 0;
+                averageWordLength, wordCount1.averageWordLength) == 0 && Objects.equals(countedWords,
+                wordCount1.countedWords);
     }
 
     @Override
