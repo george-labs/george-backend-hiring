@@ -9,7 +9,7 @@ public class JavaApplication {
 
         var ignoredWords = new IgnoredWords();
         WordCounter wordCounter = new WordCounter(ignoredWords.getIgnoredWords("stopwords.txt"), paramParser.shouldCreateIndex());
-        if (paramParser.getFileName().isPresent()) {
+        if (paramParser.getFileName().isEmpty()) {
             var scanner = new Scanner(System.in);
             System.out.print("Enter text: ");
             var line = scanner.nextLine();
@@ -23,7 +23,7 @@ public class JavaApplication {
         System.out.print(
                 "Number of words: " + wordCount.getWordCount() + ", unique: " + wordCount.getUniqueWords() + ", average word length: " + wordCount.getAverageWordLength() + " characters");
         if (!wordCount.getCountedWords().isEmpty()) {
-            System.out.println("Index:");
+            System.out.println("\nIndex:");
             wordCount.getCountedWords().forEach(System.out::println);
         }
     }

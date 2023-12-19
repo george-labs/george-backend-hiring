@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Optional;
 
 class ParamParserTest {
 
@@ -13,7 +13,7 @@ class ParamParserTest {
 
     @Test
     void testGetFilename() {
-        var paramParser = new ParamParser(new String[]{"-index", "test.txt"});
-        Assertions.assertEquals("test.txt", paramParser.getFileName());
+        var paramParser = new ParamParser(new String[]{"-index", "test.txt", "test1.txt"});
+        Assertions.assertEquals(Optional.of("test.txt"), paramParser.getFileName());
     }
 }
