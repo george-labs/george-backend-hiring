@@ -10,8 +10,8 @@ import java.util.stream.Stream;
 
 public class WordCounter {
 
-    private final String splitRegex = "[-.\\s]";
-    private final Pattern allowedCharacters = Pattern.compile("[a-zA-Z]*");
+    private final String splitRegex = "[.\\s]";
+    private final Pattern allowedCharacters = Pattern.compile("[a-zA-Z-]*");
     private List<String> ignoredWords;
 
     public WordCounter(List<String> ignoredWords) {

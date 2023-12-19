@@ -19,7 +19,7 @@ class WordCounterTest {
                 Arguments.of("asd a@", List.of(), new WordCount(1, 1)),
                 Arguments.of("Mary had a little lamb", List.of("the", "a", "on", "off"), new WordCount(4, 4)),
                 Arguments.of("the a on off", List.of("the", "a", "on", "off"), new WordCount(0, 0)),
-                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", List.of("the", "a", "on", "off"), new WordCount(9, 5)));
+                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", List.of("the", "a", "on", "off"), new WordCount(7, 5)));
     }
 
     @ParameterizedTest
