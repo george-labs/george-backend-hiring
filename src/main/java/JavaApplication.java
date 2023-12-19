@@ -8,6 +8,9 @@ public class JavaApplication {
         System.out.print("Enter text: ");
         var scanner = new Scanner(System.in);
         var line = scanner.nextLine();
-        System.out.print("Number od words: " + wordCounter.countWords(line));
+        var ignoredWords = new IgnoredWords();
+        System.out.print("Number od words: " + wordCounter.countWords(line, ignoredWords.getIgnoredWords("stopwords.txt")));
     }
+
+
 }
