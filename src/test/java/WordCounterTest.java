@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -7,8 +8,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 class WordCounterTest {
-
-    private WordCounter wordCounter = new WordCounter();
 
     private static Stream<Arguments> testSource() {
         return Stream.of(
@@ -25,6 +24,14 @@ class WordCounterTest {
     @ParameterizedTest
     @MethodSource("testSource")
     void tesWordCount(String input, List<String> ignoredWords, int expectedOutput) {
-        Assertions.assertEquals(expectedOutput, wordCounter.countWords(input, ignoredWords));
+        var wordCounter = new WordCounter(ignoredWords);
+        Assertions.assertEquals(expectedOutput, wordCounter.countWords(input));
+    }
+
+    @Test
+    void testWordCountFromFile() {
+        var wordCounter = new WordCounter(List.of());
+        var wordCount = wordCounter.countWordsFromFile("mytext.txt");
+        Assertions.assertEquals(5, wordCount);
     }
 }

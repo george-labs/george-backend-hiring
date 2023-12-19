@@ -3,14 +3,21 @@ import java.util.Scanner;
 public class JavaApplication {
 
     public static void main(String[] args) {
-        WordCounter wordCounter = new WordCounter();
 
-        System.out.print("Enter text: ");
-        var scanner = new Scanner(System.in);
-        var line = scanner.nextLine();
         var ignoredWords = new IgnoredWords();
-        System.out.print("Number od words: " + wordCounter.countWords(line, ignoredWords.getIgnoredWords("stopwords.txt")));
+        WordCounter wordCounter = new WordCounter(ignoredWords.getIgnoredWords("stopwords.txt"));
+        if (args.length == 0) {
+            var scanner = new Scanner(System.in);
+            System.out.print("Enter text: ");
+            var line = scanner.nextLine();
+            printResult(wordCounter.countWords(line));
+        } else {
+            printResult(wordCounter.countWordsFromFile(args[0]));
+        }
     }
 
+    private static void printResult(long wordCount) {
+        System.out.print("Number of words: " + wordCount);
+    }
 
 }

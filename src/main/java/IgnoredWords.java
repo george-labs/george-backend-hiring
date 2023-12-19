@@ -6,6 +6,9 @@ import java.util.List;
 public class IgnoredWords {
 
     public List<String> getIgnoredWords(String filename) {
+        if (filename != null && filename.isEmpty()) {
+            return List.of();
+        }
 
         try {
             var file = this.getClass().getClassLoader().getResource(filename);
