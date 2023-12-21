@@ -7,6 +7,8 @@ import java.io.PrintStream
 
 
 class KotlinApplicationTest {
+    private val textFileName = "textfile.txt"
+
     @Test
     fun `test word count`() {
         val numberOfWords = countWords("Hello world")
@@ -103,8 +105,20 @@ class KotlinApplicationTest {
     }
 
     @Test
+    fun `test the main function with the textfile specified`() {
+        val applicationOutput = ByteArrayOutputStream()
+        System.setOut(PrintStream(applicationOutput))
+
+        main(arrayOf(textFileName))
+        val output = applicationOutput.toString()
+
+        Assertions.assertEquals("Number of words: 7\r\n", output)
+
+        System.setOut(System.out)
+    }
+
+    @Test
     fun `test we correctly read text from file`() {
-        val textFileName = "textfile.txt"
         // Sanity check
         Assertions.assertTrue(File(textFileName).exists())
 
