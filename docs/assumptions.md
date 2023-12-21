@@ -10,3 +10,4 @@
 
 ## Iteration 3
 - I assume that the word list file is located in the project folder.
+- If the word list file is specified but not found, a user is suggested with the path to put the file into.
