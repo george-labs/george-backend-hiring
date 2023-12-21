@@ -24,14 +24,14 @@ fun countWords(text: String, stopWords: Set<String> = emptySet()): Int {
     return text.split(" ").filter { word -> word.isNotEmpty() }.filter { word -> !stopWords.contains(word)  }.filter { word -> word.all { it.isLetter() } }.size
 }
 
-fun readTextFromFile(fileName: String?): String {
+fun readTextFromFile(fileName: String): String {
     val text = StringBuilder()
     File(fileName).forEachLine { text.append(it) }
     return text.toString()
 }
 
 fun getTextInput(fileName: String? = null): String {
-    var text = ""
+    var text: String
     if (!fileName.isNullOrEmpty() && checkFileExists(fileName)) {
         text = readTextFromFile(fileName)
     } else {
