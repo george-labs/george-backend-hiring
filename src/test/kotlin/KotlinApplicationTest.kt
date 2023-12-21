@@ -19,4 +19,10 @@ class KotlinApplicationTest {
         val numberOdWords = countWords("Hello, world! We: should; skip| this.")
         Assertions.assertEquals(0,  numberOdWords)
     }
+
+    @Test
+    fun `test empty string`() {
+        val numberOdWords = countWords("")
+        Assertions.assertEquals(0,  numberOdWords)
+    }
 }
