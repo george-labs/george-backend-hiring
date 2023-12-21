@@ -38,7 +38,7 @@ class KotlinApplicationTest {
 
     @Test
     fun `test stop words are taken into account`() {
-        val stopWords = listOf("a", "the", "an")
+        val stopWords = setOf("a", "the", "an")
         val numberOfWords = countWords("A quick brown fox jumps over the lazy dog", stopWords)
 
         Assertions.assertEquals(8,  numberOfWords)
@@ -67,6 +67,6 @@ class KotlinApplicationTest {
 
         val stopWords = readStopWordsFromFile(STOP_WORDS_FILE)
 
-        Assertions.assertEquals(setOf("a", "the", "on", "off"), stopWords.toSet())
+        Assertions.assertEquals(setOf("a", "the", "on", "off"), stopWords)
     }
 }

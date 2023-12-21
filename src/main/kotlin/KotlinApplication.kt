@@ -11,16 +11,16 @@ fun checkStopWordsFileExists(fileName: String): Boolean {
     return true
 }
 
-fun readStopWordsFromFile(fileName: String = STOP_WORDS_FILE): List<String> {
+fun readStopWordsFromFile(fileName: String = STOP_WORDS_FILE): Set<String> {
     if(!checkStopWordsFileExists(fileName)) {
-        return emptyList()
+        return emptySet()
     }
-    val stopWords = mutableListOf<String>()
+    val stopWords = mutableSetOf<String>()
     File(fileName).forEachLine { stopWords.add(it) }
     return stopWords
 }
 
-fun countWords(text: String, stopWords: List<String> = emptyList()): Int {
+fun countWords(text: String, stopWords: Set<String> = emptySet()): Int {
     return text.split(" ").filter { word -> word.isNotEmpty() }.filter { word -> !stopWords.contains(word)  }.filter { word -> word.all { it.isLetter() } }.size
 }
 
