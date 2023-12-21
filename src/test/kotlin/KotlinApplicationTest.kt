@@ -90,12 +90,15 @@ class KotlinApplicationTest {
     fun `test the main function`() {
         val inputStream = ByteArrayInputStream("A quick brown fox jumps over the lazy dog.".toByteArray())
         System.setIn(inputStream)
-        val myOut = ByteArrayOutputStream()
-        System.setOut(PrintStream(myOut))
+        val applicationOutput = ByteArrayOutputStream()
+        System.setOut(PrintStream(applicationOutput))
+
         main(emptyArray())
-        val output = myOut.toString()
+        val output = applicationOutput.toString()
+
+        Assertions.assertEquals("Enter text: Number of words: 7\r\n", output)
+
         System.setIn(System.`in`)
         System.setOut(System.out)
-        Assertions.assertEquals("Enter text: Number of words: 7\r\n", output)
     }
 }
