@@ -2,17 +2,17 @@ import java.io.File
 
 const val STOP_WORDS_FILE = "stopwords.txt"
 
-fun checkStopWordsFileExists(fileName: String): Boolean {
+fun checkFileExists(fileName: String): Boolean {
     if (!File(fileName).exists()) {
-        println("Stop words file $fileName not found. Assuming no stop words exist")
-        println("If you want to use stop words, please create a file $fileName at ${System.getProperty("user.dir")} with one stop word per line")
+        println("A file $fileName not found. It should be located at ${System.getProperty("user.dir")}")
         return false
     }
     return true
 }
 
 fun readStopWordsFromFile(fileName: String = STOP_WORDS_FILE): Set<String> {
-    if(!checkStopWordsFileExists(fileName)) {
+    if(!checkFileExists(fileName)) {
+        println("Assuming no stop words exist")
         return emptySet()
     }
     val stopWords = mutableSetOf<String>()

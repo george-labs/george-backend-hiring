@@ -59,7 +59,7 @@ class KotlinApplicationTest {
     fun `test file does not exist`() {
         val dummyFileName = "nonexistentfile"
 
-        val doesExist = checkStopWordsFileExists(dummyFileName)
+        val doesExist = checkFileExists(dummyFileName)
 
         Assertions.assertFalse(doesExist)
     }
@@ -69,7 +69,7 @@ class KotlinApplicationTest {
         val dummyFileName = "somefile.txt"
 
         File(dummyFileName).createNewFile()
-        val doesExist = checkStopWordsFileExists(dummyFileName)
+        val doesExist = checkFileExists(dummyFileName)
 
         Assertions.assertTrue(doesExist)
 
