@@ -1,7 +1,10 @@
-import java.io.File
-
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.PrintStream
+
 
 class KotlinApplicationTest {
     @Test
@@ -81,5 +84,18 @@ class KotlinApplicationTest {
         val stopWords = readStopWordsFromFile(STOP_WORDS_FILE)
 
         Assertions.assertEquals(setOf("a", "the", "on", "off"), stopWords)
+    }
+
+    @Test
+    fun `test the main function`() {
+        val inputStream = ByteArrayInputStream("A quick brown fox jumps over the lazy dog.".toByteArray())
+        System.setIn(inputStream)
+        val myOut = ByteArrayOutputStream()
+        System.setOut(PrintStream(myOut))
+        main(emptyArray())
+        val output = myOut.toString()
+        System.setIn(System.`in`)
+        System.setOut(System.out)
+        Assertions.assertEquals("Enter text: Number of words: 7\r\n", output)
     }
 }
