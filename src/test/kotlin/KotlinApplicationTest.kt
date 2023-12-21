@@ -101,4 +101,15 @@ class KotlinApplicationTest {
         System.setIn(System.`in`)
         System.setOut(System.out)
     }
+
+    @Test
+    fun `test we correctly read text from file`() {
+        val textFileName = "textfile.txt"
+        // Sanity check
+        Assertions.assertTrue(File(textFileName).exists())
+
+        val text = getTextInput(textFileName)
+
+        Assertions.assertEquals("A quick brown fox jumps over the lazy dog.", text)
+    }
 }

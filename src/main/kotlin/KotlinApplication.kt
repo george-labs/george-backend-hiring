@@ -24,20 +24,25 @@ fun countWords(text: String, stopWords: Set<String> = emptySet()): Int {
     return text.split(" ").filter { word -> word.isNotEmpty() }.filter { word -> !stopWords.contains(word)  }.filter { word -> word.all { it.isLetter() } }.size
 }
 
-fun readTextFromFile(fileName: String): String {
+fun readTextFromFile(fileName: String?): String {
     val text = StringBuilder()
     File(fileName).forEachLine { text.append(it) }
     return text.toString()
 }
 
-fun main(args: Array<String>) {
+fun getTextInput(fileName: String? = null): String {
     var text = ""
-    if (args.isNotEmpty() && checkFileExists(args[0])) {
-        text = readTextFromFile(args[0])
+    if (!fileName.isNullOrEmpty() && checkFileExists(fileName)) {
+        text = readTextFromFile(fileName)
     } else {
         print("Enter text: ")
         text = readln()
     }
+    return text
+}
+
+fun main(args: Array<String>) {
+    val text = getTextInput(args.firstOrNull())
     val stopWords = readStopWordsFromFile()
     val numOfWords = countWords(text,  stopWords)
     println("Number of words: $numOfWords")
