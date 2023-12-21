@@ -33,4 +33,12 @@ class KotlinApplicationTest {
         numberOfWords = countWords("qwwqwerrw,  ")
         Assertions.assertEquals(0,  numberOfWords)
     }
+
+    @Test
+    fun `test stop words are taken into account`() {
+        val stopWords = listOf("a", "the", "an")
+        val numberOfWords = countWords("A quick brown fox jumps over the lazy dog", stopWords)
+
+        Assertions.assertEquals(8,  numberOfWords)
+    }
 }
