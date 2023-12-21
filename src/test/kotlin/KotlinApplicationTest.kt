@@ -59,4 +59,14 @@ class KotlinApplicationTest {
         Assertions.assertTrue(doesExist)
         File(dummyFileName).delete()
     }
+
+    @Test
+    fun `test we correctly read stop words from file`() {
+        // Sanity check
+        Assertions.assertTrue(File(STOP_WORDS_FILE).exists())
+
+        val stopWords = readStopWordsFromFile(STOP_WORDS_FILE)
+
+        Assertions.assertEquals(setOf("a", "the", "on", "off"), stopWords.toSet())
+    }
 }
