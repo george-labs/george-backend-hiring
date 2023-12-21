@@ -1,3 +1,5 @@
+import java.io.File
+
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -40,5 +42,21 @@ class KotlinApplicationTest {
         val numberOfWords = countWords("A quick brown fox jumps over the lazy dog", stopWords)
 
         Assertions.assertEquals(8,  numberOfWords)
+    }
+
+    @Test
+    fun `test file does not exist`() {
+        val dummyFileName = "nonexistentfile"
+        val doesExist = checkStopWordsFileExists(dummyFileName)
+        Assertions.assertFalse(doesExist)
+    }
+
+    @Test
+    fun `test file exists`() {
+        val dummyFileName = "somefile.txt"
+        File(dummyFileName).createNewFile()
+        val doesExist = checkStopWordsFileExists(dummyFileName)
+        Assertions.assertTrue(doesExist)
+        File(dummyFileName).delete()
     }
 }
