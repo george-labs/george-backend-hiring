@@ -11,7 +11,7 @@ fun checkFileExists(fileName: String): Boolean {
 }
 
 fun readStopWordsFromFile(fileName: String = STOP_WORDS_FILE): Set<String> {
-    if(!checkFileExists(fileName)) {
+    if (!checkFileExists(fileName)) {
         println("Assuming no stop words exist")
         return emptySet()
     }
@@ -21,7 +21,8 @@ fun readStopWordsFromFile(fileName: String = STOP_WORDS_FILE): Set<String> {
 }
 
 fun countWords(text: String, stopWords: Set<String> = emptySet()): Int {
-    return text.split(" ").filter { word -> word.isNotEmpty() }.filter { word -> !stopWords.contains(word)  }.filter { word -> word.all { it.isLetter() } }.size
+    return text.split(" ").filter { word -> word.isNotEmpty() }.filter { word -> !stopWords.contains(word) }
+        .filter { word -> word.all { it.isLetter() } }.size
 }
 
 fun readTextFromFile(fileName: String): String {
@@ -44,6 +45,6 @@ fun getTextInput(fileName: String? = null): String {
 fun main(args: Array<String>) {
     val text = getTextInput(args.firstOrNull())
     val stopWords = readStopWordsFromFile()
-    val numOfWords = countWords(text,  stopWords)
+    val numOfWords = countWords(text, stopWords)
     println("Number of words: $numOfWords")
 }
