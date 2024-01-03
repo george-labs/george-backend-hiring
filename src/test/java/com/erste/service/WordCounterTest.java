@@ -18,7 +18,7 @@ public class WordCounterTest {
 //- Mary had a\nlittle lamb -5words
 //- Mary had a lit\ntle lamb - 6words
 
-    private static WordCounter wordCounter;
+    private static FilteringWordCounter wordCounter;
 
     @BeforeAll
     public static void setUp() {

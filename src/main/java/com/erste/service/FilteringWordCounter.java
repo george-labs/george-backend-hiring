@@ -7,20 +7,17 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-public class FilteringWordCounter implements WordCounter {
+public class FilteringWordCounter {
 
     public static Logger log = Logger.getLogger(FilteringWordCounter.class.getName());
     public static final String MULTIPLE_WHITESPACE_REGEX = "\\s++";
     public static final String LETTERS_ONLY_REGEX = "[a-z,A-Z]*";
-
     private final WordFilter stopWordsFilter;
-
 
     public FilteringWordCounter(WordFilter stopWordsFilter) {
         this.stopWordsFilter = stopWordsFilter;
     }
 
-    @Override
     public int countWords(String input) {
         log.info("Input: " + input);
 
