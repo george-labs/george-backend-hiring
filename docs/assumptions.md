@@ -1,10 +1,11 @@
 # Assumptions per iteration
 
 ## Iteration 1
-- multiple whitespaces possible
-- lines could start white space
+- whitespaces act as words delimiters
+- *multiple whitespaces possible
+- *lines could start white space
 - other characters in words make word not acceptable and word should not be counted
-- linebreaks count as whitespaces
+- *linebreaks count as whitespaces
 
 ###Examples
 - Mary had a little lamb - 5words
