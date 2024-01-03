@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 public class FilteringWordCounter implements WordCounter {
 
     public static Logger log = Logger.getLogger(FilteringWordCounter.class.getName());
-    public static final String WHITESPACE = " ";
     public static final String MULTIPLE_WHITESPACE_REGEX = "\\s++";
     public static final String LETTERS_ONLY_REGEX = "[a-z,A-Z]*";
 
@@ -24,12 +23,6 @@ public class FilteringWordCounter implements WordCounter {
     @Override
     public int countWords(String input) {
         log.info("Input: " + input);
-
-        input = replaceLineBreaksWithWhitespaces(input);
-        log.info("Filtered linebreaks Input: " + input);
-
-        input = trimLeadingAndTailingWhitespaces(input);
-        log.info("Filtered trimmed: " + input);
 
         List<String> words = separateInputIntoWords(input);
         log.info("Raw Words: " + words);
@@ -56,14 +49,5 @@ public class FilteringWordCounter implements WordCounter {
     private List<String> separateInputIntoWords(String input) {
         String[] words = input.split(MULTIPLE_WHITESPACE_REGEX);
         return Arrays.asList(words);
-    }
-
-    private String trimLeadingAndTailingWhitespaces(String input) {
-        return input.trim();
-    }
-
-    private String replaceLineBreaksWithWhitespaces(String input) {
-        String lineSeparator = System.lineSeparator();
-        return input.replaceAll(lineSeparator, WHITESPACE);
     }
 }
