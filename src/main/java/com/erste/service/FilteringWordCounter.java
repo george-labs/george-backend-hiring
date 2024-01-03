@@ -49,6 +49,7 @@ public class FilteringWordCounter implements WordCounter {
     private List<String> filterNotAcceptableWords(List<String> words) {
         return words.stream()
                 .filter(word -> word.matches(LETTERS_ONLY_REGEX))
+                .filter(word -> !word.isBlank())
                 .collect(Collectors.toList());
     }
 

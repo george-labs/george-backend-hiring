@@ -22,25 +22,37 @@ public class JavaApplication {
     }
 
     public static void main(String[] args) {
-        String resourceFolderPath = "src/main/resources";
-        String result = new JavaApplication(resourceFolderPath).run(System.in);
+        String resourceFolderPath = "src/main/resources/";
+
+        String result = new JavaApplication(resourceFolderPath).run(args, System.in);
         System.out.println(result);
     }
 
-    public String run(InputStream inputStream) {
-        try (Scanner scanner = new Scanner(inputStream)) {
-            System.out.println("Enter filename with text ro analyze: ");
-            while (scanner.hasNextLine()) {
-                String filename = scanner.nextLine();
-                System.out.println("File name: " + filename);
-                if (filename != null && !filename.isBlank()) {
-                    int result = wordCounter.countWords(reader.readFileToString(filename));
-                    return RESULT_MESSAGE_FORMAT + result;
+    public String run(String[] args, InputStream userInput) {
+        String filename = null;
+        if (args.length > 0) {
+            filename = args[0];
+        }
+
+        System.out.println("File name: " + filename);
+        if (filename != null && !filename.isBlank()) {
+            int result = wordCounter.countWords(reader.readFileToString(filename));
+            return printResult(result);
+        } else {
+            try (Scanner scanner = new Scanner(userInput)) {
+                System.out.println("Please enter text to analyze: ");
+                if (scanner.hasNextLine()) {
+                    String textToAnalyze = scanner.nextLine();
+                    int countWords = wordCounter.countWords(textToAnalyze);
+                    return printResult(countWords);
                 }
             }
         }
-        return "No words found to process";
+        return "No words to analyze";
     }
 
+    private static String printResult(int countWords) {
+        return RESULT_MESSAGE_FORMAT + countWords;
+    }
 
 }
