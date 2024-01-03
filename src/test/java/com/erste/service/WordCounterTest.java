@@ -1,5 +1,7 @@
 package com.erste.service;
 
+import com.erste.filter.StopWordFilter;
+import com.erste.util.ResourceFileReader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,16 +22,18 @@ public class WordCounterTest {
 
     @BeforeAll
     public static void setUp() {
-        wordCounter = new FilteringWordCounter();
+        ResourceFileReader resourceFileReader = new ResourceFileReader();
+        StopWordFilter stopWordFilter = new StopWordFilter(resourceFileReader);
+        wordCounter = new FilteringWordCounter(stopWordFilter);
     }
 
     public static Stream<Arguments> wordsInput() {
         return Stream.of(
-                Arguments.of("Basic input", "Mary had a little lamb", 5),
-                Arguments.of("Special characters input", "Mary %had a lit%tle lamb", 3),
-                Arguments.of("Input with multiple whitespaces", "Mary      had a little lamb", 5),
-                Arguments.of("Input with line breaks", "Mary had a litt\nle lamb", 6),
-                Arguments.of("Input with line breaks", "Mary had a \nlittle lamb", 5)
+                Arguments.of("Basic input", "Mary had a little lamb", 4),
+                Arguments.of("Special characters input", "Mary %had a lit%tle lamb", 2),
+                Arguments.of("Input with multiple whitespaces", "Mary      had a little lamb", 4),
+                Arguments.of("Input with line breaks", "Mary had a litt\nle lamb", 5),
+                Arguments.of("Input with line breaks", "Mary had a \nlittle lamb", 4)
         );
     }
 
