@@ -1,5 +1,9 @@
 package com.erste.service;
 
+import com.erste.filter.StopWordFilter;
+import com.erste.filter.WordFilter;
+import com.erste.util.ResourceFileReader;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
@@ -12,6 +16,13 @@ public class FilteringWordCounter implements WordCounter {
     public static final String MULTIPLE_WHITESPACE_REGEX = "\\s++";
     public static final String LETTERS_ONLY_REGEX = "[a-z,A-Z]*";
 
+    private WordFilter stopWordsFilter;
+
+    public FilteringWordCounter() {
+        ResourceFileReader resourceFileReader = new ResourceFileReader();
+        stopWordsFilter = new StopWordFilter(resourceFileReader);
+    }
+
     @Override
     public int countWords(String input) {
         log.info("Input: " + input);
@@ -23,12 +34,18 @@ public class FilteringWordCounter implements WordCounter {
         log.info("Filtered trimmed: " + input);
 
         List<String> words = separateInputIntoWords(input);
-        log.info("Raw Words: " + input);
+        log.info("Raw Words: " + words);
 
         List<String> filteredWords = filterNotAcceptableWords(words);
-        log.info("Valid Words: " + input);
+        log.info("Valid Words: " + filteredWords);
+
+        filteredWords = filterStopWords(filteredWords);
 
         return filteredWords.size();
+    }
+
+    private List<String> filterStopWords(List<String> words) {
+        return stopWordsFilter.filter(words);
     }
 
     private List<String> filterNotAcceptableWords(List<String> words) {
