@@ -4,13 +4,10 @@ import com.erste.service.FilteringWordCounter;
 import com.erste.service.WordCounter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 
@@ -31,22 +28,20 @@ public class JavaApplicationTest {
     public static Stream<Arguments> wordsInput() {
         return Stream.of(
             Arguments.of("Basic input", "Mary had a little lamb", 5),
-            Arguments.of("Special characters input", "Mary %had a lit%tle lamb", 3)
-//            Arguments.of("")
+            Arguments.of("Special characters input", "Mary %had a lit%tle lamb", 3),
+            Arguments.of("Input with multiple whitespaces", "Mary      had a little lamb", 5),
+            Arguments.of("Input with line breaks", "Mary had a litt\nle lamb", 6),
+            Arguments.of("Input with line breaks", "Mary had a \nlittle lamb", 5)
         );
     }
 
     @MethodSource("wordsInput")
     @ParameterizedTest
     public void countWords_whenInputStandard(String testName, String input, int expectedWordCount) {
-        //given
-//        String input = "Mary had a little lamb";
-//        int expectedWordCount = 5;
-//
-//        //when
-//        int resultWordCount = wordCounter.countWords(input);
-//
-//        //then
-//        Assertions.assertEquals(expectedWordCount, resultWordCount);
+        //when
+        int resultWordCount = wordCounter.countWords(input);
+
+        //then
+        Assertions.assertEquals(expectedWordCount, resultWordCount);
     }
 }

@@ -9,10 +9,8 @@ public class FilteringWordCounter implements WordCounter {
 
     public static Logger log = Logger.getLogger(FilteringWordCounter.class.getName());
     public static final String WHITESPACE = " ";
-    public static final String MULTIPLE_WHITESPACE_REGEX = "[\\s++]";
-    public static final String LETTERS_ONLY_REGEX = "[a-z,A-Z]";
-
-
+    public static final String MULTIPLE_WHITESPACE_REGEX = "\\s++";
+    public static final String LETTERS_ONLY_REGEX = "[a-z,A-Z]*";
 
     @Override
     public int countWords(String input) {
@@ -20,9 +18,6 @@ public class FilteringWordCounter implements WordCounter {
 
         input = replaceLineBreaksWithWhitespaces(input);
         log.info("Filtered linebreaks Input: " + input);
-
-        input = filterExcessiveWhitespaces(input);
-        log.info("Filtered excessive Input: " + input);
 
         input = trimLeandingAndTailingWhitespaces(input);
         log.info("Filtered trimmed: " + input);
@@ -43,15 +38,12 @@ public class FilteringWordCounter implements WordCounter {
     }
 
     private List<String> separateInputIntoWords(String input) {
-        return Arrays.asList(input.split(WHITESPACE));
+        String[] words = input.split(MULTIPLE_WHITESPACE_REGEX);
+        return Arrays.asList(words);
     }
 
     private String trimLeandingAndTailingWhitespaces(String input) {
         return input.trim();
-    }
-
-    private String filterExcessiveWhitespaces(String input) {
-       return input.replaceAll(MULTIPLE_WHITESPACE_REGEX, WHITESPACE);
     }
 
     private String replaceLineBreaksWithWhitespaces(String input) {
