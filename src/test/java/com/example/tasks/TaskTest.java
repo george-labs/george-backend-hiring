@@ -10,48 +10,48 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TaskImplTest {
-    TaskImpl taskImpl;
+class TaskTest {
+    Task task;
 
     @BeforeEach
     public void init() {
-        taskImpl = new TaskImpl(null, List.of("STOPWORD"));
+        task = new Task(null, List.of("STOPWORD"));
     }
 
     @Test
     public void parseTestHappyPath() {
-        taskImpl.userInput = "ONE TWO THREE";
-        assertArrayEquals(new String [] {"ONE", "TWO", "THREE"}, taskImpl.parse());
+        task.userInput = "ONE TWO THREE";
+        assertArrayEquals(new String [] {"ONE", "TWO", "THREE"}, task.parse());
     }
 
     @Test
     public void parseTestTrailingSpace() {
-        taskImpl.userInput = "    ONE TWO THREE";
-        assertArrayEquals(new String [] {"ONE", "TWO", "THREE"}, taskImpl.parse());
+        task.userInput = "    ONE TWO THREE";
+        assertArrayEquals(new String [] {"ONE", "TWO", "THREE"}, task.parse());
     }
 
     @Test
     public void parseTestNonAlpha() {
-        taskImpl.userInput = "  ...  ONE TWO THREE";
-        assertArrayEquals(new String [] {"ONE", "TWO", "THREE"}, taskImpl.parse());
+        task.userInput = "  ...  ONE TWO THREE";
+        assertArrayEquals(new String [] {"ONE", "TWO", "THREE"}, task.parse());
     }
 
     @Test
     public void parseTestNonAlphaInWord() {
-        taskImpl.userInput = "  ...  ONE...TWO THREE";
-        assertArrayEquals(new String [] {"ONE", "TWO", "THREE"}, taskImpl.parse());
+        task.userInput = "  ...  ONE...TWO THREE";
+        assertArrayEquals(new String [] {"ONE", "TWO", "THREE"}, task.parse());
     }
 
     @Test
     public void parseStopWord() {
-        taskImpl.userInput = "ONE TWO STOPWORD THREE";
-        assertArrayEquals(new String [] {"ONE", "TWO", "THREE"}, taskImpl.parse());
+        task.userInput = "ONE TWO STOPWORD THREE";
+        assertArrayEquals(new String [] {"ONE", "TWO", "THREE"}, task.parse());
     }
 
     @Test
     public void parseStopWordAsSubString() {
-        taskImpl.userInput = "ONE TWO NOTSTOPWORD THREE";
-        assertArrayEquals(new String [] {"ONE", "TWO", "NOTSTOPWORD", "THREE"}, taskImpl.parse());
+        task.userInput = "ONE TWO NOTSTOPWORD THREE";
+        assertArrayEquals(new String [] {"ONE", "TWO", "NOTSTOPWORD", "THREE"}, task.parse());
     }
 
     @Test
@@ -61,8 +61,8 @@ class TaskImplTest {
         System.setIn(in);
 
         try {
-            taskImpl.readInput();
-            taskImpl.validate();
+            task.readInput();
+            task.validate();
         } finally {
             System.setIn(sysInBackup);
         }
@@ -72,7 +72,7 @@ class TaskImplTest {
     public void testValidateMethod() {
         // due to missing dependencies I have to do it like this
         try {
-            taskImpl.validate();
+            task.validate();
         } catch (IllegalStateException ex) {
             // TODO test message
             return;
@@ -82,7 +82,7 @@ class TaskImplTest {
 
     @Test
     public void testUniqueWords() {
-        TaskImpl task = new TaskImpl(null, Collections.emptyList());
+        Task task = new Task(null, Collections.emptyList());
         assertEquals(7, task.getUniqueWords(new String[] {"Humpty", "Dumpty", "sat", "wall", "Humpty", "Dumpty", "had", "great", "fall"}).size());
     }
 }
