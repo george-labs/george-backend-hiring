@@ -3,27 +3,41 @@ package com.example.tasks;
 import com.example.utils.predicates.IsStopWord;
 import com.example.utils.predicates.IsNotEmpty;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.function.Predicate;
 
+import static com.example.utils.Utils.readFile;
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 public class TaskImpl implements Task{
     protected String userInput;
+    private String[] args;
     protected Predicate<String> filters;
 
 
-    public TaskImpl(List<String> stopWords) {
+    public TaskImpl(String [] args, List<String> stopWords) {
+        this.args = args;
         filters = new IsNotEmpty()
                 .and(Predicate.not(new IsStopWord(stopWords)));
     }
 
     @Override
     public void readInput() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.print("Enter text: ");
-            userInput = scanner.nextLine();
+        if (nonNull(args) && args.length > 0) { // use Optional???
+            readInputFromFile(args[0]);
+        } else {
+            try (Scanner scanner = new Scanner(System.in)) {
+                System.out.print("Enter text: ");
+                userInput = scanner.nextLine();
+            }
         }
+    }
+
+    private void readInputFromFile(String file) {
+        userInput = readFile(file);
     }
 
     @Override

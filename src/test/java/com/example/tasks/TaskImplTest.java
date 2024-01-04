@@ -14,7 +14,7 @@ class TaskImplTest {
 
     @BeforeEach
     public void init() {
-        taskImpl = new TaskImpl(List.of("STOPWORD"));
+        taskImpl = new TaskImpl(null, List.of("STOPWORD"));
     }
 
     @Test

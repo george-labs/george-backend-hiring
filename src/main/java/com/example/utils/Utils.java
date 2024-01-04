@@ -1,9 +1,6 @@
 package com.example.utils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -36,5 +33,23 @@ public class Utils {
         }
 
         return stopWords;
+    }
+
+    public static String readFile(String filePath) {
+        File file = new File(filePath);
+        StringBuilder builder = new StringBuilder();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                builder.append(line).append(" ");
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("File not found: " + filePath, e);
+        } catch (IOException e) {
+            throw new RuntimeException("Cannot read file:" + filePath, e);
+        }
+
+        return builder.toString();
     }
 }
