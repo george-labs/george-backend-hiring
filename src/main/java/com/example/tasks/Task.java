@@ -1,4 +1,4 @@
-package com.example;
+package com.example.tasks;
 
 public interface Task {
     void readInput();

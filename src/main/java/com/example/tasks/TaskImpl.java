@@ -1,11 +1,22 @@
-package com.example;
+package com.example.tasks;
+
+import com.example.utils.predicates.IsStopWord;
+import com.example.utils.predicates.IsNotEmpty;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 import static java.util.Objects.isNull;
 
-public class IterationOneTask implements Task{
+public class TaskImpl implements Task{
     protected String userInput;
+    protected Predicate<String> filters;
+
+
+    public TaskImpl(List<String> stopWords) {
+        filters = new IsNotEmpty()
+                .and(Predicate.not(new IsStopWord(stopWords)));
+    }
 
     @Override
     public void readInput() {
@@ -28,13 +39,13 @@ public class IterationOneTask implements Task{
     }
 
     protected String [] parse() {
-        return filterEmptyWords(userInput.split("[^a-zA-Z]+"));
+        return applyFilters(userInput.split("[^a-zA-Z]+"));
     }
 
-    private String[] filterEmptyWords(String[] split) {
+    private String[] applyFilters(String[] split) {
         List<String> valid = new ArrayList<>(split.length);
         for (String word: split) {
-            if (!"".equals(word)) {
+            if (filters.test(word)) {
                 valid.add(word);
             }
         }
