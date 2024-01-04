@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static com.example.utils.Utils.readFile;
 import static java.util.Objects.isNull;
@@ -49,7 +50,13 @@ public class TaskImpl implements Task{
 
     @Override
     public void process() {
-        System.out.println("Number of words: " + parse().length);
+        String [] words = parse();
+        Set<String> unique = getUniqueWords(words);
+        System.out.println("Number of words: " + words.length + ", unique: " + unique.size());
+    }
+
+    protected Set<String> getUniqueWords(String [] words) {
+        return Arrays.stream(words).collect(Collectors.toSet());
     }
 
     protected String [] parse() {

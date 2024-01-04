@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -77,5 +78,11 @@ class TaskImplTest {
             return;
         }
          fail();
+    }
+
+    @Test
+    public void testUniqueWords() {
+        TaskImpl task = new TaskImpl(null, Collections.emptyList());
+        assertEquals(7, task.getUniqueWords(new String[] {"Humpty", "Dumpty", "sat", "wall", "Humpty", "Dumpty", "had", "great", "fall"}).size());
     }
 }
