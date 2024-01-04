@@ -2,6 +2,7 @@ package com.example.tasks;
 
 import com.example.utils.predicates.IsStopWord;
 import com.example.utils.predicates.IsNotEmpty;
+import com.example.utils.predicates.IsTrailingOrLeadingHyphen;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -20,7 +21,8 @@ public class Task {
     public Task(String [] args, List<String> stopWords) {
         this.args = args;
         filters = new IsNotEmpty()
-                .and(Predicate.not(new IsStopWord(stopWords)));
+                .and(Predicate.not(new IsStopWord(stopWords)))
+                .and(Predicate.not(new IsTrailingOrLeadingHyphen()));
     }
 
     public void readInput() {
@@ -55,7 +57,7 @@ public class Task {
     }
 
     protected String [] parse() {
-        return applyFilters(userInput.split("[^a-zA-Z]+"));
+        return applyFilters(userInput.split("([^a-zA-Z-]+)"));
     }
 
     private String[] applyFilters(String[] split) {

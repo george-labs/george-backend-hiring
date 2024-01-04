@@ -55,6 +55,18 @@ class TaskTest {
     }
 
     @Test
+    public void parseWithHyphen() {
+        task.userInput = "ONE TWO T-HREE";
+        assertArrayEquals(new String [] {"ONE", "TWO", "T-HREE"}, task.parse());
+    }
+
+    @Test
+    public void parseWithStandAloneHyphen() {
+        task.userInput = "ONE TWO THREE -";
+        assertArrayEquals(new String [] {"ONE", "TWO", "THREE"}, task.parse());
+    }
+
+    @Test
     public void testReadInputMethod() {
         InputStream sysInBackup = System.in; // backup System.in to restore it later
         ByteArrayInputStream in = new ByteArrayInputStream("AAA BBB\n".getBytes());
