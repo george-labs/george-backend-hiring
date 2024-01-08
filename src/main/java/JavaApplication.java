@@ -1,31 +1,30 @@
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class JavaApplication {
 
-    public static void main(String[] args) throws IOException {
-        Scanner scanner = new Scanner(System.in);
-
+    private static TextReader createReader(String[] args) {
         String filename = null;
         if (args.length > 0) {
             filename = args[0].trim();
         }
-
-        List<String> lines;
+        TextReader reader = null;
         if (filename != null && !filename.isEmpty()) {
-            lines = Files.readAllLines(Path.of(filename));
+            reader = new FileTextReader(filename);
         } else {
-            System.out.println("Enter text:");
-            String inputText = scanner.nextLine();
-            lines = new ArrayList<>();
-            lines.add(inputText);
+            reader = new SystemTextReader();
         }
+        return reader;
+    }
 
-        WordCounter wordCounter = new WordCounter(lines);
+    public static WordCounter createWordCounter(TextReader reader) throws IOException {
+        List<String> lines = reader.read();
+        return WordCounterFactory.createWithDefaultStopWords(lines);
+    }
+
+    public static void main(String[] args) throws IOException {
+        TextReader reader = createReader(args);
+        WordCounter wordCounter = createWordCounter(reader);
         System.out.println("Number of words: " + wordCounter.count() + ", unique: " + wordCounter.unique());
 
     }
