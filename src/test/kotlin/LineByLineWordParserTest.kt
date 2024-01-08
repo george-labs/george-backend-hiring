@@ -1,11 +1,11 @@
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
-class LineByLineWordsParserTest {
+class LineByLineWordParserTest {
 
     @Test
     fun testFileContainingWordsOnEachLineReturnsWordsAsList() {
-        val lineByLineWordsParser = LineByLineWordsParser()
+        val lineByLineWordsParser = LineByLineWordParser()
 
         assertEquals(
             listOf("abc", "def", "ghi", "jkl"),

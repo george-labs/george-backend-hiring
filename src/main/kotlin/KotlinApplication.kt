@@ -1,9 +1,10 @@
-import java.util.Scanner
-
 class KotlinApplication {
 }
 
 fun main(args: Array<String>) {
-    val wordsCountPrinter = WordsCountPrinterImpl()
-    wordsCountPrinter.printNumberOfWords(args)
+    val wordParser = LineByLineWordParser()
+    val wordCounter = BasicWordCounter()
+    val wordCountPrinter = WordCountPrinterImpl(wordParser, wordCounter, System.out)
+
+    wordCountPrinter.printNumberOfWords(args, wordsToIgnore = wordParser.getWordsFromFile("stopwords.txt"))
 }
