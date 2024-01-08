@@ -1,23 +1,42 @@
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class WordCounter {
     private static final String WHITESPACE_REGEX = "\\s";
     private static final Pattern WORD_PATTERN = Pattern.compile("^[a-zA-Z]+$");
-    private final String text;
+    private final List<String> STOP_WORDS;
 
-    public WordCounter(String text) {
-        this.text = text;
+    public WordCounter() {
+        STOP_WORDS = this.getStopWords();
     }
 
-    public long get(){
-        // Pattern pattern = Pattern.compile("([a-zA-z]+)");  //^[a-zA-Z]+$
+    private List<String> getStopWords() {
+        URL resource = getClass().getClassLoader().getResource("stopwords.txt");
+        try {
+            if (resource != null) {
+                return Files.readAllLines(Path.of(resource.toURI())).stream().map(String::trim).collect(Collectors.toList());
+            } else {
+                throw new IllegalStateException("The stopwords resource was not found.");
+            }
+        } catch (URISyntaxException | IOException e) {
+            throw new IllegalStateException("The stopwords resource cannot be read.");
+        }
+    }
+
+    public long count(String text) {
         String[] possibleWords = text.split(WHITESPACE_REGEX);
 
         long count = 0;
-        for (String possible: possibleWords) {
+        for (String possible : possibleWords) {
             Matcher matcher = WORD_PATTERN.matcher(possible);
-            if (matcher.find()){
+            if (matcher.find() && !STOP_WORDS.contains(possible)) {
                 count++;
             }
         }

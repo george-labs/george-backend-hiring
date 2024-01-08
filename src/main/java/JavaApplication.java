@@ -1,15 +1,15 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class JavaApplication {
 
     public static void main(String[] args) {
-        Scanner myObj = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter text:");
 
-        String inputText = myObj.nextLine();
+        String inputText = scanner.nextLine();
 
-        WordCounter wordCounter = new WordCounter(inputText);
-        System.out.println("Number of words: " + wordCounter.get());
+        System.out.println("Number of words: " + new WordCounter().count(inputText));
 
     }
 }
