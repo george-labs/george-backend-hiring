@@ -8,7 +8,7 @@ public class JavaApplication {
         if (args.length > 0) {
             filename = args[0].trim();
         }
-        TextReader reader = null;
+        TextReader reader;
         if (filename != null && !filename.isEmpty()) {
             reader = new FileTextReader(filename);
         } else {
