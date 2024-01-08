@@ -5,5 +5,6 @@ fun main(args: Array<String>) {
     println("Hello world")
 
     val wordCounter = WordCounter()
-    println("Word count: ${wordCounter.count("word word word")}")
+    val wordsParser = LineByLineWordsParser()
+    println("Word count: ${wordCounter.count("word the word", wordsToIgnore = wordsParser.getWordsFromFile("stopwords.txt"))}")
 }
