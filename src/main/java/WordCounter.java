@@ -19,6 +19,10 @@ public class WordCounter {
     private final List<String> words = new ArrayList<>();
     private long unique = 0;
 
+    /**
+     *
+     * STOPWORDS - should be as parameter
+     */
     public WordCounter(List<String> text) {
         this.text = text;
         STOP_WORDS = this.getStopWords();
@@ -34,10 +38,16 @@ public class WordCounter {
                 throw new IllegalStateException("The stopwords resource was not found.");
             }
         } catch (URISyntaxException | IOException e) {
+            // TODO I should be able to run without the stopwords file in the classpath
             throw new IllegalStateException("The stopwords resource cannot be read.");
         }
     }
 
+    /**
+     * Business Logic
+     * splitToWords
+     * unique word count
+     */
     private void analyze() {
         for (String line : text) {
             String[] possibleWords = line.split(WHITESPACE_REGEX);
