@@ -25,7 +25,7 @@ public class JavaApplication {
             lines.add(inputText);
         }
 
-        System.out.println("Number of words: " + new WordCounter().count(lines));
+        System.out.println("Number of words: " + new WordCounter(lines).count());
 
     }
 }

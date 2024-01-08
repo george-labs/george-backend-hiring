@@ -10,7 +10,7 @@ public class WordCounterTest {
     public void testBasic() {
         List<String> input = new ArrayList<>(List.of("Mary had a little lamb"));
 
-        long result = new WordCounter().count(input);
+        long result = new WordCounter(input).count();
 
         Assertions.assertEquals(4, result);
     }
@@ -20,7 +20,7 @@ public class WordCounterTest {
     public void testNumberNotAWord() {
         List<String> input = new ArrayList<>(List.of("Mary had a 5 lambs"));
 
-        long result = new WordCounter().count(input);
+        long result = new WordCounter(input).count();
 
         Assertions.assertEquals(result, 3);
     }
@@ -29,7 +29,7 @@ public class WordCounterTest {
     public void testNoWords() {
         List<String> input = new ArrayList<>(List.of(""));
 
-        long result = new WordCounter().count(input);
+        long result = new WordCounter(input).count();
 
         Assertions.assertEquals(result, 0);
     }
@@ -38,7 +38,7 @@ public class WordCounterTest {
     public void testWordsWithNumbersIgnored() {
         List<String> input = new ArrayList<>(List.of("M4ry h4s five lambs"));
 
-        long result = new WordCounter().count(input);
+        long result = new WordCounter(input).count();
 
         Assertions.assertEquals(result, 2);
     }
@@ -48,7 +48,7 @@ public class WordCounterTest {
     public void testStopWordsAreIgnored() {
         List<String> input = new ArrayList<>(List.of("random the text something a on off"));
 
-        long result = new WordCounter().count(input);
+        long result = new WordCounter(input).count();
 
         Assertions.assertEquals(result, 3);
     }
@@ -58,8 +58,20 @@ public class WordCounterTest {
     public void testMultipleLines() {
         List<String> input = new ArrayList<>(List.of("Mary had", "a", "little lamb"));
 
-        long result = new WordCounter().count(input);
+        long result = new WordCounter(input).count();
 
         Assertions.assertEquals(result, 4);
+    }
+
+
+    @Test
+    public void testUniqueWords() {
+        List<String> input = new ArrayList<>(List.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."));
+
+        WordCounter wordCounter = new WordCounter(input);
+
+        Assertions.assertEquals(wordCounter.count(), 8);
+        Assertions.assertEquals(wordCounter.unique(), 7);
+
     }
 }
