@@ -1,4 +1,4 @@
-import fake.FakeWordParser
+import fake.FakeFileWordParser
 import org.junit.jupiter.api.Test
 import java.io.ByteArrayOutputStream
 import kotlin.test.assertFalse
@@ -8,8 +8,8 @@ class WordCountPrinterImplTest {
 
     @Test
     fun testWordInputIsHandledFromCommandLineArguments() {
-        val basicWordCounter = BasicWordCounter()
-        val wordsParser = FakeWordParser()
+        val basicWordCounter = WordSplitterImpl()
+        val wordsParser = FakeFileWordParser()
         val outputStream = ByteArrayOutputStream()
 
         val wordsCountPrinter = WordCountPrinterImpl(wordsParser, basicWordCounter, outputStream)
@@ -23,8 +23,8 @@ class WordCountPrinterImplTest {
 
     @Test
     fun testWordInputIsHandledFromUserInput() {
-        val basicWordCounter = BasicWordCounter()
-        val wordsParser = FakeWordParser()
+        val basicWordCounter = WordSplitterImpl()
+        val wordsParser = FakeFileWordParser()
         val outputStream = ByteArrayOutputStream()
 
         val wordsCountPrinter = WordCountPrinterImpl(wordsParser, basicWordCounter, outputStream)

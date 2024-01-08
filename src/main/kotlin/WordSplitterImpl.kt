@@ -1,6 +1,6 @@
-class BasicWordCounter : WordCounter {
+class WordSplitterImpl : WordSplitter {
 
-    override fun count(words: String, wordsToIgnore: List<String>): List<String> {
+    override fun split(words: String, wordsToIgnore: List<String>): List<String> {
         val normalizedWords = words.replace("[.,]+".toRegex(), "")
         return normalizedWords
             .split(" ", "-")

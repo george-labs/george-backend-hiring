@@ -1,6 +1,6 @@
 import java.io.File
 
-class LineByLineWordParser : WordParser {
+class LineByLineFileWordParser : FileWordParser {
 
     override fun getWordsFromFile(path: String): List<String> {
         return File(path).readLines()

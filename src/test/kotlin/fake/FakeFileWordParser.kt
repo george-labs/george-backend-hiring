@@ -1,8 +1,8 @@
 package fake
 
-import WordParser
+import FileWordParser
 
-class FakeWordParser : WordParser {
+class FakeFileWordParser : FileWordParser {
     override fun getWordsFromFile(path: String): List<String> {
         return listOf("test", "word")
     }

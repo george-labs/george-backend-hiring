@@ -1,10 +1,8 @@
-class KotlinApplication {
-}
 
 fun main(args: Array<String>) {
-    val wordParser = LineByLineWordParser()
-    val wordCounter = BasicWordCounter()
-    val wordCountPrinter = WordCountPrinterImpl(wordParser, wordCounter, System.out)
+    val wordParser = LineByLineFileWordParser()
+    val wordSplitter = WordSplitterImpl()
+    val wordCountPrinter = WordCountPrinterImpl(wordParser, wordSplitter, System.out)
 
     wordCountPrinter.printNumberOfWords(args, wordsToIgnore = wordParser.getWordsFromFile("stopwords.txt"))
 }
