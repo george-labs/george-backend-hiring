@@ -12,7 +12,10 @@ class WordCountPrinterImpl(
         if (args.isNotEmpty()) {
             val fileName = args[0]
             val inputText = wordParser.getWordsFromFile(fileName).joinToString(" ")
-            outputStreamWriter.write("Number of words: ${basicWordCounter.count(inputText, wordsToIgnore = wordsToIgnore)}")
+            val basicWords = basicWordCounter.count(inputText, wordsToIgnore = wordsToIgnore)
+            val uniqueWords = basicWords.toSet()
+
+            outputStreamWriter.write("Number of words: ${basicWords.size}, unique: ${uniqueWords.size}")
         } else {
             outputStreamWriter.write("Enter text: ")
             outputStreamWriter.flush()
@@ -20,7 +23,9 @@ class WordCountPrinterImpl(
             val scanner = Scanner(System.`in`)
             val line = scanner.nextLine()
 
-            outputStreamWriter.write("Number of words: ${basicWordCounter.count(line, wordsToIgnore = wordsToIgnore)}")
+            val basicWords = basicWordCounter.count(line, wordsToIgnore = wordsToIgnore)
+            val uniqueWords = basicWords.toSet()
+            outputStreamWriter.write("Number of words: ${basicWords.size}, unique: ${uniqueWords.size}")
         }
         outputStreamWriter.close()
     }

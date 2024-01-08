@@ -1,3 +1,3 @@
 interface WordCounter {
-    fun count(words: String, wordsToIgnore: List<String> = emptyList()): Int
+    fun count(words: String, wordsToIgnore: List<String> = emptyList()): List<String>
 }
