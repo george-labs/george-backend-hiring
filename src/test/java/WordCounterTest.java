@@ -1,13 +1,14 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WordCounterTest {
 
     @Test
     public void testBasic() {
-        String input = "Mary had a little lamb";
+        List<String> input = new ArrayList<>(List.of("Mary had a little lamb"));
 
         long result = new WordCounter().count(input);
 
@@ -17,7 +18,7 @@ public class WordCounterTest {
 
     @Test
     public void testNumberNotAWord() {
-        String input = "Mary had a 5 lambs";
+        List<String> input = new ArrayList<>(List.of("Mary had a 5 lambs"));
 
         long result = new WordCounter().count(input);
 
@@ -26,7 +27,7 @@ public class WordCounterTest {
 
     @Test
     public void testNoWords() {
-        String input = "";
+        List<String> input = new ArrayList<>(List.of(""));
 
         long result = new WordCounter().count(input);
 
@@ -35,7 +36,7 @@ public class WordCounterTest {
 
     @Test
     public void testWordsWithNumbersIgnored() {
-        String input = "M4ry h4s five lambs";
+        List<String> input = new ArrayList<>(List.of("M4ry h4s five lambs"));
 
         long result = new WordCounter().count(input);
 
@@ -45,10 +46,20 @@ public class WordCounterTest {
 
     @Test
     public void testStopWordsAreIgnored() {
-        String input = "random the text something a on off";
+        List<String> input = new ArrayList<>(List.of("random the text something a on off"));
 
         long result = new WordCounter().count(input);
 
         Assertions.assertEquals(result, 3);
+    }
+
+
+    @Test
+    public void testMultipleLines() {
+        List<String> input = new ArrayList<>(List.of("Mary had", "a", "little lamb"));
+
+        long result = new WordCounter().count(input);
+
+        Assertions.assertEquals(result, 4);
     }
 }

@@ -30,17 +30,19 @@ public class WordCounter {
         }
     }
 
-    public long count(String text) {
-        String[] possibleWords = text.split(WHITESPACE_REGEX);
-
+    public long count(List<String> text) {
         long count = 0;
-        for (String possible : possibleWords) {
-            Matcher matcher = WORD_PATTERN.matcher(possible);
-            if (matcher.find() && !STOP_WORDS.contains(possible)) {
-                count++;
+        for (String line : text) {
+            String[] possibleWords = line.split(WHITESPACE_REGEX);
+
+            for (String possible : possibleWords) {
+                Matcher matcher = WORD_PATTERN.matcher(possible);
+                if (matcher.find() && !STOP_WORDS.contains(possible)) {
+                    count++;
+                }
             }
+
         }
         return count;
-
     }
 }
