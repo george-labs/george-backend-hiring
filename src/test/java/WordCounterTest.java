@@ -60,7 +60,7 @@ public class WordCounterTest {
 
         long result = new WordCounter(input).count();
 
-        Assertions.assertEquals(result, 4);
+        Assertions.assertEquals(4, result);
     }
 
 
@@ -70,8 +70,8 @@ public class WordCounterTest {
 
         WordCounter wordCounter = new WordCounter(input);
 
-        Assertions.assertEquals(wordCounter.count(), 8);
-        Assertions.assertEquals(wordCounter.unique(), 7);
+        Assertions.assertEquals(9, wordCounter.count());
+        Assertions.assertEquals(7, wordCounter.unique());
 
     }
 }

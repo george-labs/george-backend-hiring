@@ -18,4 +18,4 @@ I assume the file stopwords.txt is something already defined in the application,
 ## Iteration 4
 1. I assume that I can ask for the total word count and the unique number of words separatelly. 
 2. I assume that "Humpty-Dumpty" counts as 2 words.
-4. I assume "wall." is not a word.
+4. I assume "wall." is also a word ("wall").

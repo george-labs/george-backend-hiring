@@ -17,7 +17,7 @@ public class WordCounter {
     private final List<String> text;
 
     private final List<String> words = new ArrayList<>();
-    private long unique;
+    private long unique = 0;
 
     public WordCounter(List<String> text) {
         this.text = text;
