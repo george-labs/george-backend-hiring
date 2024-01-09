@@ -1,7 +1,6 @@
 package service.impl;
 
 public class WordCountServiceImpl {
-
     public int checkTheCountOfWord(String text){
         var splitText = text.split(" ");
         int counter = 0;
