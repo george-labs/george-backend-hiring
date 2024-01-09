@@ -22,17 +22,6 @@ public class IOServiceImpl implements IOService {
     }
 
     @Override
-    public int readInt(){
-        return Integer.parseInt(input.nextLine());
-    }
-
-    @Override
-    public int readIntWithPrompt(String prompt){
-        System.out.println(prompt);
-        return Integer.parseInt(input.nextLine());
-    }
-
-    @Override
     public String readStringWithPrompt(String prompt){
         System.out.println(prompt);
         return input.nextLine();
