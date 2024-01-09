@@ -19,6 +19,9 @@ public class JavaApplication {
         String text = "";
         if(args.length > 0 && args[0] != null){
             text = ioService.extractStringFromFile(args[0]);
+            if(text == null){
+                System.exit(0);
+            }
         }
         if(text.isBlank()){
             text = ioService.readStringWithPrompt("Enter text:");

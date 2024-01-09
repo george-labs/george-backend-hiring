@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class IOServiceImpl implements IOService {
 
     private final Scanner input;
+    private final String EMPTY_STRING = "";
 
     public IOServiceImpl() {
         input = new Scanner(System.in);
@@ -30,12 +31,13 @@ public class IOServiceImpl implements IOService {
     @Override
     public String extractStringFromFile(String nameOfFile) {
         if(nameOfFile == null || (nameOfFile.isBlank() && nameOfFile.isEmpty())){
-            return "";
+            return EMPTY_STRING;
         }
 
         var is = getClass().getClassLoader().getResourceAsStream(nameOfFile);
         if(is == null){
-            return "";
+            System.out.print("The file is not exits. Please try again");
+            return null;
         }
 
         try (InputStreamReader streamReader = new InputStreamReader(is, StandardCharsets.UTF_8);
@@ -48,7 +50,8 @@ public class IOServiceImpl implements IOService {
             }
             return stringBuilder.toString().trim();
         } catch (IOException e ) {
-            return "";
+            System.out.print("The file is not exits. Please try again");
+            return null;
         }
     }
 }
