@@ -11,7 +11,7 @@ public class StopWordsCheckerServiceTest {
 
     @ParameterizedTest
     @MethodSource(value = "textProvider")
-    void name(String text, String expectedString) {
+    void removeStopWordsFromSentenceTest(String text, String expectedString) {
         //arrange
         StopWordsCheckerServiceImpl stopWordsCheckerService = new StopWordsCheckerServiceImpl();
         //acts

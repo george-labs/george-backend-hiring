@@ -11,7 +11,7 @@ public class WordCountServiceTest {
 
     @ParameterizedTest
     @MethodSource(value = "textProvider")
-    void name(String text, int expectedCount) {
+    void countWordsFromSentenceTest(String text, int expectedCount) {
         //arrange
         WordCountServiceImpl wordCountService = new WordCountServiceImpl();
         //acts

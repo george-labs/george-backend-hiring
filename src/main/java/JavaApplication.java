@@ -11,7 +11,13 @@ public class JavaApplication {
         IOService ioService = new IOServiceImpl();
         WordCountServiceImpl wordCountService = new WordCountServiceImpl();
         StopWordsCheckerServiceImpl stopWordsCheckerService = new StopWordsCheckerServiceImpl();
-        var text = ioService.readStringWithPrompt("Enter text:");
+        String text = "";
+        if(args.length > 0 && args[0] != null){
+            text = ioService.extractStringFromFile(args[0]);
+        }
+        if(text.isBlank()){
+            text = ioService.readStringWithPrompt("Enter text:");
+        }
         var validText = stopWordsCheckerService.processSentence(text);
         ioService.outputValue(String.format(NUMBER_OF_WORDS, wordCountService.checkTheCountOfWord(validText)));
     }
