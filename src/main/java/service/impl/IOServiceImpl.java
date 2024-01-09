@@ -18,7 +18,7 @@ public class IOServiceImpl implements IOService {
 
     @Override
     public <OutputType> void outputValue(OutputType output){
-        System.out.println(output);
+        System.out.print(output);
     }
 
     @Override
