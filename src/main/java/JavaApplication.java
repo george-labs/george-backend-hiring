@@ -1,5 +1,5 @@
 import service.impl.IOServiceImpl;
-import service.impl.StopWordsCheckerServiceImpl;
+import service.impl.StopWordsProcessorServiceImpl;
 import service.impl.WordCountServiceImpl;
 import service.IOService;
 
@@ -10,7 +10,7 @@ public class JavaApplication {
     public static void main(String[] args) {
         IOService ioService = new IOServiceImpl();
         WordCountServiceImpl wordCountService = new WordCountServiceImpl();
-        StopWordsCheckerServiceImpl stopWordsCheckerService = new StopWordsCheckerServiceImpl();
+        StopWordsProcessorServiceImpl stopWordsCheckerService = new StopWordsProcessorServiceImpl();
         String text = "";
         if(args.length > 0 && args[0] != null){
             text = ioService.extractStringFromFile(args[0]);

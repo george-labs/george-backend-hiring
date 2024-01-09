@@ -1,5 +1,5 @@
 package service;
 
-public interface StopWordsCheckerService {
+public interface StopWordsProcessorService {
     String processSentence(String word);
 }

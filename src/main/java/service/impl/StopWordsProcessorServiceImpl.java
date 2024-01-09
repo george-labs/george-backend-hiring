@@ -1,6 +1,6 @@
 package service.impl;
 
-import service.StopWordsCheckerService;
+import service.StopWordsProcessorService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,10 +10,11 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class StopWordsCheckerServiceImpl implements StopWordsCheckerService {
+public class StopWordsProcessorServiceImpl implements StopWordsProcessorService {
 
     private static final String STOP_WORDS_TXT_PATH = "stopwords.txt";
 
+    @Override
     public String processSentence(String sentence) {
         if(sentence == null){
             return "";

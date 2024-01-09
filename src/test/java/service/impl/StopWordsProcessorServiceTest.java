@@ -7,13 +7,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class StopWordsCheckerServiceTest {
+public class StopWordsProcessorServiceTest {
 
     @ParameterizedTest
     @MethodSource(value = "textProvider")
     void removeStopWordsFromSentenceTest(String text, String expectedString) {
         //arrange
-        StopWordsCheckerServiceImpl stopWordsCheckerService = new StopWordsCheckerServiceImpl();
+        StopWordsProcessorServiceImpl stopWordsCheckerService = new StopWordsProcessorServiceImpl();
         //acts
         var actualString = stopWordsCheckerService.processSentence(text);
         //asserts

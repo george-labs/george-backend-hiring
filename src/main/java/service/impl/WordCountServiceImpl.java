@@ -1,6 +1,10 @@
 package service.impl;
 
-public class WordCountServiceImpl {
+import service.WordCountService;
+
+public class WordCountServiceImpl implements WordCountService {
+
+    @Override
     public int checkTheCountOfWord(String text){
         var splitText = text.split(" ");
         int counter = 0;
