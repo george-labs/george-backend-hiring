@@ -22,7 +22,7 @@ public class IOServiceImplTest {
 
     static Stream<Arguments> fileNameProvider(){
         return Stream.of(
-                Arguments.of("mytext.txt","Mary had a little lamb"),
+                Arguments.of("mytext.txt","Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."),
                 Arguments.of("my.txt",""),
                 Arguments.of("",""),
                 Arguments.of(null,"")
