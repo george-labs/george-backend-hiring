@@ -24,9 +24,9 @@ public class UniqueWordCounterServiceTest {
     static Stream<Arguments> textProvider(){
         return Stream.of(
                 Arguments.of("Mary had a little lamb",5),
-                Arguments.of("Ma23ry had a little lamb",5),
-                Arguments.of("14231 fdgsd",2),
-                Arguments.of("14231 skill skill job",3),
+                Arguments.of("Ma23ry had a little lamb",4),
+                Arguments.of("14231 fdgsd",1),
+                Arguments.of("14231 skill skill job",2),
                 Arguments.of("",0)
         );
     }

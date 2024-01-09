@@ -1,18 +1,19 @@
 package service.impl;
 
 import service.UniqueWordCounterService;
+import service.WordCountService;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Set;
+
 
 public class UniqueWordCounterServiceImpl implements UniqueWordCounterService {
 
     @Override
     public int processText(String text) {
-        var splitText = text.split(" |-|;");
-        var uniqueWords = Arrays.stream(splitText)
-                .filter(s -> !s.isBlank() || !s.isEmpty())
-                .collect(Collectors.toSet());
+        WordCountService wordCountService = new WordCountServiceImpl();
+        var countOfWord = wordCountService.getWords(text);
+        Set<String> uniqueWords = new HashSet<>(countOfWord);
         return uniqueWords.size();
     }
 }
