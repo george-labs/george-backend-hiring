@@ -2,10 +2,6 @@
 
 A CLI application for counting words in input.
 
-## Setup
-
-The application expects `stopwords.txt` (containing line delimited stop words) to exist in the project path.
-
 ## Usage
 
 If no input file is provided, text is read from input stream:

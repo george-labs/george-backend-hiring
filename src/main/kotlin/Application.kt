@@ -5,17 +5,24 @@ import java.io.InputStream
 import java.io.OutputStream
 
 fun main(args: Array<String>) {
-    Application(
-        arguments = args,
-        stopWordsFile = File("stopwords.txt"),
-        textInputStream = System.`in`,
-        resultOutputStream = System.out
-    ).run()
+    // We need to load the file as stream, because when using certain bundling methods (e.g., .jar)
+    // files from resources cannot be treated as normal file system files and need to be read
+    // using streams.
+    Application::class.java.classLoader.getResourceAsStream("stopwords.txt").use { stopWordsStream ->
+        Application(
+            arguments = args,
+            // As part of the requirements, if the stopwords file is not present for some reason
+            // (even though it should be bundled with application), we should ignore it.
+            stopWordsStream = stopWordsStream ?: InputStream.nullInputStream(),
+            textInputStream = System.`in`,
+            resultOutputStream = System.out
+        ).run()
+    }
 }
 
 class Application(
     private val arguments: Array<String>,
-    private val stopWordsFile: File,
+    private val stopWordsStream: InputStream,
     private val textInputStream: InputStream,
     private val resultOutputStream: OutputStream,
 ) {
@@ -36,7 +43,7 @@ class Application(
 
     private fun readStopWords(): Set<String> {
         return try {
-            stopWordsFile.readLines().toSet()
+            stopWordsStream.bufferedReader().readLines().toSet()
         } catch (e: FileNotFoundException) {
             throw RuntimeException("Expected stopwords.txt file to be present and contain line delimited list of stop words.")
         }

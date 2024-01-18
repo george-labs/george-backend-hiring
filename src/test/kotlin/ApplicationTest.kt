@@ -7,6 +7,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.io.path.absolutePathString
 import kotlin.io.path.deleteIfExists
+import kotlin.io.path.inputStream
 import kotlin.io.path.writeText
 
 class ApplicationTest {
@@ -38,15 +39,18 @@ class ApplicationTest {
         // Given
         val outputStream = ByteArrayOutputStream(1024)
 
-        val counter = Application(
-            arguments = emptyArray(),
-            stopWordsFile = testStopWordsFile.toFile(),
-            textInputStream = "Mary had a little lamb".byteInputStream(),
-            resultOutputStream = outputStream,
-        )
+        testStopWordsFile.inputStream().use { stopWordsStream ->
+            val counter = Application(
+                arguments = emptyArray(),
+                stopWordsStream = stopWordsStream,
+                textInputStream = "Mary had a little lamb".byteInputStream(),
+                resultOutputStream = outputStream,
+            )
 
-        // When
-        counter.run()
+            // When
+            counter.run()
+        }
+
 
         // Then
         Assertions.assertEquals("Enter text: Number of words: 4\n", outputStream.toString())
@@ -64,15 +68,17 @@ class ApplicationTest {
 
         val outputStream = ByteArrayOutputStream(1024)
 
-        val counter = Application(
-            arguments = arrayOf(testInputFile.absolutePathString()),
-            stopWordsFile = testStopWordsFile.toFile(),
-            textInputStream = "Mary had a little lamb".byteInputStream(),
-            resultOutputStream = outputStream,
-        )
+        testStopWordsFile.inputStream().use { stopWordsStream ->
+            val counter = Application(
+                arguments = arrayOf(testInputFile.absolutePathString()),
+                stopWordsStream = stopWordsStream,
+                textInputStream = "Mary had a little lamb".byteInputStream(),
+                resultOutputStream = outputStream,
+            )
 
-        // When
-        counter.run()
+            // When
+            counter.run()
+        }
 
         // Then
         Assertions.assertEquals("Number of words: 4\n", outputStream.toString())
