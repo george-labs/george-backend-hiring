@@ -154,10 +154,10 @@ class WordCounterTest {
             uniqueWords = 6,
             averageWordLength = 6.428571428571429,
             index = listOf(
-                "Humpty-Dumpty",
                 "fall",
                 "great",
                 "had",
+                "Humpty-Dumpty",
                 "sat",
                 "wall"
             )

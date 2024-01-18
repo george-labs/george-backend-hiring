@@ -113,10 +113,10 @@ class ApplicationTest {
         Assertions.assertEquals(
             "Number of words: 4, unique: 4; average word length: 4.25 characters\n" +
                     "Index:\n" +
-                    "Mary\n" +
                     "had\n" +
                     "lamb\n" +
-                    "little\n",
+                    "little\n" +
+                    "Mary\n",
             resultStream.toString()
         )
     }
@@ -159,10 +159,11 @@ class ApplicationTest {
         Assertions.assertEquals(
             "Number of words: 4, unique: 4; average word length: 4.25 characters\n" +
                     "Index:\n" +
-                    "Mary\n" +
                     "had\n" +
                     "lamb\n" +
-                    "little\n", resultStream.toString()
+                    "little\n" +
+                    "Mary\n",
+            resultStream.toString()
         )
         testInputFile.deleteIfExists()
     }
