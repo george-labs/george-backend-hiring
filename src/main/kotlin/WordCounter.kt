@@ -11,14 +11,12 @@ class WordCounter(
             .split(whitespaceRegex)
             .filter { isWord(it) }
 
-        val totalCharacters = words.sumOf { it.length }
-        val averageWordLength = totalCharacters / words.size.toDouble()
+        val averageWordLength = getAverageWordLength(words)
 
         return Result(
             wordCount = words.size,
             uniqueWords = words.distinct().size,
-            // If there are no words, we do a division by 0 and therefore get NaN as a result
-            averageWordLength = if (words.isEmpty()) 0.0 else averageWordLength
+            averageWordLength = averageWordLength
         )
     }
 
@@ -33,29 +31,41 @@ class WordCounter(
             return false
         }
 
-        word.forEachIndexed { index, c ->
-            when {
-                // Hyphen is a special character that is valid, when it is in the middle of a word
-                c == '-' -> {
-                    // As per our assumptions, hyphen at the start or end is not valid
-                    if (index == 0 || index == word.lastIndex) {
-                        return false
-                    }
-                }
+        return word
+            .asSequence()
+            .mapIndexed { index, c -> isValidWordCharacter(c, index, word) }
+            .all { it }
+    }
 
-                c.isPunctuationMark() -> {
-                    // Punctuation marks at the end of the word are fine
-                    if (index != word.lastIndex) {
-                        return false
-                    }
-                }
+    /**
+     * @return Returns if character can be used to form a valid word.
+     */
+    private fun isValidWordCharacter(c: Char, index: Int, word: String): Boolean {
+        return when {
+            // Hyphen is a special character that is valid, when it is in the middle of a word
+            // As per our assumptions, hyphen at the start or end is not valid
+            c == '-' -> index > 0 && index < word.lastIndex
 
-                // Words containing digits and special characters should not count as words
-                !c.isLetter() -> return false
-            }
+            // Punctuation marks at the end of the word are fine
+            c.isPunctuationMark() -> index == word.lastIndex
+
+            // Words containing digits and special characters should not count as words
+            !c.isLetter() -> false
+
+            else -> true
+        }
+    }
+
+    private fun getAverageWordLength(words: List<String>): Double {
+        // If there are no words, we would do a division by 0 and therefore get NaN as a result.
+        if (words.isEmpty()) {
+            return 0.0
         }
 
-        return true
+        // In case there are many/long words in the input it would be possible for
+        // Int to overflow, so we need to convert to Long.
+        val totalCharacters = words.sumOf { it.length.toLong() }
+        return totalCharacters / words.size.toDouble()
     }
 
     data class Result(
@@ -64,7 +74,7 @@ class WordCounter(
         val averageWordLength: Double,
     )
 
-    private fun Char.isPunctuationMark() = when(this) {
+    private fun Char.isPunctuationMark() = when (this) {
         ',', '.', '?', '!' -> true
         else -> false
     }
