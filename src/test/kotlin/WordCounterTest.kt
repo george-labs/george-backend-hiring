@@ -79,4 +79,34 @@ class WordCounterTest {
             uniqueWords = 2
         ), result)
     }
+
+    @Test
+    fun wordsWithHyphenAreCounted() {
+        // Given
+        val counter = WordCounter()
+
+        // When
+        val result = counter.countWordsInText("foo-bar foo--bar fo-ob-ar")
+
+        // Then
+        Assertions.assertEquals(WordCounter.Result(
+            wordCount = 3,
+            uniqueWords = 3
+        ), result)
+    }
+
+    @Test
+    fun wordsWithHyphenAtEdgeAreNotCounted() {
+        // Given
+        val counter = WordCounter()
+
+        // When
+        val result = counter.countWordsInText("-foobar foobar-")
+
+        // Then
+        Assertions.assertEquals(WordCounter.Result(
+            wordCount = 0,
+            uniqueWords = 0
+        ), result)
+    }
 }

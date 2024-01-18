@@ -9,19 +9,42 @@ class WordCounter(
         // we don't have to fit the whole file in memory.
         val words = text
             .split(whitespaceRegex)
-            .filter { word ->
-                // Stop words should be excluded from the result
-                !stopWords.contains(word) &&
-                        // On empty input, we could get whitespace as a result of splitting
-                        word.isNotEmpty() &&
-                        // Words containing digits and special characters should not count as words
-                        word.all { it.isLetter() }
-            }
+            .filter { isWord(it) }
 
         return Result(
             wordCount = words.size,
             uniqueWords = words.distinct().size
         )
+    }
+
+    private fun isWord(word: String): Boolean {
+        if (stopWords.contains(word)) {
+            // Stop words should be excluded from the result
+            return false
+        }
+
+        if (word.isEmpty()) {
+            // On empty input, we could get whitespace as a result of splitting
+            return false
+        }
+
+        word.forEachIndexed { index, c ->
+            when {
+                // Hyphen is a special character that is valid, when it is in the middle of a word
+                c == '-' -> {
+                    // As per our assumptions, hyphen at the start or end is not valid
+                    if (index == 0 || index == word.lastIndex) {
+                        return false
+                    }
+                }
+
+                // Words containing digits and special characters should not count as words
+                !c.isLetter() -> return false
+            }
+            //
+        }
+
+        return true
     }
 
     data class Result(
