@@ -7,3 +7,5 @@
 ## Iteration 2
 
 - Words that are split by a stop word `testfootest` where `foo` is a stop word should still count as 1 valid word. 
+
+## Iteration 3
