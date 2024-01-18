@@ -27,7 +27,7 @@ class ApplicationTest {
 
 
         // Then
-        Assertions.assertEquals("Enter text: Number of words: 4\n", outputStream.toString())
+        Assertions.assertEquals("Enter text: Number of words: 4, unique: 4\n", outputStream.toString())
     }
 
     @Test
@@ -55,7 +55,7 @@ class ApplicationTest {
         counter.run()
 
         // Then
-        Assertions.assertEquals("Number of words: 4\n", outputStream.toString())
+        Assertions.assertEquals("Number of words: 4, unique: 4\n", outputStream.toString())
         testInputFile.deleteIfExists()
     }
 

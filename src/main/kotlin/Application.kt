@@ -25,8 +25,8 @@ class Application(
 
         resultOutputStream.bufferedWriter().use { writer ->
             val inputText = inputTextReader.readInput(writer)
-            val wordCount = wordCounter.countWordsInText(inputText)
-            writer.write("Number of words: $wordCount\n")
+            val wordCountResult = wordCounter.countWordsInText(inputText)
+            writer.write("Number of words: ${wordCountResult.wordCount}, unique: ${wordCountResult.uniqueWords}\n")
         }
     }
 
