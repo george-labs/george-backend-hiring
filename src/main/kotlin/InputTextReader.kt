@@ -1,6 +1,8 @@
 import java.io.File
 import java.io.InputStream
 import java.io.Writer
+import java.nio.file.Path
+import kotlin.io.path.Path
 
 interface InputTextReader {
 
@@ -10,6 +12,8 @@ interface InputTextReader {
         val inputText: String,
         /** True when `-index` flag is present in the arguments */
         val indexFlag: Boolean,
+        /** Path to the dictionary of known words that index should be verified against */
+        val knownWordsDictionary: Path?,
     )
 }
 
@@ -23,21 +27,35 @@ class InputTextReaderImpl(
     private val arguments: Array<String>,
     private val textInputStream: InputStream,
     private val writer: Writer,
-): InputTextReader {
+) : InputTextReader {
 
     private val indexFlag = "-index"
+    private val dictionaryFlag = "-dictionary"
 
     override fun readInput(): InputTextReader.Result {
         // For ease of implementation, we will remove all flags we find
         // from the arguments array, before trying to read input text.
         val inputText = getInputText(
-            processedArguments = arguments.filter { it != indexFlag }
+            processedArguments = arguments
+                .filter { it != indexFlag && !it.startsWith(dictionaryFlag) }
         )
+
+        val knownWordsDictionaryPath = getKnownWordsDictionaryPath()
 
         return InputTextReader.Result(
             inputText = inputText,
-            indexFlag = arguments.contains(indexFlag)
+            indexFlag = arguments.contains(indexFlag),
+            knownWordsDictionary = knownWordsDictionaryPath
         )
+    }
+
+    private fun getKnownWordsDictionaryPath(): Path? {
+        return arguments
+            .find { it.startsWith(dictionaryFlag) } // -dictionary=path=foo/bar
+            ?.split("=")
+            ?.drop(1) // [path, foo/bar]
+            ?.joinToString("=") // path=foo/bar
+            ?.let { Path(it) }
     }
 
     private fun getInputText(processedArguments: List<String>): String {

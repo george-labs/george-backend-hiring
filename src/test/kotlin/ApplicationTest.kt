@@ -23,7 +23,9 @@ class ApplicationTest {
                         writer = askForInputStreamWriter,
                     ),
                     stopWordsReader = ClasspathStopWordsReader(),
+                    knownWordsDictionaryReader = KnownWordsDictionaryReaderImpl(),
                     resultWriter = StreamResultWriter(
+                        indexWriter = StreamIndexWriter(resultStreamWriter),
                         writer = resultStreamWriter
                     ),
                 )
@@ -65,7 +67,9 @@ class ApplicationTest {
                         writer = askForInputStreamWriter
                     ),
                     stopWordsReader = ClasspathStopWordsReader(),
+                    knownWordsDictionaryReader = KnownWordsDictionaryReaderImpl(),
                     resultWriter = StreamResultWriter(
+                        indexWriter = StreamIndexWriter(resultStreamWriter),
                         writer = resultStreamWriter
                     ),
                 )
@@ -98,7 +102,9 @@ class ApplicationTest {
                         writer = askForInputStreamWriter,
                     ),
                     stopWordsReader = ClasspathStopWordsReader(),
+                    knownWordsDictionaryReader = KnownWordsDictionaryReaderImpl(),
                     resultWriter = StreamResultWriter(
+                        indexWriter = StreamIndexWriter(resultStreamWriter),
                         writer = resultStreamWriter
                     ),
                 )
@@ -145,7 +151,9 @@ class ApplicationTest {
                         writer = askForInputStreamWriter
                     ),
                     stopWordsReader = ClasspathStopWordsReader(),
+                    knownWordsDictionaryReader = KnownWordsDictionaryReaderImpl(),
                     resultWriter = StreamResultWriter(
+                        indexWriter = StreamIndexWriter(resultStreamWriter),
                         writer = resultStreamWriter
                     ),
                 )
@@ -167,4 +175,60 @@ class ApplicationTest {
         )
         testInputFile.deleteIfExists()
     }
+
+    @Test
+    fun `count words with index flag and dictionary`() {
+        // Given
+        val askForInputStream = ByteArrayOutputStream(1024)
+        val resultStream = ByteArrayOutputStream(1024)
+
+        val knownFileDictionaryFile = Files.createTempFile("dict", "txt")
+        knownFileDictionaryFile.writeText(
+            """
+            big
+            small
+            little
+            cat
+            dog
+            have
+            has
+            had
+        """.trimIndent()
+        )
+
+        askForInputStream.bufferedWriter().use { askForInputStreamWriter ->
+            resultStream.bufferedWriter().use { resultStreamWriter ->
+                val counter = Application(
+                    inputTextReader = InputTextReaderImpl(
+                        arguments = arrayOf("-index", "-dictionary=${knownFileDictionaryFile.absolutePathString()}"),
+                        textInputStream = "Mary had a little lamb".byteInputStream(),
+                        writer = askForInputStreamWriter,
+                    ),
+                    stopWordsReader = ClasspathStopWordsReader(),
+                    knownWordsDictionaryReader = KnownWordsDictionaryReaderImpl(),
+                    resultWriter = StreamResultWriter(
+                        indexWriter = StreamIndexWriter(resultStreamWriter),
+                        writer = resultStreamWriter
+                    ),
+                )
+
+                // When
+                counter.run()
+            }
+        }
+
+        // Then
+        Assertions.assertEquals("Enter text: ", askForInputStream.toString())
+        Assertions.assertEquals(
+            "Number of words: 4, unique: 4; average word length: 4.25 characters\n" +
+                    "Index (unknown: 2):\n" +
+                    "had\n" +
+                    "lamb*\n" +
+                    "little\n" +
+                    "Mary*\n",
+            resultStream.toString()
+        )
+        knownFileDictionaryFile.deleteIfExists()
+    }
+
 }

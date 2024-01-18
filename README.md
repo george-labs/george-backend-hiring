@@ -17,3 +17,7 @@ Filename can be provided as a first argument to read input text from:
 $ wordcount mytext.txt
 Number of words: 4, unique: 4; average word length: 5.63 characters
 ```
+
+Optional flags:
+- `-index`: print out index of words
+- `-dictionary=path/to/file.txt`: path to dictionary of known words to verify index against

@@ -1,4 +1,3 @@
-
 fun main(args: Array<String>) {
     System.out.bufferedWriter().use { outputWriter ->
         Application(
@@ -8,8 +7,10 @@ fun main(args: Array<String>) {
                 writer = outputWriter
             ),
             stopWordsReader = ClasspathStopWordsReader(),
+            knownWordsDictionaryReader = KnownWordsDictionaryReaderImpl(),
             resultWriter = StreamResultWriter(
-                writer = outputWriter
+                indexWriter = StreamIndexWriter(outputWriter),
+                writer = outputWriter,
             )
         ).run()
     }
@@ -18,6 +19,7 @@ fun main(args: Array<String>) {
 class Application(
     private val inputTextReader: InputTextReader,
     private val stopWordsReader: StopWordsReader,
+    private val knownWordsDictionaryReader: KnownWordsDictionaryReader,
     private val resultWriter: ResultWriter,
 ) {
 
@@ -25,6 +27,9 @@ class Application(
         // Input
         val stopWords = stopWordsReader.readStopWords()
         val readerResult = inputTextReader.readInput()
+        val knownWordsDictionary = readerResult.knownWordsDictionary?.let {
+            knownWordsDictionaryReader.readFromPath(it)
+        }
 
         // Processing
         val wordCounter = WordCounterImpl(stopWords)
@@ -34,7 +39,10 @@ class Application(
         )
 
         // Output
-        resultWriter.write(wordCountResult)
+        resultWriter.write(
+            wordCountResult = wordCountResult,
+            knownWordsDictionary = knownWordsDictionary
+        )
     }
 
 }

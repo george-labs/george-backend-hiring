@@ -17,3 +17,8 @@
 - Hyphen is the only valid non-letter character that can still form words. (`.`, `,`, `+`, etc. cannot be in words)
 - Hyphen at the start or end of the word will cause the "word" to be not counted. (e.g., `-foo` is not a word)
 - Multiple hyphens inside word still count as a valid word. (e.g., `foo--bar` counts as 1 word)
+
+# Iteration 8
+
+- Number of input arguments will be small. We can read them in multiple passes.
+- If there are multiple instances of `-dictionary` flag, only one of them will be used.
