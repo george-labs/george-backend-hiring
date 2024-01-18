@@ -4,7 +4,7 @@ class WordCounter(
 
     private val whitespaceRegex = "\\s".toRegex()
 
-    fun countWordsInInput(text: String): Int {
+    fun countWordsInText(text: String): Int {
         return text
             .split(whitespaceRegex)
             .count { word ->

@@ -14,9 +14,11 @@ class ApplicationTest {
         val outputStream = ByteArrayOutputStream(1024)
 
         val counter = Application(
-            arguments = emptyArray(),
-            stopWordsReader = StopWordsReaderImpl(),
-            textInputStream = "Mary had a little lamb".byteInputStream(),
+            inputTextReader = InputTextReaderImpl(
+                arguments = emptyArray(),
+                textInputStream = "Mary had a little lamb".byteInputStream()
+            ),
+            stopWordsReader = ClasspathStopWordsReader(),
             resultOutputStream = outputStream,
         )
 
@@ -41,9 +43,11 @@ class ApplicationTest {
         val outputStream = ByteArrayOutputStream(1024)
 
         val counter = Application(
-            arguments = arrayOf(testInputFile.absolutePathString()),
-            stopWordsReader = StopWordsReaderImpl(),
-            textInputStream = "Mary had a little lamb".byteInputStream(),
+            inputTextReader = InputTextReaderImpl(
+                arguments = arrayOf(testInputFile.absolutePathString()),
+                textInputStream = "Mary had a little lamb".byteInputStream(),
+            ),
+            stopWordsReader = ClasspathStopWordsReader(),
             resultOutputStream = outputStream,
         )
 
