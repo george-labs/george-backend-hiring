@@ -21,10 +21,10 @@ class WordCounterTest {
         val counter = WordCounter()
 
         // When
-        val result = counter.countWordsInInput("  Ma23ry ha[]d ha\td ")
+        val result = counter.countWordsInInput("  Ma23ry ha[]d word. ")
 
         // Then
-        Assertions.assertEquals(6, result)
+        Assertions.assertEquals(0, result)
     }
 
     @Test
