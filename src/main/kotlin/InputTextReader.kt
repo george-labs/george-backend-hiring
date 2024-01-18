@@ -4,7 +4,13 @@ import java.io.Writer
 
 interface InputTextReader {
 
-    fun readInput(): String
+    fun readInput(): Result
+
+    data class Result(
+        val inputText: String,
+        /** True when `-index` flag is present in the arguments */
+        val indexFlag: Boolean,
+    )
 }
 
 /**
@@ -19,8 +25,23 @@ class InputTextReaderImpl(
     private val writer: Writer,
 ): InputTextReader {
 
-    override fun readInput(): String {
-        return when (arguments.size) {
+    private val indexFlag = "-index"
+
+    override fun readInput(): InputTextReader.Result {
+        // For ease of implementation, we will remove all flags we find
+        // from the arguments array, before trying to read input text.
+        val inputText = getInputText(
+            processedArguments = arguments.filter { it != indexFlag }
+        )
+
+        return InputTextReader.Result(
+            inputText = inputText,
+            indexFlag = arguments.contains(indexFlag)
+        )
+    }
+
+    private fun getInputText(processedArguments: List<String>): String {
+        return when (processedArguments.size) {
             0 -> {
                 writer.write("Enter text: ")
                 // We need to flush in case the writer is buffered by lines, to make
@@ -32,10 +53,10 @@ class InputTextReaderImpl(
 
             // First argument should be input filename
             1 -> {
-                File(arguments.first()).readText()
+                File(processedArguments.first()).readText()
             }
 
-            else -> throw IllegalArgumentException("Expected at most 1 argument (path to file to count words from).")
+            else -> throw IllegalArgumentException("Expected at most 1 positional (non-flag) argument (path to file to count words from).")
         }
     }
 

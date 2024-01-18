@@ -77,4 +77,72 @@ class ApplicationTest {
         testInputFile.deleteIfExists()
     }
 
+    @Test
+    fun `count words with index flag`() {
+        // Given
+        val askForInputStream = ByteArrayOutputStream(1024)
+        val resultStream = ByteArrayOutputStream(1024)
+
+        askForInputStream.bufferedWriter().use { askForInputStreamWriter ->
+            resultStream.bufferedWriter().use { resultStreamWriter ->
+                val counter = Application(
+                    inputTextReader = InputTextReaderImpl(
+                        arguments = arrayOf("-index"),
+                        textInputStream = "Mary had a little lamb".byteInputStream(),
+                        writer = askForInputStreamWriter,
+                    ),
+                    stopWordsReader = ClasspathStopWordsReader(),
+                    resultWriter = StreamResultWriter(
+                        writer = resultStreamWriter
+                    ),
+                )
+
+                // When
+                counter.run()
+            }
+        }
+
+        // Then
+        Assertions.assertEquals("Enter text: ", askForInputStream.toString())
+        Assertions.assertEquals("Number of words: 4, unique: 4; average word length: 4.25 characters\n", resultStream.toString())
+    }
+
+    @Test
+    fun `count words from provided file with index flag`() {
+        // Given
+        val askForInputStream = ByteArrayOutputStream(1024)
+        val resultStream = ByteArrayOutputStream(1024)
+
+        val testInputFile = Files.createTempFile("testInputFile", "txt")
+        testInputFile.writeText(
+            """
+            Mary had
+            a little
+            lamb
+        """.trimIndent()
+        )
+
+        askForInputStream.bufferedWriter().use { askForInputStreamWriter ->
+            resultStream.bufferedWriter().use { resultStreamWriter ->
+                val counter = Application(
+                    inputTextReader = InputTextReaderImpl(
+                        arguments = arrayOf(testInputFile.absolutePathString(), "-index"),
+                        textInputStream = "Mary had a little lamb".byteInputStream(),
+                        writer = askForInputStreamWriter
+                    ),
+                    stopWordsReader = ClasspathStopWordsReader(),
+                    resultWriter = StreamResultWriter(
+                        writer = resultStreamWriter
+                    ),
+                )
+                // When
+                counter.run()
+            }
+        }
+
+        // Then
+        Assertions.assertEquals("", askForInputStream.toString())
+        Assertions.assertEquals("Number of words: 4, unique: 4; average word length: 4.25 characters\n", resultStream.toString())
+        testInputFile.deleteIfExists()
+    }
 }

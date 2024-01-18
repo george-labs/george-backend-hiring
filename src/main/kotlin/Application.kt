@@ -24,11 +24,14 @@ class Application(
     fun run() {
         // Input
         val stopWords = stopWordsReader.readStopWords()
-        val inputText = inputTextReader.readInput()
+        val readerResult = inputTextReader.readInput()
 
         // Processing
         val wordCounter = WordCounterImpl(stopWords)
-        val wordCountResult = wordCounter.countWordsInText(inputText)
+        val wordCountResult = wordCounter.countWordsInText(
+            text = readerResult.inputText,
+            indexFlag = readerResult.indexFlag
+        )
 
         // Output
         resultWriter.write(wordCountResult)

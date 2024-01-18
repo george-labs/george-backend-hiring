@@ -1,6 +1,5 @@
-
 interface WordCounter {
-    fun countWordsInText(text: String): Result
+    fun countWordsInText(text: String, indexFlag: Boolean = false): Result
 
     data class Result(
         val wordCount: Int,
@@ -11,11 +10,11 @@ interface WordCounter {
 
 class WordCounterImpl(
     private val stopWords: Set<String> = emptySet()
-): WordCounter {
+) : WordCounter {
 
     private val whitespaceRegex = "\\s".toRegex()
 
-    override fun countWordsInText(text: String): WordCounter.Result {
+    override fun countWordsInText(text: String, indexFlag: Boolean): WordCounter.Result {
         // As a future improvement, this reading could be done in a streaming manner, so that
         // we don't have to fit the whole file in memory.
         val words = text
