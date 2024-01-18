@@ -27,7 +27,7 @@ class Application(
         val inputText = inputTextReader.readInput()
 
         // Processing
-        val wordCounter = WordCounter(stopWords)
+        val wordCounter = WordCounterImpl(stopWords)
         val wordCountResult = wordCounter.countWordsInText(inputText)
 
         // Output

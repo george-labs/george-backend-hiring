@@ -1,10 +1,21 @@
-class WordCounter(
+
+interface WordCounter {
+    fun countWordsInText(text: String): Result
+
+    data class Result(
+        val wordCount: Int,
+        val uniqueWords: Int,
+        val averageWordLength: Double,
+    )
+}
+
+class WordCounterImpl(
     private val stopWords: Set<String> = emptySet()
-) {
+): WordCounter {
 
     private val whitespaceRegex = "\\s".toRegex()
 
-    fun countWordsInText(text: String): Result {
+    override fun countWordsInText(text: String): WordCounter.Result {
         // As a future improvement, this reading could be done in a streaming manner, so that
         // we don't have to fit the whole file in memory.
         val words = text
@@ -13,7 +24,7 @@ class WordCounter(
 
         val averageWordLength = getAverageWordLength(words)
 
-        return Result(
+        return WordCounter.Result(
             wordCount = words.size,
             uniqueWords = words.distinct().size,
             averageWordLength = averageWordLength
@@ -67,12 +78,6 @@ class WordCounter(
         val totalCharacters = words.sumOf { it.length.toLong() }
         return totalCharacters / words.size.toDouble()
     }
-
-    data class Result(
-        val wordCount: Int,
-        val uniqueWords: Int,
-        val averageWordLength: Double,
-    )
 
     private fun Char.isPunctuationMark() = when (this) {
         ',', '.', '?', '!' -> true

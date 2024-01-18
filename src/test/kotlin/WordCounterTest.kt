@@ -6,7 +6,7 @@ class WordCounterTest {
     @Test
     fun `count words in sentence`() {
         // Given
-        val counter = WordCounter()
+        val counter = WordCounterImpl()
 
         // When
         val result = counter.countWordsInText("Mary had a little lamb")
@@ -22,7 +22,7 @@ class WordCounterTest {
     @Test
     fun `count words with special characters`() {
         // Given
-        val counter = WordCounter()
+        val counter = WordCounterImpl()
 
         // When
         val result = counter.countWordsInText("  Ma23ry ha[]d wor.d ")
@@ -38,7 +38,7 @@ class WordCounterTest {
     @Test
     fun `count words with just whitespace`() {
         // Given
-        val counter = WordCounter()
+        val counter = WordCounterImpl()
 
         // When
         val result = counter.countWordsInText(" ")
@@ -54,7 +54,7 @@ class WordCounterTest {
     @Test
     fun `counting skips ignored words`() {
         // Given
-        val counter = WordCounter(
+        val counter = WordCounterImpl(
             stopWords = setOf("the", "a", "on", "off")
         )
 
@@ -72,7 +72,7 @@ class WordCounterTest {
     @Test
     fun `counts unique words only once`() {
         // Given
-        val counter = WordCounter()
+        val counter = WordCounterImpl()
 
         // When
         val result = counter.countWordsInText("foo foo bar foo bar")
@@ -88,7 +88,7 @@ class WordCounterTest {
     @Test
     fun `words with hyphen are counted`() {
         // Given
-        val counter = WordCounter()
+        val counter = WordCounterImpl()
 
         // When
         val result = counter.countWordsInText("foo-bar foo--bar fo-ob-ar")
@@ -104,7 +104,7 @@ class WordCounterTest {
     @Test
     fun wordsWithHyphenAtEdgeAreNotCounted() {
         // Given
-        val counter = WordCounter()
+        val counter = WordCounterImpl()
 
         // When
         val result = counter.countWordsInText("-foobar foobar-")
@@ -120,7 +120,7 @@ class WordCounterTest {
     @Test
     fun `complex sentence with hyphens is counted correctly`() {
         // Given
-        val counter = WordCounter(
+        val counter = WordCounterImpl(
             stopWords = setOf("the", "a", "on", "off")
         )
 
