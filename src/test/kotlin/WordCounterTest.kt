@@ -24,7 +24,7 @@ class WordCounterTest {
         val counter = WordCounter()
 
         // When
-        val result = counter.countWordsInText("  Ma23ry ha[]d word. ")
+        val result = counter.countWordsInText("  Ma23ry ha[]d wor.d ")
 
         // Then
         Assertions.assertEquals(WordCounter.Result(

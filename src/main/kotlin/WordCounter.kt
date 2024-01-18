@@ -38,10 +38,16 @@ class WordCounter(
                     }
                 }
 
+                c.isPunctuationMark() -> {
+                    // Punctuation marks at the end of the word are fine
+                    if (index != word.lastIndex) {
+                        return false
+                    }
+                }
+
                 // Words containing digits and special characters should not count as words
                 !c.isLetter() -> return false
             }
-            //
         }
 
         return true
@@ -51,4 +57,9 @@ class WordCounter(
         val wordCount: Int,
         val uniqueWords: Int,
     )
+
+    private fun Char.isPunctuationMark() = when(this) {
+        ',', '.', '?', '!' -> true
+        else -> false
+    }
 }
