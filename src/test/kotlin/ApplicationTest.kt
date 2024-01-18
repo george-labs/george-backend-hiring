@@ -21,6 +21,7 @@ class ApplicationTest {
         val outputStream = ByteArrayOutputStream(1024)
 
         val counter = Application(
+            arguments = emptyArray(),
             stopWordsFile = testStopWordsFile.toFile(),
             textInputStream = "Mary had a little lamb".byteInputStream(),
             resultOutputStream = outputStream,
