@@ -23,6 +23,8 @@ class InputTextReaderImpl(
         return when (arguments.size) {
             0 -> {
                 writer.write("Enter text: ")
+                // We need to flush in case the writer is buffered by lines, to make
+                // sure the text is printed out to the user.
                 writer.flush()
 
                 textInputStream.bufferedReader().use { it.readLine() }

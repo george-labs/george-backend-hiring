@@ -25,7 +25,10 @@ class ClasspathStopWordsReader : StopWordsReader {
             // This file should be bundled during build time, so we don't expect customers to ever see this.
             // The requirements state that if no stopwords.txt file is found, we should continue without it.
             // (This requirement should also be satisfied by us passing in empty stream)
-            System.err.println("Expected stopwords.txt file to be present and contain line delimited list of stop words.")
+            System.err.println(
+                "Expected stopwords.txt file to be present and contain line delimited list of stop words, " +
+                        "but no file was found. Please report this error to the developers"
+            )
             emptySet()
         }
     }

@@ -118,7 +118,7 @@ class WordCounterTest {
         )
 
         // When
-        val result = counter.countWordsInText("Humpty-Dumpty sat on a wall Humpty-Dumpty had a great fall")
+        val result = counter.countWordsInText("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.")
 
         // Then
         Assertions.assertEquals(WordCounter.Result(
