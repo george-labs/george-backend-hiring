@@ -14,7 +14,8 @@ class WordCounterTest {
         // Then
         Assertions.assertEquals(WordCounter.Result(
             wordCount = 5,
-            uniqueWords = 5
+            uniqueWords = 5,
+            averageWordLength = 3.6,
         ), result)
     }
 
@@ -29,7 +30,8 @@ class WordCounterTest {
         // Then
         Assertions.assertEquals(WordCounter.Result(
             wordCount = 0,
-            uniqueWords = 0
+            uniqueWords = 0,
+            averageWordLength = 0.0,
         ), result)
     }
 
@@ -44,7 +46,8 @@ class WordCounterTest {
         // Then
         Assertions.assertEquals(WordCounter.Result(
             wordCount = 0,
-            uniqueWords = 0
+            uniqueWords = 0,
+            averageWordLength = 0.0,
         ), result)
     }
 
@@ -61,7 +64,8 @@ class WordCounterTest {
         // Then
         Assertions.assertEquals(WordCounter.Result(
             wordCount = 1,
-            uniqueWords = 1
+            uniqueWords = 1,
+            averageWordLength = 4.0,
         ), result)
     }
 
@@ -76,7 +80,8 @@ class WordCounterTest {
         // Then
         Assertions.assertEquals(WordCounter.Result(
             wordCount = 5,
-            uniqueWords = 2
+            uniqueWords = 2,
+            averageWordLength = 3.0,
         ), result)
     }
 
@@ -91,7 +96,8 @@ class WordCounterTest {
         // Then
         Assertions.assertEquals(WordCounter.Result(
             wordCount = 3,
-            uniqueWords = 3
+            uniqueWords = 3,
+            averageWordLength = 7.666666666666667,
         ), result)
     }
 
@@ -106,7 +112,8 @@ class WordCounterTest {
         // Then
         Assertions.assertEquals(WordCounter.Result(
             wordCount = 0,
-            uniqueWords = 0
+            uniqueWords = 0,
+            averageWordLength = 0.0,
         ), result)
     }
 
@@ -123,7 +130,8 @@ class WordCounterTest {
         // Then
         Assertions.assertEquals(WordCounter.Result(
             wordCount = 7,
-            uniqueWords = 6
+            uniqueWords = 6,
+            averageWordLength = 6.714285714285714,
         ), result)
     }
 }

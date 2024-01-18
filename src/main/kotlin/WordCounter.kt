@@ -11,9 +11,14 @@ class WordCounter(
             .split(whitespaceRegex)
             .filter { isWord(it) }
 
+        val totalCharacters = words.sumOf { it.length }
+        val averageWordLength = totalCharacters / words.size.toDouble()
+
         return Result(
             wordCount = words.size,
-            uniqueWords = words.distinct().size
+            uniqueWords = words.distinct().size,
+            // If there are no words, we do a division by 0 and therefore get NaN as a result
+            averageWordLength = if (words.isEmpty()) 0.0 else averageWordLength
         )
     }
 
@@ -56,6 +61,7 @@ class WordCounter(
     data class Result(
         val wordCount: Int,
         val uniqueWords: Int,
+        val averageWordLength: Double,
     )
 
     private fun Char.isPunctuationMark() = when(this) {

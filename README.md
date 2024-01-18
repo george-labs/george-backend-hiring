@@ -8,12 +8,12 @@ If no input file is provided, text is read from input stream:
 ```bash
 $ wordcount
 Enter text: Mary had a little lamb
-Number of words: 4, unique: 4
+Number of words: 4, unique: 4; average word length: 5.63 characters
 $
 ```
 
 Filename can be provided as a first argument to read input text from:
 ```bash
 $ wordcount mytext.txt
-Number of words: 4, unique: 4
+Number of words: 4, unique: 4; average word length: 5.63 characters
 ```
