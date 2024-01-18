@@ -5,6 +5,8 @@ class WordCounter(
     private val whitespaceRegex = "\\s".toRegex()
 
     fun countWordsInText(text: String): Result {
+        // As a future improvement, this reading could be done in a streaming manner, so that
+        // we don't have to fit the whole file in memory.
         val words = text
             .split(whitespaceRegex)
             .filter { word ->

@@ -11,51 +11,69 @@ class ApplicationTest {
     @Test
     fun countWordsInSentence() {
         // Given
-        val outputStream = ByteArrayOutputStream(1024)
+        val askForInputStream = ByteArrayOutputStream(1024)
+        val resultStream = ByteArrayOutputStream(1024)
 
-        val counter = Application(
-            inputTextReader = InputTextReaderImpl(
-                arguments = emptyArray(),
-                textInputStream = "Mary had a little lamb".byteInputStream()
-            ),
-            stopWordsReader = ClasspathStopWordsReader(),
-            resultOutputStream = outputStream,
-        )
+        askForInputStream.bufferedWriter().use { askForInputStreamWriter ->
+            resultStream.bufferedWriter().use { resultStreamWriter ->
+                val counter = Application(
+                    inputTextReader = InputTextReaderImpl(
+                        arguments = emptyArray(),
+                        textInputStream = "Mary had a little lamb".byteInputStream(),
+                        writer = askForInputStreamWriter,
+                    ),
+                    stopWordsReader = ClasspathStopWordsReader(),
+                    resultWriter = StreamResultWriter(
+                        writer = resultStreamWriter
+                    ),
+                )
 
-        // When
-        counter.run()
-
+                // When
+                counter.run()
+            }
+        }
 
         // Then
-        Assertions.assertEquals("Enter text: Number of words: 4, unique: 4\n", outputStream.toString())
+        Assertions.assertEquals("Enter text: ", askForInputStream.toString())
+        Assertions.assertEquals("Number of words: 4, unique: 4\n", resultStream.toString())
     }
 
     @Test
     fun countWordsFromProvidedFile() {
         // Given
+        val askForInputStream = ByteArrayOutputStream(1024)
+        val resultStream = ByteArrayOutputStream(1024)
+
         val testInputFile = Files.createTempFile("testInputFile", "txt")
-        testInputFile.writeText("""
+        testInputFile.writeText(
+            """
             Mary had
             a little
             lamb
-        """.trimIndent())
-
-        val outputStream = ByteArrayOutputStream(1024)
-
-        val counter = Application(
-            inputTextReader = InputTextReaderImpl(
-                arguments = arrayOf(testInputFile.absolutePathString()),
-                textInputStream = "Mary had a little lamb".byteInputStream(),
-            ),
-            stopWordsReader = ClasspathStopWordsReader(),
-            resultOutputStream = outputStream,
+        """.trimIndent()
         )
 
-        // When
-        counter.run()
+        askForInputStream.bufferedWriter().use { askForInputStreamWriter ->
+            resultStream.bufferedWriter().use { resultStreamWriter ->
+                val counter = Application(
+                    inputTextReader = InputTextReaderImpl(
+                        arguments = arrayOf(testInputFile.absolutePathString()),
+                        textInputStream = "Mary had a little lamb".byteInputStream(),
+                        writer = askForInputStreamWriter
+                    ),
+                    stopWordsReader = ClasspathStopWordsReader(),
+                    resultWriter = StreamResultWriter(
+                        writer = resultStreamWriter
+                    ),
+                )
+                // When
+                counter.run()
+            }
+        }
 
         // Then
-        Assertions.assertEquals("Number of words: 4, unique: 4\n", outputStream.toString())
+        Assertions.assertEquals("", askForInputStream.toString())
+        Assertions.assertEquals("Number of words: 4, unique: 4\n", resultStream.toString())
         testInputFile.deleteIfExists()
     }
 

@@ -1,22 +1,25 @@
-import java.io.BufferedWriter
 import java.io.File
 import java.io.InputStream
+import java.io.Writer
 
 interface InputTextReader {
 
-    /**
-     * @param writer Used to ask user for input if none is provided.
-     * @return Read input text from file or stdin.
-     */
-    fun readInput(writer: BufferedWriter): String
+    fun readInput(): String
 }
 
+/**
+ * @param arguments Command line arguments that specify how the input should be read
+ * @param textInputStream Input stream to read input if no file is specified in the arguments
+ * @param writer Used to ask user for input if none is provided.
+ * @return Read input text from file or stdin.
+ */
 class InputTextReaderImpl(
     private val arguments: Array<String>,
-    private val textInputStream: InputStream
+    private val textInputStream: InputStream,
+    private val writer: Writer,
 ): InputTextReader {
 
-    override fun readInput(writer: BufferedWriter): String {
+    override fun readInput(): String {
         return when (arguments.size) {
             0 -> {
                 writer.write("Enter text: ")

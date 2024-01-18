@@ -1,33 +1,37 @@
-import java.io.OutputStream
 
 fun main(args: Array<String>) {
-    Application(
-        inputTextReader = InputTextReaderImpl(
-            arguments = args,
-            textInputStream = System.`in`,
-        ),
-        stopWordsReader = ClasspathStopWordsReader(),
-        resultOutputStream = System.out
-    ).run()
+    System.out.bufferedWriter().use { outputWriter ->
+        Application(
+            inputTextReader = InputTextReaderImpl(
+                arguments = args,
+                textInputStream = System.`in`,
+                writer = outputWriter
+            ),
+            stopWordsReader = ClasspathStopWordsReader(),
+            resultWriter = StreamResultWriter(
+                writer = outputWriter
+            )
+        ).run()
+    }
 }
 
 class Application(
     private val inputTextReader: InputTextReader,
     private val stopWordsReader: StopWordsReader,
-    private val resultOutputStream: OutputStream,
+    private val resultWriter: ResultWriter,
 ) {
 
     fun run() {
+        // Input
         val stopWords = stopWordsReader.readStopWords()
-        val wordCounter = WordCounter(
-            stopWords = stopWords
-        )
+        val inputText = inputTextReader.readInput()
 
-        resultOutputStream.bufferedWriter().use { writer ->
-            val inputText = inputTextReader.readInput(writer)
-            val wordCountResult = wordCounter.countWordsInText(inputText)
-            writer.write("Number of words: ${wordCountResult.wordCount}, unique: ${wordCountResult.uniqueWords}\n")
-        }
+        // Processing
+        val wordCounter = WordCounter(stopWords)
+        val wordCountResult = wordCounter.countWordsInText(inputText)
+
+        // Output
+        resultWriter.write(wordCountResult)
     }
 
 }
