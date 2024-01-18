@@ -35,7 +35,10 @@ class ApplicationTest {
 
         // Then
         Assertions.assertEquals("Enter text: ", askForInputStream.toString())
-        Assertions.assertEquals("Number of words: 4, unique: 4; average word length: 4.25 characters\n", resultStream.toString())
+        Assertions.assertEquals(
+            "Number of words: 4, unique: 4; average word length: 4.25 characters\n",
+            resultStream.toString()
+        )
     }
 
     @Test
@@ -73,7 +76,10 @@ class ApplicationTest {
 
         // Then
         Assertions.assertEquals("", askForInputStream.toString())
-        Assertions.assertEquals("Number of words: 4, unique: 4; average word length: 4.25 characters\n", resultStream.toString())
+        Assertions.assertEquals(
+            "Number of words: 4, unique: 4; average word length: 4.25 characters\n",
+            resultStream.toString()
+        )
         testInputFile.deleteIfExists()
     }
 
@@ -104,7 +110,15 @@ class ApplicationTest {
 
         // Then
         Assertions.assertEquals("Enter text: ", askForInputStream.toString())
-        Assertions.assertEquals("Number of words: 4, unique: 4; average word length: 4.25 characters\n", resultStream.toString())
+        Assertions.assertEquals(
+            "Number of words: 4, unique: 4; average word length: 4.25 characters\n" +
+                    "Index:\n" +
+                    "Mary\n" +
+                    "had\n" +
+                    "lamb\n" +
+                    "little\n",
+            resultStream.toString()
+        )
     }
 
     @Test
@@ -142,7 +156,14 @@ class ApplicationTest {
 
         // Then
         Assertions.assertEquals("", askForInputStream.toString())
-        Assertions.assertEquals("Number of words: 4, unique: 4; average word length: 4.25 characters\n", resultStream.toString())
+        Assertions.assertEquals(
+            "Number of words: 4, unique: 4; average word length: 4.25 characters\n" +
+                    "Index:\n" +
+                    "Mary\n" +
+                    "had\n" +
+                    "lamb\n" +
+                    "little\n", resultStream.toString()
+        )
         testInputFile.deleteIfExists()
     }
 }

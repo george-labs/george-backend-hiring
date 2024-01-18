@@ -1,10 +1,15 @@
 interface WordCounter {
-    fun countWordsInText(text: String, indexFlag: Boolean = false): Result
+    fun countWordsInText(text: String, buildIndex: Boolean = false): Result
 
     data class Result(
         val wordCount: Int,
         val uniqueWords: Int,
         val averageWordLength: Double,
+        /**
+         * Alphabetically sorted list of words in the index.
+         * If the index flag is not provided, this will be `null`.
+         */
+        val index: List<String>? = null,
     )
 }
 
@@ -14,21 +19,31 @@ class WordCounterImpl(
 
     private val whitespaceRegex = "\\s".toRegex()
 
-    override fun countWordsInText(text: String, indexFlag: Boolean): WordCounter.Result {
+    override fun countWordsInText(text: String, buildIndex: Boolean): WordCounter.Result {
         // As a future improvement, this reading could be done in a streaming manner, so that
         // we don't have to fit the whole file in memory.
-        val words = text
-            .split(whitespaceRegex)
-            .filter { isWord(it) }
+        val words = findWords(text)
 
         val averageWordLength = getAverageWordLength(words)
+        val uniqueWords = words.distinct()
+        val index = if (buildIndex) {
+            uniqueWords.sortedBy { it.lowercase() }
+        } else null
 
         return WordCounter.Result(
             wordCount = words.size,
-            uniqueWords = words.distinct().size,
-            averageWordLength = averageWordLength
+            uniqueWords = uniqueWords.size,
+            averageWordLength = averageWordLength,
+            index = index
         )
     }
+
+    private fun findWords(text: String) = text
+        .split(whitespaceRegex)
+        .filter { isWord(it) }
+        // We want to strip punctuation from the end of words
+        // So that 'fall.' gets simplified to  'fall'
+        .map { word -> word.trimEnd { it.isPunctuationMark() } }
 
     private fun isWord(word: String): Boolean {
         if (stopWords.contains(word)) {

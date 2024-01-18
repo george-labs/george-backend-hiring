@@ -59,5 +59,4 @@ class InputTextReaderImpl(
             else -> throw IllegalArgumentException("Expected at most 1 positional (non-flag) argument (path to file to count words from).")
         }
     }
-
 }

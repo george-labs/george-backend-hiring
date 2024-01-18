@@ -23,6 +23,16 @@ class StreamResultWriter(
         writer.write(", unique: ${result.uniqueWords}")
         writer.write("; average word length: ${decimalFormat.format(result.averageWordLength)} characters")
         writer.write("\n")
+
+        result.index?.let { indexWords ->
+            writer.write("Index:\n")
+
+            indexWords.forEach { word ->
+                writer.write(word)
+                writer.write("\n")
+            }
+        }
+
         writer.flush()
     }
 }

@@ -30,7 +30,7 @@ class Application(
         val wordCounter = WordCounterImpl(stopWords)
         val wordCountResult = wordCounter.countWordsInText(
             text = readerResult.inputText,
-            indexFlag = readerResult.indexFlag
+            buildIndex = readerResult.indexFlag
         )
 
         // Output

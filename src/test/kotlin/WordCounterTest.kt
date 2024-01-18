@@ -131,7 +131,36 @@ class WordCounterTest {
         Assertions.assertEquals(WordCounter.Result(
             wordCount = 7,
             uniqueWords = 6,
-            averageWordLength = 6.714285714285714,
+            averageWordLength = 6.428571428571429,
+        ), result)
+    }
+
+    @Test
+    fun `builds index when flag is provided`() {
+        // Given
+        val counter = WordCounterImpl(
+            stopWords = setOf("the", "a", "on", "off")
+        )
+
+        // When
+        val result = counter.countWordsInText(
+            text = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.",
+            buildIndex = true
+        )
+
+        // Then
+        Assertions.assertEquals(WordCounter.Result(
+            wordCount = 7,
+            uniqueWords = 6,
+            averageWordLength = 6.428571428571429,
+            index = listOf(
+                "Humpty-Dumpty",
+                "fall",
+                "great",
+                "had",
+                "sat",
+                "wall"
+            )
         ), result)
     }
 }
