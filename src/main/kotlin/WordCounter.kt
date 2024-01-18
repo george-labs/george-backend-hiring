@@ -5,7 +5,7 @@ class WordCounter(
 
     private val wordRegex = "([a-zA-Z]+)".toRegex()
 
-    fun countWordsInText(text: String): Int {
+    fun countWordsInInput(text: String): Int {
         return wordRegex
             .findAll(text)
             .filter { !stopWords.contains(it.value) }
