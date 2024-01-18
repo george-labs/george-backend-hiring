@@ -5,30 +5,23 @@ import java.io.InputStream
 import java.io.OutputStream
 
 fun main(args: Array<String>) {
-    // We need to load the file as stream, because when using certain bundling methods (e.g., .jar)
-    // files from resources cannot be treated as normal file system files and need to be read
-    // using streams.
-    Application::class.java.classLoader.getResourceAsStream("stopwords.txt").use { stopWordsStream ->
-        Application(
-            arguments = args,
-            // As part of the requirements, if the stopwords file is not present for some reason
-            // (even though it should be bundled with application), we should ignore it.
-            stopWordsStream = stopWordsStream ?: InputStream.nullInputStream(),
-            textInputStream = System.`in`,
-            resultOutputStream = System.out
-        ).run()
-    }
+    Application(
+        arguments = args,
+        stopWordsReader = StopWordsReaderImpl(),
+        textInputStream = System.`in`,
+        resultOutputStream = System.out
+    ).run()
 }
 
 class Application(
     private val arguments: Array<String>,
-    private val stopWordsStream: InputStream,
+    private val stopWordsReader: StopWordsReader,
     private val textInputStream: InputStream,
     private val resultOutputStream: OutputStream,
 ) {
 
     fun run() {
-        val stopWords = readStopWords()
+        val stopWords = stopWordsReader.readStopWords()
 
         resultOutputStream.bufferedWriter().use { writer ->
             val inputText = readInput(writer)
@@ -38,14 +31,6 @@ class Application(
             ).countWordsInInput(inputText)
 
             writer.write("Number of words: $wordCount\n")
-        }
-    }
-
-    private fun readStopWords(): Set<String> {
-        return try {
-            stopWordsStream.bufferedReader().readLines().toSet()
-        } catch (e: FileNotFoundException) {
-            throw RuntimeException("Expected stopwords.txt file to be present and contain line delimited list of stop words.")
         }
     }
 
