@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test
 class WordCounterTest {
 
     @Test
-    fun countWordsInSentence() {
+    fun `count words in sentence`() {
         // Given
         val counter = WordCounter()
 
@@ -19,7 +19,7 @@ class WordCounterTest {
     }
 
     @Test
-    fun countWordsWithSpecialCharacters() {
+    fun `count words with special characters`() {
         // Given
         val counter = WordCounter()
 
@@ -34,7 +34,7 @@ class WordCounterTest {
     }
 
     @Test
-    fun countWordsWithJustWhitespace() {
+    fun `count words with just whitespace`() {
         // Given
         val counter = WordCounter()
 
@@ -49,7 +49,7 @@ class WordCounterTest {
     }
 
     @Test
-    fun countingSkipsIgnoredWords() {
+    fun `counting skips ignored words`() {
         // Given
         val counter = WordCounter(
             stopWords = setOf("the", "a", "on", "off")
@@ -66,7 +66,7 @@ class WordCounterTest {
     }
 
     @Test
-    fun countsUniqueWordsOnlyOnce() {
+    fun `counts unique words only once`() {
         // Given
         val counter = WordCounter()
 
@@ -81,7 +81,7 @@ class WordCounterTest {
     }
 
     @Test
-    fun wordsWithHyphenAreCounted() {
+    fun `words with hyphen are counted`() {
         // Given
         val counter = WordCounter()
 
@@ -107,6 +107,23 @@ class WordCounterTest {
         Assertions.assertEquals(WordCounter.Result(
             wordCount = 0,
             uniqueWords = 0
+        ), result)
+    }
+
+    @Test
+    fun `complex sentence with hyphens is counted correctly`() {
+        // Given
+        val counter = WordCounter(
+            stopWords = setOf("the", "a", "on", "off")
+        )
+
+        // When
+        val result = counter.countWordsInText("Humpty-Dumpty sat on a wall Humpty-Dumpty had a great fall")
+
+        // Then
+        Assertions.assertEquals(WordCounter.Result(
+            wordCount = 7,
+            uniqueWords = 6
         ), result)
     }
 }

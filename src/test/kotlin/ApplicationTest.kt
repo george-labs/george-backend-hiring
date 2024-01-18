@@ -9,7 +9,7 @@ import kotlin.io.path.writeText
 class ApplicationTest {
 
     @Test
-    fun countWordsInSentence() {
+    fun `count words in sentence`() {
         // Given
         val askForInputStream = ByteArrayOutputStream(1024)
         val resultStream = ByteArrayOutputStream(1024)
@@ -39,7 +39,7 @@ class ApplicationTest {
     }
 
     @Test
-    fun countWordsFromProvidedFile() {
+    fun `count words from provided file`() {
         // Given
         val askForInputStream = ByteArrayOutputStream(1024)
         val resultStream = ByteArrayOutputStream(1024)
