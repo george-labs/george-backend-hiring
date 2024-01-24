@@ -1,6 +1,9 @@
 package processors;
 
+import rules.IRule;
+
 public class WordCounterEngine {
+    private IRule rules;
     public int wordCounter(String[] words) {
         int numberOfWords = 0;
         for (String word : words

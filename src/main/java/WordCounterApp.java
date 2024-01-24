@@ -1,23 +1,18 @@
 import processors.WordCounterEngine;
 import processors.WordCounterManager;
-import providers.ConsolePrinter;
-import providers.ICustomPrinter;
-import providers.WordsPrinter;
-
-import java.util.Scanner;
+import providers.*;
 
 public class WordCounterApp {
 
     public static void main(String[] args) {
         ICustomPrinter customPrinter = new ConsolePrinter();
+        IDataProvider dataProvider = new ConsoleInputDataProvider();
+
         WordsPrinter printer = new WordsPrinter(customPrinter);
         printer.enterText();
+        String sentence = dataProvider.getData();
 
-        //FIXME: I would use here better OOD solution
-        Scanner in = new Scanner(System.in);
-        String sentence = in.nextLine();
-
-        WordCounterManager manager = new WordCounterManager(new WordCounterEngine(), printer);
+        WordCounterManager manager = new WordCounterManager(new WordCounterEngine());
         int numberOfWords = manager.process(sentence);
 
         printer.result(numberOfWords);

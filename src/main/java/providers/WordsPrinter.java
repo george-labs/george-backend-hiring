@@ -7,12 +7,11 @@ public class WordsPrinter implements IWordsPrinter {
         this.customPrinter = customPrinter;
     }
 
-
-    public void enterText(){
+    public void enterText() {
         customPrinter.print("Enter text: ");
     }
 
-    public void result(int numberOfWords){
+    public void result(int numberOfWords) {
         customPrinter.print("Number of words: " + numberOfWords);
     }
 }
