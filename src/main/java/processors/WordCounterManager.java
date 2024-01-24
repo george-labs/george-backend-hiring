@@ -1,3 +1,8 @@
+package processors;
+
+import processors.WordCounterEngine;
+import providers.WordsPrinter;
+
 public class WordCounterManager {
     private final WordCounterEngine wordCounterUtility;
     private final WordsPrinter printer;
@@ -7,9 +12,10 @@ public class WordCounterManager {
         this.printer = printer;
     }
 
-    public void process(String sentence){
+    public int process(String sentence){
         String[] words = wordCounterUtility.senteceSplitter(sentence, " ");
         int numberOfWords = wordCounterUtility.wordCounter(words);
+        return numberOfWords;
 
     }
 }

@@ -1,3 +1,5 @@
+package processors;
+
 public class WordCounterEngine {
     public int wordCounter(String[] words) {
         int numberOfWords = 0;
