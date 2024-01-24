@@ -2,14 +2,21 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import processors.WordCounterEngine;
+import rules.IRule;
+import rules.OnlyLetterRule;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class FirstSessionTest {
     private WordCounterEngine wordCounterEngine;
     @BeforeEach
     public void init(){
+        List<IRule> rules  = new ArrayList<>();
+        IRule onlyLetterRule = new OnlyLetterRule();
+        rules.add(onlyLetterRule);
         wordCounterEngine = new WordCounterEngine(rules);
     }
     @Test

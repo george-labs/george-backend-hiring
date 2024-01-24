@@ -11,7 +11,7 @@ public class StopWordsRule implements IRule{
 
     @Override
     public boolean isValid(String word) {
-        if(!stopWords.contains(word.toLowerCase())){
+        if(stopWords.contains(word.toLowerCase())){
             return false;
         }
         return true;
