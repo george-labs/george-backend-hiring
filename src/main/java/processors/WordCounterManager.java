@@ -4,7 +4,6 @@ import utils.Constants;
 
 public class WordCounterManager {
     private final WordCounterEngine wordCounterEngine;
-    ;
 
     public WordCounterManager(WordCounterEngine wordCounterEngine) {
         this.wordCounterEngine = wordCounterEngine;

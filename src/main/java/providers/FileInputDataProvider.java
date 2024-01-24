@@ -19,7 +19,7 @@ public class FileInputDataProvider implements IDataProvider {
 
         StringBuilder sb = new StringBuilder();
 
-        while(reader.ready()) {
+        while (reader.ready()) {
             String line = reader.readLine();
             sb.append(line + Constants.REGEX);
         }

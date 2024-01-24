@@ -24,8 +24,8 @@ public class WordCounterEngine {
     }
 
     private boolean isValidWord(String word) {
-        for (IRule rule: rules) {
-            if(!rule.isValid(word)){
+        for (IRule rule : rules) {
+            if (!rule.isValid(word)) {
                 return false;
             }
         }
