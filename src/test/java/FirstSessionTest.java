@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 
 public class FirstSessionTest {
     @Test
@@ -15,6 +17,14 @@ public class FirstSessionTest {
         String[] word0 = {"word."};
         Assertions.assertEquals(0, WordCounterUtility.wordCounter(word0));
 
+    }
 
+    @Test
+    public void wordSplitter(){
+        String[] word2 = {"word", "word"};
+        Assertions.assertEquals(0, Arrays.compare(word2, WordCounterUtility.senteceSplitter("word word", " ")));
+
+        String[] word = {"word", "word."};
+        Assertions.assertEquals(1, Arrays.compare(word, WordCounterUtility.senteceSplitter("word word", " ")));
     }
 }
