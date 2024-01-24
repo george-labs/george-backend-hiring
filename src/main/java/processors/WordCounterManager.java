@@ -11,7 +11,6 @@ public class WordCounterManager {
 
     public int process(String sentence) {
         String[] words = wordCounterEngine.senteceSplitter(sentence, Constants.REGEX);
-        int numberOfWords = wordCounterEngine.wordCounter(words);
-        return numberOfWords;
+        return wordCounterEngine.wordCounter(words);
     }
 }
