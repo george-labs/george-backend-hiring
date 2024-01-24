@@ -2,18 +2,34 @@ package processors;
 
 import rules.IRule;
 
+import java.util.List;
+
 public class WordCounterEngine {
-    private IRule rules;
+    private final List<IRule> rules;
+
+    public WordCounterEngine(List<IRule> rules) {
+        this.rules = rules;
+    }
+
     public int wordCounter(String[] words) {
         int numberOfWords = 0;
+
         for (String word : words
         ) {
-            if (word.matches("[a-zA-Z]+")) {
+            if (isValidWord(word)) {
                 numberOfWords++;
-
             }
         }
         return numberOfWords;
+    }
+
+    private boolean isValidWord(String word) {
+        for (IRule rule: rules) {
+            if(!rule.isValid(word)){
+                return false;
+            }
+        }
+        return true;
     }
 
     public String[] senteceSplitter(String sentence, String regex) {

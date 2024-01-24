@@ -10,7 +10,7 @@ public class FirstSessionTest {
     private WordCounterEngine wordCounterEngine;
     @BeforeEach
     public void init(){
-        wordCounterEngine = new WordCounterEngine();
+        wordCounterEngine = new WordCounterEngine(rules);
     }
     @Test
     public void wordCounter(){

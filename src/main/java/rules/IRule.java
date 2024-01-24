@@ -1,5 +1,5 @@
 package rules;
 
 public interface IRule {
-    boolean process(String word);
+    boolean isValid(String word);
 }
