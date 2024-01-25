@@ -1,3 +1,5 @@
+package io.eras.supplier;
+
 import java.util.Scanner;
 
 public class SystemInputSupplier implements InputSupplier {

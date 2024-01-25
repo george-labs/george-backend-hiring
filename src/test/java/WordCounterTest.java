@@ -1,3 +1,4 @@
+import io.eras.util.WordCounter;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

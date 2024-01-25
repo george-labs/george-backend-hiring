@@ -1,22 +1,29 @@
+package io.eras;
+
+import io.eras.parser.ClassPathInputFileParser;
+import io.eras.parser.InputFileParser;
+import io.eras.parser.InputParser;
+import io.eras.supplier.InputSupplier;
+import io.eras.supplier.SystemInputSupplier;
+import io.eras.util.WordCounter;
+
 import java.util.List;
-import java.util.Set;
 
 public class JavaApplication {
 
     List<String> stopWords;
 
     public static void main(String[] args) {
-        InputParser stopWordParser = new InputFileParser("C:\\Users\\eros\\github\\george\\george-backend-hiring\\src\\main\\resources\\stopwords.txt");
+        InputParser stopWordParser = new ClassPathInputFileParser("stopwords.txt");
 
         JavaApplication javaApplication = new JavaApplication();
         javaApplication.stopWords = stopWordParser.parse();
 
         WordCounter wordCounter = new WordCounter(javaApplication.stopWords);
 
-        String filename;
-        if(args.length == 1) {
-            filename = args[0];
-            InputParser inputParser = new InputFileParser("C:\\Users\\eros\\github\\george\\george-backend-hiring\\src\\main\\resources\\mytext.txt");
+        if (args.length == 1) {
+            String filename = args[0];
+            InputParser inputParser = new InputFileParser(filename);
 
             System.out.println("Number of Words:" + wordCounter.countWords(inputParser.parse()));
         } else {

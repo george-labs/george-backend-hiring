@@ -1,10 +1,11 @@
+import io.eras.parser.InputFileParser;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class StopWordFileParserTest {
+class InputFileParserTest {
 
     private static final List<String> stopWords = List.of("the", "a", "on", "off");
     private InputFileParser stopWordFileParser = new InputFileParser("src/test/resources/stopwords.txt");
