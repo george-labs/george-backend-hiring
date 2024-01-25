@@ -32,7 +32,7 @@ public class JavaApplication {
             InputSupplier inputSupplier = new SystemInputSupplier();
             InputParser inputParser = new SystemInParser(wordCounter, inputSupplier);
 
-            System.out.println("Number of Words:" + wordCounter.countWords(inputSupplier.read()));
+            System.out.println("Number of Words:" + inputParser.parse());
         }
 
 
