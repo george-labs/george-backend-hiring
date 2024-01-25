@@ -1,16 +1,31 @@
+import java.util.List;
 import java.util.Set;
 
 public class JavaApplication {
 
-    Set<String> stopWords;
+    List<String> stopWords;
 
     public static void main(String[] args) {
-        StopWordParser stopWordParser = new StopWordFileParser("../resources/stopwords.txt");
-        InputSupplier inputSupplier = new SystemInputSupplier();
+        InputParser stopWordParser = new InputFileParser("C:\\Users\\eros\\github\\george\\george-backend-hiring\\src\\main\\resources\\stopwords.txt");
 
         JavaApplication javaApplication = new JavaApplication();
-        javaApplication.stopWords = stopWordParser.parseStopWords();
+        javaApplication.stopWords = stopWordParser.parse();
+
         WordCounter wordCounter = new WordCounter(javaApplication.stopWords);
-        System.out.println("Number of Words:" + wordCounter.countWords(inputSupplier.read()));
+
+        String filename;
+        if(args.length == 1) {
+            filename = args[0];
+            InputParser inputParser = new InputFileParser("C:\\Users\\eros\\github\\george\\george-backend-hiring\\src\\main\\resources\\mytext.txt");
+
+            System.out.println("Number of Words:" + wordCounter.countWords(inputParser.parse()));
+        } else {
+            System.out.println("Enter text: ");
+            InputSupplier inputSupplier = new SystemInputSupplier();
+
+            System.out.println("Number of Words:" + wordCounter.countWords(inputSupplier.read()));
+        }
+
+
     }
 }

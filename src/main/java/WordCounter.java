@@ -1,12 +1,13 @@
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
 public class WordCounter {
 
-    private Set<String> stopWords;
+    private List<String> stopWords;
 
-    public WordCounter(Set<String> stopWords) {
+    public WordCounter(List<String> stopWords) {
         this.stopWords = stopWords;
     }
 
@@ -16,11 +17,18 @@ public class WordCounter {
         if (in == null || in.isEmpty()) {
             return 0;
         }
-        String[] split = in.split(" ");
+        String[] split = in.split("\\s+");
 
         return Arrays.stream(split)
                 .filter(s -> !stopWords.contains(s) && PATTERN.matcher(s).matches())
                 .count();
+    }
+
+    public long countWords(List<String> lines) {
+        return lines
+                .stream()
+                .map(this::countWords)
+                .reduce(0L, Long::sum);
     }
 
 }

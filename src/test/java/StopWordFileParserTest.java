@@ -1,21 +1,21 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StopWordFileParserTest {
 
-    private static final Set<String> stopWords = Set.of("a", "the", "on", "off");
-    private StopWordFileParser stopWordFileParser = new StopWordFileParser("src/test/resources/stopwords.txt");
+    private static final List<String> stopWords = List.of("the", "a", "on", "off");
+    private InputFileParser stopWordFileParser = new InputFileParser("src/test/resources/stopwords.txt");
 
     @Test
     public void testParseStopWordsSize() {
-        assertEquals(4, stopWordFileParser.parseStopWords().size());
+        assertEquals(4, stopWordFileParser.parse().size());
     }
 
     @Test
     public void testParseStopWords() {
-        assertEquals(stopWords, stopWordFileParser.parseStopWords());
+        assertEquals(stopWords, stopWordFileParser.parse());
     }
 }
