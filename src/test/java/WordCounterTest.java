@@ -2,12 +2,13 @@ import io.eras.util.WordCounter;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WordCounterTest {
 
-    private static final List<String> stopWords = List.of("a", "the", "on", "off");
+    private static final Set<String> stopWords = Set.of("a", "the", "on", "off");
     private WordCounter wordCounter = new WordCounter(stopWords);
 
     @Test

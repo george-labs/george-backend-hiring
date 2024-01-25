@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ClassPathInputFileParser implements InputParser {
+public class ClassPathInputFileParser {
 
     private String filename;
 
@@ -16,11 +16,10 @@ public class ClassPathInputFileParser implements InputParser {
         this.filename = filename;
     }
 
-    @Override
-    public List<String> parse() {
+    public Set<String> parse() {
         try (Stream<String> lines = Files.lines(Path.of(ClassLoader.getSystemResource(this.filename).toURI()))) {
             return lines
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toSet());
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
