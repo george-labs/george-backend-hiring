@@ -123,14 +123,14 @@ public class JavaApplicationTest {
     @Test
     void countWordAndUniqueWordHyphenAsWordFromFile() throws IOException {
         var input = this.getClass().getClassLoader().getResource("countUnique.text").getPath();
-        var expected = List.of(7, 7);
+        var expected = List.of(7, 6);
         Assertions.assertEquals(expected, javaApplication.countWordsFromFileHyphenAsWord(input));
     }
 
     @Test
     void countWordAndUniqueWordHyphenAsWordFromInput() throws IOException {
         var input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
-        var expected = List.of(7, 7);
+        var expected = List.of(7, 6);
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         Assertions.assertEquals(expected, javaApplication.countWordsFromFileHyphenAsWord(null));

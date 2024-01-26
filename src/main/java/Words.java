@@ -21,8 +21,12 @@ public class Words {
     }
 
     @NotNull
-    public String normalizeTextWithHyphen(String input) {
+    public String normalizeTextWithHyphenAsSeparator(String input) {
         return input.replaceAll("-", " ");
+    }
+    @NotNull
+    public String normalizeTextWithHyphenAsWord(String input) {
+        return input.replaceAll("-", "");
     }
 
     public List<String> getWordsExceptStopWords(List<String> words) {
@@ -38,7 +42,7 @@ public class Words {
     }
 
     public List<String> getWordsWithDash(String input) {
-        return Arrays.stream(new Words().normalizeTextWithHyphen(input).split(" "))
+        return Arrays.stream(new Words().normalizeTextWithHyphenAsSeparator(input).split(" "))
                 .filter(s -> doesMatchRegex(s))
                 .collect(Collectors.toList());
     }

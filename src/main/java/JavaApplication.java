@@ -27,7 +27,6 @@ public class JavaApplication {
 
     public long countWordsFromFile(String path) throws IOException {
 
-        var workCounter = new WordsCounter();
         var pathCheck = new PathCheck();
         if (pathCheck.checkNull(path)) {
             return countWordsFromConsole();
@@ -65,7 +64,7 @@ public class JavaApplication {
             return countWordsFromConsoleDashAsSpace();
         }
         var wordsInFle = new InputFileReader().readFromFile(path);
-        var wordList = words.getWords(words.normalizeTextWithHyphen(wordsInFle));
+        var wordList = words.getWords(words.normalizeTextWithHyphenAsSeparator(wordsInFle));
         return getWordsAndUniqueCount(words, wordList);
     }
 
@@ -80,7 +79,7 @@ public class JavaApplication {
             return countWordsFromConsoleDashAsSpace();
         }
         var wordsInFle = new InputFileReader().readFromFile(path);
-        var wordList = words.getWords(words.normalizeTextWithHyphen(wordsInFle));
+        var wordList = words.getWords(words.normalizeTextWithHyphenAsSeparator(wordsInFle));
         return getWordsAndUniqueCount(words, wordList);
     }
 
@@ -112,7 +111,7 @@ public class JavaApplication {
             return countWordsFromConsoleDashAsWord();
         }
         var wordsInFle = new InputFileReader().readFromFile(path);
-        var wordList = words.getWords(words.normalizeTextWithHyphen(wordsInFle));
+        var wordList = words.getWords(words.normalizeTextWithHyphenAsWord(wordsInFle));
         return getWordsAndUniqueCount(words, wordList);
 
 
@@ -122,7 +121,7 @@ public class JavaApplication {
         var words = new Words();
         System.out.println("enter text: ");
         var input = inputString();
-        var wordList = words.getWords(input);
+        var wordList = words.getWords(words.normalizeTextWithHyphenAsWord(input));
         return getWordsAndUniqueCount(words, wordList);
     }
 }
