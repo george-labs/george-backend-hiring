@@ -50,6 +50,10 @@ public class JavaApplication {
         if (path == null) {
             return countWordsFromConsole();
         }
+        else if (!Files.exists(Path.of(path), LinkOption.NOFOLLOW_LINKS)) {
+            System.err.println("File not exist");
+            return countWordsFromConsole();
+        }
         return countWordFromFile(path);
     }
 
