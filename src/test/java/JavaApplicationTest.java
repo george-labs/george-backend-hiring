@@ -1,9 +1,15 @@
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class JavaApplicationTest {
 
+    JavaApplication javaApplication;
 
+    @BeforeEach
+    void setup(){
+        this.javaApplication=new JavaApplication();
+    }
     @Test
     void countWord() {
 
@@ -40,5 +46,12 @@ public class JavaApplicationTest {
         String input = " ";
         int expected = 0;
         Assertions.assertEquals(expected, JavaApplication.countWord(input));
+    }
+
+    @Test
+    void countWordsExceptStopWords() {
+        String input = "Mary had a little lamb";
+        int expected = 4;
+        Assertions.assertEquals(expected, javaApplication.countWordExceptStopWords(input));
     }
 }
