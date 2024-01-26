@@ -1,8 +1,5 @@
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,21 +21,14 @@ public class Words {
     public String normalizeTextWithHyphenAsSeparator(String input) {
         return input.replaceAll("-", " ");
     }
+
     @NotNull
     public String normalizeTextWithHyphenAsWord(String input) {
         return input.replaceAll("-", "");
     }
 
-    public List<String> getWordsExceptStopWords(List<String> words) {
-        return words.stream().filter(word -> {
-            try {
-                var url = this.getClass().getClassLoader().getResource("stopwords.txt");
-                assert url != null;
-                return !Files.readAllLines(Path.of(url.getPath())).contains(word);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }).collect(Collectors.toList());
+    public List<String> getWordsExceptStopWords(List<String> words, List<String> stopWords) {
+        return words.stream().filter(word -> !stopWords.contains(word)).collect(Collectors.toList());
     }
 
     public List<String> getWordsWithDash(String input) {

@@ -2,26 +2,25 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Scanner;
 
 public class JavaApplication {
 
 
     public static void main(String... args) throws IOException {
-        var result = new JavaApplication().countWordsFromFileDashAsSpace(args.length != 0 ? args[0] : null);
-        System.out.println("number of words: " + result.get(0) + ", unique: " + result.get(1));
+        var result = new JavaApplication().countWordsFromFileHyphenAsWord(args.length != 0 ? args[0] : null);
+        System.out.println("Number of words: " + result.get(0) + ", unique: " + result.get(1));
     }
 
-
     public static int countWord(String input) {
-
         return new Words().getWords(input).size();
     }
 
-    public long countWordExceptStopWords(String input) {
+    public long countWordExceptStopWords(String input) throws IOException {
         var words = new Words();
-        var notstopWord = words.getWordsExceptStopWords(words.getWords(input));
-        return new WordsCounter().countWordsExceptStopWords(notstopWord);
+        InputFileReader inputFileReader = new InputFileReader();
+        var stopWords = inputFileReader.getWordsExceptStopWords();
+        var notStopWord = words.getWordsExceptStopWords(words.getWords(input), stopWords);
+        return new WordsCounter().countWordsExceptStopWords(notStopWord);
     }
 
 
@@ -37,20 +36,18 @@ public class JavaApplication {
         return countWordFromFile(path);
     }
 
-    public long countWordsFromConsole() {
+    public long countWordsFromConsole() throws IOException {
         System.out.println("enter text: ");
-        var input = inputString();
+        var input = new InputText().getInput();
         return countWordExceptStopWords(input);
     }
 
-    private static String inputString() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
 
     public long countWordFromFile(String path) throws IOException {
         var word = new Words();
-        return new WordsCounter().countWordsExceptStopWords(word.getWordsExceptStopWords(word.getWords(new InputFileReader().readFromFile(path))));
+        InputFileReader inputFileReader = new InputFileReader();
+        var stopWords = inputFileReader.getWordsExceptStopWords();
+        return new WordsCounter().countWordsExceptStopWords(word.getWordsExceptStopWords(word.getWords(new InputFileReader().readFromFile(path)), stopWords));
     }
 
     public List<Integer> countWordsFromFileDashAsSpace(String path) throws IOException {
@@ -68,34 +65,20 @@ public class JavaApplication {
         return getWordsAndUniqueCount(words, wordList);
     }
 
-    public List<Integer> countWordsFromFileDashAsWord(String path) throws IOException {
-        var workCounter = new WordsCounter();
-        var pathCheck = new PathCheck();
-        var words = new Words();
-        if (pathCheck.checkNull(path)) {
-            return countWordsFromConsoleDashAsSpace();
-        } else if (pathCheck.pathIsInvalid(path)) {
-            System.err.println("File not exist");
-            return countWordsFromConsoleDashAsSpace();
-        }
-        var wordsInFle = new InputFileReader().readFromFile(path);
-        var wordList = words.getWords(words.normalizeTextWithHyphenAsSeparator(wordsInFle));
-        return getWordsAndUniqueCount(words, wordList);
-    }
-
-    private List<Integer> countWordsFromConsoleDashAsSpace() {
-        var workCounter = new WordsCounter();
+    private List<Integer> countWordsFromConsoleDashAsSpace() throws IOException {
         var words = new Words();
         System.out.println("enter text: ");
-        var input = inputString();
+        var input = new InputText().getInput();
         var wordList = words.getWordsWithDash(input);
         return getWordsAndUniqueCount(words, wordList);
     }
 
     @NotNull
-    private static List<Integer> getWordsAndUniqueCount(Words words, List<String> wordList) {
+    private static List<Integer> getWordsAndUniqueCount(Words words, List<String> wordList) throws IOException {
         var workCounter = new WordsCounter();
-        var stopWordList = words.getWordsExceptStopWords(wordList);
+        InputFileReader inputFileReader = new InputFileReader();
+        var stopWords = inputFileReader.getWordsExceptStopWords();
+        var stopWordList = words.getWordsExceptStopWords(wordList, stopWords);
         var stopWordExclusiveWords = workCounter.countWordsExceptStopWords(stopWordList);
         return List.of(stopWordExclusiveWords, workCounter.getUniqueCountExceptStopWords(stopWordList));
     }
@@ -117,10 +100,10 @@ public class JavaApplication {
 
     }
 
-    private List<Integer> countWordsFromConsoleDashAsWord() {
+    private List<Integer> countWordsFromConsoleDashAsWord() throws IOException {
         var words = new Words();
-        System.out.println("enter text: ");
-        var input = inputString();
+        System.out.print("Enter text: ");
+        var input = new InputText().getInput();
         var wordList = words.getWords(words.normalizeTextWithHyphenAsWord(input));
         return getWordsAndUniqueCount(words, wordList);
     }

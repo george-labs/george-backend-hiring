@@ -55,14 +55,14 @@ public class JavaApplicationTest {
     }
 
     @Test
-    void countWordsExceptStopWords() {
+    void countWordsExceptStopWords() throws IOException {
         String input = "Mary had a little lamb";
         int expected = 4;
         Assertions.assertEquals(expected, javaApplication.countWordExceptStopWords(input));
     }
 
     @Test
-    void countWordsExceptStopWordsWithNumber() {
+    void countWordsExceptStopWordsWithNumber() throws IOException {
         String input = "Mary had a little lamb55";
         int expected = 3;
         Assertions.assertEquals(expected, javaApplication.countWordExceptStopWords(input));
