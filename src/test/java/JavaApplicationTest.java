@@ -54,4 +54,11 @@ public class JavaApplicationTest {
         int expected = 4;
         Assertions.assertEquals(expected, javaApplication.countWordExceptStopWords(input));
     }
+
+    @Test
+    void countWordsExceptStopWordsWithNumber() {
+        String input = "Mary had a little lamb55";
+        int expected = 3;
+        Assertions.assertEquals(expected, javaApplication.countWordExceptStopWords(input));
+    }
 }

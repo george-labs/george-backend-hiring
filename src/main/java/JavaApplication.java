@@ -31,8 +31,8 @@ public class JavaApplication {
     public long countWordExceptStopWords(String input) {
         return getWords(input).stream().filter(s -> {
             try {
-                var result = this.getClass().getClassLoader().getResource("stopWords.txt");
-                return Files.readAllLines(Path.of(result.getPath())).contains(s);
+                var result = this.getClass().getClassLoader().getResource("stopwords.txt");
+                return !Files.readAllLines(Path.of(result.getPath())).contains(s);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
