@@ -9,11 +9,9 @@ import java.util.stream.Collectors;
 
 public class JavaApplication {
 
-    public static void main(String... args) {
-        System.out.println("Enter text:");
-        Scanner scanner = new Scanner(System.in);
-        var input = scanner.nextLine();
-        System.out.println("Number of words: " + countWord(input));
+
+    public static void main(String... args) throws IOException {
+        System.out.println("number of words: " + new JavaApplication().countWordsFromFile(args.length != 0 ? args[0] : null));
     }
 
     public static List<String> getWords(String input) {
@@ -31,11 +29,32 @@ public class JavaApplication {
     public long countWordExceptStopWords(String input) {
         return getWords(input).stream().filter(s -> {
             try {
-                var result = this.getClass().getClassLoader().getResource("stopwords.txt");
-                return !Files.readAllLines(Path.of(result.getPath())).contains(s);
+                var url = this.getClass().getClassLoader().getResource("stopwords.txt");
+                assert url != null;
+                return !Files.readAllLines(Path.of(url.getPath())).contains(s);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }).count();
+    }
+
+    public long countWordsFromFile(String path) throws IOException {
+
+        if (path == null) {
+            return countWordsFromConsole();
+        }
+        return countWordFromFile(path);
+    }
+
+    public long countWordsFromConsole() {
+        System.out.println("enter text: ");
+        Scanner scanner = new Scanner(System.in);
+        var input = scanner.nextLine();
+        return countWordExceptStopWords(input);
+    }
+
+    public long countWordFromFile(String path) throws IOException {
+
+        return Files.readAllLines(Path.of(path)).stream().map(this::countWordExceptStopWords).reduce(0L, Long::sum);
     }
 }

@@ -2,14 +2,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class JavaApplicationTest {
 
     JavaApplication javaApplication;
 
     @BeforeEach
-    void setup(){
-        this.javaApplication=new JavaApplication();
+    void setup() {
+        this.javaApplication = new JavaApplication();
     }
+
     @Test
     void countWord() {
 
@@ -60,5 +65,28 @@ public class JavaApplicationTest {
         String input = "Mary had a little lamb55";
         int expected = 3;
         Assertions.assertEquals(expected, javaApplication.countWordExceptStopWords(input));
+    }
+
+    @Test
+    void countWordFromFileNotExist() throws IOException {
+        String input = "Mary had a little lamb55";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        int expected = 3;
+        Assertions.assertEquals(expected, javaApplication.countWordsFromFile(null));
+    }
+
+    @Test
+    void countFromFileExist() throws IOException {
+        var input = this.getClass().getClassLoader().getResource("mytext.txt").getPath();
+        var expected = 4;
+        Assertions.assertEquals(expected, javaApplication.countWordsFromFile(input));
+    }
+
+    @Test
+    void countFromFileExistContainsNumber() throws IOException {
+        var input = this.getClass().getClassLoader().getResource("mytext_number.txt").getPath();
+        var expected = 3;
+        Assertions.assertEquals(expected, javaApplication.countWordsFromFile(input));
     }
 }
