@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public class JavaApplicationTest {
 
@@ -88,5 +89,34 @@ public class JavaApplicationTest {
         var input = this.getClass().getClassLoader().getResource("mytext_number.txt").getPath();
         var expected = 3;
         Assertions.assertEquals(expected, javaApplication.countWordsFromFile(input));
+    }
+
+    @Test
+    void countUniqueWords() throws IOException {
+
+        String input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        var expected = List.of(9, 7);
+
+        Assertions.assertEquals(expected, javaApplication.countWordsFromFileDashAsSpace(null));
+    }
+
+    @Test
+    void countUniqueWordsFromFile() throws IOException {
+
+        var input = this.getClass().getClassLoader().getResource("countUnique.text").getPath();
+        var expected = List.of(9, 7);
+
+        Assertions.assertEquals(expected, javaApplication.countWordsFromFileDashAsSpace(input));
+    }
+
+    @Test
+    void countUniqueWordsFromInvalidFile() throws IOException {
+        var input = this.getClass().getClassLoader().getResource("countUnique.text").getPath();
+        var expected = List.of(9, 7);
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        Assertions.assertEquals(expected, javaApplication.countWordsFromFileDashAsSpace(input));
     }
 }
