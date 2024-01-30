@@ -25,5 +25,4 @@ class ApplicationFacadeTest {
 
         // then
     }
-
 }
