@@ -6,7 +6,7 @@ import java.io.*;
 
 import static application.infrastructure.InfrastructureConstants.NO_SUCH_FILE;
 
-public class FileInput implements Input {
+class FileInput implements Input {
     private final static String SPACE = " ";
     private final String filePath;
 

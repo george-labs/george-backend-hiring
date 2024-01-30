@@ -15,7 +15,7 @@ public class Text {
         this.sentenceValue = sentenceValue;
     }
 
-    public Long calculateWordsInSentence(final List<String> stopWords) {
+    public Long calculateWordsInText(final List<String> stopWords) {
         return ofNullable(sentenceValue)
                 .map(sentence -> stream(sentence.split(SPACE))
                         .filter(word -> !stopWords.contains(word) && word.matches(ALPHABETIC_REGEX))

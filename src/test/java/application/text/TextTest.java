@@ -15,7 +15,7 @@ class TextTest {
         final String word = "Mary had a little lamb";
 
         // when
-        final Long result = new Text(word).calculateWordsInSentence(new ArrayList<>());
+        final Long result = new Text(word).calculateWordsInText(new ArrayList<>());
 
         // then
         assertEquals(5, result);
@@ -27,7 +27,7 @@ class TextTest {
         final String word = "Mary had a little lamb";
 
         // when
-        final Long result = new Text(word).calculateWordsInSentence(of("had"));
+        final Long result = new Text(word).calculateWordsInText(of("had"));
 
         // then
         assertEquals(4, result);
@@ -39,7 +39,7 @@ class TextTest {
         final String word = "Mary1 had a little lamb 123";
 
         // when
-        final Long result = new Text(word).calculateWordsInSentence(new ArrayList<>());
+        final Long result = new Text(word).calculateWordsInText(new ArrayList<>());
 
         // then
         assertEquals(4, result);
@@ -51,7 +51,7 @@ class TextTest {
         final String word = "Mary1";
 
         // when
-        final Long result = new Text(word).calculateWordsInSentence(new ArrayList<>());
+        final Long result = new Text(word).calculateWordsInText(new ArrayList<>());
 
         // then
         assertEquals(0, result);
@@ -63,7 +63,7 @@ class TextTest {
         final String word = "Mary";
 
         // when
-        final Long result = new Text(word).calculateWordsInSentence(of("Mary"));
+        final Long result = new Text(word).calculateWordsInText(of("Mary"));
 
         // then
         assertEquals(0, result);
@@ -75,7 +75,7 @@ class TextTest {
         final String word = " ";
 
         // when
-        final Long result = new Text(word).calculateWordsInSentence(new ArrayList<>());
+        final Long result = new Text(word).calculateWordsInText(new ArrayList<>());
 
         // then
         assertEquals(0, result);
@@ -87,7 +87,7 @@ class TextTest {
         final String word = " ";
 
         // when
-        final Long result = new Text(word).calculateWordsInSentence(of("a"));
+        final Long result = new Text(word).calculateWordsInText(of("a"));
 
         // then
         assertEquals(0, result);
@@ -99,7 +99,7 @@ class TextTest {
         final String word = "";
 
         // when
-        final Long result = new Text(word).calculateWordsInSentence(new ArrayList<>());
+        final Long result = new Text(word).calculateWordsInText(new ArrayList<>());
 
         // then
         assertEquals(0, result);
@@ -111,7 +111,7 @@ class TextTest {
         final String word = "";
 
         // when
-        final Long result = new Text(word).calculateWordsInSentence(of("a"));
+        final Long result = new Text(word).calculateWordsInText(of("a"));
 
         // then
         assertEquals(0, result);
@@ -122,7 +122,7 @@ class TextTest {
         // given
 
         // when
-        final Long result = new Text(null).calculateWordsInSentence(new ArrayList<>());
+        final Long result = new Text(null).calculateWordsInText(new ArrayList<>());
 
         // then
         assertEquals(0, result);
@@ -133,7 +133,7 @@ class TextTest {
         // given
 
         // when
-        final Long result = new Text(null).calculateWordsInSentence(of("a"));
+        final Long result = new Text(null).calculateWordsInText(of("a"));
 
         // then
         assertEquals(0, result);

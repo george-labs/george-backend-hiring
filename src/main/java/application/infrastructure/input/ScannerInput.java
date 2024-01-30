@@ -2,7 +2,7 @@ package application.infrastructure.input;
 
 import java.util.Scanner;
 
-public final class ScannerInput implements Input {
+final class ScannerInput implements Input {
     private final String consoleText;
 
     public ScannerInput(final String consoleText) {
