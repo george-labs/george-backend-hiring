@@ -138,4 +138,28 @@ class TextTest {
         // then
         assertEquals(0, result);
     }
+
+    @Test
+    void calculateUniqueWordsInText() {
+        // given
+        final String text = "a b cd 1e b";
+
+        // when
+        final Long result = new Text(text).calculateUniqueWordsInText(of("a"));
+
+        // then
+        assertEquals(1, result);
+    }
+
+    @Test
+    void calculateUniqueWordsInTextWhenNoneIsUniq() {
+        // given
+        final String text = "a b  1e b";
+
+        // when
+        final Long result = new Text(text).calculateUniqueWordsInText(of("a"));
+
+        // then
+        assertEquals(0, result);
+    }
 }

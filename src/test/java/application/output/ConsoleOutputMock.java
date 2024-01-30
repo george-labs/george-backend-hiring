@@ -4,6 +4,6 @@ import application.infrastructure.output.Output;
 
 public class ConsoleOutputMock implements Output {
     @Override
-    public void provideOutput(Long result) {
+    public void provideOutput(Long totalCount, Long uniqCount) {
     }
 }

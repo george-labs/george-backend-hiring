@@ -7,7 +7,8 @@ import application.infrastructure.output.Output;
 import application.output.ConsoleOutputMock;
 import org.junit.jupiter.api.Test;
 
-import static application.constants.ApplicationConstants.RESOURCE_FILENAME;
+import static application.infrastructure.InfrastructureConstants.RESOURCE_FILENAME;
+
 
 class ApplicationFacadeTest {
 

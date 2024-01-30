@@ -6,6 +6,8 @@ import application.infrastructure.input.InputFactory;
 import application.infrastructure.output.Output;
 import application.text.Text;
 
+import java.util.List;
+
 import static application.infrastructure.InfrastructureConstants.EMPTY_STRING;
 import static application.infrastructure.InfrastructureConstants.NO_SUCH_FILE;
 
@@ -25,8 +27,10 @@ public final class ApplicationFacade {
         try {
             final String userText = inputFactory.getInput(fileName);
             final Text text = new Text(userText);
-            final Long result = text.calculateWordsInText(stopWordsConfig.getStopWords());
-            output.provideOutput(result);
+            final List<String> stopWords = stopWordsConfig.getStopWords();
+            final Long totalCount = text.calculateWordsInText(stopWords);
+            final Long uniqueCount = text.calculateUniqueWordsInText(stopWords);
+            output.provideOutput(totalCount, uniqueCount);
         } catch (NoFileFoundException e) {
             System.out.println(NO_SUCH_FILE);
         }
