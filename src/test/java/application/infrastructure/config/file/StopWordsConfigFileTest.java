@@ -39,7 +39,6 @@ class StopWordsConfigFileTest {
     @Test
     void getEmptyListForStopWordsWhenNullIsGivenForResourceFile() {
         // given
-        final String path = "bla.txt";
         final StopWordsConfig stopWordsConfig = new StopWordsConfigFile(null);
 
         // when
