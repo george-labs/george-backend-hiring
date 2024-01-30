@@ -15,7 +15,7 @@ class OutputBuilderTest {
         final String expectedResult = CONSOLE_OUTPUT_TOTAL_COUNT_TEXT + 1L + ", " + CONSOLE_OUTPUT_UNIQUE_COUNT_TEXT + 2L;
 
         // when
-        final String result = buildOutput(1l, 2l);
+        final String result = buildOutput(1L, 2L);
 
         // then
         assertEquals(expectedResult, result);
