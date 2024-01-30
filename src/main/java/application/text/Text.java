@@ -1,18 +1,16 @@
-package application.sentence;
-
-import java.util.Arrays;
+package application.text;
 
 import static java.util.Arrays.stream;
 import static java.util.Optional.ofNullable;
 
-public class Sentence {
+public class Text {
     private final static String SPACE = " ";
     private final static String ALPHABETIC_REGEX = "[a-zA-Z]+";
 
     private final String sentenceValue;
 
 
-    public Sentence(final String sentenceValue) {
+    public Text(final String sentenceValue) {
         this.sentenceValue = sentenceValue;
     }
 

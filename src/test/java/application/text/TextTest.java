@@ -1,10 +1,10 @@
-package application.sentence;
+package application.text;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SentenceTest {
+class TextTest {
 
     @Test
     void calculateWordsInSentenceWhenSentenceHaveFiveWords() {
@@ -12,7 +12,7 @@ class SentenceTest {
         final String word = "Mary had a little lamb";
 
         // when
-        final Long result = new Sentence(word).calculateWordsInSentence();
+        final Long result = new Text(word).calculateWordsInSentence();
 
         // then
         assertEquals(5, result);
@@ -24,7 +24,7 @@ class SentenceTest {
         final String word = "Mary1 had a little lamb 123";
 
         // when
-        final Long result = new Sentence(word).calculateWordsInSentence();
+        final Long result = new Text(word).calculateWordsInSentence();
 
         // then
         assertEquals(4, result);
@@ -36,7 +36,7 @@ class SentenceTest {
         final String word = "Mary1";
 
         // when
-        final Long result = new Sentence(word).calculateWordsInSentence();
+        final Long result = new Text(word).calculateWordsInSentence();
 
         // then
         assertEquals(0, result);
@@ -48,7 +48,7 @@ class SentenceTest {
         final String word = " ";
 
         // when
-        final Long result = new Sentence(word).calculateWordsInSentence();
+        final Long result = new Text(word).calculateWordsInSentence();
 
         // then
         assertEquals(0, result);
@@ -60,7 +60,7 @@ class SentenceTest {
         final String word = "";
 
         // when
-        final Long result = new Sentence(word).calculateWordsInSentence();
+        final Long result = new Text(word).calculateWordsInSentence();
 
         // then
         assertEquals(0, result);
@@ -69,10 +69,9 @@ class SentenceTest {
     @Test
     void calculateWordsInSentenceWhenSentenceIsNull() {
         // given
-        final String word = null;
 
         // when
-        final Long result = new Sentence(word).calculateWordsInSentence();
+        final Long result = new Text(null).calculateWordsInSentence();
 
         // then
         assertEquals(0, result);

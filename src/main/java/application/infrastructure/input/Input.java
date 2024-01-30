@@ -1,4 +1,4 @@
-package application.input;
+package application.infrastructure.input;
 
 public interface Input {
     String getInput();
