@@ -1,14 +1,11 @@
 package io;
 
-import java.io.InputStream;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ConsoleInputReader implements InputReader{
-
-    private InputStream inputStream;
 
     @Override
     public List<String> readAndGetData() {
