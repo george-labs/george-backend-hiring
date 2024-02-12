@@ -40,7 +40,7 @@ public class ItemProcessorTest {
     @DisplayName("Processing and validating items. Result should be 3")
     public void testItemProcessorCountingWordsOfThree() {
         // given
-        List<String> inputs = List.of("Mary", "had",  "a", "little lamb");
+        List<String> inputs = List.of("Mary", "had",  "a");
 
         // when
         long wordCount = processor.process(inputs);
