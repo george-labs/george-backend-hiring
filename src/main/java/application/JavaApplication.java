@@ -48,11 +48,12 @@ public class JavaApplication {
         inputWords = regexFilter.filter(inputWords);
         inputWords = stopWordsFilter.filter(inputWords);
 
-        Processor processor = new ItemProcessor(regexValidator);
+        Processor processor = new ItemProcessor();
         long result = processor.process(inputWords);
 
         // printing
         messageWriter.write(List.of("Number of words: ", Long.toString(result)));
     }
+
 
 }
