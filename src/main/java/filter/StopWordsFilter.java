@@ -15,7 +15,7 @@ public class StopWordsFilter implements Filter{
     @Override
     public List<String> filter(List<String> inputs) {
         return inputs.stream()
-                .filter(str -> validator.isValidInput(str))
+                .filter(str -> !validator.isValidInput(str))
                 .collect(Collectors.toList());
     }
 }

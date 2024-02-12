@@ -12,6 +12,6 @@ public class FileInputValidator implements Validator{
 
     @Override
     public boolean isValidInput(String input) {
-        return List.of().contains(input);
+        return stopWords.contains(input);
     }
 }

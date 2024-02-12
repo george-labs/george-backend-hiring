@@ -6,6 +6,7 @@ import java.util.List;
 
 public class ItemProcessor implements Processor{
 
+    // TODO: removing this field
     private final Validator validator;
 
     public ItemProcessor(Validator validator) {

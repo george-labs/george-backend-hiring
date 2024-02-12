@@ -27,10 +27,12 @@ public class JavaApplication {
     public static void main(String[] args) {
         OutputWriter messageWriter = new ConsoleOutputWriter();
         // reading from file
-        InputReader fileInputReader = new FileInputReader(Paths.get("src", "main", "resources").toString());
+        InputReader fileInputReader = new FileInputReader(Paths.get("src", "main", "resources", "stopwords.txt")
+                .toString());
         List<String> stopWords = fileInputReader.readAndGetData();
 
         // read from console
+        messageWriter.write(List.of("Enter text: "));
         InputReader inputReader = new ConsoleInputReader();
         List<String> inputWords = inputReader.readAndGetData();
         
@@ -41,14 +43,15 @@ public class JavaApplication {
         // filter for stop words
         Validator fileValidator = new FileInputValidator(fileInputReader.readAndGetData());
         Filter stopWordsFilter = new StopWordsFilter(fileValidator);
-        
+
         // counting
+        inputWords = regexFilter.filter(inputWords);
+        inputWords = stopWordsFilter.filter(inputWords);
+
         Processor processor = new ItemProcessor(regexValidator);
+        long result = processor.process(inputWords);
 
         // printing
-
-        messageWriter.write(List.of("Enter text: "));
-        long result = processor.process(inputReader.readAndGetData());
         messageWriter.write(List.of("Number of words: ", Long.toString(result)));
     }
 
