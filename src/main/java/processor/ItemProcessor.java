@@ -12,10 +12,11 @@ public class ItemProcessor implements Processor{
         this.validator = validator;
     }
 
+    // TODO: Refactoring to do only the counting at the time
+    // TODO: passing some Function<I, O> to this method to be more generic
     @Override
     public long process(List<String> input) {
         return input.stream()
-                .filter(str -> validator.isValidInput(str))
                 .count();
 
 

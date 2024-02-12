@@ -3,6 +3,7 @@ package validator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// TODO: Refactor -> using one implementation only with generic types
 public class ConsoleInputValidator implements Validator{
     private String regex;
 

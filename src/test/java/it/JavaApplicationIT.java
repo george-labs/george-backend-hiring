@@ -42,4 +42,10 @@ public class JavaApplicationIT {
 
         Assertions.assertEquals("5", consoleOutput[consoleOutput.length - 1]);
     }
+
+    @Test
+    @DisplayName("Read input from user and use file for filtering words. Outpu should be 4")
+    public void testUserInputWithFileFiltering() {
+
+    }
 }
