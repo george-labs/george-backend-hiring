@@ -6,3 +6,6 @@
 
 ## Iteration 2
 - stop words are case insensitive;
+
+## Iteration 3
+- if file is missing then error message is displayed "File doesn't exist";

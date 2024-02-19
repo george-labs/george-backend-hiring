@@ -9,7 +9,7 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class ExampleTest {
+class ExampleWithUserInputTest {
 
     private Example testSubject;
 
@@ -22,7 +22,7 @@ class ExampleTest {
         input = new ByteArrayInputStream("Mary had a little lamb".getBytes());
         byteArrayOutput = new ByteArrayOutputStream();
         output = new PrintStream(byteArrayOutput);
-        testSubject = new Example(input, output);
+        testSubject = new ExampleWithUserInput(input, output);
     }
 
     @Test
