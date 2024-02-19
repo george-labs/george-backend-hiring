@@ -151,6 +151,6 @@ class WordCounterTest {
 
     private void assertWordCountResult(int expectedCount, int expectedUniqueCount, WordCountResult actual) {
         assertEquals(expectedCount, actual.getCount());
-        assertEquals(expectedCount, actual.getUniqueCount());
+        assertEquals(expectedUniqueCount, actual.getUniqueCount());
     }
 }

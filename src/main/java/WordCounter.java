@@ -2,8 +2,6 @@ import java.util.*;
 
 public class WordCounter {
 
-    private static final Set<Character> SUPPORTED_PUNCTIONAL_MARKS = Set.of('-', '.');
-
     private final StopWords stopWords;
 
     public WordCounter(StopWords stopWords) {
@@ -34,15 +32,15 @@ public class WordCounter {
         }
         List<String> validWords = filterInvalidWords(words);
         int count = validWords.size();
-        int unique = new HashSet<String>(validWords).size();
+        int unique = new HashSet<>(validWords).size();
         return new WordCountResult(count, unique);
     }
 
     private List<String> filterInvalidWords(String[] words) {
         List<String> result = new ArrayList<>();
-        for (int i = 0; i < words.length; i++) {
-            if (isValidWord(words[i])) {
-                result.add(words[i]);
+        for (String word : words) {
+            if (isValidWord(word)) {
+                result.add(word);
             }
         }
         return result;

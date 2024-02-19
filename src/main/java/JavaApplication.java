@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class JavaApplication {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         if (args.length == 1) {
             runWithFileInput(args);
         } else {
@@ -15,9 +15,9 @@ public class JavaApplication {
         try (InputStream input = JavaApplication.class.getClassLoader().getResourceAsStream(args[0])) {
             new WordProcessorWithFileInput(input, System.out).process();
         } catch (FileNotFoundException e) {
-            System.err.println(String.format("File [%s] doesn't exist", args[0]));
+            System.err.printf("File [%s] doesn't exist%n", args[0]);
         } catch (IOException e) {
-            System.err.println(String.format("Input stream cannot be closed", args[0]));
+            System.err.println("Input stream cannot be closed");
         }
     }
 

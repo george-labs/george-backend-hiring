@@ -13,7 +13,6 @@ class WordProcessorWithUserInputTest {
 
     private WordProcessorWithUserInput testSubject;
 
-    private InputStream input;
     private PrintStream output;
     private ByteArrayOutputStream byteArrayOutput;
 
@@ -41,7 +40,7 @@ class WordProcessorWithUserInputTest {
     }
 
     void init(String inputText) {
-        input = new ByteArrayInputStream(inputText.getBytes());
+        InputStream input = new ByteArrayInputStream(inputText.getBytes());
         byteArrayOutput = new ByteArrayOutputStream();
         output = new PrintStream(byteArrayOutput);
         testSubject = new WordProcessorWithUserInput(input, output);
