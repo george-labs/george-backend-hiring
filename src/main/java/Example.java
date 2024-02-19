@@ -2,14 +2,14 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class Iteration1Example {
+public class Example {
 
     private final InputStream input;
     private final PrintStream output;
 
     private final WordCounter counter = new WordCounter();
 
-    public Iteration1Example(InputStream input, PrintStream output) {
+    public Example(InputStream input, PrintStream output) {
         if (input == null) {
             throw new IllegalArgumentException("Input stream cannot be null");
         }

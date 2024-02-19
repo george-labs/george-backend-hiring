@@ -1,6 +1,6 @@
 public class WordCounter {
 
-    private StopWords words = new StopWords("stopwords.txt");
+    private StopWords stopWords = new StopWords("stopwords.txt");
 
     public int count(String text) {
         if ((text == null) || text.isBlank()) {
@@ -28,7 +28,7 @@ public class WordCounter {
             return false;
         }
         String lowerCaseWord = word.toLowerCase();
-        if (isStopWord(lowerCaseWord)) {
+        if (stopWords.isStopWord(lowerCaseWord)) {
             return false;
         }
         for (int i = 0; i < word.length(); i++) {

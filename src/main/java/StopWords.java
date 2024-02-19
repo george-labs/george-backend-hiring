@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -14,11 +16,12 @@ public class StopWords {
         if ((fileName == null) || (fileName.isBlank())) {
             throw new IllegalArgumentException("File name cannot be null or blank");
         }
-        Scanner scanner = new Scanner(fileName);
-        while (scanner.hasNext()) {
-            String line = scanner.nextLine();
-            if ((line != null) && (!line.isBlank())) {
-                stopWords.add(line);
+        try (Scanner scanner = new Scanner(getClass().getClassLoader().getResourceAsStream(fileName))) {
+            while (scanner.hasNext()) {
+                String line = scanner.nextLine();
+                if ((line != null) && (!line.isBlank())) {
+                    stopWords.add(line.toLowerCase());
+                }
             }
         }
     }

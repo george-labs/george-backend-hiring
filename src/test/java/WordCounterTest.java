@@ -34,14 +34,14 @@ class WordCounterTest {
 
     @Test
     void testCount_givenText_thenReturnNumberOfWords() {
-        assertEquals(5, testSubject.count("Mary had a little lamb"));
-        assertEquals(5, testSubject.count(" Mary had a little lamb"));
-        assertEquals(4, testSubject.count(" _Mary had1 a LiT tLe lamb"));
+        assertEquals(4, testSubject.count("Mary had a little lamb"));
+        assertEquals(4, testSubject.count(" Mary had a little lamb"));
+        assertEquals(3, testSubject.count(" _Mary had1 a LiT tLe lamb"));
     }
 
     @Test
     void testCount_givenTextWithMultipleSpaces_thenReturnNumberOfWords() {
-        assertEquals(5, testSubject.count("Mary   had a   little lamb"));
+        assertEquals(4, testSubject.count("Mary   had a   little lamb"));
     }
 
     @Test
@@ -66,9 +66,9 @@ class WordCounterTest {
 
     @Test
     void testCountWords_givenArray_thenReturnCountOfTheWords() {
-        assertEquals(5, testSubject.countWords(new String[]{"Mary", "had", "a", "little", "lamb"}));
-        assertEquals(4, testSubject.countWords(new String[]{"    ", "had", "a", "little", "lamb"}));
-        assertEquals(3, testSubject.countWords(new String[]{"    ", "had1", "a", "little", "lamb"}));
+        assertEquals(4, testSubject.countWords(new String[]{"Mary", "had", "a", "little", "lamb"}));
+        assertEquals(3, testSubject.countWords(new String[]{"    ", "had", "a", "little", "lamb"}));
+        assertEquals(2, testSubject.countWords(new String[]{"    ", "had1", "a", "little", "lamb"}));
         assertEquals(2, testSubject.countWords(new String[]{"    ", "had1", "a?", "little", "lamb"}));
         assertEquals(1, testSubject.countWords(new String[]{"    ", "had1", "a?", "little ", "lamb"}));
         assertEquals(0, testSubject.countWords(new String[]{"    ", "had1", "a?", "little ", " lamb"}));
@@ -125,5 +125,13 @@ class WordCounterTest {
         for (char c = 'A'; c <= 'Z'; c++) {
             assertTrue(testSubject.isValidWord(String.valueOf(c)));
         }
+    }
+
+    @Test
+    void testIsValidWord_givenStopWord_thenReturnFalse() {
+        assertFalse(testSubject.isValidWord("the"));
+        assertFalse(testSubject.isValidWord("a"));
+        assertFalse(testSubject.isValidWord("on"));
+        assertFalse(testSubject.isValidWord("off"));
     }
 }

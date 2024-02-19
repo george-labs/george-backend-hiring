@@ -8,9 +8,9 @@ class StopWordsTest {
 
     private StopWords testSubject;
 
-    @BeforeAll
+    @BeforeEach
     public void setUp() {
-        testSubject = new StopWords("test_stopwords.txt");
+        testSubject = new StopWords("test-stopwords.txt");
     }
 
     @Test
@@ -25,6 +25,8 @@ class StopWordsTest {
     @Test
     void testIsStopWord_givenStopWord_thenReturnTrue() {
         assertTrue(testSubject.isStopWord("the"));
+        assertTrue(testSubject.isStopWord("The"));
+        assertTrue(testSubject.isStopWord("THE"));
         assertTrue(testSubject.isStopWord("a"));
         assertTrue(testSubject.isStopWord("on"));
         assertTrue(testSubject.isStopWord("off"));
