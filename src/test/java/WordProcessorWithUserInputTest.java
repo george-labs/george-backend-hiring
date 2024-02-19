@@ -30,6 +30,6 @@ class WordProcessorWithUserInputTest {
         assertTrue(byteArrayOutput.toString().isEmpty());
         testSubject.process();
         output.flush();
-        assertEquals("Enter text: Number of words: 4", byteArrayOutput.toString());
+        assertEquals("Enter text: Number of words: 4, unique: 4", byteArrayOutput.toString());
     }
 }

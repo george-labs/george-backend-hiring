@@ -1,6 +1,8 @@
+import java.util.*;
+
 public class WordCounter {
 
-    private StopWords stopWords;
+    private final StopWords stopWords;
 
     public WordCounter(StopWords stopWords) {
         if (stopWords == null) {
@@ -9,7 +11,7 @@ public class WordCounter {
         this.stopWords = stopWords;
     }
 
-    public int count(String text) {
+    public WordCountResult count(String text) {
         if ((text == null) || text.isBlank()) {
             throw new IllegalArgumentException("Unsupported input text");
         }
@@ -17,21 +19,28 @@ public class WordCounter {
         return countWords(words);
     }
 
-    protected int countWords(String[] words) {
+    protected WordCountResult countWords(String[] words) {
         if (words == null) {
             throw new IllegalArgumentException("Unsupported array of words");
         }
-        int counter = 0;
+        List<String> validWords = filterInvalidWords(words);
+        int count = validWords.size();
+        int unique = new HashSet<String>(validWords).size();
+        return new WordCountResult(count, unique);
+    }
+
+    private List<String> filterInvalidWords(String[] words) {
+        List<String> result = new ArrayList<>();
         for (int i = 0; i < words.length; i++) {
             if (isValidWord(words[i])) {
-                counter++;
+                result.add(words[i]);
             }
         }
-        return counter;
+        return result;
     }
 
     protected boolean isValidWord(String word) {
-        if (word == null || word.length() == 0) {
+        if (word == null || word.isEmpty()) {
             return false;
         }
         String lowerCaseWord = word.toLowerCase();

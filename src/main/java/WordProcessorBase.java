@@ -24,8 +24,8 @@ public abstract class WordProcessorBase implements WordProcessor {
     public void process() {
         requestInput();
         String text = readInput();
-        int wordCount = counter.count(text);
-        output.print("Number of words: " + wordCount);
+        WordCountResult result = counter.count(text);
+        output.printf("Number of words: %s, unique: %s", result.getCount(), result.getUniqueCount());
     }
 
     protected void requestInput() {
