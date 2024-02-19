@@ -40,6 +40,11 @@ class WordCounterTest {
     }
 
     @Test
+    void testCount_givenTextWithMultipleSpaces_thenReturnNumberOfWords() {
+        assertEquals(5, testSubject.count("Mary   had a   little lamb"));
+    }
+
+    @Test
     void testCountWords_givenNullArray_thenThrowException() {
         try {
             testSubject.countWords(null);
