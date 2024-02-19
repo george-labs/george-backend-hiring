@@ -15,6 +15,7 @@ public class WordCounter {
         if ((text == null) || text.isBlank()) {
             throw new IllegalArgumentException("Unsupported input text");
         }
+        text = text.toLowerCase();
         text = processPunctionalMarks(text);
         String[] words = text.split("\\s+");
         return countWords(words);
