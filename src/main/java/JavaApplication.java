@@ -16,9 +16,9 @@ public class JavaApplication {
         try (InputStream input = new FileInputStream(args[0])) {
             new WordProcessorWithFileInput(input, System.out).process();
         } catch (FileNotFoundException e) {
-            System.out.println(String.format("File [%s] doesn't exist", args[0]));
+            System.err.println(String.format("File [%s] doesn't exist", args[0]));
         } catch (IOException e) {
-            System.out.println(String.format("Input stream cannot be closed", args[0]));
+            System.err.println(String.format("Input stream cannot be closed", args[0]));
         }
     }
 
