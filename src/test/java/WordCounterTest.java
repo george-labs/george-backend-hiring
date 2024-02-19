@@ -34,14 +34,14 @@ class WordCounterTest {
 
     @Test
     void testCount_givenText_thenReturnNumberOfWords() {
-        assertEquals(4, testSubject.count("Mary had a little lamb"));
-        assertEquals(4, testSubject.count(" Mary had a little lamb"));
-        assertEquals(3, testSubject.count(" _Mary had1 a LiT tLe lamb"));
+        assertWordCountResult(4, 4, testSubject.count("Mary had a little lamb"));
+        assertWordCountResult(4, 4, testSubject.count(" Mary had a little lamb"));
+        assertWordCountResult(3, 3, testSubject.count(" _Mary had1 a LiT tLe lamb"));
     }
 
     @Test
     void testCount_givenTextWithMultipleSpaces_thenReturnNumberOfWords() {
-        assertEquals(4, testSubject.count("Mary   had a   little lamb"));
+        assertWordCountResult(4, 4, testSubject.count("Mary   had a   little lamb"));
     }
 
     @Test
@@ -56,22 +56,22 @@ class WordCounterTest {
 
     @Test
     void testCountWords_givenEmptyArray_thenReturnZero() {
-        assertEquals(0, testSubject.countWords(new String[]{}));
+        assertWordCountResult(0, 0, testSubject.countWords(new String[]{}));
     }
 
     @Test
     void testCountWords_givenArrayOfEmptyStrings_thenReturnZero() {
-        assertEquals(0, testSubject.countWords(new String[]{"", "", "", ""}));
+        assertWordCountResult(0, 0, testSubject.countWords(new String[]{"", "", "", ""}));
     }
 
     @Test
     void testCountWords_givenArray_thenReturnCountOfTheWords() {
-        assertEquals(4, testSubject.countWords(new String[]{"Mary", "had", "a", "little", "lamb"}));
-        assertEquals(3, testSubject.countWords(new String[]{"    ", "had", "a", "little", "lamb"}));
-        assertEquals(2, testSubject.countWords(new String[]{"    ", "had1", "a", "little", "lamb"}));
-        assertEquals(2, testSubject.countWords(new String[]{"    ", "had1", "a?", "little", "lamb"}));
-        assertEquals(1, testSubject.countWords(new String[]{"    ", "had1", "a?", "little ", "lamb"}));
-        assertEquals(0, testSubject.countWords(new String[]{"    ", "had1", "a?", "little ", " lamb"}));
+        assertWordCountResult(4, 4, testSubject.countWords(new String[]{"Mary", "had", "a", "little", "lamb"}));
+        assertWordCountResult(3, 3, testSubject.countWords(new String[]{"    ", "had", "a", "little", "lamb"}));
+        assertWordCountResult(2, 2, testSubject.countWords(new String[]{"    ", "had1", "a", "little", "lamb"}));
+        assertWordCountResult(2, 2, testSubject.countWords(new String[]{"    ", "had1", "a?", "little", "lamb"}));
+        assertWordCountResult(1, 1, testSubject.countWords(new String[]{"    ", "had1", "a?", "little ", "lamb"}));
+        assertWordCountResult(0, 0, testSubject.countWords(new String[]{"    ", "had1", "a?", "little ", " lamb"}));
     }
 
     @Test
@@ -147,5 +147,10 @@ class WordCounterTest {
         assertFalse(testSubject.isValidWord("-"));
         assertFalse(testSubject.isValidWord("Humpty-Dumpty"));
         assertFalse(testSubject.isValidWord("wall."));
+    }
+
+    private void assertWordCountResult(int expectedCount, int expectedUniqueCount, WordCountResult actual) {
+        assertEquals(expectedCount, actual.getCount());
+        assertEquals(expectedCount, actual.getUniqueCount());
     }
 }
