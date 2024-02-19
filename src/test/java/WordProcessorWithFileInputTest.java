@@ -36,7 +36,7 @@ class WordProcessorWithFileInputTest {
         assertTrue(byteArrayOutput.toString().isEmpty());
         testSubject.process();
         output.flush();
-        assertEquals("Number of words: 9, unique: 7", byteArrayOutput.toString());
+        assertEquals("Number of words: 7, unique: 6", byteArrayOutput.toString());
     }
 
     void init(String fileName) {

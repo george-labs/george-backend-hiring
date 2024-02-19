@@ -36,7 +36,7 @@ class WordProcessorWithUserInputTest {
         assertTrue(byteArrayOutput.toString().isEmpty());
         testSubject.process();
         output.flush();
-        assertEquals("Enter text: Number of words: 9, unique: 7", byteArrayOutput.toString());
+        assertEquals("Enter text: Number of words: 7, unique: 6", byteArrayOutput.toString());
     }
 
     void init(String inputText) {

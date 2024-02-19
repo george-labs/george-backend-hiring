@@ -21,7 +21,7 @@ public class WordCounter {
     }
 
     private String processPunctionalMarks(String word) {
-        String processed = word.replace("-", " ").replace(".", " ");
+        String processed = word.replace("-", "").replace(".", " ");
         processed = processed.trim();
         return processed;
     }
