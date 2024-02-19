@@ -5,32 +5,24 @@ import java.io.InputStream;
 
 public class JavaApplication {
     public static void main(String[] args) throws FileNotFoundException {
-        Example example;
-        InputStream input = null;
-        try {
-            if (args.length == 1) {
-                try {
-                    input = new FileInputStream(fileName);
-                    example = new ExampleWithFileInput(input, System.out);
-                } catch (FileNotFoundException e) {
-                    System.out.println(String.format("File [%s] doesn't exist", fileName));
-                }
-            } else {
-                new ExampleWithUserInput(System.in, System.out).run();
-
-            }
-            if (input == null) {
-                // fallback to manual text input
-
-            }
+        if (args.length == 1) {
+            runWithFileInput(args);
+        } else {
+            runWithUserInput();
+        }
     }
 
-    private static FileInputStream getFileInputStream(String fileName) {
-        try {
-
+    private static void runWithFileInput(String[] args) {
+        try (InputStream input = new FileInputStream(args[0])) {
+            new WordProcessorWithFileInput(input, System.out).process();
         } catch (FileNotFoundException e) {
-
-            return null;
+            System.out.println(String.format("File [%s] doesn't exist", args[0]));
+        } catch (IOException e) {
+            System.out.println(String.format("Input stream cannot be closed", args[0]));
         }
+    }
+
+    private static void runWithUserInput() {
+        new WordProcessorWithUserInput(System.in, System.out).process();
     }
 }

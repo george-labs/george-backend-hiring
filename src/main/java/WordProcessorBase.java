@@ -1,15 +1,14 @@
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
 
-public abstract class ExampleBase implements Example {
+public abstract class WordProcessorBase implements WordProcessor {
 
     private final InputStream input;
     private final PrintStream output;
 
     private final WordCounter counter = new WordCounter(new StopWordsImpl("stopwords.txt"));
 
-    public ExampleBase(InputStream input, PrintStream output) {
+    public WordProcessorBase(InputStream input, PrintStream output) {
         if (input == null) {
             throw new IllegalArgumentException("Input stream cannot be null");
         }
@@ -22,11 +21,15 @@ public abstract class ExampleBase implements Example {
     }
 
     @Override
-    public void run() {
-        output.print("Enter text: ");
+    public void process() {
+        requestInput();
         String text = readInput();
         int wordCount = counter.count(text);
         output.print("Number of words: " + wordCount);
+    }
+
+    protected void requestInput() {
+        // do nothing
     }
 
     protected abstract String readInput();

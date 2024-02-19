@@ -2,10 +2,15 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class ExampleWithUserInput extends ExampleBase {
+public class WordProcessorWithUserInput extends WordProcessorBase {
 
-    public ExampleWithUserInput(InputStream input, PrintStream output) {
+    public WordProcessorWithUserInput(InputStream input, PrintStream output) {
         super(input, output);
+    }
+
+    @Override
+    protected void requestInput() {
+        getOutput().print("Enter text: ");
     }
 
     @Override

@@ -9,9 +9,9 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class ExampleWithUserInputTest {
+class WordProcessorWithUserInputTest {
 
-    private Example testSubject;
+    private WordProcessorWithUserInput testSubject;
 
     private InputStream input;
     private PrintStream output;
@@ -22,13 +22,13 @@ class ExampleWithUserInputTest {
         input = new ByteArrayInputStream("Mary had a little lamb".getBytes());
         byteArrayOutput = new ByteArrayOutputStream();
         output = new PrintStream(byteArrayOutput);
-        testSubject = new ExampleWithUserInput(input, output);
+        testSubject = new WordProcessorWithUserInput(input, output);
     }
 
     @Test
     void testRun_givenValidText_thenPrintNumberOfWords() {
         assertTrue(byteArrayOutput.toString().isEmpty());
-        testSubject.run();
+        testSubject.process();
         output.flush();
         assertEquals("Enter text: Number of words: 4", byteArrayOutput.toString());
     }

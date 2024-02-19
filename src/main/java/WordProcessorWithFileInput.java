@@ -1,11 +1,10 @@
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
 
-public class ExampleWithFileInput extends ExampleBase {
+public class WordProcessorWithFileInput extends WordProcessorBase {
 
-    public ExampleWithFileInput(InputStream input, PrintStream output) {
+    public WordProcessorWithFileInput(InputStream input, PrintStream output) {
         super(input, output);
     }
 
