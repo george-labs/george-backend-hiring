@@ -40,7 +40,7 @@ class WordProcessorWithUserInputTest {
     }
 
     @Test
-    void testRun_givenValidText_thenPrintNumberOfWords() {
+    void testRun_givenValidText2_thenPrintNumberOfWords() {
         init("test Test testabc");
         assertTrue(byteArrayOutput.toString().isEmpty());
         testSubject.process();
