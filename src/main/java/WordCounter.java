@@ -17,8 +17,15 @@ public class WordCounter {
         if ((text == null) || text.isBlank()) {
             throw new IllegalArgumentException("Unsupported input text");
         }
+        text = processPunctionalMarks(text);
         String[] words = text.split("\\s+");
         return countWords(words);
+    }
+
+    private String processPunctionalMarks(String word) {
+        String processed = word.replace("-", " ").replace(".", " ");
+        processed = processed.trim();
+        return processed;
     }
 
     protected WordCountResult countWords(String[] words) {
@@ -45,24 +52,16 @@ public class WordCounter {
         if (word == null || word.isEmpty()) {
             return false;
         }
-        if (word.length() == 1 || SUPPORTED_PUNCTIONAL_MARKS.contains(word.charAt(0))) {
+        String lowerCase = word.toLowerCase();
+        if (stopWords.isStopWord(lowerCase)) {
             return false;
         }
-        String processedWord = processPunctionalMarks(word.toLowerCase());
-        if (stopWords.isStopWord(processedWord)) {
-            return false;
-        }
-        for (int i = 0; i < processedWord.length(); i++) {
-            char character = processedWord.charAt(i);
+        for (int i = 0; i < lowerCase.length(); i++) {
+            char character = lowerCase.charAt(i);
             if ((character < 'a') || (character > 'z')) {
                 return false;
             }
         }
         return true;
-    }
-
-    private String processPunctionalMarks(String word) {
-        String processed = word.replace("-", "").replace(".", "");
-        return processed;
     }
 }

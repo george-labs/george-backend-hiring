@@ -19,17 +19,31 @@ class WordProcessorWithUserInputTest {
 
     @BeforeEach
     public void setUp() {
-        input = new ByteArrayInputStream("Mary had a little lamb".getBytes());
-        byteArrayOutput = new ByteArrayOutputStream();
-        output = new PrintStream(byteArrayOutput);
-        testSubject = new WordProcessorWithUserInput(input, output);
+
     }
 
     @Test
     void testRun_givenValidText_thenPrintNumberOfWords() {
+        init("Mary had a little lamb");
         assertTrue(byteArrayOutput.toString().isEmpty());
         testSubject.process();
         output.flush();
         assertEquals("Enter text: Number of words: 4, unique: 4", byteArrayOutput.toString());
+    }
+
+    @Test
+    void testRun_givenValidText2_thenPrintNumberOfWords() {
+        init("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.");
+        assertTrue(byteArrayOutput.toString().isEmpty());
+        testSubject.process();
+        output.flush();
+        assertEquals("Enter text: Number of words: 9, unique: 7", byteArrayOutput.toString());
+    }
+
+    void init(String inputText) {
+        input = new ByteArrayInputStream(inputText.getBytes());
+        byteArrayOutput = new ByteArrayOutputStream();
+        output = new PrintStream(byteArrayOutput);
+        testSubject = new WordProcessorWithUserInput(input, output);
     }
 }
