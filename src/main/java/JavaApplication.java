@@ -13,7 +13,7 @@ public class JavaApplication {
     }
 
     private static void runWithFileInput(String[] args) {
-        try (InputStream input = new FileInputStream(args[0])) {
+        try (InputStream input = JavaApplication.class.getClassLoader().getResourceAsStream(args[0])) {
             new WordProcessorWithFileInput(input, System.out).process();
         } catch (FileNotFoundException e) {
             System.err.println(String.format("File [%s] doesn't exist", args[0]));
