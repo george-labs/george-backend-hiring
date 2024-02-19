@@ -1,5 +1,7 @@
 public class WordCounter {
 
+    private StopWords words = new StopWords("stopwords.txt");
+
     public int count(String text) {
         if ((text == null) || text.isBlank()) {
             throw new IllegalArgumentException("Unsupported input text");
@@ -26,6 +28,9 @@ public class WordCounter {
             return false;
         }
         String lowerCaseWord = word.toLowerCase();
+        if (isStopWord(lowerCaseWord)) {
+            return false;
+        }
         for (int i = 0; i < word.length(); i++) {
             char character = lowerCaseWord.charAt(i);
             if ((character < 'a') || (character > 'z')) {
@@ -34,4 +39,6 @@ public class WordCounter {
         }
         return true;
     }
+
+
 }
