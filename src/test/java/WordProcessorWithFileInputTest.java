@@ -14,14 +14,6 @@ class WordProcessorWithFileInputTest {
     private PrintStream output;
     private ByteArrayOutputStream byteArrayOutput;
 
-    @BeforeEach
-    public void setUp() {
-        input = getClass().getResourceAsStream("test-mytext.txt");
-        byteArrayOutput = new ByteArrayOutputStream();
-        output = new PrintStream(byteArrayOutput);
-        testSubject = new WordProcessorWithFileInput(input, output);
-    }
-
     @AfterEach
     public void tearDown() throws IOException {
         input.close();
@@ -29,9 +21,26 @@ class WordProcessorWithFileInputTest {
 
     @Test
     void testRun_givenValidText_thenPrintNumberOfWords() {
+        init("test-mytext.txt");
         assertTrue(byteArrayOutput.toString().isEmpty());
         testSubject.process();
         output.flush();
         assertEquals("Number of words: 4, unique: 4", byteArrayOutput.toString());
+    }
+
+    @Test
+    void testRun_givenValidText2_thenPrintNumberOfWords() {
+        init("test-mytext-unique.txt");
+        assertTrue(byteArrayOutput.toString().isEmpty());
+        testSubject.process();
+        output.flush();
+        assertEquals("Number of words: 9, unique: 7", byteArrayOutput.toString());
+    }
+
+    void init(String fileName) {
+        input = getClass().getResourceAsStream(fileName);
+        byteArrayOutput = new ByteArrayOutputStream();
+        output = new PrintStream(byteArrayOutput);
+        testSubject = new WordProcessorWithFileInput(input, output);
     }
 }

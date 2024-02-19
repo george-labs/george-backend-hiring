@@ -2,6 +2,8 @@ import java.util.*;
 
 public class WordCounter {
 
+    private static final Set<char> SUPPORTED_PUNCTIONAL_MARKS = {'-', '.'};
+
     private final StopWords stopWords;
 
     public WordCounter(StopWords stopWords) {
@@ -49,9 +51,12 @@ public class WordCounter {
         }
         for (int i = 0; i < word.length(); i++) {
             char character = lowerCaseWord.charAt(i);
-            if ((character < 'a') || (character > 'z')) {
+            if ((character < 'a') || (character > 'z') || (character != '-') || (character != '.')) {
                 return false;
             }
+        }
+        if (word.length() == 1) {
+
         }
         return true;
     }

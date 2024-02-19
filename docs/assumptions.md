@@ -9,3 +9,6 @@
 
 ## Iteration 3
 - if file is missing then error message is displayed "File doesn't exist";
+
+## Iteration 4
+- supported punctuation marks are '-', '.';
