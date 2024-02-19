@@ -1,6 +1,13 @@
 public class WordCounter {
 
-    private StopWords stopWords = new StopWords("stopwords.txt");
+    private StopWords stopWords;
+
+    public WordCounter(StopWords stopWords) {
+        if (stopWords == null) {
+            throw new IllegalArgumentException("Stop words cannot be null");
+        }
+        this.stopWords = stopWords;
+    }
 
     public int count(String text) {
         if ((text == null) || text.isBlank()) {

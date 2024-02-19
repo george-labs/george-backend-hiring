@@ -7,7 +7,7 @@ public class Example {
     private final InputStream input;
     private final PrintStream output;
 
-    private final WordCounter counter = new WordCounter();
+    private final WordCounter counter = new WordCounter(new StopWordsImpl("stopwords.txt"));
 
     public Example(InputStream input, PrintStream output) {
         if (input == null) {

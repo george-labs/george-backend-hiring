@@ -30,6 +30,6 @@ class ExampleTest {
         assertTrue(byteArrayOutput.toString().isEmpty());
         testSubject.run();
         output.flush();
-        assertEquals("Enter text: Number of words: 5", byteArrayOutput.toString());
+        assertEquals("Enter text: Number of words: 4", byteArrayOutput.toString());
     }
 }

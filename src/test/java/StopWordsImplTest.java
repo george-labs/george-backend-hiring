@@ -1,16 +1,15 @@
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StopWordsTest {
+class StopWordsImplTest {
 
-    private StopWords testSubject;
+    private StopWordsImpl testSubject;
 
     @BeforeEach
     public void setUp() {
-        testSubject = new StopWords("test-stopwords.txt");
+        testSubject = new StopWordsImpl("test-stopwords.txt");
     }
 
     @Test

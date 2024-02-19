@@ -9,7 +9,7 @@ class WordCounterTest {
 
     @BeforeEach
     public void setUp() {
-        testSubject = new WordCounter();
+        testSubject = new WordCounter(new StopWordsImpl("test-stopwords.txt"));
     }
 
     @Test
@@ -119,11 +119,17 @@ class WordCounterTest {
 
     @Test
     void testIsValidWord_givenValidCharacter_thenReturnTrue() {
-        for (char c = 'a'; c <= 'z'; c++) {
-            assertTrue(testSubject.isValidWord(String.valueOf(c)));
-        }
-        for (char c = 'A'; c <= 'Z'; c++) {
-            assertTrue(testSubject.isValidWord(String.valueOf(c)));
+        testIsValidWord_givenCharacter('a', 'z');
+        testIsValidWord_givenCharacter('A', 'Z');
+    }
+
+    void testIsValidWord_givenCharacter(char start, char stop) {
+        for (char c = start; c <= stop; c++) {
+            if (c == 'a' || c == 'A') {
+                assertFalse(testSubject.isValidWord(String.valueOf(c)));
+            } else {
+                assertTrue(testSubject.isValidWord(String.valueOf(c)));
+            }
         }
     }
 
