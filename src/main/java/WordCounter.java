@@ -2,7 +2,7 @@ import java.util.*;
 
 public class WordCounter {
 
-    private static final Set<char> SUPPORTED_PUNCTIONAL_MARKS = {'-', '.'};
+    private static final Set<Character> SUPPORTED_PUNCTIONAL_MARKS = Set.of('-', '.');
 
     private final StopWords stopWords;
 
@@ -45,21 +45,24 @@ public class WordCounter {
         if (word == null || word.isEmpty()) {
             return false;
         }
-        String lowerCaseWord = word.toLowerCase();
-        if (stopWords.isStopWord(lowerCaseWord)) {
+        if (word.length() == 1 || SUPPORTED_PUNCTIONAL_MARKS.contains(word.charAt(0))) {
             return false;
         }
-        for (int i = 0; i < word.length(); i++) {
-            char character = lowerCaseWord.charAt(i);
-            if ((character < 'a') || (character > 'z') || (character != '-') || (character != '.')) {
+        String processedWord = processPunctionalMarks(word.toLowerCase());
+        if (stopWords.isStopWord(processedWord)) {
+            return false;
+        }
+        for (int i = 0; i < processedWord.length(); i++) {
+            char character = processedWord.charAt(i);
+            if ((character < 'a') || (character > 'z')) {
                 return false;
             }
-        }
-        if (word.length() == 1) {
-
         }
         return true;
     }
 
-
+    private String processPunctionalMarks(String word) {
+        String processed = word.replace("-", "").replace(".", "");
+        return processed;
+    }
 }

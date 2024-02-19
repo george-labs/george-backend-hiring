@@ -140,4 +140,17 @@ class WordCounterTest {
         assertFalse(testSubject.isValidWord("on"));
         assertFalse(testSubject.isValidWord("off"));
     }
+
+    @Test
+    void testIsValidWord_givenOnlySupportedPunctionalMarks_thenReturnFalse() {
+        assertFalse(testSubject.isValidWord("."));
+        assertFalse(testSubject.isValidWord("-"));
+    }
+
+    @Test
+    void testIsValidWord_givenSupportedPunctionalMarksInWords_thenReturnTrue() {
+        assertTrue(testSubject.isValidWord("Humpty-Dumpty"));
+        assertTrue(testSubject.isValidWord("wall."));
+    }
+
 }
