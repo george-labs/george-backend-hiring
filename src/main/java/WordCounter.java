@@ -29,4 +29,20 @@ public class WordCounter {
         }
     }
 
+    public long countWordsFromFile(String filename) {
+        String text = loadTextFromFile(filename);
+        return countWords(text);
+
+    }
+
+    private String loadTextFromFile(String filename) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(filename);
+        try {
+            return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
 }

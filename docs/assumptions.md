@@ -9,3 +9,8 @@
 - I assume that all words in stopwords.txt file are on their own lines, which means one word per line.
 - Empty lines in stopwords.txt file are not considered.
 - If no file is provided, or any error happens when reading the stopwords.txt file, then empty list of stop words is provided to the application.
+
+
+## Iteration 3
+
+- I assume that the text file provided to application exists.
