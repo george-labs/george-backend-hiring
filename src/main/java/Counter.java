@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.util.Set;
 
 public class Counter {
 
@@ -6,6 +7,8 @@ public class Counter {
     private long countUnique = 0;
 
     private BigDecimal averageLength;
+
+    private Set<String> usedWords;
 
     public Counter(long count, long countUnique) {
         this.count = count;
@@ -16,6 +19,13 @@ public class Counter {
         this.count = count;
         this.countUnique = countUnique;
         this.averageLength = averageLength;
+    }
+
+    public Counter(long count, long countUnique, BigDecimal averageLength, Set<String> usedWords) {
+        this.count = count;
+        this.countUnique = countUnique;
+        this.averageLength = averageLength;
+        this.usedWords = usedWords;
     }
 
     public long getCount() {
@@ -40,5 +50,13 @@ public class Counter {
 
     public void setAverageLength(BigDecimal averageLength) {
         this.averageLength = averageLength;
+    }
+
+    public Set<String> getUsedWords() {
+        return usedWords;
+    }
+
+    public void setUsedWords(Set<String> usedWords) {
+        this.usedWords = usedWords;
     }
 }

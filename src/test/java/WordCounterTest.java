@@ -83,4 +83,19 @@ public class WordCounterTest {
         assert counter.getAverageLength().equals(BigDecimal.valueOf(5.25));
     }
 
+    @Test
+    public void testForIndex() {
+        String testText = "Lets test average length test test average";
+
+        WordCounter wordCounter = new WordCounter();
+        Counter counter = wordCounter.countWords(testText);
+        assert counter.getCount() == 7;
+        assert counter.getAverageLength().equals(BigDecimal.valueOf(5.15));
+        assert counter.getUsedWords().contains("Lets");
+        assert counter.getUsedWords().contains("test");
+        assert counter.getUsedWords().contains("average");
+        assert counter.getUsedWords().contains("length");
+        assert counter.getUsedWords().size() == 4;
+    }
+
 }

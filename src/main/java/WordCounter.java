@@ -25,7 +25,7 @@ public class WordCounter {
         }
         BigDecimal averageLength = BigDecimal.valueOf(wordsTotalLength).divide(BigDecimal.valueOf(count), 2, RoundingMode.CEILING);
 
-        return new Counter(count, uniqueCount, averageLength);
+        return new Counter(count, uniqueCount, averageLength, usedWords);
     }
 
     public List<String> getStopWords() {
