@@ -24,3 +24,8 @@
 
 - no assumptions needed
 
+## Iteration 6
+
+- I assume that the average number should be calculated from all words, not just unique.
+- I also assume that the output should be rounded up to 2 digits.
+

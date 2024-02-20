@@ -1,4 +1,6 @@
 import java.io.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -9,6 +11,7 @@ public class WordCounter {
         Set<String> usedWords = new HashSet<>();
         long count = 0;
         long uniqueCount = 0;
+        long wordsTotalLength = 0;
         String[] words = someText.split("[\\s\\.,]");
         for (String word : words) {
             if (!stopWords.contains(word) && word.matches("[a-zA-Z-]+")) {
@@ -17,9 +20,12 @@ public class WordCounter {
                     usedWords.add(word);
                 }
                 count++;
+                wordsTotalLength += word.length();
             }
         }
-        return new Counter(count, uniqueCount);
+        BigDecimal averageLength = BigDecimal.valueOf(wordsTotalLength).divide(BigDecimal.valueOf(count), 2, RoundingMode.CEILING);
+
+        return new Counter(count, uniqueCount, averageLength);
     }
 
     public List<String> getStopWords() {

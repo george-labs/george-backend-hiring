@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 public class WordCounterTest {
 
     @Test
@@ -59,6 +61,26 @@ public class WordCounterTest {
         Counter counter = wordCounter.countWords(testText);
         assert counter.getCount() == 7;
         assert counter.getCountUnique() == 6;
+    }
+
+    @Test
+    public void testForAverage() {
+        String testText = "Mary had a little lamb";
+
+        WordCounter wordCounter = new WordCounter();
+        Counter counter = wordCounter.countWords(testText);
+        assert counter.getCount() == 4;
+        assert counter.getAverageLength().equals(BigDecimal.valueOf(4.25));
+    }
+
+    @Test
+    public void testForAverage2() {
+        String testText = "Lets test average length";
+
+        WordCounter wordCounter = new WordCounter();
+        Counter counter = wordCounter.countWords(testText);
+        assert counter.getCount() == 4;
+        assert counter.getAverageLength().equals(BigDecimal.valueOf(5.25));
     }
 
 }
