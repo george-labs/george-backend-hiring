@@ -1,11 +1,14 @@
 import java.util.Scanner;
+import java.util.Set;
 
 public class JavaApplication {
 
 
     public static void main(String[] args) {
 
-        WordCounter wordCounter = new WordCounter();
+        Set<String> stopWords = ReadFileAdapter.getStopWords();
+        WordCounter wordCounter = new WordCounter(stopWords);
+
 
         if (args.length == 1) {
             String filename = args[0];

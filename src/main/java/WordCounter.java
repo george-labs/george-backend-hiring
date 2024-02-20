@@ -4,8 +4,13 @@ import java.util.*;
 
 public class WordCounter {
 
+    private final Set<String> stopWords;
+
+    public WordCounter(Set<String> stopWords) {
+        this.stopWords = stopWords;
+    }
+
     public Counter countWords(String someText) {
-        List<String> stopWords = ReadFileAdapter.getStopWords();
         Set<String> usedWords = new HashSet<>();
         Counter counter = new Counter();
         String[] words = someText.split("[\\s\\.,]");

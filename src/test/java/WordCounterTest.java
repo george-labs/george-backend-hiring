@@ -1,8 +1,18 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 public class WordCounterTest {
+
+    private WordCounter wordCounter;
+
+    @BeforeEach
+    public void prepareDependencies() {
+        Set<String> stopWords = ReadFileAdapter.getStopWords();
+        this.wordCounter = new WordCounter(stopWords);
+    }
 
     @Test
     public void testWordCounting() {
@@ -11,7 +21,6 @@ public class WordCounterTest {
                 "\n" +
                 "something";
 
-        WordCounter wordCounter = new WordCounter();
         Counter counter = wordCounter.countWords(testText);
         assert counter.getCount() == 4;
     }
@@ -20,7 +29,6 @@ public class WordCounterTest {
     public void testWordCountingSecond() {
         String testText = "Mary had a little lamb";
 
-        WordCounter wordCounter = new WordCounter();
         Counter counter = wordCounter.countWords(testText);
         assert counter.getCount() == 4;
     }
@@ -29,7 +37,6 @@ public class WordCounterTest {
     public void testWordCountingWithNumbers() {
         String testText = "Mary had 52 lambs at home";
 
-        WordCounter wordCounter = new WordCounter();
         Counter counter = wordCounter.countWords(testText);
         assert counter.getCount() == 5;
     }
@@ -38,7 +45,6 @@ public class WordCounterTest {
     public void testWordCountingWithSymbols() {
         String testText = "Mary, had ** lambs at home.";
 
-        WordCounter wordCounter = new WordCounter();
         Counter counter = wordCounter.countWords(testText);
         assert counter.getCount() == 5;
     }
@@ -47,7 +53,6 @@ public class WordCounterTest {
     public void testUniqueWords() {
         String testText = "Mary, had 55 lambs at home. lambs at home. Lambs.";
 
-        WordCounter wordCounter = new WordCounter();
         Counter counter = wordCounter.countWords(testText);
         assert counter.getCount() == 9;
         assert counter.getCountUnique() == 6;
@@ -57,7 +62,6 @@ public class WordCounterTest {
     public void testWithHyphen() {
         String testText = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
 
-        WordCounter wordCounter = new WordCounter();
         Counter counter = wordCounter.countWords(testText);
         assert counter.getCount() == 7;
         assert counter.getCountUnique() == 6;
@@ -67,7 +71,6 @@ public class WordCounterTest {
     public void testForAverage() {
         String testText = "Mary had a little lamb";
 
-        WordCounter wordCounter = new WordCounter();
         Counter counter = wordCounter.countWords(testText);
         assert counter.getCount() == 4;
         assert counter.getAverageLength().equals(BigDecimal.valueOf(4.25));
@@ -77,7 +80,6 @@ public class WordCounterTest {
     public void testForAverage2() {
         String testText = "Lets test average length";
 
-        WordCounter wordCounter = new WordCounter();
         Counter counter = wordCounter.countWords(testText);
         assert counter.getCount() == 4;
         assert counter.getAverageLength().equals(BigDecimal.valueOf(5.25));
@@ -87,7 +89,6 @@ public class WordCounterTest {
     public void testForIndex() {
         String testText = "Lets test average length test test average";
 
-        WordCounter wordCounter = new WordCounter();
         Counter counter = wordCounter.countWords(testText);
         assert counter.getCount() == 7;
         assert counter.getAverageLength().equals(BigDecimal.valueOf(5.15));
