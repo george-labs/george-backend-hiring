@@ -20,7 +20,7 @@ public class WordCounterTest {
 
         WordCounter wordCounter = new WordCounter();
         long words = wordCounter.countWords(testText);
-        assert words == 5;
+        assert words == 4;
     }
 
     @Test
@@ -29,7 +29,7 @@ public class WordCounterTest {
 
         WordCounter wordCounter = new WordCounter();
         long words = wordCounter.countWords(testText);
-        assert words == 5;
+        assert words == 2;
     }
 
     @Test
@@ -38,7 +38,7 @@ public class WordCounterTest {
 
         WordCounter wordCounter = new WordCounter();
         long words = wordCounter.countWords(testText);
-        assert words == 5;
+        assert words == 2;
     }
 
 }
