@@ -9,7 +9,8 @@ public class JavaApplication {
 
         if (args.length == 1) {
             String filename = args[0];
-            Counter counter = wordCounter.countWordsFromFile(filename);
+            String text = ReadFileAdapter.loadTextFromFile(filename);
+            Counter counter = wordCounter.countWords(text);
             System.out.println(getOutputMessage(counter));
             return;
         }

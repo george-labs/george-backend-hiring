@@ -10,6 +10,11 @@ public class Counter {
 
     private Set<String> usedWords;
 
+    private long totalCharacters;
+
+    public Counter() {
+    }
+
     public Counter(long count, long countUnique) {
         this.count = count;
         this.countUnique = countUnique;
@@ -26,6 +31,14 @@ public class Counter {
         this.countUnique = countUnique;
         this.averageLength = averageLength;
         this.usedWords = usedWords;
+    }
+
+    public Counter(long count, long countUnique, BigDecimal averageLength, Set<String> usedWords, long totalCharacters) {
+        this.count = count;
+        this.countUnique = countUnique;
+        this.averageLength = averageLength;
+        this.usedWords = usedWords;
+        this.totalCharacters = totalCharacters;
     }
 
     public long getCount() {
@@ -58,5 +71,13 @@ public class Counter {
 
     public void setUsedWords(Set<String> usedWords) {
         this.usedWords = usedWords;
+    }
+
+    public long getTotalCharacters() {
+        return totalCharacters;
+    }
+
+    public void setTotalCharacters(long totalCharacters) {
+        this.totalCharacters = totalCharacters;
     }
 }
