@@ -9,8 +9,8 @@ public class JavaApplication {
 
         if (args.length == 1) {
             String filename = args[0];
-            long wordsInFile = wordCounter.countWordsFromFile(filename);
-            System.out.print("Number of words: " + wordsInFile);
+            Counter counter = wordCounter.countWordsFromFile(filename);
+            System.out.print("Number of words: " + counter.getCount() + ", unique: " + counter.getCountUnique());
             return;
         }
 
@@ -19,8 +19,8 @@ public class JavaApplication {
 
         String someText = scanner.nextLine();
 
-        long numberOfWords = wordCounter.countWords(someText);
-        System.out.print("Number of words: " + numberOfWords);
+        Counter counter = wordCounter.countWords(someText);
+        System.out.print("Number of words: " + counter.getCount() + ", unique: " + counter.getCountUnique());
 
     }
 }

@@ -10,8 +10,8 @@ public class WordCounterTest {
                 "something";
 
         WordCounter wordCounter = new WordCounter();
-        long words = wordCounter.countWords(testText);
-        assert words == 4;
+        Counter counter = wordCounter.countWords(testText);
+        assert counter.getCount() == 4;
     }
 
     @Test
@@ -19,8 +19,8 @@ public class WordCounterTest {
         String testText = "Mary had a little lamb";
 
         WordCounter wordCounter = new WordCounter();
-        long words = wordCounter.countWords(testText);
-        assert words == 4;
+        Counter counter = wordCounter.countWords(testText);
+        assert counter.getCount() == 4;
     }
 
     @Test
@@ -28,8 +28,8 @@ public class WordCounterTest {
         String testText = "Mary had 52 lambs at home";
 
         WordCounter wordCounter = new WordCounter();
-        long words = wordCounter.countWords(testText);
-        assert words == 2;
+        Counter counter = wordCounter.countWords(testText);
+        assert counter.getCount() == 5;
     }
 
     @Test
@@ -37,8 +37,18 @@ public class WordCounterTest {
         String testText = "Mary, had ** lambs at home.";
 
         WordCounter wordCounter = new WordCounter();
-        long words = wordCounter.countWords(testText);
-        assert words == 2;
+        Counter counter = wordCounter.countWords(testText);
+        assert counter.getCount() == 5;
+    }
+
+    @Test
+    public void testUniqueWords() {
+        String testText = "Mary, had 55 lambs at home. lambs at home. Lambs.";
+
+        WordCounter wordCounter = new WordCounter();
+        Counter counter = wordCounter.countWords(testText);
+        assert counter.getCount() == 9;
+        assert counter.getCountUnique() == 6;
     }
 
 }

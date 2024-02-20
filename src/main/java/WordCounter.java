@@ -1,21 +1,25 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class WordCounter {
 
-    public long countWords(String someText) {
+    public Counter countWords(String someText) {
         List<String> stopWords = getStopWords();
+        Set<String> usedWords = new HashSet<>();
         long count = 0;
+        long uniqueCount = 0;
         String[] words = someText.split("[\\s\\.,]");
         for (String word : words) {
             if (!stopWords.contains(word) && word.matches("[a-zA-Z]+")) {
+                if (!usedWords.contains(word)) {
+                    uniqueCount++;
+                    usedWords.add(word);
+                }
                 count++;
             }
         }
-        return count;
+        return new Counter(count, uniqueCount);
     }
 
     public List<String> getStopWords() {
@@ -29,7 +33,7 @@ public class WordCounter {
         }
     }
 
-    public long countWordsFromFile(String filename) {
+    public Counter countWordsFromFile(String filename) {
         String text = loadTextFromFile(filename);
         return countWords(text);
 

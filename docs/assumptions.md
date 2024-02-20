@@ -14,3 +14,8 @@
 ## Iteration 3
 
 - I assume that the text file provided to application exists.
+
+
+## Iteration 4
+
+- I assume that words are unique unless they match every character including case (uppercase, lowercase). Which means that "Cat" and "cat" are both unique. 
