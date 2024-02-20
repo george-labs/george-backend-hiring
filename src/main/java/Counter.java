@@ -15,32 +15,6 @@ public class Counter {
     public Counter() {
     }
 
-    public Counter(long count, long countUnique) {
-        this.count = count;
-        this.countUnique = countUnique;
-    }
-
-    public Counter(long count, long countUnique, BigDecimal averageLength) {
-        this.count = count;
-        this.countUnique = countUnique;
-        this.averageLength = averageLength;
-    }
-
-    public Counter(long count, long countUnique, BigDecimal averageLength, Set<String> usedWords) {
-        this.count = count;
-        this.countUnique = countUnique;
-        this.averageLength = averageLength;
-        this.usedWords = usedWords;
-    }
-
-    public Counter(long count, long countUnique, BigDecimal averageLength, Set<String> usedWords, long totalCharacters) {
-        this.count = count;
-        this.countUnique = countUnique;
-        this.averageLength = averageLength;
-        this.usedWords = usedWords;
-        this.totalCharacters = totalCharacters;
-    }
-
     public long getCount() {
         return count;
     }

@@ -1,39 +1,44 @@
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class JavaApplication {
 
 
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
         Set<String> stopWords = ReadFileAdapter.getStopWords();
         WordCounter wordCounter = new WordCounter(stopWords);
+        boolean printIndex = Arrays.asList(args).contains("-index");
+        boolean readFromFile = Arrays.stream(args).anyMatch(it -> !it.startsWith("-"));
+        String text;
 
-
-        if (args.length == 1) {
-            String filename = args[0];
-            String text = ReadFileAdapter.loadTextFromFile(filename);
-            Counter counter = wordCounter.countWords(text);
-            System.out.println(getOutputMessage(counter));
-            return;
+        if (readFromFile) {
+            String filename = getFilename(args);
+            text = ReadFileAdapter.loadTextFromFile(filename);
+        } else {
+            System.out.print("Enter text: ");
+            text = scanner.nextLine();
         }
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter text: ");
-
-        String someText = scanner.nextLine();
-
-        Counter counter = wordCounter.countWords(someText);
-        System.out.println(getOutputMessage(counter));
+        Counter counter = wordCounter.countWords(text);
+        System.out.println(getOutputMessage(counter, printIndex));
 
     }
 
-    private static String getOutputMessage(Counter counter) {
-        String message = "Number of words: " + counter.getCount() + ", unique: " + counter.getCountUnique() +
-                "; average word length: " + counter.getAverageLength() + " characters" +
-                "\nIndex:\n";
-        String usedWords = String.join("\n", counter.getUsedWords());
+    private static String getFilename(String[] args) {
+        Optional<String> filename = Arrays.stream(args).filter(it -> !it.startsWith("-")).findFirst();
+        return filename.get();
+    }
 
-        return message + usedWords;
+    private static String getOutputMessage(Counter counter, boolean printIndex) {
+        String message = "Number of words: " + counter.getCount() + ", unique: " + counter.getCountUnique() +
+                "; average word length: " + counter.getAverageLength() + " characters";
+
+        if (printIndex) {
+            String usedWords = String.join("\n", counter.getUsedWords());
+            return message + "\nIndex:\n" + usedWords;
+        }
+
+        return message;
     }
 }

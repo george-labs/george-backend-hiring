@@ -11,6 +11,10 @@ public class WordCounter {
     }
 
     public Counter countWords(String someText) {
+        if (someText == null) {
+            throw new IllegalStateException("Text cannot be empty.");
+        }
+
         Set<String> usedWords = new HashSet<>();
         Counter counter = new Counter();
         String[] words = someText.split("[\\s\\.,]");
