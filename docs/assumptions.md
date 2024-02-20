@@ -19,3 +19,8 @@
 ## Iteration 4
 
 - I assume that words are unique unless they match every character including case (uppercase, lowercase). Which means that "Cat" and "cat" are both unique. 
+
+## Iteration 5
+
+- no assumptions needed
+

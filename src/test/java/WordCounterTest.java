@@ -51,4 +51,14 @@ public class WordCounterTest {
         assert counter.getCountUnique() == 6;
     }
 
+    @Test
+    public void testWithHyphen() {
+        String testText = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+
+        WordCounter wordCounter = new WordCounter();
+        Counter counter = wordCounter.countWords(testText);
+        assert counter.getCount() == 7;
+        assert counter.getCountUnique() == 6;
+    }
+
 }

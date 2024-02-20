@@ -11,7 +11,7 @@ public class WordCounter {
         long uniqueCount = 0;
         String[] words = someText.split("[\\s\\.,]");
         for (String word : words) {
-            if (!stopWords.contains(word) && word.matches("[a-zA-Z]+")) {
+            if (!stopWords.contains(word) && word.matches("[a-zA-Z-]+")) {
                 if (!usedWords.contains(word)) {
                     uniqueCount++;
                     usedWords.add(word);

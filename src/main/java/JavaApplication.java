@@ -10,7 +10,7 @@ public class JavaApplication {
         if (args.length == 1) {
             String filename = args[0];
             Counter counter = wordCounter.countWordsFromFile(filename);
-            System.out.print("Number of words: " + counter.getCount() + ", unique: " + counter.getCountUnique());
+            System.out.println("Number of words: " + counter.getCount() + ", unique: " + counter.getCountUnique());
             return;
         }
 
@@ -20,7 +20,7 @@ public class JavaApplication {
         String someText = scanner.nextLine();
 
         Counter counter = wordCounter.countWords(someText);
-        System.out.print("Number of words: " + counter.getCount() + ", unique: " + counter.getCountUnique());
+        System.out.println("Number of words: " + counter.getCount() + ", unique: " + counter.getCountUnique());
 
     }
 }
