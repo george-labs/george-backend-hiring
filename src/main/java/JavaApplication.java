@@ -1,7 +1,6 @@
 import textprocessor.WordCounterImpl;
 import textprocessor.WordsCounter;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class JavaApplication {
