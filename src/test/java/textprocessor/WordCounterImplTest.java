@@ -48,7 +48,7 @@ public class WordCounterImplTest {
         init();
 
         int count = wordCounter.countWords("AA$BB   CC5DD 1234 @#$% XXX YYY");
-        Assertions.assertEquals(6, count);
+        Assertions.assertEquals(2, count);
     }
 
     @Test

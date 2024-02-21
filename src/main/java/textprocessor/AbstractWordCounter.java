@@ -1,7 +1,10 @@
 package textprocessor;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class AbstractWordCounter {
     private StopWordsChecker stopWordsChecker;
@@ -13,30 +16,13 @@ public class AbstractWordCounter {
     protected WordsCount countWordsUnique(String text) {
         Set<String> uniqueWords = new HashSet<>();
 
-        int counter = 0;
-        char[] chars = (text + " ").toCharArray();
-        StringBuilder wordBuilder = new StringBuilder();
-        for (char ch : chars) {
-            boolean isCharLetter = Character.isLetter(ch);
+        String[] allWords = text.split("[\\s-.]+");
+        List<String> realWords = Arrays.stream(allWords)
+                .filter(word -> word.matches("[A-Za-z]+"))
+                .map(String::toLowerCase)
+                .filter(word -> !stopWordsChecker.isStopWord(word))
+                .collect(Collectors.toList());
 
-            if (isCharLetter) {
-                wordBuilder.append(ch);
-                continue;
-            }
-
-            String word = wordBuilder.toString();
-            if (word.isEmpty()) {
-                continue;
-            }
-
-            if (!stopWordsChecker.isStopWord(word.toLowerCase())) {
-                uniqueWords.add(word);
-                counter++;
-            }
-
-            wordBuilder.setLength(0);
-        }
-
-        return new WordsCount(counter, uniqueWords.size());
+        return new WordsCount(realWords.size(), new HashSet<>(realWords).size());
     }
 }
