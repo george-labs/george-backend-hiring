@@ -24,13 +24,6 @@ public class JavaApplication {
 
             System.out.println("Number of words: " + counter.countWords(text));
 
-
-//            Path path = Paths.get("src/main/resources/stopwords.txt");
-
-//            List<String> stopWords = Files.readAllLines(path);
-
-//            System.out.println(String.join(",", stopWords));
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

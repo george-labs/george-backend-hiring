@@ -10,7 +10,7 @@ public class WordCounterImpl implements WordsCounter {
     @Override
     public int countWords(String text) {
         int counter = 0;
-        char[] chars = text.toCharArray();
+        char[] chars = (text + " ").toCharArray();
         StringBuilder wordBuilder = new StringBuilder();
         for (char ch : chars) {
             boolean isCharLetter = Character.isLetter(ch);
@@ -25,10 +25,13 @@ public class WordCounterImpl implements WordsCounter {
                 continue;
             }
 
-            if (stopWordsChecker.isStopWord(word)) {
+            if (!stopWordsChecker.isStopWord(word.toLowerCase())) {
                 counter++;
             }
+
+            wordBuilder.setLength(0);
         }
+
 
         return counter;
     }

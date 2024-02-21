@@ -4,10 +4,16 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class WordCounterImplTest {
+    private WordsCounter wordCounter;
+
+    private void init() {
+        StopWordsChecker stopWordsChecker = new StopWordsCheckerImpl("src/test/resources/teststopwords.txt");
+        wordCounter = new WordCounterImpl(stopWordsChecker);
+    }
 
     @Test
     void testSingleWord() {
-        WordsCounter wordCounter = new WordCounterImpl();
+        init();
 
         int count = wordCounter.countWords("Mary");
         Assertions.assertEquals(1, count);
@@ -15,15 +21,15 @@ public class WordCounterImplTest {
 
     @Test
     void testMultiWord() {
-        WordsCounter wordCounter = new WordCounterImpl();
+        init();
 
         int count = wordCounter.countWords("Mary had a little lamb");
-        Assertions.assertEquals(5, count);
+        Assertions.assertEquals(4, count);
     }
 
     @Test
     void testEmptyText() {
-        WordsCounter wordCounter = new WordCounterImpl();
+        init();
 
         int count = wordCounter.countWords("");
         Assertions.assertEquals(0, count);
@@ -31,7 +37,7 @@ public class WordCounterImplTest {
 
     @Test
     void testWhitespaceText() {
-        WordsCounter wordCounter = new WordCounterImpl();
+        init();
 
         int count = wordCounter.countWords("          ");
         Assertions.assertEquals(0, count);
@@ -39,9 +45,18 @@ public class WordCounterImplTest {
 
     @Test
     void testTextDigitsAndSymbols() {
-        WordsCounter wordCounter = new WordCounterImpl();
+        init();
 
         int count = wordCounter.countWords("AA$BB   CC5DD 1234 @#$% XXX YYY");
         Assertions.assertEquals(6, count);
     }
+
+    @Test
+    void testOnlyBlacklisted() {
+        init();
+
+        int count = wordCounter.countWords("the a on off");
+        Assertions.assertEquals(0, count);
+    }
+
 }
