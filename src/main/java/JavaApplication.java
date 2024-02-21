@@ -1,3 +1,6 @@
+import sourceprovider.ConsoleTextProvider;
+import sourceprovider.FileTextProvider;
+import sourceprovider.TextProvider;
 import textprocessor.StopWordsChecker;
 import textprocessor.StopWordsCheckerImpl;
 import textprocessor.WordCounterImpl;
@@ -15,14 +18,18 @@ import java.util.stream.Collectors;
 public class JavaApplication {
     public static void main(String[] args) {
         try {
-            System.out.println("Enter text: ");
-            Scanner scanner = new Scanner(System.in);
-            String text = scanner.nextLine();
+            String fileName = args.length > 0 ? args[0] : "";
+            TextProvider textProvider;
+            if (!fileName.isBlank()) {
+                textProvider = new FileTextProvider(fileName);
+            } else {
+                textProvider = new ConsoleTextProvider();
+            }
 
             StopWordsChecker stopWordsChecker = new StopWordsCheckerImpl("src/main/resources/stopwords.txt");
             WordsCounter counter = new WordCounterImpl(stopWordsChecker);
 
-            System.out.println("Number of words: " + counter.countWords(text));
+            System.out.println("Number of words: " + counter.countWords(textProvider.provide()));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
