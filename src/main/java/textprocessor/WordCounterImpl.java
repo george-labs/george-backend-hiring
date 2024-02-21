@@ -1,5 +1,8 @@
 package textprocessor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class WordCounterImpl implements WordsCounter {
     private StopWordsChecker stopWordsChecker;
 
@@ -9,6 +12,8 @@ public class WordCounterImpl implements WordsCounter {
 
     @Override
     public int countWords(String text) {
+        Set<String> uniqueWords = new HashSet<>();
+
         int counter = 0;
         char[] chars = (text + " ").toCharArray();
         StringBuilder wordBuilder = new StringBuilder();
