@@ -1,24 +1,25 @@
 package com.george.wordcount.reader;
 
 import com.george.wordcount.ContentReader;
-import com.george.wordcount.WordCounter;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.Locale;
+import java.io.IOException;
+import java.io.Reader;
 
 public abstract class AbstractReader implements ContentReader {
 
-    protected final String[] stopWords;
+    protected final Reader reader;
 
-    protected AbstractReader(String[] stopWords) {
-        this.stopWords = stopWords;
+    protected String content;
+
+    protected AbstractReader(Reader reader) throws IOException {
+        this.reader = reader;
+        content = readInput(reader);
     }
 
-    @NotNull
-    protected String getResultString(String line) {
-        WordCounter wordCounter = new WordCounter(line, stopWords);
-        return String.format("Number of words: %s, unique: %s; average word length: %s characters",
-                wordCounter.getCount(), wordCounter.getUniqueCount(),
-                String.format(Locale.US, "%.2f", wordCounter.getAverageWordLength()));
+    protected abstract String readInput(Reader inputStreamReader) throws IOException;
+
+    @Override
+    public String getContent() {
+        return content;
     }
 }

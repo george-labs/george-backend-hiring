@@ -6,11 +6,11 @@ import java.io.Reader;
 
 public class FileReader extends AbstractReader {
 
-    public FileReader(String[] stopWords) {
-        super(stopWords);
+    public FileReader(Reader reader) throws IOException {
+        super(reader);
     }
 
-    public String readInput(Reader inputStreamReader) throws IOException {
+    protected String readInput(Reader inputStreamReader) throws IOException {
         if (inputStreamReader == null) {
             throw new IOException("Can not read from reader");
         }
@@ -20,6 +20,6 @@ public class FileReader extends AbstractReader {
         while ((line = br.readLine()) != null) {
             result.append(line).append('\n');
         }
-        return getResultString(result.toString());
+        return result.toString();
     }
 }

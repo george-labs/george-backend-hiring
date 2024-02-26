@@ -6,16 +6,15 @@ import java.io.Reader;
 
 public class ConsoleReader extends AbstractReader {
 
-    public ConsoleReader(String[] stopWords) {
-        super(stopWords);
+    public ConsoleReader(Reader reader) throws IOException {
+        super(reader);
     }
 
-    public String readInput(Reader inputStreamReader) throws IOException {
+    protected String readInput(Reader inputStreamReader) throws IOException {
         System.out.print("Enter text: ");
         try {
             BufferedReader br = new BufferedReader(inputStreamReader);
-            String line = br.readLine();
-            return getResultString(line);
+            return br.readLine();
         } catch (NullPointerException e) {
             throw new IOException("Input stream is null");
         }
