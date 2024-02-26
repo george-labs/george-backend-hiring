@@ -10,18 +10,20 @@ class ConsoleReaderTest {
 
     @Test
     public void testReadInput() throws IOException {
-        StringReader sr = new StringReader("test 123 aaa");
-        String expected = "Number of words: 2";
+        final StringReader sr = new StringReader("test 123 aaa");
+        final String expected = "Number of words: 2";
+        final String[] stopWords = {};
 
-        String output = ConsoleReader.readInput(sr);
+        final String output = ConsoleReader.readInput(sr, stopWords);
 
         Assertions.assertEquals(expected, output);
     }
 
     @Test
     public void testReadInputNullReader() {
-        StringReader reader = null;
+        final StringReader reader = null;
+        final String[] stopWords = {};
 
-        Assertions.assertThrows(IOException.class, () -> ConsoleReader.readInput(reader));
+        Assertions.assertThrows(IOException.class, () -> ConsoleReader.readInput(reader, stopWords));
     }
 }

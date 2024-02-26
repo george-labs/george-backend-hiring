@@ -6,7 +6,10 @@ import java.io.InputStreamReader;
 public class MainApplication {
 
     public static void main(String[] args) throws IOException {
-        System.out.println(ConsoleReader.readInput(new InputStreamReader(System.in)));
+
+        StopWordsReader stopWordsReader = new StopWordsReader("/stopwords.txt");
+
+        System.out.println(ConsoleReader.readInput(new InputStreamReader(System.in), stopWordsReader.getWords()));
     }
 
 }

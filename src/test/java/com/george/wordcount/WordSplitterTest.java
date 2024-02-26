@@ -7,40 +7,44 @@ class WordSplitterTest {
 
     @Test
     public void testWordCountOk() {
-        String input = "aa ass dd";
-        int expectedCount = 3;
+        final String input = "aa ass dd";
+        final int expectedCount = 3;
+        final String[] stopWords = {};
 
-        int words = WordSplitter.countWords(input);
+        final int words = WordSplitter.countWords(input, stopWords);
 
         Assertions.assertEquals(expectedCount, words);
     }
 
     @Test
     public void testWordCountWithNumbers() {
-        String input = "11 22 33";
-        int expectedCount = 0;
+        final String input = "11 22 33";
+        final int expectedCount = 0;
+        final String[] stopWords = {};
 
-        int words = WordSplitter.countWords(input);
+        final int words = WordSplitter.countWords(input, stopWords);
 
         Assertions.assertEquals(expectedCount, words);
     }
 
     @Test
     public void testWordCountWithNull() {
-        String input = null;
-        int expectedCount = 0;
+        final String input = null;
+        final int expectedCount = 0;
+        final String[] stopWords = {};
 
-        int words = WordSplitter.countWords(input);
+        final int words = WordSplitter.countWords(input, stopWords);
 
         Assertions.assertEquals(expectedCount, words);
     }
 
     @Test
     public void testWordCountWithEmpty() {
-        String input = "";
-        int expectedCount = 0;
+        final String input = "";
+        final int expectedCount = 0;
+        final String[] stopWords = {};
 
-        int words = WordSplitter.countWords(input);
+        final int words = WordSplitter.countWords(input, stopWords);
 
         Assertions.assertEquals(expectedCount, words);
     }
