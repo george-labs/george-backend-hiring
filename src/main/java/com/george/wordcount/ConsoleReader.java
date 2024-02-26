@@ -7,6 +7,9 @@ import java.io.Reader;
 public class ConsoleReader {
 
     public static String readInput(Reader inputStreamReader) throws IOException {
+        if (inputStreamReader == null) {
+            throw new IOException("Can not read from reader");
+        }
         System.out.print("Enter text: ");
         BufferedReader br = new BufferedReader(inputStreamReader);
         String line = br.readLine();

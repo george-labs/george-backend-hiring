@@ -17,4 +17,11 @@ class ConsoleReaderTest {
 
         Assertions.assertEquals(expected, output);
     }
+
+    @Test
+    public void testReadInputNullReader() {
+        StringReader reader = null;
+
+        Assertions.assertThrows(IOException.class, () -> ConsoleReader.readInput(reader));
+    }
 }
