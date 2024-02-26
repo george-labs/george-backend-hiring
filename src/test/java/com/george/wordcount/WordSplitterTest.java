@@ -32,7 +32,7 @@ class WordSplitterTest {
     @Test
     public void testWordCountWithHyphen() {
         final String input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
-        final int expectedCount = 9;
+        final int expectedCount = 7;
         final String[] stopWords = {"the", "a", "on", "off"};
 
         final WordSplitter wordSplitter = new WordSplitter(input, stopWords);
@@ -44,8 +44,8 @@ class WordSplitterTest {
     @Test
     public void testWordCountWithUnique() {
         final String input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
-        final int expectedCount = 9;
-        final int expectedUniqueCount = 7;
+        final int expectedCount = 7;
+        final int expectedUniqueCount = 6;
         final String[] stopWords = {"the", "a", "on", "off"};
 
         final WordSplitter wordSplitter = new WordSplitter(input, stopWords);

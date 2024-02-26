@@ -20,7 +20,7 @@ public class WordSplitter {
             uniqueCount = 0;
             return;
         }
-        countWordsWithPatter(input.split("\\s+|-"), stopWords);
+        countWordsWithPatter(input.split("\\s+"), stopWords);
     }
 
     private void countWordsWithPatter(String[] split, String[] stopWords) {
