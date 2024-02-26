@@ -2,7 +2,9 @@ package wordcount.input;
 
 import java.util.Scanner;
 
-public class ConsoleInputProvider implements InputProvider{
+public class ConsoleInputProvider implements InputProvider {
+	
+	public ConsoleInputProvider() {}
 
 	@Override
 	public String getInput() {

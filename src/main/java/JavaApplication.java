@@ -1,7 +1,14 @@
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
+import counter.Counter;
+import counter.WordCounter;
+import filter.Filter;
+import filter.RegexFilter;
 import wordcount.input.ConsoleInputProvider;
 import wordcount.input.InputProvider;
+import wordcount.output.ConsoleOutputProvider;
+import wordcount.output.OutputProvider;
 
 public class JavaApplication {
 	
@@ -11,11 +18,19 @@ public class JavaApplication {
 	    InputProvider inputProvider = new ConsoleInputProvider();
 	    
 	   // Word counter 
-	    var wordCount = getWordCount(inputProvider.getInput());
+	    Filter regexFilter =  new RegexFilter();
+	    List<Filter> filters = new ArrayList<>();
+	    filters.add(regexFilter);
+	    
+	    
+	    Counter counter = new WordCounter(inputProvider, filters);
+	    var wordCount = counter.count();
+	    
+	    //var wordCount = getWordCount(inputProvider.getInput());
 	    
 	    // Output Provider
-	    var output = String.format("Number of words: %s", wordCount);
-	    System.out.println(output);
+	    OutputProvider outputProvider = new ConsoleOutputProvider();
+	    outputProvider.output(wordCount);
 	    
 	}
 	
