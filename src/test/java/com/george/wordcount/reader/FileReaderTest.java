@@ -10,7 +10,7 @@ class FileReaderTest {
     @Test
     public void testReadInput() throws IOException {
         final StringReader sr = new StringReader("Mary had a little lamb");
-        final String expected = "Number of words: 5";
+        final String expected = "Number of words: 5, unique: 5";
         final String[] stopWords = {};
         final FileReader reader = new FileReader(stopWords);
 
@@ -22,7 +22,7 @@ class FileReaderTest {
     @Test
     public void testReadInputWithStopWords() throws IOException {
         final StringReader sr = new StringReader("Mary had a little lamb");
-        final String expected = "Number of words: 4";
+        final String expected = "Number of words: 4, unique: 4";
         final String[] stopWords = {"a"};
         final FileReader reader = new FileReader(stopWords);
 

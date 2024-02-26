@@ -18,7 +18,7 @@ class WordCounterTest {
 
         String resultString = wordCounter.getResultString();
 
-        assertEquals("Number of words: 3", resultString);
+        assertEquals("Number of words: 3, unique: 3", resultString);
     }
 
 
@@ -29,7 +29,7 @@ class WordCounterTest {
 
         String resultString = wordCounter.getResultString();
 
-        assertEquals("Number of words: 4", resultString);
+        assertEquals("Number of words: 4, unique: 4", resultString);
     }
 
     @Test
@@ -39,6 +39,6 @@ class WordCounterTest {
 
         String resultString = wordCounter.getResultString();
 
-        assertEquals("Number of words: 0", resultString);
+        assertEquals("Number of words: 0, unique: 0", resultString);
     }
 }

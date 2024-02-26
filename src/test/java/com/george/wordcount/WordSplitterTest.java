@@ -11,7 +11,8 @@ class WordSplitterTest {
         final int expectedCount = 3;
         final String[] stopWords = {};
 
-        final int words = WordSplitter.countWords(input, stopWords);
+        final WordSplitter wordSplitter = new WordSplitter(input, stopWords);
+        final int words = wordSplitter.getCount();
 
         Assertions.assertEquals(expectedCount, words);
     }
@@ -22,9 +23,35 @@ class WordSplitterTest {
         final int expectedCount = 0;
         final String[] stopWords = {};
 
-        final int words = WordSplitter.countWords(input, stopWords);
+        final WordSplitter wordSplitter = new WordSplitter(input, stopWords);
+        final int words = wordSplitter.getCount();
 
         Assertions.assertEquals(expectedCount, words);
+    }
+
+    @Test
+    public void testWordCountWithHyphen() {
+        final String input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        final int expectedCount = 9;
+        final String[] stopWords = {"the", "a", "on", "off"};
+
+        final WordSplitter wordSplitter = new WordSplitter(input, stopWords);
+        final int words = wordSplitter.getCount();
+
+        Assertions.assertEquals(expectedCount, words);
+    }
+
+    @Test
+    public void testWordCountWithUnique() {
+        final String input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        final int expectedCount = 9;
+        final int expectedUniqueCount = 7;
+        final String[] stopWords = {"the", "a", "on", "off"};
+
+        final WordSplitter wordSplitter = new WordSplitter(input, stopWords);
+
+        Assertions.assertEquals(expectedCount, wordSplitter.getCount());
+        Assertions.assertEquals(expectedUniqueCount, wordSplitter.getUniqueCount());
     }
 
     @Test
@@ -33,7 +60,8 @@ class WordSplitterTest {
         final int expectedCount = 0;
         final String[] stopWords = {};
 
-        final int words = WordSplitter.countWords(input, stopWords);
+        final WordSplitter wordSplitter = new WordSplitter(input, stopWords);
+        final int words = wordSplitter.getCount();
 
         Assertions.assertEquals(expectedCount, words);
     }
@@ -44,7 +72,8 @@ class WordSplitterTest {
         final int expectedCount = 0;
         final String[] stopWords = {};
 
-        final int words = WordSplitter.countWords(input, stopWords);
+        final WordSplitter wordSplitter = new WordSplitter(input, stopWords);
+        final int words = wordSplitter.getCount();
 
         Assertions.assertEquals(expectedCount, words);
     }
