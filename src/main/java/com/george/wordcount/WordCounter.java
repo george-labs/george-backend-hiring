@@ -1,28 +1,65 @@
 package com.george.wordcount;
 
-import com.george.wordcount.reader.ConsoleReader;
-import com.george.wordcount.reader.FileReader;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WordCounter {
-    private final StopWordsReader stopWordsReader;
-    private final ContentReader reader;
-    private final InputStreamReader inputStreamReader;
 
-    public WordCounter(String[] args) throws IOException {
-        stopWordsReader = new StopWordsReader("/stopwords.txt");
-        if (args.length == 1) {
-            reader = new FileReader(stopWordsReader.getWords());
-            inputStreamReader = new InputStreamReader(StopWordsReader.class.getResourceAsStream("/" + args[0]));
-        } else {
-            reader = new ConsoleReader(stopWordsReader.getWords());
-            inputStreamReader = new InputStreamReader(System.in);
-        }
+    private int count;
+    private int uniqueCount;
+    private List<String> words;
+
+    public WordCounter(String input, String[] stopWords) {
+        countWords(input, stopWords);
     }
 
-    public String getResultString() throws IOException {
-        return reader.readInput(inputStreamReader);
+    public void countWords(String input, String[] stopWords) {
+        if (input == null) {
+            count = 0;
+            uniqueCount = 0;
+            return;
+        }
+        countWordsWithPatter(input.split("\\s+"), stopWords);
+    }
+
+    private void countWordsWithPatter(String[] split, String[] stopWords) {
+        HashSet<String> uniqueWords = new HashSet<>();
+        words = new ArrayList<>();
+        Pattern pattern = Pattern.compile("[a-zA-Z]");
+        int counter = 0;
+        for (String s : split) {
+            Matcher matcher = pattern.matcher(s);
+            if (matcher.find() && !Arrays.asList(stopWords).contains(s)) {
+                words.add(s);
+                uniqueWords.add(s);
+                counter++;
+            }
+        }
+        this.count = counter;
+        this.uniqueCount = uniqueWords.size();
+    }
+
+
+    public int getUniqueCount() {
+        return uniqueCount;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public double getAverageWordLength() {
+        if (words.isEmpty()) {
+            return 0;
+        }
+        int totalLength = 0;
+        for (String word : words) {
+            totalLength += word.length();
+        }
+        return (double) totalLength / words.size();
     }
 }

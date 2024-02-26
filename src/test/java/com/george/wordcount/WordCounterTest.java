@@ -1,44 +1,81 @@
 package com.george.wordcount;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WordCounterTest {
 
     @Test
-    void testWordCounterWithEmptyArgs() throws IOException {
-        final String[] args = {};
-        final ByteArrayInputStream testIn = new ByteArrayInputStream("Mary had a lamb".getBytes());
-        System.setIn(testIn);
-        final WordCounter wordCounter = new WordCounter(args);
+    public void testWordCountOk() {
+        final String input = "aa ass dd";
+        final int expectedCount = 3;
+        final String[] stopWords = {};
 
-        String resultString = wordCounter.getResultString();
+        final WordCounter wordCounter = new WordCounter(input, stopWords);
+        final int words = wordCounter.getCount();
 
-        assertEquals("Number of words: 3, unique: 3", resultString);
-    }
-
-
-    @Test
-    void testWordCounterWithFileName() throws IOException {
-        final String[] args = {"mytext.txt"};
-        final WordCounter wordCounter = new WordCounter(args);
-
-        String resultString = wordCounter.getResultString();
-
-        assertEquals("Number of words: 4, unique: 4", resultString);
+        Assertions.assertEquals(expectedCount, words);
     }
 
     @Test
-    void testWordCounterWithFileNameWithStopWords() throws IOException {
-        final String[] args = {"stopwords.txt"};
-        final WordCounter wordCounter = new WordCounter(args);
+    public void testWordCountWithNumbers() {
+        final String input = "11 22 33";
+        final int expectedCount = 0;
+        final String[] stopWords = {};
 
-        String resultString = wordCounter.getResultString();
+        final WordCounter wordCounter = new WordCounter(input, stopWords);
+        final int words = wordCounter.getCount();
 
-        assertEquals("Number of words: 0, unique: 0", resultString);
+        Assertions.assertEquals(expectedCount, words);
     }
+
+    @Test
+    public void testWordCountWithHyphen() {
+        final String input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        final int expectedCount = 7;
+        final String[] stopWords = {"the", "a", "on", "off"};
+
+        final WordCounter wordCounter = new WordCounter(input, stopWords);
+        final int words = wordCounter.getCount();
+
+        Assertions.assertEquals(expectedCount, words);
+    }
+
+    @Test
+    public void testWordCountWithUnique() {
+        final String input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        final int expectedCount = 7;
+        final int expectedUniqueCount = 6;
+        final String[] stopWords = {"the", "a", "on", "off"};
+
+        final WordCounter wordCounter = new WordCounter(input, stopWords);
+
+        Assertions.assertEquals(expectedCount, wordCounter.getCount());
+        Assertions.assertEquals(expectedUniqueCount, wordCounter.getUniqueCount());
+    }
+
+    @Test
+    public void testWordCountWithNull() {
+        final String input = null;
+        final int expectedCount = 0;
+        final String[] stopWords = {};
+
+        final WordCounter wordCounter = new WordCounter(input, stopWords);
+        final int words = wordCounter.getCount();
+
+        Assertions.assertEquals(expectedCount, words);
+    }
+
+    @Test
+    public void testWordCountWithEmpty() {
+        final String input = "";
+        final int expectedCount = 0;
+        final String[] stopWords = {};
+
+        final WordCounter wordCounter = new WordCounter(input, stopWords);
+        final int words = wordCounter.getCount();
+
+        Assertions.assertEquals(expectedCount, words);
+    }
+
 }

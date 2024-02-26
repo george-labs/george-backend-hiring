@@ -1,8 +1,10 @@
 package com.george.wordcount.reader;
 
 import com.george.wordcount.ContentReader;
-import com.george.wordcount.WordSplitter;
+import com.george.wordcount.WordCounter;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Locale;
 
 public abstract class AbstractReader implements ContentReader {
 
@@ -14,7 +16,9 @@ public abstract class AbstractReader implements ContentReader {
 
     @NotNull
     protected String getResultString(String line) {
-        WordSplitter wordSplitter = new WordSplitter(line, stopWords);
-        return "Number of words: " + wordSplitter.getCount() + ", unique: " + wordSplitter.getUniqueCount();
+        WordCounter wordCounter = new WordCounter(line, stopWords);
+        return String.format("Number of words: %s, unique: %s; average word length: %s characters",
+                wordCounter.getCount(), wordCounter.getUniqueCount(),
+                String.format(Locale.US, "%.2f", wordCounter.getAverageWordLength()));
     }
 }
