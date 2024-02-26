@@ -1,4 +1,6 @@
-package com.george.wordcount;
+package com.george.wordcount.reader;
+
+import com.george.wordcount.ContentReader;
 
 public abstract class AbstractReader implements ContentReader {
 

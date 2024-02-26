@@ -1,5 +1,8 @@
 package com.george.wordcount;
 
+import com.george.wordcount.reader.ConsoleReader;
+import com.george.wordcount.reader.FileReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 

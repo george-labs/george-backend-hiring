@@ -1,4 +1,6 @@
-package com.george.wordcount;
+package com.george.wordcount.reader;
+
+import com.george.wordcount.WordSplitter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
