@@ -1,6 +1,7 @@
 import counter.Counter;
 import counter.WordCounter;
 import filter.Filter;
+import filter.FilterService;
 import filter.RegexFilter;
 import filter.StopWordsFilter;
 import filter.WordFilterService;
@@ -14,10 +15,9 @@ public class JavaApplication {
 	public static void main (String[] args) {
 		
 	    InputProvider inputProvider = new ConsoleInputProvider();
-	    
 	    Filter regexFilter =  new RegexFilter();
 	    Filter stopwordsFilter = new StopWordsFilter();
-	    WordFilterService wordFilterService = new WordFilterService();
+	    FilterService wordFilterService = new WordFilterService();
 	    wordFilterService.registerFilter(regexFilter);
 	    wordFilterService.registerFilter(stopwordsFilter);
 	    

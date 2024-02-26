@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class StopWordsFilterTest {
 	
-	private static final String STOPWORDS = "the a on off";
+	public static final String STOPWORDS = "the a on off";
 	
 	private Filter filter = new StopWordsFilter(); 
 	
