@@ -1,7 +1,9 @@
 package wordcount.output;
 
+import counter.WordCountResult;
+
 public interface OutputProvider {
 	
-	void output(Integer count);
+	void output(WordCountResult count);
 
 }

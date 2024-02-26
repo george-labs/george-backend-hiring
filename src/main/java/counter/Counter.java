@@ -2,6 +2,6 @@ package counter;
 
 public interface Counter {
 	
-	Integer count();
+	WordCountResult count();
 
 }

@@ -18,19 +18,24 @@ public class WordCounter implements Counter{
 	}
 	
 	@Override
-	public Integer count() {
+	public WordCountResult count() {
 		
 		var words = this.inputProvider.getInput();
 		if (words.isEmpty()) {
-			return 0;
+			return new WordCountResult(0);
 		}
 		
+		var wordList = getFilteredResult(words);
+		
+		return new WordCountResult(wordList.size());
+	}
+
+	private List<String> getFilteredResult(String words) {
 		var wordList = Arrays.asList(words.strip().split(" "));
 		for (var filter : this.filters) {
 			wordList = filter.filter(wordList);
 		}
-		
-		return wordList.size();
+		return wordList;
 	}
 
 }

@@ -19,13 +19,19 @@ public class RegexFilterTest {
 	}
 
 	@Test 
-	public void shouldReturnFilteredResult_whenInputContainsInvalidWordsProvided() {
+	public void shouldReturnFilteredResult_whenInputContainsInvalidWords() {
 		var input = List.of("abcd", "abc1234", "1234");
 		var expectedOutcome = 1;
 		var res = filter.filter(input);
 		assertTrue(res.size() == expectedOutcome);
 	}
 	
-	
+	@Test 
+	public void shouldReturnEmptyResult_whenEmptyInputProvided() {
+		var input = List.of("");
+		var expectedOutcome = 0;
+		var res = filter.filter(input);
+		assertTrue(res.size()== expectedOutcome);
+	}
 
 }
