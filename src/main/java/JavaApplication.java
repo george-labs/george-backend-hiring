@@ -21,19 +21,22 @@ public class JavaApplication {
             FileReaderUtil fileReaderUtil = new FileReaderUtil(args[0]);
             try {
                 text = fileReaderUtil.readLineByLine();
-                System.out.println("Number of words: " + wordCounter.countWords(text));
+                wordCounter.countWords(text);
             } catch (IOException e) {
                 System.err.println("Error reading file: " + e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Number of words: " + 0);
             }
         }
-            // No filename provided, ask for text input
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter text: ");
-            text = scanner.nextLine();
-
-
-        int count = wordCounter.countWords(text);
-        System.out.println("Number of words: " + count);
+        // No filename provided, ask for text input
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter text: ");
+        text = scanner.nextLine();
+        try {
+            wordCounter.countWords(text);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Number of words: " + 0);
+        }
     }
 
 }

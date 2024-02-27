@@ -23,27 +23,32 @@ public class ExcludeStopWordsCountingTest {
 
     @Test
     void testcountWordsExcludingStopWords() {
-        assertEquals(3, wordCounter.countWords("a something you wanted the "));
+        wordCounter.countWords("a something you wanted the ");
+        assertEquals(3, wordCounter.getNumberOfWords());
     }
 
 
     @Test
     void testNumericWordWithNonAlphaCharacter() {
-        assertEquals(0, wordCounter.countWords("the   a             "));
+        wordCounter.countWords("the   a             ");
+        assertEquals(0, wordCounter.getNumberOfWords());
     }
 
     @Test
     void testNumericWordBlank() {
-        assertEquals(0, wordCounter.countWords(" "));
+        wordCounter.countWords(" ");
+        assertEquals(0, wordCounter.getNumberOfWords());
     }
 
     @Test
     void testNullString() {
-        assertEquals(0, wordCounter.countWords(null));
+        wordCounter.countWords(null);
+        assertEquals(0, wordCounter.getNumberOfWords());
     }
 
     @Test
-    void testCountWordsByLines() {
-        assertEquals(3, wordCounter.countWords("a something you wanted the "));
+    void testNumberOfUniqueWords() {
+        wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.");
+        assertEquals(7, wordCounter.getNumberOfUniqueWords());
     }
 }

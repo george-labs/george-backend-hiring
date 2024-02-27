@@ -6,26 +6,59 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WordCounter {
+    private final String REGEX = "[^a-zA-Z]+";
+
+    private long numberOfUniqueWords;
+    private long numberOfWords;
+
     private Set<String> stopWords;
 
     public WordCounter() {
         this.stopWords = new HashSet<>();
     }
 
-    public int countWords(String text) {
+    public String getREGEX() {
+        return REGEX;
+    }
+
+    public long getNumberOfUniqueWords() {
+        return numberOfUniqueWords;
+    }
+
+    public long getNumberOfWords() {
+        return numberOfWords;
+    }
+
+    public Set<String> getStopWords() {
+        return stopWords;
+    }
+
+    public void countWords(String text) {
         if (text == null || text.trim().isEmpty()) {
-            return 0;
+            numberOfWords = 0;
+            return;
         }
         String[] words = text.split("\\s+");
+        // count the number of words
+        List<String> filteredWords = Arrays.stream(words)
+                .filter(word -> !word.matches(REGEX) &&  !stopWords.contains(word.toLowerCase()))
+                .collect(Collectors.toList());
 
-        return (int) Arrays.stream(words)
-                .filter(word -> word.matches("[a-zA-z]+") && !stopWords.contains(word.toLowerCase()))
+        // Count the unique words
+        numberOfUniqueWords = filteredWords
+                .stream()
+                .distinct()
                 .count();
+        numberOfWords = filteredWords.size();
+
+        System.out.println("Number of words: " + numberOfWords + " unique: " + numberOfUniqueWords);
+
     }
 
     public void loadStopWords() throws IOException {

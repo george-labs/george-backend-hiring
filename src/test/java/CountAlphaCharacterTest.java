@@ -14,27 +14,41 @@ public class CountAlphaCharacterTest {
 
     @Test
     void testCountWords() {
-        assertEquals(5, wordCounter.countWords("Mary had a little lamb"));
+        wordCounter.countWords("Mary had a little lamb");
+        assertEquals(5, wordCounter.getNumberOfWords());
     }
 
     @Test
     void testBlankSpace() {
-        assertEquals(2, wordCounter.countWords("         Word   word             "));
+        wordCounter.countWords("         Word   word             ");
+        assertEquals(2, wordCounter.getNumberOfWords());
     }
 
     @Test
     void testNumericWordWithNonAlphaCharacter() {
-        assertEquals(1, wordCounter.countWords("Word2   word             "));
+        wordCounter.countWords("Word2   word             ");
+        assertEquals(1, wordCounter.getNumberOfWords());
+
     }
 
     @Test
     void testNumericWordBlank() {
-        assertEquals(0, wordCounter.countWords(" "));
+        wordCounter.countWords(" ");
+        assertEquals(0, wordCounter.getNumberOfWords());
+
     }
 
     @Test
     void testNullString() {
-        assertEquals(0, wordCounter.countWords(null));
+        wordCounter.countWords(null);
+        assertEquals(0, wordCounter.getNumberOfWords());
+    }
+
+
+    @Test
+    void testUniqueWords() {
+        wordCounter.countWords("null");
+        assertEquals(0, wordCounter.getNumberOfWords());
     }
 
 }
