@@ -11,8 +11,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WordCounter {
+    private Set<String> stopWords;
 
-    private Set<String> stopWords = new HashSet<>();
+    public WordCounter() {
+        this.stopWords = new HashSet<>();
+    }
 
     public int countWords(String text) {
         if (text == null || text.trim().isEmpty()) {
@@ -27,6 +30,9 @@ public class WordCounter {
 
     public void loadStopWords() throws IOException {
         InputStream is = this.getClass().getClassLoader().getResourceAsStream("stopwords.txt");
+        if (is == null) {
+            throw new IOException("Stopwords file not found");
+        }
         Stream<String> stream = new BufferedReader(new InputStreamReader(is)).lines();
         stopWords = stream
                 .map(String::trim)
