@@ -22,17 +22,10 @@ public class WordCounter {
 
     private Set<String> stopWords;
 
-    public List<String> getFilteredWords() {
-        return filteredWords;
-    }
-
     public WordCounter() {
         this.stopWords = new HashSet<>();
     }
 
-    public String getREGEX() {
-        return REGEX;
-    }
 
     public long getNumberOfUniqueWords() {
         return numberOfUniqueWords;
@@ -42,9 +35,6 @@ public class WordCounter {
         return numberOfWords;
     }
 
-    public Set<String> getStopWords() {
-        return stopWords;
-    }
 
     public double getAvarageWordLenght() {
         return avarageWordLenght;
@@ -59,7 +49,7 @@ public class WordCounter {
         String[] words = text.split("\\s+");
         // count the number of words
         filteredWords = Arrays.stream(words)
-                .filter(word -> !word.matches(REGEX) && !stopWords.contains(word.toLowerCase()))
+                .filter(word -> !word.isEmpty() && !word.matches(REGEX) && !stopWords.contains(word.toLowerCase()))
                 .collect(Collectors.toList());
 
         // Count the unique words
@@ -67,6 +57,7 @@ public class WordCounter {
                 .stream()
                 .distinct()
                 .count();
+
         numberOfWords = filteredWords.size();
 
         avarageWordLenght = filteredWords.stream().mapToInt(String::length)
@@ -89,6 +80,7 @@ public class WordCounter {
         return null;
     }
 
+
     public void loadStopWords() throws IOException {
         InputStream is = this.getClass().getClassLoader().getResourceAsStream("stopwords.txt");
         if (is == null) {
@@ -99,6 +91,5 @@ public class WordCounter {
                 .map(String::trim)
                 .collect(Collectors.toSet());
     }
-
 
 }
