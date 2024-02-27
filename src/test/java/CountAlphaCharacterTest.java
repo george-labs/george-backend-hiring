@@ -67,4 +67,15 @@ public class CountAlphaCharacterTest {
         assertEquals(5.4, wordCounter.getAvarageWordLenght());
     }
 
+
+    @Test
+    void testPrintIndexes() {
+        wordCounter.countWords("Mary had a little lamb");
+        assertEquals("Index : \n" +
+                "Mary\n" +
+                "had\n" +
+                "little\n" +
+                "lamb", wordCounter.printIndex());
+    }
+
 }

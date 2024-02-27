@@ -18,7 +18,13 @@ public class WordCounter {
     private long numberOfWords;
     private double avarageWordLenght;
 
+    private List<String> filteredWords;
+
     private Set<String> stopWords;
+
+    public List<String> getFilteredWords() {
+        return filteredWords;
+    }
 
     public WordCounter() {
         this.stopWords = new HashSet<>();
@@ -52,7 +58,7 @@ public class WordCounter {
 
         String[] words = text.split("\\s+");
         // count the number of words
-        List<String> filteredWords = Arrays.stream(words)
+        filteredWords = Arrays.stream(words)
                 .filter(word -> !word.matches(REGEX) && !stopWords.contains(word.toLowerCase()))
                 .collect(Collectors.toList());
 
@@ -69,6 +75,18 @@ public class WordCounter {
 
         System.out.println("Number of words: " + numberOfWords + " unique: " + numberOfUniqueWords + " average word length: " + avarageWordLenght);
 
+        System.out.println(printIndex());
+
+    }
+
+    public String printIndex() {
+        if (filteredWords.size() > 0) {
+            StringBuilder builder = new StringBuilder("Index : \n");
+            filteredWords.stream().forEach(word -> builder.append(word + "\n"));
+            builder.setLength(builder.length() - 1);
+            return builder.toString();
+        }
+        return null;
     }
 
     public void loadStopWords() throws IOException {
