@@ -54,4 +54,10 @@ public class CountAlphaCharacterTest {
         assertEquals(7, wordCounter.getNumberOfUniqueWords());
     }
 
+    @Test
+    void testUniqueWordsWithoutHypes() {
+        wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.");
+        assertEquals(6, wordCounter.getNumberOfUniqueWords());
+    }
+
 }

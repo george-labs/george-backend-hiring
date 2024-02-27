@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WordCounter {
-    private final String REGEX = "[^a-zA-Z]+";
+    private final String REGEX = "[^a-zA-Z-]+";
 
     private long numberOfUniqueWords;
     private long numberOfWords;
@@ -44,7 +44,6 @@ public class WordCounter {
             numberOfWords = 0;
             return;
         }
-        text = text.replaceAll("-", " ");
 
         String[] words = text.split("\\s+");
         // count the number of words
