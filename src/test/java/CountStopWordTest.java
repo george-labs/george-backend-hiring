@@ -17,23 +17,23 @@ public class CountStopWordTest {
 
     @Test
     void testcountWordsExcludingStopWords() {
-        assertEquals(3, wordCounter.countWordsExcludingStopWords("a something you wanted the "));
+        assertEquals(3, wordCounter.countWords("a something you wanted the "));
     }
 
 
     @Test
     void testNumericWordWithNonAlphaCharacter() {
-        assertEquals(0, wordCounter.countWordsExcludingStopWords("the   a             "));
+        assertEquals(0, wordCounter.countWords("the   a             "));
     }
 
     @Test
     void testNumericWordBlank() {
-        assertEquals(0, wordCounter.countWordsExcludingStopWords(" "));
+        assertEquals(0, wordCounter.countWords(" "));
     }
 
     @Test
     void testNullString() {
-        assertEquals(0, wordCounter.countWordsExcludingStopWords(null));
+        assertEquals(0, wordCounter.countWords(null));
     }
 
 

@@ -16,7 +16,7 @@ public class JavaApplication {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter text: ");
         String text = scanner.nextLine();
-        int count = wordCounter.countWordsExcludingStopWords(text);
+        int count = wordCounter.countWords(text);
         System.out.println("Number of words: " + count);
     }
 

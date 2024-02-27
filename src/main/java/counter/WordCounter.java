@@ -19,27 +19,18 @@ public class WordCounter {
             return 0;
         }
         String[] words = text.split("\\s+");
+
         return (int) Arrays.stream(words)
-                .filter(word -> word.matches("[a-zA-z]+"))
+                .filter(word -> word.matches("[a-zA-z]+") && !stopWords.contains(word.toLowerCase()))
                 .count();
     }
 
     public void loadStopWords() throws IOException {
         InputStream is = this.getClass().getClassLoader().getResourceAsStream("stopwords.txt");
-        Stream<String> stream =  new BufferedReader(new InputStreamReader(is)).lines();
+        Stream<String> stream = new BufferedReader(new InputStreamReader(is)).lines();
         stopWords = stream
                 .map(String::trim)
                 .collect(Collectors.toSet());
-    }
-
-    public int countWordsExcludingStopWords(String text) {
-        if (text == null || text.trim().isEmpty()) {
-            return 0;
-        }
-        String[] words = text.split("\\s+");
-        return (int) Arrays.stream(words)
-                .filter(word -> word.matches("[a-zA-z]+") && !stopWords.contains(word.toLowerCase()))
-                .count();
     }
 
 }
