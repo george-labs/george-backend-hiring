@@ -44,6 +44,8 @@ public class WordCounter {
             numberOfWords = 0;
             return;
         }
+        text = text.replaceAll("-", " ");
+
         String[] words = text.split("\\s+");
         // count the number of words
         List<String> filteredWords = Arrays.stream(words)

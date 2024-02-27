@@ -2,14 +2,17 @@ import counter.WordCounter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CountAlphaCharacterTest {
     private static WordCounter wordCounter;
 
     @BeforeAll
-    public static void setUp() {
+    public static void setUp() throws IOException {
         wordCounter = new WordCounter();
+        wordCounter.loadStopWords();
     }
 
     @Test
@@ -47,8 +50,8 @@ public class CountAlphaCharacterTest {
 
     @Test
     void testUniqueWords() {
-        wordCounter.countWords("null");
-        assertEquals(0, wordCounter.getNumberOfWords());
+        wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.");
+        assertEquals(7, wordCounter.getNumberOfUniqueWords());
     }
 
 }
