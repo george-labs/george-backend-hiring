@@ -16,6 +16,7 @@ public class WordCounter {
 
     private long numberOfUniqueWords;
     private long numberOfWords;
+    private double avarageWordLenght;
 
     private Set<String> stopWords;
 
@@ -39,6 +40,10 @@ public class WordCounter {
         return stopWords;
     }
 
+    public double getAvarageWordLenght() {
+        return avarageWordLenght;
+    }
+
     public void countWords(String text) {
         if (text == null || text.trim().isEmpty()) {
             numberOfWords = 0;
@@ -48,7 +53,7 @@ public class WordCounter {
         String[] words = text.split("\\s+");
         // count the number of words
         List<String> filteredWords = Arrays.stream(words)
-                .filter(word -> !word.matches(REGEX) &&  !stopWords.contains(word.toLowerCase()))
+                .filter(word -> !word.matches(REGEX) && !stopWords.contains(word.toLowerCase()))
                 .collect(Collectors.toList());
 
         // Count the unique words
@@ -58,7 +63,11 @@ public class WordCounter {
                 .count();
         numberOfWords = filteredWords.size();
 
-        System.out.println("Number of words: " + numberOfWords + " unique: " + numberOfUniqueWords);
+        avarageWordLenght = filteredWords.stream().mapToInt(String::length)
+                .average()
+                .orElse(0.0);
+
+        System.out.println("Number of words: " + numberOfWords + " unique: " + numberOfUniqueWords + " average word length: " + avarageWordLenght);
 
     }
 
@@ -72,5 +81,6 @@ public class WordCounter {
                 .map(String::trim)
                 .collect(Collectors.toSet());
     }
+
 
 }

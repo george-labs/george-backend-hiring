@@ -60,4 +60,11 @@ public class CountAlphaCharacterTest {
         assertEquals(6, wordCounter.getNumberOfUniqueWords());
     }
 
+
+    @Test
+    void testAvarageWordLenght() {
+        wordCounter.countWords("hallo meine arbeit ist stressig");
+        assertEquals(5.4, wordCounter.getAvarageWordLenght());
+    }
+
 }
