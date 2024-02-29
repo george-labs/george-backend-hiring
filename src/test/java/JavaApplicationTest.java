@@ -13,13 +13,13 @@ public class JavaApplicationTest {
 
     private static Stream<Arguments> provideStringsForMainTest() {
         return Stream.of(
-                Arguments.of("Mary had a little lamb", 4),
-                Arguments.of("word? word. word, wo3rd  word", 1),
-                Arguments.of("wo$rd       wo$$        word,    word", 1),
-                Arguments.of("wo3rd", 0),
-                Arguments.of("the a on off", 0),
-                Arguments.of("the a on had off", 1),
-                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 9)
+                Arguments.of("Mary had a little lamb", 4, 4),
+                Arguments.of("word? word. word, wo3rd  word", 2, 1),
+                Arguments.of("wo$rd       wo$$        word,    word", 1, 1),
+                Arguments.of("wo3rd", 0, 0),
+                Arguments.of("the a on off", 0, 0),
+                Arguments.of("the a on had off", 1, 1),
+                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 9, 7)
         );
     }
 
@@ -32,16 +32,26 @@ public class JavaApplicationTest {
 
     @ParameterizedTest
     @MethodSource("provideStringsForMainTest")
-    public void mainTest(String sentence, int expected) {
+    public void mainTest(String sentence, int wordsNumberExpected, int uniqueNumberExpected) {
         ByteArrayInputStream bytesIn = new ByteArrayInputStream(sentence.getBytes());
         System.setIn(bytesIn);
 
         JavaApplication.main(new String[]{});
 
         String lines = outputStreamCaptor.toString().trim();
-        String result = lines.substring(lines.lastIndexOf(" ") + 1);
-        Integer number = Integer.valueOf(result);
 
-        Assertions.assertEquals(expected, number);
+        int lastIndexOf = lines.lastIndexOf(":");
+
+        String unique = lines.substring(lastIndexOf + 2);
+        String linesSubstring = lines.substring(0, lastIndexOf);
+        lastIndexOf = linesSubstring.lastIndexOf(":");
+        String words = linesSubstring.substring(lastIndexOf + 2);
+        words = words.substring(0, words.indexOf(","));
+
+        Integer uniqueNumber = Integer.valueOf(unique);
+        Integer wordsNumber = Integer.valueOf(words);
+
+        Assertions.assertEquals(wordsNumberExpected, wordsNumber);
+        Assertions.assertEquals(uniqueNumberExpected, uniqueNumber);
     }
 }

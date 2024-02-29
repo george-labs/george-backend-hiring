@@ -11,4 +11,4 @@ If IO operation on file stopwords.txt fail only exception message will be writte
 ## Iteration 3
 
 ## Iteration 4
-From iteration4 I assume that hyphen can be taken as white space (word separator)
+From iteration4 I assume that hyphen can be taken as white space (word separator) and that word can ends with dot.

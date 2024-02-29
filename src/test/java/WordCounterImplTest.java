@@ -15,7 +15,7 @@ public class WordCounterImplTest {
     private static Stream<Arguments> provideStringsForGetResultTest() {
         return Stream.of(
                 Arguments.of("Mary had a little lamb", 4, 4),
-                Arguments.of("word? word. word, wo3rd  word", 1, 1),
+                Arguments.of("word? word. word, wo3rd  word", 2, 1),
                 Arguments.of("wo$rd       wo$$        word,    word", 1, 1),
                 Arguments.of("wo3rd", 0, 0),
                 Arguments.of("the a on off", 0, 0),
@@ -33,7 +33,7 @@ public class WordCounterImplTest {
 
     @ParameterizedTest
     @MethodSource("provideStringsForGetResultTest")
-    public void getResultScannerResolverTest(String sentence, int expected, int expectedUniqe) {
+    public void getResultScannerResolverTest(String sentence, int expected, int expectedUnique) {
         ByteArrayInputStream bytesIn = new ByteArrayInputStream(sentence.getBytes());
         System.setIn(bytesIn);
 
@@ -43,8 +43,9 @@ public class WordCounterImplTest {
         WordCounterResult result = wordCounterImpl.getResult();
         int count = result.getCount();
         int unique = result.getUnique();
+
         Assertions.assertEquals(expected, count);
-        Assertions.assertEquals(expectedUniqe, unique);
+        Assertions.assertEquals(expectedUnique, unique);
     }
 
     @Test
