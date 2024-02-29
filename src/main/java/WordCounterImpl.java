@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class WordCounterImpl implements WordCounter {
 
-    private final Pattern pattern = Pattern.compile("^[a-zA-Z]+\\.?$");
+    private final Pattern pattern = Pattern.compile("^[a-zA-Z-]+\\.?$");
     private final StopWords stopWords;
     private final WordCounterResolver wordCounterResolver;
 
@@ -33,7 +33,7 @@ public class WordCounterImpl implements WordCounter {
     }
 
     private List<String> getWords(String sentence) {
-        String[] split = sentence.split("[\\s-]+");
+        String[] split = sentence.split("[\\s]+");
         if (split.length < 1) {
             return Collections.emptyList();
         }
@@ -42,6 +42,7 @@ public class WordCounterImpl implements WordCounter {
             Matcher matcher = pattern.matcher(w);
             return matcher.matches();
         }).collect(Collectors.toList());
+
 
         for (int i = 0; i < words.size(); i++) {
             String word = words.get(i);
