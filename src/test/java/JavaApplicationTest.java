@@ -32,8 +32,8 @@ public class JavaApplicationTest {
     @ParameterizedTest
     @MethodSource("provideStringsForMainTest")
     public void mainTest(String sentence, int expected) {
-        ByteArrayInputStream testIn = new ByteArrayInputStream(sentence.getBytes());
-        System.setIn(testIn);
+        ByteArrayInputStream bytesIn = new ByteArrayInputStream(sentence.getBytes());
+        System.setIn(bytesIn);
 
         JavaApplication.main(new String[]{});
 

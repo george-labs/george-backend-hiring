@@ -3,9 +3,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.ByteArrayInputStream;
 import java.util.stream.Stream;
 
-public class WordCounterTest {
+public class WordCounterConsoleTest {
 
     private static Stream<Arguments> provideStringsForCountTest() {
         return Stream.of(
@@ -23,8 +24,12 @@ public class WordCounterTest {
     @ParameterizedTest
     @MethodSource("provideStringsForCountTest")
     public void countTest(String sentence, int expected) {
-        WordCounter wordCounter = new WordCounter(new StopWords(new FileReader()));
-        int count = wordCounter.count(sentence);
+        ByteArrayInputStream bytesIn = new ByteArrayInputStream(sentence.getBytes());
+        System.setIn(bytesIn);
+
+        FileReader fileReader = new FileReader();
+        WordCounterConsole wordCounterConsole = new WordCounterConsole(new StopWords(fileReader));
+        int count = wordCounterConsole.count();
         Assertions.assertEquals(expected, count);
     }
 }
