@@ -1,6 +1,4 @@
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -17,14 +15,21 @@ public class WordCounterImpl implements WordCounter {
     }
 
     @Override
-    public int count() {
+    public WordCounterResult getResult() {
         String sentence = wordCounterResolver.resolve();
+        WordCounterResult wordCounterResult = new WordCounterResult();
         if (sentence == null) {
-            return 0;
+            return wordCounterResult;
         }
 
         List<String> words = getWords(sentence);
-        return filterStopWords(words).size();
+        List<String> allWords = filterStopWords(words);
+        Set<String> uniqueWords = new HashSet<>(allWords);
+
+        wordCounterResult.setCount(allWords.size());
+        wordCounterResult.setUnique(uniqueWords.size());
+
+        return wordCounterResult;
     }
 
     private List<String> getWords(String sentence) {

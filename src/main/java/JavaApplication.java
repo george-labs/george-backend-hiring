@@ -7,6 +7,7 @@ public class JavaApplication {
         WordCounterResolverFactory wordCounterResolverFactory = new WordCounterResolverFactory(fileReader, args);
         WordCounter wordCounter = new WordCounterImpl(stopWords, wordCounterResolverFactory.getResolver());
 
-        System.out.println("Number of words: " + wordCounter.count());
+        WordCounterResult result = wordCounter.getResult();
+        System.out.printf("Number of words: %d, unique: %d", result.getCount(), result.getUnique());
     }
 }

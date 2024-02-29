@@ -9,3 +9,6 @@ I assumed that stopwords.txt only contains words and new line characters.
 If IO operation on file stopwords.txt fail only exception message will be written to console and method return zero stopwords.
 
 ## Iteration 3
+
+## Iteration 4
+From iteration4 I assume that hyphen can be taken as white space (word separator)

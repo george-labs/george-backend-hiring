@@ -12,14 +12,15 @@ import java.util.stream.Stream;
 
 public class WordCounterImplTest {
 
-    private static Stream<Arguments> provideStringsForCountTest() {
+    private static Stream<Arguments> provideStringsForGetResultTest() {
         return Stream.of(
-                Arguments.of("Mary had a little lamb", 4),
-                Arguments.of("word? word. word, wo3rd  word", 1),
-                Arguments.of("wo$rd       wo$$        word,    word", 1),
-                Arguments.of("wo3rd", 0),
-                Arguments.of("the a on off", 0),
-                Arguments.of("the a on had off", 1)
+                Arguments.of("Mary had a little lamb", 4, 4),
+                Arguments.of("word? word. word, wo3rd  word", 1, 1),
+                Arguments.of("wo$rd       wo$$        word,    word", 1, 1),
+                Arguments.of("wo3rd", 0, 0),
+                Arguments.of("the a on off", 0, 0),
+                Arguments.of("the a on had off", 1, 1),
+                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 9, 7)
         );
     }
 
@@ -31,25 +32,33 @@ public class WordCounterImplTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideStringsForCountTest")
-    public void countScannerResolverTest(String sentence, int expected) {
+    @MethodSource("provideStringsForGetResultTest")
+    public void getResultScannerResolverTest(String sentence, int expected, int expectedUniqe) {
         ByteArrayInputStream bytesIn = new ByteArrayInputStream(sentence.getBytes());
         System.setIn(bytesIn);
 
         FileReader fileReader = new FileReader();
         WordCounterImpl wordCounterImpl = new WordCounterImpl(new StopWords(fileReader), new WordCounterTestResolver(sentence));
-        int count = wordCounterImpl.count();
+
+        WordCounterResult result = wordCounterImpl.getResult();
+        int count = result.getCount();
+        int unique = result.getUnique();
         Assertions.assertEquals(expected, count);
+        Assertions.assertEquals(expectedUniqe, unique);
     }
 
     @Test
-    public void countFileResolverTest() {
+    public void getResultFileResolverTest() {
         WordCounterFileResolver wordCounterFileResolver = new WordCounterFileResolver(new FileReader(), new String[]{"mytext.txt"});
 
         FileReader fileReader = new FileReader();
         WordCounterImpl wordCounterImpl = new WordCounterImpl(new StopWords(fileReader), wordCounterFileResolver);
 
-        int count = wordCounterImpl.count();
+        WordCounterResult result = wordCounterImpl.getResult();
+        int count = result.getCount();
+        int unique =  result.getUnique();
+
         Assertions.assertEquals(4, count);
+        Assertions.assertEquals(4, unique);
     }
 }
