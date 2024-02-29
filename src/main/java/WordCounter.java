@@ -1,3 +1,3 @@
 public interface WordCounter {
-    public int count();
+    int count();
 }
