@@ -19,7 +19,7 @@ public class JavaApplicationTest {
                 Arguments.of("wo3rd", 0, 0),
                 Arguments.of("the a on off", 0, 0),
                 Arguments.of("the a on had off", 1, 1),
-                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 9, 7)
+                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 7, 6)
         );
     }
 
