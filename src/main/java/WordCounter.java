@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class WordCounter {
 
-    private StopWords stopWords;
+    private final StopWords stopWords;
 
     public WordCounter(StopWords stopWords) {
         this.stopWords = stopWords;

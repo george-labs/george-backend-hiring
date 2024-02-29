@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StopWords {
-    private FileReader fileReader;
+    private final FileReader fileReader;
 
     public StopWords(FileReader reader) {
         this.fileReader = reader;
