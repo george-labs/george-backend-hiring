@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 public class WordCounterImpl implements WordCounter {
 
     private final Pattern pattern = Pattern.compile("^[a-zA-Z-]+\\.?$");
-    private final StopWords stopWords;
     private final WordCounterResolver wordCounterResolver;
+    private final List<String> stopWordsList;
 
     public WordCounterImpl(StopWords stopWords, WordCounterResolver wordCounterResolver) {
-        this.stopWords = stopWords;
+        this.stopWordsList = stopWords.getStopWords();
         this.wordCounterResolver = wordCounterResolver;
     }
 
@@ -56,7 +56,6 @@ public class WordCounterImpl implements WordCounter {
     }
 
     private List<String> filterStopWords(List<String> words) {
-        List<String> stopWordsList = stopWords.getStopWords();
         return words.stream().filter(w -> !stopWordsList.contains(w)).collect(Collectors.toList());
     }
 }
