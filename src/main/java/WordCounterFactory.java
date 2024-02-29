@@ -4,6 +4,8 @@ public class WordCounterFactory {
         FileReader fileReader = new FileReader();
         StopWords stopWords = new StopWords(fileReader);
 
-        return args.length > 0 ? new WordCounterFileReader(stopWords, fileReader, args[0]) : new WordCounterConsole(stopWords);
+        WordCounterResolver wordCounterResolver = args.length > 0 ? new WordCounterFileResolver(fileReader, args) : new WordCounterConsoleResolver();
+
+        return new WordCounterImpl(stopWords, wordCounterResolver);
     }
 }

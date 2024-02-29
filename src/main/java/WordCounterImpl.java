@@ -5,20 +5,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class WordCounterFileReader implements WordCounter {
+public class WordCounterImpl implements WordCounter {
 
     private final StopWords stopWords;
-    private final FileReader fileReader;
-    private final String arg;
+    private final WordCounterResolver wordCounterResolver;
 
-    public WordCounterFileReader(StopWords stopWords, FileReader fileReader, String arg) {
+    public WordCounterImpl(StopWords stopWords, WordCounterResolver wordCounterResolver) {
         this.stopWords = stopWords;
-        this.fileReader = fileReader;
-        this.arg = arg;
+        this.wordCounterResolver = wordCounterResolver;
     }
 
     protected String getSentence() {
-        return fileReader.readString(arg);
+        return wordCounterResolver.resolve();
     }
 
     @Override
