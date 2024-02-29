@@ -48,6 +48,7 @@ public class WordCounterImplTest {
 
         FileReader fileReader = new FileReader();
         WordCounterImpl wordCounterImpl = new WordCounterImpl(new StopWords(fileReader), wordCounterFileResolver);
+
         int count = wordCounterImpl.count();
         Assertions.assertEquals(4, count);
     }
