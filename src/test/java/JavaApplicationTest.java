@@ -13,13 +13,13 @@ public class JavaApplicationTest {
 
     private static Stream<Arguments> provideStringsForMainTest() {
         return Stream.of(
-                Arguments.of("Mary had a little lamb", 4, 4),
-                Arguments.of("word? word. word, wo3rd  word", 1, 1),
-                Arguments.of("wo$rd       wo$$        word,    word", 1, 1),
-                Arguments.of("wo3rd", 0, 0),
-                Arguments.of("the a on off", 0, 0),
-                Arguments.of("the a on had off", 1, 0),
-                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 9, 7)
+                Arguments.of("Mary had a little lamb", 4),
+                Arguments.of("word? word. word, wo3rd  word", 1),
+                Arguments.of("wo$rd       wo$$        word,    word", 1),
+                Arguments.of("wo3rd", 0),
+                Arguments.of("the a on off", 0),
+                Arguments.of("the a on had off", 1),
+                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 9)
         );
     }
 
@@ -32,7 +32,7 @@ public class JavaApplicationTest {
 
     @ParameterizedTest
     @MethodSource("provideStringsForMainTest")
-    public void mainTest(String sentence, int expected, int unique) {
+    public void mainTest(String sentence, int expected) {
         ByteArrayInputStream bytesIn = new ByteArrayInputStream(sentence.getBytes());
         System.setIn(bytesIn);
 
