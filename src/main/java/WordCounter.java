@@ -6,6 +6,10 @@ import java.util.stream.Collectors;
 
 public class WordCounter {
     public int count(String words) {
+        if (words == null) {
+            return 0;
+        }
+
         String[] split = words.split("\\s+");
 
         if (split.length < 1) {
