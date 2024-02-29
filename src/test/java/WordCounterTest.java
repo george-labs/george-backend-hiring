@@ -23,7 +23,7 @@ public class WordCounterTest {
     @ParameterizedTest
     @MethodSource("provideStringsForCountTest")
     public void countTest(String sentence, int expected) {
-        WordCounter wordCounter = new WordCounter();
+        WordCounter wordCounter = new WordCounter(new StopWords(new FileReader()));
         int count = wordCounter.count(sentence);
         Assertions.assertEquals(expected, count);
     }

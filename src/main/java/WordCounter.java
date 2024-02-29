@@ -1,6 +1,3 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -9,37 +6,37 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class WordCounter {
-    public int count(String words) {
-        if (words == null) {
-            return 0;
-        }
 
-        String[] split = words.split("\\s+");
+    private StopWords stopWords;
 
-        if (split.length < 1) {
-            return 0;
-        }
-
-        List<String> stopWords = getStopWords();
-
-        Pattern pattern = Pattern.compile("[a-zA-Z]+");
-        List<String> items = Arrays.stream(split).filter(w -> {
-            Matcher matcher = pattern.matcher(w);
-            return !stopWords.contains(w) && matcher.matches();
-        }).collect(Collectors.toList());
-
-        return items.size();
+    public WordCounter(StopWords stopWords) {
+        this.stopWords = stopWords;
     }
 
-    private List<String> getStopWords() {
-        Path filePath = Path.of("stopwords.txt");
-        try {
-            String content = Files.readString(filePath);
-            return Arrays.asList(content.split("\\n"));
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+    public int count(String sentence) {
+        if (sentence == null) {
+            return 0;
         }
 
-        return Collections.emptyList();
+        List<String> words = getWords(sentence);
+        return filterStopWords(words).size();
+    }
+
+    private List<String> getWords(String sentence) {
+        String[] split = sentence.split("\\s+");
+        if (split.length < 1) {
+            return Collections.emptyList();
+        }
+
+        Pattern pattern = Pattern.compile("[a-zA-Z]+");
+        return Arrays.stream(split).filter(w -> {
+            Matcher matcher = pattern.matcher(w);
+            return matcher.matches();
+        }).collect(Collectors.toList());
+    }
+
+    private List<String> filterStopWords(List<String> words) {
+        List<String> stopWordsList = stopWords.getStopWords();
+        return words.stream().filter(w -> !stopWordsList.contains(w)).collect(Collectors.toList());
     }
 }
