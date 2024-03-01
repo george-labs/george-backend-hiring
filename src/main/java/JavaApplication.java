@@ -1,8 +1,16 @@
+import repository.FileReader;
+import repository.StopWordsProvider;
+import service.console.reader.ConsoleReaderService;
+import service.console.reader.ConsoleReaderServiceImpl;
+import service.counting.words.CountingWordsService;
+import service.counting.words.CountingWordsServiceImpl;
+
 public class JavaApplication {
     public static void main(String[] args){
-        CountingWords countingWords = new CountingWords();
-        String text = ScannerUtil.scanText();
-        var count = countingWords.countNumberOfWords(text);
-        System.out.println("Number of words: " + count);
+        StopWordsProvider stopWordsProvider = new FileReader();
+        ConsoleReaderService consoleReaderService = new ConsoleReaderServiceImpl();
+        CountingWordsService countingWordsServiceImpl = new CountingWordsServiceImpl(stopWordsProvider, consoleReaderService);
+
+        System.out.println("Number of words: " + countingWordsServiceImpl.countNumberOfWords());
     }
 }
