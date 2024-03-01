@@ -5,13 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class FileReaderTest {
+class StopWordsProviderImplTest {
 
     @Test
-    void provideStopWords() {
-        StopWordsProvider stopWordsProvider = new StopWordsProvideImpl(new FileReader(), "teststopwords.txt");
+    void provideStopWordsTest() {
+        StopWordsProvider stopWordsProvider = new StopWordsProviderImpl(new FileReader(), "teststopwords.txt");
 
         var stopWords = stopWordsProvider.provideStopWords();
 

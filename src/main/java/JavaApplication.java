@@ -1,26 +1,17 @@
 import repository.FileReader;
-import repository.StopWordsProvideImpl;
 import repository.StopWordsProvider;
-import service.input.reader.FileReaderServiceImpl;
-import service.input.reader.InputReaderService;
-import service.input.reader.ConsoleReaderServiceImpl;
+import repository.StopWordsProviderImpl;
 import service.counting.words.CountingWordsService;
 import service.counting.words.CountingWordsServiceImpl;
+import service.input.reader.InputReaderServiceProvider;
 
 public class JavaApplication {
     public static void main(String[] args) {
-        StopWordsProvider stopWordsProvider = new StopWordsProvideImpl(new FileReader(), "stopwords.txt");
+        StopWordsProvider stopWordsProvider = new StopWordsProviderImpl(new FileReader(), "stopwords.txt");
 
-        InputReaderService inputReaderService;
+        InputReaderServiceProvider provider = new InputReaderServiceProvider();
 
-        if (args != null && args.length > 0) {
-            inputReaderService = new FileReaderServiceImpl(new FileReader(), args[0]);
-        } else {
-            inputReaderService = new ConsoleReaderServiceImpl();
-        }
-
-
-        CountingWordsService countingWordsServiceImpl = new CountingWordsServiceImpl(stopWordsProvider, inputReaderService);
+        CountingWordsService countingWordsServiceImpl = new CountingWordsServiceImpl(stopWordsProvider, provider.getProvider(args));
 
         System.out.println("Number of words: " + countingWordsServiceImpl.countNumberOfWords());
     }

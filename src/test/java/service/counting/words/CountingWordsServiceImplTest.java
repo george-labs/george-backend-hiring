@@ -7,7 +7,7 @@ import service.input.reader.InputReaderService;
 
 import java.util.List;
 
-class CountingWordsTest {
+class CountingWordsServiceImplTest {
 
     @Test
     public void givenRightTextTest() {

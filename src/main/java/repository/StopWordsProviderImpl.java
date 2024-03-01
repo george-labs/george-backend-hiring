@@ -2,12 +2,12 @@ package repository;
 
 import java.util.List;
 
-public class StopWordsProvideImpl implements StopWordsProvider {
+public class StopWordsProviderImpl implements StopWordsProvider {
 
     private final FileReader fileReader;
     private final String pathToFile;
 
-    public StopWordsProvideImpl(FileReader fileReader, String pathToFile){
+    public StopWordsProviderImpl(FileReader fileReader, String pathToFile){
         this.fileReader = fileReader;
         this.pathToFile = pathToFile;
     }
