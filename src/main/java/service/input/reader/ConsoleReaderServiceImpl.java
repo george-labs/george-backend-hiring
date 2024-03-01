@@ -1,10 +1,10 @@
-package service.console.reader;
+package service.input.reader;
 
 import java.util.Scanner;
 
-public class ConsoleReaderServiceImpl implements ConsoleReaderService {
+public class ConsoleReaderServiceImpl implements InputReaderService {
     @Override
-    public String getNextLine() {
+    public String getInputText() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter text: ");
         return scanner.nextLine();

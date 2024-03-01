@@ -1,7 +1,7 @@
 package service.counting.words;
 
 import repository.StopWordsProvider;
-import service.console.reader.ConsoleReaderService;
+import service.input.reader.InputReaderService;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -10,18 +10,18 @@ import java.util.regex.Pattern;
 public class CountingWordsServiceImpl implements CountingWordsService{
 
     private final Pattern pattern;
-    private final ConsoleReaderService consoleReaderService;
+    private final InputReaderService inputReaderService;
     private final StopWordsProvider stopWordsProvider;
 
-    public CountingWordsServiceImpl(StopWordsProvider stopWordsProvider, ConsoleReaderService consoleReaderService) {
+    public CountingWordsServiceImpl(StopWordsProvider stopWordsProvider, InputReaderService inputReaderService) {
         this.pattern = Pattern.compile("[a-zA-Z]+");
         this.stopWordsProvider = stopWordsProvider;
-        this.consoleReaderService = consoleReaderService;
+        this.inputReaderService = inputReaderService;
     }
 
 
     public long countNumberOfWords() {
-        String text = consoleReaderService.getNextLine();
+        String text = inputReaderService.getInputText();
         List<String> stopWords = stopWordsProvider.provideStopWords();
 
         if (text == null || text.isEmpty()) {

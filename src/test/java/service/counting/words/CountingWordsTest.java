@@ -3,8 +3,7 @@ package service.counting.words;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import repository.StopWordsProvider;
-import service.console.reader.ConsoleReaderService;
-import service.counting.words.CountingWordsServiceImpl;
+import service.input.reader.InputReaderService;
 
 import java.util.List;
 
@@ -61,7 +60,7 @@ class CountingWordsTest {
         Assertions.assertEquals(4, result);
     }
 
-    private ConsoleReaderService mockConsoleReaderService(String response){
+    private InputReaderService mockConsoleReaderService(String response){
         return () -> response;
     }
 

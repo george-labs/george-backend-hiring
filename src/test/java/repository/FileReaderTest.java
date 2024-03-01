@@ -11,9 +11,9 @@ class FileReaderTest {
 
     @Test
     void provideStopWords() {
-        FileReader fileReader = new FileReader("teststopwords.txt");
+        StopWordsProvider stopWordsProvider = new StopWordsProvideImpl(new FileReader(), "teststopwords.txt");
 
-        var stopWords = fileReader.provideStopWords();
+        var stopWords = stopWordsProvider.provideStopWords();
 
         Assertions.assertTrue(stopWords.containsAll(List.of("the", "a", "on", "off")));
     }
