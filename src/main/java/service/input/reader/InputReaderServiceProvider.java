@@ -11,7 +11,7 @@ public class InputReaderServiceProvider {
 
         if (args != null && args.length == 1) {
             return new FileReaderServiceImpl(new FileReader(), args[0]);
-        } else if (args == null) {
+        } else if (args == null || args.length == 0) {
             return new ConsoleReaderServiceImpl();
         }
 

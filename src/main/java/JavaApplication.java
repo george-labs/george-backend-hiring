@@ -14,5 +14,6 @@ public class JavaApplication {
         CountingWordsService countingWordsServiceImpl = new CountingWordsServiceImpl(stopWordsProvider, provider.getProvider(args));
 
         System.out.println("Number of words: " + countingWordsServiceImpl.countNumberOfWords());
+        System.out.println("Number of words: " + countingWordsServiceImpl.countNumberOfWords());
     }
 }
