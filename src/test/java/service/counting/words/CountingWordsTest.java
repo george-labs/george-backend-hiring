@@ -1,4 +1,4 @@
-package service;
+package service.counting.words;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,10 +12,10 @@ class CountingWordsTest {
 
     @Test
     public void givenRightTextTest() {
-        CountingWordsServiceImpl countingWordsServiceImpl = new CountingWordsServiceImpl(mockEmptyStopWordsProvider());
         String text = "Mary had a little lamb";
+        CountingWordsServiceImpl countingWordsServiceImpl = new CountingWordsServiceImpl(mockEmptyStopWordsProvider(), mockConsoleReaderService(text));
 
-        var result = countingWordsServiceImpl.countNumberOfWords(text);
+        var result = countingWordsServiceImpl.countNumberOfWords();
 
         Assertions.assertEquals(5, result);
     }
@@ -23,51 +23,46 @@ class CountingWordsTest {
 
     @Test
     public void givenWrongTextTest() {
-        CountingWordsServiceImpl countingWordsServiceImpl = new CountingWordsServiceImpl(mockEmptyStopWordsProvider());
         String text = "text1 Strin.g Te!st";
+        CountingWordsServiceImpl countingWordsServiceImpl = new CountingWordsServiceImpl(mockEmptyStopWordsProvider(), mockConsoleReaderService(text));
 
-        var result = countingWordsServiceImpl.countNumberOfWords(text);
+        var result = countingWordsServiceImpl.countNumberOfWords();
 
         Assertions.assertEquals(0, result);
     }
 
     @Test
     public void givenNullTest() {
-        CountingWordsServiceImpl countingWordsServiceImpl = new CountingWordsServiceImpl(mockEmptyStopWordsProvider());
         String text = null;
+        CountingWordsServiceImpl countingWordsServiceImpl = new CountingWordsServiceImpl(mockEmptyStopWordsProvider(), mockConsoleReaderService(text));
 
-        var result = countingWordsServiceImpl.countNumberOfWords(text);
+        var result = countingWordsServiceImpl.countNumberOfWords();
 
         Assertions.assertEquals(0, result);
     }
 
     @Test
     public void givenEmptyText() {
-        CountingWordsServiceImpl countingWordsServiceImpl = new CountingWordsServiceImpl(mockEmptyStopWordsProvider());
         String text = "";
+        CountingWordsServiceImpl countingWordsServiceImpl = new CountingWordsServiceImpl(mockEmptyStopWordsProvider(), mockConsoleReaderService(text));
 
-        var result = countingWordsServiceImpl.countNumberOfWords(text);
+        var result = countingWordsServiceImpl.countNumberOfWords();
 
         Assertions.assertEquals(0, result);
     }
 
     @Test
     public void givenRightTextWithStopWordsTest() {
-        CountingWordsServiceImpl countingWordsServiceImpl = new CountingWordsServiceImpl(mockStopWordsProvider());
         String text = "Mary had a little lamb";
+        CountingWordsServiceImpl countingWordsServiceImpl = new CountingWordsServiceImpl(mockStopWordsProvider(), mockConsoleReaderService(text));
 
-        var result = countingWordsServiceImpl.countNumberOfWords(text);
+        var result = countingWordsServiceImpl.countNumberOfWords();
 
         Assertions.assertEquals(4, result);
     }
 
-    private ConsoleReaderService mockStopWordsProvider(){
-        return new ConsoleReaderService() {
-            @Override
-            public String getNextLine() {
-                return null;
-            }
-        }
+    private ConsoleReaderService mockConsoleReaderService(String response){
+        return () -> response;
     }
 
     private StopWordsProvider mockStopWordsProvider(){

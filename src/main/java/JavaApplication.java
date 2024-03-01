@@ -7,7 +7,7 @@ import service.counting.words.CountingWordsServiceImpl;
 
 public class JavaApplication {
     public static void main(String[] args){
-        StopWordsProvider stopWordsProvider = new FileReader();
+        StopWordsProvider stopWordsProvider = new FileReader("stopwords.txt");
         ConsoleReaderService consoleReaderService = new ConsoleReaderServiceImpl();
         CountingWordsService countingWordsServiceImpl = new CountingWordsServiceImpl(stopWordsProvider, consoleReaderService);
 

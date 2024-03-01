@@ -10,18 +10,17 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FileReader implements StopWordsProvider{
-    private final String PATH_TO_FILE = "stopwords.txt";
     private List<String> stopWords;
 
-    public FileReader(){
-        this.loadFile();
+    public FileReader(String pathToFile){
+        this.loadFile(pathToFile);
     }
 
 
-    private void loadFile(){
+    public void loadFile(String pathToFile){
         try {
             var path = Paths.get(Objects.requireNonNull(getClass().getClassLoader()
-                    .getResource(PATH_TO_FILE)).toURI());
+                    .getResource(pathToFile)).toURI());
 
             Stream<String> lines = Files.lines(path);
             this.stopWords = lines.collect(Collectors.toList());
@@ -29,7 +28,7 @@ public class FileReader implements StopWordsProvider{
 
         } catch (URISyntaxException | IOException e) {
             System.out.println("There was exception during reading of file: " + e.getMessage());
-            //throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 
