@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -9,9 +10,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.stream.Stream;
 
-public class JavaApplicationTest {
+public class WordCounterImplTest {
 
-    private static Stream<Arguments> provideStringsForMainTest() {
+    private static Stream<Arguments> provideStringsForCountTest() {
         return Stream.of(
                 Arguments.of("Mary had a little lamb", 4),
                 Arguments.of("word? word. word, wo3rd  word", 1),
@@ -30,17 +31,25 @@ public class JavaApplicationTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideStringsForMainTest")
-    public void mainTest(String sentence, int expected) {
+    @MethodSource("provideStringsForCountTest")
+    public void countScannerResolverTest(String sentence, int expected) {
         ByteArrayInputStream bytesIn = new ByteArrayInputStream(sentence.getBytes());
         System.setIn(bytesIn);
 
-        JavaApplication.main(new String[]{});
+        FileReader fileReader = new FileReader();
+        WordCounterImpl wordCounterImpl = new WordCounterImpl(new StopWords(fileReader), new WordCounterTestResolver(sentence));
+        int count = wordCounterImpl.count();
+        Assertions.assertEquals(expected, count);
+    }
 
-        String lines = outputStreamCaptor.toString().trim();
-        String result = lines.substring(lines.lastIndexOf(" ") + 1);
-        Integer number = Integer.valueOf(result);
+    @Test
+    public void countFileResolverTest() {
+        WordCounterFileResolver wordCounterFileResolver = new WordCounterFileResolver(new FileReader(), new String[]{"mytext.txt"});
 
-        Assertions.assertEquals(expected, number);
+        FileReader fileReader = new FileReader();
+        WordCounterImpl wordCounterImpl = new WordCounterImpl(new StopWords(fileReader), wordCounterFileResolver);
+
+        int count = wordCounterImpl.count();
+        Assertions.assertEquals(4, count);
     }
 }
