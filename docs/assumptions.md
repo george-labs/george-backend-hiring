@@ -13,3 +13,6 @@
  
 ## Iteration 6
 - do not count characters .,?! in a word length
+
+## Iteration 7
+- index is unique sorted list

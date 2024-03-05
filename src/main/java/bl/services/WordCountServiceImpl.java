@@ -3,10 +3,7 @@ package bl.services;
 import bl.model.WordStats;
 import bl.providers.StopWordsProvider;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WordCountServiceImpl implements WordCountService {
@@ -18,7 +15,7 @@ public class WordCountServiceImpl implements WordCountService {
     }
 
     @Override
-    public WordStats countWords(String input) {
+    public WordStats countWords(String input, boolean createIndex) {
         if (input == null) {
             return new WordStats(0, 0, 0.0);
         }
@@ -39,6 +36,15 @@ public class WordCountServiceImpl implements WordCountService {
             totalLength += word.length();
         }
 
-        return new WordStats(words.size(), uniqueWords.size(), totalLength / words.size());
+        return new WordStats(words.size(), uniqueWords.size(), totalLength / words.size(), createIndex(uniqueWords, createIndex));
+    }
+
+    private List<String> createIndex(Set<String> words, boolean createIndex) {
+        if (!createIndex) {
+            return null;
+        }
+        List<String> index = new ArrayList<>(words);
+        index.sort(String::compareToIgnoreCase);
+        return index;
     }
 }

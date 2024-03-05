@@ -45,4 +45,27 @@ public class JavaApplicationTest {
         JavaApplication.main(new String[]{});
         Assertions.assertTrue(outContent.toString().contains("Number of words: 7, unique: 6; average word length: 6.43 characters"));
     }
+
+    @Test
+    public void testStandardInputWithIndex() {
+        ByteArrayInputStream testIn = new ByteArrayInputStream("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.\n".getBytes());
+        System.setIn(testIn);
+        JavaApplication.main(new String[]{"-index"});
+        Assertions.assertTrue(outContent.toString().contains("Number of words: 7, unique: 6; average word length: 6.43 characters"));
+        Assertions.assertTrue(outContent.toString().contains("Index:"));
+    }
+
+    @Test
+    public void testCreateIndex() {
+        JavaApplication.main(new String[]{"-index", InputFileUtils.getInputFile()});
+        Assertions.assertTrue(outContent.toString().contains("Number of words: 7, unique: 6; average word length: 6.43 characters"));
+        Assertions.assertTrue(outContent.toString().contains("Index:"));
+    }
+
+    @Test
+    public void testCreateIndexArgumentAtEnd() {
+        JavaApplication.main(new String[]{InputFileUtils.getInputFile(), "-index"});
+        Assertions.assertTrue(outContent.toString().contains("Number of words: 7, unique: 6; average word length: 6.43 characters"));
+        Assertions.assertTrue(outContent.toString().contains("Index:"));
+    }
 }
