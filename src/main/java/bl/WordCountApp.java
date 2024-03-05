@@ -15,7 +15,7 @@ public class WordCountApp {
 
     public WordCountApp(String[] args) {
         this.appArgs = AppArgs.parse(args);
-        this.inputProvider = this.appArgs.getFileName() == null ? new StdInputProvider() : new FileInputProvider(this.appArgs.getFileName());
+        this.inputProvider = InputProviderFactory.getProvider(this.appArgs.getFileName());
     }
 
     public void run() {
