@@ -11,7 +11,7 @@ public class WordCountApp {
     private final StopWordsProvider stopWordsProvider = new StopWordsFileProvider();
     private final WordStatsService wordStatsService = new WordStatsServiceImpl(stopWordsProvider);
     private final InputProvider inputProvider;
-    AppArgs appArgs;
+    private final AppArgs appArgs;
 
     public WordCountApp(String[] args) {
         this.appArgs = AppArgs.parse(args);
