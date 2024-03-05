@@ -1,8 +1,8 @@
 package bl.services;
 
-import bl.model.WordCount;
+import bl.model.WordStats;
 
 public interface WordCountService {
 
-    WordCount countWords(String input);
+    WordStats countWords(String input);
 }

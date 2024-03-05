@@ -1,6 +1,6 @@
 package bl.services;
 
-import bl.model.WordCount;
+import bl.model.WordStats;
 import bl.providers.StopWordsProvider;
 
 import java.util.Arrays;
@@ -18,14 +18,15 @@ public class WordCountServiceImpl implements WordCountService {
     }
 
     @Override
-    public WordCount countWords(String input) {
+    public WordStats countWords(String input) {
         if (input == null) {
-            return new WordCount(0, 0);
+            return new WordStats(0, 0, 0.0);
         }
 
         Set<String> stopWords = stopWordsProvider.getStopWords();
 
         String[] wordCandidates = input.split("\\s+");
+
         List<String> words = Arrays.stream(wordCandidates)
                 .map(candidate -> candidate.replaceAll("[.,?!]$", ""))
                 .filter(candidate -> candidate.matches("[a-zA-Z\\-]+"))
@@ -33,6 +34,11 @@ public class WordCountServiceImpl implements WordCountService {
                 .collect(Collectors.toList());
         Set<String> uniqueWords = new HashSet<>(words);
 
-        return new WordCount(words.size(), uniqueWords.size());
+        double totalLength = 0;
+        for (String word : words) {
+            totalLength += word.length();
+        }
+
+        return new WordStats(words.size(), uniqueWords.size(), totalLength / words.size());
     }
 }

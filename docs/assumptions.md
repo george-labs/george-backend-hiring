@@ -10,3 +10,6 @@
 - separators are whitespaces and -
 - characters .,?! are stripped
 - case insensitive
+ 
+## Iteration 6
+- do not count characters .,?! in a word length
