@@ -28,8 +28,8 @@ class WordCountServiceImplTest {
         String input = "this is a TEST-string.";
         WordCount count = countService.countWords(input);
 
-        assertEquals(5, count.getTotal());
-        assertEquals(5, count.getUnique());
+        assertEquals(4, count.getTotal());
+        assertEquals(4, count.getUnique());
     }
 
     @Test

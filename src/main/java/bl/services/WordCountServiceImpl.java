@@ -25,10 +25,10 @@ public class WordCountServiceImpl implements WordCountService {
 
         Set<String> stopWords = stopWordsProvider.getStopWords();
 
-        String[] wordCandidates = input.split("[\\s-]+");
+        String[] wordCandidates = input.split("\\s+");
         List<String> words = Arrays.stream(wordCandidates)
                 .map(candidate -> candidate.replaceAll("[.,?!]$", ""))
-                .filter(candidate -> candidate.matches("[a-zA-Z]+"))
+                .filter(candidate -> candidate.matches("[a-zA-Z\\-]+"))
                 .filter(candidate -> !stopWords.contains(candidate))
                 .collect(Collectors.toList());
         Set<String> uniqueWords = new HashSet<>(words);
