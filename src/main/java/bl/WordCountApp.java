@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public class WordCountApp {
 
-    private final WordCountService wordCountService = new WordCountServiceImpl();
+    private final StopWordsProvider stopWordsProvider = new StopWordsFileProvider();
+    private final WordCountService wordCountService = new WordCountServiceImpl(stopWordsProvider);
 
     public void run() {
         System.out.println("Enter text: ");
