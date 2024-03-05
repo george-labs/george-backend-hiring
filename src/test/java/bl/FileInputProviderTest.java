@@ -1,5 +1,6 @@
 package bl;
 
+import bl.providers.FileInputProvider;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

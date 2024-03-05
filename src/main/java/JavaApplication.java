@@ -1,6 +1,6 @@
-import bl.FileInputProvider;
-import bl.InputProvider;
-import bl.StdInputProvider;
+import bl.providers.FileInputProvider;
+import bl.providers.InputProvider;
+import bl.providers.StdInputProvider;
 import bl.WordCountApp;
 
 public class JavaApplication {

@@ -1,4 +1,4 @@
-package bl;
+package bl.providers;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

@@ -1,4 +1,4 @@
-package bl;
+package bl.providers;
 
 public interface InputProvider {
 

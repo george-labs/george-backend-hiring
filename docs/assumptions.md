@@ -1,9 +1,12 @@
 # Assumptions per iteration
 
 ## Iteration 1
-
 - are special characters and numbers count as an invalid word or a separator?
 
-## Iteration 1
+## Iteration 3
+- should stopwords be case insensitive? - no
 
-- should stopwords be case insensitive?
+## Iteration 4
+- separators are whitespaces and -
+- characters .,?! are stripped
+- case insensitive
