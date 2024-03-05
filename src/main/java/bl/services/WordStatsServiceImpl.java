@@ -6,11 +6,11 @@ import bl.providers.StopWordsProvider;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class WordCountServiceImpl implements WordCountService {
+public class WordStatsServiceImpl implements WordStatsService {
 
     private final StopWordsProvider stopWordsProvider;
 
-    public WordCountServiceImpl(StopWordsProvider stopWordsProvider) {
+    public WordStatsServiceImpl(StopWordsProvider stopWordsProvider) {
         this.stopWordsProvider = stopWordsProvider;
     }
 
@@ -35,8 +35,9 @@ public class WordCountServiceImpl implements WordCountService {
         for (String word : words) {
             totalLength += word.length();
         }
+        double avg = words.isEmpty() ? 0.0 : totalLength / words.size();
 
-        return new WordStats(words.size(), uniqueWords.size(), totalLength / words.size(), createIndex(uniqueWords, createIndex));
+        return new WordStats(words.size(), uniqueWords.size(), avg, createIndex(uniqueWords, createIndex));
     }
 
     private List<String> createIndex(Set<String> words, boolean createIndex) {

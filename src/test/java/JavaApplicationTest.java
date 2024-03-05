@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import utils.InputFileUtils;
@@ -7,6 +6,9 @@ import utils.InputFileUtils;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class JavaApplicationTest {
 
@@ -30,12 +32,12 @@ public class JavaApplicationTest {
     @Test
     public void testFileNameInput() {
         JavaApplication.main(new String[]{InputFileUtils.getInputFile()});
-        Assertions.assertTrue(outContent.toString().contains("Number of words: 7, unique: 6; average word length: 6.43 characters"));
+        assertTrue(outContent.toString().contains("Number of words: 7, unique: 6; average word length: 6.43 characters"));
     }
 
     @Test
     public void testInvalidFileNameInput() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> JavaApplication.main(new String[]{"invalid.txt"}));
+        assertThrows(IllegalArgumentException.class, () -> JavaApplication.main(new String[]{"invalid.txt"}));
     }
 
     @Test
@@ -43,7 +45,7 @@ public class JavaApplicationTest {
         ByteArrayInputStream testIn = new ByteArrayInputStream("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.\n".getBytes());
         System.setIn(testIn);
         JavaApplication.main(new String[]{});
-        Assertions.assertTrue(outContent.toString().contains("Number of words: 7, unique: 6; average word length: 6.43 characters"));
+        assertTrue(outContent.toString().contains("Number of words: 7, unique: 6; average word length: 6.43 characters"));
     }
 
     @Test
@@ -51,21 +53,28 @@ public class JavaApplicationTest {
         ByteArrayInputStream testIn = new ByteArrayInputStream("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.\n".getBytes());
         System.setIn(testIn);
         JavaApplication.main(new String[]{"-index"});
-        Assertions.assertTrue(outContent.toString().contains("Number of words: 7, unique: 6; average word length: 6.43 characters"));
-        Assertions.assertTrue(outContent.toString().contains("Index:"));
+        assertTrue(outContent.toString().contains("Number of words: 7, unique: 6; average word length: 6.43 characters"));
+        assertTrue(outContent.toString().contains("Index:"));
     }
 
     @Test
     public void testCreateIndex() {
         JavaApplication.main(new String[]{"-index", InputFileUtils.getInputFile()});
-        Assertions.assertTrue(outContent.toString().contains("Number of words: 7, unique: 6; average word length: 6.43 characters"));
-        Assertions.assertTrue(outContent.toString().contains("Index:"));
+        assertTrue(outContent.toString().contains("Number of words: 7, unique: 6; average word length: 6.43 characters"));
+        assertTrue(outContent.toString().contains("Index:"));
     }
 
     @Test
     public void testCreateIndexArgumentAtEnd() {
         JavaApplication.main(new String[]{InputFileUtils.getInputFile(), "-index"});
-        Assertions.assertTrue(outContent.toString().contains("Number of words: 7, unique: 6; average word length: 6.43 characters"));
-        Assertions.assertTrue(outContent.toString().contains("Index:"));
+        assertTrue(outContent.toString().contains("Number of words: 7, unique: 6; average word length: 6.43 characters"));
+        assertTrue(outContent.toString().contains("Index:"));
+    }
+
+    @Test
+    public void testIllegalArguments() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            JavaApplication.main(new String[]{InputFileUtils.getInputFile(), "invalidargument"});
+        });
     }
 }
