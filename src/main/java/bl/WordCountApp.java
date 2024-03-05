@@ -2,9 +2,7 @@ package bl;
 
 
 import bl.model.WordStats;
-import bl.providers.InputProvider;
-import bl.providers.StopWordsFileProvider;
-import bl.providers.StopWordsProvider;
+import bl.providers.*;
 import bl.services.WordCountService;
 import bl.services.WordCountServiceImpl;
 
@@ -14,8 +12,8 @@ public class WordCountApp {
     private final WordCountService wordCountService = new WordCountServiceImpl(stopWordsProvider);
     private final InputProvider inputProvider;
 
-    public WordCountApp(InputProvider inputProvider) {
-        this.inputProvider = inputProvider;
+    public WordCountApp(String[] args) {
+        this.inputProvider = args.length == 0 ? new StdInputProvider() : new FileInputProvider(args[0]);
     }
 
     public void run() {
