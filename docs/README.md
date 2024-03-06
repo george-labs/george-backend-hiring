@@ -92,7 +92,7 @@ In case you see the need for mocking, please hand-roll your mocks.
 
 1. Clone the repository
 2. Create a branch off `main`  
-   `<firstname>_<lastname>_sesssion_1_iteration_1_<pairing-partner-name>`
+   `<firstname>_<lastname>_session_1_iteration_1_<pairing-partner-name>`
 3. Push this branch to the repository
 4. Run `./mvnw clean verify` via your terminal
 5. Open the project in your IDE of choice
