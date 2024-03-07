@@ -1,39 +1,44 @@
-package wordcount;
+package wordcount.counter;
 
 import java.util.Arrays;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-public class CharacterWordCounter implements WordCounter {
+public class CharacterWordCounter implements FilteredWordCounter {
 
 	private Pattern characterRegexPattern;
 	private Set<String> stopWords;
 
-	CharacterWordCounter() {
+	public CharacterWordCounter() {
 		characterRegexPattern = Pattern.compile("[a-zA-Z]+");
 	}
 
 	/**
 	 * Returns true when word is in the stopwords collection
+	 * 
 	 * @param word
 	 * @return
 	 */
 	private boolean filterStopWords(String word) {
-		return stopWords.contains(word);
+		if ( stopWords != null ) { 
+			return !stopWords.contains(word);
+		} 
+		return true;
 	}
-	
-	public void supplyStopWords(Set<String> stopWords) {
+
+	@Override
+	public void loadStopWords(Set<String> stopWords) {
 		this.stopWords = stopWords;
 	}
-	
+
 	@Override
 	public long countWords(String input) {
 		String[] wordCandidates = input.split("\\s");
 		Stream<String> wordCandidatesStream = Arrays.stream(wordCandidates);
 		wordCandidatesStream = wordCandidatesStream
 				.filter(candidate -> characterRegexPattern.matcher(candidate).matches())
-				.filter(candidate -> filterStopWords(candidate));
+				.filter(this::filterStopWords);
 
 		return wordCandidatesStream.count();
 	}

@@ -1,4 +1,4 @@
-package wordcount;
+package wordcount.counter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,6 +7,9 @@ import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
+import wordcount.counter.CharacterWordCounter;
+import wordcount.counter.FilteredWordCounter;
 
 class CharacterWordCounterTest {
 
@@ -26,7 +29,7 @@ class CharacterWordCounterTest {
 	@ParameterizedTest
 	@MethodSource("getTestArguments")
 	void countWordsWithDifferentInputs(String text, long count) {
-		WordCounter wordCounter = new CharacterWordCounter();
+		FilteredWordCounter wordCounter = new CharacterWordCounter();
 
 		long expectedCount = wordCounter.countWords(text);
 

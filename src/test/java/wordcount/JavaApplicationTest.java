@@ -35,7 +35,7 @@ class JavaApplicationTest {
 
 		JavaApplication.main(null);
 
-		assertEquals(INPUT_PROMPT + OUTPUT_PROMPT + 5 + System.lineSeparator(), outputStreamCaptor.toString());
+		assertEquals(INPUT_PROMPT + OUTPUT_PROMPT + 4 + System.lineSeparator(), outputStreamCaptor.toString());
 	}
 
 }
