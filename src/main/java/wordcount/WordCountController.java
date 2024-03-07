@@ -2,6 +2,7 @@ package wordcount;
 
 import wordcount.counter.CharacterWordCounter;
 import wordcount.counter.FilteredWordCounter;
+import wordcount.counter.WordCountResult;
 import wordcount.io.FileReader;
 import wordcount.ui.ConsoleInputReader;
 import wordcount.ui.ConsoleWriter;
@@ -25,7 +26,7 @@ public class WordCountController {
 
 	void run() {
 		String userInput = userInputReader.readUserInput();
-		long wordCount = wordCounter.countWords(userInput);
-		userOutputWriter.presentOutput(wordCount);
+		WordCountResult wordCountResult = wordCounter.countWords(userInput);
+		userOutputWriter.presentOutput(wordCountResult);
 	}
 }

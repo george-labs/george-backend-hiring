@@ -20,10 +20,12 @@ import org.junit.jupiter.api.io.TempDir;
 class JavaApplicationTest {
 
 	private static final String EXAMPLE_INPUT = "Mary had a little lamb";
+	private static final String EXAMPLE_UNIQUE_INPUT = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
 
 	// input+output prompts from ConsoleUserInterface
 	protected static final String INPUT_PROMPT = "Enter text: ";
 	protected static final String OUTPUT_PROMPT = "Number of words: ";
+	protected static final String UNIQUE_OUTPUT_PROMPT = ", unique: ";
 
 	@Test
 	void mainWithExampleConsoleInput() {
@@ -37,8 +39,10 @@ class JavaApplicationTest {
 
 		JavaApplication.main(null);
 
-		assertEquals(INPUT_PROMPT + OUTPUT_PROMPT + 4 + System.lineSeparator(), outputStreamCaptor.toString());
+		assertEquals(INPUT_PROMPT + OUTPUT_PROMPT + 4 + UNIQUE_OUTPUT_PROMPT + 4 + System.lineSeparator(),
+				outputStreamCaptor.toString());
 	}
+
 
 	
 	@Test
@@ -48,16 +52,16 @@ class JavaApplicationTest {
 		List<String> lines = Arrays.asList("Mary had", "a little", "lamb");
 		Files.write(file, lines);
 
-		String[] args = {file.toString()};		
+		String[] args = { file.toString() };
 
 		// redirect stdout
 		ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStreamCaptor));
 
-		
 		JavaApplication.main(args);
 
-		assertEquals(OUTPUT_PROMPT + 4 + System.lineSeparator(), outputStreamCaptor.toString());
+		assertEquals(OUTPUT_PROMPT + 4 + UNIQUE_OUTPUT_PROMPT + 4 + System.lineSeparator(),
+				outputStreamCaptor.toString());
 	}
 
 }

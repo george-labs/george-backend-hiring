@@ -1,8 +1,11 @@
 package wordcount.counter;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CharacterWordCounter implements FilteredWordCounter {
@@ -21,9 +24,9 @@ public class CharacterWordCounter implements FilteredWordCounter {
 	 * @return
 	 */
 	private boolean filterStopWords(String word) {
-		if ( stopWords != null ) { 
+		if (stopWords != null) {
 			return !stopWords.contains(word);
-		} 
+		}
 		return true;
 	}
 
@@ -33,14 +36,16 @@ public class CharacterWordCounter implements FilteredWordCounter {
 	}
 
 	@Override
-	public long countWords(String input) {
+	public WordCountResult countWords(String input) {
 		String[] wordCandidates = input.split("\\s");
 		Stream<String> wordCandidatesStream = Arrays.stream(wordCandidates);
 		wordCandidatesStream = wordCandidatesStream
-				.filter(candidate -> characterRegexPattern.matcher(candidate).matches())
-				.filter(this::filterStopWords);
+				.filter(candidate -> characterRegexPattern.matcher(candidate).matches()).filter(this::filterStopWords);
+		List<String> wordCandidatesList = wordCandidatesStream.collect(Collectors.toList());
+		long wordCount = wordCandidatesList.size();
+		long uniqueWordCount = (new HashSet<>(wordCandidatesList)).size();
 
-		return wordCandidatesStream.count();
+		return new WordCountResult(wordCount, uniqueWordCount);
 	}
 
 }
