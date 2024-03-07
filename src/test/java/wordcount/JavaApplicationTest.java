@@ -8,10 +8,6 @@ import java.io.PrintStream;
 
 import org.junit.jupiter.api.Test;
 
-import wordcount.JavaApplication;
-import wordcount.ui.ConsoleUserInterface;
-import wordcount.ui.UserInterface;
-
 /**
  * This class contains integration test
  */

@@ -8,9 +8,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import wordcount.counter.CharacterWordCounter;
-import wordcount.counter.FilteredWordCounter;
-
 class CharacterWordCounterTest {
 
 	private static Stream<Arguments> getTestArguments() {

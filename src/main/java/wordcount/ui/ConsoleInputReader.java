@@ -2,7 +2,7 @@ package wordcount.ui;
 
 import java.util.Scanner;
 
-public class ConsoleReader implements UserInputReader {
+public class ConsoleInputReader implements UserInputReader {
 	protected static final String INPUT_PROMPT = "Enter text: ";
 
 	@Override
