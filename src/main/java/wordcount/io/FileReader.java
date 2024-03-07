@@ -1,6 +1,7 @@
 package wordcount.io;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,9 +17,17 @@ public class FileReader {
 		Path path;
 		List<String> lines;
 		try {
-			path = Paths.get(FileReader.class.getClassLoader().getResource(filename).toURI());
+			try {
+				// try to load file from classloader
+				URI uri = FileReader.class.getClassLoader().getResource(filename).toURI();
+				path = Paths.get(uri);
+			} catch ( NullPointerException e ) {
+				// try to load file from absolute/relative path
+				path = Paths.get(filename);				
+			}
+			
 			lines = Files.readAllLines(path);
-		} catch (URISyntaxException | IOException | NullPointerException e) {
+		} catch (URISyntaxException | IOException e ) {
 			// no need to log or rethrow the exception, this is a compile-time error
 			lines = new ArrayList<>();
 		}
