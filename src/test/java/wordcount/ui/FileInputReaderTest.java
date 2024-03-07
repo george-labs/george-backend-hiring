@@ -75,4 +75,5 @@ class FileInputReaderTest {
 		assertEquals(expectedString, readString);
 	}
 	
+	// TODO: test with binary file
 }
