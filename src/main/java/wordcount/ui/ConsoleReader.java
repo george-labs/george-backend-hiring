@@ -5,8 +5,6 @@ import java.util.Scanner;
 public class ConsoleReader implements UserInputReader {
 	protected static final String INPUT_PROMPT = "Enter text: ";
 
-	// TODO define output stream in constructor instead of hardcoding System.out
-	
 	@Override
 	public String readUserInput() {
 		// 1. prompt
