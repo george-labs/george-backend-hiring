@@ -1,28 +1,23 @@
 package wordcount.ui;
 
-import java.util.Scanner;
-
 public class ConsoleUserInterface implements UserInterface {
 
-	protected static final String INPUT_PROMPT = "Enter text: ";
-	protected static final String OUTPUT_PROMPT = "Number of words: ";
+	private UserInputReader userInputReader;
+	private UserOutputWriter userOutputWriter;
+
+	public ConsoleUserInterface() {
+		userInputReader = new ConsoleReader();
+		userOutputWriter = new ConsoleWriter();
+	}
 
 	@Override
 	public String readUserInput() {
-		// 1. prompt
-		System.out.print(INPUT_PROMPT);
-		// 2. read input
-		// TODO separate class for input reader
-		String line;
-		try (Scanner scanner = new Scanner(System.in)) {
-			line = scanner.nextLine();
-		}
-		return line;
+		return userInputReader.readUserInput();
 	}
 
 	@Override
 	public void presentOutput(long output) {
-		System.out.println(OUTPUT_PROMPT + output);
+		userOutputWriter.presentOutput(output);
 	}
 
 }

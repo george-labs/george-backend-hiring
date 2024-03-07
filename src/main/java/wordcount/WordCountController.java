@@ -9,7 +9,7 @@ public class WordCountController {
 
 	WordCountController() {
 		ui = new ConsoleUserInterface();
-		wordCounter = new SimpleWordCounter();
+		wordCounter = new CharacterWordCounter();
 	}
 
 	void run() {
