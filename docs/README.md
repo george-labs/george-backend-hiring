@@ -81,7 +81,7 @@ If we do not continue the recruiting process with you, we will send you a detail
 
 ### Requirements
 
-Please use Java 11 or Kotlin as a programming language, the project is already setup to support both.
+Please use Java 21 or Kotlin as a programming language, the project is already setup to support both.
 No Frameworks are allowed for this exercise.
 No other libraries than JUnit and the Kotlin Standard Library must be used.
 Currently, JUnit 5 as well as Kotlin are configured in the `pom.xml`.
