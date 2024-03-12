@@ -10,8 +10,14 @@ public class JavaApplicationTest {
     }
 
     @Test
-    public void testMainMethod(){
+    public void testMainMethodForAllValidWords(){
         provideInput("Mary Had a little lamb");
+        JavaApplication.main(new String[1]);
+    }
+
+    @Test
+    public void testMainMethodForOneInvalidWord(){
+        provideInput("M4ry Had a little lamb");
         JavaApplication.main(new String[1]);
     }
 
