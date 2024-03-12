@@ -10,10 +10,13 @@ import static wordcounter.constants.Constants.NUMBER_OF_WORDS;
 
 public class ConsoleIOLogicImpl implements InputOutputLogic {
     @Override
-    public void completeIOLogic() {
+    public String completeIOLogic() {
         Scanner scan = new Scanner(System.in);
         System.out.println(ENTER_TEXT);
         String inputLine = scan.nextLine();
-        System.out.println(NUMBER_OF_WORDS + WordCounter.countWords(inputLine));
+        int countedWords = WordCounter.countWords(inputLine);
+        String output = NUMBER_OF_WORDS + countedWords;
+        System.out.println(output);
+        return output;
     }
 }

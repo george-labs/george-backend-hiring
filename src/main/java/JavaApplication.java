@@ -3,7 +3,7 @@ import wordcounter.utilities.PointOfEntry;
 public class JavaApplication {
 
     public static void main(String[] args) {
-        PointOfEntry pointOfEntry = new PointOfEntry(args[0]);
+        PointOfEntry pointOfEntry = new PointOfEntry();
     }
 
 }
