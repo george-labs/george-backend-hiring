@@ -10,7 +10,7 @@ public class PointOfEntry {
     private final InputOutputLogic inputOutputLogic;
 
     public PointOfEntry(String[] args){
-        if(Objects.nonNull(args) && !args[0].isEmpty()){
+        if(Objects.nonNull(args) && Objects.nonNull(args[0]) && !args[0].isEmpty()){
             this.inputOutputLogic = new FileIOLogicImpl(args[0]);
         }else{
             this.inputOutputLogic = new ConsoleIOLogicImpl();
