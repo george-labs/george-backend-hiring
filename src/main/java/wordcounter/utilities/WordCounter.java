@@ -1,7 +1,6 @@
-package utilities;
+package wordcounter.utilities;
 
-import static utilities.Constants.SPACE_CHARACTER;
-import static utilities.Constants.VALID_WORD_REGEX;
+import wordcounter.constants.Constants;
 
 public class WordCounter {
 
@@ -11,7 +10,7 @@ public class WordCounter {
         if(null == inputLine){
             return 0;
         }
-        String[] splittedInput = inputLine.split(SPACE_CHARACTER);
+        String[] splittedInput = inputLine.split(Constants.SPACE_CHARACTER);
         for(String possibleWord : splittedInput){
             boolean isValidWord = isValidWord(possibleWord);
             if(isValidWord){
@@ -22,7 +21,7 @@ public class WordCounter {
     }
 
     public static boolean isValidWord(String possibleWord){
-        return possibleWord.matches(VALID_WORD_REGEX);
+        return possibleWord.matches(Constants.VALID_WORD_REGEX);
     }
 
 }

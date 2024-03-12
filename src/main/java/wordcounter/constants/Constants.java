@@ -1,4 +1,4 @@
-package utilities;
+package wordcounter.constants;
 
 public class Constants {
     public static final String ENTER_TEXT = "Enter text: ";

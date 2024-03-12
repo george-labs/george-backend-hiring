@@ -1,10 +1,9 @@
 package utlities;
 
 import org.junit.jupiter.api.Test;
-import utilities.WordCounter;
+import wordcounter.utilities.WordCounter;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 
 public class WordCountTest {
 
