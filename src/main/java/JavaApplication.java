@@ -1,34 +1,17 @@
+import utilities.WordCounter;
+
 import java.util.Scanner;
+
+import static utilities.Constants.ENTER_TEXT;
+import static utilities.Constants.NUMBER_OF_WORDS;
 
 public class JavaApplication {
 
     public static void main(String[] args) {
-        System.out.println("Hello world");
-
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter text: ");
+        System.out.println(ENTER_TEXT);
         String inputLine = scan.nextLine();
-        //counting logic
-        System.out.println("Number of words: " + countWords(inputLine));
-    }
-
-    public static int countWords(String inputLine) {
-
-        int answer = 0;
-
-        String[] splittedInput = inputLine.split(" ");
-
-        for(String possibleWord : splittedInput){
-            boolean isValidWord = isValidWord(possibleWord);
-            if(isValidWord){
-                answer++;
-            }
-        }
-        return answer;
-    }
-
-    public static boolean isValidWord(String possibleWord){
-        return possibleWord.matches("[a-zA-Z]+");
+        System.out.println(NUMBER_OF_WORDS + WordCounter.countWords(inputLine));
     }
 
 }
