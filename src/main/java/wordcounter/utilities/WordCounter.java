@@ -2,10 +2,6 @@ package wordcounter.utilities;
 
 import wordcounter.constants.Constants;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 
 public class WordCounter {
@@ -17,7 +13,7 @@ public class WordCounter {
             return 0;
         }
         String[] splittedInput = inputLine.split(Constants.SPACE_CHARACTER);
-        Set<String> stopWords = readStopwords();
+        Set<String> stopWords = FileReadingUtility.readStopwords();
         for(String possibleWord : splittedInput){
             if(stopWords.contains(possibleWord)){
                 continue;
@@ -28,21 +24,6 @@ public class WordCounter {
             }
         }
         return answer;
-    }
-
-    public static Set<String> readStopwords(){
-
-        Set<String> stopWords = new HashSet<>();
-        try{
-            Scanner file = new Scanner(new FileReader("src/main/resources/stopwords.txt"));
-            while(file.hasNext()){
-                stopWords.add(file.nextLine());
-            }
-        }
-        catch (FileNotFoundException ex){
-            ex.printStackTrace();
-        }
-        return stopWords;
     }
 
     public static boolean isValidWord(String possibleWord){
