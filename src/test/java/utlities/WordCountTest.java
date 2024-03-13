@@ -14,7 +14,7 @@ public class WordCountTest {
 
         int countedWords = WordCounter.countWords(input);
 
-        assertEquals(5, countedWords);
+        assertEquals(4, countedWords);
     }
 
     @Test
@@ -24,7 +24,7 @@ public class WordCountTest {
 
         int countedWords = WordCounter.countWords(input);
 
-        assertEquals(4, countedWords);
+        assertEquals(3, countedWords);
     }
 
     @Test

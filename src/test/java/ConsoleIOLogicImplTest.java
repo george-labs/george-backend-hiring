@@ -19,7 +19,7 @@ public class ConsoleIOLogicImplTest {
         provideInput("Mary had a little lamb");
         InputOutputLogic ioLogic = new ConsoleIOLogicImpl();
         String outputString = ioLogic.completeIOLogic();
-        Assertions.assertEquals(NUMBER_OF_WORDS + 5, outputString);
+        Assertions.assertEquals(NUMBER_OF_WORDS + 4, outputString);
     }
 
     @Test
@@ -27,6 +27,6 @@ public class ConsoleIOLogicImplTest {
         provideInput("Mary h3d a little lamb");
         InputOutputLogic ioLogic = new ConsoleIOLogicImpl();
         String outputString = ioLogic.completeIOLogic();
-        Assertions.assertEquals(NUMBER_OF_WORDS + 4, outputString);
+        Assertions.assertEquals(NUMBER_OF_WORDS + 3, outputString);
     }
 }

@@ -2,6 +2,8 @@ package wordcounter.utilities;
 
 import wordcounter.constants.Constants;
 
+import java.util.Set;
+
 public class WordCounter {
 
     public static int countWords(String inputLine) {
@@ -11,7 +13,11 @@ public class WordCounter {
             return 0;
         }
         String[] splittedInput = inputLine.split(Constants.SPACE_CHARACTER);
+        Set<String> stopWords = FileReadingUtility.readStopwords();
         for(String possibleWord : splittedInput){
+            if(stopWords.contains(possibleWord)){
+                continue;
+            }
             boolean isValidWord = isValidWord(possibleWord);
             if(isValidWord){
                 answer++;
