@@ -2,9 +2,7 @@ package wordcounter.utilities;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class FileReadingUtility {
 
@@ -21,6 +19,21 @@ public class FileReadingUtility {
             ex.printStackTrace();
         }
         return stopWords;
+    }
+
+    public static List<String> readInputFile(String filename){
+
+        List<String> inputLines = new ArrayList<>();
+        try{
+            Scanner file = new Scanner(new FileReader(filename));
+            while(file.hasNext()){
+                inputLines.add(file.nextLine());
+            }
+        }
+        catch (FileNotFoundException ex){
+            ex.printStackTrace();
+        }
+        return inputLines;
     }
 
 }
