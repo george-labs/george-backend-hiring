@@ -84,7 +84,8 @@ If we do not continue the recruiting process with you, we will send you a detail
 Please use Java 21 or Kotlin as a programming language, the project is already setup to support both.
 No Frameworks are allowed for this exercise.
 No other libraries than JUnit and the Kotlin Standard Library must be used.
-Currently, JUnit 5 as well as Kotlin are configured in the `pom.xml`.
+The project is set up to be used with Maven and Gradle using their respective wrappers.
+Currently, JUnit 5 as well as Kotlin are configured in the `pom.xml` as well as in the `build.gradle.kts`.
 We don’t allow any mocking library.
 In case you see the need for mocking, please hand-roll your mocks.
 
@@ -94,7 +95,7 @@ In case you see the need for mocking, please hand-roll your mocks.
 2. Create a branch off `main`  
    `<firstname>_<lastname>_session_1_iteration_1_<pairing-partner-name>`
 3. Push this branch to the repository
-4. Run `./mvnw clean verify` via your terminal
+4. Run `./mvnw clean verify` or `./gradlew clean check` via your terminal
 5. Open the project in your IDE of choice
 6. Create a dummy unit test and run it
 7. Read the requirements from the _Requirements_ section  
