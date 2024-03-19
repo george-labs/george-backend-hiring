@@ -5,17 +5,17 @@ package interview.output;
  */
 public class WordCountOutput {
 
-    int totalWords;
+    long totalWords;
 
-    public int getTotalWords() {
+    public long getTotalWords() {
         return totalWords;
     }
 
-    public WordCountOutput(int totalWords) {
+    public WordCountOutput(long totalWords) {
         this.totalWords = totalWords;
     }
 
-    public static WordCountOutput of(int totalWords) {
+    public static WordCountOutput of(long totalWords) {
         return new WordCountOutput(totalWords);
     }
 }
