@@ -34,3 +34,7 @@ Following is the failing test
         assertEquals("Fail: Error reading input", ex.getMessage());
     }
 ```
+
+## Iteration 2 - session 5
+
+The `stopwords.txt` file is always going to have the same name and will be on the same directory (classpath)
