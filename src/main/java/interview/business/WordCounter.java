@@ -13,7 +13,9 @@ import java.util.regex.Pattern;
  */
 public class WordCounter {
 
-    private final String VALID_CHARS = "[a-zA-Z^,.?;!]";
+    private static final String VALID_CHARS = "[a-zA-Z]+([,.?;!])?";
+    private static final String REGEX_SPLITTER = "\\s";
+
     private final InputReader inputReader;
 
     public WordCounter(InputReader inputReader) {
@@ -24,12 +26,13 @@ public class WordCounter {
 
         final String textInput = inputReader.readInput();
 
-        final long totalWords = Arrays.stream(textInput.split(" "))
+        final long totalWords = Arrays.stream(textInput.split(REGEX_SPLITTER))
                 .filter(isWordValid())
                 .count();
 
         return WordCountOutput.of(totalWords);
     }
+
 
     private Predicate<String> isWordValid() {
         return (word) -> {
