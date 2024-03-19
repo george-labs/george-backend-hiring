@@ -1,6 +1,5 @@
 package interview.presenter;
 
-import interview.business.WordCounter;
 import interview.output.WordCountOutput;
 
 /**
@@ -8,14 +7,7 @@ import interview.output.WordCountOutput;
  */
 public class WordCountPresenter {
 
-    private final WordCounter wordCounter;
-
-    public WordCountPresenter(WordCounter wordCounter) {
-        this.wordCounter = wordCounter;
-    }
-
-    public void presentWordCount() {
-        final WordCountOutput output = wordCounter.processInput();
+    public void presentWordCount(WordCountOutput output) {
         System.out.printf("Number of words: %d", output.getTotalWords());
     }
 }
