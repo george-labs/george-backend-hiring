@@ -17,4 +17,20 @@
 - splitting words will be based upon the following chars and space:
 > ,.?;!
 
+## Iteration 1 - session 3
 
+IOException could not be triggered , therefore could not be tested
+Following is the failing test
+
+```java
+    @Test
+    void test_GivenNullInput_thenThrowIOException() throws IOException {
+        InputStream inputStream = getInputStream("");
+        inputStream.close();
+
+        testClass = new ConsoleInputReader(inputStream);
+
+        final ReaderException ex = Assertions.assertThrows(ReaderException.class, () -> testClass.readInput());
+        assertEquals("Fail: Error reading input", ex.getMessage());
+    }
+```
