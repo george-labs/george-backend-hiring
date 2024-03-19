@@ -26,12 +26,12 @@ class ConsoleInputReaderTest {
 
     @Test
     void test_GivenEmptyInput_thenReturnInputAsEmptyString() {
-        String text = "";
+        String text = "\r";
         testClass = new ConsoleInputReader(getInputStream(text));
 
         final String result = testClass.readInput();
 
-        assertEquals(text, result);
+        assertEquals("", result);
     }
 
     private InputStream getInputStream(String text) {
