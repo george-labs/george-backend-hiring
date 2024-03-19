@@ -1,8 +1,11 @@
 package interview.reader;
 
+import interview.exception.ReaderException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,6 +35,13 @@ class ConsoleInputReaderTest {
         final String result = testClass.readInput();
 
         assertEquals("", result);
+    }
+
+    @Test
+    void test_GivenNullInput_thenThrowReaderException() {
+        testClass = new ConsoleInputReader(null);
+        final ReaderException ex = Assertions.assertThrows(ReaderException.class, () -> testClass.readInput());
+        assertEquals("Fail: could not retrieve input", ex.getMessage());
     }
 
     private InputStream getInputStream(String text) {
