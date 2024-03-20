@@ -1,5 +1,6 @@
 fun main() {
-    val wordCounter = WordCounter()
+    val fileReader = StopWordsFileReader("stopwords.txt")
+    val wordCounter = WordCounter(fileReader)
     println("Enter text:")
     val text = readLine() ?: ""
     val wordCount = wordCounter.countWords(text)

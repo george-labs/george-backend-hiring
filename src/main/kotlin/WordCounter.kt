@@ -1,7 +1,10 @@
-class WordCounter {
+class WordCounter(fileReader: IFileReader) {
+    private val stopWords by lazy { fileReader.readLines().toSet() }
+
     fun countWords(text: String): Int {
         val words = splitTextToWordsBySpace(text)
-        val validWords = validateWordsWithRegex(words)
+        var validWords = validateWordsWithRegex(words)
+        validWords = validWords.filterNot { it in stopWords }
 
         return validWords.count()
     }
@@ -14,13 +17,5 @@ class WordCounter {
     private fun validateWordsWithRegex(words: List<String>): List<String> {
         val regex = Regex("[^A-Za-z]")
         return words.filter { word -> regex.containsMatchIn(word).not() }
-    }
-
-    private fun createFileReader(): FileReader {
-        return FileReader("stopwords.txt")
-    }
-
-    private fun createListOfStopWords(fileReader: FileReader): List<String> {
-        return fileReader.readLines()
     }
 }
