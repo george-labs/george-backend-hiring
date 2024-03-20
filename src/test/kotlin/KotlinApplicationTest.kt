@@ -46,4 +46,15 @@ class WordCounterTest {
 
         assertEquals(expectedWordCount, actualWordCount, "The word count should be $expectedWordCount")
     }
+
+    @Test
+    fun `test countWords with '123456lamb'`() {
+        val wordCounter = WordCounter()
+        val testString = "123456lamb"
+        val expectedWordCount = 0
+
+        val actualWordCount = wordCounter.countWords(testString)
+
+        assertEquals(expectedWordCount, actualWordCount, "The word count should be $expectedWordCount")
+    }
 }
