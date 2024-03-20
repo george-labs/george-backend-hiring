@@ -15,4 +15,12 @@ class WordCounter {
         val regex = Regex("[^A-Za-z]")
         return words.filter { word -> regex.containsMatchIn(word).not() }
     }
+
+    private fun createFileReader(): FileReader {
+        return FileReader("stopwords.txt")
+    }
+
+    private fun createListOfStopWords(fileReader: FileReader): List<String> {
+        return fileReader.readLines()
+    }
 }
