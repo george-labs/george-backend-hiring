@@ -15,7 +15,8 @@ fun main(args: Array<String>) {
     }
 
     val wordCount = wordCounter.countWords(text)
-    println("Number of words: $wordCount")
+    val uniqueWordCount = wordCounter.countUniqueWords()
+    println("Number of words: $wordCount, unique: $uniqueWordCount")
 }
 
 fun getUserInput(): String {
