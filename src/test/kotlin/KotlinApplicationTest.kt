@@ -57,4 +57,37 @@ class WordCounterTest {
 
         assertEquals(expectedWordCount, actualWordCount, "The word count should be $expectedWordCount")
     }
+
+    @Test
+    fun `test countWords with comma and point 'Mary had a little lamb'`() {
+        val wordCounter = WordCounter()
+        val testString = "Mary, had a little lamb."
+        val expectedWordCount = 5
+
+        val actualWordCount = wordCounter.countWords(testString)
+
+        assertEquals(expectedWordCount, actualWordCount, "The word count should be $expectedWordCount")
+    }
+
+    @Test
+    fun `test countWords with 'Ma$y'`() {
+        val wordCounter = WordCounter()
+        val testString = "Ma\$y"
+        val expectedWordCount = 0
+
+        val actualWordCount = wordCounter.countWords(testString)
+
+        assertEquals(expectedWordCount, actualWordCount, "The word count should be $expectedWordCount")
+    }
+
+    @Test
+    fun `test countWords with 'Mary had 1 little lamb'`() {
+        val wordCounter = WordCounter()
+        val testString = "Mary had 1 little lamb"
+        val expectedWordCount = 4
+
+        val actualWordCount = wordCounter.countWords(testString)
+
+        assertEquals(expectedWordCount, actualWordCount, "The word count should be $expectedWordCount")
+    }
 }
