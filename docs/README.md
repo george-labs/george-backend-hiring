@@ -18,7 +18,7 @@ In case you have a dual monitor setup, please make sure that you also share your
 Of course, you can use the web to research in case you need to look up something.
 You are also allowed to use AI powered tools (e.g. ChatGPT, IntelliJ AI Assistant) as an extension to refine your *own* 
 solution.
-Please note, you should not try to search/ask for exact solutions for the described requirements.
+Please note, you are not allowed to try to search/ask for exact solutions for the described requirements.
 In general, it should feel as if you would have a regular day at work.
 
 ### Exercise: Word Count Kata
