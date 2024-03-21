@@ -16,6 +16,8 @@ At the beginning of every session a new George Backend team member will join whi
 In the Remote-Pair-Programming Sessions you need to share your screen so that we can follow your progress.
 In case you have a dual monitor setup, please make sure that you also share your browser window.
 Of course, you can use the web to research in case you need to look up something.
+You are also allowed to use AI powered tools (e.g. ChatGPT, IntelliJ AI Assistant) as an extension to refine your *own* 
+solution.
 In general, it should feel as if you would have a regular day at work.
 
 ### Exercise: Word Count Kata
@@ -72,7 +74,7 @@ Please make sure that
 
 You can see these rules as the definition of done for an iteration.
 
-This example might also seem a bit hypothetical, but we believe it's small but complicated enough, that it makes sense
+This example might also seem a bit hypothetical, but we believe it's small but complicated enough, that it makes sense 
 to come up with an Object-Oriented Design which is more sophisticated than implementing your whole solution in a single
 main method 😉.  
 The evaluation won't take longer than 1 work day.  
