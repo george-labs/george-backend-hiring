@@ -24,6 +24,8 @@ public class ParseWordsServiceTest {
 		Assertions.assertEquals(List.of("asdfB", "sdfg", "ghgds"), parseWordsService.parse("  asdfB sdfg  ghgds"));
 		Assertions.assertEquals(List.of("asdfB", "ghgds"), parseWordsService.parse("  asdfB  ghgds"));
 		Assertions.assertEquals(List.of("Mary", "had", "little", "lamb"), parseWordsService.parse("Mary had a little lamb"));
+		Assertions.assertEquals(List.of("Mary", "had", "little", "lamb"), parseWordsService.parse("Mary had a little lamb."));
+		Assertions.assertEquals(List.of("Mary", "had", "little", "lamb"), parseWordsService.parse("Mary-had a little lamb"));
 	}
 
 	@Test

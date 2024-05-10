@@ -17,7 +17,7 @@ public class FileStopwordsSupplierAdapter implements StopwordsSupplierPort {
 		try {
 			Path path = Paths.get(getClass().getClassLoader().getResource("stopwords.txt").toURI());
 			return readLines(path);
-		} catch (URISyntaxException | IOException e) {
+		} catch (URISyntaxException | IOException | NullPointerException e) {
 			throw new RuntimeException("Exception occured during reading stopwords.txt", e);
 		}
 	}

@@ -7,3 +7,7 @@ Empty (null) imput text is considered to have count of words = 0
 
 ## Iteration 3
 If wrong input file path is given, application throws exception
+
+
+## Iteration 4
+'.' and '-' also serve as word separators
