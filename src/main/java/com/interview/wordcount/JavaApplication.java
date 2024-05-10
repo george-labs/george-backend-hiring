@@ -7,6 +7,7 @@ import com.interview.wordcount.business.adapter.TerminalOutputAdapter;
 import com.interview.wordcount.business.port.inner.CountWordsUseCase;
 import com.interview.wordcount.business.port.inner.ParseWordsUseCase;
 import com.interview.wordcount.business.port.outer.InputSupplierPort;
+import com.interview.wordcount.business.service.AnalyzeTextService;
 import com.interview.wordcount.business.service.CountWordsService;
 import com.interview.wordcount.business.service.ParseWordsService;
 
@@ -16,6 +17,7 @@ public class JavaApplication {
 		InputSupplierPort inputSupplierPort = args.length == 0 ? new TerminalInputSupplierAdapter() : new FileInputSupplierAdapter(args[0]);
 		ParseWordsUseCase parseWordsUseCase = new ParseWordsService(new FileStopwordsSupplierAdapter());
 		CountWordsUseCase countWordsUseCase = new CountWordsService();
-		new TerminalOutputAdapter().write(countWordsUseCase.count(parseWordsUseCase.parse(inputSupplierPort.getInputText())));
+		AnalyzeTextService analyzeTextService = new AnalyzeTextService(parseWordsUseCase, countWordsUseCase);
+		new TerminalOutputAdapter().write(analyzeTextService.analyze(inputSupplierPort.getInputText()));
 	}
 }
