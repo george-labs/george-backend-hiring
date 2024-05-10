@@ -72,7 +72,6 @@ local.properties
 *.iws
 *.iml
 *.ipr
-out/
 
 ### Java ###
 # Compiled class file
