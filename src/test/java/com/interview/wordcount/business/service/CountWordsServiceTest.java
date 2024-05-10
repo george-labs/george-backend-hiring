@@ -9,25 +9,31 @@ import java.util.List;
 public class CountWordsServiceTest {
 
 	private final StopwordsSupplierPort stopwordsSupplierPort = new TestStopwordsSupplierAdapter();
+	private final CountWordsService countWordsService = new CountWordsService(stopwordsSupplierPort);
 
 	@Test
 	public void thatEmptyInputCanBeCounted() {
-		Assertions.assertEquals(0, new CountWordsService(stopwordsSupplierPort).count(null));
-		Assertions.assertEquals(0, new CountWordsService(stopwordsSupplierPort).count(""));
+		Assertions.assertEquals(0, countWordsService.count(null));
+		Assertions.assertEquals(0, countWordsService.count(""));
 	}
 
 	@Test
 	public void thatWordsCanBeCounted() {
-		Assertions.assertEquals(1, new CountWordsService(stopwordsSupplierPort).count("asdf"));
-		Assertions.assertEquals(1, new CountWordsService(stopwordsSupplierPort).count("  asdfA   "));
-		Assertions.assertEquals(3, new CountWordsService(stopwordsSupplierPort).count("  asdfB sdfg  ghgds"));
-		Assertions.assertEquals(2, new CountWordsService(stopwordsSupplierPort).count("  asdfB  ghgds"));
-		Assertions.assertEquals(5, new CountWordsService(stopwordsSupplierPort).count("Mary had a little lamb"));
+		Assertions.assertEquals(1, countWordsService.count("asdf"));
+		Assertions.assertEquals(1, countWordsService.count("  asdfA   "));
+		Assertions.assertEquals(3, countWordsService.count("  asdfB sdfg  ghgds"));
+		Assertions.assertEquals(2, countWordsService.count("  asdfB  ghgds"));
+		Assertions.assertEquals(4, countWordsService.count("Mary had a little lamb"));
 	}
 
 	@Test
 	public void thatWordsWithUnsupportedCharsAreNotCounted() {
-		Assertions.assertEquals(1, new CountWordsService(stopwordsSupplierPort).count("asdf sdfg6"));
+		Assertions.assertEquals(1, countWordsService.count("asdf sdfg6"));
+	}
+
+	@Test
+	public void thatStopwordsAreNotCounted() {
+		Assertions.assertEquals(1, countWordsService.count("asdf the"));
 	}
 
 	class TestStopwordsSupplierAdapter implements StopwordsSupplierPort {
