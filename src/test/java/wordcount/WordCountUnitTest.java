@@ -1,42 +1,49 @@
 package wordcount;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Set;
+
 class WordCountUnitTest {
+
+    StopWordsLoader stopWordsLoader = new StopWordsLoader();
+    Set<String> stopWords = stopWordsLoader.loadStopWords("src/main/resources/stopwords_empty.txt");
+
     @Test
     void testCountWordsHappyPath() {
-        WordCount wordCount = new WordCount();
-        Assertions.assertEquals(5, wordCount.countWords("Mary had a little lamb"));
+        WordCountService wordCountService = new WordCountService(stopWords);
+        Assertions.assertEquals(5, wordCountService.countWords("Mary had a little lamb"));
     }
 
     @Test
     void testCountWordsEmptySentence() {
-        WordCount wordCount = new WordCount();
-        Assertions.assertEquals(0, wordCount.countWords(""));
+        WordCountService wordCountService = new WordCountService(stopWords);
+        Assertions.assertEquals(0, wordCountService.countWords(""));
     }
 
     @Test
     void testCountWordsNullSentence() {
-        WordCount wordCount = new WordCount();
-        Assertions.assertEquals(0, wordCount.countWords(null));
+        WordCountService wordCountService = new WordCountService(stopWords);
+        Assertions.assertEquals(0, wordCountService.countWords(null));
     }
 
     @Test
     void testCountWordsInvalidCharacters() {
-        WordCount wordCount = new WordCount();
-        Assertions.assertEquals(0, wordCount.countWords("1258 @!"));
+        WordCountService wordCountService = new WordCountService(stopWords);
+        Assertions.assertEquals(0, wordCountService.countWords("1258 @!"));
     }
 
     @Test
     void testCountWordsSpecialCharacterDelimiter() {
-        WordCount wordCount = new WordCount();
-        Assertions.assertEquals(2, wordCount.countWords("abc!cbd"));
+        WordCountService wordCountService = new WordCountService(stopWords);
+        Assertions.assertEquals(2, wordCountService.countWords("abc!cbd"));
     }
 
     @Test
     void testCountWordsWithInvalidWords() {
-        WordCount wordCount = new WordCount();
-        Assertions.assertEquals(4, wordCount.countWords("Mary had a li25le 1258 @! lamb."));
+        WordCountService wordCountService = new WordCountService(stopWords);
+        Assertions.assertEquals(4, wordCountService.countWords("Mary had a li25le 1258 @! lamb."));
     }
 }

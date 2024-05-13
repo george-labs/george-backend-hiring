@@ -30,3 +30,21 @@ Enter text: Mary had a li25le 1258 @! lamb.
 Number of words: 4
 $
 ```
+
+## Iteration 2
+```shell
+$ wordcount
+Enter text: the a on off
+Number of words: 0
+$
+```
+
+```shell
+$ wordcount
+Enter text: the a on off interview
+Number of words: 1
+$
+```
+
+The file not found -> Exception is thrown and the program exits.
+The file is empty -> No stop words loaded, but program continues.
