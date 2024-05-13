@@ -1,7 +1,6 @@
 package wordcount;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
@@ -17,7 +16,7 @@ public class StopWordsLoader {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error reading stopwords.txt");
         }
         return stopWords;
     }

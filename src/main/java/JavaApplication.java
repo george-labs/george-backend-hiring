@@ -1,7 +1,8 @@
+import wordcount.InputReader;
+import wordcount.OutputWriter;
 import wordcount.StopWordsLoader;
 import wordcount.WordCountService;
 
-import java.util.Scanner;
 import java.util.Set;
 
 public class JavaApplication {
@@ -9,11 +10,12 @@ public class JavaApplication {
         StopWordsLoader stopWordsLoader = new StopWordsLoader();
         Set<String> stopWords = stopWordsLoader.loadStopWords("src/main/resources/stopwords.txt");
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter text: ");
-        String sentence = scanner.nextLine();
-
+        InputReader inputReader = new InputReader();
+        OutputWriter outputWriter = new OutputWriter();
         WordCountService wordCountService = new WordCountService(stopWords);
-        System.out.println("Number of words: " + wordCountService.countWords(sentence));
+
+        String sentence = inputReader.getInput();
+
+        outputWriter.writeOutput(wordCountService.countWords(sentence));
     }
 }

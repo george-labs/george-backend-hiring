@@ -1,20 +1,18 @@
 package wordcount;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
 class WordCountUnitTest {
 
-    StopWordsLoader stopWordsLoader = new StopWordsLoader();
-    Set<String> stopWords = stopWordsLoader.loadStopWords("src/main/resources/stopwords_empty.txt");
+    Set<String> stopWords = Set.of("the", "a", "on", "off");
 
     @Test
     void testCountWordsHappyPath() {
         WordCountService wordCountService = new WordCountService(stopWords);
-        Assertions.assertEquals(5, wordCountService.countWords("Mary had a little lamb"));
+        Assertions.assertEquals(4, wordCountService.countWords("Mary had a little lamb"));
     }
 
     @Test
@@ -44,6 +42,6 @@ class WordCountUnitTest {
     @Test
     void testCountWordsWithInvalidWords() {
         WordCountService wordCountService = new WordCountService(stopWords);
-        Assertions.assertEquals(4, wordCountService.countWords("Mary had a li25le 1258 @! lamb."));
+        Assertions.assertEquals(3, wordCountService.countWords("Mary had a li25le 1258 @! lamb."));
     }
 }
