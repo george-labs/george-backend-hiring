@@ -18,6 +18,24 @@ public class JavaApplication {
     }
 
     public static void main(String[] args) {
+        // TODO: Partial implementation of iteration3
+//        List<String> sentence = new ArrayList<>();
+//        if (args.length != 0) {
+//            String inputFile = args[0];
+//            System.out.println("Input file: " + inputFile);
+//            // read from file stored in inputFile
+//            try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))){
+//                String line;
+//                while ((line = reader.readLine()) != null) {
+//                    sentence.add(line);
+//                }
+//            } catch (IOException e) {
+//                System.err.println(String.format("Error reading %s", inputFile));
+//            }
+//        }
+//
+//        System.out.println("Test sentence: " + sentence);
+
         StopWordsLoader stopWordsLoader = new StopWordsLoader();
         Set<String> stopWords = stopWordsLoader.loadStopWords("src/main/resources/stopwords.txt");
 

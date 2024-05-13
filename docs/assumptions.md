@@ -48,3 +48,6 @@ $
 
 The file not found -> Exception is thrown and the program exits.
 The file is empty -> No stop words loaded, but program continues.
+
+## Iteration 3
+Partial implementation is presented in JavaApplication.java. Did not manage to properly implement reading input from file withit the time frame.
