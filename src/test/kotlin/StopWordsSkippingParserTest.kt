@@ -10,6 +10,6 @@ class StopWordsSkippingParserTest {
 
     @Test
     fun `when parsing a humpty dumpty then should return correct number of words`() {
-        assertEquals(9, StopWordsSkippingParser().parse("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.").count())
+        assertEquals(7, StopWordsSkippingParser().parse("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.").count())
     }
 }

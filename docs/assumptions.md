@@ -16,3 +16,6 @@
 ## Iteration 4
 * Sample output is correct, but uses different definition of what is a word
 * words can be separated by "-" and can end with "."
+
+## Iteration 5
+* words can be separated by "-"

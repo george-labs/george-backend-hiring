@@ -16,7 +16,7 @@ class SimpleWordsParserTest {
 
     @Test
     fun `when parsing a Humpty-Dumpty`() {
-        assertEquals(2, underTest.parse("Humpty-Dumpty").count())
+        assertEquals(1, underTest.parse("Humpty-Dumpty").count())
     }
 
     @Test
