@@ -12,3 +12,7 @@
 
 ## Iteration 3
 * the file contains multiple lines, all processed as single input
+
+## Iteration 4
+* Sample output is correct, but uses different definition of what is a word
+* words can be separated by "-" and can end with "."

@@ -31,6 +31,9 @@ class KotlinApplicationIntegrationTest {
                 ConsoleInputReader(PromptPrinter()),
                 SimpleWordsParser(),
                 ConsoleWordsCountWriter(),
+                ConsoleUniqueWordsCountWriter(),
+                WordsCounter(),
+                UniqueWordsCounter(),
             )
 
         application.run()

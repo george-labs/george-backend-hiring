@@ -1,5 +1,9 @@
-class ConsoleWordsCountWriter {
+abstract class WordsCountWriter(private val prefix: String) {
     fun write(count: Int) {
-        print("Number of words: $count")
+        print("$prefix$count")
     }
 }
+
+class ConsoleWordsCountWriter : WordsCountWriter("Number of words: ")
+
+class ConsoleUniqueWordsCountWriter : WordsCountWriter(", unique: ")
