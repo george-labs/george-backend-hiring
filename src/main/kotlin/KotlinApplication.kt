@@ -16,7 +16,7 @@ class KotlinApplication(
 fun main() {
     val promptPrinter = PromptPrinter()
     val inputReader = ConsoleInputReader()
-    val wordsParser = WordsParser()
+    val wordsParser = StopWordsSkippingParser()
     val countWriter = ConsoleWordsCountWriter()
     KotlinApplication(promptPrinter, inputReader, wordsParser, countWriter).run()
 }

@@ -1,14 +1,14 @@
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class WordsParserTest {
+class SimpleWordsParserTest {
     @Test
     fun `when parsing a chunks of characters separated by whitespace then should return correct number of words`() {
-        assertEquals(5, WordsParser().parse("Mary had a little lamb").count())
+        assertEquals(5, SimpleWordsParser().parse("Mary had a little lamb").count())
     }
 
     @Test
     fun `when parsing a chunks of allowed and disallowed characters separated by whitespace then should return correct number of words`() {
-        assertEquals(3, WordsParser().parse("Mary4 had a little lamb.").count())
+        assertEquals(3, SimpleWordsParser().parse("Mary4 had a little lamb.").count())
     }
 }

@@ -30,7 +30,7 @@ class KotlinApplicationIntegrationTest {
             KotlinApplication(
                 PromptPrinter(),
                 ConsoleInputReader(),
-                WordsParser(),
+                SimpleWordsParser(),
                 ConsoleWordsCountWriter(),
             )
 
