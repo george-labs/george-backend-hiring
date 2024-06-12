@@ -28,8 +28,7 @@ class KotlinApplicationIntegrationTest {
     fun `when application starts with no input, then should exit`() {
         val application =
             KotlinApplication(
-                PromptPrinter(),
-                ConsoleInputReader(),
+                ConsoleInputReader(PromptPrinter()),
                 SimpleWordsParser(),
                 ConsoleWordsCountWriter(),
             )

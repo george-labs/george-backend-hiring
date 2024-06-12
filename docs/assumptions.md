@@ -9,3 +9,6 @@
 ## Iteration 2
 * the file should exist
 * the stopwords file contain only valid words
+
+## Iteration 3
+* the file contains multiple lines, all processed as single input

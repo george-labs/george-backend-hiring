@@ -21,8 +21,10 @@ class ConsoleInputReaderTest {
         System.setIn(originalIn)
     }
 
+    private val promptPrinter = PromptPrinter()
+
     @Test
     fun `when calling hello() then printer should print correct prompt`() {
-        assertEquals(TEST_INPUT, ConsoleInputReader().read())
+        assertEquals(TEST_INPUT, ConsoleInputReader(promptPrinter).read())
     }
 }
