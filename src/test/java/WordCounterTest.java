@@ -11,7 +11,7 @@ class WordCounterTest {
     @ParameterizedTest
     @MethodSource("inputs")
     void testWordCount(String input, int expectedCount) {
-        var result = new WordCounter().countWords(input);
+        var result = new WordCounter().countNotBlackListedWords(input);
         Assertions.assertEquals(expectedCount, result);
     }
 
@@ -30,7 +30,7 @@ class WordCounterTest {
 
     @Test
     void testEmptyString() {
-        var result = new WordCounter().countWords("");
+        var result = new WordCounter().countNotBlackListedWords("");
         Assertions.assertEquals(0, result);
     }
 }

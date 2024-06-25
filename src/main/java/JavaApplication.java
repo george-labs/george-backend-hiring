@@ -5,7 +5,7 @@ public class JavaApplication {
 
         var input = new InputProcessor(System.in).readInput();
 
-        var result = new WordCounter().countWords(input);
+        var result = new WordCounter().countNotBlackListedWords(input);
 
         System.out.print("Number of words: " + result);
     }
