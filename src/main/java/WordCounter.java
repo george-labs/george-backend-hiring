@@ -16,16 +16,13 @@ public class WordCounter {
 
         return input.stream()
                 .filter(item -> pattern.matcher(item).matches() && !blackListWords.contains(item))
+                .distinct()
                 .count();
     }
 
     public long countNotBlackListedWords(String input) {
-        var blackListWords = fileLoader.loadFile("stopwords.txt");
-        var pattern = Pattern.compile("[a-zA-Z]+");
-
-        return Arrays.stream(WordUtils.splitInput(input))
-                .filter(item -> pattern.matcher(item).matches() && !blackListWords.contains(item))
-                .count();
+        String[] splitedInput = WordUtils.splitInput(input);
+        return countNotBlackListedWords(Arrays.stream(splitedInput).toList());
     }
 
 

@@ -22,6 +22,7 @@ class WordCounterTest {
                 Arguments.of("Mary had a little lamb 7", 4),
                 Arguments.of("Mary had a little   lamb ", 4),
                 Arguments.of("Mary had a a little   lamb ", 4),
+                Arguments.of("Mary had a a little   lamb lamb", 4),
                 Arguments.of("Mary had a little li312tt321le   lamb ", 4),
                 Arguments.of("Mary had a little   lamb !ddsf .dsasd", 4),
                 Arguments.of("4234232 423423", 0),
