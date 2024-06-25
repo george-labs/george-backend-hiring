@@ -11,7 +11,7 @@ class WordCounterTest {
     @ParameterizedTest
     @MethodSource("inputs")
     void testWordCount(String input, int expectedCount) {
-        var fileLoader= new FileLoader();
+        var fileLoader = new FileLoader();
         var result = new WordCounter(fileLoader).countNotBlackListedWords(input);
         Assertions.assertEquals(expectedCount, result);
     }

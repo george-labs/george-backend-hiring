@@ -8,13 +8,13 @@ import java.util.List;
 
 public class FileLoader {
 
-    public List<String> loadFile(String path) {
+    public List<String> loadFile(String fileName) {
 
         BufferedReader reader;
         List<String> result;
         try {
             Path path2 = Paths.get(getClass().getClassLoader()
-                    .getResource(path).toURI());
+                    .getResource(fileName).toURI());
             reader = new BufferedReader(new FileReader(path2.toFile()));
             result = reader.lines().toList();
             reader.close();
