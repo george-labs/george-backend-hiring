@@ -1,10 +1,27 @@
-import java.io.InputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class FileLoader {
 
-    public String loadFile(String path) {
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream(path);
-        return new InputProcessor(inputStream).readInput();
+    public List<String> loadFile(String path) {
+
+        BufferedReader reader = null;
+        List<String> result;
+        try {
+            Path path2 = Paths.get(getClass().getClassLoader()
+                    .getResource(path).toURI());
+            reader = new BufferedReader(new FileReader(path2.toFile()));
+            result = reader.lines().toList();
+            reader.close();
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
     }
 }

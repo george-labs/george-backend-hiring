@@ -3,10 +3,14 @@ import java.util.regex.Pattern;
 
 public class WordCounter {
 
+    private final FileLoader fileLoader;
+
+    public WordCounter(FileLoader fileLoader) {
+        this.fileLoader = fileLoader;
+    }
 
     public long countNotBlackListedWords(String input) {
-
-        var blackListWords = new FileLoader().loadFile("stopwords.txt");
+        var blackListWords = fileLoader.loadFile("stopwords.txt");
         var pattern = Pattern.compile("[a-zA-Z]+");
 
         return Arrays.stream(splitInput(input))
