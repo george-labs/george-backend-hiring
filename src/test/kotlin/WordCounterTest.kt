@@ -12,7 +12,7 @@ class WordCounterTest {
         val wordCounter = WordCounter()
 
         // When
-        val result = wordCounter.count(sentence)
+        val result = wordCounter.countAllWords(sentence)
 
         // Then
         Assertions.assertEquals(5, result)
@@ -25,7 +25,7 @@ class WordCounterTest {
         val wordCounter = WordCounter()
 
         // When
-        val result = wordCounter.count(sentence)
+        val result = wordCounter.countAllWords(sentence)
 
         // Then
         Assertions.assertEquals(0, result)
@@ -38,7 +38,7 @@ class WordCounterTest {
         val wordCounter = WordCounter()
 
         //When
-        val result = wordCounter.count(sentence)
+        val result = wordCounter.countAllWords(sentence)
 
         //Then
         Assertions.assertEquals(0, result)
@@ -52,7 +52,7 @@ class WordCounterTest {
         val wordCounter = WordCounter()
 
         //When
-        val result = wordCounter.count(sentence)
+        val result = wordCounter.countAllWords(sentence)
 
         //Then
         Assertions.assertEquals(4, result)
@@ -65,7 +65,7 @@ class WordCounterTest {
         val wordCounter = WordCounter()
 
         //When
-        val result = wordCounter.count(sentence)
+        val result = wordCounter.countAllWords(sentence)
 
         //Then
         Assertions.assertEquals(4, result)
@@ -79,7 +79,7 @@ class WordCounterTest {
         val wordCounter = WordCounter()
 
         //When
-        val result = wordCounter.count(sentence, stopWords)
+        val result = wordCounter.countAllWords(sentence, stopWords)
 
         //Then
         Assertions.assertEquals(3, result)
@@ -93,7 +93,7 @@ class WordCounterTest {
         val wordCounter = WordCounter()
 
         //When
-        val result = wordCounter.count(sentence, stopWords)
+        val result = wordCounter.countAllWords(sentence, stopWords)
 
         //Then
         Assertions.assertEquals(5, result)
@@ -102,14 +102,34 @@ class WordCounterTest {
     @Test
     fun `GIVEN a sentence, AND contains newline, THEN return the number of words in the sentence excluding the newline`() {
         //Given
-        val sentence = "Mary\nhad a little lamb"
+        val sentence = "Mary\nhad a \nlittle lamb"
         val wordCounter = WordCounter()
 
         //When
-        val result = wordCounter.count(sentence)
+        val result = wordCounter.countAllWords(sentence)
 
         //Then
         Assertions.assertEquals(5, result)
     }
+
+    @Test
+    fun `GIVEN a sentence, WHEN counting only unique words, THEN return the number of unique words in the sentence`() {
+        //Given
+        val sentence = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."
+        val wordCounter = WordCounter()
+
+        //When
+        val result = wordCounter.countUniqueWords(sentence)
+
+        //Then
+        Assertions.assertEquals(7, result)
+    }
+
+
+
+
+
+
+
 
 }
