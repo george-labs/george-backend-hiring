@@ -99,4 +99,17 @@ class WordCounterTest {
         Assertions.assertEquals(5, result)
     }
 
+    @Test
+    fun `GIVEN a sentence, AND contains newline, THEN return the number of words in the sentence excluding the newline`() {
+        //Given
+        val sentence = "Mary\nhad a little lamb"
+        val wordCounter = WordCounter()
+
+        //When
+        val result = wordCounter.count(sentence)
+
+        //Then
+        Assertions.assertEquals(5, result)
+    }
+
 }

@@ -1,26 +1,25 @@
 import data.FileReader
+import data.PathFileReader
 import data.ResourceFileReader
 import domain.StopWordReader
 import domain.WordCounter
+import domain.WordProcessor
 import ui.InputReader
 
 fun main(args: Array<String>) {
 
-    val givenTextFile = args.getOrNull(1)
+    val givenTextFile = args.getOrNull(0)
     if (givenTextFile != null) {
 
-
+        val readfile = PathFileReader().readFile(givenTextFile)
+        WordProcessor().processWords(readfile)
 
     } else {
         while (true) {
             println("Enter text:")
             val sentence = InputReader().readInput()
 
-            val stopWordReader = StopWordReader(ResourceFileReader())
-            val stopWords = stopWordReader.getStopWords("stopwords.txt")
-
-            val countedWords = WordCounter().count(sentence, stopWords)
-            println("Number of words: $countedWords")
+            WordProcessor().processWords(sentence)
         }
 
     }
@@ -28,5 +27,4 @@ fun main(args: Array<String>) {
 
 }
 
-private fun
 

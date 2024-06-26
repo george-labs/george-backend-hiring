@@ -7,7 +7,8 @@ class WordCounter {
     }
 
     fun count(sentence: String, stopWords: Set<String> = emptySet()): Int {
-        val words = sentence.split(" ").filter { it.matches(WORD_WITHOUT_NUMBERS) && stopWords.contains(it).not() }
+        val sentenceWithoutNewLine = sentence.replace("\n", " ")
+        val words = sentenceWithoutNewLine.split(" ").filter { it.matches(WORD_WITHOUT_NUMBERS) && stopWords.contains(it).not() }
 
         return words.count { it.isNotEmpty() }
     }
