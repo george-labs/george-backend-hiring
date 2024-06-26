@@ -7,7 +7,7 @@ class StopWordReader(
 ) {
 
     fun getStopWords(fileName: String): Set<String> {
-        val rawFileContent = fileReader.readFile(fileName)
+        val rawFileContent = fileReader.readFile("/$fileName")
         return rawFileContent.split("\n").filter { it.isNotEmpty() }.toSet()
     }
 

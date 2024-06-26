@@ -12,7 +12,7 @@ class StopWordReaderTest {
         val stopWordReader = StopWordReader(fileReader = ResourceFileReader())
 
         // When
-        val result = stopWordReader.getStopWords("/mock.txt")
+        val result = stopWordReader.getStopWords("mock.txt")
 
         // Then
         Assertions.assertEquals(3, result.size)
@@ -24,7 +24,7 @@ class StopWordReaderTest {
         val stopWordReader = StopWordReader(fileReader = ResourceFileReader())
 
         // When
-        val result = stopWordReader.getStopWords("/mockWithEmptyLines.txt")
+        val result = stopWordReader.getStopWords("mockWithEmptyLines.txt")
 
         // Then
         Assertions.assertEquals(3, result.size)
@@ -36,7 +36,7 @@ class StopWordReaderTest {
         val stopWordReader = StopWordReader(fileReader = ResourceFileReader())
 
         // When
-        val result = stopWordReader.getStopWords("/mockWithDuplicates.txt")
+        val result = stopWordReader.getStopWords("mockWithDuplicates.txt")
 
         // Then
         Assertions.assertEquals(3, result.size)
