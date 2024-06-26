@@ -22,5 +22,9 @@ class WordCounter {
             .filter { it.matches(WORD_WITHOUT_NUMBERS) && stopWords.contains(it).not() }
     }
 
+    fun averageWordLength(listOfWords: Set<String>): Double {
+        return listOfWords.map { it.length }.average()
+    }
+
 
 }

@@ -10,6 +10,7 @@ class WordProcessor {
 
         val countedWords = WordCounter().countAllWords(sentence, stopWords)
         val uniqueWords = WordCounter().countUniqueWords(sentence, stopWords)
-        println("Number of words: $countedWords, unique:$uniqueWords")
+        val averageWordLength = WordCounter().averageWordLength(countedWords)
+        println("Number of words: $countedWords, unique:$uniqueWords, average word lenght:$averageWordLength")
     }
 }
