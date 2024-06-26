@@ -12,7 +12,7 @@ class WordCounterTest {
         val wordCounter = WordCounter()
 
         // When
-        val result = wordCounter.wordCounter(sentence)
+        val result = wordCounter.count(sentence)
 
         // Then
         Assertions.assertEquals(5, result)
@@ -25,7 +25,7 @@ class WordCounterTest {
         val wordCounter = WordCounter()
 
         // When
-        val result = wordCounter.wordCounter(sentence)
+        val result = wordCounter.count(sentence)
 
         // Then
         Assertions.assertEquals(0, result)
@@ -38,7 +38,7 @@ class WordCounterTest {
         val wordCounter = WordCounter()
 
         //When
-        val result = wordCounter.wordCounter(sentence)
+        val result = wordCounter.count(sentence)
 
         //Then
         Assertions.assertEquals(0, result)
@@ -52,7 +52,7 @@ class WordCounterTest {
         val wordCounter = WordCounter()
 
         //When
-        val result = wordCounter.wordCounter(sentence)
+        val result = wordCounter.count(sentence)
 
         //Then
         Assertions.assertEquals(4, result)
@@ -65,7 +65,7 @@ class WordCounterTest {
         val wordCounter = WordCounter()
 
         //When
-        val result = wordCounter.wordCounter(sentence)
+        val result = wordCounter.count(sentence)
 
         //Then
         Assertions.assertEquals(4, result)
