@@ -71,4 +71,32 @@ class WordCounterTest {
         Assertions.assertEquals(4, result)
     }
 
+    @Test
+    fun `GIVEN a sentence, AND a set of stopwords, THEN return the number of words in the sentence excluding the stopwords`() {
+        //Given
+        val sentence = "Mary had a little lamb"
+        val stopWords = setOf("a", "had")
+        val wordCounter = WordCounter()
+
+        //When
+        val result = wordCounter.count(sentence, stopWords)
+
+        //Then
+        Assertions.assertEquals(3, result)
+    }
+
+    @Test
+    fun `GIVEN a sentence, AND a empty set of stopwords, THEN return the number of words in the sentence`() {
+        //Given
+        val sentence = "Mary had a little lamb"
+        val stopWords = emptySet<String>()
+        val wordCounter = WordCounter()
+
+        //When
+        val result = wordCounter.count(sentence, stopWords)
+
+        //Then
+        Assertions.assertEquals(5, result)
+    }
+
 }

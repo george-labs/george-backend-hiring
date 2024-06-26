@@ -6,10 +6,10 @@ class StopWordReader(
     private val fileReader: FileReader,
 ) {
 
-
-    fun getStopWords(rawFileContent: String){
-        val wordPerLine = rawFileContent.split("\n")
-        // check that elements are not empty
+    fun getStopWords(fileName: String): Set<String> {
+        val rawFileContent = fileReader.readFile(fileName)
+        return rawFileContent.split("\n").filter { it.isNotEmpty() }.toSet()
     }
+
 
 }
