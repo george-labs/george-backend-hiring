@@ -2,15 +2,18 @@ package domain
 
 import data.ResourceFileReader
 
-class WordProcessor {
+class WordProcessor(
+    private val wordCounter: WordCounter,
+    private val stopWordReader: StopWordReader,
+) {
 
     fun processWords(sentence: String) {
-        val stopWordReader = StopWordReader(ResourceFileReader())
         val stopWords = stopWordReader.getStopWords("stopwords.txt")
 
-        val countedWords = WordCounter().countAllWords(sentence, stopWords)
-        val uniqueWords = WordCounter().countUniqueWords(sentence, stopWords)
-        val averageWordLength = WordCounter().averageWordLength(countedWords)
-        println("Number of words: $countedWords, unique:$uniqueWords, average word lenght:$averageWordLength")
+        val countedWords = wordCounter.countAllWords(sentence, stopWords)
+        val uniqueWords = wordCounter.countUniqueWords(sentence, stopWords)
+        val averageWordLength = wordCounter.averageWordLength(sentence, stopWords)
+
+        println("Number of words: $countedWords, unique: $uniqueWords, average word length: $averageWordLength")
     }
 }
