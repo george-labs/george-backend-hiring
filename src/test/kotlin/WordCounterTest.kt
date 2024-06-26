@@ -113,6 +113,20 @@ class WordCounterTest {
     }
 
     @Test
+    fun `GIVEN a sentence, WHEN counting only unique words, THEN return the number of unique words in the sentence excluding the stopwords`() {
+        //Given
+        val sentence = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."
+        val stopWords = setOf("the" , "a" , "on" ,"off")
+        val wordCounter = WordCounter()
+
+        //When
+        val result = wordCounter.countUniqueWords(sentence, stopWords)
+
+        //Then
+        Assertions.assertEquals(7, result)
+    }
+
+    @Test
     fun `GIVEN a sentence, WHEN counting only unique words, THEN return the number of unique words in the sentence`() {
         //Given
         val sentence = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."
@@ -122,14 +136,8 @@ class WordCounterTest {
         val result = wordCounter.countUniqueWords(sentence)
 
         //Then
-        Assertions.assertEquals(7, result)
+        Assertions.assertEquals(9, result)
     }
-
-
-
-
-
-
 
 
 }

@@ -9,7 +9,7 @@ class WordProcessor {
         val stopWords = stopWordReader.getStopWords("stopwords.txt")
 
         val countedWords = WordCounter().countAllWords(sentence, stopWords)
-        val uniqueWords = WordCounter().countUniqueWords(sentence)
+        val uniqueWords = WordCounter().countUniqueWords(sentence, stopWords)
         println("Number of words: $countedWords, unique:$uniqueWords")
     }
 }

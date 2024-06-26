@@ -9,10 +9,8 @@ fun main(args: Array<String>) {
 
     val givenTextFile = args.getOrNull(0)
     if (givenTextFile != null) {
-
         val readfile = PathFileReader().readFile(givenTextFile)
         WordProcessor().processWords(readfile)
-
     } else {
         while (true) {
             println("Enter text:")
@@ -20,10 +18,7 @@ fun main(args: Array<String>) {
 
             WordProcessor().processWords(sentence)
         }
-
     }
-
-
 }
 
 
