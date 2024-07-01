@@ -1,1 +1,2 @@
 - if there is some unxepected char. let's ignore it
+- with new requirements i decided to make the implementation more robust and use more complex return types in counters
