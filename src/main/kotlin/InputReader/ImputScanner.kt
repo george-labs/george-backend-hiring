@@ -1,12 +1,12 @@
 package InputReader
 
+import java.io.InputStream
 import java.util.Scanner
+import java.util.zip.CheckedInputStream
 
-class ImputScanner : InputInterface {
+class InputScanner(private val inputStream: InputStream) : InputInterface {
 
-    companion object {
-        val scanner = Scanner(System.`in`)
-    }
+    private val scanner = Scanner(inputStream)
 
     override fun readText() = scanner.nextLine()
 }
