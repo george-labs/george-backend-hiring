@@ -1,3 +1,3 @@
 interface CounterInterface {
-    fun count(input: String): String
+    fun count(input: String): Int
 }

@@ -1,12 +1,27 @@
 class SimpleCounter : CounterInterface {
-    override fun count(input: String): String {
-        val words = input.split(' ')
-
-        for (word: words) {
-            word.contains()
-        }
-
-        return ""
+    companion object {
+        const val allowedChars = "[^a-zA-Z]"
     }
 
+    override fun count(input: String): Int {
+        val regex = Regex("\\s+")
+        if (input.isBlank()) {
+            return 0
+        }
+        val words = input.trim().split(regex)
+
+
+        var validWords = mutableListOf<String>()
+        for (word in words) {
+            if (!isInValidWord(word)) {
+                validWords.add(word)
+            }
+        }
+        return validWords.size
+    }
+
+    private fun isInValidWord(input: String): Boolean {
+        val regex = Regex(allowedChars)
+        return regex.containsMatchIn(input)
+    }
 }

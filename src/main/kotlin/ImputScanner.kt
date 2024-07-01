@@ -1,10 +1,10 @@
 import java.util.Scanner
 
-class ImputScanner {
+class ImputScanner : InputInterface{
 
     companion object {
         val scanner = Scanner(System.`in`)
     }
 
-    fun readText() = scanner.nextLine()
+    override fun readText() = scanner.nextLine()
 }
