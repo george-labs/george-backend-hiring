@@ -1,3 +1,4 @@
+
 # Word Count II
 
 Not all words are relevant for counting. A list of stop words (provided in the file „stopwords.txt“) defines which words

@@ -1,10 +1,12 @@
+import Counter.SimpleCounter
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class SimpleCounterTest {
 
     companion object {
-        var simpleCounter = SimpleCounter()
+        val stopWords = listOf("had", "a")
+        val simpleCounter = SimpleCounter()
     }
 
     @Test
@@ -32,4 +34,11 @@ class SimpleCounterTest {
         Assertions.assertEquals(simpleCounter.count("bab \n\n abc"), 2)
         Assertions.assertEquals(simpleCounter.count("\t bca \t ff"), 2)
     }
+
+    @Test
+    fun simpleCounterStopWords(){
+        var simpleCounter = SimpleCounter(stopWords)
+        Assertions.assertEquals(simpleCounter.count("Mary had a little lamb"), 3)
+    }
+
 }

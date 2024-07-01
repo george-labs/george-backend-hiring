@@ -1,6 +1,9 @@
-class SimpleCounter : CounterInterface {
+package Counter
+
+class SimpleCounter(private val stopwords: List<String> = listOf()) : CounterInterface {
+
     companion object {
-        const val allowedChars = "[^a-zA-Z]"
+        private const val allowedChars = "[a-zA-Z]+"
     }
 
     override fun count(input: String): Int {
@@ -13,7 +16,7 @@ class SimpleCounter : CounterInterface {
 
         var validWords = mutableListOf<String>()
         for (word in words) {
-            if (!isInValidWord(word)) {
+            if (isInValidWord(word)) {
                 validWords.add(word)
             }
         }
@@ -22,6 +25,9 @@ class SimpleCounter : CounterInterface {
 
     private fun isInValidWord(input: String): Boolean {
         val regex = Regex(allowedChars)
-        return regex.containsMatchIn(input)
+        if (stopwords.contains(input)) {
+            return false
+        }
+        return regex.matches(input)
     }
 }
