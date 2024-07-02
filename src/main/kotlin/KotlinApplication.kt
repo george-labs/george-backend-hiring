@@ -1,11 +1,23 @@
+import Counter.SimpleCounter
+import InputReader.ImputScanner
+
 class KotlinApplication {
-    fun scan() {
+
+    companion object {
+        val resourceTools = ResourceTools()
         val imputScanner = ImputScanner()
-        val simpleCounter = SimpleCounter()
+        const val STOPWORDS_PATH = "stopwords.txt"
+    }
+
+    fun scan() {
+        val stopwords = loadStopWords()
+        val simpleCounter = SimpleCounter(stopwords)
         print("Enter text: ")
         val count = simpleCounter.count(imputScanner.readText())
         println("Number of words: $count")
     }
+
+    private fun loadStopWords() = resourceTools.readTextFile(STOPWORDS_PATH).split("\n")
 }
 
 fun main() {

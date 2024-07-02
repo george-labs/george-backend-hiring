@@ -1,6 +1,8 @@
+package InputReader
+
 import java.util.Scanner
 
-class ImputScanner : InputInterface{
+class ImputScanner : InputInterface {
 
     companion object {
         val scanner = Scanner(System.`in`)
