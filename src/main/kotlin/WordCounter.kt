@@ -1,5 +1,5 @@
-import Counter.CounterInterface
-import Counter.SimpleCounter
+import counter.CounterInterface
+import counter.SimpleCounter
 import InputReader.InputScanner
 import InputReader.TextFileReader
 
