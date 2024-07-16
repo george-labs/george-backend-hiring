@@ -31,19 +31,4 @@ public class WordCounterTest {
 		// a different separator than whitespace
 		Assertions.assertEquals(0, wordCounter.countWords("asdf2asdf"));
 	}
-
-	@Test
-	void countWords_withStopwordsfile() throws Exception {
-		final WordCounter wordCounter = new WordCounter();
-
-		Assertions.assertEquals(4, wordCounter.countWords("Mary had a little lamb"));
-		// more than one space
-		Assertions.assertEquals(4, wordCounter.countWords("Mary  had  a  little  lamb"));
-		// trailing spaces
-		Assertions.assertEquals(4, wordCounter.countWords("Mary  had  a  little  lamb  "));
-		// leading and trailing spaces
-		Assertions.assertEquals(4, wordCounter.countWords("  Mary  had  a  little  lamb  "));
-		// a different separator than whitespace
-		Assertions.assertEquals(2, wordCounter.countWords("asdf2asdf"));
-	}
 }

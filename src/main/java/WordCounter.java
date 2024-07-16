@@ -1,6 +1,4 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,14 +11,11 @@ public class WordCounter {
 	
 	// maybe we need some constructors with different patterns later
 
-	// this is the expected behaviour
-	public WordCounter() throws IOException {
-		stopWords = Set.copyOf(Files.readAllLines(Path.of("stopwords.txt")));
-	}
-
-	// a constructor for test scenarios
-	WordCounter(final String[] stopwords) {
+	public WordCounter(final String[] stopwords) {
 		stopWords = Set.of(stopwords);
+	}
+	public WordCounter(final List<String> stopwords) {
+		stopWords = Set.copyOf(stopwords);
 	}
 
 	public int countWords(final String sentence) {
