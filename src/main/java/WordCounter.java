@@ -11,9 +11,6 @@ public class WordCounter {
 	
 	// maybe we need some constructors with different patterns later
 
-	public WordCounter(final String[] stopwords) {
-		stopWords = Set.of(stopwords);
-	}
 	public WordCounter(final List<String> stopwords) {
 		stopWords = Set.copyOf(stopwords);
 	}
