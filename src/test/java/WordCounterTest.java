@@ -34,7 +34,7 @@ public class WordCounterTest {
 		final WordCounter wordCounter = new WordCounter(Arrays.asList("the", "a", "on", "off"));
 
 		final WordCounter.Result wordCounterResult = wordCounter.extractWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.");
-		Assertions.assertEquals(9, wordCounterResult.words().size());
-		Assertions.assertEquals(7, wordCounterResult.uniqueWords().size());
+		Assertions.assertEquals(7, wordCounterResult.words().size());
+		Assertions.assertEquals(6, wordCounterResult.uniqueWords().size());
 	}
 }

@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class WordCounter {
 	final static Logger logger = Logger.getLogger(WordCounter.class.getName());
-	final Pattern wordPattern = Pattern.compile("([a-zA-Z]+)");
+	final Pattern wordPattern = Pattern.compile("([a-zA-Z\\-]+)");
 	final Set<String> stopWords;
 	
 	public record Result (List<String> words, Set<String> uniqueWords) {}
