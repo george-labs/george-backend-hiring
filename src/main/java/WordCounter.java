@@ -1,4 +1,4 @@
-import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -18,16 +18,6 @@ public class WordCounter {
 	}
 
 	public int countWords(final String sentence) {
-		return extractWords(sentence, null);
-	}
-
-	/**
-	 * 
-	 * @param sentence
-	 * @param container the collection can also be null
-	 * @return
-	 */
-	public int extractWords(final String sentence, final Collection<String> container) {
 		final Matcher m = wordPattern.matcher(sentence);
 		int wordsCount = 0;
 		while (m.find()) {
@@ -35,15 +25,27 @@ public class WordCounter {
 			if (this.stopWords.contains(word)) {
 				logger.log(Level.FINER, "skip {0}", word);
 			} else {
-				if (container != null)
-					container.add(word);
 				++wordsCount;
 			}
 		}
-		if (container == null)
-			logger.log(Level.FINEST, "sentence '{0}' => count {1}", new Object[] {sentence, wordsCount});
-		else
-			logger.log(Level.FINEST, "sentence '{0}' => count {1} container size {1}", new Object[] {sentence, wordsCount, container.size()});
+		logger.log(Level.FINEST, "sentence '{0}' => count {1}", new Object[] {sentence, wordsCount});
 		return wordsCount;
+
+		// Simple Alternative: return extractWords(sentence).size();
+	}
+
+	public List<String> extractWords(final String sentence) {
+		final List<String> result = new LinkedList<String>();
+		final Matcher m = wordPattern.matcher(sentence);
+		while (m.find()) {
+			final String word = m.group();
+			if (this.stopWords.contains(word)) {
+				logger.log(Level.FINER, "skip {0}", word);
+			} else {
+				result.add(word);
+			}
+		}
+		logger.log(Level.FINEST, "sentence '{0}' => container size {1}", new Object[] {sentence, result.size()});
+		return result;
 	}
 }

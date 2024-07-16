@@ -1,5 +1,8 @@
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +20,8 @@ public class JavaApplication {
 			Logger.getLogger(JavaApplication.class.getName()).log(Level.FINER, "using file {0}", filename);
 			input = Files.readString(Path.of(filename));
 		}
-		System.out.printf("Number of words: %d\n", wordCounter.countWords(input));
+		final List<String> words = wordCounter.extractWords(input);
+		final Set<String> uniqueWords = new HashSet<String>(words);
+		System.out.printf("Number of words: %d, unique: %d\n", words.size(), uniqueWords.size());
 	}
 }
