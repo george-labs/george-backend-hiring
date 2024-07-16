@@ -12,7 +12,7 @@ public class WordCounter {
 	final Pattern wordPattern = Pattern.compile("([a-zA-Z\\-]+)");
 	final Set<String> stopWords;
 	
-	public record Result (List<String> words, Set<String> uniqueWords) {}
+	public record Result (List<String> words, Set<String> uniqueWords, double avg) {}
 
 	// maybe we need some constructors with different patterns later
 
@@ -49,7 +49,8 @@ public class WordCounter {
 			}
 		}
 		final Set<String> uniqueWords = new HashSet<String>(words);
-		logger.log(Level.FINEST, "sentence '{0}' => container size {1}, unique words {2}", new Object[] {sentence, words.size(), uniqueWords.size()});
-		return new Result(words, uniqueWords);
+		final double avg = uniqueWords.stream().mapToDouble(word -> word.length()).sum() / uniqueWords.size();
+		logger.log(Level.FINEST, "sentence '{0}' => container size {1}, unique words {2}, avg {3}", new Object[] {sentence, words.size(), uniqueWords.size(), avg});
+		return new Result(words, uniqueWords, avg);
 	}
 }

@@ -13,3 +13,7 @@ I will not care about the exception if the file is not found I pass it over to t
 ## Iteration 3
 
 without an command line argument it works as before.
+
+## Iteration 6
+
+I assume the average of unique words is wanted.

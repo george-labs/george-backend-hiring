@@ -37,4 +37,12 @@ public class WordCounterTest {
 		Assertions.assertEquals(7, wordCounterResult.words().size());
 		Assertions.assertEquals(6, wordCounterResult.uniqueWords().size());
 	}
+
+	@Test
+	void extractWords_avg() throws Exception {
+		final WordCounter wordCounter = new WordCounter(new ArrayList<String>());
+
+		final WordCounter.Result wordCounterResult = wordCounter.extractWords("a bb ccc");
+		Assertions.assertEquals(2.0, wordCounterResult.avg());
+	}
 }
