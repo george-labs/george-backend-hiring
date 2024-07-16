@@ -17,3 +17,8 @@ without an command line argument it works as before.
 ## Iteration 6
 
 I assume the average of unique words is wanted.
+
+## Iteration 7
+
+Simplification only the last filename counts if more than one other arg than -index is passed by.
+I assume all counted words just means the unique words, so no duplicates are printed.
