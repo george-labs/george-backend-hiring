@@ -1,8 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -36,9 +33,8 @@ public class WordCounterTest {
 	void extractWords_withStopwords() throws Exception {
 		final WordCounter wordCounter = new WordCounter(Arrays.asList("the", "a", "on", "off"));
 
-		final List<String> words = wordCounter.extractWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.");
-		final Set<String> uniqueWords = new HashSet<String>(words);
-		Assertions.assertEquals(9, words.size());
-		Assertions.assertEquals(7, uniqueWords.size());
+		final WordCounter.Result wordCounterResult = wordCounter.extractWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.");
+		Assertions.assertEquals(9, wordCounterResult.words().size());
+		Assertions.assertEquals(7, wordCounterResult.uniqueWords().size());
 	}
 }
