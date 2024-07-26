@@ -5,4 +5,5 @@
 * Also, I assume that null or blank string input will be consists of zero words
 
 # Iteration 2
-* 
+* I assume that a words (lines) in file are only lower case
+* I assume the we don't provide the file path in program args and it is just a hardcoded path

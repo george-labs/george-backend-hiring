@@ -1,7 +1,9 @@
-package sk.george.intervierw;
+package sk.george.intervierw.word_counter;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -9,11 +11,19 @@ import org.jetbrains.annotations.NotNull;
  * The class that handles the word counting
  */
 public class WordCounter {
+    private final Set<String> excludedWords;
+
+    public WordCounter(Set<String> excludedWords) {
+        this.excludedWords = Objects.nonNull(excludedWords)
+                ? excludedWords
+                : new HashSet<>();
+    }
+
 
     /**
      * Counts the number of words in the given text
      * @param text - given text to count words in
-     * @return number of words in the text
+     * @return number of words in the text excluding the excluded words
      */
     public long count(String text) {
         if (Objects.isNull(text) || text.isBlank()) {
@@ -25,6 +35,7 @@ public class WordCounter {
 
         return Arrays.stream(wordAssumptions)
                 .filter(this::isWord)
+                .filter((String word) -> !isExcluded(word.toLowerCase()))
                 .count();
     }
 
@@ -35,5 +46,14 @@ public class WordCounter {
      */
     private boolean isWord(@NotNull String text) {
         return text.matches("^[a-zA-Z][a-zA-Z,.!?\\s]*$");
+    }
+
+    /**
+     * Checks if the given word is excluded from counting
+     * @param word checked word
+     * @return true if the word is contained in the excludedWords set, false otherwise
+     */
+    private boolean isExcluded(@NotNull String word) {
+        return excludedWords.contains(word.toLowerCase());
     }
 }
