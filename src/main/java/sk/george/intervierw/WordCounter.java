@@ -22,7 +22,5 @@ public class WordCounter {
 
         // Return the count of words
         return words.length;
-
-        return -1; // TODO: Implement this method
     }
 }
