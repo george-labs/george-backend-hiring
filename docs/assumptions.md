@@ -7,3 +7,7 @@
 # Iteration 2
 * I assume that a words (lines) in file are only lower case
 * I assume the we don't provide the file path in program args and it is just a hardcoded path
+
+# Iteration 3
+* I assume that we are still using the excluded words
+* I assume that we provide the full input file path within the app arguments 

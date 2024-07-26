@@ -8,7 +8,6 @@ import sk.george.intervierw.exception.NonRecoverableException;
  * The interface for handling inputs
  */
 public interface InputHandler {
-
     /**
      * Loads the input data from the specified path if available
      * @param path The path to the input or ignored if there is no need for path
