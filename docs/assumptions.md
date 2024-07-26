@@ -1,4 +1,6 @@
 # Assumptions per iteration
 
 ## Iteration 1
-* I will count the words that only consists of letters that are form alphabet and if there will be any number or any other character I will remove the word from final sum
+* I will count the words that only consists of letters that are from alphabet and if there will be any number or any other character except the punctuation I will remove the word from final sum
+* Also, I assume that null or blank string input will be consists of zero words
+

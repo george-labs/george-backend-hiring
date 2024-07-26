@@ -21,7 +21,58 @@ class WordCounterTest {
         int expectedCount = 5;
 
         // Call the method
-        int actualCount = wordCounter.count(input);
+        long actualCount = wordCounter.count(input);
+
+        // Assert the result
+        assertEquals(expectedCount, actualCount);
+    }
+
+    @Test
+    void count_returns0_inputNullString() {
+        // Init data
+        int expectedCount = 0;
+
+        // Call the method
+        long actualCount = wordCounter.count(null);
+
+        // Assert the result
+        assertEquals(expectedCount, actualCount);
+    }
+
+    @Test
+    void count_returns0_inputBlankString() {
+        // Init data
+        String input = "   ";
+        int expectedCount = 0;
+
+        // Call the method
+        long actualCount = wordCounter.count(input);
+
+        // Assert the result
+        assertEquals(expectedCount, actualCount);
+    }
+
+    @Test
+    void count_returnsWords_inputWithNotAlphabeticWord() {
+        // Init data
+        String input = "Mary h4d a l#ttle lamb";
+        int expectedCount = 3;
+
+        // Call the method
+        long actualCount = wordCounter.count(input);
+
+        // Assert the result
+        assertEquals(expectedCount, actualCount);
+    }
+
+    @Test
+    void count_returnsWords_inputSentenceWithNumberIncluded() {
+        // Init data
+        String input = "Mary, I had a 1 little lamb!";
+        int expectedCount = 6;
+
+        // Call the method
+        long actualCount = wordCounter.count(input);
 
         // Assert the result
         assertEquals(expectedCount, actualCount);
