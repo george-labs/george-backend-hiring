@@ -21,6 +21,9 @@ public class WordCounter {
                 : new HashSet<>();
     }
 
+    public WordCounter() {
+        this.excludedWords = new HashSet<>();
+    }
 
     /**
      * Counts the number of words in the given text
