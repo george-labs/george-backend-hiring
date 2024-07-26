@@ -11,7 +11,10 @@ public class JavaApplication {
         System.out.println("Enter your input:");
         String userInput = scanner.nextLine();
 
+        final WordCounter wordCounter = new WordCounter();
+        long wordCount = wordCounter.count(userInput);
+
         // Process the input string here
-        LOGGER.log(Level.INFO, "You entered: " + userInput);
+        LOGGER.log(Level.INFO, String.format("Number of words: %d", wordCount));
     }
 }
