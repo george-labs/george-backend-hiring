@@ -1,6 +1,7 @@
 package com.george.interview.input;
 
 import java.io.IOException;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,10 +24,11 @@ class InputReaderTest {
   }
 
   @Test
-  void readAllWordsFromFile() {
+  void readAllWordsFromFile() throws IOException {
 
     var inputStream = getClass().getClassLoader().getResourceAsStream("stopwords.txt");
     var words = reader.readFileAsWords(inputStream);
     Assertions.assertEquals(4, words.size());
+    Assertions.assertTrue(words.containsAll(List.of("the", "a", "on", "off")));
   }
 }
