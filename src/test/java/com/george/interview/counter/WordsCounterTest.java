@@ -82,6 +82,24 @@ class WordsCounterTest {
       Assertions.assertEquals(4, counter.countUniqueWords(new String[] {"a", "a", "a", "test",
         "hello", "friend", "test"}));
     }
+
+    @Test
+    void nullInputForCountUniqueWords() {
+
+      Assertions.assertThrows(IllegalArgumentException.class, () -> counter.countUniqueWords(null));
+    }
+
+    @Test
+    void allNullWordsForCountUniqueWords() {
+
+      Assertions.assertEquals(0, counter.countUniqueWords(new String[] {null, null, null}));
+    }
+
+    @Test
+    void someNullWordsForCountUniqueWords() {
+
+      Assertions.assertEquals(2, counter.countUniqueWords(new String[] {"a", "a", null, "test"}));
+    }
   }
 
   @Test
