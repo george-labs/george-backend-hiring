@@ -17,7 +17,7 @@ public class WordsCountExecutor {
 
   private static final String STOP_WORDS_FILE_NAME = "stopwords.txt";
 
-  public WordsCountExecutor(InputStream userInput, PrintStream out) {
+  public WordsCountExecutor(InputStream userInput, PrintStream out, String[] strings) {
 
     this.userInput = userInput;
     this.userOutput = out;

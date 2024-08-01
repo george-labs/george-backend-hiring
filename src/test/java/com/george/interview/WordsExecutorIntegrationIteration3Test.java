@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class WordsExecutorIntegrationTest {
+class WordsExecutorIntegrationIteration3Test {
 
   private WordsCountExecutor executor;
 
@@ -17,14 +17,14 @@ class WordsExecutorIntegrationTest {
   void setUp() {
 
     outputStreamCaptor = new ByteArrayOutputStream();
-    var wordsFile = getClass().getClassLoader().getResourceAsStream("integration-iteration-2");
-    executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor));
+    var wordsFile = getClass().getClassLoader().getResourceAsStream("integration-iteration-3");
+    executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[]{"mytext.txt"});
   }
 
   @Test
-  void iteration2IntegrationTest() {
+  void iteration3IntegrationTest() {
 
     executor.execute();
-    Assertions.assertEquals("Enter text: Number of words: 4", outputStreamCaptor.toString());
+    Assertions.assertEquals("Number of words: 4", outputStreamCaptor.toString());
   }
 }
