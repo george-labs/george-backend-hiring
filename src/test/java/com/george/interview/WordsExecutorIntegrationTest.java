@@ -22,7 +22,7 @@ class WordsExecutorIntegrationTest {
   }
 
   @Test
-  void assertWholeUseCaseRunProperly() {
+  void iteration2IntegrationTest() {
 
     executor.execute();
     Assertions.assertEquals("Enter text: Number of words: 4", outputStreamCaptor.toString());
