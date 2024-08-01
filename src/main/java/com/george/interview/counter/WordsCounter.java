@@ -18,7 +18,7 @@ public class WordsCounter {
     this.ignoredWords = ignoredWords;
   }
 
-  public CountResult countWords(String text) {
+  public CountResult countWords(String text, boolean indexingRequired) {
 
     if (text == null || text.isBlank()) {
       return new CountResult(0, 0, 0);

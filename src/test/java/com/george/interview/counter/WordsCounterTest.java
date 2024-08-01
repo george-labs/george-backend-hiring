@@ -22,42 +22,42 @@ class WordsCounterTest {
     @Test
     void countWordsFromSingleWord() {
 
-      var result = counter.countWords("Hello");
+      var result = counter.countWords("Hello",false);
       Assertions.assertEquals(1, result.wordCount());
     }
 
     @Test
     void countWordsFromMultipleWord() {
 
-      var result = counter.countWords("Hello dear friend from space");
+      var result = counter.countWords("Hello dear friend from space",false);
       Assertions.assertEquals(5, result.wordCount());
     }
 
     @Test
     void countWordsInNullString() {
 
-      var result = counter.countWords(null);
+      var result = counter.countWords(null,false);
       Assertions.assertEquals(0, result.wordCount());
     }
 
     @Test
     void countWordsInEmptyString() {
 
-      var result = counter.countWords("");
+      var result = counter.countWords("",false);
       Assertions.assertEquals(0, result.wordCount());
     }
 
     @Test
     void countWordsWithSpecificDelimitersString() {
 
-      var result = counter.countWords("Hello4World\nHow\tAre-you");
+      var result = counter.countWords("Hello4World\nHow\tAre-you",false);
       Assertions.assertEquals(4, result.wordCount());
     }
 
     @Test
     void countWordsOnlyHyphensString() {
 
-      var result = counter.countWords("--- ---");
+      var result = counter.countWords("--- ---",false);
       Assertions.assertEquals(2, result.wordCount());
       Assertions.assertEquals(1, result.uniqueWords());
     }

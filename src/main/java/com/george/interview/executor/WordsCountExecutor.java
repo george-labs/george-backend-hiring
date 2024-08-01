@@ -2,6 +2,7 @@ package com.george.interview.executor;
 
 import com.george.interview.counter.WordsCounter;
 import com.george.interview.input.InputReader;
+import com.george.interview.input.model.InputOptions;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class WordsCountExecutor {
 
   private final PrintStream userOutput;
 
-  private final String[] commandLineInput;
+  private final InputOptions options;
 
   private final String stopWordsFileName;
 
@@ -27,7 +28,7 @@ public class WordsCountExecutor {
     checkNullabilityOfDependencies(userInput, outputStream, commandLineInput);
     this.userInput = userInput;
     this.userOutput = outputStream;
-    this.commandLineInput = commandLineInput;
+    options = new InputOptions.Builder().buildFromCommandLineArgs(commandLineInput);
     this.stopWordsFileName = stopWordsFileName;
   }
 
@@ -58,20 +59,19 @@ public class WordsCountExecutor {
     WordsCounter counter = new WordsCounter(ignoredWords);
 
     var message = extractMessage(reader);
-    var wordCount = counter.countWords(message);
+    var wordCount = counter.countWords(message, options.isIndexingRequired());
 
-    userOutput.format("Number of words: %d, unique: %d"
-        + "; average word length: %.2f characters", wordCount.wordCount(), wordCount.uniqueWords()
-      , wordCount.avgWordLength());
+    userOutput.format("Number of words: %d, unique: %d" + "; average word length: %.2f characters", wordCount.wordCount(),
+      wordCount.uniqueWords(), wordCount.avgWordLength());
   }
 
   private String extractMessage(InputReader reader) throws IOException {
 
-    if (commandLineInput.length == 0) {
+    if (options.providedFile() == null) {
       userOutput.print("Enter text: ");
       return reader.readLine(userInput);
     } else {
-      return reader.readWholeFile(commandLineInput[0]);
+      return reader.readWholeFile(options.providedFile());
     }
   }
 

@@ -20,7 +20,7 @@ class WordsCounterAcceptanceTest {
   @Test
   void ignoreAllWordsTest() {
 
-    var result = counter.countWords("test hello");
+    var result = counter.countWords("test hello",false);
     Assertions.assertEquals(0, result.wordCount());
   }
 
