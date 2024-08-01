@@ -2,14 +2,10 @@ package com.george.interview.executor;
 
 import com.george.interview.counter.WordsCounter;
 import com.george.interview.input.InputReader;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.Set;
 
@@ -23,11 +19,22 @@ public class WordsCountExecutor {
 
   private final String[] commandLineInput;
 
-  public WordsCountExecutor(InputStream userInput, PrintStream out, String[] commandLineInput) {
+  public WordsCountExecutor(InputStream userInput, PrintStream outputStream, String[] commandLineInput) {
 
+    checkNullabilityOfDependencies(userInput, outputStream, commandLineInput);
     this.userInput = userInput;
-    this.userOutput = out;
+    this.userOutput = outputStream;
     this.commandLineInput = commandLineInput;
+  }
+
+  private void checkNullabilityOfDependencies(InputStream userInput, PrintStream outputStream, String[] commandLineInput) {
+
+    if (outputStream == null) {
+      throw new IllegalArgumentException("output cannot be null");
+    }
+    if (commandLineInput == null) {
+      throw new IllegalArgumentException("command line input cannot be null");
+    }
   }
 
   public void execute() {

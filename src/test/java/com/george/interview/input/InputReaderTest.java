@@ -43,4 +43,10 @@ class InputReaderTest {
 
     Assertions.assertThrows(IllegalArgumentException.class, () -> reader.readLine(null));
   }
+
+  @Test
+  void readWholeFileNullFileNameTest() {
+
+    Assertions.assertThrows(IllegalArgumentException.class, () -> reader.readWholeFile(null));
+  }
 }

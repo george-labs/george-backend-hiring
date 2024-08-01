@@ -12,14 +12,14 @@ public class InputReader {
 
   public String readLine(InputStream input) throws IOException {
 
-    checkNullityOfInput(input);
+    checkNullity(input);
     try (var is = new InputStreamReader(input);
          var buffer = new BufferedReader(is)) {
       return buffer.readLine();
     }
   }
 
-  private void checkNullityOfInput(InputStream input) {
+  private void checkNullity(Object input) {
 
     if (input == null) {
       throw new IllegalArgumentException("Input cannot be null");
@@ -28,7 +28,7 @@ public class InputReader {
 
   public Set<String> readFileAsWords(InputStream input) throws IOException {
 
-    checkNullityOfInput(input);
+    checkNullity(input);
     try (var is = new InputStreamReader(input);
          var buffer = new BufferedReader((is))) {
       return buffer.lines().collect(Collectors.toSet());
@@ -37,6 +37,7 @@ public class InputReader {
 
   public String readWholeFile(String fileNameToRead) throws IOException {
 
+    checkNullity(fileNameToRead);
     StringBuilder content = new StringBuilder();
     try (var fis = new FileInputStream(fileNameToRead);
          var bis = new BufferedReader(new InputStreamReader(fis))) {
