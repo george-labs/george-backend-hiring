@@ -25,6 +25,6 @@ class WordsExecutorIntegrationIteration2Test {
   void iteration2IntegrationTest() {
 
     executor.execute();
-    Assertions.assertEquals("Enter text: Number of words: 4", outputStreamCaptor.toString());
+    Assertions.assertEquals("Enter text: Number of words: 4, unique: 4", outputStreamCaptor.toString());
   }
 }
