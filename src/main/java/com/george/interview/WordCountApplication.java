@@ -6,6 +6,6 @@ public class WordCountApplication {
 
   public static void main(String[] args) {
 
-    new WordsCountExecutor().execute();
+    new WordsCountExecutor(System.in, System.out).execute();
   }
 }

@@ -5,11 +5,23 @@ import com.george.interview.input.InputReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Set;
 
 public class WordsCountExecutor {
 
+  private final InputStream userInput;
+
+  private final PrintStream userOutput;
+
   private static final String STOP_WORDS_FILE_NAME = "stopwords.txt";
+
+  public WordsCountExecutor(InputStream userInput, PrintStream out) {
+
+    this.userInput = userInput;
+    this.userOutput = out;
+  }
 
   public void execute() {
 
@@ -27,12 +39,12 @@ public class WordsCountExecutor {
 
     WordsCounter counter = new WordsCounter(ignoredWords);
 
-    System.out.print("Enter text: ");
+    userOutput.print("Enter text: ");
 
-    var message = reader.readLine(System.in);
+    var message = reader.readLine(userInput);
     var wordCount = counter.countWords(message);
 
-    System.out.format("Number of words: %d", wordCount);
+    userOutput.format("Number of words: %d", wordCount);
   }
 
   private Set<String> readIgnoreWordsFile(InputReader reader) throws IOException {
