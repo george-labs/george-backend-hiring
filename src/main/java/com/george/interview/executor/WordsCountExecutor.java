@@ -4,10 +4,7 @@ import com.george.interview.counter.WordsCounter;
 import com.george.interview.input.InputReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashSet;
 import java.util.Set;
 
 public class WordsCountExecutor {
@@ -28,7 +25,7 @@ public class WordsCountExecutor {
     InputReader reader = new InputReader();
     var ignoredWords = readIgnoreWordsFile(reader);
 
-    WordsCounter counter = new WordsCounter(new HashSet<>());
+    WordsCounter counter = new WordsCounter(ignoredWords);
 
     System.out.print("Enter text: ");
 
