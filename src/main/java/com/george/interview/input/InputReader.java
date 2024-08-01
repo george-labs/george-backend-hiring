@@ -12,8 +12,10 @@ public class InputReader {
   public String readLine(InputStream input) throws IOException {
 
     checkNullityOfInput(input);
-    BufferedReader buffer = new BufferedReader(new InputStreamReader(input));
-    return buffer.readLine();
+    try (var is = new InputStreamReader(input);
+         var buffer = new BufferedReader(is)) {
+      return buffer.readLine();
+    }
   }
 
   private void checkNullityOfInput(InputStream input) {
@@ -26,7 +28,10 @@ public class InputReader {
   public Set<String> readFileAsWords(InputStream input) throws IOException {
 
     checkNullityOfInput(input);
-    BufferedReader buffer = new BufferedReader(new InputStreamReader(input));
-    return buffer.lines().collect(Collectors.toSet());
+    try (
+      var is = new InputStreamReader(input);
+      var buffer = new BufferedReader((is))) {
+      return buffer.lines().collect(Collectors.toSet());
+    }
   }
 }
