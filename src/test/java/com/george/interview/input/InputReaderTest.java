@@ -11,6 +11,7 @@ class InputReaderTest {
 
   @BeforeEach
   void setUp() {
+
     reader = new InputReader();
   }
 
@@ -19,5 +20,13 @@ class InputReaderTest {
 
     var inputStream = getClass().getClassLoader().getResourceAsStream("input-iteration1.txt");
     Assertions.assertEquals("Hello world", reader.readLine(inputStream));
+  }
+
+  @Test
+  void readAllWordsFromFile() {
+
+    var inputStream = getClass().getClassLoader().getResourceAsStream("stopwords.txt");
+    var words = reader.readFileAsWords(inputStream);
+    Assertions.assertEquals(4, words.size());
   }
 }
