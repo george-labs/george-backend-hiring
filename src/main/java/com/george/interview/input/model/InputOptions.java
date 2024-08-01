@@ -13,13 +13,7 @@ public record InputOptions(String providedFile, boolean isIndexingRequired) {
       if (commandLineArgs == null || commandLineArgs.length == 0) {
         return new InputOptions(null, false);
       }
-      if (commandLineArgs.length == 1) {
-        return extractFromOneArg(commandLineArgs[0]);
-      }
-      if (commandLineArgs.length == 2) {
-        return new InputOptions(extractFileName(commandLineArgs), extractIndex(commandLineArgs));
-      }
-      return null;
+      return new InputOptions(extractFileName(commandLineArgs), extractIndex(commandLineArgs));
     }
 
     private boolean extractIndex(String[] commandLineArgs) {
@@ -36,14 +30,6 @@ public record InputOptions(String providedFile, boolean isIndexingRequired) {
       return Arrays.stream(commandLineArgs)
         .filter(arg -> !INDEX_INPUT.equals(arg))
         .findFirst().orElse(null);
-    }
-
-    private InputOptions extractFromOneArg(String commandLineArg) {
-
-      if (INDEX_INPUT.equals(commandLineArg)) {
-        return new InputOptions(null, true);
-      }
-      return new InputOptions(commandLineArg, false);
     }
   }
 }

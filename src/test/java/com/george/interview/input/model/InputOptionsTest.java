@@ -80,7 +80,7 @@ class InputOptionsTest {
   void provideMoreThan2Arguments() {
 
     var builder = new InputOptions.Builder();
-    var options = builder.buildFromCommandLineArgs(new String[] {"test-file-name", "test-file-name-two", "-input", "-input"});
+    var options = builder.buildFromCommandLineArgs(new String[] {"test-file-name", "test-file-name-two", "-index", "-index"});
 
     Assertions.assertNotNull(options.providedFile());
     Assertions.assertTrue(options.isIndexingRequired());
