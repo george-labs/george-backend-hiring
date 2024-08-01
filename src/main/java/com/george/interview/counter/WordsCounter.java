@@ -4,6 +4,9 @@ public class WordsCounter {
 
   public int countWords(String text) {
 
-    return 0;
+    if (text == null || text.isBlank()) {
+      return 0;
+    }
+    return text.split("\\P{Alpha}+").length;
   }
 }

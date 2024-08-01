@@ -20,4 +20,32 @@ class WordsCounterTest {
     var wordsCount = counter.countWords("Hello");
     Assertions.assertEquals(1, wordsCount);
   }
+
+  @Test
+  void countWordsFromMultipleWord() {
+
+    var wordsCount = counter.countWords("Hello dear friend from space");
+    Assertions.assertEquals(5, wordsCount);
+  }
+
+  @Test
+  void countWordsInNullString() {
+
+    var wordsCount = counter.countWords(null);
+    Assertions.assertEquals(0, wordsCount);
+  }
+
+  @Test
+  void countWordsInEmptyString() {
+
+    var wordsCount = counter.countWords("");
+    Assertions.assertEquals(0, wordsCount);
+  }
+
+  @Test
+  void countWordsWithSpecificDelimitersString() {
+
+    var wordsCount = counter.countWords("Hello4World\nHow\tAre-you");
+    Assertions.assertEquals(5, wordsCount);
+  }
 }
