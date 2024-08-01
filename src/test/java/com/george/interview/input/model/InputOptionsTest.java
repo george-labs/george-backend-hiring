@@ -54,4 +54,25 @@ class InputOptionsTest {
     Assertions.assertTrue(options.isIndexingRequired());
     Assertions.assertNotNull(options.providedFile());
   }
+
+  @Test
+  void provideTwoArgumentsThatAreBothIndex() {
+
+    var builder = new InputOptions.Builder();
+    var options = builder.buildFromCommandLineArgs(new String[] {"-index", "-index"});
+
+    Assertions.assertTrue(options.isIndexingRequired());
+    Assertions.assertNull(options.providedFile());
+  }
+
+  @Test
+  void provideTwoArgumentsThatAreBothFileNames() {
+
+    var builder = new InputOptions.Builder();
+    var options = builder.buildFromCommandLineArgs(new String[] {"test-file-name", "test-file-name-two"});
+
+    Assertions.assertNotNull(options.providedFile());
+    Assertions.assertFalse(options.isIndexingRequired());
+    Assertions.assertEquals("test-file-name", options.providedFile());
+  }
 }
