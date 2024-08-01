@@ -4,11 +4,7 @@ import java.util.Set;
 
 public class WordsCounter {
 
-  private Set<String> ignoredWords;
-
-  public WordsCounter() {
-
-  }
+  private final Set<String> ignoredWords;
 
   public WordsCounter(Set<String> ignoredWords) {
 

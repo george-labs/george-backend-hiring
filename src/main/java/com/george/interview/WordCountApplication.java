@@ -3,13 +3,14 @@ package com.george.interview;
 import com.george.interview.counter.WordsCounter;
 import com.george.interview.input.InputReader;
 import java.io.IOException;
+import java.util.HashSet;
 
 public class WordCountApplication {
 
   public static void main(String[] args) throws IOException {
 
     InputReader reader = new InputReader(System.in);
-    WordsCounter counter = new WordsCounter();
+    WordsCounter counter = new WordsCounter(new HashSet<>());
 
     System.out.print("Enter text: ");
 

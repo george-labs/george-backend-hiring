@@ -1,5 +1,6 @@
 package com.george.interview.counter;
 
+import java.util.HashSet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,7 @@ class WordsCounterTest {
   @BeforeEach
   void setUp() {
 
-    counter = new WordsCounter();
+    counter = new WordsCounter(new HashSet<>());
   }
 
   @Test
