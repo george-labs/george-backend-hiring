@@ -28,7 +28,7 @@ class WordsExecutorStopWordsTest {
     var wordsFile = getClass().getClassLoader().getResourceAsStream("integration-iteration-2");
     executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {}, null);
     executor.execute();
-    Assertions.assertEquals("Enter text: Number of words: 4, unique: 4", outputStreamCaptor.toString());
+    Assertions.assertEquals("Enter text: Number of words: 5, unique: 5", outputStreamCaptor.toString());
   }
 
   @Test
@@ -37,6 +37,6 @@ class WordsExecutorStopWordsTest {
     var wordsFile = getClass().getClassLoader().getResourceAsStream("integration-iteration-2");
     executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {}, "file-that-does-not-exist");
     executor.execute();
-    Assertions.assertEquals("Enter text: Number of words: 4, unique: 4", outputStreamCaptor.toString());
+    Assertions.assertEquals("Enter text: Number of words: 5, unique: 5", outputStreamCaptor.toString());
   }
 }

@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Collections;
 import java.util.Set;
 
 public class WordsCountExecutor {
@@ -74,7 +75,15 @@ public class WordsCountExecutor {
 
   private Set<String> readIgnoreWordsFile(InputReader reader) throws IOException {
 
+    if (stopWordsFileName == null) {
+      return Collections.emptySet();
+    }
     var initialFile = new File(stopWordsFileName);
+
+    if (!initialFile.exists()) {
+      return Collections.emptySet();
+    }
+
     var targetStream = new FileInputStream(initialFile);
     return reader.readFileAsWords(targetStream);
   }
