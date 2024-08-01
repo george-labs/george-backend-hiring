@@ -11,13 +11,22 @@ public class InputReader {
 
   public String readLine(InputStream input) throws IOException {
 
+    checkNullityOfInput(input);
     BufferedReader buffer = new BufferedReader(new InputStreamReader(input));
     return buffer.readLine();
   }
 
-  public Set<String> readFileAsWords(InputStream inputStream) throws IOException {
+  private void checkNullityOfInput(InputStream input) {
 
-    BufferedReader buffer = new BufferedReader(new InputStreamReader(inputStream));
+    if (input == null) {
+      throw new IllegalArgumentException("Input cannot be null");
+    }
+  }
+
+  public Set<String> readFileAsWords(InputStream input) throws IOException {
+
+    checkNullityOfInput(input);
+    BufferedReader buffer = new BufferedReader(new InputStreamReader(input));
     return buffer.lines().collect(Collectors.toSet());
   }
 }

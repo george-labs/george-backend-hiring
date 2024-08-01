@@ -31,4 +31,16 @@ class InputReaderTest {
     Assertions.assertEquals(4, words.size());
     Assertions.assertTrue(words.containsAll(List.of("the", "a", "on", "off")));
   }
+
+  @Test
+  void readFileAsWordsNullityOfInput() {
+
+    Assertions.assertThrows(IllegalArgumentException.class, () -> reader.readFileAsWords(null));
+  }
+
+  @Test
+  void readLineNullityOfInput() {
+
+    Assertions.assertThrows(IllegalArgumentException.class, () -> reader.readLine(null));
+  }
 }
