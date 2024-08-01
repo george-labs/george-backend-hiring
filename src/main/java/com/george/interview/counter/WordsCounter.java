@@ -21,18 +21,25 @@ public class WordsCounter {
   public CountResult countWords(String text, boolean indexingRequired) {
 
     if (text == null || text.isBlank()) {
-      return new CountResult(0, 0, 0);
+      return new CountResult(0, 0, 0, null);
     }
     var temporaryText = text;
     for (String word : ignoredWords) {
       temporaryText = temporaryText.replaceAll("\\b" + word + "\\b", "");
     }
-    var splitText = Arrays
-      .stream(temporaryText.split("[^a-zA-Z-]+"))
-      .map(String::trim).toList()
-      .toArray(new String[] {});
+    var splitText = divideText(temporaryText);
     return new CountResult(splitText.length, countUniqueWords(splitText),
-      calculateAvgWordLength(splitText));
+      calculateAvgWordLength(splitText),
+      indexingRequired ? indexWords(splitText) : null);
+  }
+
+  private String[] divideText(String temporaryText) {
+
+    return Arrays
+      .stream(temporaryText.split("[^a-zA-Z-]+"))
+      .map(String::trim)
+      .toList()
+      .toArray(new String[] {});
   }
 
   private double calculateAvgWordLength(String[] splitText) {
@@ -55,5 +62,15 @@ public class WordsCounter {
     return Arrays.stream(words)
       .filter(Objects::nonNull)
       .collect(Collectors.toSet()).size();
+  }
+
+  Set<String> indexWords(String[] words) {
+
+    if (words == null) {
+      throw new IllegalArgumentException("words cannot be null");
+    }
+    return Arrays.stream(words)
+      .filter(Objects::nonNull)
+      .collect(Collectors.toSet());
   }
 }

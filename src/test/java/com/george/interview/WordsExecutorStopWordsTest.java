@@ -10,23 +10,19 @@ import org.junit.jupiter.api.Test;
 
 class WordsExecutorStopWordsTest {
 
-  private WordsCountExecutor executor;
-
   private ByteArrayOutputStream outputStreamCaptor;
 
   @BeforeEach
   void setUp() {
 
     outputStreamCaptor = new ByteArrayOutputStream();
-    var wordsFile = getClass().getClassLoader().getResourceAsStream("integration-iteration-2");
-    executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {}, STOP_WORDS_FILE_NAME);
   }
 
   @Test
   void nullStopWordsFileDoesNotBreakTheImplementation() {
 
     var wordsFile = getClass().getClassLoader().getResourceAsStream("integration-iteration-2");
-    executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {}, null);
+    var executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {}, null);
     executor.execute();
     Assertions.assertEquals("Enter text: Number of words: 5, unique: 5; average word length: 3.60 characters", outputStreamCaptor.toString());
   }
@@ -35,7 +31,7 @@ class WordsExecutorStopWordsTest {
   void notExistingStopWordsFileDoesNotBreakTheImplementation() {
 
     var wordsFile = getClass().getClassLoader().getResourceAsStream("integration-iteration-2");
-    executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {}, "file-that-does-not-exist");
+    var executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {}, "file-that-does-not-exist");
     executor.execute();
     Assertions.assertEquals(
       "Enter text: Number of words: 5, unique: 5; average word length: 3.60 characters",

@@ -63,6 +63,13 @@ public class WordsCountExecutor {
 
     userOutput.format("Number of words: %d, unique: %d" + "; average word length: %.2f characters", wordCount.wordCount(),
       wordCount.uniqueWords(), wordCount.avgWordLength());
+
+    if (wordCount.indexedWords() != null) {
+      System.out.println("Index:");
+      wordCount.indexedWords().forEach(
+        System.out::println
+      );
+    }
   }
 
   private String extractMessage(InputReader reader) throws IOException {

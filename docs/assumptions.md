@@ -10,6 +10,3 @@ Number of average length of word is formatted to show 2 decimal places everytime
 
 ### Assumption 4
 I could not find file sometext.txt in a repository, so I created it by myself.
-
-### Assumption 5
-Words that are in index part are printed in alphabetical order.
