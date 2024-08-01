@@ -34,4 +34,24 @@ class InputOptionsTest {
     Assertions.assertFalse(options.isIndexingRequired());
     Assertions.assertNotNull(options.providedFile());
   }
+
+  @Test
+  void provideBothArgumentsButIndexIsFirst() {
+
+    var builder = new InputOptions.Builder();
+    var options = builder.buildFromCommandLineArgs(new String[] {"-index", "not-an-index"});
+
+    Assertions.assertTrue(options.isIndexingRequired());
+    Assertions.assertNotNull(options.providedFile());
+  }
+
+  @Test
+  void provideBothArgumentsButIndexIsSecond() {
+
+    var builder = new InputOptions.Builder();
+    var options = builder.buildFromCommandLineArgs(new String[] {"not-an-index", "-index"});
+
+    Assertions.assertTrue(options.isIndexingRequired());
+    Assertions.assertNotNull(options.providedFile());
+  }
 }
