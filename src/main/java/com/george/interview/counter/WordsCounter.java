@@ -8,6 +8,9 @@ public class WordsCounter {
 
   public WordsCounter(Set<String> ignoredWords) {
 
+    if (ignoredWords == null) {
+      throw new IllegalArgumentException("ignored words set cannot be null");
+    }
     this.ignoredWords = ignoredWords;
   }
 
