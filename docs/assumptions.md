@@ -10,3 +10,6 @@ Number of average length of word is formatted to show 2 decimal places everytime
 
 ### Assumption 4
 I could not find file sometext.txt in a repository, so I created it by myself.
+
+### Final result
+I did not finish iteration 7 during assignment.
