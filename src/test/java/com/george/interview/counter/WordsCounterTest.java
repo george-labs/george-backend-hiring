@@ -3,6 +3,7 @@ package com.george.interview.counter;
 import java.util.HashSet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 class WordsCounterTest {
@@ -15,39 +16,59 @@ class WordsCounterTest {
     counter = new WordsCounter(new HashSet<>());
   }
 
-  @Test
-  void countWordsFromSingleWord() {
+  @Nested
+  class CountWords {
 
-    var result = counter.countWords("Hello");
-    Assertions.assertEquals(1, result.wordCount());
+    @Test
+    void countWordsFromSingleWord() {
+
+      var result = counter.countWords("Hello");
+      Assertions.assertEquals(1, result.wordCount());
+    }
+
+    @Test
+    void countWordsFromMultipleWord() {
+
+      var result = counter.countWords("Hello dear friend from space");
+      Assertions.assertEquals(5, result.wordCount());
+    }
+
+    @Test
+    void countWordsInNullString() {
+
+      var result = counter.countWords(null);
+      Assertions.assertEquals(0, result.wordCount());
+    }
+
+    @Test
+    void countWordsInEmptyString() {
+
+      var result = counter.countWords("");
+      Assertions.assertEquals(0, result.wordCount());
+    }
+
+    @Test
+    void countWordsWithSpecificDelimitersString() {
+
+      var result = counter.countWords("Hello4World\nHow\tAre-you");
+      Assertions.assertEquals(4, result.wordCount());
+    }
   }
 
-  @Test
-  void countWordsFromMultipleWord() {
+  @Nested
+  class CountUniqueWords {
 
-    var result = counter.countWords("Hello dear friend from space");
-    Assertions.assertEquals(5, result.wordCount());
-  }
+    @Test
+    void countEmptyArrayOfWords() {
 
-  @Test
-  void countWordsInNullString() {
+      Assertions.assertEquals(0, counter.countUniqueWords(new String[] {}));
+    }
 
-    var result = counter.countWords(null);
-    Assertions.assertEquals(0, result.wordCount());
-  }
+    @Test
+    void countAllUniqueWords() {
 
-  @Test
-  void countWordsInEmptyString() {
-
-    var result = counter.countWords("");
-    Assertions.assertEquals(0, result.wordCount());
-  }
-
-  @Test
-  void countWordsWithSpecificDelimitersString() {
-
-    var result = counter.countWords("Hello4World\nHow\tAre-you");
-    Assertions.assertEquals(5, result.wordCount());
+      Assertions.assertEquals(0, counter.countUniqueWords(new String[] {"a", "hello", "test", "test 2"}));
+    }
   }
 
   @Test
