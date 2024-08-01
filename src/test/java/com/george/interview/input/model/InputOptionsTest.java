@@ -75,4 +75,15 @@ class InputOptionsTest {
     Assertions.assertFalse(options.isIndexingRequired());
     Assertions.assertEquals("test-file-name", options.providedFile());
   }
+
+  @Test
+  void provideMoreThan2Arguments() {
+
+    var builder = new InputOptions.Builder();
+    var options = builder.buildFromCommandLineArgs(new String[] {"test-file-name", "test-file-name-two", "-input", "-input"});
+
+    Assertions.assertNotNull(options.providedFile());
+    Assertions.assertTrue(options.isIndexingRequired());
+    Assertions.assertEquals("test-file-name", options.providedFile());
+  }
 }
