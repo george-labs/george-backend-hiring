@@ -1,6 +1,8 @@
 package com.george.interview.counter;
 
 import com.george.interview.counter.model.CountResult;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 public class WordsCounter {
@@ -28,8 +30,8 @@ public class WordsCounter {
     return new CountResult(splitText.length, countUniqueWords(splitText));
   }
 
-  int countUniqueWords(String[] splitText) {
+  int countUniqueWords(String[] words) {
 
-    return 0;
+    return new HashSet<>(Arrays.asList(words)).size();
   }
 }
