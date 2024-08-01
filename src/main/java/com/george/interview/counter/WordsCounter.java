@@ -3,7 +3,9 @@ package com.george.interview.counter;
 import com.george.interview.counter.model.CountResult;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class WordsCounter {
 
@@ -32,6 +34,11 @@ public class WordsCounter {
 
   int countUniqueWords(String[] words) {
 
-    return new HashSet<>(Arrays.asList(words)).size();
+    if (words == null) {
+      throw new IllegalArgumentException("words cannot be null");
+    }
+    return Arrays.stream(words)
+      .filter(Objects::nonNull)
+      .collect(Collectors.toSet()).size();
   }
 }
