@@ -60,7 +60,9 @@ public class WordsCountExecutor {
     var message = extractMessage(reader);
     var wordCount = counter.countWords(message);
 
-    userOutput.format("Number of words: %d, unique: %d", wordCount.wordCount(), wordCount.uniqueWords());
+    userOutput.format("Number of words: %d, unique: %d"
+        + "; average word length: %.2f characters", wordCount.wordCount(), wordCount.uniqueWords()
+      , wordCount.avgWordLength());
   }
 
   private String extractMessage(InputReader reader) throws IOException {

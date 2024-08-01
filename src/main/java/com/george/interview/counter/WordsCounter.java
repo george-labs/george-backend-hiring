@@ -21,14 +21,30 @@ public class WordsCounter {
   public CountResult countWords(String text) {
 
     if (text == null || text.isBlank()) {
-      return new CountResult(0, 0);
+      return new CountResult(0, 0, 0);
     }
     var temporaryText = text;
     for (String word : ignoredWords) {
-      temporaryText = temporaryText.replaceAll(word, "");
+      temporaryText = temporaryText.replaceAll("\\b" + word + "\\b", "");
     }
-    var splitText = temporaryText.split("[^a-zA-Z-]+");
-    return new CountResult(splitText.length, countUniqueWords(splitText));
+    var splitText = Arrays
+      .stream(temporaryText.split("[^a-zA-Z-]+"))
+      .map(String::trim).toList()
+      .toArray(new String[] {});
+    return new CountResult(splitText.length, countUniqueWords(splitText),
+      calculateAvgWordLength(splitText));
+  }
+
+  private double calculateAvgWordLength(String[] splitText) {
+
+    var optionalResult = Arrays.stream(splitText)
+      .mapToInt((String::length))
+      .average();
+
+    if (optionalResult.isEmpty()) {
+      return 0;
+    }
+    return optionalResult.getAsDouble();
   }
 
   int countUniqueWords(String[] words) {
