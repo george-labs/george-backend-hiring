@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class WordsCountExecutor {
 
-  private static final String STOP_WORDS_FILE_NAME = "stopwords.txt";
+  public static final String STOP_WORDS_FILE_NAME = "stopwords.txt";
 
   private final InputStream userInput;
 
@@ -19,12 +19,15 @@ public class WordsCountExecutor {
 
   private final String[] commandLineInput;
 
-  public WordsCountExecutor(InputStream userInput, PrintStream outputStream, String[] commandLineInput) {
+  private final String stopWordsFileName;
+
+  public WordsCountExecutor(InputStream userInput, PrintStream outputStream, String[] commandLineInput, String stopWordsFileName) {
 
     checkNullabilityOfDependencies(userInput, outputStream, commandLineInput);
     this.userInput = userInput;
     this.userOutput = outputStream;
     this.commandLineInput = commandLineInput;
+    this.stopWordsFileName = stopWordsFileName;
   }
 
   private void checkNullabilityOfDependencies(InputStream userInput, PrintStream outputStream, String[] commandLineInput) {
@@ -71,7 +74,7 @@ public class WordsCountExecutor {
 
   private Set<String> readIgnoreWordsFile(InputReader reader) throws IOException {
 
-    var initialFile = new File(STOP_WORDS_FILE_NAME);
+    var initialFile = new File(stopWordsFileName);
     var targetStream = new FileInputStream(initialFile);
     return reader.readFileAsWords(targetStream);
   }

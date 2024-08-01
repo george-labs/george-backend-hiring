@@ -1,6 +1,7 @@
 package com.george.interview;
 
 import com.george.interview.executor.WordsCountExecutor;
+import static com.george.interview.executor.WordsCountExecutor.STOP_WORDS_FILE_NAME;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.Assertions;
@@ -21,7 +22,7 @@ class WordsExecutorIntegrationIteration3Test {
   void iteration3IntegrationTest() {
 
     var wordsFile = getClass().getClassLoader().getResourceAsStream("integration-iteration-3");
-    var executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {"mytext.txt"});
+    var executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {"mytext.txt"}, STOP_WORDS_FILE_NAME);
 
     executor.execute();
     Assertions.assertEquals("Number of words: 4, unique: 4", outputStreamCaptor.toString());
@@ -31,7 +32,8 @@ class WordsExecutorIntegrationIteration3Test {
   void iteration3NotExistingFileIsProvided() {
 
     var wordsFile = getClass().getClassLoader().getResourceAsStream("integration-iteration-3-no-existing-file");
-    var executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {"not-existing-file"});
+    var executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {"not-existing-file"},
+      STOP_WORDS_FILE_NAME);
     Assertions.assertDoesNotThrow(executor::execute);
     Assertions.assertTrue(outputStreamCaptor.toString().isBlank());
   }

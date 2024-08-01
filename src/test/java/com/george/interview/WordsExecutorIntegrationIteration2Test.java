@@ -1,6 +1,7 @@
 package com.george.interview;
 
 import com.george.interview.executor.WordsCountExecutor;
+import static com.george.interview.executor.WordsCountExecutor.STOP_WORDS_FILE_NAME;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.Assertions;
@@ -18,7 +19,7 @@ class WordsExecutorIntegrationIteration2Test {
 
     outputStreamCaptor = new ByteArrayOutputStream();
     var wordsFile = getClass().getClassLoader().getResourceAsStream("integration-iteration-2");
-    executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {});
+    executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {}, STOP_WORDS_FILE_NAME);
   }
 
   @Test
