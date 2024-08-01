@@ -24,7 +24,7 @@ public class WordsCounter {
     for (String word : ignoredWords) {
       temporaryText = temporaryText.replaceAll(word, "");
     }
-    var splitText = temporaryText.split("[^a-zA-Z-]+");
+    var splitText = temporaryText.split("[^a-zA-Z]+");
     return new CountResult(splitText.length, countUniqueWords(splitText));
   }
 

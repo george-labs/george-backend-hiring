@@ -51,7 +51,7 @@ class WordsCounterTest {
     void countWordsWithSpecificDelimitersString() {
 
       var result = counter.countWords("Hello4World\nHow\tAre-you");
-      Assertions.assertEquals(4, result.wordCount());
+      Assertions.assertEquals(5, result.wordCount());
     }
   }
 
