@@ -20,6 +20,10 @@ public class WordsCounter {
     if (text == null || text.isBlank()) {
       return 0;
     }
-    return text.split("\\P{Alpha}+").length;
+    var temporaryText = text;
+    for (String word : ignoredWords) {
+      temporaryText = temporaryText.replaceAll(word, "");
+    }
+    return temporaryText.split("\\P{Alpha}+").length;
   }
 }
