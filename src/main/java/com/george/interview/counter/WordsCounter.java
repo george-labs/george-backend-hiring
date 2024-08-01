@@ -2,7 +2,6 @@ package com.george.interview.counter;
 
 import com.george.interview.counter.model.CountResult;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,7 +27,7 @@ public class WordsCounter {
     for (String word : ignoredWords) {
       temporaryText = temporaryText.replaceAll(word, "");
     }
-    var splitText = temporaryText.split("[^a-zA-Z]+");
+    var splitText = temporaryText.split("[^a-zA-Z-]+");
     return new CountResult(splitText.length, countUniqueWords(splitText));
   }
 
