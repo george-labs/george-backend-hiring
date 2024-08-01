@@ -49,4 +49,10 @@ class WordsCounterTest {
     var wordsCount = counter.countWords("Hello4World\nHow\tAre-you");
     Assertions.assertEquals(5, wordsCount);
   }
+
+  @Test
+  void provideNullSetExpectIllegalArgumentException() {
+
+    Assertions.assertThrows(IllegalArgumentException.class, () -> new WordsCounter(null));
+  }
 }
