@@ -7,14 +7,7 @@ import java.io.InputStreamReader;
 
 public class InputReader {
 
-  private final InputStream input;
-
-  public InputReader(InputStream input) {
-
-    this.input = input;
-  }
-
-  public String readLine() throws IOException {
+  public String readLine(InputStream input) throws IOException {
 
     BufferedReader buffer = new BufferedReader(new InputStreamReader(input));
     return buffer.readLine();

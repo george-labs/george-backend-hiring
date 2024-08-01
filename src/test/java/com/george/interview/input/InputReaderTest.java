@@ -11,13 +11,13 @@ class InputReaderTest {
 
   @BeforeEach
   void setUp() {
-    var inputStream = getClass().getClassLoader().getResourceAsStream("input-iteration1.txt");
-    reader = new InputReader(inputStream);
+    reader = new InputReader();
   }
 
   @Test
   void readDataFromISProperly() throws IOException {
 
-    Assertions.assertEquals("Hello world", reader.readLine());
+    var inputStream = getClass().getClassLoader().getResourceAsStream("input-iteration1.txt");
+    Assertions.assertEquals("Hello world", reader.readLine(inputStream));
   }
 }
