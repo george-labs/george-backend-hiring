@@ -2,25 +2,32 @@ package com.george.interview.executor;
 
 import com.george.interview.counter.WordsCounter;
 import com.george.interview.input.InputReader;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.Set;
 
 public class WordsCountExecutor {
 
+  private static final String STOP_WORDS_FILE_NAME = "stopwords.txt";
+
   private final InputStream userInput;
 
   private final PrintStream userOutput;
 
-  private static final String STOP_WORDS_FILE_NAME = "stopwords.txt";
+  private final String[] commandLineInput;
 
-  public WordsCountExecutor(InputStream userInput, PrintStream out, String[] strings) {
+  public WordsCountExecutor(InputStream userInput, PrintStream out, String[] commandLineInput) {
 
     this.userInput = userInput;
     this.userOutput = out;
+    this.commandLineInput = commandLineInput;
   }
 
   public void execute() {
@@ -39,12 +46,35 @@ public class WordsCountExecutor {
 
     WordsCounter counter = new WordsCounter(ignoredWords);
 
-    userOutput.print("Enter text: ");
-
-    var message = reader.readLine(userInput);
+    var message = extractMessage(reader);
     var wordCount = counter.countWords(message);
 
     userOutput.format("Number of words: %d", wordCount);
+  }
+
+  private String extractMessage(InputReader reader) throws IOException {
+
+    if (commandLineInput.length == 0) {
+      userOutput.print("Enter text: ");
+      return reader.readLine(userInput);
+    } else {
+      var fileNameToRead = commandLineInput[0];
+      return readProvidedFile(fileNameToRead);
+    }
+  }
+
+  private String readProvidedFile(String fileNameToRead) throws IOException {
+
+    StringBuilder content = new StringBuilder();
+    try (var fis = new FileInputStream(fileNameToRead);
+         var bis = new BufferedReader(new InputStreamReader(fis))) {
+      String line = bis.readLine();
+      while (line != null) {
+        content.append(line).append(System.lineSeparator());
+        line = bis.readLine();
+      }
+    }
+    return content.toString();
   }
 
   private Set<String> readIgnoreWordsFile(InputReader reader) throws IOException {

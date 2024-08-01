@@ -18,7 +18,7 @@ class WordsExecutorIntegrationIteration2Test {
 
     outputStreamCaptor = new ByteArrayOutputStream();
     var wordsFile = getClass().getClassLoader().getResourceAsStream("integration-iteration-2");
-    executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {"mytext.txt"});
+    executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {});
   }
 
   @Test
