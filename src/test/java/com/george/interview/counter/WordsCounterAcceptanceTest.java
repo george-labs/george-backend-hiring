@@ -20,8 +20,8 @@ class WordsCounterAcceptanceTest {
   @Test
   void ignoreAllWordsTest() {
 
-    var wordsCount = counter.countWords("test hello");
-    Assertions.assertEquals(0, wordsCount);
+    var result = counter.countWords("test hello");
+    Assertions.assertEquals(0, result.wordCount());
   }
 
   private Set<String> createExcludedWords() {

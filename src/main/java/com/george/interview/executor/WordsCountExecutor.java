@@ -56,7 +56,7 @@ public class WordsCountExecutor {
     var message = extractMessage(reader);
     var wordCount = counter.countWords(message);
 
-    userOutput.format("Number of words: %d", wordCount);
+    userOutput.format("Number of words: %d", wordCount.wordCount());
   }
 
   private String extractMessage(InputReader reader) throws IOException {

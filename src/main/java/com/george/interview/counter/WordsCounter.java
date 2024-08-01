@@ -1,5 +1,6 @@
 package com.george.interview.counter;
 
+import com.george.interview.counter.model.CountResult;
 import java.util.Set;
 
 public class WordsCounter {
@@ -14,15 +15,16 @@ public class WordsCounter {
     this.ignoredWords = ignoredWords;
   }
 
-  public int countWords(String text) {
+  public CountResult countWords(String text) {
 
     if (text == null || text.isBlank()) {
-      return 0;
+      return new CountResult(0, 0);
     }
     var temporaryText = text;
     for (String word : ignoredWords) {
       temporaryText = temporaryText.replaceAll(word, "");
     }
-    return temporaryText.split("\\P{Alpha}+").length;
+    var splitText = temporaryText.split("\\P{Alpha}+");
+    return new CountResult(splitText.length, 0);
   }
 }
