@@ -25,6 +25,6 @@ class WordsExecutorIntegrationIteration4Test {
     var executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {}, STOP_WORDS_FILE_NAME);
 
     executor.execute();
-    Assertions.assertEquals("Enter text: Number of words: 7, unique: 6", outputStreamCaptor.toString());
+    Assertions.assertEquals("Enter text: Number of words: 7, unique: 6; average word length: 6.43 characters", outputStreamCaptor.toString());
   }
 }
