@@ -1,6 +1,7 @@
 package com.george.interview.input;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,10 +29,23 @@ public class InputReader {
   public Set<String> readFileAsWords(InputStream input) throws IOException {
 
     checkNullityOfInput(input);
-    try (
-      var is = new InputStreamReader(input);
-      var buffer = new BufferedReader((is))) {
+    try (var is = new InputStreamReader(input);
+         var buffer = new BufferedReader((is))) {
       return buffer.lines().collect(Collectors.toSet());
     }
+  }
+
+  public String readWholeFile(String fileNameToRead) throws IOException {
+
+    StringBuilder content = new StringBuilder();
+    try (var fis = new FileInputStream(fileNameToRead);
+         var bis = new BufferedReader(new InputStreamReader(fis))) {
+      String line = bis.readLine();
+      while (line != null) {
+        content.append(line).append(System.lineSeparator());
+        line = bis.readLine();
+      }
+    }
+    return content.toString();
   }
 }

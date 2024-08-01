@@ -9,22 +9,30 @@ import org.junit.jupiter.api.Test;
 
 class WordsExecutorIntegrationIteration3Test {
 
-  private WordsCountExecutor executor;
-
   private ByteArrayOutputStream outputStreamCaptor;
 
   @BeforeEach
   void setUp() {
 
     outputStreamCaptor = new ByteArrayOutputStream();
-    var wordsFile = getClass().getClassLoader().getResourceAsStream("integration-iteration-3");
-    executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[]{"mytext.txt"});
   }
 
   @Test
   void iteration3IntegrationTest() {
 
+    var wordsFile = getClass().getClassLoader().getResourceAsStream("integration-iteration-3");
+    var executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {"mytext.txt"});
+
     executor.execute();
     Assertions.assertEquals("Number of words: 4", outputStreamCaptor.toString());
+  }
+
+  @Test
+  void iteration3NotExistingFileIsProvided() {
+
+    var wordsFile = getClass().getClassLoader().getResourceAsStream("integration-iteration-3-no-existing-file");
+    var executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {"not-existing-file"});
+    Assertions.assertDoesNotThrow(executor::execute);
+    Assertions.assertTrue(outputStreamCaptor.toString().isBlank());
   }
 }

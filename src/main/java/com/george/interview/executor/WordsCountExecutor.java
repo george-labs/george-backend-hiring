@@ -58,23 +58,8 @@ public class WordsCountExecutor {
       userOutput.print("Enter text: ");
       return reader.readLine(userInput);
     } else {
-      var fileNameToRead = commandLineInput[0];
-      return readProvidedFile(fileNameToRead);
+      return reader.readWholeFile(commandLineInput[0]);
     }
-  }
-
-  private String readProvidedFile(String fileNameToRead) throws IOException {
-
-    StringBuilder content = new StringBuilder();
-    try (var fis = new FileInputStream(fileNameToRead);
-         var bis = new BufferedReader(new InputStreamReader(fis))) {
-      String line = bis.readLine();
-      while (line != null) {
-        content.append(line).append(System.lineSeparator());
-        line = bis.readLine();
-      }
-    }
-    return content.toString();
   }
 
   private Set<String> readIgnoreWordsFile(InputReader reader) throws IOException {
