@@ -67,7 +67,20 @@ class WordsCounterTest {
     @Test
     void countAllUniqueWords() {
 
-      Assertions.assertEquals(0, counter.countUniqueWords(new String[] {"a", "hello", "test", "test 2"}));
+      Assertions.assertEquals(4, counter.countUniqueWords(new String[] {"a", "hello", "test", "test2"}));
+    }
+
+    @Test
+    void allWordsAreTheSame() {
+
+      Assertions.assertEquals(1, counter.countUniqueWords(new String[] {"a", "a", "a"}));
+    }
+
+    @Test
+    void uniqueAndNotUniqueWords() {
+
+      Assertions.assertEquals(4, counter.countUniqueWords(new String[] {"a", "a", "a", "test",
+        "hello", "friend", "test"}));
     }
   }
 

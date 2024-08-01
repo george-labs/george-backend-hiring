@@ -18,7 +18,7 @@ class WordsExecutorIntegrationIteration4Test {
   }
 
   @Test
-  void iteration3IntegrationTest() {
+  void iteration4IntegrationTest() {
 
     var wordsFile = getClass().getClassLoader().getResourceAsStream("integration-iteration-4");
     var executor = new WordsCountExecutor(wordsFile, new PrintStream(outputStreamCaptor), new String[] {});
