@@ -51,7 +51,15 @@ class WordsCounterTest {
     void countWordsWithSpecificDelimitersString() {
 
       var result = counter.countWords("Hello4World\nHow\tAre-you");
-      Assertions.assertEquals(5, result.wordCount());
+      Assertions.assertEquals(4, result.wordCount());
+    }
+
+    @Test
+    void countWordsOnlyHyphensString() {
+
+      var result = counter.countWords("--- ---");
+      Assertions.assertEquals(2, result.wordCount());
+      Assertions.assertEquals(1, result.uniqueWords());
     }
   }
 
