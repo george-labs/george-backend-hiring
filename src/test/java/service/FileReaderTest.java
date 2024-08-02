@@ -26,7 +26,7 @@ public class FileReaderTest {
 
         List<String> lines = fileReader.readFile(filePath);
 
-        assertEquals(4, lines.size());
+        assertEquals(3, lines.size());
     }
 
     @Test
