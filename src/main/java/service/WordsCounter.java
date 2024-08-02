@@ -1,7 +1,11 @@
 package service;
 
+import dto.WordsNumbersDto;
+
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WordsCounter {
@@ -9,13 +13,20 @@ public class WordsCounter {
     public WordsCounter() {
     }
 
-    public long countWords(String text) {
+    public WordsNumbersDto countWords(String text) {
         return countWords(text, List.of());
     }
 
-    public long countWords(String text, List<String> stoppedWords) {
+    public WordsNumbersDto countWords(String text, List<String> stoppedWords) {
         List<String> words = prepareWords(text, stoppedWords);
-        return words.stream().count();
+
+        WordsNumbersDto wordsNumbersDto = new WordsNumbersDto();
+        wordsNumbersDto.setNumberOfWords(words.size());
+
+        Set<String> uniqueWords = new HashSet<>(words);
+        wordsNumbersDto.setUniqueNumberOfWords(uniqueWords.size());
+
+        return wordsNumbersDto;
     }
 
     private List<String> prepareWords(String text, List<String> stoppedWords) {

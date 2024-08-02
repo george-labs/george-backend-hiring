@@ -12,4 +12,5 @@
 - the fileName for reading the words by default will be placed under the resources
 
 ## Iteration 4
-- words is valid only if contains only letters
+- words are valid only if contains only letters
+- we will check the case sensitivity for unique rods for example: "HERE" and "here" are not the same

@@ -1,5 +1,6 @@
 package service;
 
+import dto.WordsNumbersDto;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -13,9 +14,9 @@ class WordsCounterTest {
         WordsCounter wordsCounter = new WordsCounter();
         String text = "";
 
-        long numberOfWords = wordsCounter.countWords(text);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text);
 
-        assertEquals(0, numberOfWords);
+        assertEquals(0, numberOfWords.getNumberOfWords());
     }
 
     @Test
@@ -23,9 +24,9 @@ class WordsCounterTest {
         WordsCounter wordsCounter = new WordsCounter();
         String text = null;
 
-        long numberOfWords = wordsCounter.countWords(text);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text);
 
-        assertEquals(0, numberOfWords);
+        assertEquals(0, numberOfWords.getNumberOfWords());
     }
 
     @Test
@@ -33,18 +34,18 @@ class WordsCounterTest {
         WordsCounter wordsCounter = new WordsCounter();
         String text = "Mary had a little lamb";
 
-        long numberOfWords = wordsCounter.countWords(text);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text);
 
-        assertEquals(5, numberOfWords);
+        assertEquals(5, numberOfWords.getNumberOfWords());
     }
     @Test
     public void givenStringSeparatedByMultipleSpacesWordsCountShouldReturnCorrectNumber() {
         WordsCounter wordsCounter = new WordsCounter();
         String text = "Mary had a          little         lamb";
 
-        long numberOfWords = wordsCounter.countWords(text);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text);
 
-        assertEquals(5, numberOfWords);
+        assertEquals(5, numberOfWords.getNumberOfWords());
     }
 
 
@@ -53,9 +54,9 @@ class WordsCounterTest {
         WordsCounter wordsCounter = new WordsCounter();
         String text = "Mary had a          little\n         lamb";
 
-        long numberOfWords = wordsCounter.countWords(text);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text);
 
-        assertEquals(5, numberOfWords);
+        assertEquals(5, numberOfWords.getNumberOfWords());
     }
 
     @Test
@@ -63,9 +64,9 @@ class WordsCounterTest {
         WordsCounter wordsCounter = new WordsCounter();
         String text = "M4ry had a l1ttle lamb";
 
-        long numberOfWords = wordsCounter.countWords(text);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text);
 
-        assertEquals(3, numberOfWords);
+        assertEquals(3, numberOfWords.getNumberOfWords());
     }
 
     @Test
@@ -73,9 +74,9 @@ class WordsCounterTest {
         WordsCounter wordsCounter = new WordsCounter();
         String text = "Mary' had a l1ttle lamb";
 
-        long numberOfWords = wordsCounter.countWords(text);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text);
 
-        assertEquals(3, numberOfWords);
+        assertEquals(3, numberOfWords.getNumberOfWords());
     }
 
     @Test
@@ -84,9 +85,9 @@ class WordsCounterTest {
         String text = "Here I am";
         List<String> stoppedWords = List.of();
 
-        long numberOfWords = wordsCounter.countWords(text, stoppedWords);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
 
-        assertEquals(3, numberOfWords);
+        assertEquals(3, numberOfWords.getNumberOfWords());
     }
 
     @Test
@@ -95,9 +96,9 @@ class WordsCounterTest {
         String text = "Here I am";
         List<String> stoppedWords = null;
 
-        long numberOfWords = wordsCounter.countWords(text, stoppedWords);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
 
-        assertEquals(3, numberOfWords);
+        assertEquals(3, numberOfWords.getNumberOfWords());
     }
 
     @Test
@@ -106,9 +107,9 @@ class WordsCounterTest {
         String text = "Here I am";
         List<String> stoppedWords = List.of("Here");
 
-        long numberOfWords = wordsCounter.countWords(text, stoppedWords);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
 
-        assertEquals(2, numberOfWords);
+        assertEquals(2, numberOfWords.getNumberOfWords());
     }
 
     @Test
@@ -117,9 +118,9 @@ class WordsCounterTest {
         String text = "Here I am";
         List<String> stoppedWords = List.of("Here", "I", "am");
 
-        long numberOfWords = wordsCounter.countWords(text, stoppedWords);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
 
-        assertEquals(0, numberOfWords);
+        assertEquals(0, numberOfWords.getNumberOfWords());
     }
 
     @Test
@@ -128,9 +129,9 @@ class WordsCounterTest {
         String text = "Here I am";
         List<String> stoppedWords = List.of("Dog", "Cat", "Lion");
 
-        long numberOfWords = wordsCounter.countWords(text, stoppedWords);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
 
-        assertEquals(3, numberOfWords);
+        assertEquals(3, numberOfWords.getNumberOfWords());
     }
 
     @Test
@@ -139,9 +140,9 @@ class WordsCounterTest {
         String text = "Mary' had a l1ttle lamb";
         List<String> stoppedWords = List.of("Dog", "1421412", "L%on");
 
-        long numberOfWords = wordsCounter.countWords(text, stoppedWords);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
 
-        assertEquals(3, numberOfWords);
+        assertEquals(3, numberOfWords.getNumberOfWords());
     }
 
     @Test
@@ -150,9 +151,9 @@ class WordsCounterTest {
         String text = "Mary' had a l1ttle lamb";
         List<String> stoppedWords = List.of("had", "1421412", "L%on");
 
-        long numberOfWords = wordsCounter.countWords(text, stoppedWords);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
 
-        assertEquals(2, numberOfWords);
+        assertEquals(2, numberOfWords.getNumberOfWords());
     }
 
     @Test
@@ -161,8 +162,74 @@ class WordsCounterTest {
         String text = "Here I am";
         List<String> stoppedWords = List.of("HERE", "Cat", "Lion");
 
-        long numberOfWords = wordsCounter.countWords(text, stoppedWords);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
 
-        assertEquals(2, numberOfWords);
+        assertEquals(2, numberOfWords.getNumberOfWords());
+    }
+
+    @Test
+    public void giveTextWithoutDuplicationThenWordsCountShouldReturnCorrectUniqueWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = "Here I am";
+        List<String> stoppedWords = List.of();
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(3, numberOfWords.getUniqueNumberOfWords());
+    }
+
+    @Test
+    public void giveTextWithDuplicationThenWordsCountShouldReturnCorrectUniqueWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = "Here I am Here";
+        List<String> stoppedWords = List.of();
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(3, numberOfWords.getUniqueNumberOfWords());
+    }
+
+    @Test
+    public void giveEmptyTextThenWordsCountShouldReturnZeroUniqueWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = "";
+        List<String> stoppedWords = List.of();
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(0, numberOfWords.getUniqueNumberOfWords());
+    }
+
+    @Test
+    public void giveTextWithDuplicationAndStoppedWordsThenWordsCountShouldReturnCorrectUniqueWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = "Here I am Here";
+        List<String> stoppedWords = List.of("Here");
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(2, numberOfWords.getUniqueNumberOfWords());
+    }
+
+    @Test
+    public void giveTextWithouthDuplicationAndStoppedWordsThenWordsCountShouldReturnCorrectUniqueWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = "Here I am";
+        List<String> stoppedWords = List.of("Here");
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(2, numberOfWords.getUniqueNumberOfWords());
+    }
+
+    @Test
+    public void giveTextWithCaseSensitiveWordsThenWordsCountShouldReturnCorrectUniqueWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = "Here I am HERE";
+        List<String> stoppedWords = List.of("");
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(4, numberOfWords.getUniqueNumberOfWords());
     }
 }

@@ -1,5 +1,7 @@
 package service;
 
+import dto.WordsNumbersDto;
+
 import java.util.List;
 
 public class Application {
@@ -37,8 +39,8 @@ public class Application {
     }
 
     private void countTheWords(String input, List<String> stoppedWords) {
-        long numberOfWords = wordsCounter.countWords(input, stoppedWords);
-        String outputText = String.format("Number of words: %d", numberOfWords);
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(input, stoppedWords);
+        String outputText = String.format("Number of words: %d, unique: %d", numberOfWords.getNumberOfWords(), numberOfWords.getUniqueNumberOfWords());
         System.out.println(outputText);
     }
 
