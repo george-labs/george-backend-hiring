@@ -10,3 +10,6 @@
 - the words will be case in sensitive, so for example the "am" and the "AM" will represent the same word
 - the program will read by default stoppedWord file from the resources, so user will not put the path for that file manually
 - the fileName for reading the words by default will be placed under the resources
+
+## Iteration 4
+- words is valid only if contains only letters

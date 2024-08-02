@@ -2,6 +2,7 @@ package service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WordsCounter {
 
@@ -13,8 +14,13 @@ public class WordsCounter {
     }
 
     public long countWords(String text, List<String> stoppedWords) {
+        List<String> words = prepareWords(text, stoppedWords);
+        return words.stream().count();
+    }
+
+    private List<String> prepareWords(String text, List<String> stoppedWords) {
         if (text == null || text.isBlank()) {
-            return 0;
+            return List.of();
         }
         String[] words = text.split("\\s+");
 
@@ -22,7 +28,7 @@ public class WordsCounter {
 
         return Arrays.stream(words)
                 .filter(word -> isAWord(word) && !isStoppedWord(convertedWordsToLowerCase, word))
-                .count();
+                .toList();
     }
 
     private List<String> convertStoppedWordsToLowerCase(List<String> stoppedWords) {
