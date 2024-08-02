@@ -15,14 +15,40 @@ public class Application {
     }
 
     public void run() {
-        String stoppedWordsFilePath = "src/main/resources/stoppedWords.txt";
-        List<String> stoppedWords = fileReader.readFile(stoppedWordsFilePath);
+        List<String> stoppedWords = readFile("src/main/resources/stoppedWords.txt");
 
         textInput.askForInput();
         String input = textInput.read();
 
+        countTheWords(input, stoppedWords);
+    }
+
+    public void run(String fileName) {
+        List<String> stoppedWords = readFile("src/main/resources/stoppedWords.txt");
+
+        List<String> wordsFileLines = readFile("src/main/resources/" + fileName);
+        String input = convertListToString(wordsFileLines);
+
+        countTheWords(input, stoppedWords);
+    }
+
+    private List<String> readFile(String filePath) {
+        return fileReader.readFile(filePath);
+    }
+
+    private void countTheWords(String input, List<String> stoppedWords) {
         long numberOfWords = wordsCounter.countWords(input, stoppedWords);
         String outputText = String.format("Number of words: %d", numberOfWords);
         System.out.println(outputText);
     }
+
+    private String convertListToString(List<String> wordsFileLines) {
+        StringBuilder text = new StringBuilder();
+        for (String wordsFileLine : wordsFileLines) {
+            text.append(wordsFileLine);
+            text.append(" ");
+        }
+        return text.toString();
+    }
+
 }
