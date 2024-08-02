@@ -2,10 +2,7 @@ package service;
 
 import dto.WordsNumbersDto;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class WordsCounter {
 
@@ -27,7 +24,16 @@ public class WordsCounter {
         Set<String> uniqueWords = new HashSet<>(words);
         wordsNumbersDto.setUniqueNumberOfWords(uniqueWords.size());
 
+        wordsNumbersDto.setAverageLength(countAverageNumberOfLength(words));
+
         return wordsNumbersDto;
+    }
+
+    private double countAverageNumberOfLength(List<String> words) {
+        return words.stream()
+                .mapToDouble(String::length)
+                .average()
+                .orElse(0);
     }
 
     private List<String> prepareWords(String text, List<String> stoppedWords) {

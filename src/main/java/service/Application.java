@@ -40,7 +40,10 @@ public class Application {
 
     private void countTheWords(String input, List<String> stoppedWords) {
         WordsNumbersDto numberOfWords = wordsCounter.countWords(input, stoppedWords);
-        String outputText = String.format("Number of words: %d, unique: %d", numberOfWords.getNumberOfWords(), numberOfWords.getUniqueNumberOfWords());
+        String outputText = String.format("Number of words: %d, unique: %d; average word length: %,.4f",
+                numberOfWords.getNumberOfWords(),
+                numberOfWords.getUniqueNumberOfWords(),
+                numberOfWords.getAverageLength());
         System.out.println(outputText);
     }
 

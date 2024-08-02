@@ -276,4 +276,70 @@ class WordsCounterTest {
 
         assertEquals(8, numberOfWords.getUniqueNumberOfWords());
     }
+
+    @Test
+    public void giveTextWithOneWordCountShouldReturnCorrectAverageWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = "Here";
+        List<String> stoppedWords = List.of("");
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(4.0000, numberOfWords.getAverageLength());
+    }
+
+    @Test
+    public void giveTextWithSameLengthOfWordsCountShouldReturnCorrectAverageWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = "Here here here";
+        List<String> stoppedWords = List.of("");
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(4.0000, numberOfWords.getAverageLength());
+    }
+
+    @Test
+    public void giveTextWithDifferentLengthOfWordsCountShouldReturnCorrectAverageWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = "Here I am";
+        List<String> stoppedWords = List.of("");
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(2.3333, numberOfWords.getAverageLength(), 0.0001);
+    }
+
+    @Test
+    public void giveEmptyStringWordsCountShouldReturnCorrectAverageWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = "";
+        List<String> stoppedWords = List.of("");
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(0, numberOfWords.getAverageLength(), 0.0001);
+    }
+
+    @Test
+    public void giveNullAsStringWordsCountShouldReturnCorrectAverageWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = null;
+        List<String> stoppedWords = List.of("");
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(0, numberOfWords.getAverageLength(), 0.0001);
+    }
+
+    @Test
+    public void giveTextWithOneWordCountAndStoppedWprdsShouldReturnCorrectAverageWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = "Here";
+        List<String> stoppedWords = List.of("Here");
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(0, numberOfWords.getAverageLength());
+    }
 }

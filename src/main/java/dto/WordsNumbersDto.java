@@ -4,6 +4,7 @@ public class WordsNumbersDto {
 
     private long numberOfWords;
     private long uniqueNumberOfWords;
+    private double averageLength;
 
     public void setNumberOfWords(long numberOfWords) {
         this.numberOfWords = numberOfWords;
@@ -19,5 +20,13 @@ public class WordsNumbersDto {
 
     public long getUniqueNumberOfWords() {
         return uniqueNumberOfWords;
+    }
+
+    public void setAverageLength(double averageLength) {
+        this.averageLength = averageLength;
+    }
+
+    public double getAverageLength() {
+        return averageLength;
     }
 }
