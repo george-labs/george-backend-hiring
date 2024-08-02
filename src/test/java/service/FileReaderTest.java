@@ -12,7 +12,7 @@ public class FileReaderTest {
     @Test
     public void givenNotExistingFileThenFileReaderShouldReturnEmptyList() {
         FileReader fileReader = new FileReader();
-        String filePath = "src/main/resources/dsadsf.txt";
+        String filePath = "src/test/resources/dsadsf.txt";
 
         List<String> lines = fileReader.readFile(filePath);
 
@@ -22,7 +22,7 @@ public class FileReaderTest {
     @Test
     public void givenExistingFileThenFileReaderShouldReturnListOfLines() {
         FileReader fileReader = new FileReader();
-        String filePath = "src/main/resources/stoppedWords.txt";
+        String filePath = "src/test/resources/stoppedWords.txt";
 
         List<String> lines = fileReader.readFile(filePath);
 
@@ -32,7 +32,7 @@ public class FileReaderTest {
     @Test
     public void givenExistingEmptyFileThenFileReaderShouldReturnEmptyList() {
         FileReader fileReader = new FileReader();
-        String filePath = "src/main/resources/emptyFile.txt";
+        String filePath = "src/test/resources/emptyFile.txt";
 
         List<String> lines = fileReader.readFile(filePath);
 
