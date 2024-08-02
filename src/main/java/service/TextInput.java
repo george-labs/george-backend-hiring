@@ -10,7 +10,7 @@ public class TextInput {
     }
 
     public void askForInput() {
-        System.out.println("Enter text:");
+        System.out.print("Enter text: ");
         this.scanner = new Scanner(System.in);
     }
 

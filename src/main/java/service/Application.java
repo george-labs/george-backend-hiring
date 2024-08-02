@@ -15,7 +15,7 @@ public class Application {
         String input = textInput.read();
 
         long numberOfWords = wordsCounter.countWords(input);
-        String outputText = String.format("Number of words : %d", numberOfWords);
+        String outputText = String.format("Number of words: %d", numberOfWords);
         System.out.println(outputText);
     }
 }
