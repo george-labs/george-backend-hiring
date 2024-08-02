@@ -232,4 +232,48 @@ class WordsCounterTest {
 
         assertEquals(4, numberOfWords.getUniqueNumberOfWords());
     }
+
+    @Test
+    public void giveTextWithHypeThenWordsCountShouldReturnCorrectUniqueWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = "Humpty-Dumpt I am HERE";
+        List<String> stoppedWords = List.of("");
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(4, numberOfWords.getUniqueNumberOfWords());
+    }
+
+    @Test
+    public void giveTextWithHypeThenWordsCountShouldReturnCorrectNumberOfWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = "Humpty-Dumpt I am HERE";
+        List<String> stoppedWords = List.of("");
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(4, numberOfWords.getUniqueNumberOfWords());
+    }
+
+    @Test
+    public void giveTextWithHypeAndOtherEndingCharacterWordsCountShouldReturnCorrectNumberWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        List<String> stoppedWords = List.of("");
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(10, numberOfWords.getNumberOfWords());
+    }
+
+    @Test
+    public void giveTextWithHypeAndOtherEndingCharacterWordsCountShouldReturnCorrectUniqueWords() {
+        WordsCounter wordsCounter = new WordsCounter();
+        String text = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        List<String> stoppedWords = List.of("");
+
+        WordsNumbersDto numberOfWords = wordsCounter.countWords(text, stoppedWords);
+
+        assertEquals(8, numberOfWords.getUniqueNumberOfWords());
+    }
 }

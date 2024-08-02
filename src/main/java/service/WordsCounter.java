@@ -6,9 +6,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class WordsCounter {
+
+    private final String ENGLISH_WORD_REGEXP = "^[A-Za-z]+(?:[-'][A-Za-z]+)*[.?!]?$";
 
     public WordsCounter() {
     }
@@ -53,7 +54,7 @@ public class WordsCounter {
     }
 
     private boolean isAWord(String word) {
-        return word.matches("[a-zA-Z]+");
+        return word.matches(ENGLISH_WORD_REGEXP);
     }
 
     private boolean isStoppedWord(List<String> stoppedWords, String word) {
