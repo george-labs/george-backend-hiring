@@ -4,13 +4,18 @@ public class Application {
 
     private final TextInput textInput;
     private final WordsCounter wordsCounter;
+    private final FileReader fileReader;
 
-    public Application(TextInput textInput, WordsCounter wordsCounter) {
+    public Application(TextInput textInput, WordsCounter wordsCounter, FileReader fileReader) {
         this.textInput = textInput;
         this.wordsCounter = wordsCounter;
+        this.fileReader = fileReader;
     }
 
     public void run() {
+        String stoppedWordsFilePath = "src/main/resources/stoppedWords.txt";
+        fileReader.readFile(stoppedWordsFilePath);
+
         textInput.askForInput();
         String input = textInput.read();
 
