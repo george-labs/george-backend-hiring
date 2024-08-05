@@ -1,15 +1,20 @@
 package wordcounter.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WordCountDto {
 
     private long count;
     private long unique;
     private double averageLength;
+    private List<String> countedWords = new ArrayList<String>();
 
-    public WordCountDto(long count, long unique, double averageLength) {
+    public WordCountDto(long count, long unique, double averageLength, List<String> countedWords) {
         this.count = count;
         this.unique = unique;
         this.averageLength = averageLength;
+        this.countedWords = countedWords;
     }
 
     public long getCount() {
@@ -36,4 +41,11 @@ public class WordCountDto {
         this.averageLength = averageLength;
     }
 
+    public List<String> getCountedWords() {
+        return countedWords;
+    }
+
+    public void setCountedWords(List<String> countedWords) {
+        this.countedWords = countedWords;
+    }
 }

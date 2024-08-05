@@ -28,7 +28,7 @@ public class WordCounterService {
                 .average()
                 .orElse(0.0);
 
-        return new WordCountDto(count, uniqueWords, averageLength);
+        return new WordCountDto(count, uniqueWords, averageLength, validWords);
     }
 
     private List<String> splitTextForWords(String text) {

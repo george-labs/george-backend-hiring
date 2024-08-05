@@ -2,6 +2,7 @@ package wordcounter;
 
 import wordcounter.input.InputReader;
 import wordcounter.model.WordCountDto;
+import wordcounter.printer.ResultPrinter;
 import wordcounter.service.WordCounterService;
 
 public class WordCounterApplication {
