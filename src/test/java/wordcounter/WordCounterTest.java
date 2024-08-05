@@ -10,11 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WordCounterTest {
 
-    private final WordCounter wordCounter = new WordCounter();
+    private final StopWordsReader stopWordsReader = new StopWordsReader("stopwords.txt");
+    private final WordCounter wordCounter = new WordCounter(stopWordsReader);
 
     private static Stream<Arguments> provideTextAndExpectedWordCount() {
         return Stream.of(
                 Arguments.of("Mary had a little lamb", 5),
+                Arguments.of("Mary had a stopWord lamb", 4),
                 Arguments.of("Mary! had. a? little, lamb.", 5),
                 Arguments.of("Mary&^had a lit'tle la1mb", 1),
                 Arguments.of(" ", 0)

@@ -1,9 +1,9 @@
 package wordcounter;
 
 import org.junit.jupiter.api.Test;
-import java.io.ByteArrayInputStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static wordcounter.InputUtils.provideInput;
 
 
 public class TextReaderTest {
@@ -18,9 +18,5 @@ public class TextReaderTest {
         assertEquals(providedInput, resultInput);
     }
 
-    void provideInput(String data) {
-        ByteArrayInputStream testIn = new ByteArrayInputStream(data.getBytes());
-        System.setIn(testIn);
-    }
 
 }
