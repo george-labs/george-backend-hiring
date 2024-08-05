@@ -1,4 +1,4 @@
-package wordcounter;
+package wordcounter.input;
 
 import java.io.ByteArrayInputStream;
 

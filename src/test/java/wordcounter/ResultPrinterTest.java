@@ -22,8 +22,8 @@ public class ResultPrinterTest {
 
     @Test
     void printWordCount_printsProvidedNumberOfWords() {
-        WordCountDto wordCountDto = new WordCountDto(2, 1);
+        WordCountDto wordCountDto = new WordCountDto(2, 1, 1.1);
         resultPrinter.printWordCount(wordCountDto);
-        assertEquals("Number of words: 2, unique: 1", outputStreamCaptor.toString().trim());
+        assertEquals("Number of words: 2, unique: 1, average word length: 1.10 characters", outputStreamCaptor.toString().trim());
     }
 }

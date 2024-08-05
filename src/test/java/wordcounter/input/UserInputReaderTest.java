@@ -1,10 +1,9 @@
-package wordcounter;
+package wordcounter.input;
 
 import org.junit.jupiter.api.Test;
-import wordcounter.input.UserInputReader;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static wordcounter.InputUtils.provideInput;
+import static wordcounter.input.InputUtils.provideInput;
 
 
 public class UserInputReaderTest {

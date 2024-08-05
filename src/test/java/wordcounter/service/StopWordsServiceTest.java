@@ -1,7 +1,7 @@
-package wordcounter;
+package wordcounter.service;
 
 import org.junit.jupiter.api.Test;
-import wordcounter.service.StopWordsService;
+import wordcounter.FileReader;
 
 import java.util.Set;
 

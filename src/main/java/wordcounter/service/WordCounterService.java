@@ -22,8 +22,13 @@ public class WordCounterService {
 
         long count = validWords.size();
         long uniqueWords = validWords.stream().distinct().count();
+        double averageLength = validWords.stream()
+                .map(String::length)
+                .mapToDouble(Integer::doubleValue)
+                .average()
+                .orElse(0.0);
 
-        return new WordCountDto(count, uniqueWords);
+        return new WordCountDto(count, uniqueWords, averageLength);
     }
 
     private List<String> splitTextForWords(String text) {
