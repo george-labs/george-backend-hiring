@@ -1,21 +1,29 @@
-package wordcounter;
+package wordcounter.service;
+
+import wordcounter.model.WordCountDto;
 
 import java.util.List;
 import java.util.Set;
 
-public class WordCounter {
+public class WordCounterService {
 
     private final StopWordsService stopWordsService;
 
-    public WordCounter(StopWordsService stopWordsService) {
+    public WordCounterService(StopWordsService stopWordsService) {
         this.stopWordsService = stopWordsService;
     }
 
-    public long countWords(String text) {
+    public WordCountDto countWords(String text) {
         List<String> words = splitTextForWords(text);
-        return words.stream()
+
+        List<String> validWords = words.stream()
                 .filter(this::isValidWord)
-                .count();
+                .toList();
+
+        long count = validWords.size();
+        long uniqueWords = validWords.stream().distinct().count();
+
+        return new WordCountDto(count, uniqueWords);
     }
 
     private List<String> splitTextForWords(String text) {

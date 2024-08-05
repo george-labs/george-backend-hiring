@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static wordcounter.InputUtils.provideInput;
 
 
-public class userInputReaderTest {
+public class UserInputReaderTest {
 
     private final UserInputReader reader = new UserInputReader();
 

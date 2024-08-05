@@ -2,6 +2,7 @@ package wordcounter;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import wordcounter.model.WordCountDto;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -21,8 +22,8 @@ public class ResultPrinterTest {
 
     @Test
     void printWordCount_printsProvidedNumberOfWords() {
-        long wordCount = 8;
-        resultPrinter.printWordCount(wordCount);
-        assertEquals("Word count: " + wordCount , outputStreamCaptor.toString().trim());
+        WordCountDto wordCountDto = new WordCountDto(2, 1);
+        resultPrinter.printWordCount(wordCountDto);
+        assertEquals("Number of words: 2, unique: 1", outputStreamCaptor.toString().trim());
     }
 }

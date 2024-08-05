@@ -2,6 +2,8 @@ import wordcounter.*;
 import wordcounter.input.FileInputReader;
 import wordcounter.input.InputReader;
 import wordcounter.input.UserInputReader;
+import wordcounter.service.StopWordsService;
+import wordcounter.service.WordCounterService;
 
 public class JavaApplication {
 
@@ -10,7 +12,7 @@ public class JavaApplication {
         FileReader fileReader = new FileReader();
         InputReader inputReader;
         StopWordsService stopWordsService = new StopWordsService("stopwords.txt", fileReader);
-        WordCounter wordCounter = new WordCounter(stopWordsService);
+        WordCounterService wordCounterService = new WordCounterService(stopWordsService);
         ResultPrinter resultPrinter = new ResultPrinter();
 
         if (args.length == 1) {
@@ -20,7 +22,7 @@ public class JavaApplication {
             inputReader = new UserInputReader();
         }
 
-        WordCounterApplication wordCounterApplication = new WordCounterApplication(inputReader, wordCounter, resultPrinter);
+        WordCounterApplication wordCounterApplication = new WordCounterApplication(inputReader, wordCounterService, resultPrinter);
         wordCounterApplication.run();
 
     }

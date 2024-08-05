@@ -17,11 +17,12 @@ public class JavaApplicationTest {
 
     private static Stream<Arguments> provideTextAndExpectedWordCount() {
         return Stream.of(
-                Arguments.of("Mary had a little lamb", 5),
-                Arguments.of("Mary! had. a? little, lamb.", 5),
-                Arguments.of("Mary! had. a? stopWord, lamb.", 4),
-                Arguments.of("Mary&^had a little la1mb", 2),
-                Arguments.of(" ", 0)
+                Arguments.of("Mary had a little lamb", 5, 5),
+                Arguments.of("Mary lamb a little lamb", 5, 4),
+                Arguments.of("Mary! had. a? little, lamb.", 5, 5),
+                Arguments.of("Mary! had. a? stopWord, lamb.", 4, 4),
+                Arguments.of("Mary&^had a little la1mb", 2, 2),
+                Arguments.of(" ", 0, 0)
         );
     }
 
@@ -32,16 +33,16 @@ public class JavaApplicationTest {
 
     @ParameterizedTest
     @MethodSource("provideTextAndExpectedWordCount")
-    public void countWords_userInput_countsValidWords(String text, long expected) {
+    public void countWords_userInput_countsValidWords(String text, long expectedCount, int expectedUnique) {
         provideInput(text);
         JavaApplication.main(new String[]{});
-        assertEquals("Enter text: Word count: " + expected, outputStreamCaptor.toString().trim());
+        assertEquals(String.format("Enter text: Number of words: %d, unique: %d", expectedCount, expectedUnique), outputStreamCaptor.toString().trim());
     }
 
     @Test
     public void countWords_fileInput_countsValidWords() {
         JavaApplication.main(new String[]{"mytext.txt"});
-        assertEquals("Word count: 4", outputStreamCaptor.toString().trim());
+        assertEquals("Number of words: 4, unique: 4", outputStreamCaptor.toString().trim());
     }
 
 }

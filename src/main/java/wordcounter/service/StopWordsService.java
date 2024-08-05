@@ -1,4 +1,6 @@
-package wordcounter;
+package wordcounter.service;
+
+import wordcounter.FileReader;
 
 import java.util.List;
 import java.util.Set;
