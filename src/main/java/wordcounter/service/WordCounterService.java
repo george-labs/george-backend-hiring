@@ -33,7 +33,7 @@ public class WordCounterService {
 
     private boolean isValidWord(String word) {
         Set<String> stopWords = stopWordsService.getStopWords();
-        return word.matches("[a-zA-Z]+") && !stopWords.contains(word);
+        return word.matches("[a-zA-Z-]+") && !stopWords.contains(word);
     }
 
 }

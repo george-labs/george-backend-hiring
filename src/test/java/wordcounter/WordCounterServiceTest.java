@@ -18,6 +18,7 @@ public class WordCounterServiceTest {
 
     private static Stream<Arguments> provideTextAndExpectedWordCount() {
         return Stream.of(
+                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 10, 5),
                 Arguments.of("Mary lamb a little lamb", 5, 4),
                 Arguments.of("Mary had a stopWord lamb", 4, 4),
                 Arguments.of("Mary! had. a? little, lamb.", 5, 5),
