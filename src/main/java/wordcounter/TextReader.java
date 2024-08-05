@@ -1,9 +1,13 @@
 package wordcounter;
 
-public class InputReader {
+import java.util.Scanner;
+
+public class TextReader {
 
     public String readText() {
-        return System.console().readLine();
+        System.out.print("Enter text: ");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
 }
