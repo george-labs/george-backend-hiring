@@ -1,4 +1,4 @@
-import wordcounter.ConsolePrinter;
+import wordcounter.ResultPrinter;
 import wordcounter.StopWordsReader;
 import wordcounter.TextReader;
 import wordcounter.WordCounter;
@@ -9,11 +9,11 @@ public class JavaApplication {
         TextReader textReader = new TextReader();
         StopWordsReader stopWordsReader = new StopWordsReader("stopwords.txt");
         WordCounter wordCounter = new WordCounter(stopWordsReader);
-        ConsolePrinter consolePrinter = new ConsolePrinter();
+        ResultPrinter resultPrinter = new ResultPrinter();
 
         String text = textReader.readText();
         long wordCount = wordCounter.countWords(text);
-        consolePrinter.printWordCount(wordCount);
+        resultPrinter.printWordCount(wordCount);
     }
 
 }

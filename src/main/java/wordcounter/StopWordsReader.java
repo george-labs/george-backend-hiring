@@ -3,18 +3,22 @@ package wordcounter;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class StopWordsReader {
 
-    private final String stopWordFileName;
+    private final Set<String> stopWords;
 
     public StopWordsReader(String stopWordFileName) {
-        this.stopWordFileName = stopWordFileName;
+        this.stopWords = readStopWords(stopWordFileName);
     }
 
-    public List<String> getStopWords() {
+    public Set<String> getStopWords() {
+        return stopWords;
+    }
 
+    private Set<String> readStopWords(String stopWordFileName) {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream resource = classLoader.getResourceAsStream(stopWordFileName);
 
@@ -22,7 +26,9 @@ public class StopWordsReader {
             throw new RuntimeException("File 'stopwords.txt' not found");
         }
 
-        return new BufferedReader(new InputStreamReader(resource)).lines().toList();
+        return new BufferedReader(new InputStreamReader(resource))
+                .lines()
+                .collect(Collectors.toSet());
     }
 
 }

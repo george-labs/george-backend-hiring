@@ -8,9 +8,9 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ConsolePrinterTest {
+public class ResultPrinterTest {
 
-    private final ConsolePrinter consolePrinter = new ConsolePrinter();
+    private final ResultPrinter resultPrinter = new ResultPrinter();
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
@@ -22,7 +22,7 @@ public class ConsolePrinterTest {
     @Test
     void printWordCount_printsProvidedNumberOfWords() {
         long wordCount = 8;
-        consolePrinter.printWordCount(wordCount);
+        resultPrinter.printWordCount(wordCount);
         assertEquals("Word count: " + wordCount , outputStreamCaptor.toString().trim());
     }
 }
