@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WordCounterTest {
 
-    private final StopWordsReader stopWordsReader = new StopWordsReader("stopwords.txt");
-    private final WordCounter wordCounter = new WordCounter(stopWordsReader);
+    private final StopWordsService stopWordsService = new StopWordsService("stopwords.txt", new FileReader());
+    private final WordCounter wordCounter = new WordCounter(stopWordsService);
 
     private static Stream<Arguments> provideTextAndExpectedWordCount() {
         return Stream.of(

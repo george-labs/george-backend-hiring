@@ -5,10 +5,10 @@ import java.util.Set;
 
 public class WordCounter {
 
-    private final StopWordsReader stopWordsReader;
+    private final StopWordsService stopWordsService;
 
-    public WordCounter(StopWordsReader stopWordsReader) {
-        this.stopWordsReader = stopWordsReader;
+    public WordCounter(StopWordsService stopWordsService) {
+        this.stopWordsService = stopWordsService;
     }
 
     public long countWords(String text) {
@@ -24,7 +24,7 @@ public class WordCounter {
     }
 
     private boolean isValidWord(String word) {
-        Set<String> stopWords = stopWordsReader.getStopWords();
+        Set<String> stopWords = stopWordsService.getStopWords();
         return word.matches("[a-zA-Z]+") && !stopWords.contains(word);
     }
 

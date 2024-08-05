@@ -1,19 +1,28 @@
-import wordcounter.ResultPrinter;
-import wordcounter.StopWordsReader;
-import wordcounter.TextReader;
-import wordcounter.WordCounter;
+import wordcounter.*;
+import wordcounter.input.FileInputReader;
+import wordcounter.input.InputReader;
+import wordcounter.input.UserInputReader;
 
 public class JavaApplication {
 
     public static void main(String[] args) {
-        TextReader textReader = new TextReader();
-        StopWordsReader stopWordsReader = new StopWordsReader("stopwords.txt");
-        WordCounter wordCounter = new WordCounter(stopWordsReader);
+
+        FileReader fileReader = new FileReader();
+        InputReader inputReader;
+        StopWordsService stopWordsService = new StopWordsService("stopwords.txt", fileReader);
+        WordCounter wordCounter = new WordCounter(stopWordsService);
         ResultPrinter resultPrinter = new ResultPrinter();
 
-        String text = textReader.readText();
-        long wordCount = wordCounter.countWords(text);
-        resultPrinter.printWordCount(wordCount);
+        if (args.length == 1) {
+            String inputFileName = args[0];
+            inputReader = new FileInputReader(inputFileName, fileReader);
+        } else {
+            inputReader = new UserInputReader();
+        }
+
+        WordCounterApplication wordCounterApplication = new WordCounterApplication(inputReader, wordCounter, resultPrinter);
+        wordCounterApplication.run();
+
     }
 
 }

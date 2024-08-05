@@ -6,13 +6,13 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class StopWordsReaderTest {
+public class StopWordsServiceTest {
 
-    private final StopWordsReader stopWordsReader = new StopWordsReader("stopWords.txt");
+    private final StopWordsService stopWordsService = new StopWordsService("stopWords.txt", new FileReader());
 
     @Test
     void getStopWords_returnsStopWordsFromFile() {
-        Set<String> stopWords = stopWordsReader.getStopWords();
+        Set<String> stopWords = stopWordsService.getStopWords();
 
         assertEquals(Set.of("stopWord", "stopWord2"), stopWords);
     }

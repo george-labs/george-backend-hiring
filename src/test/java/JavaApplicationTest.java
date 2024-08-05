@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -31,12 +32,16 @@ public class JavaApplicationTest {
 
     @ParameterizedTest
     @MethodSource("provideTextAndExpectedWordCount")
-    public void countWords_countValidWords(String text, long expected) {
+    public void countWords_userInput_countsValidWords(String text, long expected) {
         provideInput(text);
         JavaApplication.main(new String[]{});
-        assertEquals("Enter text: Word count: " + expected , outputStreamCaptor.toString().trim());
-
+        assertEquals("Enter text: Word count: " + expected, outputStreamCaptor.toString().trim());
     }
 
+    @Test
+    public void countWords_fileInput_countsValidWords() {
+        JavaApplication.main(new String[]{"mytext.txt"});
+        assertEquals("Word count: 4", outputStreamCaptor.toString().trim());
+    }
 
 }

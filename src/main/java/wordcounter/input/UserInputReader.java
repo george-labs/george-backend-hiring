@@ -1,10 +1,11 @@
-package wordcounter;
+package wordcounter.input;
 
 import java.util.Scanner;
 
-public class TextReader {
+public class UserInputReader implements InputReader {
 
-    public String readText() {
+    @Override
+    public String readInput() {
         System.out.print("Enter text: ");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
