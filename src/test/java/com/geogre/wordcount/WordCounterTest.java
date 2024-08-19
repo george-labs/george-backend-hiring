@@ -40,4 +40,11 @@ class WordCounterTest {
         assertEquals(0, result);
     }
 
+    @Test
+    void shouldCountWordsStringWithStopWords() {
+        long result = wordCounter.count(TEST_INPUT_WITH_STOP_WORDS);
+
+        assertEquals(3, result);
+    }
+
 }
