@@ -42,6 +42,18 @@ class WordCountTest {
     }
 
     @Test
+    void shouldStartBlankString() {
+        setUpInput(" ");
+        wordCount.start();
+        String[] outputParts = outputStream.toString().split(":");
+
+        if (outputParts.length < 3) {
+            fail("The number of parts should be 3: [prompting]: [info]: [number]");
+        }
+        assertEquals(0, Integer.parseInt(outputParts[2].trim()));
+    }
+
+    @Test
     void shouldStartEmptyString() {
         setUpInput("");
         wordCount.start();

@@ -8,7 +8,7 @@ public class WordCount {
     private static final String SEPARATOR = " ";
 
     public void start() {
-        System.out.print("Please, enter text: ");
+        System.out.print("Enter text: ");
         int totalWords = 0;
         Scanner scanner = new Scanner(System.in);
         try {
