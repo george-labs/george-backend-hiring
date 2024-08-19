@@ -5,3 +5,4 @@
  - Single round pass: one prompt - one result, no repeating
  - The input is simple short string without special characters
  - The input is not separated by new lines
+ - There is no differentiation between digits and letters
