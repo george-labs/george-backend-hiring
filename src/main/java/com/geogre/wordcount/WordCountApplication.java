@@ -13,12 +13,17 @@ public class WordCountApplication {
     private static final String STOPWORDS_PATH = "/stopwords.txt";
 
     public static void main(String[] args) {
-        configureWordCount().start();
+        String wordsFilePath = null;
+        if (args.length > 0) {
+            wordsFilePath = args[0];
+        }
+
+        configureWordCount(wordsFilePath).start();
     }
 
-    private static WordCount configureWordCount() {
+    private static WordCount configureWordCount(String inputFilePath) {
         WordCounter wordCounter = new WordCounter(SEPARATOR, getStopWords());
-        return new WordCount(wordCounter);
+        return new WordCount(wordCounter, inputFilePath);
     }
 
     private static @NotNull List<String> getStopWords() {

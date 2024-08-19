@@ -7,3 +7,6 @@
 
 ## Iteration 2
  - stopwords.txt is a file within classpath
+
+## Iteration 3
+ - application accepts single parameter the path to file with words

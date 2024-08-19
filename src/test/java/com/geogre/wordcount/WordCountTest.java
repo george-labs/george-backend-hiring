@@ -21,7 +21,7 @@ class WordCountTest {
     private static final int COUNT_NUMBER_POSITION = 2;
 
     private final WordCounter wordCounter = new WordCounter(SEPARATOR, STOP_LIST);
-    private final WordCount wordCount = new WordCount(wordCounter);
+    private final WordCount wordCount = new WordCount(wordCounter, null);
 
 
     @BeforeAll
