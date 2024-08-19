@@ -15,14 +15,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class WordCountTest {
 
     private static final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    private static final String TEST_FILE_PATH = "src/test/resources/test_input.txt";
 
     private static final int PROMPT_MESSAGE_POSITION = 0;
     private static final int INFO_MESSAGE_POSITION = 1;
     private static final int COUNT_NUMBER_POSITION = 2;
 
     private final WordCounter wordCounter = new WordCounter(SEPARATOR, STOP_LIST);
-    private final WordCount wordCount = new WordCount(wordCounter, null);
-
 
     @BeforeAll
     public static void beforeAll() {
@@ -35,7 +34,8 @@ class WordCountTest {
     }
 
     @Test
-    public void shouldStart() {
+    public void shouldStartFromConsole() {
+        WordCount wordCount = new WordCount(wordCounter, null);
         setUpInput(TEST_INPUT);
 
         wordCount.start();
@@ -48,6 +48,21 @@ class WordCountTest {
         assertEquals("Enter text", outputParts[PROMPT_MESSAGE_POSITION].trim());
         assertEquals("Number of words", outputParts[INFO_MESSAGE_POSITION].trim());
         assertEquals(4, Integer.parseInt(outputParts[COUNT_NUMBER_POSITION].trim()));
+    }
+
+    @Test
+    public void shouldStartFromFile() {
+        WordCount wordCount = new WordCount(wordCounter, TEST_FILE_PATH);
+
+        wordCount.start();
+
+        String[] outputParts = outputStream.toString().split(":");
+
+        if (outputParts.length < 2) {
+            fail("The number of parts should be 2: [info]: [number]");
+        }
+        assertEquals("Number of words", outputParts[0].trim());
+        assertEquals(6, Integer.parseInt(outputParts[1].trim()));
     }
 
     private void setUpInput(String input) {
