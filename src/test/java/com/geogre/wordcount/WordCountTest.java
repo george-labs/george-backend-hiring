@@ -1,5 +1,7 @@
 package com.geogre.wordcount;
 
+import static com.geogre.wordcount.TestConstants.*;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,13 +14,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WordCountTest {
 
-    private static final String TEST_INPUT = "The grey goose walks";
-    private static final String TEST_INPUT_MIXED = "Let's GO there !";
-    private static final String TEST_INPUT_MIXED_NO_CLEAR_WORDS = "Let's p1ck em!";
-
     private static final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-    private final WordCount wordCount = new WordCount();
+    private static final int PROMPT_MESSAGE_POSITION = 0;
+    private static final int INFO_MESSAGE_POSITION = 1;
+    private static final int COUNT_NUMBER_POSITION = 2;
+
+    private final WordCounter wordCounter = new WordCounter(SEPARATOR, STOP_LIST);
+    private final WordCount wordCount = new WordCount(wordCounter);
+
 
     @BeforeAll
     public static void beforeAll() {
@@ -31,63 +35,19 @@ class WordCountTest {
     }
 
     @Test
-    void shouldCountWordsNormalString() {
+    public void shouldStart() {
         setUpInput(TEST_INPUT);
+
         wordCount.start();
+
         String[] outputParts = outputStream.toString().split(":");
 
         if (outputParts.length < 3) {
             fail("The number of parts should be 3: [prompting]: [info]: [number]");
         }
-        assertEquals(4, Integer.parseInt(outputParts[2].trim()));
-    }
-
-    @Test
-    void shouldCountWordsBlankString() {
-        setUpInput(" ");
-        wordCount.start();
-        String[] outputParts = outputStream.toString().split(":");
-
-        if (outputParts.length < 3) {
-            fail("The number of parts should be 3: [prompting]: [info]: [number]");
-        }
-        assertEquals(0, Integer.parseInt(outputParts[2].trim()));
-    }
-
-    @Test
-    void shouldCountWordsEmptyString() {
-        setUpInput("");
-        wordCount.start();
-        String[] outputParts = outputStream.toString().split(":");
-
-        if (outputParts.length < 3) {
-            fail("The number of parts should be 3: [prompting]: [info]: [number]");
-        }
-        assertEquals(0, Integer.parseInt(outputParts[2].trim()));
-    }
-
-    @Test
-    void shouldCountWordsStringWithDigits() {
-        setUpInput(TEST_INPUT_MIXED);
-        wordCount.start();
-        String[] outputParts = outputStream.toString().split(":");
-
-        if (outputParts.length < 3) {
-            fail("The number of parts should be 3: [prompting]: [info]: [number]");
-        }
-        assertEquals(2, Integer.parseInt(outputParts[2].trim()));
-    }
-
-    @Test
-    void shouldCountWordsStringWithNoClearWords() {
-        setUpInput(TEST_INPUT_MIXED_NO_CLEAR_WORDS);
-        wordCount.start();
-        String[] outputParts = outputStream.toString().split(":");
-
-        if (outputParts.length < 3) {
-            fail("The number of parts should be 3: [prompting]: [info]: [number]");
-        }
-        assertEquals(0, Integer.parseInt(outputParts[2].trim()));
+        assertEquals("Enter text", outputParts[PROMPT_MESSAGE_POSITION].trim());
+        assertEquals("Number of words", outputParts[INFO_MESSAGE_POSITION].trim());
+        assertEquals(4, Integer.parseInt(outputParts[COUNT_NUMBER_POSITION].trim()));
     }
 
     private void setUpInput(String input) {
