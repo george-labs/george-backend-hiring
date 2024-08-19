@@ -3,9 +3,7 @@ package com.geogre.wordcount;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.util.StringUtils;
 
-import javax.security.sasl.SaslServer;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -33,7 +31,7 @@ class WordCountTest {
     }
 
     @Test
-    void shouldStart() {
+    void shouldCountWordsNormalString() {
         setUpInput(TEST_INPUT);
         wordCount.start();
         String[] outputParts = outputStream.toString().split(":");
@@ -45,7 +43,7 @@ class WordCountTest {
     }
 
     @Test
-    void shouldStartBlankString() {
+    void shouldCountWordsBlankString() {
         setUpInput(" ");
         wordCount.start();
         String[] outputParts = outputStream.toString().split(":");
@@ -57,7 +55,7 @@ class WordCountTest {
     }
 
     @Test
-    void shouldStartEmptyString() {
+    void shouldCountWordsEmptyString() {
         setUpInput("");
         wordCount.start();
         String[] outputParts = outputStream.toString().split(":");
@@ -69,7 +67,7 @@ class WordCountTest {
     }
 
     @Test
-    void shouldStartStringWithDigits() {
+    void shouldCountWordsStringWithDigits() {
         setUpInput(TEST_INPUT_MIXED);
         wordCount.start();
         String[] outputParts = outputStream.toString().split(":");
@@ -81,7 +79,7 @@ class WordCountTest {
     }
 
     @Test
-    void shouldStartStringWithNoClearWords() {
+    void shouldCountWordsStringWithNoClearWords() {
         setUpInput(TEST_INPUT_MIXED_NO_CLEAR_WORDS);
         wordCount.start();
         String[] outputParts = outputStream.toString().split(":");
