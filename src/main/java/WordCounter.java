@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class WordCounter {
 
-    private final Regex regexWord = new Regex("[a-zA-Z]+\\.?");
+    private final Regex regexWord = new Regex("[a-zA-Z]+[\\.!\\?,]?");
     private int counter = 0;
     private String input;
 

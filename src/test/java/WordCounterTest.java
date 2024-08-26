@@ -38,4 +38,28 @@ public class WordCounterTest {
         assertEquals(3, wordProcessor.getWordCount());
     }
 
+    @Test
+    public void test_sentence_with_comma_and_exclamation() {
+        var wordProcessor = new WordCounter("Mary, who had a little lamb said I am hungry!");
+        wordProcessor.processString();
+
+        assertEquals(10, wordProcessor.getWordCount());
+    }
+
+    @Test
+    public void test_sentences_with_question_mark_and_stop() {
+        var wordProcessor = new WordCounter("What about Joseph? He was not hungry at all.");
+        wordProcessor.processString();
+
+        assertEquals(9, wordProcessor.getWordCount());
+    }
+
+    @Test
+    public void test_sentence_with_more_than_one_punctuation_mark() {
+        var wordProcessor = new WordCounter("Joseph did not have any lambs...");
+        wordProcessor.processString();
+
+        assertEquals(5, wordProcessor.getWordCount());
+    }
+
 }
