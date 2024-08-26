@@ -6,25 +6,28 @@ import java.util.List;
 
 public class StopWordsLoader {
 
-    public static List<String> loadStopWords(String filename) {
-        return loadStopWords(filename);
+    public static List<String> loadStopWords() throws IOException {
+        return loadStopWords("stopwords.txt");
     }
 
-    public static List<String> loadStopWords() {
+    public static List<String> loadStopWords(String filename) throws IOException {
         var stopWords = new ArrayList<String>();
+        var inputStream = StopWordsLoader.class.getClassLoader().getResourceAsStream(filename);
 
-        try (
-                var inputStream = StopWordsLoader.class.getClassLoader().getResourceAsStream("stopwords.txt");
-                var bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        ) {
-            String line;
-
-            while ((line = bufferedReader.readLine()) != null) {
-                stopWords.add(line);
-            }
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        if (inputStream == null) {
+            throw new IOException(String.format("File '%s' not found", filename));
         }
+
+        var bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+        String line;
+
+        while ((line = bufferedReader.readLine()) != null) {
+            stopWords.add(line);
+        }
+
+        inputStream.close();
+        bufferedReader.close();
 
         return stopWords;
     }

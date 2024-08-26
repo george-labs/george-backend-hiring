@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
+import util.ResourceUtils;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -73,8 +73,8 @@ public class WordCounterTest {
     }
 
     @Test
-    public void test_stop_words() {
-        createStopWordsResource(List.of("the", "a", "on", "off"));
+    public void test_stop_words() throws IOException {
+        ResourceUtils.populateStopWords(List.of("the", "a", "on", "off"));
 
         var stopWords = StopWordsLoader.loadStopWords();
         var wordProcessor = new WordCounter("the cat is on and off a table", stopWords);
@@ -85,8 +85,8 @@ public class WordCounterTest {
     }
 
     @Test
-    public void test_stop_word_empty_string() {
-        createStopWordsResource(List.of(" "));
+    public void test_stop_word_empty_string() throws IOException {
+        ResourceUtils.populateStopWords(List.of(" "));
 
         var stopWords = StopWordsLoader.loadStopWords();
         var wordProcessor = new WordCounter("a cat and a dog", stopWords);
@@ -97,8 +97,8 @@ public class WordCounterTest {
     }
 
     @Test
-    public void test_stop_word_with_exclamation_mark() {
-        createStopWordsResource(List.of("world!"));
+    public void test_stop_word_with_exclamation_mark() throws IOException {
+        ResourceUtils.populateStopWords(List.of("world!"));
 
         var stopWords = StopWordsLoader.loadStopWords();
         var wordProcessor = new WordCounter("Hello world!", stopWords);
@@ -106,20 +106,6 @@ public class WordCounterTest {
         wordProcessor.processString();
 
         assertEquals(1, wordProcessor.getWordCount());
-    }
-
-    private void createStopWordsResource(List<String> stopWords) {
-        var resource = WordCounterTest.class.getClassLoader().getResource("stopwords.txt");
-        var filePath = resource.getPath();
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));) {
-            for (String word : stopWords) {
-                writer.write(word);
-                writer.newLine();
-            }
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
     }
 
 }
