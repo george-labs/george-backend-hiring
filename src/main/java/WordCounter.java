@@ -1,15 +1,22 @@
 import kotlin.text.Regex;
 
-import java.util.List;
+import java.util.Arrays;
 
 public class WordCounter {
 
-    private Regex regexWord = new Regex("[a-zA-Z]*");
-
+    private final Regex regexWord = new Regex("[a-zA-Z]+\\.?");
     private int counter = 0;
+    private String input;
 
-    public void processString(List<String> input) {
-        input.forEach(word -> {
+    public WordCounter(String input) {
+        this.input = input;
+    }
+
+
+    public void processString() {
+        var tokens = Arrays.asList(input.split("\\s+"));
+
+        tokens.forEach(word -> {
             if (regexWord.matches(word)) {
                 raiseCounter();
             }

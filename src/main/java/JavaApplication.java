@@ -8,10 +8,9 @@ public class JavaApplication {
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        var words = Arrays.asList(input.split("\\s+"));
 
-        var wordProcessor = new WordCounter();
-        wordProcessor.processString(words);
+        var wordProcessor = new WordCounter(input);
+        wordProcessor.processString();
         var wordCount = wordProcessor.getWordCount();
 
         System.out.println("Number of words: " + wordCount);
