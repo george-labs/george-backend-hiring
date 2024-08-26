@@ -8,20 +8,24 @@ public class WordCounter {
 
     private final Regex regexWord = new Regex("[a-zA-Z]+[\\.!\\?,]?");
     private int counter = 0;
-    private final String input;
+    private final List<String> input;
     private final List<String> stopWords;
 
-    public WordCounter(String input) {
+    public WordCounter(List<String> input) {
         this(input, new ArrayList<>());
     }
 
-    public WordCounter(String input, List<String> stopWords) {
+    public WordCounter(List<String> input, List<String> stopWords) {
         this.input = input;
         this.stopWords = stopWords;
     }
 
-    public void processString() {
-        var tokens = Arrays.asList(input.split("\\s+"));
+    public void countWords() {
+        input.forEach(this::processLine);
+    }
+
+    private void processLine(String line) {
+        var tokens = Arrays.asList(line.split("\\s+"));
 
         tokens.forEach(word -> {
             if (stopWords.contains(word)) {
