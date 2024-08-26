@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class JavaApplication {
@@ -9,11 +10,16 @@ public class JavaApplication {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
-        var wordProcessor = new WordCounter(input);
-        wordProcessor.processString();
-        var wordCount = wordProcessor.getWordCount();
+        try {
+            var stopWords = StopWordsLoader.loadStopWords();
+            var wordProcessor = new WordCounter(input, stopWords);
+            wordProcessor.processString();
+            var wordCount = wordProcessor.getWordCount();
 
-        System.out.println("Number of words: " + wordCount);
+            System.out.println("Number of words: " + wordCount);
+        } catch (IOException e) {
+            System.err.println("Encountered an error: " + e.getMessage());
+        }
 
         scanner.close();
     }

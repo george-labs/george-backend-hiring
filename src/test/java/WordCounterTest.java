@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.Test;
-import util.ResourceUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -74,9 +73,7 @@ public class WordCounterTest {
 
     @Test
     public void test_stop_words() throws IOException {
-        ResourceUtils.populateStopWords(List.of("the", "a", "on", "off"));
-
-        var stopWords = StopWordsLoader.loadStopWords();
+        var stopWords = List.of("the", "a", "on", "off");
         var wordProcessor = new WordCounter("the cat is on and off a table", stopWords);
 
         wordProcessor.processString();
@@ -86,9 +83,7 @@ public class WordCounterTest {
 
     @Test
     public void test_stop_word_empty_string() throws IOException {
-        ResourceUtils.populateStopWords(List.of(" "));
-
-        var stopWords = StopWordsLoader.loadStopWords();
+        var stopWords = List.of(" ");
         var wordProcessor = new WordCounter("a cat and a dog", stopWords);
 
         wordProcessor.processString();
@@ -98,9 +93,7 @@ public class WordCounterTest {
 
     @Test
     public void test_stop_word_with_exclamation_mark() throws IOException {
-        ResourceUtils.populateStopWords(List.of("world!"));
-
-        var stopWords = StopWordsLoader.loadStopWords();
+        var stopWords = List.of("world!");
         var wordProcessor = new WordCounter("Hello world!", stopWords);
 
         wordProcessor.processString();
