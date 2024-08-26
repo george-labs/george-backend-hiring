@@ -6,12 +6,11 @@ public class WordCounter {
 
     private final Regex regexWord = new Regex("[a-zA-Z]+[\\.!\\?,]?");
     private int counter = 0;
-    private String input;
+    private final String input;
 
     public WordCounter(String input) {
         this.input = input;
     }
-
 
     public void processString() {
         var tokens = Arrays.asList(input.split("\\s+"));
