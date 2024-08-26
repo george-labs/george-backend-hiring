@@ -1,9 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.net.URL;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -67,37 +65,58 @@ public class WordCounterTest {
     }
 
     @Test
+    public void test_separate_punctuation_marks_do_not_count_as_words() {
+        var wordProcessor = new WordCounter(", . ? !");
+        wordProcessor.processString();
+
+        assertEquals(0, wordProcessor.getWordCount());
+    }
+
+    @Test
     public void test_stop_words() {
         createStopWordsResource(List.of("the", "a", "on", "off"));
 
-        var wordProcessor = new WordCounter("the cat is on and off a table");
+        var stopWords = StopWordsLoader.loadStopWords();
+        var wordProcessor = new WordCounter("the cat is on and off a table", stopWords);
+
         wordProcessor.processString();
 
         assertEquals(4, wordProcessor.getWordCount());
     }
 
     @Test
-    public void test_stop_words_2() {
-        createStopWordsResource(List.of("cat", "dog"));
+    public void test_stop_word_empty_string() {
+        createStopWordsResource(List.of(" "));
 
-        var wordProcessor = new WordCounter("a cat and a dog");
+        var stopWords = StopWordsLoader.loadStopWords();
+        var wordProcessor = new WordCounter("a cat and a dog", stopWords);
+
         wordProcessor.processString();
 
-        assertEquals(3, wordProcessor.getWordCount());
+        assertEquals(5, wordProcessor.getWordCount());
+    }
+
+    @Test
+    public void test_stop_word_with_exclamation_mark() {
+        createStopWordsResource(List.of("world!"));
+
+        var stopWords = StopWordsLoader.loadStopWords();
+        var wordProcessor = new WordCounter("Hello world!", stopWords);
+
+        wordProcessor.processString();
+
+        assertEquals(1, wordProcessor.getWordCount());
     }
 
     private void createStopWordsResource(List<String> stopWords) {
-        try {
-            URL resource = WordCounterTest.class.getClassLoader().getResource("stopwords.txt");
-            String filePath = resource.getPath();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+        var resource = WordCounterTest.class.getClassLoader().getResource("stopwords.txt");
+        var filePath = resource.getPath();
 
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));) {
             for (String word : stopWords) {
                 writer.write(word);
                 writer.newLine();
             }
-
-            writer.close();
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

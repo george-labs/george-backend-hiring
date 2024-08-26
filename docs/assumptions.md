@@ -17,15 +17,16 @@ Joseph did not have any lambs...
 ```
 
 ## Iteration 2
-Program reads file "stopwords.txt" which contains list of 'blaclisted' words that do not count.
+Program reads file "stopwords.txt" which contains list of 'blacklisted' words that do not count.
 For example if file contains:
 ```
 the
+and
 ```
 
 Then following example has 4 words:
 ```
-the little lamb is white.
+the cat and the dog are friends
 ```
 
 We assume that the stop words have to match exactly (including case).
