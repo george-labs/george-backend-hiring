@@ -1,5 +1,4 @@
-import kotlin.text.Regex;
-
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class JavaApplication {
@@ -9,10 +8,13 @@ public class JavaApplication {
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
+        var words = Arrays.asList(input.split("\\s+"));
 
-        var regex = new Regex("[a-zA-Z]*");
-        var words = input.split("\\s+");
+        var wordProcessor = new WordCounter();
+        wordProcessor.processString(words);
+        var wordCount = wordProcessor.getWordCount();
 
+        System.out.println("Number of words: " + wordCount);
 
         scanner.close();
     }
