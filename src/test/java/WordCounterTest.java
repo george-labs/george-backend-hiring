@@ -1,5 +1,11 @@
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.net.URL;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WordCounterTest {
@@ -58,6 +64,43 @@ public class WordCounterTest {
         wordProcessor.processString();
 
         assertEquals(5, wordProcessor.getWordCount());
+    }
+
+    @Test
+    public void test_stop_words() {
+        createStopWordsResource(List.of("the", "a", "on", "off"));
+
+        var wordProcessor = new WordCounter("the cat is on and off a table");
+        wordProcessor.processString();
+
+        assertEquals(4, wordProcessor.getWordCount());
+    }
+
+    @Test
+    public void test_stop_words_2() {
+        createStopWordsResource(List.of("cat", "dog"));
+
+        var wordProcessor = new WordCounter("a cat and a dog");
+        wordProcessor.processString();
+
+        assertEquals(3, wordProcessor.getWordCount());
+    }
+
+    private void createStopWordsResource(List<String> stopWords) {
+        try {
+            URL resource = WordCounterTest.class.getClassLoader().getResource("stopwords.txt");
+            String filePath = resource.getPath();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+
+            for (String word : stopWords) {
+                writer.write(word);
+                writer.newLine();
+            }
+
+            writer.close();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 
 }

@@ -15,3 +15,17 @@ Following example has 5 words:
 ```
 Joseph did not have any lambs...
 ```
+
+## Iteration 2
+Program reads file "stopwords.txt" which contains list of 'blaclisted' words that do not count.
+For example if file contains:
+```
+the
+```
+
+Then following example has 4 words:
+```
+the little lamb is white.
+```
+
+We assume that the stop words have to match exactly (including case).
