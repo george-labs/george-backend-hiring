@@ -5,10 +5,17 @@ public class JavaApplication {
 
     public static void main(String[] args) {
 
-        System.out.println("Enter text: ");
+        String fileName;
+        String input;
 
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        if (args.length > 1) {
+            fileName = args[1];
+            input
+        } else {
+            System.out.println("Enter text: ");
+            Scanner scanner = new Scanner(System.in);
+            input = scanner.nextLine();
+        }
 
         try {
             var stopWords = StopWordsLoader.loadStopWords();

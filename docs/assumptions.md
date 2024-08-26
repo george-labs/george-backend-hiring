@@ -30,3 +30,14 @@ the cat and the dog are friends
 ```
 
 We assume that the stop words have to match exactly (including case).
+
+## Iteration 3
+Program can be run with provided filename as an argument.
+User can either provide the file name when executing the program, for example:
+```
+application stopwords.txt
+```
+
+If not provided, program will ask for the file name and user can enter it manually.
+
+The file serves as a source of text to be processed and words counted.
