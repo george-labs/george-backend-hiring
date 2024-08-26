@@ -13,7 +13,7 @@ public class JavaApplication {
         try {
             if (args.length > 0) {
                 fileName = args[0];
-                input = FileLoader.loadLinesFromFile(fileName);
+                input = FileLoader.loadInputContent(fileName);
             } else {
                 System.out.println("Enter text: ");
                 Scanner scanner = new Scanner(System.in);
@@ -24,7 +24,7 @@ public class JavaApplication {
                 scanner.close();
             }
 
-            var stopWords = StopWordsLoader.loadStopWords();
+            var stopWords = FileLoader.loadStopWords();
             var wordCounter = new WordCounter(input, stopWords);
 
             wordCounter.countWords();

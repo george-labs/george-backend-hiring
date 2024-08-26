@@ -5,22 +5,26 @@ import util.ResourceUtils;
 import java.io.IOException;
 import java.util.List;
 
-public class StopWordsLoaderTest {
+public class FileLoaderTest {
 
     @Test
     public void test_load_stop_words_success() throws IOException {
         ResourceUtils.populateStopWords(List.of("cat", "dog"));
 
-        var stopWords = StopWordsLoader.loadStopWords();
+        var stopWords = FileLoader.loadStopWords();
 
         Assertions.assertNotNull(stopWords);
         Assertions.assertEquals(2, stopWords.size());
     }
 
     @Test
-    public void test_load_stop_words_file_not_found() {
+    public void test_file_not_found() {
         Assertions.assertThrows(IOException.class, () -> {
-            StopWordsLoader.loadStopWords("nonexistent.txt");
+            FileLoader.loadStopWords("nonexistent.txt");
+        });
+
+        Assertions.assertThrows(IOException.class, () -> {
+            FileLoader.loadInputContent("nonexistent.txt");
         });
     }
 
