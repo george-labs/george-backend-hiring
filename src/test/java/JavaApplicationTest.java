@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 class JavaApplicationTest {
@@ -39,7 +40,7 @@ class JavaApplicationTest {
     }
 
     @Test
-    void filterWords() {
+    void filterWordsTest() {
         String[] list = {"On12e", "Two", "Thr#4ee*h"};
         List<String> filteredWords = WordUtils.filterWords(list);
         Assertions.assertEquals(1, filteredWords.size());
@@ -52,5 +53,18 @@ class JavaApplicationTest {
         String[] splitedWords = WordUtils.splitWordsBySpace(sentence);
         List<String> filtered = WordUtils.filterWords(splitedWords);
         Assertions.assertEquals(expected, WordUtils.countWords(filtered));
+    }
+
+    @Test
+    void filterStopWordsTest() {
+        List<String> stopWords = List.of("a","the");
+        List<String> words = List.of("This","is","a","test","the","This");
+//
+//        Assertions.assertEquals WordUtils.filterStopWords(words, stopWords);
+    }
+
+    @Test
+    void readFileTest() throws IOException {
+//        WordUtils.readFile();
     }
 }
