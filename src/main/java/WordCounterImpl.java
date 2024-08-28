@@ -2,11 +2,12 @@ import java.util.List;
 
 public class WordCounterImpl implements WordCounter {
 
-    private SentenceReader sentenceReader;
-    private WordFilter wordFilter;
-    private WordSpliter wordSpliter;
+    private final SentenceReader sentenceReader;
+    private final WordFilter wordFilter;
+    private final WordSpliter wordSpliter;
 
-    public WordCounterImpl(SentenceReader sentenceReader, WordFilter wordFilter,
+    public WordCounterImpl(SentenceReader sentenceReader,
+                           WordFilter wordFilter,
                            WordSpliter wordSpliter) {
         this.sentenceReader = sentenceReader;
         this.wordSpliter = wordSpliter;
@@ -15,9 +16,9 @@ public class WordCounterImpl implements WordCounter {
 
     @Override
     public int countWords() {
-        String[] splitedWords = wordSpliter.splitWordsBySpace(sentenceReader.readSentence());
+        String input = sentenceReader.readSentence();
+        String[] splitedWords = wordSpliter.splitWordsBySpace(input);
         List<String> filteredWords = wordFilter.filterWords(splitedWords);
-
         return WordUtils.countWords(filteredWords);
     }
 

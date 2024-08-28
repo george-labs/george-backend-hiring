@@ -35,12 +35,12 @@ class JavaApplicationTest {
     @Test
     void countNumbersInList2Test(){
         List<String> list = List.of("One", "Two");
-        Assertions.assertEquals(2,WordUtils.countWords(list));
+        Assertions.assertEquals(2, WordUtils.countWords(list));
     }
 
     @Test
     void filterWords() {
-        String[] list = {"On12e", "Two"};
+        String[] list = {"On12e", "Two", "Thr#4ee*h"};
         List<String> filteredWords = WordUtils.filterWords(list);
         Assertions.assertEquals(1, filteredWords.size());
     }
@@ -49,11 +49,8 @@ class JavaApplicationTest {
     void fullFlowTest() {
         int expected = 2;
         String sentence = "One Two";
-
         String[] splitedWords = WordUtils.splitWordsBySpace(sentence);
         List<String> filtered = WordUtils.filterWords(splitedWords);
         Assertions.assertEquals(expected, WordUtils.countWords(filtered));
-
     }
-
 }
