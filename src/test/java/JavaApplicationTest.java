@@ -77,4 +77,10 @@ class JavaApplicationTest {
         Assertions.assertEquals(expected, WordUtils.filterWords(words, stopWords));
     }
 
+    @Test
+    void test() {
+        String list = "A B \n CD \n asdas dsad ";
+        System.out.println(WordUtils.splitWordsBySpace(list).length);
+    }
+
 }

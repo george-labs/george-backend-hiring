@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.Nullable;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
@@ -32,6 +34,7 @@ public class WordUtils {
     }
 
     public static String readSentence() {
+        List<String> inputFromFile = new ArrayList<>();
         Scanner input = new Scanner(System.in);
         System.out.print("Enter text : ");
         return input.nextLine();
@@ -39,17 +42,21 @@ public class WordUtils {
 
     public static List<String> readStopWordsFromFile(String fileName) {
         List<String> stopwords = new ArrayList<>();
+        return readFromFile(fileName, stopwords);
+    }
+
+    private static @Nullable String readFromFile(String fileName, List<String> stopwords) {
         String file = WordUtils.class.getResource(fileName).getFile();
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String st;
             while ((st = br.readLine()) != null) {
-                stopwords.add(st);
+                st += st;
+                // 1 line String
             }
         } catch (Exception e) {
             System.out.println("More specific exception should be handled !");
-        } finally {
-            return stopwords;
         }
+        return ;
     }
 
     public static List<String> filterStopWords(List<String> list, List<String> stopwords) {
