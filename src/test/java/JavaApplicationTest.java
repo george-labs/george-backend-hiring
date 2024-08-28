@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.List;
 
 class JavaApplicationTest {
@@ -58,13 +57,24 @@ class JavaApplicationTest {
     @Test
     void filterStopWordsTest() {
         List<String> stopWords = List.of("a","the");
-        List<String> words = List.of("This","is","a","test","the","This");
-//
-//        Assertions.assertEquals WordUtils.filterStopWords(words, stopWords);
+        List<String> words = List.of("This","is","a","test","the");
+        List<String> expected = List.of("This","is","test");
+        Assertions.assertEquals(expected, WordUtils.filterStopWords(words, stopWords));
     }
 
     @Test
-    void readFileTest() throws IOException {
-//        WordUtils.readFile();
+    void filterWordsWhenStopWordsIsEmptyTest() {
+       String[] words = {"Th2is","is","a","te23st","the"};
+        List<String> expected = List.of("is", "a", "the");
+        Assertions.assertEquals(expected, WordUtils.filterWords(words));
     }
+
+    @Test
+    void filterWordsUsingAllFiltersTest() {
+        List<String> stopWords = List.of("a","the");
+        String[] words = {"Th2is","is","a","te23st","the"};
+        List<String> expected = List.of("is");
+        Assertions.assertEquals(expected, WordUtils.filterWords(words, stopWords));
+    }
+
 }

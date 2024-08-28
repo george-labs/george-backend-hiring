@@ -1,7 +1,5 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -39,9 +37,9 @@ public class WordUtils {
         return input.nextLine();
     }
 
-    public static List<String> readStopWordsFromFile() throws IOException {
+    public static List<String> readStopWordsFromFile(String fileName) {
         List<String> stopwords = new ArrayList<>();
-        String file = WordUtils.class.getResource("/stopwords.txt").getFile();
+        String file = WordUtils.class.getResource(fileName).getFile();
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String st;
             while ((st = br.readLine()) != null) {
@@ -49,13 +47,14 @@ public class WordUtils {
             }
         } catch (Exception e) {
             System.out.println("More specific exception should be handled !");
+        } finally {
+            return stopwords;
         }
-        return stopwords;
     }
 
     public static List<String> filterStopWords(List<String> list, List<String> stopwords) {
         return list.stream()
-                .filter(stopwords::contains)
+                .filter(it -> !stopwords.contains(it))
                 .collect(Collectors.toList());
     }
 

@@ -1,4 +1,4 @@
-import java.io.IOException;
+
 import java.util.List;
 
 public class WordCounterImpl implements WordCounter {
@@ -16,11 +16,11 @@ public class WordCounterImpl implements WordCounter {
     }
 
     @Override
-    public int countWords() throws IOException {
-        List<String> stopWords = sentenceReader.readWordsFromFile();
+    public int countWords() {
+        List<String> stopWords = sentenceReader.readWordsFromFile("/stopwords.txt");
         String input = sentenceReader.readSentence();
         String[] splitedWords = wordSpliter.splitWordsBySpace(input);
-        List<String> filteredWords = wordFilter.filterWords(splitedWords);
+        List<String> filteredWords = wordFilter.filterWords(splitedWords, stopWords);
         return WordUtils.countWords(filteredWords);
     }
 

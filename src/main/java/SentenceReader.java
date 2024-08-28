@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.List;
 
 public class SentenceReader {
@@ -7,7 +6,7 @@ public class SentenceReader {
         return WordUtils.readSentence();
     }
 
-    public List<String> readWordsFromFile() throws IOException {
-        return WordUtils.readStopWordsFromFile();
+    public List<String> readWordsFromFile(String fileName)  {
+        return WordUtils.readStopWordsFromFile(fileName);
     }
 }
