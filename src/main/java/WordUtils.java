@@ -33,30 +33,52 @@ public class WordUtils {
                 .collect(Collectors.toList());
     }
 
+    // This should make iteration 3 try to read from file and if not exists then return value from manual input
+    // both shoult return 1 line string that is modified by split filter and count funtion to get result
     public static String readSentence() {
-        List<String> inputFromFile = new ArrayList<>();
-        Scanner input = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
         System.out.print("Enter text : ");
-        return input.nextLine();
+        try {
+            return readWordFromFile(input);
+        } catch (Exception e) {
+            System.out.println("File not found");
+        }
+
+        return scanner.nextLine();
     }
 
     public static List<String> readStopWordsFromFile(String fileName) {
         List<String> stopwords = new ArrayList<>();
-        return readFromFile(fileName, stopwords);
-    }
-
-    private static @Nullable String readFromFile(String fileName, List<String> stopwords) {
         String file = WordUtils.class.getResource(fileName).getFile();
+        System.out.println("file test "+ file);
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String st;
             while ((st = br.readLine()) != null) {
-                st += st;
-                // 1 line String
+                stopwords.add(st);
             }
         } catch (Exception e) {
             System.out.println("More specific exception should be handled !");
         }
-        return ;
+        return stopwords;
+    }
+
+    // This should return 1 liner string from file, but it should be refactored completely
+    public static String readWordFromFile(String fileName) {
+        String st = "";
+        System.out.println(WordUtils.class.getResource(fileName));
+        String file = WordUtils.class.getResource(fileName).getFile();
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            while ((st = br.readLine()) != null) {
+                st += st; // this is wrong
+            }
+            return st;
+
+        } catch (Exception e) {
+            System.out.println("More specific exception should be handled !");
+        }
+        return st;
+
     }
 
     public static List<String> filterStopWords(List<String> list, List<String> stopwords) {

@@ -77,10 +77,8 @@ class JavaApplicationTest {
         Assertions.assertEquals(expected, WordUtils.filterWords(words, stopWords));
     }
 
-    @Test
-    void test() {
-        String list = "A B \n CD \n asdas dsad ";
-        System.out.println(WordUtils.splitWordsBySpace(list).length);
-    }
+    // 1. Test file read
+    // 2. Test scanner when file does not exist
+    // 3. test for input from file
 
 }
