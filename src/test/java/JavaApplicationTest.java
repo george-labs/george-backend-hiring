@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 class JavaApplicationTest {
 
     @Test
@@ -18,16 +20,39 @@ class JavaApplicationTest {
     }
 
     @Test
+    void splitSentenceWithNumbersTest() {
+        String sentence = "One   Two";
+        String[] expected = {"One", "Two"};
+        Assertions.assertArrayEquals(expected, WordUtils.splitWordsBySpace(sentence));
+    }
+
+    @Test
     void countNumbersInListTest(){
-        String[] list = {"One", "Two"};
-        Assertions.assertEquals(WordUtils.countWords(list),2);
+        List<String> list = List.of("One", "Two");
+        Assertions.assertEquals(2, WordUtils.countWords(list));
+    }
+
+    @Test
+    void countNumbersInList2Test(){
+        List<String> list = List.of("One", "Two");
+        Assertions.assertEquals(2,WordUtils.countWords(list));
+    }
+
+    @Test
+    void filterWords() {
+        String[] list = {"On12e", "Two"};
+        List<String> filteredWords = WordUtils.filterWords(list);
+        Assertions.assertEquals(1, filteredWords.size());
     }
 
     @Test
     void fullFlowTest() {
         int expected = 2;
         String sentence = "One Two";
-        Assertions.assertEquals(WordUtils.countWords(WordUtils.splitWordsBySpace(sentence)), expected);
+
+        String[] splitedWords = WordUtils.splitWordsBySpace(sentence);
+        List<String> filtered = WordUtils.filterWords(splitedWords);
+        Assertions.assertEquals(expected, WordUtils.countWords(filtered));
 
     }
 
