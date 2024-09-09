@@ -2,6 +2,13 @@ import iteration1.WordCounter
 import java.io.File
 
 
+/**
+ * This method is the entry point of the program. It analyzes a given sentence or a file's content
+ * using the WordCounter class and outputs the number of words, number of unique words,
+ * and the average word length.
+ *
+ * @param args the command line arguments. The first argument can be a file name to read the content from.
+ */
 fun main(args: Array<String>) {
     val wordCounter = WordCounter()
 
@@ -10,7 +17,7 @@ fun main(args: Array<String>) {
         val contents: String? = readFileContents(filename)
 
         contents?.let {
-            printOutput(wordCounter.countWords(it), wordCounter.countUniqueWords(it))
+            printOutput(wordCounter.countWords(it), wordCounter.countUniqueWords(it), wordCounter.countAverageWordLength(it))
         } ?: run {
             println("Unable to read file $filename")
         }
@@ -19,7 +26,7 @@ fun main(args: Array<String>) {
 
         val content = readlnOrNull()
 
-        printOutput(wordCounter.countWords(content), wordCounter.countUniqueWords(content))
+        printOutput(wordCounter.countWords(content), wordCounter.countUniqueWords(content), wordCounter.countAverageWordLength(content))
     }
 }
 
@@ -33,6 +40,6 @@ fun readFileContents(filename: String): String? {
     }
 }
 
-fun printOutput(number: Int, unique:Int) {
-    println("Number of words: $number, unique: $unique")
+fun printOutput(number: Int, unique:Int, average:Double) {
+    println("Number of words: $number, unique: $unique; average word length: $average")
 }

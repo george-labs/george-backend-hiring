@@ -22,27 +22,6 @@ class KotlinApplicationTest {
         // Verify the output
         val capturedOutput = outputStream.toString().trim()
 
-        assertEquals("Number of words: 4, unique: 4", capturedOutput)
+        assertEquals("Number of words: 4, unique: 4; average word length: 4.25", capturedOutput)
     }
-
-    /*
-    @Test
-    fun testingNoFileArgs() {
-        // Create a stream to capture output
-        val outputStream = ByteArrayOutputStream()
-        val originalOut = System.out
-
-        // Redirect System.out to the new stream
-        System.setOut(PrintStream(outputStream))
-
-        main(emptyArray<String>())
-
-        // Restore the original System.out
-        System.setOut(originalOut)
-
-        // Verify the output
-        val capturedOutput = outputStream.toString().trim()
-
-        assertEquals("Number of words: 4", capturedOutput)
-    }*/
 }

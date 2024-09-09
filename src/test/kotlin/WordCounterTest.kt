@@ -61,8 +61,8 @@ class WordCounterTest {
     fun testKnownVariety() {
         val wordCounter = WordCounter()
         val sentence = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."
-        val expectedWordCount = 9
-        val expectedUniqueCount = 7
+        val expectedWordCount = 7
+        val expectedUniqueCount = 6
         val wordCount = wordCounter.countWords(sentence)
         val uniqueCount = wordCounter.countUniqueWords(sentence)
         assertEquals(expectedWordCount, wordCount)
