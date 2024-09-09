@@ -23,10 +23,18 @@ class WordCounterTest {
     }
 
     @Test
-    fun testStopWordsRead() {
+    fun testStopWordsCount() {
         val wordCounter = WordCounter()
         val expectedCount = 4
         val actualCount = wordCounter.stopWordsCount()
+        assertEquals(expectedCount, actualCount)
+    }
+
+    @Test
+    fun testDictWordsCount() {
+        val wordCounter = WordCounter()
+        val expectedCount = 8
+        val actualCount = wordCounter.dictWordsCount()
         assertEquals(expectedCount, actualCount)
     }
 

@@ -8,10 +8,14 @@ package iteration1
 class WordCounter {
     private val regex = "\\b[a-zA-Z-]+\\b".toRegex()
     private val stopWords: MutableSet<String> = mutableSetOf()
+    private val dictWords: MutableSet<String> = mutableSetOf()
 
     init {
-        val wordsText = object {}.javaClass.getResource("/stopwords.txt")?.readText()
-        wordsText?.split("\n")?.map { it.trim().lowercase() }?.forEach(stopWords::add)
+        val stopText = object {}.javaClass.getResource("/stopwords.txt")?.readText()
+        stopText?.split("\n")?.map { it.trim().lowercase() }?.forEach(stopWords::add)
+
+        val dictText = object {}.javaClass.getResource("/dict.txt")?.readText()
+        dictText?.split("\n")?.map { it.trim().lowercase() }?.forEach(dictWords::add)
     }
 
     /**
@@ -20,6 +24,8 @@ class WordCounter {
      * @return the number of stop words as an integer value.
      */
     fun stopWordsCount():Int = stopWords.size
+
+    fun dictWordsCount():Int = dictWords.size
 
     fun getWords(sentence: String?):List<String>  {
         return sentence?.let {
