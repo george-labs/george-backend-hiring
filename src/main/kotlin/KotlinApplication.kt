@@ -1,8 +1,11 @@
+import iteration1.WordCounter
 
-class KotlinApplication {
+fun main() {
+    val wordCounter = WordCounter()
+    print("Enter text:")
 
-}
+    val input = readlnOrNull()
+    val size = wordCounter.countWords(input)
 
-fun main(args: Array<String>) {
-    println("hello world")
+    println("Number of words: $size")
 }

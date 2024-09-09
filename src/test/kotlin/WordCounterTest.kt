@@ -21,4 +21,13 @@ class WordCounterTest {
         val actualCount = wordCounter.countWords(sentence)
         assertEquals(expectedCount, actualCount)
     }
+
+    @Test
+    fun testNull() {
+        val wordCounter = WordCounter()
+        val sentence = null
+        val expectedCount = 0
+        val actualCount = wordCounter.countWords(sentence)
+        assertEquals(expectedCount, actualCount)
+    }
 }
