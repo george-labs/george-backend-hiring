@@ -6,7 +6,7 @@ class WordCounterTest {
 
     @Test
     fun testEmptyCountWords() {
-        val wordCounter = WordCounter()
+        val wordCounter = WordCounter(tokenizeLines(readResource("/stopwords.txt")))
         val sentence = "Mary had 4 little lamb"
         val expectedCount = 4
         val actualCount = wordCounter.countWords(sentence)
@@ -15,7 +15,7 @@ class WordCounterTest {
 
     @Test
     fun testNull() {
-        val wordCounter = WordCounter()
+        val wordCounter = WordCounter(tokenizeLines(readResource("/stopwords.txt")))
         val sentence = null
         val expectedCount = 0
         val actualCount = wordCounter.countWords(sentence)
@@ -24,7 +24,7 @@ class WordCounterTest {
 
     @Test
     fun testStopWordsCount() {
-        val wordCounter = WordCounter()
+        val wordCounter = WordCounter(tokenizeLines(readResource("/stopwords.txt")))
         val expectedCount = 4
         val actualCount = wordCounter.stopWordsCount()
         assertEquals(expectedCount, actualCount)
@@ -32,15 +32,15 @@ class WordCounterTest {
 
     @Test
     fun testDictWordsCount() {
-        val wordCounter = WordCounter()
-        val expectedCount = 8
+        val wordCounter = WordCounter(tokenizeLines(readResource("/stopwords.txt")))
+        val expectedCount = 0
         val actualCount = wordCounter.dictWordsCount()
         assertEquals(expectedCount, actualCount)
     }
 
     @Test
     fun testStopWordsExcludes() {
-        val wordCounter = WordCounter()
+        val wordCounter = WordCounter(tokenizeLines(readResource("/stopwords.txt")))
         val sentence = "Mary had a little lamb"
         val expectedCount = 4
         val actualCount = wordCounter.countWords(sentence)
@@ -49,7 +49,7 @@ class WordCounterTest {
 
     @Test
     fun testloadedFromFileExcludes() {
-        val wordCounter = WordCounter()
+        val wordCounter = WordCounter(tokenizeLines(readResource("/stopwords.txt")))
         val sentence = "Mary had a little lamb"
         val expectedCount = 4
         val actualCount = wordCounter.countWords(sentence)
@@ -58,7 +58,7 @@ class WordCounterTest {
 
     @Test
     fun testUniqueWordsExcludes() {
-        val wordCounter = WordCounter()
+        val wordCounter = WordCounter(tokenizeLines(readResource("/stopwords.txt")))
         val sentence = "Mary had a little lamb a little lamb"
         val expectedCount = 4
         val actualCount = wordCounter.countUniqueWords(sentence)
@@ -67,7 +67,7 @@ class WordCounterTest {
 
     @Test
     fun testKnownVariety() {
-        val wordCounter = WordCounter()
+        val wordCounter = WordCounter(tokenizeLines(readResource("/stopwords.txt")))
         val sentence = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."
         val expectedWordCount = 7
         val expectedUniqueCount = 6

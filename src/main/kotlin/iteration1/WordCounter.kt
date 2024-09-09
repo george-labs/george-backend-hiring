@@ -5,19 +5,10 @@ package iteration1
  * It can calculate the number of stop words, the average word length, the number of unique words,
  * and the total number of words in a given sentence.
  */
-class WordCounter {
+class WordCounter(val stopWords: Set<String> = mutableSetOf<String>(), val dictWords: Set<String> = mutableSetOf<String>()) {
+
     private val regex = "\\b[a-zA-Z-]+\\b".toRegex()
-    private val stopWords: MutableSet<String> = mutableSetOf()
-    private val dictWords: MutableSet<String> = mutableSetOf()
 
-    // TODO: Move thing out from processing in constructor. The values of regex, stopWords and dictWords should be provided to this class.
-    init {
-        val stopText = object {}.javaClass.getResource("/stopwords.txt")?.readText()
-        stopText?.split("\n")?.map { it.trim().lowercase() }?.forEach(stopWords::add)
-
-        val dictText = object {}.javaClass.getResource("/dict.txt")?.readText()
-        dictText?.split("\n")?.map { it.trim().lowercase() }?.forEach(dictWords::add)
-    }
 
     /**
      * Returns the number of stop words in the stopWords list.
@@ -28,12 +19,24 @@ class WordCounter {
 
     fun dictWordsCount():Int = dictWords.size
 
+
     fun getWords(sentence: String?):List<String>  {
         return sentence?.let {
             regex.findAll(sentence)
                 .map { it.value.trim() }
                 .map { it.lowercase() }
                 .filter { !stopWords.contains(it) }
+                .toList()
+        } ?: emptyList()
+    }
+
+    fun getMarkedWords(sentence: String?):List<String> {
+        return sentence?.let {
+            regex.findAll(sentence)
+                .map { it.value.trim() }
+                .map { it.lowercase() }
+                .filter { !stopWords.contains(it) }
+                .map { if (dictWords.contains(it)) it else ("$it*") }
                 .toList()
         } ?: emptyList()
     }
@@ -71,7 +74,6 @@ class WordCounter {
     fun countUniqueWords(sentence: String?): Int {
         return getWords(sentence).toSet().size
     }
-
 
     /**
      * Counts the number of words in a given sentence.
