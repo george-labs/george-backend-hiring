@@ -1,11 +1,16 @@
 import iteration1.WordCounter
 
-fun main() {
+fun main(args: Array<String>) {
     val wordCounter = WordCounter()
-    print("Enter text:")
 
-    val input = readlnOrNull()
-    val size = wordCounter.countWords(input)
+    if(args.isNotEmpty()) {
 
-    println("Number of words: $size")
+    } else {
+        print("Enter text:")
+
+        val input = readlnOrNull()
+        val size = wordCounter.countWords(input)
+
+        println("Number of words: $size")
+    }
 }
