@@ -1,22 +1,22 @@
 package iteration1
 
-class WordCounter() {
+class WordCounter {
 
-    private val stopwords: MutableSet<String> = mutableSetOf()
+    private val stopWords: MutableSet<String> = mutableSetOf()
 
     init {
         val wordsText = object {}.javaClass.getResource("/stopwords.txt")?.readText()
-        wordsText?.split("\n")?.forEach(stopwords::add)
+        wordsText?.split("\n")?.map { it.lowercase() }?.forEach(stopWords::add)
     }
 
-    fun stopWordsCount():Int = stopwords.size
+    fun stopWordsCount():Int = stopWords.size
 
     fun countUniqueWords(sentence: String?): Int {
         sentence?.let {
             val regex = "\\b[a-zA-Z]+\\b".toRegex()
             val set = regex.findAll(sentence).filter {
-                !stopwords.contains(it.value.trim())
-            }.map { it.value }.toSet()
+                !stopWords.contains(it.value.trim())
+            }.map { it.value.lowercase() }.toSet()
 
             return set.size
         }
@@ -28,7 +28,7 @@ class WordCounter() {
         sentence?.let {
             val regex = "\\b[a-zA-Z]+\\b".toRegex()
             val matches = regex.findAll(sentence).filter {
-                !stopwords.contains(it.value.trim())
+                !stopWords.contains(it.value.trim())
             }
 
             return matches.count()
@@ -36,6 +36,4 @@ class WordCounter() {
 
         return 0
     }
-
-
 }
