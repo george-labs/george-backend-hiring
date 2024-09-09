@@ -11,6 +11,19 @@ class WordCounter() {
 
     fun stopWordsCount():Int = stopwords.size
 
+    fun countUniqueWords(sentence: String?): Int {
+        sentence?.let {
+            val regex = "\\b[a-zA-Z]+\\b".toRegex()
+            val set = regex.findAll(sentence).filter {
+                !stopwords.contains(it.value.trim())
+            }.map { it.value }.toSet()
+
+            return set.size
+        }
+
+        return 0
+    }
+
     fun countWords(sentence: String?): Int {
         sentence?.let {
             val regex = "\\b[a-zA-Z]+\\b".toRegex()

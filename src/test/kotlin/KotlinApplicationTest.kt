@@ -22,7 +22,7 @@ class KotlinApplicationTest {
         // Verify the output
         val capturedOutput = outputStream.toString().trim()
 
-        assertEquals("Number of words: 4", capturedOutput)
+        assertEquals("Number of words: 4, unique: 4", capturedOutput)
     }
 
     /*

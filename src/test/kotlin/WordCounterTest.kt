@@ -47,4 +47,25 @@ class WordCounterTest {
         val actualCount = wordCounter.countWords(sentence)
         assertEquals(expectedCount, actualCount)
     }
+
+    @Test
+    fun testUniqueWordsExcludes() {
+        val wordCounter = WordCounter()
+        val sentence = "Mary had a little lamb a little lamb"
+        val expectedCount = 4
+        val actualCount = wordCounter.countUniqueWords(sentence)
+        assertEquals(expectedCount, actualCount)
+    }
+
+    @Test
+    fun testKnownVariety() {
+        val wordCounter = WordCounter()
+        val sentence = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."
+        val expectedWordCount = 9
+        val expectedUniqueCount = 7
+        val wordCount = wordCounter.countWords(sentence)
+        val uniqueCount = wordCounter.countUniqueWords(sentence)
+        assertEquals(expectedWordCount, wordCount)
+        assertEquals(expectedUniqueCount, uniqueCount)
+    }
 }

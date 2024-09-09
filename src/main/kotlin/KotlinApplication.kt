@@ -10,16 +10,16 @@ fun main(args: Array<String>) {
         val contents: String? = readFileContents(filename)
 
         contents?.let {
-            printOutput(wordCounter.countWords(it))
+            printOutput(wordCounter.countWords(it), wordCounter.countUniqueWords(it))
         } ?: run {
             println("Unable to read file $filename")
         }
     } else {
         print("Enter text:")
 
-        val input = readlnOrNull()
+        val content = readlnOrNull()
 
-        printOutput(wordCounter.countWords(input))
+        printOutput(wordCounter.countWords(content), wordCounter.countUniqueWords(content))
     }
 }
 
@@ -33,6 +33,6 @@ fun readFileContents(filename: String): String? {
     }
 }
 
-fun printOutput(size:Int) {
-    println("Number of words: $size")
+fun printOutput(number: Int, unique:Int) {
+    println("Number of words: $number, unique: $unique")
 }
