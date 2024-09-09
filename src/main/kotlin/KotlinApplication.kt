@@ -11,13 +11,14 @@ import java.io.File
  */
 fun main(args: Array<String>) {
     val wordCounter = WordCounter()
+    val printIndex = args.contains("-index")
 
-    if(args.isNotEmpty()) {
+    if(args.any { it != "-index" }) {
         val filename = args[0]
         val contents: String? = readFileContents(filename)
 
         contents?.let {
-            printOutput(wordCounter.countWords(it), wordCounter.countUniqueWords(it), wordCounter.countAverageWordLength(it))
+            printOutput(if (printIndex) wordCounter.getWords(it) else null, wordCounter.countWords(it), wordCounter.countUniqueWords(it), wordCounter.countAverageWordLength(it))
         } ?: run {
             println("Unable to read file $filename")
         }
@@ -26,7 +27,7 @@ fun main(args: Array<String>) {
 
         val content = readlnOrNull()
 
-        printOutput(wordCounter.countWords(content), wordCounter.countUniqueWords(content), wordCounter.countAverageWordLength(content))
+        printOutput(if (printIndex) wordCounter.getWords(content) else null, wordCounter.countWords(content), wordCounter.countUniqueWords(content), wordCounter.countAverageWordLength(content))
     }
 }
 
@@ -40,6 +41,12 @@ fun readFileContents(filename: String): String? {
     }
 }
 
-fun printOutput(number: Int, unique:Int, average:Double) {
+fun printOutput(words:List<String>?, number: Int, unique:Int, average:Double) {
     println("Number of words: $number, unique: $unique; average word length: $average")
+    if(!words.isNullOrEmpty()) {
+        println("Index:")
+        words.forEach {
+            println(it)
+        }
+    }
 }

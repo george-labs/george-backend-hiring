@@ -21,6 +21,16 @@ class WordCounter {
      */
     fun stopWordsCount():Int = stopWords.size
 
+    fun getWords(sentence: String?):List<String>  {
+        return sentence?.let {
+            regex.findAll(sentence)
+                .map { it.value.trim() }
+                .map { it.lowercase() }
+                .filter { !stopWords.contains(it) }
+                .toList()
+        } ?: emptyList()
+    }
+
     /**
      * Calculates the average word length of a given sentence.
      *
@@ -28,15 +38,9 @@ class WordCounter {
      * @return the average word length as a Double value. Returns 0.0 if the sentence is null or empty.
      */
     fun countAverageWordLength(sentence: String?):Double  {
-        val words = sentence?.let {
-            regex.findAll(sentence)
-                .map { it.value.trim() }
-                .map { it.lowercase() }
-                .filter { !stopWords.contains(it) }
-                .toList()
-        }
+        val words = getWords(sentence)
 
-        words?.let {
+        words.let {
             val totalLength = words.sumOf { it.length }
 
             // Calculate the number of words
@@ -49,10 +53,7 @@ class WordCounter {
                 0.0
             }
         }
-
-        return 0.0
     }
-
 
     /**
      * Counts the number of unique words in a given sentence.
@@ -61,13 +62,7 @@ class WordCounter {
      * @return the number of unique words in the sentence. Returns 0 if the sentence is null or empty.
      */
     fun countUniqueWords(sentence: String?): Int {
-        return sentence?.let {
-            regex.findAll(sentence)
-                .map { it.value.trim() }
-                .map { it.lowercase() }
-                .filter { !stopWords.contains(it)
-            }.toSet().size
-        } ?: 0
+        return getWords(sentence).toSet().size
     }
 
 
@@ -78,12 +73,6 @@ class WordCounter {
      * @return the number of words in the sentence. Returns 0 if the sentence is null.
      */
     fun countWords(sentence: String?): Int {
-        return sentence?.let {
-            regex.findAll(sentence)
-                .map { it.value.trim() }
-                .map { it.lowercase() }
-                .filter { !stopWords.contains(it) }
-                .count()
-        } ?: 0
+        return getWords(sentence).size
     }
 }
