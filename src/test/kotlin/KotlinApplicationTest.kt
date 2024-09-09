@@ -24,4 +24,6 @@ class KotlinApplicationTest {
 
         assertEquals("Number of words: 4, unique: 4; average word length: 4.25", capturedOutput)
     }
+
+    //TODO: Add more tests here for testing with arguments.
 }

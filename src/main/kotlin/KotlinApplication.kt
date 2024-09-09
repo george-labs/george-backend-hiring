@@ -41,6 +41,7 @@ fun readFileContents(filename: String): String? {
     }
 }
 
+// TODO: Add multiple version of this that work so that no printing logic is encapsulated in this function.
 fun printOutput(words:List<String>?, number: Int, unique:Int, average:Double) {
     println("Number of words: $number, unique: $unique; average word length: $average")
     if(!words.isNullOrEmpty()) {

@@ -10,6 +10,7 @@ class WordCounter {
     private val stopWords: MutableSet<String> = mutableSetOf()
     private val dictWords: MutableSet<String> = mutableSetOf()
 
+    // TODO: Move thing out from processing in constructor. The values of regex, stopWords and dictWords should be provided to this class.
     init {
         val stopText = object {}.javaClass.getResource("/stopwords.txt")?.readText()
         stopText?.split("\n")?.map { it.trim().lowercase() }?.forEach(stopWords::add)
