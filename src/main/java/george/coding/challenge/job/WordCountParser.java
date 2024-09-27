@@ -18,12 +18,13 @@ public class WordCountParser implements Parser {
 
     @Override
     public Result parse(String text) {
-        int wordCount = Math.toIntExact(Pattern.compile(wordSeparator())
+        var words = Pattern.compile(wordSeparator())
                 .splitAsStream(text)
-                .flatMap(word -> Pattern.compile(regex()).matcher(word).results().filter(this::predicate))
-                .count());
+                .flatMap(word -> Pattern.compile(regex()).matcher(word).results().filter(this::predicate)).toList();
 
-        return new Result(wordCount);
+        var uniqueWordsCount = Math.toIntExact(words.stream().map(MatchResult::group).distinct().count());
+
+        return new Result(words.size(), uniqueWordsCount);
     }
 
     @Override

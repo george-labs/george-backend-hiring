@@ -23,7 +23,7 @@ class ConsolePrinterTest {
     @Test
     void shouldSentTextToPrintStream() {
         // given
-        Result result = new Result(0);
+        Result result = new Result(5, 5);
         ConsolePrinter consolePrinter = new ConsolePrinter(printStream);
 
         // when

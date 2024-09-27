@@ -5,5 +5,5 @@ package george.coding.challenge.job;
  *
  * @param wordCount
  */
-public record Result(int wordCount) {
+public record Result(int wordCount, int uniqueWordCount) {
 }
