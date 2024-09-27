@@ -19,6 +19,6 @@ public class ConsolePrinter implements Printer {
 
     @Override
     public void print(Result result) {
-        printStream.println(String.format(Consts.RESULT_TEXT, result.wordCount()));
+        printStream.printf((Consts.RESULT_TEXT) + "%n", result.wordCount());
     }
 }

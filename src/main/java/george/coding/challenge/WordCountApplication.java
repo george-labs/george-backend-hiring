@@ -3,12 +3,15 @@ package george.coding.challenge;
 import george.coding.challenge.job.WordCountParser;
 import george.coding.challenge.printer.ConsolePrinter;
 import george.coding.challenge.reader.ConsoleReader;
+import george.coding.challenge.reader.FileReader;
+import george.coding.challenge.reader.TextReader;
 
 import java.io.IOException;
 
-public class JavaApplication {
+public class WordCountApplication {
     public static void main(String[] args) throws IOException {
-        var reader = new ConsoleReader();
+        TextReader reader = args.length == 0 ? new ConsoleReader() : new FileReader(args[0]);
+
         var wordCountParser = new WordCountParser();
         var printer = new ConsolePrinter();
 

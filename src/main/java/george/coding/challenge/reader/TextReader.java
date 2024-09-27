@@ -1,5 +1,8 @@
 package george.coding.challenge.reader;
 
-public interface TextReader {
-    String read();
+import java.io.Closeable;
+import java.io.IOException;
+
+public interface TextReader extends Closeable {
+    String read() throws IOException;
 }

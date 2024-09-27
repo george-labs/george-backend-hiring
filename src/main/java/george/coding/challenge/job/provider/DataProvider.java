@@ -5,26 +5,25 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DataProvider {
 
-    private final Set<String> words;
+    private final List<String> words;
 
     public DataProvider(String filename) throws IOException {
         this.words = readWords(createPath(filename));
     }
 
-    public Set<String> getExcludedWords() {
+    public List<String> words() {
         return words;
     }
 
-    private Set<String> readWords(Path path) throws IOException {
+    private List<String> readWords(Path path) throws IOException {
         try (Stream<String> lines = Files.lines(path)) {
-            return lines.collect(Collectors.toSet());
+            return lines.toList();
         }
     }
 

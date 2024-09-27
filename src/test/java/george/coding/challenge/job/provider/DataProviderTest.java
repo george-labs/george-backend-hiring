@@ -20,7 +20,7 @@ class DataProviderTest {
 
     @Test
     public void shouldReadAllFiles() {
-        assertEquals(4, dataProvider.getExcludedWords().size());
+        assertEquals(4, dataProvider.words().size());
     }
 
     @Test

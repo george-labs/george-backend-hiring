@@ -21,7 +21,7 @@ class ConsolePrinterTest {
     }
 
     @Test
-    void checksIfTextSentToPrintStream() {
+    void shouldSentTextToPrintStream() {
         // given
         Result result = new Result(0);
         ConsolePrinter consolePrinter = new ConsolePrinter(printStream);

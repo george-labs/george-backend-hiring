@@ -2,10 +2,9 @@ package george.coding.challenge.reader;
 
 import george.coding.challenge.Consts;
 
-import java.io.Closeable;
 import java.util.Scanner;
 
-public class ConsoleReader implements TextReader, Closeable {
+public class ConsoleReader implements TextReader {
 
     private final Scanner scanner;
 

@@ -1,5 +1,6 @@
 package george.coding.challenge.reader;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -31,7 +32,7 @@ class ConsoleReaderTest {
             " ",
             "Special characters!@#$%^&*()"
     })
-    void testReadWithSimulatedInput(String text) {
+    void shouldReadFromSimulatedInputStream(String text) {
         // Prepare the simulated input
         InputStream inputStream = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
 
@@ -47,7 +48,7 @@ class ConsoleReaderTest {
     }
 
     @Test
-    void throwsNoSuchElementExceptionWhenNoLineFound() {
+    void shouldTrowNoSuchElementExceptionWhenNoLineFound() {
         // Prepare the simulated input
         InputStream inputStream = new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8));
 
@@ -61,7 +62,7 @@ class ConsoleReaderTest {
         assertThrows(NoSuchElementException.class, consoleReader::read);
     }
 
-    @BeforeEach
+    @AfterEach
     void tearDown() {
         System.setIn(backupIn);
     }

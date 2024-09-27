@@ -38,7 +38,7 @@ public class WordCountParser implements Parser {
 
     @Override
     public boolean predicate(MatchResult matchResult) {
-        var stream = dataProvider.getExcludedWords();
+        var stream = dataProvider.words();
         return !stream.contains(matchResult.group());
     }
 }
