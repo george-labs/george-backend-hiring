@@ -88,8 +88,8 @@ class WordCountParserTest {
                 Arguments.of("Mary", 4),
                 Arguments.of("Mary Mary Mary", 4),
                 Arguments.of("Mary Mary MARY", 4),
-                Arguments.of("Mary had a little lamb", 4.25),
-                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall", 6.428571428571429),
+                Arguments.of("Mary had a little lamb", (double) 17 / 4),
+                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall", (double) 45 / 7),
                 Arguments.of("Humpty-Dumpty-sat-on-a-wall. Humpty-Dumpty-sat-on-a-wall.", 27)
         );
     }

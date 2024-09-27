@@ -12,4 +12,16 @@ public record Result(
         int uniqueWordCount,
         // average length of word
         double averageLength) {
+
+    public Result {
+        if (wordCount < 0) {
+            throw new IllegalArgumentException("Word count cannot be negative");
+        }
+        if (uniqueWordCount < 0) {
+            throw new IllegalArgumentException("Unique word count cannot be negative");
+        }
+        if (uniqueWordCount > wordCount) {
+            throw new IllegalArgumentException("Unique word count cannot be higher than word count");
+        }
+    }
 }

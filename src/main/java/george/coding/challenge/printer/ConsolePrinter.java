@@ -19,6 +19,10 @@ public class ConsolePrinter implements Printer {
 
     @Override
     public void print(Result result) {
-        printStream.println(String.format(Constants.RESULT_TEXT, result.wordCount(), result.uniqueWordCount(), result.averageLength()));
+        printStream.println(String.format(
+                Constants.RESULT_TEXT,
+                result.wordCount(),
+                result.uniqueWordCount(),
+                result.averageLength()));
     }
 }

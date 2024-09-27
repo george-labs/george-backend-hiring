@@ -9,5 +9,5 @@ public interface Parser {
 
     String wordSeparator();
 
-    boolean predicate(MatchResult predicate);
+    boolean matches(MatchResult predicate);
 }

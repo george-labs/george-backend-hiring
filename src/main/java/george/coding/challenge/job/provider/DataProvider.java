@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class DataProvider {
@@ -14,7 +15,9 @@ public class DataProvider {
     private final List<String> words;
 
     public DataProvider(String filename) throws IOException {
-        this.words = readWords(createPath(filename));
+        Path path = createPath(filename)
+                .orElseThrow(() -> new FileNotFoundException("Resource not found: " + filename));
+        this.words = readWords(path);
     }
 
     public List<String> words() {
@@ -27,11 +30,11 @@ public class DataProvider {
         }
     }
 
-    private Path createPath(String fileName) throws FileNotFoundException {
+    private Optional<Path> createPath(String fileName) {
         try {
-            return Paths.get(Objects.requireNonNull(getClass().getClassLoader().getResource(fileName)).toURI());
+            return Optional.of(Paths.get(Objects.requireNonNull(getClass().getClassLoader().getResource(fileName)).toURI()));
         } catch (Exception e) {
-            throw new FileNotFoundException(e.getMessage());
+            return Optional.empty();
         }
     }
 

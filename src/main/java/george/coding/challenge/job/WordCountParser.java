@@ -20,7 +20,8 @@ public class WordCountParser implements Parser {
     public Result parse(String text) {
         var words = Pattern.compile(wordSeparator())
                 .splitAsStream(text)
-                .flatMap(word -> Pattern.compile(regex()).matcher(word).results().filter(this::predicate)).toList();
+                .flatMap(word -> Pattern.compile(regex()).matcher(word).results().filter(this::matches))
+                .toList();
 
         var wordCount = words.size();
         var sumLength = words.stream().mapToInt(value -> value.group().length()).sum();
@@ -36,11 +37,11 @@ public class WordCountParser implements Parser {
 
     @Override
     public String wordSeparator() {
-        return " +";
+        return " ";
     }
 
     @Override
-    public boolean predicate(MatchResult matchResult) {
+    public boolean matches(MatchResult matchResult) {
         var stream = dataProvider.words();
         return !stream.contains(matchResult.group());
     }
