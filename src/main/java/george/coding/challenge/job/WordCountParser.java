@@ -22,9 +22,11 @@ public class WordCountParser implements Parser {
                 .splitAsStream(text)
                 .flatMap(word -> Pattern.compile(regex()).matcher(word).results().filter(this::predicate)).toList();
 
+        var wordCount = words.size();
+        var sumLength = words.stream().mapToInt(value -> value.group().length()).sum();
         var uniqueWordsCount = Math.toIntExact(words.stream().map(MatchResult::group).distinct().count());
 
-        return new Result(words.size(), uniqueWordsCount);
+        return new Result(wordCount, uniqueWordsCount, wordCount > 0 ? (double) sumLength / wordCount : 0);
     }
 
     @Override

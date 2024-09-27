@@ -23,14 +23,14 @@ class ConsolePrinterTest {
     @Test
     void shouldSentTextToPrintStream() {
         // given
-        Result result = new Result(5, 5);
+        Result result = new Result(5, 5, 5);
         ConsolePrinter consolePrinter = new ConsolePrinter(printStream);
 
         // when
         consolePrinter.print(result);
 
         // then
-        String expectedOutput = String.format(Constants.RESULT_TEXT, result.wordCount(), result.uniqueWordCount()) + System.lineSeparator();
+        String expectedOutput = String.format(Constants.RESULT_TEXT, result.wordCount(), result.uniqueWordCount(), result.averageLength()) + System.lineSeparator();
         assertEquals(expectedOutput, outputStream.toString());
     }
 

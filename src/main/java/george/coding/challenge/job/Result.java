@@ -5,5 +5,11 @@ package george.coding.challenge.job;
  *
  * @param wordCount
  */
-public record Result(int wordCount, int uniqueWordCount) {
+public record Result(
+        // count of words
+        int wordCount,
+        // count of unique words
+        int uniqueWordCount,
+        // average length of word
+        double averageLength) {
 }

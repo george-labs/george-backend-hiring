@@ -14,6 +14,11 @@ class WordCountParserTest {
 
     private Parser wordparser;
 
+    @BeforeEach
+    void setUp() throws IOException {
+        wordparser = new WordCountParser();
+    }
+
     /**
      * Provides arguments in following format:
      * Input text | number of words | number of unique words
@@ -46,13 +51,11 @@ class WordCountParserTest {
                 Arguments.of("-1-2-3-4-5-6-7-8-9-", 10, 1),
                 Arguments.of("Humpty-Dumpty", 1, 1),
                 Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall", 7, 6),
-                Arguments.of("Humpty-Dumpty-sat-on-a-wall. Humpty-Dumpty-sat-on-a-wall.", 2, 1)
-        );
-    }
+                Arguments.of("Humpty-Dumpty-sat-on-a-wall. Humpty-Dumpty-sat-on-a-wall.", 2, 1),
+                // text fixtures for average length
+                Arguments.of(" Mary had a little lamb ", 4, 4, 17 / 4)
 
-    @BeforeEach
-    void setUp() throws IOException {
-        wordparser = new WordCountParser();
+        );
     }
 
     @ParameterizedTest
@@ -65,6 +68,30 @@ class WordCountParserTest {
         // then
         assertEquals(expectedCount, result.wordCount(), "Mismatch in expected count assertion");
         assertEquals(expectedUniqueCount, result.uniqueWordCount(), "Mismatch in expected unique count assertion");
+
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideAverageLengthArguments")
+    void checksWordParserAverageLengthResult(String input, double averageLength) {
+        // given
+        // when
+        var result = wordparser.parse(input);
+
+        // then
+        assertEquals(averageLength, result.averageLength(), "Mismatch in average length assertion");
+
+    }
+
+    private static Stream<Arguments> provideAverageLengthArguments() {
+        return Stream.of(
+                Arguments.of("Mary", 4),
+                Arguments.of("Mary Mary Mary", 4),
+                Arguments.of("Mary Mary MARY", 4),
+                Arguments.of("Mary had a little lamb", 4.25),
+                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall", 6.428571428571429),
+                Arguments.of("Humpty-Dumpty-sat-on-a-wall. Humpty-Dumpty-sat-on-a-wall.", 27)
+        );
     }
 
 }

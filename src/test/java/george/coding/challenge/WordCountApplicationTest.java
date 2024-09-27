@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
-import static george.coding.challenge.Constants.MYTEXT_FILENAME;
+import static george.coding.challenge.Constants.MY_TEXT_FILENAME;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WordCountApplicationTest {
@@ -28,11 +28,11 @@ class WordCountApplicationTest {
         PrintStream printStream = new PrintStream(outputStream);
         System.setOut(printStream);
         // when
-        WordCountApplication.main(new String[]{MYTEXT_FILENAME});
+        WordCountApplication.main(new String[]{MY_TEXT_FILENAME});
 
         // then
         var text = outputStream.toString(StandardCharsets.UTF_8);
-        assertEquals("Number of words: 4, unique: 4", text.trim());
+        assertEquals("Number of words: 4, unique: 4; average word length: 4.25 characters", text.trim());
     }
 
     @AfterEach

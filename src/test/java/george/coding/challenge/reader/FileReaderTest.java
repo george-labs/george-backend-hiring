@@ -14,7 +14,7 @@ class FileReaderTest {
     @Test
     public void shouldReadTextFromExistingFile() throws IOException {
         // given
-        var fileReader = new FileReader(Constants.MYTEXT_FILENAME);
+        var fileReader = new FileReader(Constants.MY_TEXT_FILENAME);
 
         // when
         var result = fileReader.read();

@@ -13,3 +13,9 @@ The An On Off -> Expected 4
 
 Again assume that comparision is not case sensitive and 'Mary' and 'mary' are treated as two uniques words.
 test example: Arguments.of("Mary mary MARY", 3, 3) 
+
+# Iteration 5
+
+# Iteration 6
+
+Assumed that sometext.txt is only example here and average calculation is just only math :)
