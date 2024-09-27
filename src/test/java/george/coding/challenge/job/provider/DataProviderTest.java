@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static george.coding.challenge.Consts.EXCLUDED_WORDS_FILENAME;
+import static george.coding.challenge.Constants.EXCLUDED_WORDS_FILENAME;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

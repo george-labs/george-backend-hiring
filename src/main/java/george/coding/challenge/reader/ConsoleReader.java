@@ -1,6 +1,6 @@
 package george.coding.challenge.reader;
 
-import george.coding.challenge.Consts;
+import george.coding.challenge.Constants;
 
 import java.util.Scanner;
 
@@ -18,7 +18,7 @@ public class ConsoleReader implements TextReader {
 
     @Override
     public String read() {
-        System.out.println(Consts.PROMPT_TEXT);
+        System.out.println(Constants.PROMPT_TEXT);
         return scanner.nextLine();
     }
 

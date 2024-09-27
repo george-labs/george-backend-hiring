@@ -1,6 +1,6 @@
 package george.coding.challenge.printer;
 
-import george.coding.challenge.Consts;
+import george.coding.challenge.Constants;
 import george.coding.challenge.job.Result;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ class ConsolePrinterTest {
         consolePrinter.print(result);
 
         // then
-        String expectedOutput = String.format(Consts.RESULT_TEXT, result.wordCount()) + System.lineSeparator();
+        String expectedOutput = String.format(Constants.RESULT_TEXT, result.wordCount(), result.uniqueWordCount()) + System.lineSeparator();
         assertEquals(expectedOutput, outputStream.toString());
     }
 

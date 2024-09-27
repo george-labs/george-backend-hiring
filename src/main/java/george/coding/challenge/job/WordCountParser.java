@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
-import static george.coding.challenge.Consts.EXCLUDED_WORDS_FILENAME;
+import static george.coding.challenge.Constants.EXCLUDED_WORDS_FILENAME;
 
 public class WordCountParser implements Parser {
 

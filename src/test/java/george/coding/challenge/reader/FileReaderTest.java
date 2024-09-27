@@ -1,5 +1,6 @@
 package george.coding.challenge.reader;
 
+import george.coding.challenge.Constants;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -13,7 +14,7 @@ class FileReaderTest {
     @Test
     public void shouldReadTextFromExistingFile() throws IOException {
         // given
-        var fileReader = new FileReader("mytext.txt");
+        var fileReader = new FileReader(Constants.MYTEXT_FILENAME);
 
         // when
         var result = fileReader.read();
@@ -29,7 +30,7 @@ class FileReaderTest {
 
         // when
         // then
-        assertThrows(FileNotFoundException.class, () -> fileReader.read());
+        assertThrows(FileNotFoundException.class, fileReader::read);
     }
 
 }

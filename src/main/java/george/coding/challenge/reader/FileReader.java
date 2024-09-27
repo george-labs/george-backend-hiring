@@ -3,7 +3,6 @@ package george.coding.challenge.reader;
 import george.coding.challenge.job.provider.DataProvider;
 
 import java.io.IOException;
-import java.util.stream.Collectors;
 
 public class FileReader implements TextReader {
 
@@ -21,7 +20,7 @@ public class FileReader implements TextReader {
     public String read(String path) throws IOException {
 
         DataProvider dataProvider = new DataProvider(path);
-        return dataProvider.words().stream().collect(Collectors.joining(" "));
+        return String.join(" ", dataProvider.words());
     }
 
     @Override
