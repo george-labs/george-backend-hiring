@@ -40,7 +40,13 @@ class WordCountParserTest {
                 // text fixtures for unique word count
                 Arguments.of("Mary Mary Mary", 3, 1),
                 Arguments.of("Mary mary MARY", 3, 3),
-                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall", 9, 7)
+                // hyphen is not separator
+                Arguments.of("-", 1, 1),
+                Arguments.of("--- --- ---", 3, 1),
+                Arguments.of("-1-2-3-4-5-6-7-8-9-", 10, 1),
+                Arguments.of("Humpty-Dumpty", 1, 1),
+                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall", 7, 6),
+                Arguments.of("Humpty-Dumpty-sat-on-a-wall. Humpty-Dumpty-sat-on-a-wall.", 2, 1)
         );
     }
 
@@ -57,8 +63,8 @@ class WordCountParserTest {
         var result = wordparser.parse(input);
 
         // then
-        assertEquals(expectedCount, result.wordCount());
-        assertEquals(expectedUniqueCount, result.uniqueWordCount());
+        assertEquals(expectedCount, result.wordCount(), "Mismatch in expected count assertion");
+        assertEquals(expectedUniqueCount, result.uniqueWordCount(), "Mismatch in expected unique count assertion");
     }
 
 }

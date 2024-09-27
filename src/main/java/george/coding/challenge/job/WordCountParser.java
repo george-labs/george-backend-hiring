@@ -29,12 +29,12 @@ public class WordCountParser implements Parser {
 
     @Override
     public String regex() {
-        return "[a-zA-Z]+";
+        return "[a-zA-Z\\-]+";
     }
 
     @Override
     public String wordSeparator() {
-        return "\\s+";
+        return " +";
     }
 
     @Override
