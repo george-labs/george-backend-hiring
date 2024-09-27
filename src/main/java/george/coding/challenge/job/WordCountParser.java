@@ -1,9 +1,20 @@
 package george.coding.challenge.job;
 
+import george.coding.challenge.job.provider.DataProvider;
+
+import java.io.IOException;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
+import static george.coding.challenge.Consts.EXCLUDED_WORDS_FILENAME;
+
 public class WordCountParser implements Parser {
+
+    private final DataProvider dataProvider;
+
+    public WordCountParser() throws IOException {
+        dataProvider = new DataProvider(EXCLUDED_WORDS_FILENAME);
+    }
 
     @Override
     public Result parse(String text) {
@@ -27,6 +38,7 @@ public class WordCountParser implements Parser {
 
     @Override
     public boolean predicate(MatchResult matchResult) {
-        return true;
+        var stream = dataProvider.getExcludedWords();
+        return !stream.contains(matchResult.group());
     }
 }
