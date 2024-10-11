@@ -1,10 +1,12 @@
 package com.example;
 
+import com.example.components.ConsoleTextProvider;
+import com.example.components.FileTextProvider;
+import com.example.components.ITextProvider;
 import com.example.utils.FileHelper;
 import com.example.utils.WordCounter;
 
 import java.util.List;
-import java.util.Scanner;
 
 /**
  *
@@ -17,20 +19,14 @@ public class JavaApplication {
     private static final String DEFAULT_STOPWORDS_FILE = "stopwords.txt";
 
     public void run(String stopwordsFileName, String textFileName) {
-        Scanner scanner = new Scanner(System.in);
         List<String> stopwords = FileHelper.getFileLines(stopwordsFileName);
-        List<String> textFileContent = FileHelper.getFileLines(textFileName);
+
+        ITextProvider textProvider = textFileName != null
+                ? new FileTextProvider(textFileName)
+                : new ConsoleTextProvider();
 
         if (stopwords != null) {
-            if (textFileContent != null) {
-                String text = String.join(" ", textFileContent);
-                int words = WordCounter.countWordsFilteringOutStopwords(text, stopwords);
-                System.out.println("Number of words: " + words);
-                return;
-            }
-            System.out.println("Enter text: ");
-            String text = scanner.nextLine();
-
+            String text = textProvider.getInputText();
             int words = WordCounter.countWordsFilteringOutStopwords(text, stopwords);
             System.out.println("Number of words: " + words);
         } else {

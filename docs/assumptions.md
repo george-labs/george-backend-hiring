@@ -21,3 +21,4 @@
 - if file is found than assume that it is valid
 
 ## Iteration 3
+- the file is assumed to be placed in the same directory as where the application is running or by full path
