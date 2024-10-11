@@ -17,6 +17,7 @@ public class JavaApplicationTest {
 
         String output = testOut.toString().trim();
         Assertions.assertNotNull(output);
+        System.out.println(output);
         Assertions.assertTrue(output.endsWith("Number of words: 4"));
     }
 
@@ -31,4 +32,27 @@ public class JavaApplicationTest {
         Assertions.assertNotNull(output);
         Assertions.assertTrue(output.endsWith("Number of words: 2"));
     }
+
+    @Test
+    public void testWhenTextFileIsAvailable() {
+        ByteArrayOutputStream testOut = TestHelper.provideOutput();
+
+        JavaApplication.main(new String[]{"text.txt"});
+
+        String output = testOut.toString().trim();
+        Assertions.assertNotNull(output);
+        Assertions.assertTrue(output.endsWith("Number of words: 4"));
+    }
+
+    @Test
+    public void testWhenWhenStopwordsNotAvailable() {
+        ByteArrayOutputStream testErr = TestHelper.provideErrOutput();
+
+        new JavaApplication().run("stopw.txt", "text.txt");
+
+        String output = testErr.toString().trim();
+        Assertions.assertNotNull(output);
+        Assertions.assertTrue(output.endsWith("Stopwords file not found."));
+    }
+
 }
