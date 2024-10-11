@@ -9,4 +9,7 @@
 - so let's assume there will be no special characters in the text
 - and we split just by spaces
 - so "Hello, World!" will have 0 words while "Hello World" will have 2 words
- 
+
+## Iteration 2
+- file name is specified as "stopwords.txt"
+- that means it will be hardcoded in main function
