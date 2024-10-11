@@ -9,4 +9,13 @@
 - so let's assume there will be no special characters in the text
 - and we split just by spaces
 - so "Hello, World!" will have 0 words while "Hello World" will have 2 words
- 
+
+## Iteration 2
+- file name is specified as "stopwords.txt"
+- that means it will be hardcoded in main function
+- there is no specification about the size of the file
+- so let's assume it will be small enough to fit in memory
+- there is no specification about the encoding of the file
+- so let's assume it will be ASCII encoded
+- let's assume that the file will be in application resources directory
+- if file is found than assume that it is valid

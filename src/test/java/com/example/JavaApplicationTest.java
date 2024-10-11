@@ -17,7 +17,7 @@ public class JavaApplicationTest {
 
         String output = testOut.toString().trim();
         Assertions.assertNotNull(output);
-        Assertions.assertTrue(output.endsWith("Number of words: 5"));
+        Assertions.assertTrue(output.endsWith("Number of words: 4"));
     }
 
     @Test
@@ -29,6 +29,6 @@ public class JavaApplicationTest {
 
         String output = testOut.toString().trim();
         Assertions.assertNotNull(output);
-        Assertions.assertTrue(output.endsWith("Number of words: 3"));
+        Assertions.assertTrue(output.endsWith("Number of words: 2"));
     }
 }
