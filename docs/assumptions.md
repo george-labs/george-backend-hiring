@@ -17,5 +17,7 @@
 - so let's assume it will be small enough to fit in memory
 - there is no specification about the encoding of the file
 - so let's assume it will be ASCII encoded
-- let's assume that the file will be in application resources directory
+- let's assume that the file will be in directory where the application is run
 - if file is found than assume that it is valid
+
+## Iteration 3

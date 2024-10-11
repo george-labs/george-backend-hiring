@@ -1,13 +1,13 @@
 package com.example.testutils;
 
-import com.example.utils.ResourceFileHelper;
+import com.example.utils.FileHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class ResourceFileHelperTest {
+public class FileHelperTest {
 
     @Test
     public void testSuccessfulGetFileLines() {
@@ -16,7 +16,7 @@ public class ResourceFileHelperTest {
         List<String> expected = Arrays.asList("the", "a", "on", "off");
 
         // When
-        List<String> actual = ResourceFileHelper.getFileLines(fileName);
+        List<String> actual = FileHelper.getFileLines(fileName);
 
         // Then
         Assertions.assertEquals(expected, actual);
@@ -26,7 +26,7 @@ public class ResourceFileHelperTest {
     public void testFileNotFoundInGetFileLines() {
         // Given
         String fileName = "stopwor.txt";
-        List<String> actual = ResourceFileHelper.getFileLines(fileName);
+        List<String> actual = FileHelper.getFileLines(fileName);
 
 
         // Then
