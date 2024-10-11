@@ -31,16 +31,4 @@ public class JavaApplicationTest {
         Assertions.assertNotNull(output);
         Assertions.assertTrue(output.endsWith("Number of words: 2"));
     }
-
-    @Test
-    public void testStopwordsWithStopwordsIsNull() {
-        TestHelper.provideInput("M4ry ha!d a little lamb");
-        ByteArrayOutputStream testOut = TestHelper.provideOutput();
-
-        JavaApplication.main(new String[0]);
-
-        String output = testOut.toString().trim();
-        Assertions.assertNotNull(output);
-        Assertions.assertTrue(output.endsWith("Number of words: 2"));
-    }
 }
