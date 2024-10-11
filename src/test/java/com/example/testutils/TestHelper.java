@@ -15,4 +15,10 @@ public class TestHelper {
         System.setOut(new PrintStream(testOut));
         return testOut;
     }
+
+    public static ByteArrayOutputStream provideErrOutput() {
+        ByteArrayOutputStream testErr = new ByteArrayOutputStream();
+        System.setErr(new PrintStream(testErr));
+        return testErr;
+    }
 }

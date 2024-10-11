@@ -1,6 +1,5 @@
-package com.example.testutils;
+package com.example.utils;
 
-import com.example.utils.FileHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
