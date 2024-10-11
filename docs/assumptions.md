@@ -8,3 +8,5 @@
 - that means if "Hello, World!" is same as a "Hello World"
 - so let's assume there will be no special characters in the text
 - and we split just by spaces
+- so "Hello, World!" will have 0 words while "Hello World" will have 2 words
+ 

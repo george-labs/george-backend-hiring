@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.utils.WordCounter;
+
 import java.util.Scanner;
 
 public class JavaApplication {

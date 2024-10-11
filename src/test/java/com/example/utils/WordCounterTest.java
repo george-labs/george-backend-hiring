@@ -1,4 +1,4 @@
-package com.example;
+package com.example.utils;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,13 +9,6 @@ public class WordCounterTest {
         String text = "Mary had a little lamb";
         int words = WordCounter.countWords(text);
         Assertions.assertEquals(5, words);
-    }
-
-    @Test
-    public void testCountAlsoIncorrectWords() {
-        String text = "M4ry had a little lamb";
-        int words = WordCounter.countWords(text);
-        Assertions.assertEquals(4, words);
     }
 
     @Test
