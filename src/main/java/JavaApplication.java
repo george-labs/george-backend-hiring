@@ -4,10 +4,12 @@ import output.ConsoleOutputWriter;
 import output.OutputWriter;
 import service.WordCounter;
 
+import java.util.HashSet;
+
 public class JavaApplication {
 
     public static void main (String[] args) {
-        WordCounter wordCounter = new WordCounter();
+        WordCounter wordCounter = new WordCounter(new HashSet<>());
         InputReader inputReader = new ConsoleInputReader();
         OutputWriter outputWriter = new ConsoleOutputWriter();
 
