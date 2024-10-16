@@ -21,7 +21,7 @@ public class InputReaderService {
 
     public String getInput(String[] args) throws IOException {
         String inputText = null;
-        if (args != null && args.length > 0 && args[0] != null && !args[0].isEmpty()) {
+        if (checkIfArgumentExists(args)) {
             // TODO: read not only from resources
             Collection<String> words = wordsProvider.getWords(args[0]);
             inputText = String.join(" ", words);
@@ -32,4 +32,7 @@ public class InputReaderService {
         return inputText;
     }
 
+    private boolean checkIfArgumentExists(String[] args) {
+        return args != null && args.length > 0 && args[0] != null && !args[0].isEmpty();
+    }
 }
