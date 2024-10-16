@@ -9,10 +9,7 @@ public class WordCounter {
             return 0;
         }
         String[] words = textInput.split("\\s+");
-        int wordsCount = 0;
-        Stream<String> wordsStream = Stream.of(words);
-        wordsCount = (int)wordsStream.filter(word -> word.matches("[a-zA-Z]+")).count();
-        return wordsCount;
+        return (int)Stream.of(words).filter(word -> word.matches("[a-zA-Z]+")).count();
     }
 
 }
