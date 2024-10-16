@@ -14,11 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FileStopWordsProviderTest {
 
-    private FileStopWordsProvider underTest;
+    private FileWordsProvider underTest;
 
     @BeforeEach
     public void setUp() {
-        underTest = new FileStopWordsProvider();
+        underTest = new FileWordsProvider();
     }
 
     @ParameterizedTest
@@ -28,14 +28,14 @@ public class FileStopWordsProviderTest {
     }
     )
     public void givenValidFile_whenGetStopWords_thenReturnStopWords(String filePath, String expected) throws IOException {
-        Set<String> stopWords = underTest.getStopWords(filePath);
+        Set<String> stopWords = (Set<String>) underTest.getWords(filePath);
         Set<String> words = Arrays.stream(expected.split(";")).collect(Collectors.toSet());
         assertEquals(words, stopWords);
     }
 
     @Test
     public void givenEmptyFile_whenGetStopWords_thenReturnNoWords() throws IOException {
-        Set<String> stopWords = underTest.getStopWords("src/test/resources/empty_stop_words.txt");
+        Set<String> stopWords = (Set<String>) underTest.getWords("src/test/resources/empty_stop_words.txt");
         assertEquals(0, stopWords.size());
     }
 

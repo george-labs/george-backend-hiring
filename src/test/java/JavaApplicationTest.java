@@ -1,7 +1,7 @@
 import input.ConsoleInputReader;
-import input.FileStopWordsProvider;
+import input.FileWordsProvider;
 import input.InputReader;
-import input.StopWordsProvider;
+import input.WordsProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import output.ConsoleOutputWriter;
@@ -9,22 +9,23 @@ import output.OutputWriter;
 import service.WordCounter;
 
 import java.io.IOException;
+import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JavaApplicationTest {
 
-    private StopWordsProvider stopWordsProvider;
+    private WordsProvider stopWordsProvider;
     private InputReader inputReader;
     private OutputWriter outputWriter;
     private WordCounter wordCounter;
 
     @BeforeEach
     void setUp() throws IOException {
-        stopWordsProvider = new FileStopWordsProvider();
+        stopWordsProvider = new FileWordsProvider();
         inputReader = new ConsoleInputReader();
         outputWriter = new ConsoleOutputWriter();
-        wordCounter = new WordCounter(stopWordsProvider.getStopWords("src/test/resources/correct_stop_words.txt"));
+        wordCounter = new WordCounter(new HashSet<>(stopWordsProvider.getWords("src/test/resources/correct_stop_words.txt")));
     }
 
     @Test
