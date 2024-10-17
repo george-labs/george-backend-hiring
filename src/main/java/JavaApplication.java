@@ -3,9 +3,9 @@ public class JavaApplication {
     public static void main(String[] args) {
         WordCount wordCount = new WordCount();
         if (args.length == 0){
-            System.out.println("Number of words:" + wordCount.countWords());
+            wordCount.displayResultsFromConsole();
         } else{
-            System.out.println("Number of words:" + wordCount.readCountWordsFromFile(args[0]));
+            wordCount.displayResultsFromFile(args[0]);
         }
 
     }

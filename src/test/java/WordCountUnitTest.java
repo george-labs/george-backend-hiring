@@ -9,6 +9,8 @@ public class WordCountUnitTest {
     private final String testInvalidChar = "M$arry is";
     private final String testInvalidCharAllWrong = "M$arry $i #rt";
 
+    private final String uniqueWordTest = "Humpty Dumpty sat on a wall Humpty Dumpty had a great fall";
+
     private final WordCount wordCount = new WordCount();
 
     @Test
@@ -23,10 +25,17 @@ public class WordCountUnitTest {
 
     @Test
     public void wordCountCountResults() {
-        Assertions.assertEquals(1, wordCount.countWords(testOneWord));
-        Assertions.assertEquals(4, wordCount.countWords(testSentence));
-        Assertions.assertEquals(1, wordCount.countWords(testInvalidChar));
-        Assertions.assertEquals(0, wordCount.countWords(testInvalidCharAllWrong));
+        Assertions.assertEquals(1, wordCount.clearWordsList(testOneWord).size());
+        Assertions.assertEquals(4, wordCount.clearWordsList(testSentence).size());
+        Assertions.assertEquals(1, wordCount.clearWordsList(testInvalidChar).size());
+        Assertions.assertEquals(0, wordCount.clearWordsList(testInvalidCharAllWrong).size());
+        Assertions.assertEquals(9, wordCount.clearWordsList(uniqueWordTest).size());
+    }
+
+    @Test
+    public void uniqueWordsTest(){
+        Assertions.assertEquals(4, wordCount.countUniqueWords(wordCount.clearWordsList(testSentence)));
+        Assertions.assertEquals(5, wordCount.countUniqueWords(wordCount.clearWordsList(uniqueWordTest)));
     }
 
     @Test
