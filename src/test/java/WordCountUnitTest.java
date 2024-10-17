@@ -22,9 +22,9 @@ public class WordCountUnitTest {
 
     @Test
     public void wordCountCountResults() {
-        Assertions.assertEquals(1, wordCount.countResults(testOneWord));
-        Assertions.assertEquals(5, wordCount.countResults(testSentence));
-        Assertions.assertEquals(1, wordCount.countResults(testInvalidChar));
-        Assertions.assertEquals(0, wordCount.countResults(testInvalidCharAllWrong));
+        Assertions.assertEquals(1, wordCount.countWords(testOneWord));
+        Assertions.assertEquals(4, wordCount.countWords(testSentence));
+        Assertions.assertEquals(1, wordCount.countWords(testInvalidChar));
+        Assertions.assertEquals(0, wordCount.countWords(testInvalidCharAllWrong));
     }
 }

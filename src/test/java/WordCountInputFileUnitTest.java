@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class WordCountImoutFileUnitTest {
+public class WordCountInputFileUnitTest {
 
     private final String testOneWord = "Marry";
     private final String testSentence = "Marry had a little lamb";

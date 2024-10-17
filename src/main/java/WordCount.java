@@ -3,6 +3,7 @@ import helper.ReadUserInput;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WordCount {
 
@@ -13,10 +14,14 @@ public class WordCount {
         this.stopWordsList = readTextFile.readResourceTextFile();
     }
 
-    public Integer countNumbers() {
+    public Integer countWords() {
         ReadUserInput readUserInput = new ReadUserInput();
         String input = readUserInput.readInputFromConsole();
-        return isInputCorrect(input) ? splitWord(input).size() : Integer.valueOf(0);
+        return countWords(input);
+    }
+
+    public Integer countWords(String inputText) {
+        return isInputCorrect(inputText) ? splitWord(inputText).size() : Integer.valueOf(0);
     }
 
     public Boolean isInputCorrect(String input) {
@@ -29,11 +34,11 @@ public class WordCount {
 
     public List<String> splitWord(String inputString) {
         List<String> splitList = Arrays.stream(inputString.split("\\s")).toList();
-        return removeStopWords(splitList.stream().filter(item -> item.matches("[a-zA-Z]+")).toList());
+        return removeStopWords(splitList.stream().filter(item -> item.matches("[a-zA-Z]+")).collect(Collectors.toList()));
     }
 
     public List<String> removeStopWords(List<String> inputList){
-        stopWordsList.forEach(inputList::remove);
+        inputList.removeAll(stopWordsList);
         return inputList;
     }
 }
