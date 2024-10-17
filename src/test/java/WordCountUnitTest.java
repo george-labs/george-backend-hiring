@@ -37,7 +37,7 @@ public class WordCountUnitTest {
 
     @Test
     public void shouldThrowFileNotFoundException(){
-        FileIsMissingException fileIsMissingException = Assertions.assertThrows(FileIsMissingException.class, () ->
+        Assertions.assertThrows(FileIsMissingException.class, () ->
                 wordCount.readCountWordsFromFile("E:\\george-backend-hiring\\src\\test\\inputtext.txt"));
     }
 }

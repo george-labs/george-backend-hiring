@@ -1,7 +1,5 @@
 package exception;
 
-import java.io.FileNotFoundException;
-
 public class FileIsMissingException extends RuntimeException {
 
 
