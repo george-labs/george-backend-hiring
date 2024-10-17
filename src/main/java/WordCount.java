@@ -1,5 +1,4 @@
 import helper.ReadResourceInput;
-import helper.ReadTextFile;
 import helper.ReadUserInput;
 
 import java.util.Arrays;
