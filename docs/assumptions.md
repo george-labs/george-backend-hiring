@@ -16,4 +16,6 @@
  - Input files is provided with full path
  - File stopwords.txt will keep one word in one line
  - For testing file is presented in test folder
- - Inout file now contains special characters, regexp needs to be updated
+## Iteration 4
+ - Iteration is not fully completed,  input file now contains special characters, 
+   regexp needs to be updated as well as logic
