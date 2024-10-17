@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class WordCountUniTest {
+public class WordCountUnitTest {
 
     private final String testOneWord = "Marry";
     private final String testSentence = "Marry had a little lamb";
@@ -9,14 +9,6 @@ public class WordCountUniTest {
     private final String testInvalidCharAllWrong = "M$arry $i #rt";
 
     private final WordCount wordCount = new WordCount();
-
-    @Test
-    public void wordCountTest() {
-
-        WordCount wordCount = new WordCount();
-
-        Assertions.assertEquals(false, wordCount.isInputCorrect(""));
-    }
 
     @Test
     public void wordCountInputTest() {

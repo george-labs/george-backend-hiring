@@ -1,17 +1,22 @@
-import java.io.InputStream;
+import helper.ReadTextFile;
+import helper.ReadUserInput;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class WordCount {
 
+    List<String> stopWordsList;
+
+    public WordCount() {
+        ReadTextFile readTextFile = new ReadTextFile();
+        this.stopWordsList = readTextFile.readResourceTextFile();
+    }
 
     public Integer countNumbers() {
-        System.out.print("Enter text:");
-        Scanner scanner = new Scanner(InputStream.nullInputStream());
-        String input = scanner.nextLine();
-
-        return isInputCorrect(input) ? countResults(input) : Integer.valueOf(0);
+        ReadUserInput readUserInput = new ReadUserInput();
+        String input = readUserInput.readInputFromConsole();
+        return isInputCorrect(input) ? splitWord(input).size() : Integer.valueOf(0);
     }
 
     public Boolean isInputCorrect(String input) {
@@ -22,11 +27,13 @@ public class WordCount {
         return true;
     }
 
-    public Integer countResults(String inputString) {
-
+    public List<String> splitWord(String inputString) {
         List<String> splitList = Arrays.stream(inputString.split("\\s")).toList();
-        return splitList.stream().filter(item -> item.matches("[a-zA-Z]+")).toList().size();
+        return removeStopWords(splitList.stream().filter(item -> item.matches("[a-zA-Z]+")).toList());
+    }
 
-
+    public List<String> removeStopWords(List<String> inputList){
+        stopWordsList.forEach(inputList::remove);
+        return inputList;
     }
 }

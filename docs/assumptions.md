@@ -6,3 +6,9 @@
  - App will and after one iteration
  - Exceptions by dev
  - Valid words are counted, invalid words are ignored
+## Iteration 2
+ - Test will be in text file
+ - User is not providing the file
+ - File can contain Ma$rry
+ - \n in test file
+ - stopWords will be always presented
