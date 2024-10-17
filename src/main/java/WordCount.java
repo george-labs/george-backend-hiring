@@ -21,7 +21,7 @@ public class WordCount {
     }
 
     public Integer countWords(String inputText) {
-        return isInputCorrect(inputText) ? splitWord(inputText).size() : Integer.valueOf(0);
+        return isInputCorrect(inputText) ? splitWord(inputText).size() : 0;
     }
 
     public Boolean isInputCorrect(String input) {
