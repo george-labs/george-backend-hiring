@@ -27,4 +27,9 @@ public class WordCountUnitTest {
         Assertions.assertEquals(1, wordCount.countWords(testInvalidChar));
         Assertions.assertEquals(0, wordCount.countWords(testInvalidCharAllWrong));
     }
+
+    @Test
+    public void wordCountInoutFileTest(){
+        Assertions.assertEquals(1, wordCount.readCountWordsFromFile("E:\\Projects\\george-backend-hiring\\src\\test\\inputtext.txt"));
+    }
 }

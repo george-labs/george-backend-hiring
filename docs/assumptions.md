@@ -12,3 +12,7 @@
  - File can contain Ma$rry
  - \n in test file
  - stopWords will be always presented
+## Iteration 3
+ - Input files is provided with full path
+ - File stopwords.txt will keep one word in one line
+ - For testing file is presented in test folder

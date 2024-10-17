@@ -1,3 +1,4 @@
+import helper.ReadResourceInput;
 import helper.ReadTextFile;
 import helper.ReadUserInput;
 
@@ -10,14 +11,20 @@ public class WordCount {
     List<String> stopWordsList;
 
     public WordCount() {
-        ReadTextFile readTextFile = new ReadTextFile();
-        this.stopWordsList = readTextFile.readResourceTextFile();
+        ReadResourceInput readResourceInput = new ReadResourceInput();
+        this.stopWordsList = readResourceInput.readInputFromFile();
     }
 
     public Integer countWords() {
         ReadUserInput readUserInput = new ReadUserInput();
         String input = readUserInput.readInputFromConsole();
         return countWords(input);
+    }
+
+    public Integer readCountWordsFromFile(String pathToFile){
+        ReadTextFile readTextFile = new ReadTextFile();
+        return countWords(readTextFile.readFile(pathToFile).toString());
+
     }
 
     public Integer countWords(String inputText) {
