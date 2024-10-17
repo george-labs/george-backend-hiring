@@ -23,8 +23,7 @@ public class WordCount {
 
     public Integer readCountWordsFromFile(String pathToFile){
         ReadTextFile readTextFile = new ReadTextFile();
-        return countWords(readTextFile.readFile(pathToFile).toString());
-
+        return countWords(String.join(" ", readTextFile.readFile(pathToFile)));
     }
 
     public Integer countWords(String inputText) {

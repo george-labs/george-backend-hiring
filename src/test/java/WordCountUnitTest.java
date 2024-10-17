@@ -1,3 +1,4 @@
+import exception.FileIsMissingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +31,13 @@ public class WordCountUnitTest {
 
     @Test
     public void wordCountInoutFileTest(){
-        Assertions.assertEquals(1, wordCount.readCountWordsFromFile("E:\\Projects\\george-backend-hiring\\src\\test\\inputtext.txt"));
+        Assertions.assertEquals(4, wordCount.readCountWordsFromFile("E:\\Projects\\george-backend-hiring\\src\\test\\inputtext.txt"));
+
+    }
+
+    @Test
+    public void shouldThrowFileNotFoundException(){
+        FileIsMissingException fileIsMissingException = Assertions.assertThrows(FileIsMissingException.class, () ->
+                wordCount.readCountWordsFromFile("E:\\george-backend-hiring\\src\\test\\inputtext.txt"));
     }
 }
