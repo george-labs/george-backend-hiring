@@ -5,10 +5,10 @@ import java.util.regex.Pattern;
 
 public class WordCounter {
     private final static String WHITESPACE_REGEX = "\\s";
-    private final static String VALID_WORD_REGEX = "[A-Za-z]+";
+    private final static String VALID_WORD_REGEX = "^[A-Za-z]+$";
     private final static Pattern WORD_PATTERN = Pattern.compile(VALID_WORD_REGEX);
 
-    private List<String> stopWords;
+    private final List<String> stopWords;
 
     public WordCounter(List<String> stopWords) {
         this.stopWords = stopWords;
@@ -19,9 +19,8 @@ public class WordCounter {
     }
 
     public long getNumberOfWords(String text) {
-        var list = Arrays.stream(text.split(WHITESPACE_REGEX)).toList();
 
-        return list.stream()
+        return Arrays.stream(text.split(WHITESPACE_REGEX))
                 .filter(word -> !stopWords.contains(word))
                 .filter(WORD_PATTERN.asPredicate())
                 .count();
