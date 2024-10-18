@@ -26,7 +26,7 @@ public class JavaApplicationTest {
     @Test
     void mainTest_withoutFileParameter() {
         final var expectedResult = "Enter text:\n" +
-                "Number of words: 4\n";
+                "Number of words: 4,unique: 4\n";
         final var inputStream = new ByteArrayInputStream("Mary had a little lamb".getBytes());
         System.setIn(inputStream);
 
@@ -36,7 +36,7 @@ public class JavaApplicationTest {
 
     @Test
     void mainTest_withFileParameter() {
-        final var expectedResult = "Number of words: 4\n";
+        final var expectedResult = "Number of words: 4,unique: 4\n";
 
         JavaApplication.main(new String[]{"src/test/resources/testfile.txt"});
         Assertions.assertEquals(expectedResult, outContent.toString());

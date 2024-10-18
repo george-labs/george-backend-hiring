@@ -4,8 +4,8 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class WordCounter {
-    private final static String WHITESPACE_REGEX = "\\s";
-    private final static String VALID_WORD_REGEX = "^[A-Za-z]+$";
+    private final static String WHITESPACE_REGEX = "[\\s-\\.]";
+    private final static String VALID_WORD_REGEX = "^([A-Za-z]+)$";
     private final static Pattern WORD_PATTERN = Pattern.compile(VALID_WORD_REGEX);
 
     private final List<String> stopWords;
@@ -18,15 +18,16 @@ public class WordCounter {
         this.stopWords = new ArrayList<>();
     }
 
-    public long getNumberOfWords(String text) {
-        Set<String> uniqueWordsSet =  new HashSet<>();
+    public WordCountResult getNumberOfWords(String text) {
+        final List<String> wordList = Arrays.stream(text.split(WHITESPACE_REGEX)).toList();
 
-        long totalWordCount = Arrays.stream(text.split(WHITESPACE_REGEX))
+        List<String> totalWordCount = wordList.stream()
                 .filter(word -> !stopWords.contains(word))
                 .filter(WORD_PATTERN.asPredicate())
-                .peek(uniqueWordsSet::add)
-                .count();
+                .toList();
 
-        return new WordCountResult(totalWordCount, uniqueWordsSet.size());
+        Set<String> uniqueWordsSet = new HashSet<>(totalWordCount);
+
+        return new WordCountResult(totalWordCount.size(), uniqueWordsSet.size());
     }
 }

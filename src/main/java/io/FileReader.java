@@ -12,7 +12,7 @@ public class FileReader {
     public List<String> getStopWords() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(STOP_WORD_FILE_NAME);
-        IOHandler ioHandler = new IOHandler(inputStream);
+        IOHandler ioHandler = new IOHandler(inputStream, System.out);
         return ioHandler.getAllInputFromStream();
     }
 
