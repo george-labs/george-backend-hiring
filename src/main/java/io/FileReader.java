@@ -2,6 +2,8 @@ package io;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class FileReader {
@@ -12,6 +14,10 @@ public class FileReader {
         InputStream inputStream = classLoader.getResourceAsStream(STOP_WORD_FILE_NAME);
         IOHandler ioHandler = new IOHandler(inputStream);
         return ioHandler.getAllInputFromStream();
+    }
+
+    public String readFile(String filePath) throws IOException {
+        return Files.readString(Paths.get(filePath));
     }
 
 }

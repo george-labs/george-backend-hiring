@@ -8,15 +8,12 @@ import java.util.Arrays;
 
 class IOHandlerTest {
 
-    public static final String TEST_MARY_TEXT = "Mary had a little lamb";
-
-
     @Test
     void getCmdInputTest() {
-        IOHandler cmdTestHandler = new IOHandler(new ByteArrayInputStream(TEST_MARY_TEXT.getBytes()));
+        IOHandler cmdTestHandler = new IOHandler(new ByteArrayInputStream("Mary had a little lamb".getBytes()));
 
         final var actualResult = cmdTestHandler.getCmdInput();
-        Assertions.assertEquals(TEST_MARY_TEXT, actualResult);
+        Assertions.assertEquals("Mary had a little lamb", actualResult);
     }
 
     @Test

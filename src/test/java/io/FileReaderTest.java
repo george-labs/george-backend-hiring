@@ -16,4 +16,23 @@ class FileReaderTest {
         Assertions.assertEquals(Arrays.asList("a", "aa"), actualResult);
     }
 
+    @Test
+    void readFileTest_resultReturned() throws IOException {
+        FileReader fileReader = new FileReader();
+
+        String actualResult = fileReader.readFile("src/test/resources/testfile.txt");
+
+        Assertions.assertEquals("Mary had a little lamb", actualResult);
+    }
+
+    @Test
+    void readFileTest_fileNotFoundExceptionThrown() {
+        FileReader fileReader = new FileReader();
+
+        Assertions.assertThrows(IOException.class,
+                () -> fileReader.readFile("src/test/resources/nonexistent.txt"));
+
+    }
+
+
 }

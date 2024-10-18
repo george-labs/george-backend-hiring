@@ -4,7 +4,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class WordCountTest {
+class WordCounterTest {
 
     @Test
     void getNumberOfWordsTest_withoutStopWords() {
@@ -57,7 +57,7 @@ class WordCountTest {
     }
 
     @Test
-    public void getNumberOfWords_testNonLetterWords() {
+    public void getNumberOfWords_testSpecialCharacters() {
         WordCounter wordCounter = new WordCounter();
         long wordCount = wordCounter.getNumberOfWords("12345 !@#$% ^&*() Mary had");
         assertEquals(2, wordCount);
