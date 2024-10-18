@@ -19,9 +19,11 @@ public class WordCounter {
     }
 
     public long getNumberOfWords(String text) {
-        final var list = text.split(WHITESPACE_REGEX);
+        var list = Arrays.stream(text.split(WHITESPACE_REGEX)).toList();
 
-        return Arrays.stream(list).filter(WORD_PATTERN.asPredicate()).count();
-
+        return list.stream()
+                .filter(word -> !stopWords.contains(word))
+                .filter(WORD_PATTERN.asPredicate())
+                .count();
     }
 }

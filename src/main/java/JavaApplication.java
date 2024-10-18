@@ -1,3 +1,6 @@
+import io.FileReader;
+import io.IOHandler;
+
 import java.io.IOException;
 
 public class JavaApplication {
@@ -16,7 +19,7 @@ public class JavaApplication {
 
             System.out.println("Number of words: " + wordCount);
         } catch (IOException e) {
-            System.out.println("###Error");
+            System.out.println("###Exception happened: " + e.getMessage());
         }
     }
 
