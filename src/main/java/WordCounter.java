@@ -1,6 +1,6 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import domain.entity.WordCountResult;
+
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class WordCounter {
@@ -19,10 +19,14 @@ public class WordCounter {
     }
 
     public long getNumberOfWords(String text) {
+        Set<String> uniqueWordsSet =  new HashSet<>();
 
-        return Arrays.stream(text.split(WHITESPACE_REGEX))
+        long totalWordCount = Arrays.stream(text.split(WHITESPACE_REGEX))
                 .filter(word -> !stopWords.contains(word))
                 .filter(WORD_PATTERN.asPredicate())
+                .peek(uniqueWordsSet::add)
                 .count();
+
+        return new WordCountResult(totalWordCount, uniqueWordsSet.size());
     }
 }
