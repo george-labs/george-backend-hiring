@@ -1,15 +1,23 @@
+import java.io.IOException;
 
 public class JavaApplication {
 
 
 
     public static void main(String[] args) {
-        IOHandler ioHandler = new IOHandler();
-        WordCounter wordCounter = new WordCounter();
+        IOHandler ioHandler = new IOHandler(System.in);
+        FileReader fileReader = new FileReader();
 
-        final var input = ioHandler.getInput();
-        final var wordCount = wordCounter.getNumberOfWords(input);
+        try {
+            final var stopWords = fileReader.getStopWords();
+            WordCounter wordCounter = new WordCounter(stopWords);
+            final var input = ioHandler.getCmdInput();
+            final var wordCount = wordCounter.getNumberOfWords(input);
 
-        System.out.println("Number of words: " + wordCount);
+            System.out.println("Number of words: " + wordCount);
+        } catch (IOException e) {
+            System.out.println("###Error");
+        }
     }
+
 }
