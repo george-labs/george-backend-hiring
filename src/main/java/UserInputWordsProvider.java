@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,10 +22,5 @@ public class UserInputWordsProvider implements WordsProvider {
         scanner.close();
 
         return userInput;
-    }
-
-    private List<String> splitWords(String input) {
-        //split according spaces
-        return Arrays.stream(input.split("\\s+")).toList();
     }
 }

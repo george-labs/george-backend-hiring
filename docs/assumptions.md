@@ -9,3 +9,4 @@
 3. TextFileStopWords
 ## Iteration 3
 1. User input is read not only if no file is inputted but also if there was any problem reading the file.
+2. Refactoring of package structure should be considered as the number of classes is incresing and it is harder to find what I am looking for.
