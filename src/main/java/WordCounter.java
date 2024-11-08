@@ -20,13 +20,13 @@ public class WordCounter {
      *
      * @return Number of words containing only letters
      * */
-    public int  countWords() {
+    public int  countWords(List<String> stopWords) {
         //split according spaces
         String[] crudeWords = this.text.split("\\s+");
 
         //filter out letter words only
         List<String> filteredWords = Arrays.stream(crudeWords)
-                .filter(word -> word.matches("^[a-zA-Z]+$"))
+                .filter(word -> word.matches("^[a-zA-Z]+$") && !stopWords.contains(word))
                 .toList();
 
         return filteredWords.size();

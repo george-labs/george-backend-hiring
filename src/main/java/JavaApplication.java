@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class JavaApplication {
@@ -14,7 +15,7 @@ public class JavaApplication {
         String userInput = scanner.nextLine();
 
         // Print the user input
-        System.out.println("Number of words: " + new WordCounter(userInput).countWords());
+        System.out.println("Number of words: " + new WordCounter(userInput).countWords(new TextFileStopWords().provideStopWords()));
 
         // Close the scanner
         scanner.close();
