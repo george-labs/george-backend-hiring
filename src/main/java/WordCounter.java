@@ -1,19 +1,20 @@
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class WordCounter {
 
-    private final String text;
+    private final List<String> words;
 
     /**
-     * Creates new wordcounter instance that will be based on given text.
+     * Creates new word counter instance that can count letter words.
      *
-     * @param text Text with which word counter will be working with.
+     * @param words TList of words with which word counter will be working with.
      * */
-    WordCounter(String text) {
-        this.text = Objects.requireNonNull(text, "Text cannot be null");
+    WordCounter(List<String> words) {
+        this.words = Objects.requireNonNull(words, "Words cannot be null");
     }
+
+
 
     /**
      * Returns count of words (letters only) for its text.
@@ -21,11 +22,8 @@ public class WordCounter {
      * @return Number of words containing only letters
      * */
     public int  countWords(List<String> stopWords) {
-        //split according spaces
-        String[] crudeWords = this.text.split("\\s+");
-
         //filter out letter words only
-        List<String> filteredWords = Arrays.stream(crudeWords)
+        List<String> filteredWords = words.stream()
                 .filter(word -> word.matches("^[a-zA-Z]+$") && !stopWords.contains(word))
                 .toList();
 

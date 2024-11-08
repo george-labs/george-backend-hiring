@@ -1,51 +1,62 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WordCounterTest {
 
+    private List<String> words;
+
+    @BeforeEach
+    void setUp() {
+        List<String> words = new ArrayList<>();
+        words.add("Mary");
+        words.add("had");
+        words.add("little");
+        words.add("a");
+        words.add("lamb");
+    }
+
+
     @Test
     public void testRegularWords() {
-        String text = "Mary had a little lamb";
-
-        int result = new WordCounter(text).countWords(new ArrayList<>());
+        int result = new WordCounter(words).countWords(new ArrayList<>());
 
         assertEquals(5, result);
     }
 
     @Test
     public void countWordstestingRegularWordsWithStopWords() {
-        String text = "Mary had a little lamb";
-
-        int result = new WordCounter(text).countWords(new TextFileStopWords().provideStopWords());
+        int result = new WordCounter(words).countWords(new TextFileStopWords().provideStopWords());
 
         assertEquals(4, result);
     }
 
     @Test
-    public void countWordstestingWordSplitting() {
-        String textWithSpace = "Mary had";
-        String textWithSpecialCharacter = "Mary - Sue";
-
-        int resultWithSpace = new WordCounter(textWithSpace).countWords(new ArrayList<>());
-        int resultWithSpecialCharacter = new WordCounter(textWithSpecialCharacter).countWords(new ArrayList<>());
-
-        assertEquals(2, resultWithSpace);
-        assertEquals(2, resultWithSpecialCharacter);
-    }
-
-    @Test
     public void testWordsWithOtherCharacters() {
-        String textWithNumbers = "Mary had a little lamb - with 2 heads and 0 eyes.";
-        String textNumberOnly = "0000";
-        String textNumbersOnly = "0000 1111 2222";
+        List<String> wordsWithNumbers = new ArrayList<>(words);
+        wordsWithNumbers.add("-");
+        wordsWithNumbers.add("2");
+        wordsWithNumbers.add("heads");
+        wordsWithNumbers.add("and");
+        wordsWithNumbers.add("0");
+        wordsWithNumbers.add("eyes.");
 
-        int resultWithNumbers = new WordCounter(textWithNumbers).countWords(new ArrayList<>());
-        int resultWithNumberOnly = new WordCounter(textNumberOnly).countWords(new ArrayList<>());
-        int resultWithNumbersOnly = new WordCounter(textNumbersOnly).countWords(new ArrayList<>());
+        List<String> wordsNumberOnly = new ArrayList<>();
+        wordsNumberOnly.add("0000");
+
+        List<String> wordsNumbersOnly = new ArrayList<>();
+        wordsNumberOnly.add("0000");
+        wordsNumberOnly.add("1111");
+        wordsNumberOnly.add("2222");
+
+        int resultWithNumbers = new WordCounter(wordsWithNumbers).countWords(new ArrayList<>());
+        int resultWithNumberOnly = new WordCounter(wordsNumberOnly).countWords(new ArrayList<>());
+        int resultWithNumbersOnly = new WordCounter(wordsNumbersOnly).countWords(new ArrayList<>());
 
         assertEquals(8, resultWithNumbers);
         assertEquals(0, resultWithNumberOnly);

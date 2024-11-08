@@ -7,3 +7,5 @@
 1. stopwords.txt contains only letter words on each line.
 2. TextFileStopWords could also wrap IOException into custom exception
 3. TextFileStopWords
+## Iteration 3
+1. User input is read not only if no file is inputted but also if there was any problem reading the file.

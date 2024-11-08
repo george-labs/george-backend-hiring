@@ -1,23 +1,22 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class JavaApplication {
 
 
     public static void main(String[] args) {
-        // Create a Scanner object to read input from the command line
-        Scanner scanner = new Scanner(System.in);
+        WordsProvider provider;
 
-        // Prompt the user for input
-        System.out.print("Enter text: ");
-
-        // Read a line of input from the user
-        String userInput = scanner.nextLine();
+        if (args.length == 0) {
+            provider = new UserInputWordsProvider();
+        } else {
+            try {
+                provider = new FileInputWordsProvider(args[0]);
+            } catch (Exception e) {
+                provider = new UserInputWordsProvider();
+            }
+        }
 
         // Print the user input
-        System.out.println("Number of words: " + new WordCounter(userInput).countWords(new TextFileStopWords().provideStopWords()));
-
-        // Close the scanner
-        scanner.close();
+        System.out.println("Number of words: " + new WordCounter(provider.provideWords()).countWords(new TextFileStopWords().provideStopWords()));
     }
+
+
 }
