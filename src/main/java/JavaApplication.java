@@ -1,3 +1,5 @@
+import logic.WordsCounter;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -7,7 +9,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class JavaApplication {
-
 
     public static final String STOP_WORDS_FILE = "stopwords.txt";
     private static final Scanner scanner = new Scanner(System.in);
@@ -29,19 +30,11 @@ public class JavaApplication {
             System.out.println("Enter text: ");
             textLine = scanner.nextLine();
         }
-        int numberOfWords = countNumberOfAlphabeticalWordsExcludingStopWords(textLine, stopWords);
 
-        System.out.println("Number of words: " + numberOfWords);
-    }
+        var textWordsCounter = new WordsCounter(textLine, stopWords);
 
-    public static int countNumberOfAlphabeticalWordsExcludingStopWords(String textLine, List<String> stopWords) {
-        List<String> wordList = Arrays.asList(textLine.split("[ \n]"));
-        wordList = wordList.stream()
-                .filter(word -> word.matches("[a-zA-Z]+"))
-                .filter(word -> !stopWords.contains(word))
-                .toList();
-
-        return wordList.size();
+        System.out.println("Number of words: " + textWordsCounter.getNumberOfWords() +
+                ", unique: " + textWordsCounter.getNumberOfUniqueWords());
     }
 
     public static String getStringFromFile(String fileName) {
