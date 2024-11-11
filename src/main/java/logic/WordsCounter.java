@@ -22,7 +22,7 @@ public class WordsCounter {
         return wordList.size();
     }
 
-    public static List<String> extractAlphabeticalWordsExcludingStopWords(String textLine, List<String> stopWords) {
+    private List<String> extractAlphabeticalWordsExcludingStopWords(String textLine, List<String> stopWords) {
         List<String> wordList = Arrays.asList(textLine.split(WORDS_SEPARATOR_REGEX));
         return wordList.stream()
                 .filter(word -> word.matches(ALLOWED_CHARACTERS_REGEX))

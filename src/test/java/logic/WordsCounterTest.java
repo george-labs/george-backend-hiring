@@ -12,9 +12,9 @@ public class WordsCounterTest {
     public static final List<String> EXTRACTED_WORDS_LIST =
             List.of("Humpty", "Dumpty", "sat", "wall", "Humpty", "Dumpty", "had", "great", "fall");
     public static final List<String> STOP_WORDS = List.of("on", "a");
-    
+
     @Test
-    public void testExtractAlphabeticalWordsExcludingStopWords() {
+    public void testGetWordList() {
         var extractedWords = new WordsCounter(TEXT_LINE, STOP_WORDS).getWordList();
         assertEquals(EXTRACTED_WORDS_LIST, extractedWords,
                 "Words should be extracted and stop words should be excluded");
