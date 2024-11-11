@@ -5,8 +5,8 @@ import java.util.List;
 
 public class WordsCounter {
 
-    public static final String WORDS_SEPARATOR_REGEX = "[ \n-.]";
-    public static final String ALLOWED_CHARACTERS_REGEX = "[a-zA-Z]+";
+    public static final String WORDS_SEPARATOR_REGEX = "[ \n.]";
+    public static final String ALLOWED_CHARACTERS_REGEX = "[a-zA-Z-]+";
 
     private final List<String> wordList;
 
