@@ -22,6 +22,13 @@ public class WordsCounter {
         return wordList.size();
     }
 
+    public double getAverageWordLength() {
+        return wordList.stream()
+                .mapToInt(String::length)
+                .average()
+                .orElse(0);
+    }
+
     private List<String> extractAlphabeticalWordsExcludingStopWords(String textLine, List<String> stopWords) {
         List<String> wordList = Arrays.asList(textLine.split(WORDS_SEPARATOR_REGEX));
         return wordList.stream()

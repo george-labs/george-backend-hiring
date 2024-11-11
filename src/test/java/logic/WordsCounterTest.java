@@ -14,7 +14,7 @@ public class WordsCounterTest {
     public static final List<String> STOP_WORDS = List.of("on", "a");
 
     @Test
-    public void testGetWordList() {
+    public void getWordList() {
         var extractedWords = new WordsCounter(INPUT_TEXT_LINE, STOP_WORDS).getWordList();
         assertEquals(EXPECTED_WORDS_LIST, extractedWords,
                 "Words should be extracted and stop words should be excluded");
@@ -30,5 +30,17 @@ public class WordsCounterTest {
     void getNumberOfUniqueWords() {
         assertEquals(6,  new WordsCounter(INPUT_TEXT_LINE, STOP_WORDS).getNumberOfUniqueWords(),
                 "Number of unique words should be 7");
+    }
+
+    @Test
+    void getAverageWordLength() {
+        var lengthSum = 0;
+        for (String word : EXPECTED_WORDS_LIST) {
+            lengthSum += word.length();
+        }
+        var expectedAverageLength = (double) lengthSum / EXPECTED_WORDS_LIST.size();
+        assertEquals(expectedAverageLength,
+                new WordsCounter(INPUT_TEXT_LINE, STOP_WORDS).getAverageWordLength(),
+                "Average word length should be " + expectedAverageLength);
     }
 }

@@ -33,8 +33,10 @@ public class JavaApplication {
 
         var textWordsCounter = new WordsCounter(textLine, stopWords);
 
-        System.out.println("Number of words: " + textWordsCounter.getNumberOfWords() +
-                ", unique: " + textWordsCounter.getNumberOfUniqueWords());
+        System.out.printf("Number of words: %d, unique: %d; average word length: %.2f characters\n",
+                textWordsCounter.getNumberOfWords(),
+                textWordsCounter.getNumberOfUniqueWords(),
+                textWordsCounter.getAverageWordLength());
     }
 
     public static String getStringFromFile(String fileName) {
