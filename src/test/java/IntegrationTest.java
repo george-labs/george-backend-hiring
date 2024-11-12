@@ -1,4 +1,5 @@
 import mock.StopWordsInputServiceMock;
+import mock.UserInputFileServiceMock;
 import mock.UserInputServiceMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,4 +28,16 @@ public class IntegrationTest {
                 StopWordsLoader.getStopWords(fileInputService.getInput()));
         Assertions.assertEquals(4, count);
     }
+
+    @Test
+    void shouldReadInputsFromFileTest() throws IOException {
+        InputService userInputService = new UserInputFileServiceMock();
+        InputService fileInputService = new StopWordsInputServiceMock();
+
+        int count = WordCounterService.wordCounter(
+                userInputService.getInput(),
+                StopWordsLoader.getStopWords(fileInputService.getInput()));
+        Assertions.assertEquals(3, count);
+    }
+
 }

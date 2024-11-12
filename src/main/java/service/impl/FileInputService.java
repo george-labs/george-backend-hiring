@@ -7,12 +7,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileInputService implements InputService {
-    private static String FILE_PATH = "src/main/resources/stopwords.txt";
+    private final String filePath;
+
+    public FileInputService(String filePath) {
+        this.filePath = filePath;
+    }
 
     @Override
     public String getInput() throws IOException {
         try {
-            Path path = Path.of(FILE_PATH);
+            Path path = Path.of(filePath);
             return Files.readString(path);
         } catch (IOException e) {
             throw e;
