@@ -5,6 +5,6 @@ import service.InputService;
 public class UserInputFileServiceMock implements InputService {
     @Override
     public String getInput() {
-        return "This is 1st integration test";
+        return "This is the 1st integration test";
     }
 }
