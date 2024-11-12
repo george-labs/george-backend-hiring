@@ -8,4 +8,6 @@
 
 ## Iteration 3
  If the file path does not exist, user will be informed in console.
- 
+
+## Iteration 4
+ Duplicities are counted as 1 occurrence.
