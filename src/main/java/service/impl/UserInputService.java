@@ -4,7 +4,7 @@ import service.InputService;
 
 import java.util.Scanner;
 
-public class InputsServiceImpl implements InputService {
+public class UserInputService implements InputService {
 
     @Override
     public String getInput() {
