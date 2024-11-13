@@ -1,19 +1,20 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class JavaApplication {
 
     private static final WordParser parser = new SelectiveWordParser();
-    private static final String REPORT_FORMAT = "Number of words: %d, unique: %d, average word length: %.2f characters";
+    private static final Reporter reporter = new Reporter();
 
     public static void main(String[] args) {
 
         AnalysisResult analysisResult = doAnalysis(args);
-        report(analysisResult);
+        reporter.report(analysisResult);
 
         if (args.length > 0 && args[0].equals("-index")) {
-            reportIndex(analysisResult);
+            reporter.reportIndex(analysisResult);
         }
     }
 
@@ -21,19 +22,10 @@ public class JavaApplication {
         if (args.length > 0 && !args[0].equals("-index")) {
             return parseFile(args[0]);
         }
+
         return parseInput();
     }
 
-    private static void report(AnalysisResult analysisResult) {
-        System.out.printf((REPORT_FORMAT) + "%n", analysisResult.wordCount, analysisResult.uniqueWordCount, analysisResult.avergeWordLength);
-    }
-
-    private static void reportIndex(AnalysisResult analysisResult) {
-        System.out.println("Index:");
-        for (String indexedWord : analysisResult.indexedWords) {
-            System.out.println(indexedWord);
-        }
-    }
 
     private static AnalysisResult parseFile(String filePath) {
         File inputFile = new File(filePath);
