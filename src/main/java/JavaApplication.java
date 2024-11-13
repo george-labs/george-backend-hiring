@@ -11,45 +11,48 @@ import java.util.Scanner;
 public class JavaApplication {
 
     private static final WordParser parser = new SelectiveWordParser();
+    private static final String REPORT_FORMAT = "Number of words: %d, unique: %d";
 
     public static void main(String[] args) {
 
-        int wordCount;
         if (args.length > 0) {
-            wordCount = parseFile(args);
+            report(parseFile(args));
         } else {
-            wordCount = parseInput();
+            report(parseInput());
         }
-        System.out.println("Number of words: " + wordCount);
+
     }
 
-    private static int parseFile(String[] args) {
+    private static void report(AnalysisResult analysisResult) {
+        System.out.printf((REPORT_FORMAT) + "%n", analysisResult.wordCount, analysisResult.uniqueWordCount);
+    }
+
+    private static AnalysisResult parseFile(String[] args) {
         File inputFile = new File(args[0]);
 
         if (!inputFile.exists()) {
             throw new IllegalStateException("File does not exist: " + args[0]);
         }
 
-        int wordCount = 0;
         try (Scanner myReader = new Scanner(inputFile)) {
+            StringBuilder sb = new StringBuilder();
             while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                wordCount += parser.countWords(data);
+                sb.append(myReader.nextLine());
             }
+            return parser.countWords(sb.toString());
+
         } catch (FileNotFoundException e) {
             throw new IllegalStateException(e);
         }
-        return wordCount;
     }
 
-    private static int parseInput() {
+    private static AnalysisResult parseInput() {
         Scanner in = new Scanner(System.in);
 
         System.out.print("Enter text: ");
         String s = in.nextLine();
 
-        int countWords = parser.countWords(s);
-        return countWords;
+        return parser.countWords(s);
     }
 
 }

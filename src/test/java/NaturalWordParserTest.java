@@ -3,26 +3,25 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import javax.swing.text.html.parser.Parser;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class NaturalWordParserTest {
 
     private final WordParser parser = new NaturalWordParser();
 
     @ParameterizedTest
     @CsvSource({
-            "2, ad ad",
-            "1, adads",
-            "0, ''",
+            "2,1, ad ad",
+            "1,1, adads",
+            "0,0 ,''",
+            "3, 2, this other this",
     })
-    void positiveCase(int expectedCount, String input) {
-        Assertions.assertEquals(expectedCount, parser.countWords(input));
+    void shouldParseWithSuccess(int expectedCount, int uniqueCount, String input) {
+        Assertions.assertEquals(new AnalysisResult(expectedCount, uniqueCount), parser.countWords(input));
     }
 
     @Test
-    void nullCase() {
+    void shouldHandleNull() {
         Assertions.assertThrows(IllegalStateException.class, () -> parser.countWords(null));
     }
+
+
 }
