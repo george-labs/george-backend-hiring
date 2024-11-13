@@ -1,17 +1,11 @@
-import javax.swing.text.html.parser.Parser;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.file.ClosedFileSystemException;
 import java.util.Scanner;
 
 public class JavaApplication {
 
     private static final WordParser parser = new SelectiveWordParser();
-    private static final String REPORT_FORMAT = "Number of words: %d, unique: %d";
+    private static final String REPORT_FORMAT = "Number of words: %d, unique: %d, average word length: %.2f characters";
 
     public static void main(String[] args) {
 
@@ -24,7 +18,7 @@ public class JavaApplication {
     }
 
     private static void report(AnalysisResult analysisResult) {
-        System.out.printf((REPORT_FORMAT) + "%n", analysisResult.wordCount, analysisResult.uniqueWordCount);
+        System.out.printf((REPORT_FORMAT) + "%n", analysisResult.wordCount, analysisResult.uniqueWordCount, analysisResult.avergeWordLength);
     }
 
     private static AnalysisResult parseFile(String[] args) {

@@ -9,14 +9,14 @@ class NaturalWordParserTest {
 
     @ParameterizedTest
     @CsvSource({
-            "2,1, ad ad",
-            "1,1, adads",
-            "0,0 ,''",
-            "3, 2, this other this",
-            "2, 2, th-is ot.her this"
+            "2,1,2, ad ad",
+            "1,1,5, adads",
+            "0,0,0 ,''",
+            "3, 2, 4.333333333, this other this",
+            "2, 2, 4.5, th-is ot.her this"
     })
-    void shouldParseWithSuccess(int expectedCount, int uniqueCount, String input) {
-        Assertions.assertEquals(new AnalysisResult(expectedCount, uniqueCount), parser.countWords(input));
+    void shouldParseWithSuccess(int expectedCount, int uniqueCount, double averageLength, String input) {
+        Assertions.assertEquals(new AnalysisResult(expectedCount, uniqueCount, averageLength), parser.countWords(input));
     }
 
     @Test
