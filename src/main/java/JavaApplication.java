@@ -9,23 +9,37 @@ public class JavaApplication {
 
     public static void main(String[] args) {
 
-        if (args.length > 0) {
-            report(parseFile(args));
-        } else {
-            report(parseInput());
-        }
+        AnalysisResult analysisResult = doAnalysis(args);
+        report(analysisResult);
 
+        if (args.length > 0 && args[0].equals("-index")) {
+            reportIndex(analysisResult);
+        }
+    }
+
+    private static AnalysisResult doAnalysis(String[] args) {
+        if (args.length > 0 && !args[0].equals("-index")) {
+            return parseFile(args[0]);
+        }
+        return parseInput();
     }
 
     private static void report(AnalysisResult analysisResult) {
         System.out.printf((REPORT_FORMAT) + "%n", analysisResult.wordCount, analysisResult.uniqueWordCount, analysisResult.avergeWordLength);
     }
 
-    private static AnalysisResult parseFile(String[] args) {
-        File inputFile = new File(args[0]);
+    private static void reportIndex(AnalysisResult analysisResult) {
+        System.out.println("Index:");
+        for (String indexedWord : analysisResult.indexedWords) {
+            System.out.println(indexedWord);
+        }
+    }
+
+    private static AnalysisResult parseFile(String filePath) {
+        File inputFile = new File(filePath);
 
         if (!inputFile.exists()) {
-            throw new IllegalStateException("File does not exist: " + args[0]);
+            throw new IllegalStateException("File does not exist: " + filePath);
         }
 
         try (Scanner myReader = new Scanner(inputFile)) {

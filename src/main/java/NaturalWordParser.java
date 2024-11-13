@@ -1,4 +1,7 @@
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class NaturalWordParser implements WordParser {
@@ -14,9 +17,8 @@ public class NaturalWordParser implements WordParser {
 
         String[] possibleWords = input.split(DELIMITER);
 
-        long uniqueWords = getStreamOfValidWords(possibleWords)
-                .distinct()
-                .count();
+        Set<String> uniqueWords = getStreamOfValidWords(possibleWords)
+                .collect(Collectors.toSet());
 
         long allWords = getStreamOfValidWords(possibleWords).count();
 
@@ -25,7 +27,11 @@ public class NaturalWordParser implements WordParser {
                 .average()
                 .orElse(0);
 
-        return new AnalysisResult((int) allWords, (int) uniqueWords, averageWordLength);
+        List<String> indexedWords = uniqueWords.stream()
+                .sorted()
+                .toList();
+
+        return new AnalysisResult((int) allWords, (int) uniqueWords.size(), averageWordLength, indexedWords);
     }
 
     protected boolean validateWord(String word) {

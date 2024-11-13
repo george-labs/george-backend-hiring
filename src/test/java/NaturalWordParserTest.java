@@ -16,7 +16,9 @@ class NaturalWordParserTest {
             "2, 2, 4.5, th-is ot.her this"
     })
     void shouldParseWithSuccess(int expectedCount, int uniqueCount, double averageLength, String input) {
-        Assertions.assertEquals(new AnalysisResult(expectedCount, uniqueCount, averageLength), parser.countWords(input));
+        Assertions.assertEquals(expectedCount, parser.countWords(input).wordCount);
+        Assertions.assertEquals(uniqueCount, parser.countWords(input).uniqueWordCount);
+        Assertions.assertEquals(averageLength, parser.countWords(input).avergeWordLength, 0.00001);
     }
 
     @Test
