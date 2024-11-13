@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class JavaApplication {
 
-    private static final WordParser parser = new NaturalWordParser();
+    private static final WordParser parser = new SelectiveWordParser();
 
     public static void main(String[] args) {
 
