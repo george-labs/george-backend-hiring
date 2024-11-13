@@ -9,6 +9,10 @@ public class NaturalWordParser implements WordParser{
     @Override
     public int countWords(String input) {
 
+        if (input == null){
+            throw new IllegalStateException("Input string must not be null");
+        }
+
         String[] possibleWords = input.split(DELIMITER);
 
 
