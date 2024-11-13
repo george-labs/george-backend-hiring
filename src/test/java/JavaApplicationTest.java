@@ -17,4 +17,6 @@ class JavaApplicationTest {
         Assertions.assertThrows(IllegalStateException.class,
                 () -> JavaApplication.main(new String[]{"wrong"}));
     }
+
+
 }

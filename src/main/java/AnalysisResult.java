@@ -25,4 +25,12 @@ public class AnalysisResult {
     public int hashCode() {
         return Objects.hash(wordCount, uniqueWordCount);
     }
+
+    @Override
+    public String toString() {
+        return "AnalysisResult{" +
+                "wordCount=" + wordCount +
+                ", uniqueWordCount=" + uniqueWordCount +
+                '}';
+    }
 }

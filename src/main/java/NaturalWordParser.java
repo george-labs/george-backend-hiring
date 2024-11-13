@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 public class NaturalWordParser implements WordParser {
 
     private static final String DELIMITER = " ";
-    private static final String WORD_DEFINITION = "[a-zA-Z]+";
+    private static final String WORD_DEFINITION = "[a-zA-Z\\-]+";
 
     @Override
     public AnalysisResult countWords(String input) {

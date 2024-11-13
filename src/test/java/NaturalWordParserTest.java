@@ -13,6 +13,7 @@ class NaturalWordParserTest {
             "1,1, adads",
             "0,0 ,''",
             "3, 2, this other this",
+            "2, 2, th-is ot.her this"
     })
     void shouldParseWithSuccess(int expectedCount, int uniqueCount, String input) {
         Assertions.assertEquals(new AnalysisResult(expectedCount, uniqueCount), parser.countWords(input));
