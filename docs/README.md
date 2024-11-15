@@ -1,6 +1,6 @@
 # George Backend Chapter - Coding Challenge
 
-Congratulations. You made it to our next recruiting stage which is a coding challenge.
+Congratulations! You made it to our next recruiting stage which is a coding challenge.
 In this stage you have to show practical skills in the things which we discussed in the previous recruiting stage:
 
 - Object-Oriented Programming
@@ -28,7 +28,7 @@ You will find all requirements split into 9 iterations.
 The goal of this exercise is __not__ to finish as many iterations as possible.
 We will evaluate your solution based on __quality over quantity__.
 
-Please focus on code quality by applying
+Please focus on code quality by applying:
 
 - Object-Oriented Programming
 - Refactoring
@@ -53,7 +53,7 @@ We always put ourselves into our reviewers position to improve their life when r
   pattern: `<firstname>_<lastname>_session_<session-nr>_iteration_<iteration-nr>_<pairing-partner-name>`
     - The `<pairing-partner-name>` is the name of the team member you pair in this iteration
 - Your first iteration must branch off `main`
-- Your branches won't be merged back to master
+- Your branches won't be merged back to `main`
 - Make sure every new branch is based on the previous branch
 
 ### Assumptions
@@ -62,6 +62,7 @@ In case the requirements are ambiguous, please write down your assumptions into 
 file.
 Please always create a section for each iteration and put your assumptions under this section.
 This helps us to follow certain design decisions in your code which you came up with based on your assumptions.
+Don't hesitate to also explain assumptions using comments in your source code.
 
 ### Evaluation
 
