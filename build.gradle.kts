@@ -1,6 +1,21 @@
 plugins {
     java
+    application
     kotlin("jvm") version "1.9.23"
+}
+
+application {
+    // NOTE: In case you choose a different main class, make sure to update this path
+    mainClass = "KotlinApplicationKt"
+    // mainClass = "JavaApplication"
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = application.mainClass
+    }
+
+    from(configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) })
 }
 
 repositories {
