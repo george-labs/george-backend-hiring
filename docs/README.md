@@ -102,7 +102,8 @@ In case you see the need for mocking, please hand-roll your mocks.
 3. Push this branch to the repository
 4. Run `./mvnw clean verify` or `./gradlew clean check` via your terminal
 5. Open the project in your IDE of choice
-6. Create a dummy unit test and run it
-7. Read the requirements from the _Requirements_ section  
+6. Update `mainClass` in Gradle or Maven config to point to either Kotlin or Java main method depending on your choice of language
+7. Create a dummy unit test and run it
+8. Read the requirements from the _Requirements_ section  
    Please only read one iteration at a time, starting with iteration 1
-8. Please think about how you will approach this problem in code for a few minutes before you start coding
+9. Please think about how you will approach this problem in code for a few minutes before you start coding
