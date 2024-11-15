@@ -6,7 +6,8 @@ plugins {
 
 application {
     // NOTE: In case you choose a different main class, make sure to update this path
-    mainClass = "george.backend.hiring.KotlinApplicationKt"
+    mainClass = "KotlinApplicationKt"
+    // mainClass = "JavaApplication"
 }
 
 tasks.jar {
