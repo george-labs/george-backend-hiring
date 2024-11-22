@@ -1,5 +1,7 @@
 package input;
 
+import java.io.IOException;
+
 public class InputReader {
 
 
@@ -12,6 +14,10 @@ public class InputReader {
 
     public String getInput(){
         return inputSource.getInput();
+    }
+
+    public void closeInputSource() throws IOException {
+        inputSource.close();
     }
 
 

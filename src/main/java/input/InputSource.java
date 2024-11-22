@@ -1,5 +1,7 @@
 package input;
 
-public interface InputSource {
+import java.io.Closeable;
+
+public interface InputSource extends Closeable {
     String getInput();
 }

@@ -1,4 +1,4 @@
-import input.ConsoleScanner;
+import input.OneLineScanner;
 import input.InputReader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,15 +9,14 @@ import java.util.Scanner;
 
 class InputReaderTest {
 
-    private InputStream inputStream;
     private InputReader inputReader;
 
 
     @Test
     void getInput_valid(){
         String originalInput = "Hello World";
-        inputStream = new ByteArrayInputStream(originalInput.getBytes());
-        inputReader = new InputReader(new ConsoleScanner(new Scanner(inputStream)));
+        InputStream inputStream = new ByteArrayInputStream(originalInput.getBytes());
+        inputReader = new InputReader(new OneLineScanner(new Scanner(inputStream)));
         String resultInput = inputReader.getInput();
         Assertions.assertEquals(originalInput, resultInput);
     }

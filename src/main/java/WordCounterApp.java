@@ -1,5 +1,6 @@
 import input.InputReadException;
 import input.InputReader;
+import input.InputSourceCloseException;
 import reporter.ResultReporter;
 import reporter.SimpleStringReporter;
 import wordcounter.WordCounter;
@@ -9,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class WordCounterApp {
-
+    private static final String INPUT_PROMPT_MESSAGE = "Enter text: ";
 
     InputReader inputReader;
     WordCounter wordCounter;
@@ -22,9 +23,18 @@ public class WordCounterApp {
     }
 
     public String run() {
+        System.out.print(INPUT_PROMPT_MESSAGE);
         String inputLine = inputReader.getInput();
         int wordCount = wordCounter.countWords(inputLine);
         return resultReporter.report(wordCount);
+    }
+
+    public void shutDown() {
+        try {
+            inputReader.closeInputSource();
+        } catch (IOException e) {
+            throw new InputSourceCloseException("Could not close the input source");
+        }
     }
 
     private Set<String> getStopWords(String fileName) {
