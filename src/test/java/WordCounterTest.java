@@ -10,7 +10,18 @@ class WordCounterTest {
         String helloWorld = "Hello World";
         int result = wordCounter.countWords(helloWorld);
         Assertions.assertEquals(2, result);
-
-
     }
+
+    @Test
+    void countWords_withIllegalCharacter() {
+        String helloWorld = "Hello World! 123 !";
+        int result = wordCounter.countWords(helloWorld);
+        Assertions.assertEquals(1, result);
+    }
+
+    @Test
+    void countWords_null(){
+        Assertions.assertThrows(NullPointerException.class, () -> wordCounter.countWords(null));
+    }
+
 }

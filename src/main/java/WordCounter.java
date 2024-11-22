@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 public class WordCounter {
 
 
-    public int countWords(String inputLine){
-        String[] words = inputLine.split(" ");
+    public int countWords(String input){
+        String[] words = input.split(" ");
         List<String> wordList = List.of(words);
 
         List<String> actualWords = new ArrayList<>();
@@ -18,6 +18,7 @@ public class WordCounter {
                 String regex = "^[a-zA-Z]+$";
                 Pattern pattern = Pattern.compile(regex);
                 Matcher matcher = pattern.matcher(word);
+
                 if (matcher.find()){
                     actualWords.add(word);
                 }
