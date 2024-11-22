@@ -14,24 +14,12 @@ import java.util.regex.Pattern;
 
 public class WordCounter {
 
-    private static final Set<String> stopWords = new HashSet<>();
     public static final String WORD_REGEX = "^[a-zA-Z]+$";
+    private final Set<String> stopWords;
 
-    static{
-        String fileName = "stopwords.txt";
-
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String word;
-            while ((word = br.readLine()) != null) {
-                System.out.println(word);
-                stopWords.add(word);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new InputReadException("Error when reading the file");
-        }
+    public WordCounter(Set<String> stopWords) {
+        this.stopWords = stopWords;
     }
-
 
     public int countWords(String input){
         String[] words = input.split(" ");
