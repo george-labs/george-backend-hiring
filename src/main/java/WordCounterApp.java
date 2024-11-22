@@ -5,18 +5,18 @@ public class WordCounterApp {
 
     InputReader inputReader;
     WordCounter wordCounter;
-    CountReporter countReporter;
+    ResultReporter resultReporter;
 
     public WordCounterApp() {
         this.inputReader = new InputReader(new ConsoleScanner(new Scanner(System.in)));
         this.wordCounter = new WordCounter();
-        this.countReporter = new CountReporter();
+        this.resultReporter = new ResultReporter();
     }
 
     public void run(){
         String inputLine = inputReader.getInput();
         int wordCount = wordCounter.countWords(inputLine);
-        countReporter.report(wordCount);
+        resultReporter.report(wordCount);
     }
 
 }
