@@ -10,13 +10,13 @@ public class WordCounterApp {
     public WordCounterApp() {
         this.inputReader = new InputReader(new ConsoleScanner(new Scanner(System.in)));
         this.wordCounter = new WordCounter();
-        this.resultReporter = new ResultReporter(new OutputStreamReporter(System.out));
+        this.resultReporter = new ResultReporter(new SimpleStringReporter());
     }
 
-    public void run(){
+    public String run(){
         String inputLine = inputReader.getInput();
         int wordCount = wordCounter.countWords(inputLine);
-        resultReporter.report(wordCount);
+        return resultReporter.report(wordCount);
     }
 
 }

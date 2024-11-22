@@ -4,7 +4,8 @@ public class JavaApplication {
     public static void main(String[] args) {
 
         WordCounterApp app = new WordCounterApp();
-        app.run();
+        String result = app.run();
+        System.out.println(result);
 
 
 

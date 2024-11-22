@@ -1,3 +1,3 @@
 public interface Reporter {
-     report(int wordCount);
+     String report(int wordCount);
 }

@@ -6,8 +6,8 @@ public class ResultReporter {
         this.reporter = reporter;
     }
 
-    public void report(int wordCount){
-        reporter.report(wordCount);
+    public String report(int wordCount){
+        return reporter.report(wordCount);
     }
 
 }
