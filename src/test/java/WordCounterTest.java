@@ -2,9 +2,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import wordcounter.WordCounter;
 
+import java.util.Set;
+
 class WordCounterTest {
 
-    WordCounter wordCounter = new WordCounter();
+    WordCounter wordCounter = new WordCounter(Set.of(""));
 
     @Test
     void countWords() {
@@ -21,8 +23,16 @@ class WordCounterTest {
     }
 
     @Test
-    void countWords_null(){
+    void countWords_null() {
         Assertions.assertThrows(NullPointerException.class, () -> wordCounter.countWords(null));
+    }
+
+    @Test
+    void countWords_checkStopwords() {
+        wordCounter = new WordCounter(Set.of("of", "and", "a"));
+        String input = "This is a test of WordCounter";
+        int result = wordCounter.countWords(input);
+        Assertions.assertEquals(4, result);
     }
 
 }

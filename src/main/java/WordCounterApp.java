@@ -5,9 +5,7 @@ import reporter.ResultReporter;
 import reporter.SimpleStringReporter;
 import wordcounter.WordCounter;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -25,25 +23,29 @@ public class WordCounterApp {
         this.resultReporter = new ResultReporter(new SimpleStringReporter());
     }
 
-    public String run(){
+    public String run() {
         String inputLine = inputReader.getInput();
         int wordCount = wordCounter.countWords(inputLine);
         return resultReporter.report(wordCount);
     }
 
-    private Set<String> getStopWords(String fileName){
+    private Set<String> getStopWords(String fileName) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(fileName);
+        return readFromInputStream(inputStream);
+    }
+
+    private Set<String> readFromInputStream(InputStream inputStream) {
         Set<String> stopWords = new HashSet<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String word;
-            while ((word = br.readLine()) != null) {
-                System.out.println(word);
-                stopWords.add(word);
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                stopWords.add(line);
             }
             return stopWords;
         } catch (IOException e) {
-            e.printStackTrace();
             throw new InputReadException("Error when reading the file");
         }
-    }
 
+    }
 }
