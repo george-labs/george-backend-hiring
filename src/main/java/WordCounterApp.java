@@ -10,7 +10,7 @@ public class WordCounterApp {
     public WordCounterApp() {
         this.inputReader = new InputReader(new ConsoleScanner(new Scanner(System.in)));
         this.wordCounter = new WordCounter();
-        this.resultReporter = new ResultReporter(new SOutReporter());
+        this.resultReporter = new ResultReporter(new OutputStreamReporter(System.out));
     }
 
     public void run(){
