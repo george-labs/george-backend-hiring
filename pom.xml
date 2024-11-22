@@ -130,7 +130,6 @@
                         <manifest>
                             <!-- NOTE: In case you choose a different main class, make sure to update this path -->
                             <mainClass>JavaApplication</mainClass>
-                            <!-- <mainClass>KotlinApplicationKt</mainClass> -->
                         </manifest>
                     </archive>
                     <descriptorRefs>
