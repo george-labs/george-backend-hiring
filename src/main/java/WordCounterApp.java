@@ -1,3 +1,9 @@
+import input.ConsoleScanner;
+import input.InputReader;
+import reporter.ResultReporter;
+import reporter.SimpleStringReporter;
+import wordcounter.WordCounter;
+
 import java.util.Scanner;
 
 public class WordCounterApp {

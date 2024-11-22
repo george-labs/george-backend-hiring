@@ -1,3 +1,5 @@
+package reporter;
+
 public class SimpleStringReporter implements Reporter{
 
     public static final String WORD_COUNT_MESSAGE = "Word count ";

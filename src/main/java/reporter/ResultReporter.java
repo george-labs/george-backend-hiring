@@ -1,3 +1,5 @@
+package reporter;
+
 public class ResultReporter {
 
     private final Reporter reporter;
