@@ -1,5 +1,5 @@
-import input.OneLineScanner;
-import input.InputReader;
+package input;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
