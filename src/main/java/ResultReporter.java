@@ -1,5 +1,3 @@
-import java.io.OutputStream;
-
 public class ResultReporter {
 
     private final Reporter reporter;
