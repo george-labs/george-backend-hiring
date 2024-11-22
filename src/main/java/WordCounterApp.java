@@ -1,4 +1,3 @@
-import input.ConsoleScanner;
 import input.InputReadException;
 import input.InputReader;
 import reporter.ResultReporter;
@@ -7,7 +6,6 @@ import wordcounter.WordCounter;
 
 import java.io.*;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 
 public class WordCounterApp {
@@ -17,9 +15,9 @@ public class WordCounterApp {
     WordCounter wordCounter;
     ResultReporter resultReporter;
 
-    public WordCounterApp(String filename) {
-        this.inputReader = new InputReader(new ConsoleScanner(new Scanner(System.in)));
-        this.wordCounter = new WordCounter(getStopWords(filename));
+    public WordCounterApp(InputReader inputReader, String stopWordsFileName) {
+        this.inputReader = inputReader;
+        this.wordCounter = new WordCounter(getStopWords(stopWordsFileName));
         this.resultReporter = new ResultReporter(new SimpleStringReporter());
     }
 
