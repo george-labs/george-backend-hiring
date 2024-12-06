@@ -1,5 +1,6 @@
 package com.erste.mm.service;
 
+import com.erste.mm.model.Word;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +13,8 @@ public class WordServiceTest {
 
     @Test
     void testWordServiceCanFilterOutSpecialCharacterWords() {
-        long count = WordService.countWords(TEST_NON_SPECIAL_WORD + " " + TEST_SPECIAL_WORD);
+        List<Word> words = WordService.countWords(TEST_NON_SPECIAL_WORD + " " + TEST_SPECIAL_WORD);
 
-        Assertions.assertEquals(1, count);
+        Assertions.assertEquals(1, words.size());
     }
 }
