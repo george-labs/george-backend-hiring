@@ -3,6 +3,8 @@ package com.erste.mm.service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class WordServiceTest {
 
     private final String TEST_NON_SPECIAL_WORD = "testTest";
@@ -13,5 +15,11 @@ public class WordServiceTest {
         long count = WordService.countWords(TEST_NON_SPECIAL_WORD + " " + TEST_SPECIAL_WORD);
 
         Assertions.assertEquals(1, count);
+    }
+
+    @Test
+    void testReadingStopWordsFile() {
+        List<String> read = WordService.readStopWords("stopWords.txt");
+        Assertions.assertFalse(read.isEmpty());
     }
 }
