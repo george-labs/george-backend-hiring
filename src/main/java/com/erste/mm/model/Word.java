@@ -6,8 +6,7 @@ import java.util.regex.Pattern;
 public class Word {
 
     private final String word;
-    private static final String regex = "\\b[a-zA-Z]+\\.?";
-//    private static final String regex = "\\b[a-zA-Z]+(?:-[a-zA-Z]+)*\\.?";;
+    private static final String regex = "\\b[a-zA-Z]+(?:-[a-zA-Z]+)*\\.?";;
     private static final Pattern wordPattern  = Pattern.compile(regex);
 
     public Word(String word) {
