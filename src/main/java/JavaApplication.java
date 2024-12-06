@@ -25,9 +25,13 @@ public class JavaApplication {
             outputIndexedList(counts.getTextualIndex());
     }
 
+    static boolean isInputManual(String[] args) {
+        return args.length > 0 && !INDEXED_PARAM.equals(args[0]);
+    }
+
     static UniqueCount processWordsInput(String[] args) {
-        return args.length > 0 && !INDEXED_PARAM.equals(args[0])?
-                getCountWordsFile(args[0]) : getCountWordsInput();
+        return isInputManual(args) ?
+                getCountWordsInput() : getCountWordsFile(args[0]);
     }
 
     static void outputIndexedList(List<String> strings) {

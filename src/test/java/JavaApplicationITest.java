@@ -52,4 +52,12 @@ class JavaApplicationITest {
         Assertions.assertEquals(EXPECTED_OUTPUT_OF_FILE_INPUT, output);
     }
 
+    @Test
+    void testManualInputChoosenByTheParams() {
+        String[] args = {"src/test/resources/mytext.txt", "-index"};
+
+        boolean inputManual = JavaApplication.isInputManual(args);
+
+        Assertions.assertTrue(inputManual);
+    }
 }
