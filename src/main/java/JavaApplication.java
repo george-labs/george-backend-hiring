@@ -2,13 +2,14 @@ import impl.core.InputProcessorImpl;
 import impl.loaders.FileLoaderImpl;
 import impl.writers.InputScannerImpl;
 import impl.writers.OutputWriterImpl;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class JavaApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         FileLoaderImpl fileLoader = new FileLoaderImpl();
         List<String> stopWords = fileLoader.loadFile();
 
