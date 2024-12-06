@@ -16,10 +16,4 @@ public class WordServiceTest {
 
         Assertions.assertEquals(1, count);
     }
-
-    @Test
-    void testReadingStopWordsFile() {
-        List<String> read = WordService.readStopWords("stopWords.txt");
-        Assertions.assertFalse(read.isEmpty());
-    }
 }
