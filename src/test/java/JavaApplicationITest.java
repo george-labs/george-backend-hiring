@@ -7,14 +7,21 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-public class JavaApplicationITest {
+class JavaApplicationITest {
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private final String EXPECTED_OUTPUT = """
+    private final String EXPECTED_OUTPUT_OF_MANUAL_INPUT = """
            Enter text: Number of words: 4, unique: 4; average word length: 4.25 charactersIndex:
            had
            lamb
            Mary
+           little
+           """;
+
+    private final String EXPECTED_OUTPUT_OF_FILE_INPUT = """
+           Number of words: 3, unique: 3; average word length: 4.33 charactersIndex:
+           had
+           lamb
            little
            """;
 
@@ -35,13 +42,14 @@ public class JavaApplicationITest {
     }
 
     @Test
-    void testSystemOutputIsAsExpected() {
-        String[] args = {"-index"};
+    void testSystemOutputIsAsExpected_whenInputFileProvided() {
+        String[] args = {"src/test/resources/mytext.txt", "-index"};
 
         JavaApplication.processAndOutput(args);
 
         String output = outputStreamCaptor.toString();
 
-        Assertions.assertEquals(EXPECTED_OUTPUT, output);
+        Assertions.assertEquals(EXPECTED_OUTPUT_OF_FILE_INPUT, output);
     }
+
 }
