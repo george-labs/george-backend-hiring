@@ -8,6 +8,6 @@ public class JavaApplication {
         InputScannerImpl inputScanner = new InputScannerImpl();
         int output = inputScanner.scanInput();
         OutputWriterImpl outputWriter = new OutputWriterImpl();
-        outputWriter.writeToTerminal("Number of words: " + output);
+        outputWriter.writeToTerminal("\nNumber of words: " + output);
     }
 }
