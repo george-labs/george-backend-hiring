@@ -4,7 +4,6 @@ import com.erste.mm.component.FileReader;
 import com.erste.mm.model.Word;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,7 +13,7 @@ public class WordService {
     static List<Word> countWords(List<String> input) {
         return input.stream()
                 .flatMap(q -> Stream.of(q.split(" ")))
-                .map()
+                .map(Word::new)
                 .filter(Word::isLetteredWord)
                 .toList();
     }
