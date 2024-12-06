@@ -1,9 +1,11 @@
 package com.erste.mm.model;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class Word {
+public class Word implements Comparable<Word> {
 
     private final String word;
 
@@ -19,9 +21,7 @@ public class Word {
     }
 
     public boolean isLetteredWord() {
-        boolean matches = getTextualWord().matches(wordPattern.pattern());
-
-        return matches;
+        return getTextualWord().matches(wordPattern.pattern());
     }
 
     @Override
@@ -35,5 +35,10 @@ public class Word {
     @Override
     public int hashCode() {
         return Objects.hashCode(word);
+    }
+
+    @Override
+    public int compareTo(@NotNull Word o) {
+        return getTextualWord().length() > o.getTextualWord().length() ? 1 : -1;
     }
 }

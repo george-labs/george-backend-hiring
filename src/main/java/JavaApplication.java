@@ -8,13 +8,22 @@ import java.util.Scanner;
 public class JavaApplication {
 
     private static final String STOP_WORD_FILE = "stopwords.txt";
+    private static final String INDEXED_PARAM = "indexed";
 
     public static void main(String[] args) {
-        UniqueCount counts = args.length == 1 ?
+        UniqueCount counts = args.length > 0 && !INDEXED_PARAM.equals(args[0])?
                 getCountWordsFile(args[0]) : getCountWordsInput();
 
         System.out.printf("Number of words: %d, unique: %d; average word length: %.2f characters",
                 counts.getCount(), counts.getUniqueCount(), counts.getAverage());
+
+        if (args[0].equals(INDEXED_PARAM))
+            outputIndexedList(counts.getTextualIndex());
+    }
+
+    static void outputIndexedList(List<String> strings) {
+        System.out.println("Index:");
+        strings.forEach(System.out::println);
     }
 
     static UniqueCount getCountWordsFile(String path) {
