@@ -1,26 +1,26 @@
 package impl.writers;
 
-import static impl.writers.InputScannerUtil.filterInputWords;
+import static impl.writers.utils.InputScannerUtil.filterInputWords;
+import static impl.writers.utils.InputScannerUtil.readFile;
 
 import api.writers.InputScanner;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import org.jetbrains.annotations.NotNull;
 
 public class InputScannerImpl implements InputScanner {
 
-    public InputScannerImpl() {
+        private final Scanner scanner;
+
+    public InputScannerImpl(Scanner scanner) {
+        this.scanner = scanner;
     }
 
     @Override
     public int scanInput() {
         System.out.println("Enter sentences: ");
-        String userInput = new Scanner(System.in).nextLine();
-        var split = userInput.split("\\s");
+        String userInput = scanner.nextLine();
+        final var split = Arrays.asList(userInput.split("\\s"));
 
         List<String> forbiddenWords = readFile();
         List<String> list = filterInputWords(split, forbiddenWords);

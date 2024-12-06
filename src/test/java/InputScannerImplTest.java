@@ -1,18 +1,19 @@
-import impl.writers.InputScannerImpl;
-import impl.writers.InputScannerUtil;
-import java.sql.Array;
-import java.util.ArrayList;
+import static impl.writers.utils.InputScannerUtil.readFile;
+
+import impl.writers.utils.InputScannerUtil;
 import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class InputScannerImplTest {
 
-//    @Test
-//    public void testFilterInputWords() {
-//        var sourceWords = Arrays.asList("Not", "all", "words", "are", "relevant", "on", "and", "off");
-//
-//        InputScannerUtil.filterInputWords(sourceWords, );
-//
-//    }
+    @Test
+    public void testFilterInputWords() {
+        List<String> sourceWords = Arrays.asList("Not", "all", "words", "are", "relevant", "on", "and", "off");
+        var forbiddenWords = readFile();
 
+        List<String> filteredInputWords = InputScannerUtil.filterInputWords(sourceWords, forbiddenWords);
+        Assertions.assertEquals(6, filteredInputWords.size());
+    }
 }

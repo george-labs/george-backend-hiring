@@ -1,10 +1,9 @@
-package impl.writers;
+package impl.writers.utils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +16,7 @@ public class InputScannerUtil {
     }
 
     @NotNull
-    static List<String> readFile() {
+    public static List<String> readFile() {
         List<String> forbiddenWords = new ArrayList<>();
 
         try (var bufferedReader = new BufferedReader(new FileReader(STOPWORDS_FILENAME_PATH))) {
@@ -38,9 +37,8 @@ public class InputScannerUtil {
     }
 
     @NotNull
-    // TODO add annotation visible for testing
-    public static List<String> filterInputWords(final String[] inputWords, final List<String> forbiddenWords) {
-        return Arrays.stream(inputWords)
+    public static List<String> filterInputWords(final List<String> inputWords, final List<String> forbiddenWords) {
+        return inputWords.stream()
                 .filter(s ->  !forbiddenWords.contains(s))
                 .toList();
     }
