@@ -17,4 +17,26 @@ public class WordServiceTest {
 
         Assertions.assertEquals(1, words.size());
     }
+
+    @Test
+    void testStopWordsParametric() {
+        // given
+        final String STOPPED_WORD = "stop";
+        List<String> stopWords = List.of(STOPPED_WORD);
+        List<Word> words = List.of(new Word("testWord"), new Word("2"), new Word(STOPPED_WORD));
+
+        // when
+        long count = WordService.countOnlyNonStoppedWords(words, stopWords);
+
+        // then
+        Assertions.assertEquals(2, count);
+    }
+
+    @Test
+    void testValidNonStoppedWordsCountMatches() {
+        final String MANUAL_INPUT = "firstWord second1nvlaid the";
+        long counted = WordService.countWordsWithoutStoppedWords(MANUAL_INPUT, "stopwords.txt");
+
+        Assertions.assertEquals(1, counted);
+    }
 }
