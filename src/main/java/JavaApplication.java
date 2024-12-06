@@ -13,7 +13,8 @@ public class JavaApplication {
         UniqueCount counts = args.length == 1 ?
                 getCountWordsFile(args[0]) : getCountWordsInput();
 
-        System.out.printf("Number of words: %d, unique: %d", counts.getCount(), counts.getUniqueCount());
+        System.out.printf("Number of words: %d, unique: %d; average word length: %.2f characters",
+                counts.getCount(), counts.getUniqueCount(), counts.getAverage());
     }
 
     static UniqueCount getCountWordsFile(String path) {
