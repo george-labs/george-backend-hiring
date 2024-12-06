@@ -1,6 +1,10 @@
 package api.loaders;
 
+import java.util.List;
+
 public interface FileLoader {
 
-    void loadFile(String args);
+    List<String> loadFile();
+
+    List<String> loadFile(String args);
 }

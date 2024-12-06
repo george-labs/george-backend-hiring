@@ -1,8 +1,10 @@
 package api.writers;
 
 
+import java.util.List;
+
 public interface InputScanner {
 
-    int scanInput();
+    List<String> scanInput();
 
 }
