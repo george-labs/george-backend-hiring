@@ -1,4 +1,5 @@
-import impl.loaders.FileLoaderImpl;
+import api.writers.InputReader;
+import impl.writers.InputReaderImpl;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -9,21 +10,21 @@ public class FileLoaderImplTest {
 
     @Test
     public void testLoadExistingFile() throws IOException {
-        FileLoaderImpl fileLoader = new FileLoaderImpl();
+        InputReader fileLoader = new InputReaderImpl();
 
         List<String> expectedInput = Arrays.asList("Mary", "had", "a", "little", "lamb");
-        List<String> loadedInput = fileLoader.loadFile("src/test/resources/mytext/mytext.txt");
+        List<String> loadedInput = fileLoader.readInput("src/test/resources/mytext/mytext.txt");
         Assertions.assertEquals(expectedInput, loadedInput);
 
     }
 
     @Test
     public void testLoadNonExistingFile() {
-        FileLoaderImpl fileLoader = new FileLoaderImpl();
+        InputReaderImpl fileLoader = new InputReaderImpl();
         try {
-            fileLoader.loadFile("src/test/resources/non_exist.txt");
+            fileLoader.readInput("src/test/resources/non_exist.txt");
         } catch (IOException e) {
-            Assertions.assertThrows(IOException.class, fileLoader::loadFile);
+            Assertions.assertThrows(IOException.class, fileLoader::readInput);
         }
     }
 }
