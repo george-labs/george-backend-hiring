@@ -13,9 +13,11 @@ public class InputProcessorImplTest {
         List<String> stopWords = Arrays.asList("a", "on", "off", "the");
         List<String> sourceWords = Arrays.asList("Not", "all", "the", "are", "relevant", "on", "and", "off");
 
-        List<String> filteredInputWords = InputProcessorImpl.filterInputWords(sourceWords, stopWords);
+        InputProcessorImpl inputProcessor = new InputProcessorImpl();
 
-        Assertions.assertEquals(5, filteredInputWords.size());
+        int filteredInputWords = inputProcessor.processScannedInput(sourceWords, stopWords);
+
+        Assertions.assertEquals(5, filteredInputWords);
     }
 
     @Test
