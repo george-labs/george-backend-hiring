@@ -15,7 +15,7 @@ class WordServiceTest {
 
     @Test
     void testWordServiceCanFilterOutSpecialCharacterWords() {
-        List<Word> words = WordService.countWords(TEST_NON_SPECIAL_WORD + " " + TEST_SPECIAL_WORD);
+        List<Word> words = WordService.filterWords(TEST_NON_SPECIAL_WORD + " " + TEST_SPECIAL_WORD);
 
         Assertions.assertEquals(1, words.size());
     }
