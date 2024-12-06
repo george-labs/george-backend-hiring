@@ -1,10 +1,12 @@
 package com.erste.mm.model;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class Word {
 
     private final String word;
+    private static final Pattern wordPattern = Pattern.compile("(?=\\S*['-])([a-zA-Z'-]+)");
 
     public Word(String word) {
         this.word = word;
@@ -15,11 +17,9 @@ public class Word {
     }
 
     public boolean isLetteredWord() {
-        for (char ch : word.toCharArray())
-            if (!Character.isLetter(ch))
-                return false;
+        boolean matches = getTextualWord().matches(wordPattern.pattern());
 
-        return true;
+        return matches;
     }
 
     @Override
