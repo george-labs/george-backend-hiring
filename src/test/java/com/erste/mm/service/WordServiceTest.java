@@ -1,5 +1,6 @@
 package com.erste.mm.service;
 
+import com.erste.mm.model.UniqueCount;
 import com.erste.mm.model.Word;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,25 +29,25 @@ class WordServiceTest {
         List<Word> words = List.of(new Word("testWord"), new Word("2"), new Word(STOPPED_WORD));
 
         // when
-        long count = WordService.countOnlyNonStoppedWords(words, stopWords);
+        UniqueCount count = WordService.countOnlyNonStoppedWords(words, stopWords);
 
         // then
-        Assertions.assertEquals(2, count);
+        Assertions.assertEquals(2, count.getCount());
     }
 
     @Test
     void testValidNonStoppedWordsCountMatches() {
         final String MANUAL_INPUT = "firstWord second1nvlaid the";
-        long counted = WordService.countWordsWithoutStoppedWords(MANUAL_INPUT, STOP_WORDS_FILE);
+        UniqueCount counted = WordService.countWordsWithoutStoppedWords(MANUAL_INPUT, STOP_WORDS_FILE);
 
-        Assertions.assertEquals(1, counted);
+        Assertions.assertEquals(1, counted.getCount());
     }
 
     @Test
     void testCanCountWordsAsListOfStringWords() {
         List<String> testWords = List.of("testWord", "testWord2", "testWord3", "qwer");
-        long counted = WordService.countWordsWithoutStoppedWords(testWords, STOP_WORDS_FILE);
+        UniqueCount counted = WordService.countWordsWithoutStoppedWords(testWords, STOP_WORDS_FILE);
 
-        Assertions.assertEquals(2, counted);
+        Assertions.assertEquals(2, counted.getCount());
     }
 }
