@@ -42,6 +42,13 @@ class JavaApplicationITest {
     }
 
     @Test
+    void testManualImpotProducesExpectedOutput() {
+        JavaApplication.processAndOutput(new String[]{});
+
+        Assertions.assertEquals(EXPECTED_OUTPUT_OF_MANUAL_INPUT, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
     void testSystemOutputIsAsExpected_whenInputFileProvided() {
         String[] args = {"src/test/resources/mytext.txt", "-index"};
 
@@ -53,11 +60,11 @@ class JavaApplicationITest {
     }
 
     @Test
-    void testManualInputChoosenByTheParams() {
+    void testManualInputChosenByTheParams() {
         String[] args = {"src/test/resources/mytext.txt", "-index"};
 
-        boolean inputManual = JavaApplication.isInputManual(args);
+        boolean fileInput = JavaApplication.isFileInput(args);
 
-        Assertions.assertTrue(inputManual);
+        Assertions.assertTrue(fileInput);
     }
 }

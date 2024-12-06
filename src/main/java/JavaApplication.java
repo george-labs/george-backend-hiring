@@ -25,12 +25,12 @@ public class JavaApplication {
             outputIndexedList(counts.getTextualIndex());
     }
 
-    static boolean isInputManual(String[] args) {
-        return args.length > 0 && !INDEXED_PARAM.equals(args[0]);
+    static boolean isFileInput(String[] args) {
+        return args.length > 0 && !INDEXED_PARAM.equals(args[1]);
     }
 
     static UniqueCount processWordsInput(String[] args) {
-        return isInputManual(args) ?
+        return isFileInput(args) ?
                 getCountWordsInput() : getCountWordsFile(args[0]);
     }
 
