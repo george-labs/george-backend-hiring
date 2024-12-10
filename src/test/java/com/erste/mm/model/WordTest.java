@@ -27,4 +27,13 @@ public class WordTest {
         Assertions.assertFalse(anotherWord.isLetteredWord());
     }
 
+    @Test
+    void testRegexWordPatternCanHandleSpecialCharacters() {
+        Word word = new Word("sat.");
+        Word word2 = new Word("Humpty-Dumpty.");
+
+        Assertions.assertTrue(word.isLetteredWord());
+        Assertions.assertTrue(word2.isLetteredWord());
+    }
+
 }

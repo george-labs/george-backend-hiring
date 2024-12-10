@@ -1,4 +1,5 @@
 import com.erste.mm.component.FileReader;
+import com.erste.mm.model.UniqueCount;
 import com.erste.mm.service.WordService;
 
 import java.util.List;
@@ -9,19 +10,19 @@ public class JavaApplication {
     private static final String STOP_WORD_FILE = "stopwords.txt";
 
     public static void main(String[] args) {
-        long count = args.length == 1 ?
+        UniqueCount counts = args.length == 1 ?
                 getCountWordsFile(args[0]) : getCountWordsInput();
 
-        System.out.println("Number of words: " + count);
+        System.out.printf("Number of words: %d, unique: %d", counts.getCount(), counts.getUniqueCount());
     }
 
-    static long getCountWordsFile(String path) {
+    static UniqueCount getCountWordsFile(String path) {
         List<String> read = FileReader.readWordsInput(path);
 
         return WordService.countWordsWithoutStoppedWords(read, STOP_WORD_FILE);
     }
 
-    static long getCountWordsInput() {
+    static UniqueCount getCountWordsInput() {
         System.out.print("Enter text: ");
         Scanner scanner = new Scanner(System.in);
 
