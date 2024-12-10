@@ -7,3 +7,7 @@ Stop words are compiled inside, therefore are not subject to user change.
 
 ## Iteration 4
 Hyphenated words are split and end of the sentence dot doesn't interfere in the word "quality".
+
+## Iteration 7
+To use file input as a words input, make the filename first argument when running the program.
+

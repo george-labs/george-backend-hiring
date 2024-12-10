@@ -2,19 +2,41 @@ import com.erste.mm.component.FileReader;
 import com.erste.mm.model.UniqueCount;
 import com.erste.mm.service.WordService;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class JavaApplication {
 
     private static final String STOP_WORD_FILE = "stopwords.txt";
+    private static final String INDEXED_PARAM = "-index";
 
     public static void main(String[] args) {
-        UniqueCount counts = args.length == 1 ?
-                getCountWordsFile(args[0]) : getCountWordsInput();
+        processWordsInput(args);
+    }
+
+    static void processAndOutput(String[] args) {
+        UniqueCount counts = processWordsInput(args);
 
         System.out.printf("Number of words: %d, unique: %d; average word length: %.2f characters",
                 counts.getCount(), counts.getUniqueCount(), counts.getAverage());
+
+        if (Arrays.asList(args).contains(INDEXED_PARAM))
+            outputIndexedList(counts.getTextualIndex());
+    }
+
+    static boolean isFileInput(String[] args) {
+        return args.length > 0 && !INDEXED_PARAM.equals(args[1]);
+    }
+
+    static UniqueCount processWordsInput(String[] args) {
+        return isFileInput(args) ?
+                getCountWordsInput() : getCountWordsFile(args[0]);
+    }
+
+    static void outputIndexedList(List<String> strings) {
+        System.out.println("Index:");
+        strings.forEach(System.out::println);
     }
 
     static UniqueCount getCountWordsFile(String path) {

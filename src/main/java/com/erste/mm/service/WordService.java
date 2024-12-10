@@ -6,7 +6,6 @@ import com.erste.mm.model.Word;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WordService {
@@ -39,12 +38,17 @@ public class WordService {
     static UniqueCount countOnlyNonStoppedWords(List<Word> words, List<String> stoppedWords) {
         List<Word> list = words.stream()
                 .filter(q -> !stoppedWords.contains(q.getTextualWord()))
+                .sorted()
                 .toList();
 
         long uniqueCount = countDistinctWords(list);
         double averageLength = countAverageLength(list);
 
-        return new UniqueCount(list.size(), uniqueCount, averageLength);
+        List<String> stringWords = list.stream()
+                .map(Word::getTextualWord)
+                .toList();
+
+        return new UniqueCount(list.size(), uniqueCount, averageLength, stringWords);
     }
 
     static long countDistinctWords(List<Word> words) {
