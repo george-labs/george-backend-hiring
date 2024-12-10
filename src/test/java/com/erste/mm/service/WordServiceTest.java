@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class WordServiceTest {
+class WordServiceTest {
+
+    private final String STOP_WORDS_FILE = "stopwords.txt";
 
     private final String TEST_NON_SPECIAL_WORD = "testTest";
     private final String TEST_SPECIAL_WORD = "testTest1";
@@ -35,8 +37,16 @@ public class WordServiceTest {
     @Test
     void testValidNonStoppedWordsCountMatches() {
         final String MANUAL_INPUT = "firstWord second1nvlaid the";
-        long counted = WordService.countWordsWithoutStoppedWords(MANUAL_INPUT, "stopwords.txt");
+        long counted = WordService.countWordsWithoutStoppedWords(MANUAL_INPUT, STOP_WORDS_FILE);
 
         Assertions.assertEquals(1, counted);
+    }
+
+    @Test
+    void testCanCountWordsAsListOfStringWords() {
+        List<String> testWords = List.of("testWord", "testWord2", "testWord3", "qwer");
+        long counted = WordService.countWordsWithoutStoppedWords(testWords, STOP_WORDS_FILE);
+
+        Assertions.assertEquals(2, counted);
     }
 }
