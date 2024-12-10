@@ -13,9 +13,7 @@ public class WordService {
 
     static List<Word> filterWords(List<String> input) {
         return input.stream()
-                .flatMap(q -> Stream.of(q.split(" "))
-                        .flatMap(p -> Stream.of(p.split("-")))
-                )
+                .flatMap(q -> Stream.of(q.split(" ")))
                 .map(Word::new)
                 .filter(Word::isLetteredWord)
                 .toList();
