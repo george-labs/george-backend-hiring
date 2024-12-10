@@ -50,4 +50,29 @@ class WordServiceTest {
 
         Assertions.assertEquals(2, counted.getCount());
     }
+
+    @Test
+    void testCanCountAverageWordLength() {
+        List<Word> testWords = List.of(new Word("testWord"), new Word("2"), new Word("q"), new Word("q-p"));
+
+        double averageLength = WordService.countAverageLength(testWords);
+
+        Assertions.assertEquals(3.25, averageLength);
+    }
+
+    @Test
+    void testCanCountNonRepeatingWords() {
+        List<Word> testWords = List.of(new Word("testWord"), new Word("2"), new Word("testWord"), new Word("q-p"));
+
+        long counted = WordService.countDistinctWords(testWords);
+
+        Assertions.assertEquals(3, counted);
+    }
+
+    @Test
+    void testCanCountEmptyWOrdsAsZeroRepeating() {
+        long countedEmpty = WordService.countDistinctWords(List.of());
+
+        Assertions.assertEquals(0, countedEmpty);
+    }
 }

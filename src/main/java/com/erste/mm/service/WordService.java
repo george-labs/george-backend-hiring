@@ -24,8 +24,7 @@ public class WordService {
     }
 
     public static UniqueCount countWordsWithoutStoppedWords(List<String> stringWords, String stopWordsFileName) {
-        String string = stringWords.stream()
-                .collect(Collectors.joining(" "));
+        String string = String.join(" ", stringWords);
 
         return countWordsWithoutStoppedWords(string, stopWordsFileName);
     }
@@ -42,11 +41,25 @@ public class WordService {
                 .filter(q -> !stoppedWords.contains(q.getTextualWord()))
                 .toList();
 
-        long uniqueCount = list.stream()
+        long uniqueCount = countDistinctWords(list);
+        double averageLength = countAverageLength(list);
+
+        return new UniqueCount(list.size(), uniqueCount, averageLength);
+    }
+
+    static long countDistinctWords(List<Word> words) {
+        return words.stream()
                 .distinct()
                 .count();
+    }
 
-        return new UniqueCount(list.size(), uniqueCount);
+    static double countAverageLength(List<Word> words) {
+        return words.stream()
+                .map(Word::getTextualWord)
+                .map(String::length)
+                .mapToDouble(q -> q)
+                .average()
+                .orElseThrow();
     }
 
 }
