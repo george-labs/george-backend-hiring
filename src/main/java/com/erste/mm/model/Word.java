@@ -8,6 +8,10 @@ public class Word {
         this.word = word;
     }
 
+    public String getTextualWord() {
+        return word;
+    }
+
     public boolean isLetteredWord() {
 
         for (char ch : word.toCharArray()) {

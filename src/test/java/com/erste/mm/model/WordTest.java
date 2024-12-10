@@ -26,4 +26,5 @@ public class WordTest {
         Assertions.assertFalse(word.isLetteredWord());
         Assertions.assertFalse(anotherWord.isLetteredWord());
     }
+
 }

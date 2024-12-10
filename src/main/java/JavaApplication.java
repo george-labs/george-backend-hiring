@@ -10,7 +10,7 @@ public class JavaApplication {
 
         String input = scanner.nextLine();
 
-        long count = WordService.countWords(input);
+        long count = WordService.countWordsWithoutStoppedWords(input, "stopwords.txt");
 
         System.out.println("Number of words: " + count);
     }
