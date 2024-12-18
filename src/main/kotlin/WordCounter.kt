@@ -1,6 +1,17 @@
-class WordCounter(val stopWords: Set<String>) {
+import inputReader.InputReader
 
-    fun count(input: String): Int {
+class WordCounter(
+    val stopWordLoader: StopWordLoader,
+    private val inputReader: InputReader,
+) {
+    private val stopWords = stopWordLoader.loadFromResources()
+
+    fun countWordsInText(): Int {
+        val inputText = inputReader.read()
+        return countWordsInText(inputText)
+    }
+
+    private fun countWordsInText(input: String): Int {
         val words = mutableListOf<String>()
         var currentWord = ""
 

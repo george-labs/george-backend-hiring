@@ -6,15 +6,11 @@ fun main(args: Array<String>) {
 
     val stopWordsResourceName = "stopwords.txt"
     val stopWordLoader = StopWordLoader(stopWordsResourceName)
-//    val stopWords = stopWordLoader.loadFromResources(stopWordsResourceName)
-//    val inputReader = if (args.size == 1)
-//        ConsoleInputReader()
-//    else
-//        FileInputReader()
 
-    val applicationController = ApplicationController(args.get(0), stopWordLoader, inputReaders = listOf())
-//        print("Enter text: ")
-
-//    val userInput = readln()
-    println("Number of words: ${applicationController.countWords()}")
+    val inputReader = InputReaderFactory({ readln() }, { print(it) }).getInputReader(args.get(0))
+    val applicationController = WordCounter(
+        stopWordLoader = stopWordLoader,
+        inputReader = inputReader,
+    )
+    println("Number of words: ${applicationController.countWordsInText()}")
 }

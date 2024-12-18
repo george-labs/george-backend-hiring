@@ -1,7 +1,11 @@
 package inputReader
 
-class ConsoleInputReader: InputReader {
+class ConsoleInputReader(private val readLineImplementation: () -> String, private val printer: (String) -> Unit): InputReader {
+    companion object {
+        const val entryMessage = "Enter text: "
+    }
     override fun read(): String {
-        TODO("Not yet implemented")
+        printer(entryMessage)
+        return readLineImplementation()
     }
 }

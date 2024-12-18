@@ -11,7 +11,7 @@ class WordCounterTest {
         val input = ""
 
         // when
-        val result = wordCounter.count(input)
+        val result = wordCounter.countWordsInText(input)
 
         // then
         assertEquals(0, result)
@@ -24,7 +24,7 @@ class WordCounterTest {
         val input = "       "
 
         // when
-        val result = wordCounter.count(input)
+        val result = wordCounter.countWordsInText(input)
 
         // then
         assertEquals(0, result)
@@ -37,7 +37,7 @@ class WordCounterTest {
         val input = "9999 /// ---- !@#$%^&*("
 
         // when
-        val result = wordCounter.count(input)
+        val result = wordCounter.countWordsInText(input)
 
         // then
         assertEquals(0, result)
@@ -50,7 +50,7 @@ class WordCounterTest {
         val input = "Ma99ry had a little lamb 999"
 
         // when
-        val result = wordCounter.count(input)
+        val result = wordCounter.countWordsInText(input)
 
         // then
         assertEquals(4, result)
@@ -63,7 +63,7 @@ class WordCounterTest {
         val input = "had      a little"
 
         // when
-        val result = wordCounter.count(input)
+        val result = wordCounter.countWordsInText(input)
 
         // then
         assertEquals(3, result)
@@ -77,7 +77,7 @@ class WordCounterTest {
         val input = "had      a little on off bagel"
 
         // when
-        val result = wordCounter.count(input)
+        val result = wordCounter.countWordsInText(input)
 
         // then
         assertEquals(3, result)
