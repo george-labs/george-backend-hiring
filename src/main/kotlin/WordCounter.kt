@@ -1,4 +1,4 @@
-class WordCounter {
+class WordCounter(val stopWords: Set<String>) {
 
     fun count(input: String): Int {
         val words = mutableListOf<String>()
@@ -16,7 +16,7 @@ class WordCounter {
         if (currentWord.isNotEmpty())
             words.add(currentWord)
 
-        val validWords = words.filter { word -> word.none { !it.isLetter() } }
+        val validWords = words.filter { word -> word.none { !it.isLetter() } && !stopWords.contains(word) }
         return validWords.size
     }
 }
