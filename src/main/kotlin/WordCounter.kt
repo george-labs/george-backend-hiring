@@ -1,4 +1,5 @@
 import inputReader.InputReader
+import stopWorldLoader.StopWordLoader
 
 class WordCounter(
     val stopWordLoader: StopWordLoader,
@@ -8,10 +9,10 @@ class WordCounter(
 
     fun countWordsInText(): Int {
         val inputText = inputReader.read()
-        return countWordsInText(inputText)
+        return countWords(inputText)
     }
 
-    private fun countWordsInText(input: String): Int {
+    private fun countWords(input: String): Int {
         val words = mutableListOf<String>()
         var currentWord = ""
 

@@ -1,17 +1,18 @@
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import stopWorldLoader.DefaultStopWordLoader
 
-class StopWordLoaderTest {
+class DefaultStopWordLoaderTest {
     private val resourceName = "stopwords.txt"
 
-    private val stopWordLoader = StopWordLoader(resourceName)
+    private val defaultStopWordLoader = DefaultStopWordLoader(resourceName)
 
     @Test
     fun loadFromResourcesWillLoadSpecifiedFileFromResourcesAndReadsStopWordsLineByLine() {
         // given
 
         // then
-        val stopWords = stopWordLoader.loadFromResources()
+        val stopWords = defaultStopWordLoader.loadFromResources()
 
         // when
         val expected = setOf("the", "a", "on", "off")
