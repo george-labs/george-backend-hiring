@@ -1,22 +1,22 @@
-class WordCounter(val stopWords: Set<String>) {
+import inputReader.InputReader
+import stopWorldLoader.StopWordLoader
 
-    fun count(input: String): Int {
-        val words = mutableListOf<String>()
-        var currentWord = ""
+class WordCounter(
+    private val stopWordLoader: StopWordLoader,
+    private val inputReader: InputReader,
+) {
+    private val stopWords = stopWordLoader.loadFromResources()
 
-        input.forEach { currentChar ->
-            currentWord = if (currentChar.isWhitespace()) {
-                if (currentWord.isNotEmpty())
-                    words.add(currentWord)
-                ""
-            } else {
-                currentWord.plus(currentChar)
-            }
-        }
-        if (currentWord.isNotEmpty())
-            words.add(currentWord)
+    fun countWordsInText(): Int {
+        val inputText = inputReader.read()
+        return countWords(inputText)
+    }
 
-        val validWords = words.filter { word -> word.none { !it.isLetter() } && !stopWords.contains(word) }
+    private fun countWords(input: String): Int {
+        val potentialWords = input.split(" ", "\t", System.lineSeparator())
+        val validWords = potentialWords
+            .filter { it.isNotBlank() }
+            .filter { word -> word.none { !it.isLetter() } && !stopWords.contains(word) }
         return validWords.size
     }
 }

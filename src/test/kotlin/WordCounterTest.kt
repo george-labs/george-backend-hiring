@@ -1,17 +1,20 @@
+import mocks.InputReaderMock
+import mocks.StopWordLoaderMock
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class WordCounterTest {
-    private val emptyStopWords = emptySet<String>()
 
     @Test
     fun countReturnZeroWhenInputIsEmpty() {
         // given
-        val wordCounter = WordCounter(emptyStopWords)
+        val stopWorldLoaderMock = StopWordLoaderMock(emptySet())
         val input = ""
+        val inputReaderMock = InputReaderMock(input)
+        val wordCounter = WordCounter(stopWorldLoaderMock, inputReaderMock)
 
         // when
-        val result = wordCounter.count(input)
+        val result = wordCounter.countWordsInText()
 
         // then
         assertEquals(0, result)
@@ -20,11 +23,13 @@ class WordCounterTest {
     @Test
     fun countReturnZeroWhenInputIsBlank() {
         // given
-        val wordCounter = WordCounter(emptyStopWords)
         val input = "       "
+        val stopWorldLoaderMock = StopWordLoaderMock(emptySet())
+        val inputReaderMock = InputReaderMock(input)
+        val wordCounter = WordCounter(stopWorldLoaderMock, inputReaderMock)
 
         // when
-        val result = wordCounter.count(input)
+        val result = wordCounter.countWordsInText()
 
         // then
         assertEquals(0, result)
@@ -33,11 +38,13 @@ class WordCounterTest {
     @Test
     fun countIgnoresNoneAlphabeticalValues() {
         // given
-        val wordCounter = WordCounter(emptyStopWords)
         val input = "9999 /// ---- !@#$%^&*("
+        val stopWorldLoaderMock = StopWordLoaderMock(emptySet())
+        val inputReaderMock = InputReaderMock(input)
+        val wordCounter = WordCounter(stopWorldLoaderMock, inputReaderMock)
 
         // when
-        val result = wordCounter.count(input)
+        val result = wordCounter.countWordsInText()
 
         // then
         assertEquals(0, result)
@@ -46,24 +53,43 @@ class WordCounterTest {
     @Test
     fun countReturnsValidResultOnNormalInput() {
         // given
-        val wordCounter = WordCounter(emptyStopWords)
         val input = "Ma99ry had a little lamb 999"
+        val stopWorldLoaderMock = StopWordLoaderMock(emptySet())
+        val inputReaderMock = InputReaderMock(input)
+        val wordCounter = WordCounter(stopWorldLoaderMock, inputReaderMock)
 
         // when
-        val result = wordCounter.count(input)
+        val result = wordCounter.countWordsInText()
 
         // then
         assertEquals(4, result)
     }
 
     @Test
-    fun countHandlesMultipleWhiteSpaceAfterEachOther() {
+    fun countHandlesTabs() {
         // given
-        val wordCounter = WordCounter(emptyStopWords)
-        val input = "had      a little"
+        val input = "had\ta little"
+        val stopWorldLoaderMock = StopWordLoaderMock(emptySet())
+        val inputReaderMock = InputReaderMock(input)
+        val wordCounter = WordCounter(stopWorldLoaderMock, inputReaderMock)
 
         // when
-        val result = wordCounter.count(input)
+        val result = wordCounter.countWordsInText()
+
+        // then
+        assertEquals(3, result)
+    }
+
+    @Test
+    fun countHandlesLineSeparators() {
+        // given
+        val input = "had${System.lineSeparator()}a ${System.lineSeparator()}little"
+        val stopWorldLoaderMock = StopWordLoaderMock(emptySet())
+        val inputReaderMock = InputReaderMock(input)
+        val wordCounter = WordCounter(stopWorldLoaderMock, inputReaderMock)
+
+        // when
+        val result = wordCounter.countWordsInText()
 
         // then
         assertEquals(3, result)
@@ -73,11 +99,13 @@ class WordCounterTest {
     fun countUsesStopWordsToInvalidateWords() {
         // given
         val stopWords = setOf("a", "on", "off")
-        val wordCounter = WordCounter(stopWords)
         val input = "had      a little on off bagel"
+        val stopWorldLoaderMock = StopWordLoaderMock(stopWords)
+        val inputReaderMock = InputReaderMock(input)
+        val wordCounter = WordCounter(stopWorldLoaderMock, inputReaderMock)
 
         // when
-        val result = wordCounter.count(input)
+        val result = wordCounter.countWordsInText()
 
         // then
         assertEquals(3, result)
