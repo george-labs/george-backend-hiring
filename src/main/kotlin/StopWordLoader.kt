@@ -1,9 +1,9 @@
-import java.nio.file.Path
+import java.nio.file.Paths
+import kotlin.io.path.readLines
 
 class StopWordLoader() {
-    fun loadFromResources(resourceName: String): List<String> {
-        // handle reading line by line
-        val stopWordsText = StopWordLoader::class.java.getResource("resourceName").readText()
-        return stopWordsText.split("\n")
+    fun loadFromResources(resourceName: String): Set<String> {
+        val stopWordsUrl = StopWordLoader::class.java.getResource("/$resourceName")!!
+        return Paths.get(stopWordsUrl.toURI()).readLines().toSet()
     }
 }
