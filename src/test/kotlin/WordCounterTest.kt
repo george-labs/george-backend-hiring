@@ -66,9 +66,24 @@ class WordCounterTest {
     }
 
     @Test
-    fun countHandlesMultipleWhiteSpaceAfterEachOther() {
+    fun countHandlesTabs() {
         // given
-        val input = "had      a little"
+        val input = "had\ta little"
+        val stopWorldLoaderMock = StopWordLoaderMock(emptySet())
+        val inputReaderMock = InputReaderMock(input)
+        val wordCounter = WordCounter(stopWorldLoaderMock, inputReaderMock)
+
+        // when
+        val result = wordCounter.countWordsInText()
+
+        // then
+        assertEquals(3, result)
+    }
+
+    @Test
+    fun countHandlesLineSeparators() {
+        // given
+        val input = "had${System.lineSeparator()}a ${System.lineSeparator()}little"
         val stopWorldLoaderMock = StopWordLoaderMock(emptySet())
         val inputReaderMock = InputReaderMock(input)
         val wordCounter = WordCounter(stopWorldLoaderMock, inputReaderMock)

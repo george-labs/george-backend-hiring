@@ -10,6 +10,7 @@ fun main(args: Array<String>) {
     val reader = { readln() }
     val inputTextFileName = if (args.size == 1) args.get(0) else null
     val inputReader = InputReaderFactory(reader, printer).getInputReader(inputTextFileName)
+
     val applicationController = WordCounter(
         stopWordLoader = defaultStopWordLoader,
         inputReader = inputReader,
