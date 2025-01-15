@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 
 public class TerminalInput implements Input {
 
-
   @Override
   public String input() throws IOException {
     // Enter data using BufferReader

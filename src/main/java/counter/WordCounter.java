@@ -11,7 +11,6 @@ public class WordCounter implements Counter {
   }
 
   public long countWords(final String input) {
-
     return this.separator.separate(input).stream()
         .filter(word -> word.chars().allMatch(Character::isLetter))
         .count();
