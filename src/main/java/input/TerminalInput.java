@@ -17,6 +17,7 @@ public class TerminalInput implements Input {
   public String input() throws IOException {
     // Enter data using BufferReader
     try (BufferedReader r = new BufferedReader(new InputStreamReader(this.inputStream))) {
+      System.out.print("Enter text: ");
       return r.readLine();
     }
   }

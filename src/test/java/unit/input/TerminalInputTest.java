@@ -1,5 +1,6 @@
-package input;
+package unit.input;
 
+import input.TerminalInput;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import org.junit.jupiter.api.Assertions;

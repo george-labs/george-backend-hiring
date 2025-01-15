@@ -12,7 +12,7 @@ public class WordCounter implements Counter {
 
   public long countWords(final String input) {
     return this.delimiterSeparator.separate(input).stream()
-        .filter(word -> word.chars().allMatch(Character::isLetter))
+        .filter(word -> word != null && !word.isBlank() && word.chars().allMatch(Character::isLetter))
         .count();
   }
 }

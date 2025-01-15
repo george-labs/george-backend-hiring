@@ -1,5 +1,6 @@
-package counter;
+package unit.counter;
 
+import exception.NullInputException;
 import java.util.List;
 import separator.Separator;
 
@@ -12,7 +13,10 @@ public class MockedSeparator implements Separator {
   }
 
   @Override
-  public List<String> separate(String input) {
+  public List<String> separate(final String input) {
+    if (input == null) {
+      throw new NullInputException();
+    }
     return this.mockedSeparatedStrings;
   }
 }
