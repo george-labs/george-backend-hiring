@@ -1,4 +1,4 @@
-package unit.counter;
+package unit.mocks;
 
 import exception.NullInputException;
 import java.util.List;

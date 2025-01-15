@@ -1,6 +1,6 @@
 package reader;
 
-import exception.IgnoreFileNotFoundException;
+import exception.RequiredFileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -13,7 +13,7 @@ public class LineByLineFileReader implements FileReader {
     try {
       return Files.readAllLines(Paths.get(pathToFile));
     } catch (IOException ex) {
-      throw new IgnoreFileNotFoundException(pathToFile);
+      throw new RequiredFileNotFoundException(pathToFile);
     }
   }
 }

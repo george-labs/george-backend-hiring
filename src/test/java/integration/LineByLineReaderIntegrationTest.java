@@ -1,6 +1,6 @@
 package integration;
 
-import exception.IgnoreFileNotFoundException;
+import exception.RequiredFileNotFoundException;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,6 +27,6 @@ class LineByLineReaderIntegrationTest {
   @Test
   void testNonExistingFileRead() {
     final String nonExisitngPath = "oleg/oleg";
-    Assertions.assertThrows(IgnoreFileNotFoundException.class, () -> this.lineByLineFileReader.read(nonExisitngPath));
+    Assertions.assertThrows(RequiredFileNotFoundException.class, () -> this.lineByLineFileReader.read(nonExisitngPath));
   }
 }
