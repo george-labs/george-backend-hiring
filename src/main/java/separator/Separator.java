@@ -1,15 +1,7 @@
 package separator;
 
-import exception.NullInputException;
 import java.util.List;
 
-public class Separator {
-  private final String allowedSeparators = "[\\s]";
-
-  public List<String> separate(final String input) {
-    if (input == null) {
-      throw new NullInputException();
-    }
-    return List.of(input.split(allowedSeparators));
-  }
+public interface Separator {
+  List<String> separate(final String input);
 }

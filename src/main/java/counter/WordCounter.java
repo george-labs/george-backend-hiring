@@ -4,14 +4,14 @@ import separator.Separator;
 
 public class WordCounter implements Counter {
 
-  private final Separator separator;
+  private final Separator delimiterSeparator;
 
-  public WordCounter(final Separator separator) {
-    this.separator = separator;
+  public WordCounter(final Separator delimiterSeparator) {
+    this.delimiterSeparator = delimiterSeparator;
   }
 
   public long countWords(final String input) {
-    return this.separator.separate(input).stream()
+    return this.delimiterSeparator.separate(input).stream()
         .filter(word -> word.chars().allMatch(Character::isLetter))
         .count();
   }
