@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 
 public class TerminalInput implements Input {
 
-  private InputStream inputStream;
+  private final InputStream inputStream;
 
   public TerminalInput(final InputStream inputStream) {
     this.inputStream = inputStream;

@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import rule.ignore.WordsToIgnoreRule;
 
 class WordCounterTest {
 
@@ -16,7 +17,7 @@ class WordCounterTest {
   @BeforeEach
   void beforeEach() {
     this.separator = new MockedSeparator();
-    this.wordCounter = new WordCounter(this.separator);
+    this.wordCounter = new WordCounter(this.separator, new WordsToIgnoreRule(List.of()));
   }
 
   @Test
@@ -111,6 +112,20 @@ class WordCounterTest {
     final String testString = "oleg10 is on a 5interview";
     final List<String> separatedString = List.of("oleg10", "is", "on", "a", "5interview");
     this.separator.setMockedSeparatedStrings(separatedString);
+
+    long actualCount = this.wordCounter.countWords(testString);
+    long expectedCount = 3;
+    Assertions.assertEquals(expectedCount, actualCount);
+  }
+
+  @Test
+  void testWithWordsToIgnore() {
+    final String testString = "oleg is on a interview";
+    final List<String> separatedString = List.of("oleg", "is", "on", "a", "interview");
+    this.separator.setMockedSeparatedStrings(separatedString);
+
+    final List<String> wordsToIgnoreImmutableValues = List.of("oleg", "interview");
+    this.wordCounter = new WordCounter(this.separator, new WordsToIgnoreRule(wordsToIgnoreImmutableValues));
 
     long actualCount = this.wordCounter.countWords(testString);
     long expectedCount = 3;

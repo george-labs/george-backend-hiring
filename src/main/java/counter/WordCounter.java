@@ -1,16 +1,16 @@
 package counter;
 
-import rule.ignore.WordsToIgnore;
+import rule.Rule;
 import separator.Separator;
 
 public class WordCounter implements Counter {
 
   private final Separator delimiterSeparator;
-  private final WordsToIgnore wordsToIgnore;
+  private final Rule wordsToIgnoreRule;
 
-  public WordCounter(final Separator delimiterSeparator, final WordsToIgnore wordsToIgnore) {
+  public WordCounter(final Separator delimiterSeparator, final Rule wordsToIgnoreRule) {
     this.delimiterSeparator = delimiterSeparator;
-    this.wordsToIgnore = wordsToIgnore;
+    this.wordsToIgnoreRule = wordsToIgnoreRule;
   }
 
   public long countWords(final String input) {
@@ -18,7 +18,7 @@ public class WordCounter implements Counter {
         .filter(word -> word != null
             && !word.isBlank()
             && word.chars().allMatch(Character::isLetter)
-            && !this.wordsToIgnore.wordsToIgnoreImmutableValues.contains(word))
+            && this.wordsToIgnoreRule.validate(word))
         .count();
   }
 }

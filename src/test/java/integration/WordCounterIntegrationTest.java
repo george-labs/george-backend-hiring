@@ -2,9 +2,11 @@ package integration;
 
 import counter.WordCounter;
 import exception.NullInputException;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import rule.ignore.WordsToIgnoreRule;
 import separator.DelimiterSeparator;
 
 class WordCounterIntegrationTest {
@@ -13,7 +15,7 @@ class WordCounterIntegrationTest {
 
   @BeforeEach
   void beforeEach() {
-    this.wordCounter = new WordCounter(new DelimiterSeparator());
+    this.wordCounter = new WordCounter(new DelimiterSeparator(), new WordsToIgnoreRule(List.of()));
   }
 
   @Test
