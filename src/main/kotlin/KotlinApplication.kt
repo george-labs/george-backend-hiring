@@ -11,7 +11,14 @@ fun main(vararg args: String) {
     }
     val stopWords = getWordsListFromFile("stopwords.txt")
     val counter = WordCounter()
-    println("Number of words: ${counter.countWords(words, stopWords)}")
+    println(
+        "Number of words: ${counter.countWords(words, stopWords)}, unique: ${
+            counter.countUniqueWords(
+                words,
+                stopWords
+            )
+        }"
+    )
 }
 
 fun getWordsListFromFile(filename: String): List<Word> {
