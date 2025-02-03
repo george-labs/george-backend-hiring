@@ -67,4 +67,27 @@ class KotlinApplicationTest {
         val count = counter.countWords(words, stopWords)
         Assertions.assertEquals(expectedValueNegative, count)
     }
+
+
+    @Test
+    fun testWordCounterUniqueWordsFromFileStopWordsPositive() {
+        val counter = WordCounter()
+        val words = getWordsListFromFile("mytexttestuniquepositive.txt")
+        val stopWords = getWordsListFromFile("stopwords.txt")
+        val count = counter.countWords(words, stopWords)
+        Assertions.assertEquals(11, count)
+        val countUnique = counter.countUniqueWords(words, stopWords)
+        Assertions.assertEquals(4, countUnique)
+    }
+
+    @Test
+    fun testWordCounterWordsUniqueFromFileStopWordsNegative() {
+        val counter = WordCounter()
+        val words = getWordsListFromFile("mytexttestuniquenegative.txt")
+        val stopWords = getWordsListFromFile("stopwords.txt")
+        val count = counter.countWords(words, stopWords)
+        Assertions.assertEquals(expectedValueNegative, count)
+        val countUnique = counter.countUniqueWords(words, stopWords)
+        Assertions.assertEquals(expectedValueNegative, countUnique)
+    }
 }
