@@ -1,9 +1,12 @@
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class KotlinApplicationTest {
 
-    val testingValue = "Test testing testo"
-    val testingValueNegative = "t35t 987456 i-o8 i/p"
+    private val testingValuePositive = "Test testing testo"
+    private val testingValueNegative = "t35t 987456 i-o8 i/p"
+    private val expectedValuePositive = 3
+    private val expectedValueNegative = 0
 
     @Test
     fun testDummy() {
@@ -11,14 +14,18 @@ class KotlinApplicationTest {
     }
 
     @Test
-    fun testWordCounter() {
-        val counter = WordCounter(testingValue)
-        assert(counter.countWords(counter.splitToWords()) == 3)
+    fun testWordCounterPositive() {
+        val counter = WordCounter(testingValuePositive)
+
+        val count = counter.countWords(counter.splitToWords())
+
+        Assertions.assertEquals(expectedValuePositive, count)
     }
 
     @Test
     fun testWordCounterNegative() {
         val counter = WordCounter(testingValueNegative)
-        assert(counter.countWords(counter.splitToWords()) == 0)
+        val count = counter.countWords(counter.splitToWords())
+        Assertions.assertEquals(expectedValueNegative, count)
     }
 }
