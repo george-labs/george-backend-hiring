@@ -16,9 +16,7 @@ class KotlinApplicationTest {
     @Test
     fun testWordCounterPositive() {
         val counter = WordCounter(testingValuePositive)
-
         val count = counter.countWords(counter.splitToWords())
-
         Assertions.assertEquals(expectedValuePositive, count)
     }
 
