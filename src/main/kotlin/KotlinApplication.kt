@@ -1,14 +1,15 @@
-import data.Word
-import java.io.File
-import java.io.FileNotFoundException
-import java.io.InputStream
+import util.WordCounter
+import util.WordFileReader
+import util.splitToWords
+
+const val STOP_WORD_FILE = "stopwords.txt"
 
 fun main(vararg args: String) {
     val counter = WordCounter()
-    val stopWords = getWordsListFromFile("stopwords.txt", isStopWords = true)
+    val stopWords = WordFileReader().getWordsListFromFile(STOP_WORD_FILE, isStopWords = true)
 
-    val words = if (args.isNotEmpty() && args.get(0) != "-index") {
-        getWordsListFromFile(args.get(0), isStopWords = false)
+    val words = if (args.isNotEmpty() && args[0] != "-index") {
+        WordFileReader().getWordsListFromFile(args[0], isStopWords = false)
     } else {
         print("Enter text: ")
         readln().splitToWords()
@@ -29,16 +30,3 @@ fun main(vararg args: String) {
     }
 }
 
-fun getWordsListFromFile(filename: String, isStopWords: Boolean = false): List<Word> {
-    try {
-        val inputStream: InputStream = File(filename).inputStream()
-        val lineList = mutableListOf<String>()
-
-        inputStream.bufferedReader().forEachLine { lineList.add(it) }
-        return lineList.flatMap { it.splitToWords() }
-    } catch (e: FileNotFoundException) {
-        println("Failed to open ${if (isStopWords) "stop " else ""}words file")
-        print("Enter text: ")
-        return readln().splitToWords()
-    }
-}

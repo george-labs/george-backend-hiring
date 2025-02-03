@@ -1,7 +1,9 @@
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import util.WordCounter
+import util.splitToWords
 
-class WordCounterTest {
+class WordWrapperCounterTest {
 
     private val testingValuePositive = "test testig testo"
     private val testingValueNegative = "t35t 987456 i-o8 i/p"
@@ -31,5 +33,21 @@ class WordCounterTest {
         val words = testingValuePositive.splitToWords()
         val count = counter.averageWordLength(words)
         Assertions.assertEquals(expectedValueAveragePositive, count)
+    }
+
+    @Test
+    fun testWordCounterFilterWordsPositive() {
+        val counter = WordCounter()
+        val words = testingValuePositive.splitToWords()
+        val count = counter.filterWords(words).count()
+        Assertions.assertEquals(expectedValuePositive, count)
+    }
+
+    @Test
+    fun testWordCounterFilterWordsNegative() {
+        val counter = WordCounter()
+        val words = testingValueNegative.splitToWords()
+        val count = counter.filterWords(words).count()
+        Assertions.assertEquals(expectedValueNegative, count)
     }
 }

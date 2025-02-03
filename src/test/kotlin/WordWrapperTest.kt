@@ -1,8 +1,9 @@
-import data.Word
+import data.WordWrapper
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import util.isAcceptedWord
 
-class WordTest {
+class WordWrapperTest {
 
     private val testingValuePositive = "test"
     private val testingValueHyphenPositive = "test-testing"
@@ -12,19 +13,19 @@ class WordTest {
 
     @Test
     fun testWordCounterPositive() {
-        val word = Word(testingValuePositive)
-        Assertions.assertEquals(expectedValuePositive, word.isWord())
+        val word = WordWrapper(testingValuePositive)
+        Assertions.assertEquals(expectedValuePositive, word.isAcceptedWord())
     }
 
     @Test
     fun testWordCounterHyphenPositive() {
-        val word = Word(testingValueHyphenPositive)
-        Assertions.assertEquals(expectedValuePositive, word.isWord())
+        val word = WordWrapper(testingValueHyphenPositive)
+        Assertions.assertEquals(expectedValuePositive, word.isAcceptedWord())
     }
 
     @Test
     fun testWordCounterNegative() {
-        val word = Word(testingValueNegative)
-        Assertions.assertEquals(expectedValueNegative, word.isWord())
+        val word = WordWrapper(testingValueNegative)
+        Assertions.assertEquals(expectedValueNegative, word.isAcceptedWord())
     }
 }
