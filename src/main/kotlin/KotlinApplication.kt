@@ -7,7 +7,7 @@ fun main(vararg args: String) {
     val counter = WordCounter()
     val stopWords = getWordsListFromFile("stopwords.txt", isStopWords = true)
 
-    val words = if (args.isNotEmpty()) {
+    val words = if (args.isNotEmpty() && args.get(0) != "-index") {
         getWordsListFromFile(args.get(0), isStopWords = false)
     } else {
         print("Enter text: ")
@@ -19,6 +19,14 @@ fun main(vararg args: String) {
                 ", unique: ${counter.countUniqueWords(words, stopWords)}" +
                 "; average word length: ${counter.averageWordLength(words, stopWords)} characters"
     )
+    if (args.isNotEmpty() && args.contains("-index")) {
+        val filteredWords = counter.filterWords(words, stopWords).map { it.value }.toMutableList()
+        if (filteredWords.isNotEmpty()) {
+            println("Index:")
+            filteredWords.sort()
+            filteredWords.map { println(it) }
+        }
+    }
 }
 
 fun getWordsListFromFile(filename: String, isStopWords: Boolean = false): List<Word> {

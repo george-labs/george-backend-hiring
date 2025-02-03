@@ -1,10 +1,10 @@
 import data.Word
 
 class WordCounter {
-    fun countWords(words: List<Word>) = words.count { it.isWord() }
+    fun countWords(words: List<Word>) = filterWords(words).size
 
     fun countWords(words: List<Word>, stopWords: List<Word>) =
-        words.count { word -> stopWords.none { word.value == it.value } && word.isWord() }
+        filterWords(words = words, stopWords = stopWords).size
 
     fun countUniqueWords(words: List<Word>, stopWords: List<Word>): Int {
         val uniqueWords = mutableMapOf<String, Int>()
@@ -37,6 +37,13 @@ class WordCounter {
         }
         return charCount.div(countWords(words, stopWords).toFloat())
     }
+
+
+    fun filterWords(words: List<Word>) =
+        words.filter { word -> word.isWord() }
+
+    fun filterWords(words: List<Word>, stopWords: List<Word>) =
+        words.filter { word -> stopWords.none { word.value == it.value } && word.isWord() }
 }
 
 fun String.splitToWords() =
