@@ -17,31 +17,54 @@ class KotlinApplicationTest {
 
     @Test
     fun testWordCounterPositive() {
-        val counter = WordCounter(testingValuePositive)
-        val count = counter.countWords(counter.splitToWords())
+        val counter = WordCounter()
+        val words = testingValuePositive.splitToWords()
+        val count = counter.countWords(words)
         Assertions.assertEquals(expectedValuePositive, count)
     }
 
     @Test
     fun testWordCounterNegative() {
-        val counter = WordCounter(testingValueNegative)
-        val count = counter.countWords(counter.splitToWords())
+        val counter = WordCounter()
+        val words = testingValueNegative.splitToWords()
+        val count = counter.countWords(words)
         Assertions.assertEquals(expectedValueNegative, count)
     }
 
     @Test
     fun testWordCounterStopWordsPositive() {
-        val counter = WordCounter(testingValueStopWordsPositive)
-        val stopWords = getStopWordsListFromFile("stopwords.txt")
-        val count = counter.countWords(counter.splitToWords(), stopWords)
+        val counter = WordCounter()
+        val words = testingValueStopWordsPositive.splitToWords()
+        val stopWords = getWordsListFromFile("stopwords.txt")
+        val count = counter.countWords(words, stopWords)
         Assertions.assertEquals(expectedValuePositive, count)
     }
 
     @Test
     fun testWordCounterStopWordsNegative() {
-        val counter = WordCounter(testingValueStopWordsNegative)
-        val stopWords = getStopWordsListFromFile("stopwords.txt")
-        val count = counter.countWords(counter.splitToWords(), stopWords)
+        val counter = WordCounter()
+        val words = testingValueStopWordsNegative.splitToWords()
+        val stopWords = getWordsListFromFile("stopwords.txt")
+        val count = counter.countWords(words, stopWords)
+        Assertions.assertEquals(expectedValueNegative, count)
+    }
+
+
+    @Test
+    fun testWordCounterWordsFromFileStopWordsPositive() {
+        val counter = WordCounter()
+        val words = getWordsListFromFile("mytexttestpositive.txt")
+        val stopWords = getWordsListFromFile("stopwords.txt")
+        val count = counter.countWords(words, stopWords)
+        Assertions.assertEquals(expectedValuePositive, count)
+    }
+
+    @Test
+    fun testWordCounterWordsFromFileStopWordsNegative() {
+        val counter = WordCounter()
+        val words = getWordsListFromFile("mytexttestnegative.txt")
+        val stopWords = getWordsListFromFile("stopwords.txt")
+        val count = counter.countWords(words, stopWords)
         Assertions.assertEquals(expectedValueNegative, count)
     }
 }
