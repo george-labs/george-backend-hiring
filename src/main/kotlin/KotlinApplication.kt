@@ -1,6 +1,6 @@
 import util.WordCounter
 import util.WordFileReader
-import util.splitToWords
+import util.readFromPrompt
 
 const val STOP_WORD_FILE = "stopwords.txt"
 
@@ -11,8 +11,7 @@ fun main(vararg args: String) {
     val words = if (args.isNotEmpty() && args[0] != "-index") {
         WordFileReader().getWordsListFromFile(args[0], isStopWords = false)
     } else {
-        print("Enter text: ")
-        readln().splitToWords()
+        readFromPrompt()
     }
 
     println(

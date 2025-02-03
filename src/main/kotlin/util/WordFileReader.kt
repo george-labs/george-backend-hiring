@@ -15,8 +15,7 @@ class WordFileReader {
             return lineList.flatMap { it.splitToWords() }
         } catch (e: FileNotFoundException) {
             println("Failed to open ${if (isStopWords) "stop " else ""}words file")
-            print("Enter text: ")
-            return readln().splitToWords()
+            return readFromPrompt()
         }
     }
 }
