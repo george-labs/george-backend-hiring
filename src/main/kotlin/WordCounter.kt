@@ -19,6 +19,24 @@ class WordCounter {
         }
         return words.count { word -> uniqueWords.get(word.value) == 1 && stopWords.none { word.value == it.value } && word.isWord() }
     }
+
+    fun averageWordLength(words: List<Word>): Float {
+        var charCount = 0f
+        words.map { word ->
+            if (word.isWord())
+                charCount += word.value.length
+        }
+        return charCount.div(countWords(words).toFloat())
+    }
+
+    fun averageWordLength(words: List<Word>, stopWords: List<Word>): Float {
+        var charCount = 0f
+        words.map { word ->
+            if (stopWords.none { word.value == it.value } && word.isWord())
+                charCount += word.value.length
+        }
+        return charCount.div(countWords(words, stopWords).toFloat())
+    }
 }
 
 fun String.splitToWords() =

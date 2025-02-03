@@ -6,6 +6,7 @@ class KotlinApplicationTest {
     private val testingValueStopWordsPositive = "test the testing a testo on off"
     private val testingValueStopWordsNegative = "a on off the"
     private val expectedValuePositive = 3
+    private val expectedValueAveragePositive = 4.6666665f
     private val expectedValueNegative = 0
 
     @Test
@@ -71,5 +72,14 @@ class KotlinApplicationTest {
         Assertions.assertEquals(expectedValueNegative, count)
         val countUnique = counter.countUniqueWords(words, stopWords)
         Assertions.assertEquals(expectedValueNegative, countUnique)
+    }
+
+    @Test
+    fun testWordCounterWordsAverageFromFileStopWordsPositive() {
+        val counter = WordCounter()
+        val words = getWordsListFromFile("mytexttestpositive.txt", true)
+        val stopWords = getWordsListFromFile("stopwords.txt")
+        val count = counter.averageWordLength(words, stopWords)
+        Assertions.assertEquals(expectedValueAveragePositive, count)
     }
 }

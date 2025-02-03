@@ -16,7 +16,8 @@ fun main(vararg args: String) {
 
     println(
         "Number of words: ${counter.countWords(words, stopWords)}" +
-                ", unique: ${counter.countUniqueWords(words, stopWords)}"
+                ", unique: ${counter.countUniqueWords(words, stopWords)}" +
+                "; average word length: ${counter.averageWordLength(words, stopWords)} characters"
     )
 }
 
