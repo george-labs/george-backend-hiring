@@ -1,4 +1,3 @@
-import data.Word
 import org.junit.jupiter.api.Test
 
 class KotlinApplicationTest {
@@ -13,13 +12,13 @@ class KotlinApplicationTest {
 
     @Test
     fun testWordCounter() {
-        val counter=WordCounter(testingValue)
+        val counter = WordCounter(testingValue)
         assert(counter.countWords(counter.splitToWords()) == 3)
     }
 
     @Test
     fun testWordCounterNegative() {
-        val counter=WordCounter(testingValueNegative)
+        val counter = WordCounter(testingValueNegative)
         assert(counter.countWords(counter.splitToWords()) == 0)
     }
 }
