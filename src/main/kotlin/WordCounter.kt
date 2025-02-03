@@ -7,6 +7,7 @@ class WordCounter(private val line: String) {
 
     fun countWords(words: List<Word>) = words.count { it.isWord() }
 
-    fun countWords(words: List<Word>, stopWords: List<Word>) = words.count { it.isWord(stopWords) }
+    fun countWords(words: List<Word>, stopWords: List<Word>) =
+        words.count { word -> stopWords.none { word.value == it.value } && word.isWord() }
 }
 

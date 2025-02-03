@@ -7,7 +7,6 @@ fun main() {
     val words = readln()
     val stopWords = getStopWordsListFromFile("stopwords.txt")
     val counter = WordCounter(words)
-    println(stopWords)
     println("Number of words: ${counter.countWords(counter.splitToWords(), stopWords)}")
 }
 
