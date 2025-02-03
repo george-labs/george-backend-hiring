@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 class WordTest {
 
     private val testingValuePositive = "test"
+    private val testingValueHyphenPositive = "test-testing"
     private val testingValueNegative = "t35t"
     private val expectedValuePositive = true
     private val expectedValueNegative = false
@@ -12,6 +13,12 @@ class WordTest {
     @Test
     fun testWordCounterPositive() {
         val word = Word(testingValuePositive)
+        Assertions.assertEquals(expectedValuePositive, word.isWord())
+    }
+
+    @Test
+    fun testWordCounterHyphenPositive() {
+        val word = Word(testingValueHyphenPositive)
         Assertions.assertEquals(expectedValuePositive, word.isWord())
     }
 
