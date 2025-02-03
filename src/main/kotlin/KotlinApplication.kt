@@ -1,5 +1,7 @@
+import data.Word
+
 fun main() {
-    val words = readln().split(' ')
-    val wordCount = words.count { it.matches("[A-Z,a-z]+".toRegex()) }
-    println("Number of words: $wordCount")
+    val words = readln()
+    val counter=WordCounter(words)
+    println("Number of words: ${counter.countWords(counter.splitToWords())}")
 }
