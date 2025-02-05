@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 record WordsCountInfo(int wordsCount, int uniqueWordsCount) {
 }
 
-public class JavaApplication {
+public class WordCounter {
 
 	public static WordsCountInfo getWordsCount(String s) {
 		return getWordsCount(s, Collections.emptySet());
@@ -50,7 +50,7 @@ public class JavaApplication {
 
 	public static Set<String> getStopwords(String resourcePath) {
 		try {
-			ClassLoader classLoader = JavaApplication.class.getClassLoader();
+			ClassLoader classLoader = WordCounter.class.getClassLoader();
 			try (InputStream inputStream = classLoader.getResourceAsStream(resourcePath);
 					BufferedReader reader = new BufferedReader(
 							new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
