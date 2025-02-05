@@ -6,24 +6,29 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+record WordsCountInfo(int wordsCount, int uniqueWordsCount) {
+}
+
 public class JavaApplication {
 
-	public static int getWordsCount(String s) {
+	public static WordsCountInfo getWordsCount(String s) {
 		return getWordsCount(s, Collections.emptySet());
 	}
 
-	public static int getWordsCount(String s, Set<String> stopwords) {
+	public static WordsCountInfo getWordsCount(String s, Set<String> stopwords) {
 
 		if (s == null)
-			return 0;
+			return new WordsCountInfo(0, 0);
 
-		int res = 0;
+		int wordsCount = 0;
+		Set<String> uniqueWords = new HashSet<>();
 
-		String[] ss = s.split("\\s");
+		String[] ss = s.split("[\\s,\\.\\-\"']+");
 		for_tmp: for (String tmp : ss) {
 			if (tmp.trim().length() == 0)
 				continue;
@@ -35,9 +40,10 @@ public class JavaApplication {
 			if (stopwords.contains(tmp)) {
 				continue;
 			}
-			res++;
+			wordsCount++;
+			uniqueWords.add(tmp);
 		}
-		return res;
+		return new WordsCountInfo(wordsCount, uniqueWords.size());
 	}
 
 	public static Set<String> getStopwords(String resourcePath) {
@@ -55,10 +61,10 @@ public class JavaApplication {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	private static String getText(Path path) {
 		try {
-			return Files.readString(path);		
+			return Files.readString(path);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -67,22 +73,23 @@ public class JavaApplication {
 	public static void main(String[] args) {
 
 		Set<String> stopwords = getStopwords("stopwords.txt");
+		String text = null;
 
 		if (args.length != 0) {
 			if (args.length != 1) {
-				throw new IllegalArgumentException("Only one argument is allowed. It is path for file with text. If not entered, then the application will ask for text.");
+				throw new IllegalArgumentException(
+						"Only one argument is allowed. It is path for file with text. If not entered, then the application will ask for text.");
 			}
-			String content = getText(Path.of(args[0]));
-			System.out.println("Number of words: " + getWordsCount(content , stopwords));
-			return;
+			text = getText(Path.of(args[0]));
+		} else {
+			System.out.print("Enter text: ");
+			try (Scanner scanner = new Scanner(System.in);) {
+				text = scanner.nextLine();
+			}
 		}
 
-		System.out.print("Enter text: ");
-		String s = null;
-
-		try (Scanner scanner = new Scanner(System.in);) {
-			s = scanner.nextLine();
-		}
-		System.out.println("Number of words: " + getWordsCount(s, stopwords));
+		WordsCountInfo wordsCountInfo = getWordsCount(text, stopwords);
+		System.out.println(
+				"Number of words: " + wordsCountInfo.wordsCount() + ", unique: " + wordsCountInfo.uniqueWordsCount());
 	}
 }

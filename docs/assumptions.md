@@ -15,3 +15,14 @@ No tests are added for that case as the core functionality (counting words) did 
 I wrap IOExceptions into RuntimeExceptions. A better approach is to have a specific domain exception (for debuging etc.) but I am keeping it simple as it is small commandline app for now.
 I assume that user understands info from Java exception about non-existing file. As an alternative we can provide more user friendly messages for such cases.
 I also do not check if file is text of binary. I assume text file in UTF8.
+
+## Iteration 4
+
+The example in the iteration 4 reveled that my understanding of word definition is not correct.
+Enter text: Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.
+Number of words: 9, unique: 7
+
+Till now, I assumed that words must be separated by whitespace chars only.
+I did not put it to assumptions file but spoke about it with interviewer 1.
+Now I see that example in iteration 4 contradicts it, so we can improve the solution.
+Based on discussion with the current interviewer, I am adding a few more separators that define boundary of a word: comma, dot, hyphen, single quote, double quote.
