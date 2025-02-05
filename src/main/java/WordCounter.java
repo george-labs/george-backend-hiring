@@ -11,7 +11,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-record WordsCountInfo(int wordsCount, int uniqueWordsCount) {
+record WordsCountInfo(int wordsCount, int uniqueWordsCount, double averageWordLength) {
 }
 
 public class WordCounter {
@@ -23,9 +23,10 @@ public class WordCounter {
 	public static WordsCountInfo getWordsCount(String s, Set<String> stopwords) {
 
 		if (s == null)
-			return new WordsCountInfo(0, 0);
+			return new WordsCountInfo(0, 0, 0);
 
 		int wordsCount = 0;
+		int totalLength = 0;
 		Set<String> uniqueWords = new HashSet<>();
 
 		String[] ss = s.split("[\\s,\\.\"':;]+");
@@ -43,9 +44,11 @@ public class WordCounter {
 				continue;
 			}
 			wordsCount++;
+			totalLength += tmp.length();
 			uniqueWords.add(tmp);
 		}
-		return new WordsCountInfo(wordsCount, uniqueWords.size());
+		return new WordsCountInfo(wordsCount, uniqueWords.size(),
+				wordsCount == 0 ? 0 : (double) totalLength / wordsCount);
 	}
 
 	public static Set<String> getStopwords(String resourcePath) {
@@ -91,7 +94,7 @@ public class WordCounter {
 		}
 
 		WordsCountInfo wordsCountInfo = getWordsCount(text, stopwords);
-		System.out.println(
-				"Number of words: " + wordsCountInfo.wordsCount() + ", unique: " + wordsCountInfo.uniqueWordsCount());
+		System.out.printf("Number of words: %d, unique: %d; average word length: %.2f characters\n",
+				wordsCountInfo.wordsCount(), wordsCountInfo.uniqueWordsCount(), wordsCountInfo.averageWordLength());
 	}
 }
