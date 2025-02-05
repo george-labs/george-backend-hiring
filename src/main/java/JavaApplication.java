@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.Set;
@@ -53,6 +55,14 @@ public class JavaApplication {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	private static String getText(Path path) {
+		try {
+			return Files.readString(path);		
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	public static void main(String[] args) {
 
@@ -61,7 +71,10 @@ public class JavaApplication {
 		if (args.length != 0) {
 			if (args.length != 1) {
 				throw new IllegalArgumentException("Only one argument is allowed. It is path for file with text. If not entered, then the application will ask for text.");
-			}			
+			}
+			String content = getText(Path.of(args[0]));
+			System.out.println("Number of words: " + getWordsCount(content , stopwords));
+			return;
 		}
 
 		System.out.print("Enter text: ");
