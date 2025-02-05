@@ -38,3 +38,8 @@ Humpty- : 1 word
 A-B-C : 1 word
 ---- : 0 words
 -A- : 1 word
+
+## Iteration 7
+It is not specified in which order to print index but based on on the example I decided to print it alphabetically sorted.
+I will not print duplicates, just each word once.
+

@@ -1,3 +1,5 @@
+package com.erste.wordcounter;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -5,25 +7,24 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-record WordsCountInfo(int wordsCount, int uniqueWordsCount, double averageWordLength) {
-}
-
 public class WordCounter {
 
 	public static WordsCountInfo getWordsCount(String s) {
-		return getWordsCount(s, Collections.emptySet());
+		return getWordsCount(s, false, Collections.emptySet());
 	}
 
-	public static WordsCountInfo getWordsCount(String s, Set<String> stopwords) {
+	public static WordsCountInfo getWordsCount(String s, boolean addIndex, Set<String> stopwords) {
 
 		if (s == null)
-			return new WordsCountInfo(0, 0, 0);
+			return new WordsCountInfo(0, 0, 0, Collections.emptyList());
 
 		int wordsCount = 0;
 		int totalLength = 0;
@@ -47,8 +48,14 @@ public class WordCounter {
 			totalLength += tmp.length();
 			uniqueWords.add(tmp);
 		}
+		List<String> index = null;
+		if (addIndex) {
+			index = new ArrayList<>(uniqueWords);
+			Collections.sort(index, new LowercaseFirstComparator());
+
+		}
 		return new WordsCountInfo(wordsCount, uniqueWords.size(),
-				wordsCount == 0 ? 0 : (double) totalLength / wordsCount);
+				wordsCount == 0 ? 0 : (double) totalLength / wordsCount, index);
 	}
 
 	public static Set<String> getStopwords(String resourcePath) {
@@ -75,17 +82,43 @@ public class WordCounter {
 		}
 	}
 
+	private static String getUsage() {
+		return """
+				Allowed arguments:
+				filename - path to filename from which text will processed. If not defined, then application will ask for the text.
+				Allowed options:
+				-indent - prints index of all counted words
+				"""
+				.stripIndent();
+	}
+
 	public static void main(String[] args) {
 
 		Set<String> stopwords = getStopwords("stopwords.txt");
+		String filepath = null;
+		boolean index = false;
 		String text = null;
 
 		if (args.length != 0) {
-			if (args.length != 1) {
-				throw new IllegalArgumentException(
-						"Only one argument is allowed. It is path for file with text. If not entered, then the application will ask for text.");
+			if (args.length > 2) {
+				System.out.println(getUsage());
+				return;
 			}
-			text = getText(Path.of(args[0]));
+			for (String arg : args) {
+				if ("-index".equals(arg)) {
+					if (index) {
+						System.out.println(getUsage());
+						return;
+					}
+					index = true;
+					continue;
+				}
+				filepath = arg;
+			}
+		}
+
+		if (filepath != null) {
+			text = getText(Path.of(filepath));
 		} else {
 			System.out.print("Enter text: ");
 			try (Scanner scanner = new Scanner(System.in);) {
@@ -93,8 +126,14 @@ public class WordCounter {
 			}
 		}
 
-		WordsCountInfo wordsCountInfo = getWordsCount(text, stopwords);
+		WordsCountInfo wordsCountInfo = getWordsCount(text, index, stopwords);
 		System.out.printf("Number of words: %d, unique: %d; average word length: %.2f characters\n",
 				wordsCountInfo.wordsCount(), wordsCountInfo.uniqueWordsCount(), wordsCountInfo.averageWordLength());
+		if (index) {
+			System.out.println("Index:");
+			for (String word : wordsCountInfo.index()) {
+				System.out.println(word);
+			}
+		}
 	}
 }

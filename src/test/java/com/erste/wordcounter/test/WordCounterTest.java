@@ -1,35 +1,41 @@
+package com.erste.wordcounter.test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
+
+import com.erste.wordcounter.WordCounter;
+import com.erste.wordcounter.WordsCountInfo;
 
 public class WordCounterTest {
 
 	@Test
 	public void testWhenOneUppercaseWordThenCountEquals1() {
-		assertEquals(new WordsCountInfo(1, 1, 5), WordCounter.getWordsCount("HELLO"));
+		assertEquals(new WordsCountInfo(1, 1, 5, null), WordCounter.getWordsCount("HELLO"));
 	}
 
 	@Test
 	public void testWhenOneLowercaseWordThenCountEquals1() {
-		assertEquals(new WordsCountInfo(1, 1, 5), WordCounter.getWordsCount("hello"));
+		assertEquals(new WordsCountInfo(1, 1, 5, null), WordCounter.getWordsCount("hello"));
 	}
 
 	@Test
 	public void testWhenOneMixedcaseWordThenCountEquals1() {
-		assertEquals(new WordsCountInfo(1, 1, 5), WordCounter.getWordsCount("Hello"));
+		assertEquals(new WordsCountInfo(1, 1, 5, null), WordCounter.getWordsCount("Hello"));
 	}
 
 	@Test
 	public void testWhenOneWordWithDigitThenCountEquals0() {
-		assertEquals(new WordsCountInfo(0, 0, 0), WordCounter.getWordsCount("He2o"));
+		assertEquals(new WordsCountInfo(0, 0, 0, null), WordCounter.getWordsCount("He2o"));
 	}
 
 	@Test
 	public void testWhenOneWordWithDollarThenCountEquals0() {
-		assertEquals(new WordsCountInfo(0, 0, 0), WordCounter.getWordsCount("He$o"));
+		assertEquals(new WordsCountInfo(0, 0, 0, null), WordCounter.getWordsCount("He$o"));
 	}
 
 	@Test
@@ -55,12 +61,14 @@ public class WordCounterTest {
 
 	@Test
 	public void testWhenStopwordThenCountEquals0() {
-		assertEquals(new WordsCountInfo(0, 0, 0), WordCounter.getWordsCount("the", Collections.singleton("the")));
+		assertEquals(new WordsCountInfo(0, 0, 0, null),
+				WordCounter.getWordsCount("the", false, Collections.singleton("the")));
 	}
 
 	@Test
 	public void testWhenNonStopwordsAndStopwordsThenCountEqualsNonStopwords() {
-		WordsCountInfo actual = WordCounter.getWordsCount("This is a test with the mixed words.", Set.of("the", "a"));
+		WordsCountInfo actual = WordCounter.getWordsCount("This is a test with the mixed words.", false,
+				Set.of("the", "a"));
 		assertEquals(6, actual.wordsCount());
 		assertEquals(6, actual.uniqueWordsCount());
 	}
@@ -120,6 +128,18 @@ public class WordCounterTest {
 
 	@Test
 	public void testWhenNoWordsThenCountsAndAvgIs0() {
-		assertEquals(new WordsCountInfo(0, 0, 0), WordCounter.getWordsCount(""));
+		assertEquals(new WordsCountInfo(0, 0, 0, null), WordCounter.getWordsCount(""));
+	}
+
+	@Test
+	public void testWhenUniqueWordsThenAllWordsAreInIndex() {
+		WordsCountInfo actual = WordCounter.getWordsCount("Hello world.", true, Collections.emptySet());
+		assertEquals(List.of("world", "Hello"), actual.index());
+	}
+
+	@Test
+	public void testWhenNonUniqueWordsThenUniqueWordsOnlyAreInIndex() {
+		WordsCountInfo actual = WordCounter.getWordsCount("Hello world. Hi world.", true, Collections.emptySet());
+		assertEquals(List.of("world", "Hello", "Hi"), actual.index());
 	}
 }
