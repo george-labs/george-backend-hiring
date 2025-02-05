@@ -58,6 +58,12 @@ public class JavaApplication {
 
 		Set<String> stopwords = getStopwords("stopwords.txt");
 
+		if (args.length != 0) {
+			if (args.length != 1) {
+				throw new IllegalArgumentException("Only one argument is allowed. It is path for file with text. If not entered, then the application will ask for text.");
+			}			
+		}
+
 		System.out.print("Enter text: ");
 		String s = null;
 
