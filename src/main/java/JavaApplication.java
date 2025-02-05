@@ -28,16 +28,18 @@ public class JavaApplication {
 		int wordsCount = 0;
 		Set<String> uniqueWords = new HashSet<>();
 
-		String[] ss = s.split("[\\s,\\.\\-\"':;]+");
+		String[] ss = s.split("[\\s,\\.\"':;]+");
 		for_tmp: for (String tmp : ss) {
 			if (tmp.trim().length() == 0)
 				continue;
+			boolean hasLetter = false;
 			for (char c : tmp.toCharArray()) {
-				if (!(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')) {
+				if (!(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c == '-')) {
 					continue for_tmp;
 				}
+				hasLetter = hasLetter || c != '-';
 			}
-			if (stopwords.contains(tmp)) {
+			if (!hasLetter || stopwords.contains(tmp)) {
 				continue;
 			}
 			wordsCount++;

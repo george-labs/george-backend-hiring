@@ -75,7 +75,12 @@ public class JavaApplicationTest {
 
 	@Test
 	public void testWhenWordsHaveMixedSeparatorsThenWordsAreCounted() {
-		assertEquals(new WordsCountInfo(7, 5),
+		assertEquals(new WordsCountInfo(7, 6),
 				JavaApplication.getWordsCount("I said: - \"Hi\". He said: - \"He-\nllo\""));
+	}
+
+	@Test
+	public void testWhenWordContainsHyphenThenWordIsCountedAs1() {
+		assertEquals(new WordsCountInfo(1, 1), JavaApplication.getWordsCount("Humpty-Dumpty"));
 	}
 }

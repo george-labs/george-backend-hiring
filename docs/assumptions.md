@@ -26,3 +26,15 @@ Till now, I assumed that words must be separated by whitespace chars only.
 I did not put it to assumptions file but spoke about it with interviewer 1.
 Now I see that example in iteration 4 contradicts it, so we can improve the solution.
 Based on discussion with the current interviewer, I am adding a few more separators that define boundary of a word: comma, dot, hyphen, single quote, double quote, colon, semicolon.
+
+## Iteration 5
+Hyphen is not separator of words anymore.
+I decided to define word containing hyphes as any string which has at least one letter. It can have one or more hyphens.
+
+Examples:
+Humpty-Dumpty : 1 word
+Humpty- : 1 word
+-Humpty : 1 word
+A-B-C : 1 word
+---- : 0 words
+-A- : 1 word
