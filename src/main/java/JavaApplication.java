@@ -28,7 +28,7 @@ public class JavaApplication {
 		int wordsCount = 0;
 		Set<String> uniqueWords = new HashSet<>();
 
-		String[] ss = s.split("[\\s,\\.\\-\"']+");
+		String[] ss = s.split("[\\s,\\.\\-\"':;]+");
 		for_tmp: for (String tmp : ss) {
 			if (tmp.trim().length() == 0)
 				continue;

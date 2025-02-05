@@ -54,14 +54,15 @@ public class JavaApplicationTest {
 
 	@Test
 	public void testWhenNonStopwordsAndStopwordsThenCountEqualsNonStopwords() {
-		assertEquals(new WordsCountInfo(6, 6), JavaApplication.getWordsCount("This is a test with the mixed words.", Set.of("the", "a")));
+		assertEquals(new WordsCountInfo(6, 6),
+				JavaApplication.getWordsCount("This is a test with the mixed words.", Set.of("the", "a")));
 	}
-	
+
 	@Test
 	public void testWhenTwoEqualWordsThenUniqueCountEquals1() {
 		assertEquals(new WordsCountInfo(2, 1), JavaApplication.getWordsCount("hello hello"));
 	}
-	
+
 	@Test
 	public void testWhenWordsHaveDotSeparatorThenWordsAreCounted() {
 		assertEquals(new WordsCountInfo(5, 5), JavaApplication.getWordsCount("I visited www.abc.com."));
@@ -70,5 +71,11 @@ public class JavaApplicationTest {
 	@Test
 	public void testWhenWordsHaveCommaSeparatorThenWordsAreCounted() {
 		assertEquals(new WordsCountInfo(6, 6), JavaApplication.getWordsCount("I saw cat, dog and mouse."));
+	}
+
+	@Test
+	public void testWhenWordsHaveMixedSeparatorsThenWordsAreCounted() {
+		assertEquals(new WordsCountInfo(7, 5),
+				JavaApplication.getWordsCount("I said: - \"Hi\". He said: - \"He-\nllo\""));
 	}
 }

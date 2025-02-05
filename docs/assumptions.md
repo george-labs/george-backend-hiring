@@ -25,4 +25,4 @@ Number of words: 9, unique: 7
 Till now, I assumed that words must be separated by whitespace chars only.
 I did not put it to assumptions file but spoke about it with interviewer 1.
 Now I see that example in iteration 4 contradicts it, so we can improve the solution.
-Based on discussion with the current interviewer, I am adding a few more separators that define boundary of a word: comma, dot, hyphen, single quote, double quote.
+Based on discussion with the current interviewer, I am adding a few more separators that define boundary of a word: comma, dot, hyphen, single quote, double quote, colon, semicolon.
