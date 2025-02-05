@@ -9,7 +9,7 @@ public class JavaApplication {
 
 		int res = 0;
 
-		String[] ss = s.split(" ");
+		String[] ss = s.split("\\s");
 		for_tmp: for (String tmp : ss) {
 			if (tmp.trim().length() == 0)
 				continue;
