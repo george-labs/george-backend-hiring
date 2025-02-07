@@ -7,12 +7,12 @@ plugins {
 application {
     // NOTE: In case you choose a different main class, make sure to update this path
     mainClass = "KotlinApplicationKt"
-    // mainClass = "JavaApplication"
+    // mainClass = "com.wulpio.JavaApplication"
 }
 
 tasks.jar {
     manifest {
-        attributes["Main-Class"] = application.mainClass
+        attributes["com.wulpio.Main-Class"] = application.mainClass
     }
 
     from(configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) })

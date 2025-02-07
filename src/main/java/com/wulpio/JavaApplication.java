@@ -1,3 +1,5 @@
+package com.wulpio;
+
 import java.io.ByteArrayInputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

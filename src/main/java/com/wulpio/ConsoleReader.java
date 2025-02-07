@@ -1,3 +1,5 @@
+package com.wulpio;
+
 import java.util.Scanner;
 
 public class ConsoleReader {
