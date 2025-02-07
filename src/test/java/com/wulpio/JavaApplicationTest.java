@@ -10,6 +10,10 @@ public class JavaApplicationTest {
 
     @ParameterizedTest
     @CsvSource({
+            ",0",
+            " ,0",
+            "\n,0",
+            "\\n,0",
             "test,1",
             "Mary had a little lamb,5",
             "Mary! had a little lamb,4",

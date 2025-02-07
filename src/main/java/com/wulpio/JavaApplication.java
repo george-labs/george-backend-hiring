@@ -10,6 +10,10 @@ public class JavaApplication {
     private static final Pattern PATTERN = Pattern.compile(WORD_REGEX);
 
     public int getCountOfWords(String inputString) {
+        if (inputString == null || inputString.isBlank()) {
+            return 0;
+        }
+
         String[] inputAsArray = inputString.split(" ");
 //        System.out.println("length: " + inputAsArray.length);
 
