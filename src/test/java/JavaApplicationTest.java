@@ -15,7 +15,7 @@ public class JavaApplicationTest {
 
     @Test
     public void emptyString() {
-        var input = "";
+        var input = List.of("");
 
         var result = JavaApplication.countWords(input, Collections.emptyList());
 
@@ -44,7 +44,7 @@ public class JavaApplicationTest {
 
     @Test
     public void countWords() {
-        var input = "abc1 ads";
+        var input = List.of("abc1", "ads");
 
         var result = JavaApplication.countWords(input, Collections.emptyList());
 
@@ -53,7 +53,7 @@ public class JavaApplicationTest {
 
     @Test
     public void iteration1Test() {
-        var input = Constants.MOCK_USER_INPUT;
+        var input = prepareInput(Constants.MOCK_USER_INPUT);
 
         var result = JavaApplication.countWords(input, Collections.emptyList());
 
@@ -62,7 +62,7 @@ public class JavaApplicationTest {
 
     @Test
     public void stopWordsCheck() {
-        var input = Constants.MOCK_USER_INPUT;
+        var input = prepareInput(Constants.MOCK_USER_INPUT);
         List<String> stopWords = new ArrayList<>();
         stopWords.add("a");
 
@@ -82,7 +82,7 @@ public class JavaApplicationTest {
 
     @Test
     public void iteration2Test() {
-        var input = Constants.MOCK_USER_INPUT;
+        var input = prepareInput(Constants.MOCK_USER_INPUT);
 
         var result = JavaApplication.countWords(input, getDummyStopWordsList());
 
@@ -90,8 +90,17 @@ public class JavaApplicationTest {
     }
 
     @Test
-    public void readEmptyFile() {
-        var input = Constants.MOCK_USER_INPUT;
+    public void emptyStopWords() {
+        var input = prepareInput(Constants.MOCK_USER_INPUT);
+
+        var result = JavaApplication.countWords(input, Collections.emptyList());
+
+        assertEquals(5, result);
+    }
+
+    @Test
+    public void d() {
+        var input = prepareInput(Constants.MOCK_USER_INPUT);
 
         var result = JavaApplication.countWords(input, Collections.emptyList());
 
@@ -105,5 +114,9 @@ public class JavaApplicationTest {
         stopWords.add("on");
         stopWords.add("off");
         return stopWords;
+    }
+
+    private List<String> prepareInput(String line) {
+        return List.of(line.split(Constants.DELIMETER));
     }
 }
