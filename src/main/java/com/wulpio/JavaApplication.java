@@ -1,6 +1,8 @@
 package com.wulpio;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,20 +18,14 @@ public class JavaApplication {
             return 0;
         }
 
-        List<String> resourceFileAsString = FileReader.getResourceFileAsString(STOPWORDS_FILE);
-//        System.out.println("stop words:" + resourceFileAsString);
+        List<String> stopWordsFromFile = FileReader.getResourceFileAsString(STOPWORDS_FILE);
+//        System.out.println("stop words:" + stopWordsFromFile);
 
-        String[] inputAsArray = inputString.split(" ");
-//        System.out.println("length: " + inputAsArray.length);
+        List<String> inputAsList = new ArrayList<>(Arrays.asList(inputString.split(" ")));
+        inputAsList.removeAll(stopWordsFromFile);   //remove all stopWords
 
         int wordCounter = 0;
-        for (String word : inputAsArray) {
-
-            boolean isWordFromInputStopWord = resourceFileAsString.contains(word);
-            if (isWordFromInputStopWord) {
-                System.out.println("word: " + word + " is not counted");
-                continue;
-            }
+        for (String word : inputAsList) {
 
             boolean regexMatch = doesStringMatchRegex(word);
 //            System.out.println("word: " + word + ", match: " + regexMatch);
