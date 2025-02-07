@@ -12,6 +12,7 @@ public class JavaApplication {
     private static final String WORD_REGEX = "[a-zA-Z]+";
     private static final Pattern PATTERN = Pattern.compile(WORD_REGEX);
     private static final String STOPWORDS_FILE = "stopwords.txt";
+    private static final String DELIMITER = " ";
 
     public int getCountOfWords(String inputString) {
         if (inputString == null || inputString.isBlank()) {
@@ -21,7 +22,7 @@ public class JavaApplication {
         List<String> stopWordsFromFile = FileReader.getResourceFileAsList(STOPWORDS_FILE);
 //        System.out.println("stop words:" + stopWordsFromFile);
 
-        List<String> inputAsList = new ArrayList<>(Arrays.asList(inputString.split(" ")));
+        List<String> inputAsList = new ArrayList<>(Arrays.asList(inputString.split(DELIMITER)));
         inputAsList.removeAll(stopWordsFromFile);   //remove all stopWords
 
         int wordCounter = 0;
@@ -41,7 +42,7 @@ public class JavaApplication {
         String input = FileReader.getResourceFileAsString(fileName);
 
         if (fileName == null || input == null) {
-            input = ConsoleReader.readFromConsole();
+            input = ConsoleReader.readStringFromConsole();
         }
 
         int countOfWords = getCountOfWords(input);
