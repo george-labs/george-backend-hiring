@@ -6,8 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -58,9 +60,11 @@ public class JavaApplicationTest {
     @Test
     void GIVEN_non_existing_file_WHEN_readLineAndCountWords_THEN_console_input_is_read_and_1_number_is_written_on_console() {
         var javaApplication = new JavaApplication();
-        javaApplication.provideInput("Baeldung");
+        String simulatedInput = "Baeldung";
 
+        openStream(simulatedInput);
         javaApplication.readContentAndCountWords("not_exist");
+        closeStream();
 
         assertEquals("Enter text: Number of words: 1, unique: 1", outContent.toString());
     }
@@ -68,11 +72,21 @@ public class JavaApplicationTest {
     @Test
     void GIVEN_null_as_input_WHEN_readLineAndCountWords_THEN_console_input_is_read_and_1_number_is_written_on_console() {
         var javaApplication = new JavaApplication();
-        javaApplication.provideInput("Baeldung");
+        String simulatedInput = "Baeldung";
 
+        openStream(simulatedInput);
         javaApplication.readContentAndCountWords(null);
+        closeStream();
 
         assertEquals("Enter text: Number of words: 1, unique: 1", outContent.toString());
+    }
+
+    private static void openStream(String simulatedInput) {
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+    }
+
+    private static void closeStream() {
+        new Scanner(System.in).close();
     }
 
 }

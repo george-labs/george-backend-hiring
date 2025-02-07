@@ -1,6 +1,5 @@
 package com.wulpio;
 
-import java.io.ByteArrayInputStream;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,19 +44,15 @@ public class JavaApplication {
             input = ConsoleReader.readStringFromConsole();
         }
 
+        WordCounterDto countOfWords = getCountOfWords(input);
         System.out.print(
-                "Number of words: " + getCountOfWords(input).wordCount()
-                        + ", unique: " + getCountOfWords(input).uniqueWordCount());
+                "Number of words: " + countOfWords.wordCount()
+                        + ", unique: " + countOfWords.uniqueWordCount());
     }
 
     private boolean doesStringMatchRegex(String s) {
         Matcher matcher = PATTERN.matcher(s);
         return matcher.matches();
-    }
-
-    void provideInput(String data) {
-        ByteArrayInputStream testIn = new ByteArrayInputStream(data.getBytes());
-        System.setIn(testIn);
     }
 
 }
