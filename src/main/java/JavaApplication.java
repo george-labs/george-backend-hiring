@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,18 +10,16 @@ import java.util.Scanner;
 public class JavaApplication {
 
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final List<String> stopWords = new ArrayList<>();
 
     public static void main(String[] args) {
-        readStopWords();
-        stopWords.forEach(System.out::println);
+        List<String> stopWords = readStopWords(Constants.STOP_WORDS_PATH);
 
         System.out.print("Enter text: ");
-        String s1 = SCANNER.nextLine();
-        System.out.printf("Number of words: %d%n", countWords(s1));
+        String userInput = SCANNER.nextLine();
+        System.out.printf("Number of words: %d%n", countWords(userInput, stopWords));
     }
 
-    protected static long countWords(String inputLine) {
+    protected static long countWords(String inputLine, List<String> stopWords) {
         if (inputLine == null || inputLine.isEmpty()) {
             return 0;
         }
@@ -29,18 +28,22 @@ public class JavaApplication {
 
         return Arrays.stream(splitedString)
                 .filter(substr -> substr.matches(Constants.PATTERN))
-//                .filter()
+                .filter(s -> !stopWords.contains(s))
                 .count();
     }
 
-    protected static void readStopWords() {
-        try (BufferedReader br = new BufferedReader(new FileReader(Constants.STOP_WORDS_PATH))) {
+    protected static List<String> readStopWords(String path) {
+        List<String> stopWords = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
                 stopWords.add(line);
             }
+        } catch (FileNotFoundException e) {
+            System.out.println("Warning: The system cannot find the file containing stop words");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return stopWords;
     }
 }

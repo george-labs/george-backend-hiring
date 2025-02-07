@@ -1,5 +1,9 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JavaApplicationTest {
@@ -13,7 +17,7 @@ public class JavaApplicationTest {
     public void emptyString() {
         var input = "";
 
-        var result = JavaApplication.countWords(input);
+        var result = JavaApplication.countWords(input, Collections.emptyList());
 
         assertEquals(0, result);
     }
@@ -42,23 +46,64 @@ public class JavaApplicationTest {
     public void countWords() {
         var input = "abc1 ads";
 
-        var result = JavaApplication.countWords(input);
+        var result = JavaApplication.countWords(input, Collections.emptyList());
 
         assertEquals(1, result);
     }
 
     @Test
-    public void req1Check() {
-        var input = "Mary had a little lamb";
+    public void iteration1Test() {
+        var input = Constants.MOCK_USER_INPUT;
 
-        var result = JavaApplication.countWords(input);
+        var result = JavaApplication.countWords(input, Collections.emptyList());
 
         assertEquals(5, result);
     }
 
     @Test
+    public void stopWordsCheck() {
+        var input = Constants.MOCK_USER_INPUT;
+        List<String> stopWords = new ArrayList<>();
+        stopWords.add("a");
+
+        var result = JavaApplication.countWords(input, stopWords);
+
+        assertEquals(4, result);
+    }
+
+    @Test
     public void test() {
-        JavaApplication.readStopWords();
+        var path = Constants.STOP_WORDS_PATH;
+
+        JavaApplication.readStopWords(path);
+
         assertTrue(true);
+    }
+
+    @Test
+    public void iteration2Test() {
+        var input = Constants.MOCK_USER_INPUT;
+
+        var result = JavaApplication.countWords(input, getDummyStopWordsList());
+
+        assertEquals(4, result);
+    }
+
+    @Test
+    public void readEmptyFile() {
+        var input = Constants.MOCK_USER_INPUT;
+
+        var result = JavaApplication.countWords(input, Collections.emptyList());
+
+        assertEquals(5, result);
+    }
+
+    private List<String> getDummyStopWordsList() {
+        List<String> stopWords = new ArrayList<>();
+        stopWords.add("the");
+        stopWords.add("a");
+        stopWords.add("on");
+        stopWords.add("off");
+        return stopWords;
     }
 }
