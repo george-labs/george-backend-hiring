@@ -1,9 +1,7 @@
 package com.wulpio;
 
 import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,11 +10,11 @@ public class JavaApplication {
     private static final String WORD_REGEX = "[a-zA-Z]+";
     private static final Pattern PATTERN = Pattern.compile(WORD_REGEX);
     private static final String STOPWORDS_FILE = "stopwords.txt";
-    private static final String DELIMITER = " ";
+    private static final String DELIMITER = "[ |-]";
 
-    public int getCountOfWords(String inputString) {
+    public WordCounterDto getCountOfWords(String inputString) {
         if (inputString == null || inputString.isBlank()) {
-            return 0;
+            return new WordCounterDto(0, 0);
         }
 
         List<String> stopWordsFromFile = FileReader.getResourceFileAsList(STOPWORDS_FILE);
@@ -25,6 +23,7 @@ public class JavaApplication {
         List<String> inputAsList = new ArrayList<>(Arrays.asList(inputString.split(DELIMITER)));
         inputAsList.removeAll(stopWordsFromFile);   //remove all stopWords
 
+        Set<String> uniqueWords = new HashSet<>();
         int wordCounter = 0;
         for (String word : inputAsList) {
 
@@ -32,10 +31,11 @@ public class JavaApplication {
 //            System.out.println("word: " + word + ", match: " + regexMatch);
             if (regexMatch) {
                 wordCounter++;
+                uniqueWords.add(word);
             }
         }
 
-        return wordCounter;
+        return new WordCounterDto(wordCounter, uniqueWords.size());
     }
 
     public void readContentAndCountWords(String fileName) {
@@ -45,8 +45,9 @@ public class JavaApplication {
             input = ConsoleReader.readStringFromConsole();
         }
 
-        int countOfWords = getCountOfWords(input);
-        System.out.println("Number of words: " + countOfWords);
+        System.out.print(
+                "Number of words: " + getCountOfWords(input).wordCount()
+                        + ", unique: " + getCountOfWords(input).uniqueWordCount());
     }
 
     private boolean doesStringMatchRegex(String s) {

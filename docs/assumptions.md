@@ -15,4 +15,10 @@
 
 - input file is located in resources folder
 - if file doesn't exist, or it cannot be read, application will ask for input
-- 
+
+## Iteration 4
+
+- I assume that words with minus sign are 2 "correct" words
+- I assume that words with suffix '.' are not correct words
+- Humpty Dumpty sat Humpty Dumpty had great -> 7 words (instead of 9)
+- unique for this iteration would be 5 (instead of 7)
