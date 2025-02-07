@@ -6,10 +6,10 @@ import java.util.regex.Pattern;
 
 public class JavaApplication {
 
-    private static final String WORD_REGEX = "[a-zA-Z]+";
+    private static final String WORD_REGEX = "[a-zA-Z]+(-[a-zA-Z]+)*";
     private static final Pattern PATTERN = Pattern.compile(WORD_REGEX);
     private static final String STOPWORDS_FILE = "stopwords.txt";
-    private static final String DELIMITER = "[ |-]";
+    private static final String DELIMITER = " ";
 
     public WordCounterDto getCountOfWords(String inputString) {
         if (inputString == null || inputString.isBlank()) {

@@ -22,3 +22,16 @@
 - I assume that words with suffix '.' are not correct words
 - Humpty Dumpty sat Humpty Dumpty had great -> 7 words (instead of 9)
 - unique for this iteration would be 5 (instead of 7)
+- some command line argument tool should be used for parsing input arguments (for main method)
+
+## Iteration 5
+
+- same as before
+- I assume that words with suffix '.' are not correct words
+- Number of words: 7, unique: 6
+- is changed to
+- Number of words: 5, unique: 4
+- words starts with minus sign are ignored
+- words ends with minus sign are ignored
+- I would ask business guy, what 'containing' means to clarify behavior
+- 
