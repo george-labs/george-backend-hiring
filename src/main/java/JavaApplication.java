@@ -2,9 +2,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 import static file.Warnings.STOP_WORDS_FILE_NOT_FOUND;
 import static file.Warnings.UNEXPECTED_PROGRAM_ARGUMENTS;
@@ -12,13 +13,14 @@ import static java.lang.String.format;
 
 public class JavaApplication {
 
-    private static final String NUMBER_OF_WORDS = "Number of words: %d%n";
+    private static final String OUTPUT_WITH_UNIQUE_COUNTER = "Number of words: %d, unique: %d";
+    private static final String OUTPUT = "Number of words: %d%n, unique: %d%n";
     private static final String GREETINGS = "Enter text: ";
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
-        List<String> stopWords = readFile(Constants.STOP_WORDS_PATH, false);
+        List<String> stopWords = readFile(Constants.STOP_WORDS_PATH, false).keySet().stream().toList();
 
         if (args.length > 1) {
             System.out.println(UNEXPECTED_PROGRAM_ARGUMENTS);
@@ -40,12 +42,19 @@ public class JavaApplication {
         if (userInput != null && !userInput.isEmpty()) {
             wordsCount = countWords(List.of(userInput.split(Constants.DELIMETER)), stopWords);
         }
-        System.out.printf(NUMBER_OF_WORDS, wordsCount);
+        System.out.printf(OUTPUT, wordsCount);
     }
 
     private static void processFileUserInput(List<String> stopWords, String path) {
-        List<String> userInput = readFile(format(Constants.DEFAULT_PATH, path), true);
-        System.out.printf(NUMBER_OF_WORDS, countWords(userInput, stopWords));
+        HashMap<String, Integer> userInput = readFile(format(Constants.DEFAULT_PATH, path), true);
+
+        System.out.println(format(OUTPUT_WITH_UNIQUE_COUNTER, countWords(userInput.keySet().stream().toList(), stopWords), countUniqueWords(userInput, stopWords)));
+    }
+
+    private static long countUniqueWords(HashMap<String, Integer> map, List<String> stopWords) {
+        return map.entrySet().stream()
+                .filter(entry -> !stopWords.contains(entry.getKey()))
+                .filter(entry -> entry.getValue() == 1).count();
     }
 
 
@@ -56,15 +65,16 @@ public class JavaApplication {
                 .count();
     }
 
-    protected static List<String> readFile(String path, boolean isFileInput) {
-        List<String> result = new ArrayList<>();
+    protected static HashMap<String, Integer> readFile(String path, boolean isFileInput) {
+        HashMap<String, Integer> resultMap = new HashMap<>();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (isFileInput) {
-                    result.addAll(List.of(line.split(Constants.DELIMETER)));
+                    Stream.of(line.split(Constants.DELIMETER))
+                            .forEach(l -> resultMap.put(l, resultMap.get(l) == null ? 1 : resultMap.get(l) + 1));
                 } else {
-                    result.add(line);
+                    resultMap.put(line, 0);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -72,6 +82,6 @@ public class JavaApplication {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return result;
+        return resultMap;
     }
 }
