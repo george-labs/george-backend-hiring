@@ -55,4 +55,10 @@ public class JavaApplicationTest {
 
         assertEquals(5, result);
     }
+
+    @Test
+    public void test() {
+        JavaApplication.readStopWords();
+        assertTrue(true);
+    }
 }
