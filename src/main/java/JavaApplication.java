@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class JavaApplication {
@@ -10,10 +11,15 @@ public class JavaApplication {
         System.out.printf("Number of words: %d%n", countWords(s1));
     }
 
-    private static int countWords(String inputLine) {
+    protected static long countWords(String inputLine) {
+        if (inputLine == null || inputLine.isEmpty()) {
+            return 0;
+        }
 
-        var splitedString = inputLine.split(" ");
+        var splitedString = inputLine.split(Constants.DELIMETER);
 
-        return 0;
+        return Arrays.stream(splitedString)
+                .filter(substr -> substr.matches(Constants.PATTERN))
+                .count();
     }
 }
