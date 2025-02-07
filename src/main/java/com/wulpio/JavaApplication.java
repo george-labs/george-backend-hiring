@@ -1,6 +1,7 @@
 package com.wulpio;
 
 import java.io.ByteArrayInputStream;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,20 +9,31 @@ public class JavaApplication {
 
     private static final String WORD_REGEX = "[a-zA-Z]+";
     private static final Pattern PATTERN = Pattern.compile(WORD_REGEX);
+    private static final String STOPWORDS_FILE = "stopwords.txt";
 
     public int getCountOfWords(String inputString) {
         if (inputString == null || inputString.isBlank()) {
             return 0;
         }
 
+        List<String> resourceFileAsString = FileReader.getResourceFileAsString(STOPWORDS_FILE);
+//        System.out.println("stop words:" + resourceFileAsString);
+
         String[] inputAsArray = inputString.split(" ");
 //        System.out.println("length: " + inputAsArray.length);
 
         int wordCounter = 0;
         for (String word : inputAsArray) {
-            boolean b = doesStringMatchRegex(word);
-//            System.out.println("word: " + word + ", match: " + b);
-            if (b) {
+
+            boolean isWordFromInputStopWord = resourceFileAsString.contains(word);
+            if (isWordFromInputStopWord) {
+                System.out.println("word: " + word + " is not counted");
+                continue;
+            }
+
+            boolean regexMatch = doesStringMatchRegex(word);
+//            System.out.println("word: " + word + ", match: " + regexMatch);
+            if (regexMatch) {
                 wordCounter++;
             }
         }
