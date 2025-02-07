@@ -18,7 +18,7 @@ public class JavaApplication {
             return 0;
         }
 
-        List<String> stopWordsFromFile = FileReader.getResourceFileAsString(STOPWORDS_FILE);
+        List<String> stopWordsFromFile = FileReader.getResourceFileAsList(STOPWORDS_FILE);
 //        System.out.println("stop words:" + stopWordsFromFile);
 
         List<String> inputAsList = new ArrayList<>(Arrays.asList(inputString.split(" ")));
@@ -37,9 +37,14 @@ public class JavaApplication {
         return wordCounter;
     }
 
-    public void readLineAndCountWords() {
-        String sentenceFromConsole = ConsoleReader.readFromConsole();
-        int countOfWords = getCountOfWords(sentenceFromConsole);
+    public void readContentAndCountWords(String fileName) {
+        String input = FileReader.getResourceFileAsString(fileName);
+
+        if (fileName == null || input == null) {
+            input = ConsoleReader.readFromConsole();
+        }
+
+        int countOfWords = getCountOfWords(input);
         System.out.println("Number of words: " + countOfWords);
     }
 

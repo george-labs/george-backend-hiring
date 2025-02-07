@@ -9,5 +9,10 @@
 - file stopwords.txt is located in resources folder
 - if file is missing or cannot be read, error message is logged inside console logger and application is ignoring this
   stopwords functionality
-- javadocs are missing due simple implementation and I'm trying to write self documented code
+- javadocs are missing due simple implementation, and I'm trying to write self documented code
+
+## Iteration 3
+
+- input file is located in resources folder
+- if file doesn't exist, or it cannot be read, application will ask for input
 - 

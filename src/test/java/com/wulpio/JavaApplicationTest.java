@@ -30,12 +30,28 @@ public class JavaApplicationTest {
     }
 
     @Test
-    void smokeTest() {
+    void GIVEN_existing_file_with_4_words_WHEN_readLineAndCountWords_THEN_4_number_of_words_is_written_on_console() {
+        var javaApplication = new JavaApplication();
+
+        javaApplication.readContentAndCountWords("myText.txt");
+    }
+
+    @Test
+    void GIVEN_non_existing_file_WHEN_readLineAndCountWords_THEN_console_input_is_read_and_1_number_is_written_on_console() {
         var javaApplication = new JavaApplication();
 
         javaApplication.provideInput("Baeldung");
 
-        javaApplication.readLineAndCountWords();
+        javaApplication.readContentAndCountWords("not_exist");
+    }
+
+    @Test
+    void GIVEN_null_as_input_WHEN_readLineAndCountWords_THEN_console_input_is_read_and_1_number_is_written_on_console() {
+        var javaApplication = new JavaApplication();
+
+        javaApplication.provideInput("Baeldung");
+
+        javaApplication.readContentAndCountWords(null);
     }
 
 }
