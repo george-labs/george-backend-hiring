@@ -2,10 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class JavaApplication {
 
@@ -14,6 +11,10 @@ public class JavaApplication {
     public static void main(String[] args) {
         List<String> stopWords = readStopWords(Constants.STOP_WORDS_PATH);
 
+        processUserInput(stopWords);
+    }
+
+    private static void processUserInput(List<String> stopWords) {
         System.out.print("Enter text: ");
         String userInput = SCANNER.nextLine();
         System.out.printf("Number of words: %d%n", countWords(userInput, stopWords));
