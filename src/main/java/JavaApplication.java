@@ -1,23 +1,42 @@
+import java.io.ByteArrayInputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class JavaApplication {
 
-    public int getCountOfWords(String s) {
-        String[] s1 = s.split(" ");
-        System.out.println("length: " + s1.length);
+    private static final String WORD_REGEX = "[a-zA-Z]+";
+    private static final Pattern PATTERN = Pattern.compile(WORD_REGEX);
 
-        for (String string : s1) {
-            System.out.println(doesStringMatchRegex(string));
+    public int getCountOfWords(String inputString) {
+        String[] inputAsArray = inputString.split(" ");
+//        System.out.println("length: " + inputAsArray.length);
+
+        int wordCounter = 0;
+        for (String word : inputAsArray) {
+            boolean b = doesStringMatchRegex(word);
+//            System.out.println("word: " + word + ", match: " + b);
+            if (b) {
+                wordCounter++;
+            }
         }
 
-        return 0;
+        return wordCounter;
     }
 
-    public boolean doesStringMatchRegex(String s) {
-        Pattern pattern = Pattern.compile("[a-zA-Z]+");
-        Matcher matcher = pattern.matcher(s);
+    public void readLineAndCountWords() {
+        String sentenceFromConsole = ConsoleReader.readFromConsole();
+        int countOfWords = getCountOfWords(sentenceFromConsole);
+        System.out.println("Number of words: " + countOfWords);
+    }
+
+    private boolean doesStringMatchRegex(String s) {
+        Matcher matcher = PATTERN.matcher(s);
         return matcher.matches();
+    }
+
+    void provideInput(String data) {
+        ByteArrayInputStream testIn = new ByteArrayInputStream(data.getBytes());
+        System.setIn(testIn);
     }
 
 }
