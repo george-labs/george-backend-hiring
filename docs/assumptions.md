@@ -13,4 +13,7 @@
             - For now I will not benefit from holding values, but I may use it in future for counting words
             - Also picking an element from HashMap by key is O(1) which may be much faster on bigger nubmers
 ## Iteration 3 
+    - in case program runs with more than 1 args there is a warning
+        - extra arguments will be ignored
+        - program will process file specified in 1st arg
 

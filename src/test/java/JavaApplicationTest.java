@@ -75,7 +75,7 @@ public class JavaApplicationTest {
     public void test() {
         var path = Constants.STOP_WORDS_PATH;
 
-        JavaApplication.readStopWords(path);
+        JavaApplication.readFile(path, false);
 
         assertTrue(true);
     }
@@ -91,15 +91,6 @@ public class JavaApplicationTest {
 
     @Test
     public void emptyStopWords() {
-        var input = prepareInput(Constants.MOCK_USER_INPUT);
-
-        var result = JavaApplication.countWords(input, Collections.emptyList());
-
-        assertEquals(5, result);
-    }
-
-    @Test
-    public void d() {
         var input = prepareInput(Constants.MOCK_USER_INPUT);
 
         var result = JavaApplication.countWords(input, Collections.emptyList());
