@@ -30,7 +30,7 @@ class MainTest {
 
         Main.main(args);
 
-        assertEquals("Number of words: 4, unique: 4", outContent.toString());
+        assertEquals("Number of words: 4, unique: 4; average word length: 4.25 characters", outContent.toString());
     }
 
 }

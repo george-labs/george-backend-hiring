@@ -11,9 +11,9 @@ public class JavaApplication {
     private static final String STOPWORDS_FILE = "stopwords.txt";
     private static final String DELIMITER = " ";
 
-    public WordCounterDto getCountOfWords(String inputString) {
+    public WordCounterDto getWordMetrics(String inputString) {
         if (inputString == null || inputString.isBlank()) {
-            return new WordCounterDto(0, 0);
+            return new WordCounterDto(0, 0, 0);
         }
 
         List<String> stopWordsFromFile = FileReader.getResourceFileAsList(STOPWORDS_FILE);
@@ -24,17 +24,19 @@ public class JavaApplication {
 
         Set<String> uniqueWords = new HashSet<>();
         int wordCounter = 0;
+        double wordLengthCounter = 0;
         for (String word : inputAsList) {
 
             boolean regexMatch = doesStringMatchRegex(word);
 //            System.out.println("word: " + word + ", match: " + regexMatch);
             if (regexMatch) {
                 wordCounter++;
+                wordLengthCounter += word.length();
                 uniqueWords.add(word);
             }
         }
 
-        return new WordCounterDto(wordCounter, uniqueWords.size());
+        return new WordCounterDto(wordCounter, uniqueWords.size(), wordLengthCounter / wordCounter);
     }
 
     public void readContentAndCountWords(String fileName) {
@@ -44,10 +46,13 @@ public class JavaApplication {
             input = ConsoleReader.readStringFromConsole();
         }
 
-        WordCounterDto countOfWords = getCountOfWords(input);
+        WordCounterDto countOfWords = getWordMetrics(input);
         System.out.print(
                 "Number of words: " + countOfWords.wordCount()
-                        + ", unique: " + countOfWords.uniqueWordCount());
+                        + ", unique: " + countOfWords.uniqueWordCount()
+                        + "; average word length: " + countOfWords.averageWordLength()
+                        + " characters"
+        );
     }
 
     private boolean doesStringMatchRegex(String s) {

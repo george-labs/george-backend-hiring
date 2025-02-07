@@ -31,7 +31,7 @@ public class SmokeTests {
         var javaApplication = new JavaApplication();
 
         javaApplication.readContentAndCountWords("myText.txt");
-        assertEquals("Number of words: 4, unique: 4", outContent.toString());
+        assertEquals("Number of words: 4, unique: 4; average word length: 4.25 characters", outContent.toString());
     }
 
     @Test
@@ -43,7 +43,7 @@ public class SmokeTests {
         javaApplication.readContentAndCountWords("not_exist");
         closeStream();
 
-        assertEquals("Enter text: Number of words: 1, unique: 1", outContent.toString());
+        assertEquals("Enter text: Number of words: 1, unique: 1; average word length: 8.0 characters", outContent.toString());
     }
 
     @Test
@@ -55,7 +55,7 @@ public class SmokeTests {
         javaApplication.readContentAndCountWords(null);
         closeStream();
 
-        assertEquals("Enter text: Number of words: 1, unique: 1", outContent.toString());
+        assertEquals("Enter text: Number of words: 1, unique: 1; average word length: 8.0 characters", outContent.toString());
     }
 
     private static void openStream(String simulatedInput) {

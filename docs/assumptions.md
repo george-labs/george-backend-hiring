@@ -34,4 +34,9 @@
 - words starts with minus sign are ignored
 - words ends with minus sign are ignored
 - I would ask business guy, what 'containing' means to clarify behavior
+
+## Iteration 6
+
+- decimal precision can be change (instead of '4.333333333333333')
+- edge cases needs to be tested / fixed -> I did not finish that part
 - 
