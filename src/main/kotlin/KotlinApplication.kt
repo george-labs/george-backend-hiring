@@ -16,6 +16,8 @@ fun main(args: Array<String>) {
 
     val stopWordContext = StopWordContext()
     val wordCount = WordCounter(stopWordContext).countWords(userInput)
+    // TODO refactor
+    val uniqueWordCount = WordCounter(stopWordContext).countWords(userInput)
 
-    println("Number of words: $wordCount")
+    println("Number of words: $wordCount, unique: $uniqueWordCount")
 }

@@ -18,6 +18,11 @@ class WordCounterTest {
         "'the a on off', 0",
         "'the a on hello world', 2",
         "'theaon hello world', 3",
+        "'Humpty-Dumpty', 2",
+        "'Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.', 9",
+        "'Humpty-Dum.pty sat on a wall', 3",
+        "'Hum-pty-Dumpty sat on a wall.', 5",
+        "'Stopword test on.', 2",
     )
     fun `Word counter test`(input: String, expected: Int) {
         val stopWordContext = StopWordContext()

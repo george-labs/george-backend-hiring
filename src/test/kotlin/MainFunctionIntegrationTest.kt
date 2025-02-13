@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -7,7 +7,7 @@ import java.io.PrintStream
 class MainFunctionIntegrationTest {
 
     @Test
-    fun `test main with path parameter to file from example`() {
+    fun `test main with path parameter to file from example iteration 3`() {
         // Save the original System.out
         val originalOut = System.out
 
@@ -31,10 +31,35 @@ class MainFunctionIntegrationTest {
         val output = outputStream.toString().trim()
 
         // Example assertion: check that the output contains expected text
-        assertTrue(
-            output.contains("Number of words: 4"),
-            "Wrong output for the file with 4 words"
-        )
+        assertEquals(output, "Number of words: 4, unique: 4")
+    }
+
+    @Test
+    fun `test main with path parameter to file from example iteration 4`() {
+        // Save the original System.out
+        val originalOut = System.out
+
+        // Prepare a stream to capture the output
+        val outputStream = ByteArrayOutputStream()
+        val printStream = PrintStream(outputStream)
+
+        try {
+            // Redirect System.out to our capturing printStream
+            System.setOut(printStream)
+
+            // Call the main function with a path param
+            main(arrayOf("./tmp/testFileIteration4.txt"))
+
+        } finally {
+            // Restore original System.out
+            System.setOut(originalOut)
+        }
+
+        // Convert output to string for assertions
+        val output = outputStream.toString().trim()
+
+        // Example assertion: check that the output contains expected text
+        assertEquals(output, "Number of words: 9, unique: 7")
     }
 
     @Test
@@ -62,10 +87,8 @@ class MainFunctionIntegrationTest {
         val output = outputStream.toString().trim()
 
         // Example assertion: check that the output contains expected text
-        assertTrue(
-            output.contains("Number of words: 6"),
-            "Wrong output for the file with 6 words"
-        )
+        assertEquals(output, "Number of words: 6, unique: 6")
+
     }
 
     @Test
@@ -92,15 +115,12 @@ class MainFunctionIntegrationTest {
         // Convert output to string for assertions
         val output = outputStream.toString().trim()
 
-        // Example assertion: check that the output contains expected text
-        assertTrue(
-            output.contains("Number of words: 10"),
-            "Wrong output for the file with 10 words"
-        )
+        assertEquals(output, "Number of words: 10, unique: 10")
+
     }
 
     @Test
-    fun `test main with path parameter empty file will fallback to the user input`() {
+    fun `test main with path parameter empty file will return 0`() {
         // Save the original System.out
         val originalOut = System.out
         val originalIn = System.`in`
@@ -127,11 +147,7 @@ class MainFunctionIntegrationTest {
         // Convert output to string for assertions
         val output = outputStream.toString().trim()
 
-        // Example assertion: check that the output contains expected text
-        assertTrue(
-            output.contains("Number of words: 6"),
-            "Wrong output for the file with 6 words"
-        )
+        assertEquals(output, "Number of words: 0, unique: 0")
     }
 
     @Test
@@ -158,14 +174,8 @@ class MainFunctionIntegrationTest {
             System.setOut(originalOut)
             System.setIn(originalIn)
         }
-
-        // Convert output to string for assertions
-        val output = outputStream.toString().trim()
-
-        // Example assertion: check that the output contains expected text
-        assertTrue(
-            output.contains("Number of words: 2"),
-            "Wrong output for the file with 2 words"
-        )
+        // Convert output to string for assertions and remove enter text prefix
+        val output = outputStream.toString().trim().removePrefix("Enter text: \n")
+        assertEquals(output, "Number of words: 2, unique: 2")
     }
 }

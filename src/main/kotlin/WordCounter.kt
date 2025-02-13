@@ -8,7 +8,7 @@ class WordCounter(private val fileLoader: StopWordsLoader) {
         if (line.isEmpty()) {
             return 0
         }
-        val wordCounter = line.split("\\s+".toRegex())
+        val wordCounter = line.split("[\\s-]+".toRegex())
             .filter { isWord(it) }
             .count { !isStopword(it) }
 
@@ -17,7 +17,7 @@ class WordCounter(private val fileLoader: StopWordsLoader) {
 
 
     fun isWord(word: String): Boolean {
-        return word.matches("[a-zA-Z]+".toRegex())
+        return word.matches("[a-zA-Z]+\\.?".toRegex())
     }
 
     // Stopwords are defined in the file stopwords.txt
