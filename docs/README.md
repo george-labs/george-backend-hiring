@@ -107,3 +107,7 @@ In case you see the need for mocking, please hand-roll your mocks.
 8. Read the requirements from the _Requirements_ section  
    Please only read one iteration at a time, starting with iteration 1
 9. Please think about how you will approach this problem in code for a few minutes before you start coding
+
+### Run
+1. `./gradlew build` # this will generate jar file and run test
+2. `java -jar ./build/libs/wordcount.jar` to run application

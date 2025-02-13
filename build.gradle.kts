@@ -20,6 +20,11 @@ repositories {
     mavenCentral()
 }
 
+tasks.named<JavaExec>("run") {
+    // Make sure Gradle’s run task allows interactive input
+    standardInput = System.`in`
+}
+
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.23")
     testImplementation(platform("org.junit:junit-bom:5.10.2"))
