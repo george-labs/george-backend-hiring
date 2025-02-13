@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-class KotlinApplicationTest {
+class WordCounterTest {
 
     @ParameterizedTest
     @CsvSource(
@@ -34,6 +34,22 @@ class KotlinApplicationTest {
     )
     fun `IsWord test`(input: String, expected: Boolean) {
         val actual = WordCounter.isWord(input)
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "'Hello', false",
+        "'World!', false",
+        "'the', true",
+        "'a', true",
+        "'on', true",
+        "'off', true",
+        "'\n ', false",
+        "'Word ', false",
+    )
+    fun `IsStopword test`(input: String, expected: Boolean) {
+        val actual = WordCounter.isStopword(input)
         assertEquals(expected, actual);
     }
 }

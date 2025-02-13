@@ -1,7 +1,9 @@
-object WordCounter {
+class WordCounter(fileLoader: FileLoader) {
+
+    val stopWords = fileLoader.stopWords
 
     // Words are stretches of letters (a-z,A-Z)
-    fun countWords(line: String) : Int {
+    fun countWords(line: String): Int {
         if (line.isEmpty()) {
             return 0
         }
@@ -11,7 +13,11 @@ object WordCounter {
     }
 
 
-    fun isWord(word: String) : Boolean {
+    fun isWord(word: String): Boolean {
         return word.matches("[a-zA-Z]+".toRegex())
+    }
+
+    fun isStopword(word: String): Boolean {
+        return stopWords.contains(word)
     }
 }

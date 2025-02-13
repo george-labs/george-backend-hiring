@@ -5,5 +5,7 @@
 - If there is no input from the user I will return 0 as the result
 - Words are split with one or more whitespaces
 ## Iteration 2 
-
+- I cannot see stopwords.txt so I will create it with the words provided as example in the iteration2
+- if there is no stopword file application should throw an error that file is missing
+- There are not many changes and the file will not be very big in the future
 ## Iteration 3
