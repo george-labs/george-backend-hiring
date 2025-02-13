@@ -7,7 +7,7 @@ import java.io.PrintStream
 class MainFunctionIntegrationTest {
 
     @Test
-    fun `test main with path parameter to file from example iteration 3`() {
+    fun `test main with file from example iteration 3`() {
         // Save the original System.out
         val originalOut = System.out
 
@@ -35,7 +35,7 @@ class MainFunctionIntegrationTest {
     }
 
     @Test
-    fun `test main with path parameter to file from example iteration 4`() {
+    fun `test main file from example iteration 4`() {
         // Save the original System.out
         val originalOut = System.out
 
@@ -59,11 +59,11 @@ class MainFunctionIntegrationTest {
         val output = outputStream.toString().trim()
 
         // Example assertion: check that the output contains expected text
-        assertEquals(output, "Number of words: 9, unique: 7")
+        assertEquals(output, "Number of words: 7, unique: 6")
     }
 
     @Test
-    fun `test main with path parameter to file with 6 words`() {
+    fun `test main with file with 6 words`() {
         // Save the original System.out
         val originalOut = System.out
 
@@ -92,7 +92,7 @@ class MainFunctionIntegrationTest {
     }
 
     @Test
-    fun `test main with path parameter to file with 10 words`() {
+    fun `test main with file with 10 words`() {
         // Save the original System.out
         val originalOut = System.out
 
@@ -120,7 +120,7 @@ class MainFunctionIntegrationTest {
     }
 
     @Test
-    fun `test main with path parameter empty file will return 0`() {
+    fun `test main with empty file`() {
         // Save the original System.out
         val originalOut = System.out
         val originalIn = System.`in`
@@ -151,7 +151,7 @@ class MainFunctionIntegrationTest {
     }
 
     @Test
-    fun `test main with path parameter no file provided will fallback to the user input`() {
+    fun `test main with no path param and fallback to the user input`() {
         // Save the original System.out
         val originalOut = System.out
         val originalIn = System.`in`

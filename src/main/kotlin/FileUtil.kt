@@ -2,7 +2,7 @@ import java.io.File
 
 object FileUtil {
 
-    // tries to read file form filepath returns null if file not found or cannot be read
+    // tries to read file form filepath returns null if file was not found or cannot be read
     fun readFileFromPath(filePath: String): String? {
         return try {
             val file = File(filePath)
