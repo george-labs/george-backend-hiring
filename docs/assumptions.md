@@ -9,3 +9,5 @@
 - if there is no stopword file application should throw an error that file is missing
 - There are not many changes and the file will not be very big in the future
 ## Iteration 3
+- I will add some information to the user for the output with errors when loading file
+
