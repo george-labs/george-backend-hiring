@@ -1,10 +1,13 @@
+import impl.StopWordContext
+
 class MyApplication
 
 fun main() {
     print("Enter text: ")
     val userInput = readlnOrNull() ?: ""
 
-    val wordCount = WordCounter.countWords(userInput)
+    val stopWordContext = StopWordContext()
+    val wordCount = WordCounter(stopWordContext).countWords(userInput)
 
     println("Number of words: $wordCount")
 }

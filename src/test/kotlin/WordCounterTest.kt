@@ -1,3 +1,5 @@
+import impl.StopWordContext
+import mock.MockedStopWordContext
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -13,10 +15,15 @@ class WordCounterTest {
         "'', 0",
         "'Looooooooooooooooooooooooooooooooong dsadas', 2",
         "'Many space             something   \n   test   ', 4",
+        "'the a on off', 0",
+        "'the a on hello world', 2",
+        "'theaon hello world', 3",
     )
     fun `Word counter test`(input: String, expected: Int) {
-        val actual = WordCounter.countWords(input)
-        assertEquals(expected, actual);
+        val stopWordContext = StopWordContext()
+        val actual = WordCounter(stopWordContext).countWords(input)
+
+        assertEquals(expected, actual)
     }
 
 
@@ -33,7 +40,9 @@ class WordCounterTest {
         "'\n ', false",
     )
     fun `IsWord test`(input: String, expected: Boolean) {
-        val actual = WordCounter.isWord(input)
+        val mockedFileLoader = MockedStopWordContext()
+        val actual = WordCounter(mockedFileLoader).isWord(input)
+
         assertEquals(expected, actual);
     }
 
@@ -49,7 +58,9 @@ class WordCounterTest {
         "'Word ', false",
     )
     fun `IsStopword test`(input: String, expected: Boolean) {
-        val actual = WordCounter.isStopword(input)
+        val stopWordContext = StopWordContext()
+        val actual = WordCounter(stopWordContext).isStopword(input)
+
         assertEquals(expected, actual);
     }
 }

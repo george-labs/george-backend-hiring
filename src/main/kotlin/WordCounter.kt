@@ -1,13 +1,16 @@
-class WordCounter(fileLoader: FileLoader) {
+import abstract.StopWordsLoader
 
-    val stopWords = fileLoader.stopWords
+class WordCounter(private val fileLoader: StopWordsLoader) {
 
-    // Words are stretches of letters (a-z,A-Z)
+    // words are stretches of letters (a-z,A-Z)
+    // not containing stopwords
     fun countWords(line: String): Int {
         if (line.isEmpty()) {
             return 0
         }
-        val wordCounter = line.split("\\s+".toRegex()).count { isWord(it) }
+        val wordCounter = line.split("\\s+".toRegex())
+            .filter { isWord(it) }
+            .count { !isStopword(it) }
 
         return wordCounter
     }
@@ -17,7 +20,10 @@ class WordCounter(fileLoader: FileLoader) {
         return word.matches("[a-zA-Z]+".toRegex())
     }
 
+    // Stopwords are defined in the file stopwords.txt
     fun isStopword(word: String): Boolean {
+        val stopWords = fileLoader.getStopWords()
+
         return stopWords.contains(word)
     }
 }

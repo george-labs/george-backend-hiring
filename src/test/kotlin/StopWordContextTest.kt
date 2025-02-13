@@ -1,12 +1,12 @@
+import impl.StopWordContext
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class FileLoaderTest {
+class StopWordContextTest {
 
     @Test
     fun `File loader test`() {
-        val file = FileLoader.readResourceFile("stopwords.txt")
-        val stopwords = FileLoader.parseStopwordsFile(file)
+        val stopwords = StopWordContext().getStopWords().toList()
 
         assertEquals(stopwords.size, 4)
         assertEquals(stopwords[0], "the")
