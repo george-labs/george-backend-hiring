@@ -87,7 +87,7 @@ class MainFunctionIntegrationTest {
         val output = outputStream.toString().trim()
 
         // Example assertion: check that the output contains expected text
-        assertEquals(output, "Number of words: 6, unique: 6")
+        assertEquals(output, "Number of words: 6, unique: 5")
 
     }
 
@@ -115,7 +115,7 @@ class MainFunctionIntegrationTest {
         // Convert output to string for assertions
         val output = outputStream.toString().trim()
 
-        assertEquals(output, "Number of words: 10, unique: 10")
+        assertEquals(output, "Number of words: 10, unique: 9")
 
     }
 

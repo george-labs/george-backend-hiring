@@ -15,9 +15,10 @@ fun main(args: Array<String>) {
     } else fileContent
 
     val stopWordContext = StopWordContext()
-    val wordCount = WordCounter(stopWordContext).countWords(userInput)
-    // TODO refactor
-    val uniqueWordCount = WordCounter(stopWordContext).countWords(userInput)
+    val wordCounter = WordCounter(stopWordContext)
 
-    println("Number of words: $wordCount, unique: $uniqueWordCount")
+    val words = wordCounter.getWordsWithoutStopwords(userInput)
+    val uniqueWordCount = wordCounter.countUniqueWords(words)
+
+    println("Number of words: ${words.count()}, unique: $uniqueWordCount")
 }

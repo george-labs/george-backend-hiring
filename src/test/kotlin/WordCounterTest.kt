@@ -23,10 +23,27 @@ class WordCounterTest {
         "'Humpty-Dum.pty sat on a wall', 3",
         "'Hum-pty-Dumpty sat on a wall.', 5",
         "'Stopword test on.', 2",
-    )
+        "'Stopword with comma, test on, test on.', 5",
+
+        )
     fun `Word counter test`(input: String, expected: Int) {
         val stopWordContext = StopWordContext()
-        val actual = WordCounter(stopWordContext).countWords(input)
+        val actual = WordCounter(stopWordContext).getWordsWithoutStopwords(input).count()
+
+        assertEquals(expected, actual)
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "'Hello Hello World', 2",
+        "'Hello World!', 1",
+        "'Hello World something else else else else', 4",
+
+        )
+    fun `Unique Word counter test`(input: String, expected: Int) {
+        val stopWordContext = StopWordContext()
+        val wordCounter = WordCounter(stopWordContext)
+        val actual = wordCounter.countUniqueWords(wordCounter.getWordsWithoutStopwords(input))
 
         assertEquals(expected, actual)
     }
@@ -47,6 +64,19 @@ class WordCounterTest {
     fun `IsWord test`(input: String, expected: Boolean) {
         val mockedFileLoader = MockedStopWordContext()
         val actual = WordCounter(mockedFileLoader).isWord(input)
+
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "'Hello.', Hello",
+        "'World.,', World.",
+        "'Hello', Hello",
+    )
+    fun `RemoveLastDotOrComma test`(input: String, expected: String) {
+        val mockedStopWordContext = MockedStopWordContext()
+        val actual = WordCounter(mockedStopWordContext).removeLastDotOrComma(input)
 
         assertEquals(expected, actual);
     }

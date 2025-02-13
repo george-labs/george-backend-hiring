@@ -14,3 +14,4 @@
 ## Iteration 4
 - When there is word with `-` in between it counts as 2 words
 - Also this will change for the `.` with current solution, and I will also do `,`
+- THIS, this and ThIs is the same words
