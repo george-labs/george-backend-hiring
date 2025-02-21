@@ -1,4 +1,4 @@
-package sk.erste.wordcountkata;
+package sk.erste.wordcountkata.filter;
 
 import org.junit.jupiter.api.Test;
 

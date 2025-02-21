@@ -1,5 +1,8 @@
 package sk.erste.wordcountkata;
 
+import sk.erste.wordcountkata.filter.StopWordFilter;
+import sk.erste.wordcountkata.filter.WordFilter;
+
 public class WordCounter {
 
     private final StopWordFilter stopWordFilter;

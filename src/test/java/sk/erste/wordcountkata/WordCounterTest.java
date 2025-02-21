@@ -1,6 +1,7 @@
 package sk.erste.wordcountkata;
 
 import org.junit.jupiter.api.Test;
+import sk.erste.wordcountkata.filter.StopWordFilter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
