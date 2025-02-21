@@ -1,5 +1,6 @@
 package sk.erste.wordcountkata;
 
+import sk.erste.wordcountkata.WordCounter.WordCountStat;
 import sk.erste.wordcountkata.filter.StopWordFilter;
 
 import java.io.FileNotFoundException;
@@ -12,7 +13,7 @@ public class WordKata {
         this.inputTextReader = inputTextReader;
     }
 
-    public int countWords() throws FileNotFoundException {
+    public WordCountStat countWords() throws FileNotFoundException {
         String text = inputTextReader.getInputText();
 
         StopWordFilter stopWordFilter = new StopWordFilter("stopwords.txt");

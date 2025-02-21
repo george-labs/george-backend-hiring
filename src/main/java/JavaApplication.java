@@ -1,4 +1,5 @@
 import sk.erste.wordcountkata.InputTextReader;
+import sk.erste.wordcountkata.WordCounter;
 import sk.erste.wordcountkata.WordKata;
 
 public class JavaApplication {
@@ -14,8 +15,8 @@ public class JavaApplication {
         WordKata wordKata = new WordKata(inputTextReader);
 
         try {
-            int count = wordKata.countWords();
-            System.out.println("Number of words: " + count);
+            WordCounter.WordCountStat wordCountStat = wordKata.countWords();
+            System.out.println("Number of words: " + wordCountStat.wordCount() + ", unique: " + wordCountStat.uniqueWordCount());
         } catch (Exception e) {
             System.out.print("File not found");
         }

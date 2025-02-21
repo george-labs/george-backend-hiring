@@ -1,6 +1,7 @@
 package sk.erste.wordcountkata;
 
 import org.junit.jupiter.api.Test;
+import sk.erste.wordcountkata.WordCounter.WordCountStat;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
@@ -13,13 +14,13 @@ public class WordKataTest {
     @Test
     public void testProcess_fromFile() throws FileNotFoundException {
         WordKata wordKata = new WordKata(new InputTextReader("mytext_test.txt"));
-        assertEquals(4, wordKata.countWords());
+        assertEquals(new WordCountStat(4, 4), wordKata.countWords());
     }
 
     @Test
     public void testProcess_emptyFile() throws FileNotFoundException {
         WordKata wordKata = new WordKata(new InputTextReader("mytext_test_empty.txt"));
-        assertEquals(0, wordKata.countWords());
+        assertEquals(new WordCountStat(0, 0), wordKata.countWords());
     }
 
     @Test
@@ -32,6 +33,6 @@ public class WordKataTest {
     public void testProcess_fromConsole() throws FileNotFoundException {
         System.setIn(new ByteArrayInputStream("Mary had a little lamb".getBytes()));
         WordKata wordKata = new WordKata(new InputTextReader(null));
-        assertEquals(4, wordKata.countWords());
+        assertEquals(new WordCountStat(4, 4), wordKata.countWords());
     }
 }

@@ -1,3 +1,5 @@
 # Assumptions per iteration
 
-## Iteration 1
+## Iteration 4
+The word separater can be any character other than alphanumeric characters.
+
