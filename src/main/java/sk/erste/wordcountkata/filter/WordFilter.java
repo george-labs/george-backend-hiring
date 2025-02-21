@@ -6,6 +6,6 @@ public class WordFilter {
         if (word == null) {
             return false;
         }
-        return word.matches("[a-zA-Z]+");
+        return word.matches("[a-zA-Z-]+");
     }
 }

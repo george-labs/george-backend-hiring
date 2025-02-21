@@ -36,7 +36,7 @@ public class WordCounterTest {
     public void countWords_whenTextHasHyphen() {
         WordCounter wordCounter = new WordCounter(stopWordFilterTest);
         WordCountStat result = wordCounter.countWords("Humpty-Dumpty sat on a wall. Have a great fall.");
-        assertEquals(new WordCountStat(7, 7), result);
+        assertEquals(new WordCountStat(6, 6), result);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class WordCounterTest {
     public void countWords_whenTextHasHyphenAndDuplicate() {
         WordCounter wordCounter = new WordCounter(stopWordFilterTest);
         WordCountStat result = wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.");
-        assertEquals(new WordCountStat(9, 7), result);
+        assertEquals(new WordCountStat(7, 6), result);
     }
 
     @Test

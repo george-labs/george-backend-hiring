@@ -18,7 +18,7 @@ public class WordCounter {
     public WordCountStat countWords(String text) {
         Set<String> uniqueWords = new HashSet<>();
 
-        String[] split = text.split("[^a-zA-Z0-9]+");
+        String[] split = text.split("[^a-zA-Z0-9-]+");
         int count = 0;
         for (String word : split) {
             if (isWordValid(word)) {
