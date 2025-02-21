@@ -2,13 +2,7 @@ package sk.erste.wordcountkata;
 
 public class WordFilter {
 
-    private final String word;
-
-    public WordFilter(String word) {
-        this.word = word;
-    }
-
-    public boolean isWordValid() {
+    public boolean isWordValid(String word) {
         if (word == null) {
             return false;
         }

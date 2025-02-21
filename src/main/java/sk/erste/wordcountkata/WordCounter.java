@@ -2,20 +2,25 @@ package sk.erste.wordcountkata;
 
 public class WordCounter {
 
-    private final String text;
+    private final StopWordFilter stopWordFilter;
+    private final WordFilter wordFilter = new WordFilter();
 
-    public WordCounter(String text) {
-        this.text = text;
+    public WordCounter(StopWordFilter stopWordFilter) {
+        this.stopWordFilter = stopWordFilter;
     }
 
-    public int countWords() {
+    public int countWords(String text) {
         String[] split = text.split("\\s+");
         int count = 0;
         for (String word : split) {
-            if (new WordFilter(word).isWordValid()) {
+            if (isWordValid(word)) {
                 count++;
             }
         }
         return count;
+    }
+
+    public boolean isWordValid(String word) {
+        return wordFilter.isWordValid(word) && !stopWordFilter.isStopWord(word);
     }
 }
