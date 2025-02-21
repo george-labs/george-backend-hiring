@@ -20,14 +20,18 @@ public class WordCounter {
 
         String[] split = text.split("[^a-zA-Z0-9-]+");
         int count = 0;
+        int lengthSum = 0;
         for (String word : split) {
             if (isWordValid(word)) {
                 count++;
                 uniqueWords.add(word);
+                lengthSum += word.length();
             }
         }
 
-        return new WordCountStat(count, uniqueWords.size());
+        double avgLength = count > 0 ? (double) lengthSum / count : 0;
+
+        return new WordCountStat(count, uniqueWords.size(), avgLength);
     }
 
     public boolean isWordValid(String word) {
@@ -38,6 +42,6 @@ public class WordCounter {
         return passed;
     }
 
-    public record WordCountStat (int wordCount, int uniqueWordCount) {
+    public record WordCountStat (int wordCount, int uniqueWordCount, double avgLength) {
     }
 }
