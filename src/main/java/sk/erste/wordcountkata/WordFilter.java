@@ -2,7 +2,7 @@ package sk.erste.wordcountkata;
 
 public class WordFilter {
 
-    private String word;
+    private final String word;
 
     public WordFilter(String word) {
         this.word = word;

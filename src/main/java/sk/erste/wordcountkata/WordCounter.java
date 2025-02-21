@@ -2,7 +2,7 @@ package sk.erste.wordcountkata;
 
 public class WordCounter {
 
-    private String text;
+    private final String text;
 
     public WordCounter(String text) {
         this.text = text;
