@@ -1,17 +1,21 @@
 package com.dusanbartos.wordcount.data
 
+import kotlin.io.path.Path
+
+
 interface FileReader {
-    fun read(name: String): Set<String>
+    fun read(filename: String): String
 }
 
-class ResourceFileReader : FileReader {
+class PathFileReader : FileReader {
 
-    private val classLoader = this::class.java.classLoader
+    override fun read(filename: String): String =
+        try {
+            Path(filename).toFile().readText()
+        } catch (e: Throwable) {
+            System.err.println("Error processing file '$filename' - ${e.message ?: "unknown error"}")
 
-    override fun read(name: String): Set<String> =
-        classLoader.getResourceAsStream(name)
-            ?.use { it.bufferedReader().readLines() }
-            ?.toSet()
-            // this should never happen, but if we want to be double-safe, let's print a message in console
-            ?: emptySet<String>().also { System.err.println("Stopword file was not found") }
+            throw IllegalArgumentException("File '$filename' could not be accessed. Please check if you have rights" +
+                    " to access the file or if the file exists.")
+        }
 }

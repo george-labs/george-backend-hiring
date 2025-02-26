@@ -2,7 +2,7 @@ package com.dusanbartos.wordcount.domain
 
 import com.dusanbartos.wordcount.data.MockedReader
 import com.dusanbartos.wordcount.data.MockedWriter
-import com.dusanbartos.wordcount.data.ResourceFileReader
+import com.dusanbartos.wordcount.data.ResourceStopWordReader
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -20,7 +20,7 @@ class WordCountAppTest {
             reader = reader,
             writer = writer,
             counter = WordCounter(),
-            stopWordReader = ResourceFileReader(),
+            stopWordReader = ResourceStopWordReader(),
         )
     }
 
