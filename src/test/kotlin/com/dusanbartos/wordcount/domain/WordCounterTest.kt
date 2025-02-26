@@ -24,7 +24,7 @@ class WordCounterTest {
         delimiter = ';'
     )
     fun `only valid alphabetical characters in words`(sentence: String, expected: Int) {
-        val result = counter.countAll(sentence)
+        val result = counter.process(sentence).all
         Assertions.assertEquals(expected, result) { "Unexpected word count" }
     }
 
@@ -36,20 +36,20 @@ class WordCounterTest {
         delimiter = ';'
     )
     fun `invalid characters in words`(sentence: String, expected: Int) {
-        val result = counter.countAll(sentence)
+        val result = counter.process(sentence).all
         Assertions.assertEquals(expected, result) { "Unexpected word count" }
     }
 
     @ParameterizedTest
     @CsvSource(
         "'   Mary'; 1",
-        "' a  b .../ c.  ,'; 2",
+        "' a  b .../ c.  ,'; 3",
         "' '; 0",
         "'         '; 0",
         delimiter = ';'
     )
     fun `invalid input`(sentence: String, expected: Int) {
-        val result = counter.countAll(sentence)
+        val result = counter.process(sentence).all
         Assertions.assertEquals(expected, result) { "Unexpected word count" }
     }
 
@@ -64,14 +64,14 @@ class WordCounterTest {
     fun `stopwords are filtered out`(sentence: String, expected: Int) {
         val stopwords = setOf("had", "a", "the", "on")
 
-        val result = counter.countAll(sentence, stopwords)
+        val result = counter.process(sentence, stopwords).all
         Assertions.assertEquals(expected, result) { "Unexpected word count" }
     }
 
     @ParameterizedTest
     @CsvSource(
         "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.; 9",
-        "In general, it should feel as if you would have a regular day at work.; 12",
+        "In general, it should feel as if you should have a general day at work?; 14",
         "Humpty--Dumpty sat on a wall; 4",
         "-Dumpty sat on a wall; 3",
         "--Dumpty- sat; 2",
@@ -79,16 +79,16 @@ class WordCounterTest {
         delimiter = ';'
     )
     fun `words are counted correctly with stopwords provided`(sentence: String, expected: Int) {
-        val stopwords = setOf("had", "a", "the", "on", "as", "at")
+        val stopwords = setOf("a", "the", "on", "off")
 
-        val result = counter.countAll(sentence, stopwords)
+        val result = counter.process(sentence, stopwords).all
         Assertions.assertEquals(expected, result) { "Unexpected word count" }
     }
 
     @ParameterizedTest
     @CsvSource(
-        "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.; 9",
-        "In general, it should feel as if you would have a regular day at work?; 12",
+        "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.; 7",
+        "In general, it should feel as if you should have a general day at work?; 12",
         "Humpty--Dumpty sat on a wall; 4",
         "-Dumpty sat on a wall; 3",
         "--Dumpty- sat; 2",
@@ -96,9 +96,9 @@ class WordCounterTest {
         delimiter = ';'
     )
     fun `unique words are counted correctly with stopwords provided`(sentence: String, expected: Int) {
-        val stopwords = setOf("had", "a", "the", "on", "as", "at")
+        val stopwords = setOf("a", "the", "on", "off")
 
-        val result = counter.countUnique(sentence, stopwords)
+        val result = counter.process(sentence, stopwords).unique
         Assertions.assertEquals(expected, result) { "Unexpected word count" }
     }
 }

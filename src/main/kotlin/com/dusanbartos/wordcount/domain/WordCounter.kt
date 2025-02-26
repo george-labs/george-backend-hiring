@@ -8,11 +8,17 @@ class WordCounter {
         private val PUNCTUATION_CHARS = charArrayOf(',', '.', '?', '!')
     }
 
-    fun countAll(sentence: String, stopwords: Set<String> = emptySet()): Int =
+    fun process(sentence: String, stopwords: Set<String> = emptySet()): WordCounterResult =
+        WordCounterResult(
+            all = countAll(sentence, stopwords),
+            unique = countUnique(sentence, stopwords),
+        )
+
+    private fun countAll(sentence: String, stopwords: Set<String>): Int =
         findWords(sentence, stopwords)
             .count()
 
-    fun countUnique(sentence: String, stopwords: Set<String> = emptySet()): Int =
+    private fun countUnique(sentence: String, stopwords: Set<String>): Int =
         findWords(sentence, stopwords)
             .distinctBy { it.lowercase() }
             .count()
@@ -22,9 +28,7 @@ class WordCounter {
 
         return sentence.split(SEPARATOR_REGEX)
             .asSequence()
-            .also { println(it.toList()) }
             .map { it.trim(*PUNCTUATION_CHARS) }
-            .also { println(it.toList()) }
             .filter { WORD_REGEX.matches(it) }
             .filter { it.lowercase() !in lowercaseStopwords }
     }

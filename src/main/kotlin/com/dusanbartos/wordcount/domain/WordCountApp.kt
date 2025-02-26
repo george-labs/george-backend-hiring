@@ -24,10 +24,10 @@ class WordCountApp(
             reader.read()
         }
 
-        val result = counter.countAll(
+        val result = counter.process(
             sentence = sentence,
             stopwords = stopWordReader.read("stopwords.txt")
         )
-        writer.println("Number of words: $result")
+        writer.println("Number of words: ${result.all}, unique: ${result.unique}")
     }
 }

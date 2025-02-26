@@ -47,7 +47,7 @@ class WordCountAppTest {
         app.run(config = config)
 
         // then verify
-        writer.assertEquals("Number of words: 4, unique")
+        writer.assertEquals("Number of words: 4, unique: 4")
     }
 
     @Test
@@ -71,6 +71,6 @@ class WordCountAppTest {
         app.run(config = WordCountAppConfig(inputFilePath = null))
 
         // then verify
-        writer.assertEquals("Number of words: 9, unique: 7")
+        writer.assertEquals("Enter text: Number of words: 9, unique: 7")
     }
 }
