@@ -7,10 +7,13 @@ interface ConfigFactory {
 class ConfigFactoryImpl : ConfigFactory {
     override fun create(args: Array<String>): WordCountAppConfig {
         if (args.size > 1) {
-            throw IllegalArgumentException("Unexpected arguments. Allowed arguments:\n" +
-                    "\tfile.txt - text input to process")
+            throw InvalidConfigException("${args.size} args but expecting max 1")
         }
 
-        TODO("Not yet implemented")
+        return WordCountAppConfig(
+            inputFilePath = args.getOrNull(0),
+        )
     }
 }
+
+class InvalidConfigException(message: String) : IllegalArgumentException(message)

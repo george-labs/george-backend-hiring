@@ -207,4 +207,4 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,osx,java,kotlin,maven,intellij,eclipse
 
 # test files
-*.txt
+/*.txt
