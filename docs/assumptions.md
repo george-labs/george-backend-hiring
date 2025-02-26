@@ -33,3 +33,11 @@ Now the hyphen character don't act as a separator, but rather a special characte
 Multiple hyphens inside one word are still not breaking the word validity. `Humpty--Dumpty` is 1 word
 The same for hyphens in the front/back of the word. `--Dumpty-` is 1 word 
 Hyphenation characters are not part of the uniqueness check, so `Humpty-Dumpty and HumptyDumpty are equal` is 4 unique words
+
+## Iteration 6
+
+Average length is counted from all words, not just unique
+Average length output is rounded to 2 decimal places
+Due to previous decisions in Iteration 5, the hyphen is stripped from words when processing, making the result different to if it would be kept
+This hyphen-related assumption is made, because there is no clear example to verify this on - `sometext.txt` is missing
+If result does not have a decimal part, it will still be printed with `.0` which is also considered ok given that no example with whole numbers is present

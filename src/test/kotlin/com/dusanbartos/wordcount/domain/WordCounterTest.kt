@@ -112,4 +112,17 @@ class WordCounterTest {
         Assertions.assertEquals(0, result.all) { "Unexpected word count - all" }
         Assertions.assertEquals(0, result.unique) { "Unexpected word count - unique" }
     }
+
+    @ParameterizedTest
+    @CsvSource(
+        "Mary had a little lamb.; 4.25",
+        "In general, it should feel as if you should have a general day at work?; 3.85",
+        delimiter = ';'
+    )
+    fun `average word length is calculated correctly`(sentence: String, expected: Double) {
+        val stopwords = setOf("a", "the", "on", "off")
+        val result = counter.process(sentence, stopwords)
+
+        Assertions.assertEquals(expected, result.averageLength) { "Unexpected average length" }
+    }
 }

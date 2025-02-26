@@ -35,7 +35,7 @@ class WordCountAppTest {
         app.run(config = WordCountAppConfig(inputFilePath = null))
 
         // then verify
-        writer.assertEquals("Enter text: Number of words: 4, unique: 4")
+        writer.assertEquals("Enter text: Number of words: 4, unique: 4; average word length: 4.25 characters")
     }
 
     @Test
@@ -47,7 +47,7 @@ class WordCountAppTest {
         app.run(config = config)
 
         // then verify
-        writer.assertEquals("Number of words: 4, unique: 4")
+        writer.assertEquals("Number of words: 4, unique: 4; average word length: 4.25 characters")
     }
 
     @Test
@@ -59,7 +59,7 @@ class WordCountAppTest {
         app.run(config = config)
 
         // then verify
-        writer.assertEquals("Number of words: 0, unique: 0")
+        writer.assertEquals("Number of words: 0, unique: 0; average word length: 0.0 characters")
     }
 
     @Test
@@ -71,6 +71,6 @@ class WordCountAppTest {
         app.run(config = WordCountAppConfig(inputFilePath = null))
 
         // then verify
-        writer.assertEquals("Enter text: Number of words: 7, unique: 6")
+        writer.assertEquals("Enter text: Number of words: 7, unique: 6; average word length: 6.14 characters")
     }
 }

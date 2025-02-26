@@ -28,6 +28,6 @@ class WordCountApp(
             sentence = sentence,
             stopwords = stopWordReader.read("stopwords.txt")
         )
-        writer.println("Number of words: ${result.all}, unique: ${result.unique}")
+        writer.println("Number of words: ${result.all}, unique: ${result.unique}; average word length: ${result.averageLength} characters")
     }
 }
