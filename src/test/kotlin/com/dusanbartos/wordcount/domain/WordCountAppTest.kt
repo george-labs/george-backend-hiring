@@ -71,6 +71,6 @@ class WordCountAppTest {
         app.run(config = WordCountAppConfig(inputFilePath = null))
 
         // then verify
-        writer.assertEquals("Enter text: Number of words: 9, unique: 7")
+        writer.assertEquals("Enter text: Number of words: 7, unique: 6")
     }
 }

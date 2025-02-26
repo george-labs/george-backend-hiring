@@ -26,3 +26,10 @@ Hyphenation character is now considered a separator. `Humpty-Dumpty` is 2 words 
 Unique words would be considered case-insensitive. so `Humpty humpty` is 1 unique word
 Hyphens are considered separators, so they behave as if they were whitespaces. `Humpty--Dumpty` is 2 words 
 Hyphens at the beginning and end of a word are still not invalidating the word itself. `--Dumpty-` is 1 word 
+
+## Iteration 5
+
+Now the hyphen character don't act as a separator, but rather a special character allowed in the word
+Multiple hyphens inside one word are still not breaking the word validity. `Humpty--Dumpty` is 1 word
+The same for hyphens in the front/back of the word. `--Dumpty-` is 1 word 
+Hyphenation characters are not part of the uniqueness check, so `Humpty-Dumpty and HumptyDumpty are equal` is 4 unique words

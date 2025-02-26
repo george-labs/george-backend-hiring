@@ -4,7 +4,7 @@ class WordCounter {
 
     companion object {
         private val WORD_REGEX = "[a-zA-Z]+".toRegex()
-        private val SEPARATOR_REGEX = "[-\\s]+".toRegex()
+        private val SEPARATOR_REGEX = "\\s+".toRegex()
         private val PUNCTUATION_CHARS = charArrayOf(',', '.', '?', '!')
     }
 
@@ -28,7 +28,7 @@ class WordCounter {
 
         return sentence.split(SEPARATOR_REGEX)
             .asSequence()
-            .map { it.trim(*PUNCTUATION_CHARS) }
+            .map { it.trim(*PUNCTUATION_CHARS).replace("-", "") }
             .filter { WORD_REGEX.matches(it) }
             .filter { it.lowercase() !in lowercaseStopwords }
     }

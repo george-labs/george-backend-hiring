@@ -2,6 +2,7 @@ package com.dusanbartos.wordcount.domain
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -70,12 +71,12 @@ class WordCounterTest {
 
     @ParameterizedTest
     @CsvSource(
-        "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.; 9",
+        "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.; 7",
         "In general, it should feel as if you should have a general day at work?; 14",
-        "Humpty--Dumpty sat on a wall; 4",
+        "Humpty--Dumpty sat on a wall; 3",
         "-Dumpty sat on a wall; 3",
         "--Dumpty- sat; 2",
-        "-sat-on-a-big-wall; 3",
+        "-sat-on-a-big-wall; 1",
         delimiter = ';'
     )
     fun `words are counted correctly with stopwords provided`(sentence: String, expected: Int) {
@@ -87,12 +88,12 @@ class WordCounterTest {
 
     @ParameterizedTest
     @CsvSource(
-        "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.; 7",
+        "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.; 6",
         "In general, it should feel as if you should have a general day at work?; 12",
-        "Humpty--Dumpty sat on a wall; 4",
-        "-Dumpty sat on a wall; 3",
-        "--Dumpty- sat; 2",
-        "-sat-on-a-big-wall; 3",
+        "Humpty--Dumpty sat on a wall wall; 3",
+        "-Dumpty sat on a wall sat; 3",
+        "--Dumpty- sat on a wall on a wall on a wall. Real Dumpty; 4",
+        "-sat-on-a-big-wall; 1",
         delimiter = ';'
     )
     fun `unique words are counted correctly with stopwords provided`(sentence: String, expected: Int) {
@@ -100,5 +101,15 @@ class WordCounterTest {
 
         val result = counter.process(sentence, stopwords).unique
         Assertions.assertEquals(expected, result) { "Unexpected word count" }
+    }
+
+    @Test
+    fun `unique words are counted correctly with special characters only`() {
+        val stopwords = setOf("a", "the", "on", "off")
+        val sentence = "----   ----   ----  -  -."
+        val result = counter.process(sentence, stopwords)
+
+        Assertions.assertEquals(0, result.all) { "Unexpected word count - all" }
+        Assertions.assertEquals(0, result.unique) { "Unexpected word count - unique" }
     }
 }
