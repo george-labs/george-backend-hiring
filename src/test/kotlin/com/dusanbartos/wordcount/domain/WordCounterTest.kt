@@ -52,4 +52,19 @@ class WordCounterTest {
         val result = counter.countAll(sentence)
         Assertions.assertEquals(expected, result) { "Unexpected word count" }
     }
+
+    @ParameterizedTest
+    @CsvSource(
+        "Mary had a little lamb; 3",
+        "Mary had a little; 2",
+        "Lorem ipsum dolor sit amet; 5",
+        "The had had a on a hat; 1",
+        delimiter = ';'
+    )
+    fun `stopwords are filtered out`(sentence: String, expected: Int) {
+        val stopwords = setOf("had", "a", "the", "on")
+
+        val result = counter.countAll(sentence, stopwords)
+        Assertions.assertEquals(expected, result) { "Unexpected word count" }
+    }
 }

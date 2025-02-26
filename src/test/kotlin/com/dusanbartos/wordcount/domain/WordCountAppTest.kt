@@ -2,6 +2,7 @@ package com.dusanbartos.wordcount.domain
 
 import com.dusanbartos.wordcount.data.MockedReader
 import com.dusanbartos.wordcount.data.MockedWriter
+import com.dusanbartos.wordcount.data.ResourceFileReader
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -18,7 +19,8 @@ class WordCountAppTest {
         app = WordCountApp(
             reader = reader,
             writer = writer,
-            counter = WordCounter()
+            counter = WordCounter(),
+            stopWordReader = ResourceFileReader(),
         )
     }
 
@@ -31,6 +33,6 @@ class WordCountAppTest {
         app.run()
 
         // then verify
-        writer.assertEquals("Enter text: Number of words: 5")
+        writer.assertEquals("Enter text: Number of words: 4")
     }
 }

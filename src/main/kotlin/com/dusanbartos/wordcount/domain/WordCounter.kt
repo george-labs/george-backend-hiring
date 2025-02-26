@@ -7,9 +7,13 @@ class WordCounter {
         private val SEPARATOR_REGEX = "\\s+".toRegex()
     }
 
-    fun countAll(sentence: String): Int =
-        sentence.split(SEPARATOR_REGEX)
+    fun countAll(sentence: String, stopwords: Set<String> = emptySet()): Int {
+        val lowercaseStopwords = stopwords.map { it.lowercase() }.toSet()
+
+        return sentence.split(SEPARATOR_REGEX)
             .asSequence()
             .filter { WORD_REGEX.matches(it) }
+            .filter { it.lowercase() !in lowercaseStopwords }
             .count()
+    }
 }
