@@ -6,12 +6,29 @@ interface ConfigFactory {
 
 class ConfigFactoryImpl : ConfigFactory {
     override fun create(args: Array<String>): WordCountAppConfig {
-        if (args.size > 1) {
-            throw InvalidConfigException("${args.size} args but expecting max 1")
+        var doPrintIndex = false
+        var filePath: String? = null
+
+        args.forEach { arg ->
+            when {
+                arg == "-index" -> {
+                    doPrintIndex = true
+                }
+                else -> {
+                    // if there was already one pass which set the filePath
+                    // further parameters are invalidating the config
+                    if (filePath != null) {
+                        throw InvalidConfigException("Unexpected parameter.")
+                    }
+                    filePath = arg
+                }
+            }
         }
 
+
         return WordCountAppConfig(
-            inputFilePath = args.getOrNull(0),
+            inputFilePath = filePath,
+            printIndex = doPrintIndex,
         )
     }
 }

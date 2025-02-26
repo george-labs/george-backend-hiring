@@ -24,4 +24,10 @@ class ConfigFactoryTest {
         val config = factory.create(arrayOf())
         Assertions.assertNull(config.inputFilePath) { "file path should be empty" }
     }
+
+    @Test
+    fun `process -index flag into config when provided`() {
+        val config = factory.create(arrayOf("-index"))
+        Assertions.assertTrue(config.printIndex) { "index flag should be set" }
+    }
 }

@@ -41,3 +41,8 @@ Average length output is rounded to 2 decimal places
 Due to previous decisions in Iteration 5, the hyphen is stripped from words when processing, making the result different to if it would be kept
 This hyphen-related assumption is made, because there is no clear example to verify this on - `sometext.txt` is missing
 If result does not have a decimal part, it will still be printed with `.0` which is also considered ok given that no example with whole numbers is present
+
+## Iteration 7
+
+Multiple input arguments can now be provided in an unordered fashion
+When processing input parameters (configuration), known prefixed (i.e. `-index`) flags are processed first and then the rest is assumed to be the file path
