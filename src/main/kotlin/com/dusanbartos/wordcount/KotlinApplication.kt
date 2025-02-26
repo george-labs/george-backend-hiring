@@ -12,15 +12,14 @@ import com.dusanbartos.wordcount.domain.WordCounter
 
 fun main(args: Array<String>) {
     try {
-        val config = ConfigFactoryImpl().create(args)
-
         WordCountApp(
             reader = SystemInReader(),
             writer = SystemOutWriter(),
             counter = WordCounter(),
             stopWordReader = ResourceStopWordReader(),
             inputFileReader = PathFileReader(),
-        ).run(config)
+            configFactory = ConfigFactoryImpl(),
+        ).run(args)
     } catch (e: InvalidConfigException) {
         println("Unexpected arguments. Allowed arguments:\n" +
                 "\tfile.txt - text input to process")

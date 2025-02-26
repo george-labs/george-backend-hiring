@@ -11,9 +11,11 @@ class WordCountApp(
     private val counter: WordCounter,
     private val stopWordReader: StopWordReader,
     private val inputFileReader: FileReader,
+    private val configFactory: ConfigFactory,
 ) {
 
-    fun run(config: WordCountAppConfig) {
+    fun run(args: Array<String>) {
+        val config = configFactory.create(args)
 
         val sentence = if (config.inputFilePath != null) {
             // input provided in a file
