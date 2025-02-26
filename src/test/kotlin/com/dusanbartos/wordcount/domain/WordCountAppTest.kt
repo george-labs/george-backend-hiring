@@ -35,7 +35,7 @@ class WordCountAppTest {
         app.run(config = WordCountAppConfig(inputFilePath = null))
 
         // then verify
-        writer.assertEquals("Enter text: Number of words: 4")
+        writer.assertEquals("Enter text: Number of words: 4, unique: 4")
     }
 
     @Test
@@ -47,7 +47,7 @@ class WordCountAppTest {
         app.run(config = config)
 
         // then verify
-        writer.assertEquals("Number of words: 4")
+        writer.assertEquals("Number of words: 4, unique")
     }
 
     @Test
@@ -59,6 +59,18 @@ class WordCountAppTest {
         app.run(config = config)
 
         // then verify
-        writer.assertEquals("Number of words: 0")
+        writer.assertEquals("Number of words: 0, unique: 0")
+    }
+
+    @Test
+    fun `should correctly count unique words in a sentence and print output`() {
+        // given
+        reader.setup("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.")
+
+        // when
+        app.run(config = WordCountAppConfig(inputFilePath = null))
+
+        // then verify
+        writer.assertEquals("Number of words: 9, unique: 7")
     }
 }
