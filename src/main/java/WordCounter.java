@@ -23,6 +23,9 @@ public class WordCounter {
 
     @NotNull
     private static String[] processLineToArray(String line) {
-        return line.trim().split("\\W+");
+        return line
+                .trim()                                      // cut spaces at the start and end of the string
+                .replaceAll("\\s+", " ")     // replace more spaces by one
+                .split(" ");
     }
 }

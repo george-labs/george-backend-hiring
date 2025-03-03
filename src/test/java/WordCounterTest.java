@@ -16,7 +16,7 @@ public class WordCounterTest {
 
         // mock stopWords list
         List<String> stopWords = mockFactory.getStopWordsList();
-        CountResponse expectedResponse = mockFactory.createCountResponse(9, 7);
+        CountResponse expectedResponse = mockFactory.createCountResponse(7, 6);
 
         // asserts
         Assertions.assertEquals(expectedResponse.getUniqueCount(), wordCounter.count(line, stopWords).getUniqueCount());
@@ -30,7 +30,7 @@ public class WordCounterTest {
 
         // mock stopWords list
         List<String> stopWords = mockFactory.getStopWordsList();
-        CountResponse expectedResponse = mockFactory.createCountResponse(9, 7);
+        CountResponse expectedResponse = mockFactory.createCountResponse(7, 6);
 
         // asserts
         Assertions.assertEquals(expectedResponse.getUniqueCount(), wordCounter.count(line, stopWords).getUniqueCount());
@@ -43,7 +43,7 @@ public class WordCounterTest {
         String line = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
 
         // mock stopWords list
-        CountResponse expectedResponse = mockFactory.createCountResponse(12, 9);
+        CountResponse expectedResponse = mockFactory.createCountResponse(10, 8);
 
         // asserts
         Assertions.assertEquals(expectedResponse.getUniqueCount(), wordCounter.count(line, new ArrayList<>()).getUniqueCount());
