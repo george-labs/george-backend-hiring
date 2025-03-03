@@ -8,6 +8,8 @@ public class WordCounterTest {
 
     private final MockFactory mockFactory = new MockFactory();
 
+    private final WordCounter wordCounter = new WordCounter();
+
     @ParameterizedTest
     @CsvSource(
             {" aa vv cc ,3",
@@ -17,12 +19,15 @@ public class WordCounterTest {
             " a   a a  a ,0,",
             " b   b b  b ,4"}
     )
-    public void countTrimmedStringTest(String line, int expectedCount){
+    public void countFromManualInputTest(String line, int expectedCount){
         // mock stopWords list
         List<String> stopWords = mockFactory.getStopWordsList();
 
         // asserts
-        Assertions.assertEquals(expectedCount, WordCounter.count(line, stopWords));
+        Assertions.assertEquals(expectedCount, wordCounter.count(line, stopWords));
     }
 
+    public void countFromFileInputTest(){
+        // TODO
+    }
 }
