@@ -26,8 +26,4 @@ public class WordCounterTest {
         // asserts
         Assertions.assertEquals(expectedCount, wordCounter.count(line, stopWords));
     }
-
-    public void countFromFileInputTest(){
-        // TODO
-    }
 }
