@@ -5,20 +5,14 @@ import java.util.*;
 public class WordCounter {
 
     public CountResponse count(String line, List<String> stopWords) {
-        String[] splittedLine = processLineToArray(line);
-        if (splittedLine.length == 1 && "".equals(splittedLine[0])) {
+        if (line == null || "".equals(line)) {
             return new CountResponse();
         }
-        Set<String> unique = new LinkedHashSet<>();
-        List<String> allWords = new ArrayList<>();
-        for (String word : splittedLine) {
-            if (stopWords.contains(word)){
-                continue;
-            }
+        List<String> allWords = Arrays.stream(processLineToArray(line))
+                .filter(word -> !stopWords.contains(word))
+                .toList();
 
-            unique.add(word);
-            allWords.add(word);
-        }
+        Set<String> unique = new LinkedHashSet<>(allWords);
 
         CountResponse response = new CountResponse();
         response.setUniqueCount(unique.size());
@@ -29,10 +23,6 @@ public class WordCounter {
 
     @NotNull
     private static String[] processLineToArray(String line) {
-        return line
-                .trim()                                      // cut spaces at the start and end of the string
-                .replaceAll("\\s+", " ")     // replace more spaces by one
-                .replaceAll("-", " ")
-                .split(" ");
+        return line.trim().split("\\W+");
     }
 }

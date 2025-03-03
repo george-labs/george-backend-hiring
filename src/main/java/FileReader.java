@@ -13,10 +13,10 @@ public class FileReader {
         return Arrays.stream(getContent(path).split(" ")).toList();
     }
 
-    public String getContent(String path){
+    public String getContent(String path) {
         StringBuilder stringBuilder = new StringBuilder();
-        try {
-            BufferedReader br = new BufferedReader(new java.io.FileReader(path));
+        try (BufferedReader br = new BufferedReader(new java.io.FileReader(path))) {
+
             String line = br.readLine();
 
             while (line != null) {

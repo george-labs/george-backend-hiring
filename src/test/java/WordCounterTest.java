@@ -25,6 +25,20 @@ public class WordCounterTest {
     }
 
     @Test
+    public void countWordsWithMoreSpacesInTextTest(){
+        String line = "Humpty-Dumpty sat  on a wall. Humpty-Dumpty   had a great fall.";
+
+        // mock stopWords list
+        List<String> stopWords = mockFactory.getStopWordsList();
+        CountResponse expectedResponse = mockFactory.createCountResponse(9, 7);
+
+        // asserts
+        Assertions.assertEquals(expectedResponse.getUniqueCount(), wordCounter.count(line, stopWords).getUniqueCount());
+        Assertions.assertEquals(expectedResponse.getTotalCount(), wordCounter.count(line, stopWords).getTotalCount());
+
+    }
+
+    @Test
     public void countWithoutStopWordsTest(){
         String line = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
 
@@ -55,7 +69,7 @@ public class WordCounterTest {
         String line = null;
 
         // mock stopWords list
-        CountResponse expectedResponse = mockFactory.createCountResponse(12, 9);
+        CountResponse expectedResponse = mockFactory.createCountResponse(0, 0);
 
         // asserts
         Assertions.assertEquals(expectedResponse.getUniqueCount(), wordCounter.count(line, new ArrayList<>()).getUniqueCount());
