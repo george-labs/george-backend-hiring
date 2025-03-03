@@ -11,4 +11,11 @@ public class MockFactory {
         stopWords.add("off");
         return stopWords;
     }
+
+    public CountResponse createCountResponse(int totalCount, int uniqueCount) {
+        CountResponse countResponse = new CountResponse();
+        countResponse.setTotalCount(totalCount);
+        countResponse.setUniqueCount(uniqueCount);
+        return countResponse;
+    }
 }

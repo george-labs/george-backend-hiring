@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WordCounterTest {
@@ -10,20 +10,56 @@ public class WordCounterTest {
 
     private final WordCounter wordCounter = new WordCounter();
 
-    @ParameterizedTest
-    @CsvSource(
-            {" aa vv cc ,3",
-             "aa vv cc,3",
-             "oo nnbn h h  h,5",
-            "aa a0v a-v a ,3",
-            " a   a a  a ,0,",
-            " b   b b  b ,4"}
-    )
-    public void countFromManualInputTest(String line, int expectedCount){
+    @Test
+    public void countTest(){
+        String line = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+
         // mock stopWords list
         List<String> stopWords = mockFactory.getStopWordsList();
+        CountResponse expectedResponse = mockFactory.createCountResponse(9, 7);
 
         // asserts
-        Assertions.assertEquals(expectedCount, wordCounter.count(line, stopWords));
+        Assertions.assertEquals(expectedResponse.getUniqueCount(), wordCounter.count(line, stopWords).getUniqueCount());
+        Assertions.assertEquals(expectedResponse.getTotalCount(), wordCounter.count(line, stopWords).getTotalCount());
+
+    }
+
+    @Test
+    public void countWithoutStopWordsTest(){
+        String line = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+
+        // mock stopWords list
+        CountResponse expectedResponse = mockFactory.createCountResponse(12, 9);
+
+        // asserts
+        Assertions.assertEquals(expectedResponse.getUniqueCount(), wordCounter.count(line, new ArrayList<>()).getUniqueCount());
+        Assertions.assertEquals(expectedResponse.getTotalCount(), wordCounter.count(line, new ArrayList<>()).getTotalCount());
+
+    }
+
+    @Test
+    public void countWithLineEmptyWordsTest(){
+        String line = "";
+
+        // mock stopWords list
+        CountResponse expectedResponse = mockFactory.createCountResponse(0, 0);
+
+        // asserts
+        Assertions.assertEquals(expectedResponse.getUniqueCount(), wordCounter.count(line, new ArrayList<>()).getUniqueCount());
+        Assertions.assertEquals(expectedResponse.getTotalCount(), wordCounter.count(line, new ArrayList<>()).getTotalCount());
+
+    }
+
+    @Test
+    public void countWithLineNullTest(){
+        String line = null;
+
+        // mock stopWords list
+        CountResponse expectedResponse = mockFactory.createCountResponse(12, 9);
+
+        // asserts
+        Assertions.assertEquals(expectedResponse.getUniqueCount(), wordCounter.count(line, new ArrayList<>()).getUniqueCount());
+        Assertions.assertEquals(expectedResponse.getTotalCount(), wordCounter.count(line, new ArrayList<>()).getTotalCount());
+
     }
 }

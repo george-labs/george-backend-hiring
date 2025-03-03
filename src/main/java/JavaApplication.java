@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,7 +14,10 @@ public class JavaApplication {
         List<String> stopWords = fileReader.getStopWords(STOPWORDS_FILE_PATH);
 
         String line = readInputLine(args, sc, fileReader);
-        System.out.println("Number of words: " + wordCounter.count(line, stopWords));
+        CountResponse countResponse = wordCounter.count(line, stopWords);
+        System.out.printf("Number of words: %d, unique: %d%n",
+                countResponse.getTotalCount(),
+                countResponse.getUniqueCount());
     }
 
     private static String readInputLine(String[] args, Scanner sc, FileReader fileReader) {
