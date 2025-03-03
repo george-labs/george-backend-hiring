@@ -12,9 +12,11 @@ public class JavaApplication {
 
         String line = new ReadInputUtil().readInputLine(args, fileReader);
         CountResponse countResponse = wordCounter.count(line, stopWords);
-        System.out.printf("Number of words: %d, unique: %d%n",
+        System.out.printf("Number of words: %d, unique: %d; average word length: %.2f characters%n",
                 countResponse.getTotalCount(),
-                countResponse.getUniqueCount());
+                countResponse.getUniqueCount(),
+                countResponse.getAverageWordLength()
+                );
     }
 
 }

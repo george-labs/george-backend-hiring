@@ -13,14 +13,15 @@ public class WordCounterTest {
     @Test
     public void countTest(){
         String line = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
-
         // mock stopWords list
         List<String> stopWords = mockFactory.getStopWordsList();
-        CountResponse expectedResponse = mockFactory.createCountResponse(7, 6);
+        CountResponse expectedResponse = mockFactory.createCountResponse(7, 6, 6.428571F);
 
         // asserts
-        Assertions.assertEquals(expectedResponse.getUniqueCount(), wordCounter.count(line, stopWords).getUniqueCount());
-        Assertions.assertEquals(expectedResponse.getTotalCount(), wordCounter.count(line, stopWords).getTotalCount());
+        CountResponse response = wordCounter.count(line, stopWords);
+        Assertions.assertEquals(expectedResponse.getUniqueCount(), response.getUniqueCount());
+        Assertions.assertEquals(expectedResponse.getTotalCount(), response.getTotalCount());
+        Assertions.assertEquals(expectedResponse.getAverageWordLength(), response.getAverageWordLength());
 
     }
 
@@ -30,11 +31,13 @@ public class WordCounterTest {
 
         // mock stopWords list
         List<String> stopWords = mockFactory.getStopWordsList();
-        CountResponse expectedResponse = mockFactory.createCountResponse(7, 6);
+        CountResponse expectedResponse = mockFactory.createCountResponse(7, 6, 6.428571F);
 
         // asserts
-        Assertions.assertEquals(expectedResponse.getUniqueCount(), wordCounter.count(line, stopWords).getUniqueCount());
-        Assertions.assertEquals(expectedResponse.getTotalCount(), wordCounter.count(line, stopWords).getTotalCount());
+        CountResponse response = wordCounter.count(line, stopWords);
+        Assertions.assertEquals(expectedResponse.getUniqueCount(), response.getUniqueCount());
+        Assertions.assertEquals(expectedResponse.getTotalCount(), response.getTotalCount());
+        Assertions.assertEquals(expectedResponse.getAverageWordLength(), response.getAverageWordLength());
 
     }
 
@@ -43,11 +46,13 @@ public class WordCounterTest {
         String line = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
 
         // mock stopWords list
-        CountResponse expectedResponse = mockFactory.createCountResponse(10, 8);
+        CountResponse expectedResponse = mockFactory.createCountResponse(10, 8, 4.9F);
 
         // asserts
-        Assertions.assertEquals(expectedResponse.getUniqueCount(), wordCounter.count(line, new ArrayList<>()).getUniqueCount());
-        Assertions.assertEquals(expectedResponse.getTotalCount(), wordCounter.count(line, new ArrayList<>()).getTotalCount());
+        CountResponse response = wordCounter.count(line, new ArrayList<>());
+        Assertions.assertEquals(expectedResponse.getUniqueCount(), response.getUniqueCount());
+        Assertions.assertEquals(expectedResponse.getTotalCount(), response.getTotalCount());
+        Assertions.assertEquals(expectedResponse.getAverageWordLength(), response.getAverageWordLength());
 
     }
 
@@ -56,11 +61,13 @@ public class WordCounterTest {
         String line = "";
 
         // mock stopWords list
-        CountResponse expectedResponse = mockFactory.createCountResponse(0, 0);
+        CountResponse expectedResponse = mockFactory.createCountResponse(0, 0, 0);
 
         // asserts
-        Assertions.assertEquals(expectedResponse.getUniqueCount(), wordCounter.count(line, new ArrayList<>()).getUniqueCount());
-        Assertions.assertEquals(expectedResponse.getTotalCount(), wordCounter.count(line, new ArrayList<>()).getTotalCount());
+        CountResponse response = wordCounter.count(line, new ArrayList<>());
+        Assertions.assertEquals(expectedResponse.getUniqueCount(), response.getUniqueCount());
+        Assertions.assertEquals(expectedResponse.getTotalCount(), response.getTotalCount());
+        Assertions.assertEquals(expectedResponse.getAverageWordLength(), response.getAverageWordLength());
 
     }
 
@@ -69,11 +76,13 @@ public class WordCounterTest {
         String line = null;
 
         // mock stopWords list
-        CountResponse expectedResponse = mockFactory.createCountResponse(0, 0);
+        CountResponse expectedResponse = mockFactory.createCountResponse(0, 0, 0);
 
         // asserts
-        Assertions.assertEquals(expectedResponse.getUniqueCount(), wordCounter.count(line, new ArrayList<>()).getUniqueCount());
-        Assertions.assertEquals(expectedResponse.getTotalCount(), wordCounter.count(line, new ArrayList<>()).getTotalCount());
+        CountResponse response = wordCounter.count(line, new ArrayList<>());
+        Assertions.assertEquals(expectedResponse.getUniqueCount(), response.getUniqueCount());
+        Assertions.assertEquals(expectedResponse.getTotalCount(), response.getTotalCount());
+        Assertions.assertEquals(expectedResponse.getTotalCount(), response.getAverageWordLength());
 
     }
 }

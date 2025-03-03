@@ -4,6 +4,8 @@ public class CountResponse {
 
     private int uniqueCount = 0;
 
+    private float averageWordLength = 0;
+
     public int getTotalCount() {
         return totalCount;
     }
@@ -18,5 +20,13 @@ public class CountResponse {
 
     public void setUniqueCount(int uniqueCount) {
         this.uniqueCount = uniqueCount;
+    }
+
+    public float getAverageWordLength() {
+        return averageWordLength;
+    }
+
+    public void setAverageWordLength(float averageWordLength) {
+        this.averageWordLength = averageWordLength;
     }
 }

@@ -17,15 +17,25 @@ public class WordCounter {
         CountResponse response = new CountResponse();
         response.setUniqueCount(unique.size());
         response.setTotalCount(allWords.size());
+        response.setAverageWordLength(getAvgWordLength(allWords));
 
         return response;
     }
 
+    private float getAvgWordLength(List<String> allWords) {
+        int sum = 0;
+        for (String word: allWords) {
+            sum += word.length();
+        }
+        return (float) sum / (float) allWords.size();
+    }
+
     @NotNull
-    private static String[] processLineToArray(String line) {
+    private String[] processLineToArray(String line) {
         return line
                 .trim()                                      // cut spaces at the start and end of the string
                 .replaceAll("\\s+", " ")     // replace more spaces by one
+                .replaceAll("\\.", "")
                 .split(" ");
     }
 }

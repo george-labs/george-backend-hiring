@@ -12,10 +12,11 @@ public class MockFactory {
         return stopWords;
     }
 
-    public CountResponse createCountResponse(int totalCount, int uniqueCount) {
+    public CountResponse createCountResponse(int totalCount, int uniqueCount, float averageWordLength) {
         CountResponse countResponse = new CountResponse();
         countResponse.setTotalCount(totalCount);
         countResponse.setUniqueCount(uniqueCount);
+        countResponse.setAverageWordLength(averageWordLength);
         return countResponse;
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class FileReader {
 
-    public static final String STOPWORD_TXT_WAS_NOT_FOUND = "STOPWORD.TXT WAS NOT FOUND!";
+    public static final String FILE_WAS_NOT_FOUND = "%s WAS NOT FOUND!";
     public static final String READING_FILE_ERROR_MESSAGE = "READING FILE ERROR!";
 
     public List<String> getStopWords(String path) {
@@ -25,7 +25,7 @@ public class FileReader {
                 line = br.readLine();
             }
         } catch (FileNotFoundException e) {
-            System.out.println(STOPWORD_TXT_WAS_NOT_FOUND);
+            System.out.println(String.format(FILE_WAS_NOT_FOUND, path));
         } catch (IOException e){
             System.out.println(READING_FILE_ERROR_MESSAGE);
             e.printStackTrace();
