@@ -2,7 +2,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
-import java.util.Scanner;
 
 public class ReadInputUtilTest {
 
@@ -20,7 +19,7 @@ public class ReadInputUtilTest {
 
     @Test
     void readInputFileFromConsole(){
-        String[] args = new String[]{""};
+        String[] args = new String[]{};
         String expectedResult = "Mary had a little pony ";
         provideInput("Mary had a little pony ");
 
