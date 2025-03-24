@@ -44,4 +44,13 @@ class WordCounterTest {
                                                     Set.of("a", "on"));
     assertEquals(6, countHolder.getUniqueWords());
   }
+
+  @Test
+  void shouldCalculateAverage() {
+    WordCounter wordCounter = new WordCounter();
+
+    CountHolder countHolder = wordCounter.getCounts("a df dfg dfgh sdfgh kjhbkjbkjbkj",
+                                                    emptySet());
+    assertEquals(4.5, countHolder.getAverageLenght());
+  }
 }

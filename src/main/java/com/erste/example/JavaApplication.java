@@ -8,6 +8,9 @@ import java.util.Set;
  */
 public class JavaApplication {
 
+  public static final String OUTPUT_PLACEHOLDER
+      = "Number of words: %s, unique: %s; average word length: %s  characters";
+
   /**
    * Main method to run app.
    *
@@ -25,7 +28,8 @@ public class JavaApplication {
       inputWords = inputReader.readInput();
     }
     Set<String> stopWords = inputFileReader.readStopWordFile();
-    CountHolder counts = wordCounter.getCounts(inputWords, stopWords);
-    System.out.println("Number of words: " + counts.getAllWords() + ", unique: " + counts.getUniqueWords());
+    CountHolder countHolder = wordCounter.getCounts(inputWords, stopWords);
+    System.out.printf((OUTPUT_PLACEHOLDER) + "%n", countHolder.getAllWords(), countHolder.getUniqueWords(),
+                      countHolder.getAverageLenght());
   }
 }

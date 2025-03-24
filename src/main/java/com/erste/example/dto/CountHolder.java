@@ -2,12 +2,14 @@ package com.erste.example.dto;
 
 public class CountHolder {
 
-  private long allWords;
-  private long uniqueWords;
+  private final long allWords;
+  private final long uniqueWords;
+  private final Double averageLenght;
 
-  public CountHolder(long allWords, long uniqueWords) {
+  public CountHolder(long allWords, long uniqueWords, Double averageLenght) {
     this.allWords = allWords;
     this.uniqueWords = uniqueWords;
+    this.averageLenght = averageLenght;
   }
 
   public long getAllWords() {
@@ -18,4 +20,7 @@ public class CountHolder {
     return uniqueWords;
   }
 
+  public Double getAverageLenght() {
+    return averageLenght;
+  }
 }
