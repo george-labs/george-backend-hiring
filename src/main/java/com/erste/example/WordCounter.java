@@ -1,5 +1,9 @@
 package com.erste.example;
 
+import com.erste.example.dto.CountHolder;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -9,33 +13,22 @@ import java.util.stream.Stream;
 public class WordCounter {
 
   /**
-   * Count words in provided input, filter out words from provided stopWords.
+   * Returns counts of all and unique words.
    *
    * @param input     input to count words
    * @param stopWords words to filter out.
-   * @return counted words
+   * @return {@link CountHolder} with calculated counts
    */
-  public long countWords(String input, Set<String> stopWords) {
-    return getFilteredStream(input, stopWords)
-        .count();
-  }
-
-  /**
-   * Count unique words in provided input, filter out words from provided stopWords.
-   *
-   * @param input     input to count words
-   * @param stopWords words to filter out.
-   * @return counted words
-   */
-  public long countUniqueWords(String input, Set<String> stopWords) {
-    return getFilteredStream(input, stopWords)
-        .distinct()
-        .count();
-  }
-
-  private Stream<String> getFilteredStream(String input, Set<String> stopWords) {
-    return Stream.of(input.split(" |-"))
-                 .filter(word -> word.matches("[a-zA-Z-.]+"))
-                 .filter(word -> !stopWords.contains(word));
+  public CountHolder getCounts(String input, Set<String> stopWords) {
+    Set<String> filteredWords = new HashSet<>();
+    List<String> allWords = new ArrayList<>();
+    Stream.of(input.split(" |-"))
+          .filter(word -> word.matches("[a-zA-Z-.]+"))
+          .filter(word -> !stopWords.contains(word))
+          .forEach(word -> {
+            filteredWords.add(word);
+            allWords.add(word);
+          });
+    return new CountHolder(allWords.size(), filteredWords.size());
   }
 }

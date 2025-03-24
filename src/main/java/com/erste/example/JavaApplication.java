@@ -1,5 +1,6 @@
 package com.erste.example;
 
+import com.erste.example.dto.CountHolder;
 import java.util.Set;
 
 /**
@@ -24,8 +25,7 @@ public class JavaApplication {
       inputWords = inputReader.readInput();
     }
     Set<String> stopWords = inputFileReader.readStopWordFile();
-    long numberOfWords = wordCounter.countWords(inputWords, stopWords);
-    long numberOfUniqueWords = wordCounter.countUniqueWords(inputWords, stopWords);
-    System.out.println("Number of words: " + numberOfWords + ", unique: " + numberOfUniqueWords);
+    CountHolder counts = wordCounter.getCounts(inputWords, stopWords);
+    System.out.println("Number of words: " + counts.getAllWords() + ", unique: " + counts.getUniqueWords());
   }
 }
