@@ -29,7 +29,9 @@ public class JavaApplication {
     }
     Set<String> stopWords = inputFileReader.readStopWordFile();
     CountHolder countHolder = wordCounter.getCounts(inputWords, stopWords);
-    System.out.printf((OUTPUT_PLACEHOLDER), countHolder.getAllWords(), countHolder.getUniqueWords(),
+    System.out.printf(OUTPUT_PLACEHOLDER,
+                      countHolder.getAllWords(),
+                      countHolder.getUniqueWords(),
                       countHolder.getAverageLenght());
   }
 }
