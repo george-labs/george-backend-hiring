@@ -32,9 +32,9 @@ class StopWordReaderTest {
     InputFileReader stopWordReader = new InputFileReader();
 
     RuntimeException runtimeException = assertThrows(RuntimeException.class,
-                                                     () -> stopWordReader.readInputTextFile("mytext2.txt"));
+                                                     () -> stopWordReader.readInputTextFile("mytextxxx.txt"));
 
-    assertEquals("Problem with reading file: mytext2.txt", runtimeException.getMessage());
+    assertEquals("Problem with reading file: mytextxxx.txt", runtimeException.getMessage());
   }
 
 }
