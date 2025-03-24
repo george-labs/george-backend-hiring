@@ -15,16 +15,17 @@ public class JavaApplication {
   public static void main(String[] args) {
     WordCounter wordCounter = new WordCounter();
     InputReader inputReader = new InputReader();
-    InputFileReader stopWordReader = new InputFileReader();
+    InputFileReader inputFileReader = new InputFileReader();
 
     String inputWords;
     if (args.length == 1) {
-      inputWords = stopWordReader.readInputTextFile(args[0]);
+      inputWords = inputFileReader.readInputTextFile(args[0]);
     } else {
       inputWords = inputReader.readInput();
     }
-    Set<String> stopWords = stopWordReader.readStopWordFile();
+    Set<String> stopWords = inputFileReader.readStopWordFile();
     long numberOfWords = wordCounter.countWords(inputWords, stopWords);
-    System.out.println("Number of words: " + numberOfWords);
+    long numberOfUniqueWords = wordCounter.countUniqueWords(inputWords, stopWords);
+    System.out.println("Number of words: " + numberOfWords + ", unique: " + numberOfUniqueWords);
   }
 }
