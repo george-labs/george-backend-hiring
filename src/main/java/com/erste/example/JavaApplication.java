@@ -1,5 +1,7 @@
 package com.erste.example;
 
+import static java.lang.String.CASE_INSENSITIVE_ORDER;
+
 import com.erste.example.dto.CountHolder;
 import java.util.Set;
 
@@ -33,5 +35,10 @@ public class JavaApplication {
                       countHolder.getAllWords(),
                       countHolder.getUniqueWords(),
                       countHolder.getAverageLenght());
+    System.out.println();
+    System.out.println("Index:");
+    wordCounter.getWordsStream(inputWords, stopWords)
+        .sorted(CASE_INSENSITIVE_ORDER)
+        .forEachOrdered(System.out::println);
   }
 }

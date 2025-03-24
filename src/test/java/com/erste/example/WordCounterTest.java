@@ -2,9 +2,12 @@ package com.erste.example;
 
 import static java.util.Collections.emptySet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.erste.example.dto.CountHolder;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
 class WordCounterTest {
@@ -52,5 +55,19 @@ class WordCounterTest {
     CountHolder countHolder = wordCounter.getCounts("a df dfg dfgh sdfgh kjhbkjbkjbkj",
                                                     emptySet());
     assertEquals(4.5, countHolder.getAverageLenght());
+  }
+
+  @Test
+  void shouldMapWordsToNotContainDot() {
+    WordCounter wordCounter = new WordCounter();
+
+    Stream<String> wordsStream = wordCounter.getWordsStream(
+        "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall",
+        emptySet());
+
+    boolean noneMatch = wordsStream.collect(Collectors.toSet())
+                                   .stream()
+                                   .noneMatch(word -> word.contains("."));
+    assertTrue(noneMatch);
   }
 }
