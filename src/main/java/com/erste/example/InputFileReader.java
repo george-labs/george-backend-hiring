@@ -15,14 +15,15 @@ public class InputFileReader {
   /**
    * Reads stop words from stopwords.txt file.
    *
+   * @param fileName name of file
    * @return stop words
    */
-  public Set<String> readStopWordFile() {
-    try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/stopwords.txt"))) {
+  public Set<String> readStopWordFile(String fileName) {
+    try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
       return br.lines()
                .collect(Collectors.toSet());
     } catch (java.io.IOException e) {
-      System.out.println("Caught exception during file stopwords.txt reading: " + e);
+      System.out.println("Caught exception during file " + fileName + " reading: " + e);
       return emptySet();
     }
   }

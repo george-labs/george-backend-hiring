@@ -12,7 +12,7 @@ class StopWordReaderTest {
   public void shouldReadStopWordsFile() {
     InputFileReader stopWordReader = new InputFileReader();
 
-    Set<String> stopWords = stopWordReader.readStopWordFile();
+    Set<String> stopWords = stopWordReader.readStopWordFile("stopwords.txt");
 
     assertEquals(4, stopWords.size());
   }

@@ -1,9 +1,13 @@
 package com.erste.example;
 
+import static com.erste.example.ArgumentsParser.ARGUMENT_NAME_DICTIONARY;
+import static com.erste.example.ArgumentsParser.ARGUMENT_NAME_FILENAME;
+import static com.erste.example.ArgumentsParser.ARGUMENT_NAME_INDEX;
 import static java.lang.String.CASE_INSENSITIVE_ORDER;
 
 import com.erste.example.dto.Argument;
 import com.erste.example.dto.CountHolder;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -41,33 +45,51 @@ public class CounterApp {
     List<Argument> arguments = argumentParser.parseArguments(args);
     String inputWords = getInputWords(arguments);
 
-    Set<String> stopWords = inputFileReader.readStopWordFile();
+    Set<String> stopWords = inputFileReader.readStopWordFile("src/main/resources/stopwords.txt");
     CountHolder countHolder = wordCounter.getCounts(inputWords, stopWords);
     System.out.printf(OUTPUT_PLACEHOLDER,
                       countHolder.getAllWords(),
                       countHolder.getUniqueWords(),
                       countHolder.getAverageLenght());
     System.out.println();
-    outputWhenFiltered(arguments, inputWords, stopWords);
+
+    Set<String> dictionaryWords = arguments.stream()
+                                           .filter(argument -> argument.getName().equals(ARGUMENT_NAME_DICTIONARY))
+                                           .findFirst()
+                                           .map(arg -> inputFileReader.readStopWordFile(arg.getValue()))
+                                           .orElseGet(Collections::emptySet);
+
+    outputWhenFiltered(arguments, inputWords, stopWords, dictionaryWords);
   }
 
   private String getInputWords(List<Argument> arguments) {
     return arguments.stream()
-                    .filter(argument -> argument.getName().equals("filename"))
+                    .filter(argument -> argument.getName().equals(ARGUMENT_NAME_FILENAME))
                     .findFirst()
                     .map(arg -> inputFileReader.readInputTextFile(arg.getValue()))
                     .orElseGet(inputReader::readInput);
   }
 
-  private void outputWhenFiltered(List<Argument> arguments, String inputWords, Set<String> stopWords) {
+  private void outputWhenFiltered(List<Argument> arguments,
+                                  String inputWords,
+                                  Set<String> stopWords,
+                                  Set<String> dictionaryWords) {
     arguments.stream()
-             .filter(argument -> argument.getName().equals("index"))
+             .filter(argument -> argument.getName().equals(ARGUMENT_NAME_INDEX))
              .findFirst()
              .ifPresent(filter -> {
                System.out.println("Index:");
                wordCounter.getWordsStream(inputWords, stopWords)
                           .sorted(CASE_INSENSITIVE_ORDER)
-                          .forEachOrdered(System.out::println);
+                          .forEachOrdered(word -> printWord(word, dictionaryWords));
              });
+  }
+
+  private void printWord(String word, Set<String> dictionaryWords) {
+    if (dictionaryWords.contains(word)) {
+      System.out.println(word + "*");
+    } else {
+      System.out.println(word);
+    }
   }
 }
