@@ -22,7 +22,7 @@ public class WordCounter {
   public CountHolder getCounts(String input, Set<String> stopWords) {
     Set<String> filteredWords = new HashSet<>();
     List<String> allWords = new ArrayList<>();
-    Stream.of(input.split(" |-"))
+    Stream.of(input.split(" "))
           .filter(word -> word.matches("[a-zA-Z-.]+"))
           .filter(word -> !stopWords.contains(word))
           .forEach(word -> {

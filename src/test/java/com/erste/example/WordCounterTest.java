@@ -33,7 +33,7 @@ class WordCounterTest {
 
     CountHolder countHolder = wordCounter.getCounts("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall",
                                                     emptySet());
-    assertEquals(9, countHolder.getUniqueWords());
+    assertEquals(8, countHolder.getUniqueWords());
   }
 
   @Test
@@ -42,6 +42,6 @@ class WordCounterTest {
 
     CountHolder countHolder = wordCounter.getCounts("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall",
                                                     Set.of("a", "on"));
-    assertEquals(7, countHolder.getUniqueWords());
+    assertEquals(6, countHolder.getUniqueWords());
   }
 }
