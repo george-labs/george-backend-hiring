@@ -1,3 +1,5 @@
+package com.erste.example;
+
 import static java.util.Collections.emptySet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

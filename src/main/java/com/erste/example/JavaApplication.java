@@ -1,3 +1,5 @@
+package com.erste.example;
+
 import java.util.Set;
 
 /**
@@ -13,11 +15,16 @@ public class JavaApplication {
   public static void main(String[] args) {
     WordCounter wordCounter = new WordCounter();
     InputReader inputReader = new InputReader();
-    StopWordReader stopWordReader = new StopWordReader();
+    InputFileReader stopWordReader = new InputFileReader();
 
-    String input = inputReader.readInput();
+    String inputWords;
+    if (args.length == 1) {
+      inputWords = stopWordReader.readInputTextFile(args[0]);
+    } else {
+      inputWords = inputReader.readInput();
+    }
     Set<String> stopWords = stopWordReader.readStopWordFile();
-    long numberOfWords = wordCounter.countWords(input, stopWords);
+    long numberOfWords = wordCounter.countWords(inputWords, stopWords);
     System.out.println("Number of words: " + numberOfWords);
   }
 }

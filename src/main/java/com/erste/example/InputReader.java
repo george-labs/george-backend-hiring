@@ -1,3 +1,5 @@
+package com.erste.example;
+
 import java.util.Scanner;
 
 public class InputReader {
