@@ -2,19 +2,20 @@ package com.erste.example.dto;
 
 public class Argument {
 
-  private final int index;
   private final String name;
+  private final String value;
 
-  public Argument(int index, String name) {
-    this.index = index;
+  public Argument(String name, String value) {
     this.name = name;
-  }
-
-  public int getIndex() {
-    return index;
+    this.value = value;
   }
 
   public String getName() {
     return name;
   }
+
+  public String getValue() {
+    return value;
+  }
+
 }

@@ -6,7 +6,6 @@ import com.erste.example.dto.Argument;
 import com.erste.example.dto.CountHolder;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
 /**
  * Main application class
@@ -19,11 +18,13 @@ public class CounterApp {
   private final WordCounter wordCounter;
   private final InputFileReader inputFileReader;
   private final ArgumentsParser argumentParser;
+  private final InputReader inputReader;
 
   public CounterApp() {
     this.wordCounter = new WordCounter();
     this.inputFileReader = new InputFileReader();
     this.argumentParser = new ArgumentsParser();
+    this.inputReader = new InputReader();
   }
 
   /**
@@ -38,8 +39,8 @@ public class CounterApp {
 
   private void count(String[] args) {
     List<Argument> arguments = argumentParser.parseArguments(args);
+    String inputWords = getInputWords(arguments);
 
-    String inputWords = getInputWords(args, inputFileReader);
     Set<String> stopWords = inputFileReader.readStopWordFile();
     CountHolder countHolder = wordCounter.getCounts(inputWords, stopWords);
     System.out.printf(OUTPUT_PLACEHOLDER,
@@ -47,24 +48,26 @@ public class CounterApp {
                       countHolder.getUniqueWords(),
                       countHolder.getAverageLenght());
     System.out.println();
-    System.out.println("Index:");
-    wordCounter.getWordsStream(inputWords, stopWords)
-               .sorted(CASE_INSENSITIVE_ORDER)
-               .forEachOrdered(System.out::println);
+    outputWhenFiltered(arguments, inputWords, stopWords);
   }
 
+  private String getInputWords(List<Argument> arguments) {
+    return arguments.stream()
+                    .filter(argument -> argument.getName().equals("filename"))
+                    .findFirst()
+                    .map(arg -> inputFileReader.readInputTextFile(arg.getValue()))
+                    .orElseGet(inputReader::readInput);
+  }
 
-  private String getInputWords(String[] args, InputFileReader inputFileReader) {
-    InputReader inputReader = new InputReader();
-    String inputWords;
-    long count = Stream.of(args)
-                       .filter(arg -> arg.contains("-"))
-                       .count();
-    if (args.length > 0 && count == 1) {
-      inputWords = inputFileReader.readInputTextFile(args[0]);
-    } else {
-      inputWords = inputReader.readInput();
-    }
-    return inputWords;
+  private void outputWhenFiltered(List<Argument> arguments, String inputWords, Set<String> stopWords) {
+    arguments.stream()
+             .filter(argument -> argument.getName().equals("index"))
+             .findFirst()
+             .ifPresent(filter -> {
+               System.out.println("Index:");
+               wordCounter.getWordsStream(inputWords, stopWords)
+                          .sorted(CASE_INSENSITIVE_ORDER)
+                          .forEachOrdered(System.out::println);
+             });
   }
 }
