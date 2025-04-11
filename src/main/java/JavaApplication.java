@@ -17,8 +17,9 @@ public class JavaApplication {
             input = reader.readInput(fileName);
         }
 
-        Long result = wordCounter.countWordsWithStopWords(input);
+        Long countedWords = wordCounter.countWords(input);
+        Long countedUniqueWords = wordCounter.countUniqueWords(input);
 
-        System.out.printf("Number of words: %d", result);
+        System.out.printf("Number of words: %d, unique: %d", countedWords, countedUniqueWords);
     }
 }

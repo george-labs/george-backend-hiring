@@ -12,3 +12,7 @@ My assumption is that wordcount should have two variations, one with the filter 
 
 I will remove Reader and Counter interface to make it more simple, because solutions like this should be used there, 
 where they make sense, and on a second thought I am overcomplicating it.
+
+## Iteration 4
+
+My assumption is to ignore the special characters '-' and '.' for example in Humpty-Dumpty making it two separate words. 

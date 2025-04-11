@@ -12,7 +12,7 @@ public class FileReader {
     public String readInput(String filename) {
         Set<String> wordSet = new HashSet<>();
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(filename)) {
-            if (is != null) {
+            if (is != null && is.available() == 0) {
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
                     String currentLine = reader.readLine();
                     while (currentLine != null) {

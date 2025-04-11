@@ -11,55 +11,33 @@ public class WordCounterTest {
     @Nested
     public class CountWordsTest {
         @Test
-        void countWordsTest5Words() {
+        void countWordsTest9Words7Unique() {
+            String input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
             WordCounter wordCounter = new WordCounter();
-            assertEquals(5, wordCounter.countWords("Mary had a little lamb"));
+            assertEquals(9, wordCounter.countWords(input));
+            assertEquals(7, wordCounter.countUniqueWords(input));
         }
 
         @Test
-        void countWordsTest1Filtered() {
+        void countWordsTest9Words7Unique1Filtered() {
+            String input = "Humpty-Dumpty s4t on a wall. Humpty-Dumpty had a great fall.";
             WordCounter wordCounter = new WordCounter();
-            assertEquals(4, wordCounter.countWords("M4ry had a little lamb"));
+            assertEquals(8, wordCounter.countWords(input));
+            assertEquals(6, wordCounter.countUniqueWords(input));
         }
 
         @Test
         void countWordsTestNull() {
             WordCounter wordCounter = new WordCounter();
             assertEquals(0, wordCounter.countWords(null));
+            assertEquals(0, wordCounter.countUniqueWords(null));
         }
 
         @Test
         void countWordsTestEmptyString() {
             WordCounter wordCounter = new WordCounter();
             assertEquals(0, wordCounter.countWords(""));
-        }
-    }
-
-    @Nested
-    public class CountWordsWithStopWordsTest {
-
-        @Test
-        void countWordsWithStopWordsTest5Words() {
-            WordCounter wordCounter = new WordCounter();
-            assertEquals(4, wordCounter.countWordsWithStopWords("Mary had a little lamb"));
-        }
-
-        @Test
-        void countWordsWithStopWordsTest1Filtered() {
-            WordCounter wordCounter = new WordCounter();
-            assertEquals(3, wordCounter.countWordsWithStopWords("M4ry had a little lamb"));
-        }
-
-        @Test
-        void countWordsWithStopWordsTestNull() {
-            WordCounter wordCounter = new WordCounter();
-            assertEquals(0, wordCounter.countWordsWithStopWords(null));
-        }
-
-        @Test
-        void countWordsWithStopWordsTestEmptyString() {
-            WordCounter wordCounter = new WordCounter();
-            assertEquals(0, wordCounter.countWordsWithStopWords(""));
+            assertEquals(0, wordCounter.countUniqueWords(""));
         }
     }
 }
