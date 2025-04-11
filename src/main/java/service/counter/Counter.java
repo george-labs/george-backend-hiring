@@ -1,4 +1,4 @@
-package service;
+package service.counter;
 
 public interface Counter {
 

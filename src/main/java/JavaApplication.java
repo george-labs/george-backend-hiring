@@ -1,7 +1,7 @@
-import service.Counter;
-import service.InputReader;
-import service.Reader;
-import service.WordCounter;
+import service.counter.Counter;
+import service.reader.InputReader;
+import service.reader.Reader;
+import service.counter.WordCounter;
 
 public class JavaApplication {
 

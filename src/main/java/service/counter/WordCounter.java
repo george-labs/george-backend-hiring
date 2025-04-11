@@ -1,8 +1,7 @@
-package service;
+package service.counter;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class WordCounter implements Counter {
@@ -10,8 +9,8 @@ public class WordCounter implements Counter {
     @Override
     public long countWords(String text) {
         // This should already be checked
-        if (text.isBlank()) {
-            throw new IllegalArgumentException("Text is blank");
+        if (text == null || text.isBlank()) {
+           return 0;
         }
 
         // Create desired pattern to match each word

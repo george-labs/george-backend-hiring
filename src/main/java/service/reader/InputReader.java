@@ -1,4 +1,4 @@
-package service;
+package service.reader;
 
 import java.util.Scanner;
 
@@ -7,10 +7,13 @@ public class InputReader implements Reader {
     @Override
     public String readInput() {
         System.out.print("Enter text: ");
+        if (System.in == null) {
+            return "";
+        }
+
         Scanner myObj = new Scanner(System.in);
         String line = myObj.nextLine();
-        if (line.isBlank()) {
-            System.out.println("No input provided.");
+        if (line == null || line.isBlank()) {
             return "";
         }
         return line;
