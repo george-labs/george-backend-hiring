@@ -6,7 +6,6 @@ import service.reader.FileReader;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class WordCounter {
 
@@ -35,7 +34,7 @@ public class WordCounter {
 
     private List<String> getFilteredWords(String text) {
 
-        // Replace all non-alphanumeric with ' ' to split by
+        // Replace '-' and '.' with ' ' to split by
         String modifiedText = text.replaceAll("[-.]", " ");
 
         // Split array by each word

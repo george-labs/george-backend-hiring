@@ -10,9 +10,14 @@ import java.util.Set;
 public class FileReader {
 
     public String readInput(String filename) {
+
+        if (filename == null || filename.isBlank()) {
+            throw new RuntimeException("Empty filename");
+        }
+
         Set<String> wordSet = new HashSet<>();
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(filename)) {
-            if (is != null && is.available() == 0) {
+            if (is != null) {
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
                     String currentLine = reader.readLine();
                     while (currentLine != null) {

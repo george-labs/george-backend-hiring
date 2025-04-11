@@ -9,20 +9,20 @@ public class FileReaderTest {
 
     private static final String STOPWORDS_FILE_NAME = "stopwords.txt";
 
-    //TODO: finish test
-//    @Test
-//    void readStopWordsFile() {
-//        FileReader fileReader = new FileReader();
-//        assertFalse(fileReader.readInput(STOPWORDS_FILE_NAME).isBlank());
-//    }
+    @Test
+    void readStopWordsFile() {
+        FileReader fileReader = new FileReader();
+        String text = fileReader.readInput(STOPWORDS_FILE_NAME);
+        assertEquals("the a off on", text);
+    }
 
 
-
+    //TODO: fix the test
     @Test
     void readFileWithError() {
         FileReader fileReader = new FileReader();
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            fileReader.readInput("");
+            fileReader.readInput("abc.txt");
         });
 
         assertTrue(exception.getMessage().contains("File could not be loaded"));
