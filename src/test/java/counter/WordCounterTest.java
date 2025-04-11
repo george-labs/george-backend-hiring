@@ -8,8 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WordCounterTest {
 
-    @Nested
-    public class CountWordsTest {
         @Test
         void countWordsTest9Words7Unique() {
             String input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
@@ -39,5 +37,12 @@ public class WordCounterTest {
             assertEquals(0, wordCounter.countWords(""));
             assertEquals(0, wordCounter.countUniqueWords(""));
         }
-    }
+
+        @Test
+        void calculateAverageWordLengthTest() {
+            WordCounter wordCounter = new WordCounter();
+            assertEquals(7.50f, wordCounter.calculateAverageWordLength("worddddddd wordd"));
+        }
+
+
 }

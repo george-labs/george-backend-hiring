@@ -32,6 +32,20 @@ public class WordCounter {
         return textList.stream().distinct().count();
     }
 
+    public double calculateAverageWordLength(String text) {
+        if (checkInputText(text)) {
+            return 0;
+        }
+
+        List<String> wordList = getFilteredWords(text);
+        int totalWordLength = 0;
+        for (String word : wordList) {
+            totalWordLength += word.length();
+        }
+
+        return (double) totalWordLength / wordList.size();
+    }
+
     private List<String> getFilteredWords(String text) {
 
         // Replace '.' with ' ' to split by

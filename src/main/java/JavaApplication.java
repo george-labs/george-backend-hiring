@@ -19,7 +19,9 @@ public class JavaApplication {
 
         Long countedWords = wordCounter.countWords(input);
         Long countedUniqueWords = wordCounter.countUniqueWords(input);
+        double averageWordLength = wordCounter.calculateAverageWordLength(input);
 
-        System.out.printf("Number of words: %d, unique: %d", countedWords, countedUniqueWords);
+        System.out.printf("Number of words: %d, unique: %d; average word length: %.2f characters",
+                countedWords, countedUniqueWords, averageWordLength);
     }
 }
