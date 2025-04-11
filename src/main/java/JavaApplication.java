@@ -10,7 +10,7 @@ public class JavaApplication {
         Counter wordCounter = new WordCounter();
 
         String input = inputReader.readInput();
-        Long result = wordCounter.countWords(input);
+        Long result = wordCounter.countWordsWithStopWords(input);
 
         System.out.printf("Number of words: %d", result);
     }
