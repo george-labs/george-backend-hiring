@@ -2,17 +2,16 @@ package service.counter;
 
 
 import service.reader.FileReader;
-import service.reader.Reader;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class WordCounter implements Counter {
+public class WordCounter {
 
     private static final String PATTERN = "[a-zA-Z]+";
+    private static final String STOPWORDS_FILE_NAME = "stopwords.txt";
 
-    @Override
     public long countWords(String text) {
 
         if (checkInputText(text)) {
@@ -31,7 +30,7 @@ public class WordCounter implements Counter {
                 .count();
     }
 
-    @Override
+
     public long countWordsWithStopWords(String text) {
 
         if (checkInputText(text)) {
@@ -39,8 +38,8 @@ public class WordCounter implements Counter {
         }
 
         // Read blacklisted words from stopwords file
-        Reader fileReader = new FileReader();
-        String stopWords = fileReader.readInput();
+        FileReader fileReader = new FileReader();
+        String stopWords = fileReader.readInput(STOPWORDS_FILE_NAME);
 
         // Create array of blacklisted words
         List<String> blackListedWords = Arrays.asList(stopWords.split(" "));

@@ -2,7 +2,6 @@ package reader;
 
 import org.junit.jupiter.api.Test;
 import service.reader.InputReader;
-import service.reader.Reader;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -18,7 +17,7 @@ public class InputReaderTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        Reader inputReader = new InputReader();
+        InputReader inputReader = new InputReader();
         assertEquals(input, inputReader.readInput());
     }
 
@@ -26,7 +25,7 @@ public class InputReaderTest {
     void testInputReaderNullInput() {
         System.setIn(null);
 
-        Reader inputReader = new InputReader();
+        InputReader inputReader = new InputReader();
         assertTrue(inputReader.readInput().isEmpty());
     }
 }

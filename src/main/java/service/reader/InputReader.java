@@ -2,9 +2,8 @@ package service.reader;
 
 import java.util.Scanner;
 
-public class InputReader implements Reader {
+public class InputReader {
 
-    @Override
     public String readInput() {
         System.out.print("Enter text: ");
         if (System.in == null) {

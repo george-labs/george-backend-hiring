@@ -6,3 +6,9 @@ My assumption is that if the text is empty or null, then it contains 0 matches, 
 
 ## Iteration 2
 My assumption is that wordcount should have two variations, one with the filter for stopwords enabled and one without
+
+
+## Iteration 3
+
+I will remove Reader and Counter interface to make it more simple, because solutions like this should be used there, 
+where they make sense, and on a second thought I am overcomplicating it.
