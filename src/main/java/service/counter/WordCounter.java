@@ -23,6 +23,7 @@ public class WordCounter {
     }
 
     public long countUniqueWords(String text) {
+
         if (checkInputText(text)) {
             return 0;
         }
@@ -33,6 +34,7 @@ public class WordCounter {
     }
 
     public double calculateAverageWordLength(String text) {
+
         if (checkInputText(text)) {
             return 0;
         }
