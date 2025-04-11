@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class WordCounter {
 
-    private static final String PATTERN = "[a-zA-Z]+";
+    private static final String PATTERN = "[a-zA-Z\\-]+";
     private static final String STOPWORDS_FILE_NAME = "stopwords.txt";
 
     public long countWords(String text) {
@@ -34,8 +34,8 @@ public class WordCounter {
 
     private List<String> getFilteredWords(String text) {
 
-        // Replace '-' and '.' with ' ' to split by
-        String modifiedText = text.replaceAll("[-.]", " ");
+        // Replace '.' with ' ' to split by
+        String modifiedText = text.replaceAll("[.]", " ");
 
         // Split array by each word
         List<String> textList = Arrays.asList(modifiedText.split(" "));

@@ -14,16 +14,16 @@ public class WordCounterTest {
         void countWordsTest9Words7Unique() {
             String input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
             WordCounter wordCounter = new WordCounter();
-            assertEquals(9, wordCounter.countWords(input));
-            assertEquals(7, wordCounter.countUniqueWords(input));
+            assertEquals(7, wordCounter.countWords(input));
+            assertEquals(6, wordCounter.countUniqueWords(input));
         }
 
         @Test
         void countWordsTest9Words7Unique1Filtered() {
             String input = "Humpty-Dumpty s4t on a wall. Humpty-Dumpty had a great fall.";
             WordCounter wordCounter = new WordCounter();
-            assertEquals(8, wordCounter.countWords(input));
-            assertEquals(6, wordCounter.countUniqueWords(input));
+            assertEquals(6, wordCounter.countWords(input));
+            assertEquals(5, wordCounter.countUniqueWords(input));
         }
 
         @Test
