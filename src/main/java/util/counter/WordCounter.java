@@ -1,7 +1,7 @@
-package service.counter;
+package util.counter;
 
 
-import service.reader.FileReader;
+import util.reader.FileReader;
 
 import java.util.Arrays;
 import java.util.List;
@@ -48,7 +48,7 @@ public class WordCounter {
         return (double) totalWordLength / wordList.size();
     }
 
-    private List<String> getFilteredWords(String text) {
+    public List<String> getFilteredWords(String text) {
 
         // Replace '.' with ' ' to split by
         String modifiedText = text.replaceAll("[.]", " ");

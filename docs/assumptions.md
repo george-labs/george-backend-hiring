@@ -18,3 +18,6 @@ My assumption is to ignore the special characters '-' and '.' for example in Hum
 ## Iteration 6
 Calculating the average is based on the counted words not all input words, meaning that they are already filtered using 
 the stopwords and the pattern.
+
+## Iteration 7
+Removed reading text file in the main method because I ve assumed that the argument is replaced by -index

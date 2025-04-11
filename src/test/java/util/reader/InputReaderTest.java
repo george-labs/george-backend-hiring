@@ -1,7 +1,7 @@
-package reader;
+package util.reader;
 
 import org.junit.jupiter.api.Test;
-import service.reader.InputReader;
+import util.reader.InputReader;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

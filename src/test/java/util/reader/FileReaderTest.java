@@ -1,7 +1,7 @@
-package reader;
+package util.reader;
 
 import org.junit.jupiter.api.Test;
-import service.reader.FileReader;
+import util.reader.FileReader;
 
 import static org.junit.jupiter.api.Assertions.*;
 

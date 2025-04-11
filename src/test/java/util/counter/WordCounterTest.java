@@ -1,8 +1,7 @@
-package counter;
+package util.counter;
 
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import service.counter.WordCounter;
+import util.counter.WordCounter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

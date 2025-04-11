@@ -1,4 +1,4 @@
-package service.reader;
+package util.reader;
 
 import java.util.Scanner;
 
