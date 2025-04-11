@@ -8,7 +8,7 @@ public class WordCounter implements Counter {
 
     @Override
     public long countWords(String text) {
-        // This should already be checked
+        // Check input
         if (text == null || text.isBlank()) {
            return 0;
         }
