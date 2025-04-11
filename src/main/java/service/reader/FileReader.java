@@ -23,7 +23,7 @@ public class FileReader implements Reader {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("File could not be loaded", e);
         }
         return wordSet.isEmpty() ? "" : String.join(" ", wordSet);
     }
