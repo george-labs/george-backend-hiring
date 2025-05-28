@@ -19,7 +19,7 @@ class WordCountingServiceTest {
 
     @Test
     void when_text_contains_invalid_words_then_return_only_number_of_valid_words() {
-        String text = "sdfsd 534 gdgd 6456 gdf&Y(*";
+        String text = "sdfsd 534 gdgd. 6456 gdf&Y(*";
         WordCountingService wordCountingService = new WordCountingService(new MockEmptyStopWordsService());
         var wordCount = wordCountingService.countWords(text);
         assertEquals(2, wordCount);

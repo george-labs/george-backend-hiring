@@ -27,3 +27,5 @@ there seems to be god candidate to reuse of file reading functionality
 
 I'm not happy about the mocking of StopWordService but it will have to do for now
 it's imitation of Mockito
+
+lets assume that words with trailing dots are valid words

@@ -22,9 +22,18 @@ public class WordCountingService {
         }
         var words = text.split("\\s+");
         return Arrays.stream(words)
+                .map(this::removeTrailingDot)
                 .filter(word -> word.matches("[a-zA-Z]+"))
                 .filter( word -> !stopWords.contains(word.toLowerCase()))
                 .count();
+    }
+
+    private String removeTrailingDot(String word) {
+        if(word.endsWith(".")) {
+            return word.substring(0, word.length() - 1);
+        } else {
+            return word;
+        }
     }
 
 }
