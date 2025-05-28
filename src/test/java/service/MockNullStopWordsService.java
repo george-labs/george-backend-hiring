@@ -1,6 +1,7 @@
-import service.StopWordsService;
+package service;
 
-import java.util.Collections;
+import utils.MockTextFileReader;
+
 import java.util.Set;
 
 public class MockNullStopWordsService extends StopWordsService {

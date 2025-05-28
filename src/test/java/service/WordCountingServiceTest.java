@@ -1,6 +1,7 @@
+package service;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import service.WordCountingService;
 
 import java.util.Collections;
 import java.util.Set;
@@ -14,7 +15,7 @@ class WordCountingServiceTest {
         String text = "This is a test";
         WordCountingService wordCountingService = new WordCountingService(new MockEmptyStopWordsService());
         var wordCount = wordCountingService.countWords(text);
-        assertEquals(4, wordCount);
+        assertEquals(4, wordCount.wordCount());
     }
 
     @Test
@@ -22,7 +23,7 @@ class WordCountingServiceTest {
         String text = "sdfsd 534 gdgd. 6456 gdf&Y(*";
         WordCountingService wordCountingService = new WordCountingService(new MockEmptyStopWordsService());
         var wordCount = wordCountingService.countWords(text);
-        assertEquals(2, wordCount);
+        assertEquals(2, wordCount.wordCount());
     }
 
     @Test
@@ -30,7 +31,7 @@ class WordCountingServiceTest {
         String text = "";
         WordCountingService wordCountingService = new WordCountingService(new MockEmptyStopWordsService());
         var wordCount = wordCountingService.countWords(text);
-        assertEquals(0, wordCount);
+        assertEquals(0, wordCount.wordCount());
 
     }
 
@@ -50,7 +51,7 @@ class WordCountingServiceTest {
         WordCountingService wordCountingService = new WordCountingService(new MockStopWordsService());
         var wordCount = wordCountingService.countWords(text);
 
-        Assertions.assertEquals(3, wordCount);
+        Assertions.assertEquals(3, wordCount.wordCount());
     }
 
     @Test
@@ -69,6 +70,18 @@ class WordCountingServiceTest {
         WordCountingService wordCountingService = new WordCountingService(new MockNullStopWordsService());
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> wordCountingService.countWords(text));
+    }
+
+    @Test
+    void when_counting_words_in_text_with_duplicates_then_the_unique_word_count_is_correct() {
+        String text = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+
+        WordCountingService wordCountingService = new WordCountingService(new MockStopWordsService());
+
+        var countingResult = wordCountingService.countWords(text);
+
+        Assertions.assertEquals(9, countingResult.wordCount());
+        Assertions.assertEquals(7, countingResult.uniqueWordCount());
     }
 
 

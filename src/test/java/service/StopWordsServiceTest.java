@@ -1,6 +1,8 @@
+package service;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import service.StopWordsService;
+import utils.MockTextFileReader;
 
 class StopWordsServiceTest {
 

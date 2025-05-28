@@ -1,7 +1,11 @@
 package service;
 
+import data.WordCountResult;
+
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class WordCountingService {
 
@@ -12,7 +16,7 @@ public class WordCountingService {
     }
 
 
-    public long countWords(String text) {
+    public WordCountResult countWords(String text) {
         if(text == null) {
             throw new IllegalArgumentException("Text cannot be null");
         }
@@ -20,12 +24,14 @@ public class WordCountingService {
         if(stopWords == null) {
             throw new IllegalArgumentException("Stop words cannot be null");
         }
-        var words = text.split("\\s+");
-        return Arrays.stream(words)
+        var words = text.split("[\\s+\\-]");
+        var validWords = Arrays.stream(words)
                 .map(this::removeTrailingDot)
                 .filter(word -> word.matches("[a-zA-Z]+"))
                 .filter( word -> !stopWords.contains(word.toLowerCase()))
-                .count();
+                .toList();
+        var uniqueWords = new HashSet<>(validWords);
+        return new WordCountResult(validWords.size(), uniqueWords.size());
     }
 
     private String removeTrailingDot(String word) {

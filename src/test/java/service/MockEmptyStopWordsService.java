@@ -1,4 +1,6 @@
-import service.StopWordsService;
+package service;
+
+import utils.MockTextFileReader;
 
 import java.util.Collections;
 import java.util.Set;

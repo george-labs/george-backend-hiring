@@ -1,4 +1,4 @@
-import utils.TextFileReader;
+package utils;
 
 public class MockTextFileReader extends TextFileReader {
 

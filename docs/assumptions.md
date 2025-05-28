@@ -29,3 +29,5 @@ I'm not happy about the mocking of StopWordService but it will have to do for no
 it's imitation of Mockito
 
 lets assume that words with trailing dots are valid words
+we found that Humpty-Dumpty is being treated as 2 word, not one and apparently it's valid
+
