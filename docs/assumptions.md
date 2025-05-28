@@ -16,3 +16,5 @@ we have a file of stop words that we want to filter out of counting
 case sensitivity of the stop words is not specified
 it seems from specification that all stop words are lowercase
 let's assume that the comparison should be case insensitive
+
+
