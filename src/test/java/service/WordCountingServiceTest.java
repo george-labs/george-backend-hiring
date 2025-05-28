@@ -81,7 +81,7 @@ class WordCountingServiceTest {
         var countingResult = wordCountingService.countWords(text);
 
         Assertions.assertEquals(7, countingResult.wordCount());
-        Assertions.assertEquals(6, countingResult.uniqueWordCount());
+        Assertions.assertEquals(6, countingResult.uniqueWords().size());
     }
 
     @Test

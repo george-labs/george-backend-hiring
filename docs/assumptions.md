@@ -40,3 +40,10 @@ did that before in iteration 4 by mistake
 ## Iteration 6
 
 the average counted word length seems to be kept to 2 decimal numbers
+not sure about the delta comparison in the test case
+
+## Iteration 7
+
+optional input parameter
+index seems to be just a list of unique words
+indexed words seem to be sorted in alphabetical way

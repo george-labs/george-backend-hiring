@@ -4,6 +4,7 @@ import data.WordCountResult;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,14 +32,19 @@ public class WordCountingService {
                 .filter( word -> !stopWords.contains(word.toLowerCase()))
                 .toList();
         var uniqueWords = new HashSet<>(validWords);
+        float averageWordLength = getAverageWordLength(validWords);
+
+        return new WordCountResult(validWords.size(), uniqueWords, averageWordLength);
+    }
+
+    private static float getAverageWordLength(List<String> validWords) {
         float averageWordLength;
         if (validWords.isEmpty()) {
             averageWordLength = 0;
         } else {
             averageWordLength  = (float) validWords.stream().map(String::length).mapToInt(Integer::intValue).sum() / validWords.size();
         }
-
-        return new WordCountResult(validWords.size(), uniqueWords.size(), averageWordLength);
+        return averageWordLength;
     }
 
     private String removeTrailingDot(String word) {
