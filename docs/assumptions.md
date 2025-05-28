@@ -31,3 +31,4 @@ it's imitation of Mockito
 lets assume that words with trailing dots are valid words
 we found that Humpty-Dumpty is being treated as 2 word, not one and apparently it's valid
 
+we need to format the output properly

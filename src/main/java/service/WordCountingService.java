@@ -15,7 +15,6 @@ public class WordCountingService {
         this.stopWordsService = stopWordsService;
     }
 
-
     public WordCountResult countWords(String text) {
         if(text == null) {
             throw new IllegalArgumentException("Text cannot be null");
@@ -24,6 +23,7 @@ public class WordCountingService {
         if(stopWords == null) {
             throw new IllegalArgumentException("Stop words cannot be null");
         }
+
         var words = text.split("\\s+");
         var validWords = Arrays.stream(words)
                 .map(this::removeTrailingDot)
