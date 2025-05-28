@@ -10,7 +10,6 @@ public class JavaApplication {
         System.out.print("Please enter text: ");
         String inputText = scanner.nextLine();
 
-
         Path stopWordsFile = Paths.get("stopwords.txt");
         var stopWordsService = new StopWordsService();
         var stopWords = stopWordsService.getStopWords(stopWordsFile);
