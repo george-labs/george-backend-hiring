@@ -8,4 +8,11 @@ output  the results into console
 we presume that the input will be in one line
 
 split the input into word candidates, count only the valid words
-valid words a-z and A-Z 
+valid words a-z and A-Z
+
+## Iteration 2
+
+we have a file of stop words that we want to filter out of counting
+case sensitivity of the stop words is not specified
+it seems from specification that all stop words are lowercase
+let's assume that the comparison should be case insensitive
