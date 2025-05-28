@@ -3,6 +3,7 @@ import service.WordCountingService;
 import utils.TextFileReader;
 
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class JavaApplication {
 
@@ -27,7 +28,9 @@ public class JavaApplication {
         System.out.println("Number of words: " + wordCount);
         if (printIndex) {
             System.out.println("Index:");
-            wordCount.uniqueWords().forEach(System.out::println);
+            var index = wordCount.uniqueWords().stream().collect(Collectors.toList());
+            index.sort(String.CASE_INSENSITIVE_ORDER);
+            index.forEach(System.out::println);
         }
     }
 
