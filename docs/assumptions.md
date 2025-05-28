@@ -22,3 +22,8 @@ let's assume that the comparison should be case insensitive
 first argument will now be filename to read text from
 if there is no filename, proceed as before
 there seems to be god candidate to reuse of file reading functionality
+
+## Iteration 4
+
+I'm not happy about the mocking of StopWordService but it will have to do for now
+it's imitation of Mockito

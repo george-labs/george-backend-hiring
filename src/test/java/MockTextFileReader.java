@@ -1,8 +1,10 @@
-public class MockTextFileReadingService extends TextFileReadingService {
+import utils.TextFileReader;
+
+public class MockTextFileReader extends TextFileReader {
 
     private final String defaultText;
 
-    public MockTextFileReadingService(String defaultText) {
+    public MockTextFileReader(String defaultText) {
         this.defaultText = defaultText;
     }
 

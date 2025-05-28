@@ -1,15 +1,12 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.nio.file.Path;
-
-import static org.junit.jupiter.api.Assertions.*;
+import service.StopWordsService;
 
 class StopWordsServiceTest {
 
     @Test
     void when_there_are_some_words_in_stopwords_file_then_they_are_correctly_parsed() {
-        MockTextFileReadingService mockTextFileReadingService = new MockTextFileReadingService("the\n" +
+        MockTextFileReader mockTextFileReadingService = new MockTextFileReader("the\n" +
                 "a\n" +
                 "on\n" +
                 "off");

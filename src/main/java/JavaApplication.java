@@ -1,5 +1,7 @@
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import service.StopWordsService;
+import service.WordCountingService;
+import utils.TextFileReader;
+
 import java.util.Scanner;
 
 public class JavaApplication {
@@ -7,23 +9,19 @@ public class JavaApplication {
     public static void main(String[] args) {
 
         String inputText;
-        TextFileReadingService textFileReadingService = new TextFileReadingService();
+        TextFileReader textFileReader = new TextFileReader();
 
         if (args.length > 0) {
             String filename = args[0];
-            inputText = textFileReadingService.readFile(filename);
+            inputText = textFileReader.readFile(filename);
         } else {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Please enter text: ");
             inputText = scanner.nextLine();
         }
 
-        String stopWordsFile = "src/main/resources/stopwords.txt";
-        var stopWordsService = new StopWordsService(textFileReadingService);
-        var stopWords = stopWordsService.getStopWords(stopWordsFile);
-
-        var wordCountingService = new WordCountingService();
-        var wordCount = wordCountingService.countWords(inputText, stopWords);
+        var wordCountingService = new WordCountingService(new StopWordsService(textFileReader));
+        var wordCount = wordCountingService.countWords(inputText);
 
         System.out.println("Number of words: " + wordCount);
     }
