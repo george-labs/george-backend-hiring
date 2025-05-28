@@ -31,7 +31,14 @@ public class WordCountingService {
                 .filter( word -> !stopWords.contains(word.toLowerCase()))
                 .toList();
         var uniqueWords = new HashSet<>(validWords);
-        return new WordCountResult(validWords.size(), uniqueWords.size());
+        float averageWordLength;
+        if (validWords.isEmpty()) {
+            averageWordLength = 0;
+        } else {
+            averageWordLength  = (float) validWords.stream().map(String::length).mapToInt(Integer::intValue).sum() / validWords.size();
+        }
+
+        return new WordCountResult(validWords.size(), uniqueWords.size(), averageWordLength);
     }
 
     private String removeTrailingDot(String word) {

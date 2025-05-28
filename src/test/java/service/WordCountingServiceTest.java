@@ -84,5 +84,18 @@ class WordCountingServiceTest {
         Assertions.assertEquals(6, countingResult.uniqueWordCount());
     }
 
+    @Test
+    void when_counting_words_then_correct_average_length_is_calculated() {
+        String text = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+
+        WordCountingService wordCountingService = new WordCountingService(new MockStopWordsService());
+
+        var countingResult = wordCountingService.countWords(text);
+
+        Assertions.assertEquals(6.43, countingResult.averageLength(), 0.005);
+    }
+
+
+
 
 }

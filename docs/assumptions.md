@@ -32,3 +32,11 @@ lets assume that words with trailing dots are valid words
 we found that Humpty-Dumpty is being treated as 2 word, not one and apparently it's valid
 
 we need to format the output properly
+
+## Iteration 5
+
+did that before in iteration 4 by mistake
+
+## Iteration 6
+
+the average counted word length seems to be kept to 2 decimal numbers

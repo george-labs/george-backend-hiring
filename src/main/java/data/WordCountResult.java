@@ -1,5 +1,14 @@
 package data;
 
-public record WordCountResult (long wordCount, long uniqueWordCount) {
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Locale;
+
+public record WordCountResult (long wordCount, long uniqueWordCount, float averageLength) {
+
+    @NotNull
+    @Override
+    public String toString() {
+        return String.format(Locale.US,"Number of words: %d, unique: %d; average word length: %.2f characters", wordCount, uniqueWordCount, averageLength);
+    }
 }
