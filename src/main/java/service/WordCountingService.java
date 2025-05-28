@@ -24,10 +24,10 @@ public class WordCountingService {
         if(stopWords == null) {
             throw new IllegalArgumentException("Stop words cannot be null");
         }
-        var words = text.split("[\\s+\\-]");
+        var words = text.split("\\s+");
         var validWords = Arrays.stream(words)
                 .map(this::removeTrailingDot)
-                .filter(word -> word.matches("[a-zA-Z]+"))
+                .filter(word -> word.matches("[a-zA-Z\\-]+"))
                 .filter( word -> !stopWords.contains(word.toLowerCase()))
                 .toList();
         var uniqueWords = new HashSet<>(validWords);
