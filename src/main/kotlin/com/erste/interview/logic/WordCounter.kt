@@ -2,7 +2,7 @@ package com.erste.interview.logic
 
 class WordCounter {
 
-    private val regex = Regex("[a-zA-Z]+")
+    private val regex = Regex("[a-zA-Z-]+")
 
     fun count(text: String, stopWords: Set<String>): CountResult {
         val filteredWords = filterWords(text, stopWords)
@@ -16,6 +16,7 @@ class WordCounter {
         return text.split(Regex("\\s+"))
             .filter { regex.matches(it) }
             .filterNot { stopWords.contains(it) }
+            .filterNot { it.startsWith("-") || it.endsWith("-")}
     }
 
 }
