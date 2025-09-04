@@ -48,10 +48,10 @@ private fun runWordCounter(inputTextProvider: InputTextProvider, output: Writer)
     // 2. call business logic
     val wordCounter = WordCounter()
     val stopWords = readStopwords()
-    val wordCount = wordCounter.countWords(input, stopWords)
+    val countResult = wordCounter.count(input, stopWords)
 
     // 4. Output to user
-    output.write("\nNumber of words: $wordCount")
+    output.write("\nNumber of words: ${countResult.uniqueCount}, unique: ${countResult.uniqueCount}")
     output.flush()
 }
 

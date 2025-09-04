@@ -17,7 +17,7 @@ class MainTest {
         assertEquals(
             """
             Enter text: 
-            Number of words: 4
+            Number of words: 4, unique: 4
         """.trimIndent(), output.toString()
         )
     }
@@ -41,7 +41,7 @@ class MainTest {
 
         assertEquals(
             """
-        Number of words: 4
+        Number of words: 4, unique: 4
         """.trimIndent(), output.toString().trim()
         )
     }
