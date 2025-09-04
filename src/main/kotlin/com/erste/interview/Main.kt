@@ -51,7 +51,7 @@ private fun runWordCounter(inputTextProvider: InputTextProvider, output: Writer)
     val countResult = wordCounter.count(input, stopWords)
 
     // 4. Output to user
-    output.write("\nNumber of words: ${countResult.uniqueCount}, unique: ${countResult.uniqueCount}")
+    output.write("\nNumber of words: ${countResult.uniqueCount}, unique: ${countResult.uniqueCount}; average word length: ${countResult.avgLength} characters")
     output.flush()
 }
 

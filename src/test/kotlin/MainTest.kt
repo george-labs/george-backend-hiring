@@ -14,10 +14,11 @@ class MainTest {
         runWordCounter(emptyArray<String>(), input, output)
 
         // assert what in the stream
+        // expected avg length: (4 + 3 + 6 + 4) / 4 = 17 / 4 = 4.25
         assertEquals(
             """
             Enter text: 
-            Number of words: 4, unique: 4
+            Number of words: 4, unique: 4; average word length: 4.25 characters
         """.trimIndent(), output.toString()
         )
     }
@@ -39,9 +40,10 @@ class MainTest {
         // TODO: possible redesign so no dummy input should be needed here
         runWordCounter(arrayOf(tempFile.absolutePath), StringReader(""), output)
 
+        // expected avg length: (4 + 3 + 6 + 4) / 4 = 17 / 4 = 4.25
         assertEquals(
             """
-        Number of words: 4, unique: 4
+        Number of words: 4, unique: 4; average word length: 4.25 characters
         """.trimIndent(), output.toString().trim()
         )
     }

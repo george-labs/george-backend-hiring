@@ -2,6 +2,7 @@ package com.erste.interview.logic
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import java.math.BigDecimal
 
 class WordCounterTest {
 
@@ -65,17 +66,30 @@ class WordCounterTest {
     fun `hypen char in words`() {
         val counter = WordCounter()
 
-        assertEquals(CountResult(1, 1), counter.count("a-a", emptySet()))
-        assertEquals(CountResult(1, 1), counter.count("a-----a", emptySet()))
-        assertEquals(CountResult(1, 1), counter.count("a---b---a", emptySet()))
-        assertEquals(CountResult(1, 1), counter.count("a-a-a", emptySet()))
-        assertEquals(CountResult(1, 1), counter.count("a-a- b", emptySet()))
-        assertEquals(CountResult(1, 1), counter.count("-a-a b", emptySet()))
-        assertEquals(CountResult(0, 0), counter.count("-a", emptySet()))
-        assertEquals(CountResult(0, 0), counter.count("a-", emptySet()))
-        assertEquals(CountResult(0, 0), counter.count("-", emptySet()))
-        assertEquals(CountResult(8, 6), counter.count("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", emptySet()))
+        assertEquals(CountResult(1, 1, 3.0.toAvgLength()), counter.count("a-a", emptySet()))
+        assertEquals(CountResult(1, 1, 7.0.toAvgLength()), counter.count("a-----a", emptySet()))
+        assertEquals(CountResult(1, 1, 9.0.toAvgLength()), counter.count("a---b---a", emptySet()))
+        assertEquals(CountResult(1, 1, 5.0.toAvgLength()), counter.count("a-a-a", emptySet()))
+        assertEquals(CountResult(1, 1, 1.0.toAvgLength()), counter.count("a-a- b", emptySet()))
+        assertEquals(CountResult(1, 1, 1.0.toAvgLength()), counter.count("-a-a b", emptySet()))
+        assertEquals(CountResult(0, 0, 0.0.toAvgLength()), counter.count("-a", emptySet()))
+        assertEquals(CountResult(0, 0, 0.0.toAvgLength()), counter.count("a-", emptySet()))
+        assertEquals(CountResult(0, 0, 0.0.toAvgLength()), counter.count("-", emptySet()))
+        assertEquals(CountResult(8, 6, 5.13.toAvgLength()), counter.count("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", emptySet()))
     }
 
+    @Test
+    fun `avg word length`() {
+        val counter = WordCounter()
 
+        assertEquals(0.0.toAvgLength(), counter.count("", emptySet()).avgLength)
+        assertEquals(1.0.toAvgLength(), counter.count("a a b c d", emptySet()).avgLength)
+        assertEquals(2.0.toAvgLength(), counter.count("abc a ba", emptySet()).avgLength)
+        // 13 + 3 + 2 + 1 / 4 = 19 / 4 = 4.75
+        assertEquals(4.75.toAvgLength(), counter.count("Humpty-Dumpty sat on a wall.", emptySet()).avgLength)
+    }
+
+    private fun Double.toAvgLength(): BigDecimal {
+        return this.toBigDecimal().setScale(2)
+    }
 }
