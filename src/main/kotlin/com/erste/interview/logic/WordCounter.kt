@@ -4,9 +4,10 @@ class WordCounter {
 
     private val regex = Regex("[a-zA-Z]+")
 
-    fun countWords(text: String): Int {
+    fun countWords(text: String, stopWords: Set<String>): Int {
         return text.split(" ")
             .filter { regex.matches(it) }
+            .filterNot { stopWords.contains(it) }
             .size
     }
 
