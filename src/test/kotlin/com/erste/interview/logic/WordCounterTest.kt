@@ -45,4 +45,12 @@ class WordCounterTest {
         Assertions.assertEquals(8, count)
     }
 
+    @Test
+    fun `delimited by any whitespace`() {
+        val counter = WordCounter()
+
+        Assertions.assertEquals(2, counter.countWords("word\tanotherword", emptySet()))
+        Assertions.assertEquals(2, counter.countWords("word\nanotherword", emptySet()))
+    }
+
 }
