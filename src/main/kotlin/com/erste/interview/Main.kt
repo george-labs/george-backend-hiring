@@ -15,23 +15,19 @@ fun main(args: Array<String>) {
 }
 
 fun runWordCounter(args: Array<String>, input: Reader, output: Writer) {
-    when {
+    val inputTextProvider = when {
         args.isEmpty() -> {
             // We go with command-line I0
             output.write("Enter text: ")
             output.flush()
 
-            val inputTextProvider = CliInputTextProvider(input)
-
-            runWordCounter(inputTextProvider, output)
+            CliInputTextProvider(input)
         }
         args.size == 1 -> {
             // go with file input
             val filepath = args[0]
 
-            val fileInputTextProvider = FileInputTextProvider(filepath)
-
-            runWordCounter(fileInputTextProvider, output)
+            FileInputTextProvider(filepath)
         }
         else -> {
             println("""
@@ -41,6 +37,8 @@ fun runWordCounter(args: Array<String>, input: Reader, output: Writer) {
             exitProcess(1)
         }
     }
+
+    runWordCounter(inputTextProvider, output)
 }
 
 private fun runWordCounter(inputTextProvider: InputTextProvider, output: Writer) {

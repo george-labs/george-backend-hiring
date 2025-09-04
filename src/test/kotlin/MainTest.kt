@@ -36,8 +36,8 @@ class MainTest {
             """.trimIndent()
         )
 
-        // FIXME: no dummy input should be needed here
-        runWordCounter(arrayOf(tempFile.absolutePath), StringReader("dummy"), output)
+        // TODO: possible redesign so no dummy input should be needed here
+        runWordCounter(arrayOf(tempFile.absolutePath), StringReader(""), output)
 
         assertEquals(
             """
