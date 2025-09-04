@@ -37,8 +37,11 @@ class MainTest {
             """.trimIndent()
         )
 
-        // TODO: possible redesign so no dummy input should be needed here
-        runWordCounter(arrayOf(tempFile.absolutePath), StringReader(""), output)
+        runWordCounter(
+            args = arrayOf(tempFile.absolutePath),
+            input = null,
+            output = output,
+        )
 
         // expected avg length: (4 + 3 + 6 + 4) / 4 = 17 / 4 = 4.25
         assertEquals(

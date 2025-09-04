@@ -14,14 +14,14 @@ fun main(args: Array<String>) {
     runWordCounter(args, InputStreamReader(System.`in`), OutputStreamWriter(System.out))
 }
 
-fun runWordCounter(args: Array<String>, input: Reader, output: Writer) {
+fun runWordCounter(args: Array<String>, input: Reader?, output: Writer) {
     val inputTextProvider = when {
         args.isEmpty() -> {
             // We go with command-line I0
             output.write("Enter text: ")
             output.flush()
 
-            CliInputTextProvider(input)
+            CliInputTextProvider(input?: throw RuntimeException("Application input not provided"))
         }
         args.size == 1 -> {
             // go with file input
@@ -31,8 +31,7 @@ fun runWordCounter(args: Array<String>, input: Reader, output: Writer) {
         }
         else -> {
             println("""
-                Check usage:
-                TODO
+                Usage: provide file path or input text.
             """.trimIndent())
             exitProcess(1)
         }
