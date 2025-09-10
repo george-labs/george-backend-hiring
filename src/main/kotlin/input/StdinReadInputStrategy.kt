@@ -10,7 +10,7 @@ class StdinReadInputStrategy(
 ): ReadInputStrategy {
     override fun readInput(): String {
         outputStream.bufferedWriter().writeAndFlush("Enter text: ")
-        return inputStream.bufferedReader().readText()
+        return inputStream.bufferedReader().readLine() ?: ""
     }
 
     fun BufferedWriter.writeAndFlush(input: String) {
