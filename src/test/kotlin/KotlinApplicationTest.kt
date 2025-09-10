@@ -20,17 +20,18 @@ class KotlinApplicationTest {
     }
 
     @Test
-    fun `test application end-to-end, stdin read strategy`() {
+    fun `test application end-to-end, file-based read strategy`() {
         executeBusinessLogic(arrayOf(testFilePath), readerOutStream, printerOutputStream = writerOutStream)
 
         assertEquals("Number of words: 4", String(writerOutStream.toByteArray()))
     }
 
     @Test
-    fun `test application end-to-end, file-based input strategy`() {
+    fun `test application end-to-end, stdin input strategy`() {
         val inputStream = ByteArrayInputStream("Mary had a little lamb".toByteArray())
         executeBusinessLogic(emptyArray(), readerOutStream, inputStream, writerOutStream)
 
+        assertEquals("Enter text: ", String(readerOutStream.toByteArray()))
         assertEquals("Number of words: 4", String(writerOutStream.toByteArray()))
     }
 }
