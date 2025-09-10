@@ -1,8 +1,11 @@
 import java.io.BufferedWriter
 import java.io.OutputStream
 
-fun constructMessage(count: Int): String {
-    return "Number of words: $count"
+fun constructMessage(count: Int, uniqueCount: Int): String {
+    return buildString {
+        append("Number of words: $count")
+        append(", unique: $uniqueCount")
+    }
 }
 
 fun printMessage(message: String, outputStream: OutputStream = System.out) {

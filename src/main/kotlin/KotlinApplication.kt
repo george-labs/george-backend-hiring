@@ -28,7 +28,8 @@ fun executeBusinessLogic(
     val words = parseInput(input)
     val counter = WordCounter(stopwords)
     val count = counter.countWords(words)
-    val message = constructMessage(count)
+    val uniqueCount = counter.countUniqueWords(words)
+    val message = constructMessage(count, uniqueCount)
     printMessage(message, printerOutputStream)
 }
 
