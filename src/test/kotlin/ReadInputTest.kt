@@ -20,6 +20,5 @@ class ReadInputTest {
     fun `can support an empty string input`() {
         assertTrue(readInput(bytearrayOutStream) { "" }.isEmpty())
         assertEquals("Enter text: ", String(bytearrayOutStream.toByteArray()))
-
     }
 }
