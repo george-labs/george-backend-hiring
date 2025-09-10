@@ -28,10 +28,10 @@ class KotlinApplicationTest {
 
     @Test
     fun `test application end-to-end, stdin input strategy`() {
-        val inputStream = ByteArrayInputStream("Mary had a little lamb".toByteArray())
+        val inputStream = ByteArrayInputStream("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.".toByteArray())
         executeBusinessLogic(emptyArray(), readerOutStream, inputStream, writerOutStream)
 
         assertEquals("Enter text: ", String(readerOutStream.toByteArray()))
-        assertEquals("Number of words: 4, unique: 4", String(writerOutStream.toByteArray()))
+        assertEquals("Number of words: 5, unique: 4", String(writerOutStream.toByteArray()))
     }
 }
