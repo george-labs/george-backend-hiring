@@ -50,4 +50,22 @@ class WordCounterTest {
             assertEquals(1, counter.countUniqueWords(listOf("one", "one", "a")))
         }
     }
+
+    @Nested
+    inner class AverageWordLengthTest {
+        @Test
+        fun `returns the average word length of the valid words`() {
+            assertEquals(3.0, counter.calculateAverageWordLength(listOf("one", "two", "six")))
+        }
+
+        @Test
+        fun `returns the average word length of the valid words, it excludes stop words`() {
+            assertEquals(3.0, counter.calculateAverageWordLength(listOf("one", "two", "six", "a")))
+        }
+
+        @Test
+        fun `returns 0, when input list is empty`() {
+            assertEquals(0.0, counter.calculateAverageWordLength(emptyList()))
+        }
+    }
 }

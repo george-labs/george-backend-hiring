@@ -15,3 +15,6 @@ As an initial assumption, whitespace will be considered the only valid word sepa
 * A word that contains multiple hyphens (e.g. `word-other-word`) will also be considered an invalid word.
 * Based on the assumption of iteration 1, a word that contains a punctuation should not be considered a valid word. (e.g. `wall.`)
   * Because of this assumption, the sentence `Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.` would produce the result `Number of words: 5, unique: 4`, instead of the proposed `Number of words: 7, unique: 6` from the specification
+
+## Iteration 6
+* The average word-length is calculated based on all the valid words, not just the unique ones.
