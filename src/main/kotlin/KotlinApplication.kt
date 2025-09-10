@@ -1,8 +1,10 @@
 import input.FileBasedReadInputStrategy
 import input.ReadInputStrategy
 import input.StdinReadInputStrategy
+import java.io.InputStream
+import java.io.OutputStream
 
-val stopwords : List<String> =
+val stopwords: List<String> =
     Thread
         .currentThread()
         .contextClassLoader
@@ -12,18 +14,31 @@ val stopwords : List<String> =
         ?: error("Internal resource 'stopwords.txt' not found")
 
 fun main(args: Array<String>) {
-    val strategy = chooseReadStrategy(args)
+    executeBusinessLogic(args)
+}
+
+fun executeBusinessLogic(
+    args: Array<String>,
+    readerOutputStream: OutputStream = System.out,
+    inputStream: InputStream = System.`in`,
+    printerOutputStream: OutputStream = System.out,
+) {
+    val strategy = chooseReadStrategy(args, readerOutputStream, inputStream)
     val input = strategy.readInput()
     val words = parseInput(input)
     val counter = WordCounter(stopwords)
     val count = counter.countWords(words)
     val message = constructMessage(count)
-    printMessage(message)
+    printMessage(message, printerOutputStream)
 }
 
-fun chooseReadStrategy(args: Array<String>): ReadInputStrategy {
+fun chooseReadStrategy(
+    args: Array<String>,
+    outputStream: OutputStream = System.out,
+    inputStream: InputStream = System.`in`
+): ReadInputStrategy {
     return if (args.isEmpty()) {
-        StdinReadInputStrategy()
+        StdinReadInputStrategy(outputStream, inputStream)
     } else {
         FileBasedReadInputStrategy(args[0])
     }
