@@ -9,7 +9,7 @@ fun readInput(
     return inputProvider()
 }
 
-private fun BufferedWriter.writeAndFlush(input: String){
+fun BufferedWriter.writeAndFlush(input: String){
     write(input)
     flush()
 }
