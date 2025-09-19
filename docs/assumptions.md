@@ -16,4 +16,9 @@ input validation not implemented
 
 file stopwords.txt located in resources directory
 
-stopword will just contain alphabetical characters 
+stopword will just contain alphabetical characters
+
+## Iteration
+
+Revisited assumption from Section 2 -   the stopwords.txt file is assumed to be at
+src/main/resources/stopwords.txt

@@ -1,12 +1,8 @@
 import java.io.*;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 /**
  * Assumption
@@ -27,13 +23,9 @@ public class JavaApplication {
     }
 
     public static List<String> readStopwords() {
-
-        try (InputStream inputStream =
-                     JavaApplication.class.getClassLoader().getResourceAsStream("/stopwords.txt")) {
-
-
-//            return Files.readAllLines(Path.of(
-//                    "/Users/anton/IdeaProjects/george-backend-hiring/src/main/resources/stopwords.txt"));
+        try {
+            return Files.readAllLines(Path.of(
+                    "src/main/resources/stopwords.txt"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
