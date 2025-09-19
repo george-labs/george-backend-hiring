@@ -1,5 +1,7 @@
-import java.io.InputStreamReader;
-import java.io.StringReader;
+import java.io.*;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -20,19 +22,22 @@ public class JavaApplication {
         System.out.println("Enter text:");
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Number of words:" + countWords(scan.nextLine()));
+        List<String> stopwords = readStopwords();
+        System.out.println("Number of words:" + new WordCounter().countWords(scan.nextLine(), stopwords));
     }
 
-    public static int countWords(String input) {
-        int count = 0;
-        String[] splice = input.split("[^a-zA-Z]+");
-        if (splice.length == 1 && splice[0].equals("")) {
-            count = 0;
-        } else {
-            count += splice.length;
+    public static List<String> readStopwords() {
+
+        try (InputStream inputStream =
+                     JavaApplication.class.getClassLoader().getResourceAsStream("/stopwords.txt")) {
+
+
+//            return Files.readAllLines(Path.of(
+//                    "/Users/anton/IdeaProjects/george-backend-hiring/src/main/resources/stopwords.txt"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return count;
-
     }
+
 
 }
