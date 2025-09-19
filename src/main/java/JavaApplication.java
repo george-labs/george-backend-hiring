@@ -16,27 +16,11 @@ public class JavaApplication {
         List<String> stopwords = readStopwords();
         String words;
         if (args.length > 0) {
-            words = wordsFromFile(args[0]);
+            words = Input.wordsFromFile(args[0]);
         } else {
-            words = wordsFromConsole();
+            words = Input.wordsFromConsole();
         }
         System.out.println("Number of words:" + new WordCounter().countWords(words, stopwords));
-    }
-
-    private static String wordsFromFile(String path) {
-        try {
-            return Files.readString(Path.of(path));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static String wordsFromConsole() {
-        // "wor3d word" = per regex in description will be split to wor, d, word
-
-        System.out.println("Enter text:");
-        Scanner scan = new Scanner(System.in);
-        return scan.nextLine();
     }
 
     public static List<String> readStopwords() {

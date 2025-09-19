@@ -18,7 +18,7 @@ file stopwords.txt located in resources directory
 
 stopword will just contain alphabetical characters
 
-## Iteration
+## Iteration 3
 
 Revisited assumption from Section 2 -   the stopwords.txt file is assumed to be at
 src/main/resources/stopwords.txt
