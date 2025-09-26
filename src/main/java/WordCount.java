@@ -1,14 +1,12 @@
-import java.util.Scanner;
+import java.util.Set;
+
 
 public class WordCount {
 
-    public static void main(String[] args) {
+    private final FileReader fileReader;
 
-        System.out.println("Enter text: ");
-        Scanner scanner = new Scanner(System.in);
-
-        String input = scanner.nextLine();
-        System.out.println("Number of words: " + countWords(input));
+    public WordCount(FileReader fileReader) {
+        this.fileReader = fileReader;
     }
 
     public static int countWords(String text) {
@@ -17,8 +15,33 @@ public class WordCount {
             return 0;
         }
 
-        String[] words = text.trim().split("[^a-zA-Z]+");
+        String[] words = splitAndTrimInput(text);
 
         return words.length;
+    }
+
+    private static String[] splitAndTrimInput(String input) {
+        return input.trim().toLowerCase().split("[^a-zA-Z]+");
+    }
+
+    public int countWordsExcludingStopWords(String input) throws Exception {
+        Set<String> stopWords = fileReader.getStopWords();
+
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+
+        String[] words = splitAndTrimInput(input);
+
+
+        int count = 0;
+
+        for (String word : words) {
+            if (word != null && !word.isEmpty() && !stopWords.contains(word)) {
+                count++;
+            }
+        }
+
+        return count;
     }
 }
