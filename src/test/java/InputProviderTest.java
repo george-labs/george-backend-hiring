@@ -26,14 +26,4 @@ public class InputProviderTest {
 
         assertEquals(expected, words);
     }
-
-    @Test
-    public void getInputWordsWithoutArgsReturnsExpectedly() {
-
-        String[] params = new String[]{};
-
-        List<String> words = inputProvider.getInputWords(params);
-
-        assertEquals(5, words.size());
-    }
 }

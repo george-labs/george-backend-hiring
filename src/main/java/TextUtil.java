@@ -13,7 +13,7 @@ public final class TextUtil {
 
     public static List<String> getTrimmedAndSplitedWords(String input) {
 
-        if (input == null) {
+        if (input == null || input.isEmpty()) {
             return new ArrayList<>();
         }
 

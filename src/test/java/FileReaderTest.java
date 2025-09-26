@@ -23,7 +23,7 @@ public class FileReaderTest {
     }
 
     @Test
-    void getWordsFromFileWithNonExistingFileThrowsException() throws Exception {
+    void getWordsFromFileWithNonExistingFileThrowsException() {
 
         assertThrows(Exception.class, () -> fileReader.getWordsFromFile("badFileName.txt"));
     }
