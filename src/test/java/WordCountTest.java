@@ -9,98 +9,89 @@ public class WordCountTest {
 
     public WordCountTest() {
 
-        this.wordCount = new WordCount(new FileReader());
+        this.wordCount = new WordCountService(new FileReader());
     }
 
     @Test
-    void test() {
-
-        int expectedResult = 5;
-        int result = WordCount.countWords("Mary had a little lamb");
-
-        assertEquals(expectedResult, result);
-    }
-
-    @Test
-    void testWithSigns() {
+    void countWordsWithSpecialCharactersReturnsExpectedly() {
 
         int expectedResult = 2;
-        int result = WordCount.countWords("Mary had !@#@$");
+        int result = wordCount.countWords("Mary had !@#@$");
 
         assertEquals(expectedResult, result);
     }
 
     @Test
-    void testWithoutAnyWord() {
+    void countWordsWithJustNumbersReturnsZero() {
 
         int expectedResult = 0;
-        int result = WordCount.countWords("11 22");
+        int result = wordCount.countWords("11 22");
 
         assertEquals(expectedResult, result);
     }
 
     @Test
-    void testWithEmptyString() {
+    void countWordsWithEmptyStringReturnsZero() {
 
         int expectedResult = 0;
-        int result = WordCount.countWords("");
+        int result = wordCount.countWords("");
 
         assertEquals(expectedResult, result);
     }
 
 
     @Test
-    void testWithNullInput() {
+    void countWordsWithNullInputReturnsZero() {
 
         int expectedResult = 0;
-        int result = WordCount.countWords(null);
+        int result = wordCount.countWords(null);
 
         assertEquals(expectedResult, result);
     }
 
 
     @Test
-    void testWithMultipleParts() {
-
-        int expectedResult = 5;
-        int result = WordCount.countWords("   Mary       had a little lamb  ");
-
-        assertEquals(expectedResult, result);
-    }
-
-    @Test
-    void testCountWordsExcludingStopWords() throws Exception {
+    void countWordsWithMultipleSpacesReturnsExpectedWords() {
 
         int expectedResult = 4;
-        int result = wordCount.countWordsExcludingStopWords("Mary had a little lamb");
-
-        assertEquals(expectedResult, result);
-    }
-
-
-    @Test
-    void testCountWordsExcludingStopWordsAllStopWords() throws Exception {
-
-        int expectedResult = 0;
-        int result = wordCount.countWordsExcludingStopWords("the a on off");
+        int result = wordCount.countWords("   Mary       had a little lamb  ");
 
         assertEquals(expectedResult, result);
     }
 
     @Test
-    void testCountWordsExcludingStopWordsUpperCase() throws Exception {
+    void countWordsWithStopWordIgnoresStopWord() {
 
         int expectedResult = 4;
-        int result = wordCount.countWordsExcludingStopWords("Mary had A little lamb");
+        int result = wordCount.countWords("Mary had a little lamb");
+
+        assertEquals(expectedResult, result);
+    }
+
+
+    @Test
+    void countWordsWithOnlyStopWordsReturnsZero() {
+
+        int expectedResult = 0;
+        int result = wordCount.countWords("the a on off");
 
         assertEquals(expectedResult, result);
     }
 
     @Test
-    void testCountWordsExcludingStopWordsNumbers() throws Exception {
+    void countWordsWithUpperCaseStopWordReturnsExpectedly() {
+
+        int expectedResult = 4;
+        int result = wordCount.countWords("Mary had A little lamb");
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void countWordsWithNumbersIncludedCountsOnlyWords() {
 
         int expectedResult = 6;
-        int result = wordCount.countWordsExcludingStopWords("Mary had a little lamb and 1 cow");
+        int result = wordCount.countWords("Mary had a little lamb and 1 cow");
 
         assertEquals(expectedResult, result);
     }
