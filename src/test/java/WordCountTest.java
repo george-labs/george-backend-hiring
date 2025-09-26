@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WordCountTest {
@@ -16,7 +18,8 @@ public class WordCountTest {
     void countWordsWithSpecialCharactersReturnsExpectedly() {
 
         int expectedResult = 2;
-        int result = wordCount.countWords("Mary had !@#@$");
+        List<String> words = TextHelper.splitAndTrimText("Mary had !@#@$");
+        int result = wordCount.countWords(words);
 
         assertEquals(expectedResult, result);
     }
@@ -25,7 +28,8 @@ public class WordCountTest {
     void countWordsWithJustNumbersReturnsZero() {
 
         int expectedResult = 0;
-        int result = wordCount.countWords("11 22");
+        List<String> words = TextHelper.splitAndTrimText("11 22");
+        int result = wordCount.countWords(words);
 
         assertEquals(expectedResult, result);
     }
@@ -34,7 +38,8 @@ public class WordCountTest {
     void countWordsWithEmptyStringReturnsZero() {
 
         int expectedResult = 0;
-        int result = wordCount.countWords("");
+        List<String> words = TextHelper.splitAndTrimText("");
+        int result = wordCount.countWords(words);
 
         assertEquals(expectedResult, result);
     }
@@ -44,7 +49,8 @@ public class WordCountTest {
     void countWordsWithNullInputReturnsZero() {
 
         int expectedResult = 0;
-        int result = wordCount.countWords(null);
+        List<String> words = TextHelper.splitAndTrimText(null);
+        int result = wordCount.countWords(words);
 
         assertEquals(expectedResult, result);
     }
@@ -54,7 +60,8 @@ public class WordCountTest {
     void countWordsWithMultipleSpacesReturnsExpectedWords() {
 
         int expectedResult = 4;
-        int result = wordCount.countWords("   Mary       had a little lamb  ");
+        List<String> words = TextHelper.splitAndTrimText("   Mary       had a little lamb  ");
+        int result = wordCount.countWords(words);
 
         assertEquals(expectedResult, result);
     }
@@ -63,7 +70,8 @@ public class WordCountTest {
     void countWordsWithStopWordIgnoresStopWord() {
 
         int expectedResult = 4;
-        int result = wordCount.countWords("Mary had a little lamb");
+        List<String> words = TextHelper.splitAndTrimText("Mary had a little lamb");
+        int result = wordCount.countWords(words);
 
         assertEquals(expectedResult, result);
     }
@@ -73,7 +81,8 @@ public class WordCountTest {
     void countWordsWithOnlyStopWordsReturnsZero() {
 
         int expectedResult = 0;
-        int result = wordCount.countWords("the a on off");
+        List<String> words = TextHelper.splitAndTrimText("the a on off");
+        int result = wordCount.countWords(words);
 
         assertEquals(expectedResult, result);
     }
@@ -81,9 +90,10 @@ public class WordCountTest {
     @Test
     void countWordsWithUpperCaseStopWordReturnsExpectedly() {
 
-        int expectedResult = 4;
-        int result = wordCount.countWords("Mary had A little lamb");
+        List<String> words = TextHelper.splitAndTrimText("Mary had A little lamb");
+        int result = wordCount.countWords(words);
 
+        int expectedResult = 4;
         assertEquals(expectedResult, result);
     }
 
@@ -91,7 +101,8 @@ public class WordCountTest {
     void countWordsWithNumbersIncludedCountsOnlyWords() {
 
         int expectedResult = 6;
-        int result = wordCount.countWords("Mary had a little lamb and 1 cow");
+        List<String> words = TextHelper.splitAndTrimText("Mary had a little lamb and 1 cow");
+        int result = wordCount.countWords(words);
 
         assertEquals(expectedResult, result);
     }

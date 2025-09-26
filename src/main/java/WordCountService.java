@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class WordCountService implements WordCount {
 
+    private static final String STOP_WORDS_FILE_NAME = "stopwords.txt";
     private final FileReader fileReader;
 
     public WordCountService(FileReader fileReader) {
@@ -12,35 +13,29 @@ public class WordCountService implements WordCount {
     }
 
     @Override
-    public int countWords(String input) {
+    public int countWords(List<String> inputWords) {
 
-        if (input == null || input.isEmpty()) {
+        if (inputWords == null || inputWords.isEmpty()) {
             return 0;
         }
 
-        String[] words = splitAndTrimInput(input);
-
-        Set<String> stopWords;
+        List<String> stopWords;
 
         try {
-            stopWords = fileReader.getStopWords();
+            stopWords = fileReader.getWordsFromFile(STOP_WORDS_FILE_NAME);
         } catch (Exception exception) {
-            stopWords = new HashSet<>();
+            stopWords = new ArrayList<>();
         }
 
-        return countWordsWithoutStopWords(words, stopWords);
+        return countWordsWithoutStopWords(inputWords, stopWords);
     }
 
-    private int countWordsWithoutStopWords(String[] words, Set<String> stopWords) {
+    private int countWordsWithoutStopWords(List<String> words, List<String> stopWords) {
 
-        return (int) Arrays.stream(words)
+        return (int) words.stream()
             .filter(Objects::nonNull)
             .filter(word -> !word.isEmpty())
             .filter(word -> !stopWords.contains(word))
             .count();
-    }
-
-    private String[] splitAndTrimInput(String input) {
-        return input.trim().toLowerCase().split("[^a-zA-Z]+");
     }
 }

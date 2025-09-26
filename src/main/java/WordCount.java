@@ -1,5 +1,6 @@
+import java.util.List;
+
 public interface WordCount {
 
-    int countWords(String inputText);
-
+    int countWords(List<String> inputWords);
 }
