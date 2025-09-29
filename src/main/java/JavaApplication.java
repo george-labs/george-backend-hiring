@@ -5,13 +5,12 @@ public class JavaApplication {
         Set<String> stopwords = getStopwords();
 
         IFileReadingService readingService = new FileReadingService();
-        WordCountService wordCountService = new WordCountService();
+        WordService wordService = new WordService();
         IFilterService filterService = new FilterService();
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter File to read from: ");
         String inputFile = scanner.nextLine();
 
-        int numberOfWords;
         List<String> inputWords;
         if(readingService.getFileUrl(inputFile) != null){
             inputWords = flattenListOfStrings(readingService.getFileContent(inputFile));
@@ -20,10 +19,12 @@ public class JavaApplication {
             System.out.print("Enter Text: ");
             inputWords = Arrays.stream(splitLine(scanner.nextLine())).toList();
         }
-        numberOfWords = wordCountService.countWordsInStringWithStopwords(filterService.filterInputString(inputWords),
-                stopwords).size();
 
-        System.out.println("Number of words: " + numberOfWords);
+        List<String> filteredInput = filterService.filterInputString(inputWords);
+        List<String> filteredInputAfterStopwords = wordService.getWordsConsideringStopwords(filteredInput, stopwords);
+
+        System.out.println("Number of words: " + filteredInputAfterStopwords.size());
+        System.out.println("Number of unique words: " + wordService.getUniqueWords(filteredInputAfterStopwords).size());
     }
 
     private static Set<String> getStopwords() {

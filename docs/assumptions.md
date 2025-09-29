@@ -16,3 +16,6 @@ Sentence: The house
 Output: Size: 1 (The)
 
 It is also assumed that, should no valid file be provided, the program will still run but use no stopwords
+
+## Iteration 4
+For this iteration, it is assumed that, if one word occurs twice, it is counted once towards the unique count
