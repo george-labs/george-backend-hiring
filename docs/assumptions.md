@@ -19,3 +19,7 @@ It is also assumed that, should no valid file be provided, the program will stil
 
 ## Iteration 4
 For this iteration, it is assumed that, if one word occurs twice, it is counted once towards the unique count
+
+## Iteration 5 
+Previously, words with hyphen were completely excluded; now they are no longer
+It is assumed that Hyphens at the start or end of a word are not excluded. So words like Hello- would be valid now

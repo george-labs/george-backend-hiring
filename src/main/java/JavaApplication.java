@@ -6,7 +6,7 @@ public class JavaApplication {
 
         IFileReadingService readingService = new FileReadingService();
         WordService wordService = new WordService();
-        IFilterService filterService = new FilterService();
+        IFilterService filterService = new FilterServiceHyphen();
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter File to read from: ");
         String inputFile = scanner.nextLine();

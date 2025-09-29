@@ -1,10 +1,11 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class FilterServiceTest {
-    private final IFilterService filterService = new FilterService();
+public class FilterServiceHyphenTest {
+    private final IFilterService filterService = new FilterServiceHyphen();
 
     @Test
     void test_filterInputString_normalString(){
@@ -61,6 +62,16 @@ public class FilterServiceTest {
         //Given
         List<String> input = List.of("Hello,", "World!");
         int expectedCount = 0;
+
+        //Then
+        Assertions.assertEquals(expectedCount, filterService.filterInputString(input).size());
+    }
+
+    @Test
+    void test_filterInputString_hyphenValidString(){
+        //Given
+        List<String> input = List.of("Hello-World", "World-Hello");
+        int expectedCount = 2;
 
         //Then
         Assertions.assertEquals(expectedCount, filterService.filterInputString(input).size());
