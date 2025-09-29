@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class StopWordServiceTest {
-    StopWordReadingService stopWordReadingService = new StopWordReadingService();
+    StopWordReadingService stopWordReadingService = new StopWordReadingService(new FileReadingService());
 
     @Test
     void test_getStopwordsValidFile(){

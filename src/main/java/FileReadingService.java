@@ -8,8 +8,13 @@ import java.util.*;
 
 public class FileReadingService implements IFileReadingService{
     @Override
+    public URL getFileUrl(String file) {
+        return this.getClass().getResource(file);
+    }
+
+    @Override
     public List<String> getFileContent(String file) {
-        URL url = this.getClass().getResource(file);
+        URL url = getFileUrl(file);
         if(url == null){
             return Collections.emptyList();
         }
