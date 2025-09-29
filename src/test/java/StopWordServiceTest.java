@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FileReadingServiceTest {
-    FileReadingService fileReadingService = new FileReadingService();
+public class StopWordServiceTest {
+    StopWordReadingService stopWordReadingService = new StopWordReadingService();
 
     @Test
     void test_getStopwordsValidFile(){
@@ -15,7 +15,7 @@ public class FileReadingServiceTest {
         Set<String> expectedStopwords = new HashSet<>(Arrays.asList("the", "a", "off", "on"));
 
         //Then
-        Assertions.assertEquals(expectedStopwords, fileReadingService.getStopWords(fileLocationForStopwords));
+        Assertions.assertEquals(expectedStopwords, stopWordReadingService.getStopWords(fileLocationForStopwords));
     }
 
     @Test
@@ -25,7 +25,7 @@ public class FileReadingServiceTest {
         Set<String> expectedStopwords = new HashSet<>(Arrays.asList("the", "a", "off", "on"));
 
         //Then
-        Assertions.assertEquals(expectedStopwords, fileReadingService.getStopWords(fileLocationForStopwords));
+        Assertions.assertEquals(expectedStopwords, stopWordReadingService.getStopWords(fileLocationForStopwords));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class FileReadingServiceTest {
         Set<String> expectedStopwords = new HashSet<>();
 
         //Then
-        Assertions.assertEquals(expectedStopwords, fileReadingService.getStopWords(fileLocationForStopwords));
+        Assertions.assertEquals(expectedStopwords, stopWordReadingService.getStopWords(fileLocationForStopwords));
     }
 
     @Test
@@ -45,6 +45,6 @@ public class FileReadingServiceTest {
         Set<String> expectedStopwords = new HashSet<>();
 
         //Then
-        Assertions.assertEquals(expectedStopwords, fileReadingService.getStopWords(fileLocationForStopwords));
+        Assertions.assertEquals(expectedStopwords, stopWordReadingService.getStopWords(fileLocationForStopwords));
     }
 }

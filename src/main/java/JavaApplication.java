@@ -5,9 +5,15 @@ public class JavaApplication {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String fileLocationForStopwords = "stopwords.txt";
+        IFileReadingService readingService = new FileReadingService();
 
-        FileReadingService fileReadingService = new FileReadingService();
-        Set<String> stopwords = fileReadingService.getStopWords(fileLocationForStopwords);
+        StopWordReadingService stopWordReadingService = new StopWordReadingService();
+        Set<String> stopwords = stopWordReadingService.getStopWords(fileLocationForStopwords);
+
+        System.out.print("Enter File to read from: ");
+        String inputFile = scanner.nextLine();
+
+        readingService.getFileContent(inputFile);
 
         System.out.print("Enter Text: ");
         String userInput = scanner.nextLine();

@@ -1,30 +1,31 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-public class FileReadingService {
-    public Set<String> getStopWords(String fileForStopwords) {
-        URL url = this.getClass().getResource(fileForStopwords);
+public class FileReadingService implements IFileReadingService{
+    @Override
+    public List<String> getFileContent(String file) {
+        URL url = this.getClass().getResource(file);
         if(url == null){
-            return Collections.emptySet();
+            return Collections.emptyList();
         }
 
-        Set<String> stopwords = new HashSet<>();
+        List<String> content = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(url.getFile()))){
             String currentLine = br.readLine();
             while(currentLine != null){
                 if(!currentLine.trim().isEmpty()){
-                    stopwords.add(currentLine.trim());
+                    content.add(currentLine.trim());
                 }
                 currentLine = br.readLine();
             }
         }catch(IOException ioException){
-            System.out.println("Could not find file: " + fileForStopwords);
+            System.out.println("Could not find file: " + file);
         }
-        return stopwords;
+        return content;
     }
 }
