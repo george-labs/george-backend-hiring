@@ -100,4 +100,81 @@ public class WordCountServiceTest {
         //Then
         Assertions.assertThrows(IllegalArgumentException.class, () -> WordCountService.countWordsInString(input));
     }
+
+    @Test
+    void test_countWordsInStringWithStopwords_validStringAndStopwords(){
+        //Given
+        String input = "Mary had a little lamb";
+        Set<String> stopWords = new HashSet<>(Arrays.asList("the", "a", "on", "off"));
+        int expected = 4;
+
+        //Then
+        Assertions.assertEquals(expected, WordCountService.countWordsInStringWithStopwords(input, stopWords).size());
+    }
+
+    @Test
+    void test_countWordsInStringWithStopwords_validStringAndStopwordsCaseSensitivity(){
+        //Given
+        String input = "Mary had a little lamb";
+        Set<String> stopWords = new HashSet<>(Arrays.asList("mary", "HAD", "a", "little", "Lamb"));
+        int expected = 3;
+
+        //Then
+        Assertions.assertEquals(expected, WordCountService.countWordsInStringWithStopwords(input, stopWords).size());
+    }
+
+    @Test
+    void test_countWordsInStringWithStopwords_validStringNoStopwords(){
+        //Given
+        String input = "Mary had a little lamb";
+        Set<String> stopWords = new HashSet<>();
+        int expected = 5;
+
+        //Then
+        Assertions.assertEquals(expected, WordCountService.countWordsInStringWithStopwords(input, stopWords).size());
+    }
+
+    @Test
+    void test_countWordsInStringWithStopwords_validStringNoMatchingStopwords(){
+        //Given
+        String input = "Mary had a little lamb";
+        Set<String> stopWords = new HashSet<>(Arrays.asList("Cool", "Day", "Today"));
+        int expected = 5;
+
+        //Then
+        Assertions.assertEquals(expected, WordCountService.countWordsInStringWithStopwords(input, stopWords).size());
+    }
+
+    @Test
+    void test_countWordsInStringWithStopwords_emptyStringValidStopwords(){
+        //Given
+        String input = "          ";
+        Set<String> stopWords = new HashSet<>(Arrays.asList("Cool", "Day", "Today"));
+        int expected = 0;
+
+        //Then
+        Assertions.assertEquals(expected, WordCountService.countWordsInStringWithStopwords(input, stopWords).size());
+    }
+
+    @Test
+    void test_countWordsInStringWithStopwords_emptyStringNoStopwords(){
+        //Given
+        String input = "          ";
+        Set<String> stopWords = new HashSet<>();
+        int expected = 0;
+
+        //Then
+        Assertions.assertEquals(expected, WordCountService.countWordsInStringWithStopwords(input, stopWords).size());
+    }
+
+    @Test
+    void test_countWordsInStringWithStopwords_validStringStopwordsNull(){
+        //Given
+        String input = "Mary had a little lamb";
+        Set<String> stopWords = null;
+
+        //Then
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
+                WordCountService.countWordsInStringWithStopwords(input, stopWords));
+        }
 }
