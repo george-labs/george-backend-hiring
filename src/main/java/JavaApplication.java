@@ -1,18 +1,13 @@
-import org.jetbrains.annotations.NotNull;
-
 import java.util.*;
 
 public class JavaApplication {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String fileLocationForStopwords = "stopwords.txt";
+        Set<String> stopwords = getStopwords();
+
         IFileReadingService readingService = new FileReadingService();
         WordCountService wordCountService = new WordCountService();
         IFilterService filterService = new FilterService();
-
-        StopWordReadingService stopWordReadingService = new StopWordReadingService(new FileReadingService());
-        Set<String> stopwords = stopWordReadingService.getStopWords(fileLocationForStopwords);
-
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Enter File to read from: ");
         String inputFile = scanner.nextLine();
 
@@ -25,10 +20,16 @@ public class JavaApplication {
             System.out.print("Enter Text: ");
             inputWords = Arrays.stream(splitLine(scanner.nextLine())).toList();
         }
-        numberOfWords = wordCountService.countWordsInStringWithStopwords(filterService.filterInputString(inputWords), 
+        numberOfWords = wordCountService.countWordsInStringWithStopwords(filterService.filterInputString(inputWords),
                 stopwords).size();
 
         System.out.println("Number of words: " + numberOfWords);
+    }
+
+    private static Set<String> getStopwords() {
+        String fileLocationForStopwords = "stopwords.txt";
+        StopWordReadingService stopWordReadingService = new StopWordReadingService(new FileReadingService());
+        return stopWordReadingService.getStopWords(fileLocationForStopwords);
     }
 
     private static List<String> flattenListOfStrings(List<String> linesFromFile) {
