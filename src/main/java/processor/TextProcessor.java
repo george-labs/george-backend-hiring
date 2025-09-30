@@ -2,6 +2,6 @@ package processor;
 
 public interface TextProcessor {
 
-    int countWords(final String text);
+    long countWords(final String text);
 
 }

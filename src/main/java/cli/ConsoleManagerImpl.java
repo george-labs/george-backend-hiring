@@ -16,7 +16,7 @@ public class ConsoleManagerImpl implements ConsoleManager {
     }
 
     @Override
-    public void printNumberOfWords(final int num) {
+    public void printNumberOfWords(final long num) {
         System.out.printf(NUMBER_OF_WORDS_MSG, num);
     }
 }

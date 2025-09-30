@@ -10,7 +10,7 @@ public class JavaApplication {
         final TextProcessor processor = new TextProcessorImpl();
 
         final String text = consoleManager.printPromptAndReadInput();
-        final int wordCount = processor.countWords(text);
+        final long wordCount = processor.countWords(text);
 
         consoleManager.printNumberOfWords(wordCount);
     }

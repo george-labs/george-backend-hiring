@@ -4,6 +4,6 @@ public interface ConsoleManager {
 
     String printPromptAndReadInput();
 
-    void printNumberOfWords(final int num);
+    void printNumberOfWords(final long num);
 
 }
