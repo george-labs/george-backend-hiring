@@ -5,14 +5,28 @@ import processor.TextProcessorImpl;
 
 public class JavaApplication {
 
-    public static void main(final String[] args) {
-        final ConsoleManager consoleManager = new ConsoleManagerImpl();
-        final TextProcessor processor = new TextProcessorImpl();
+    final ConsoleManager consoleManager;
+    final TextProcessor processor;
 
+    public JavaApplication() {
+        this.consoleManager = new ConsoleManagerImpl();
+        this.processor = new TextProcessorImpl();
+    }
+
+    public JavaApplication(ConsoleManager consoleManager, TextProcessor processor) {
+        this.consoleManager = consoleManager;
+        this.processor = processor;
+    }
+
+    public void run() {
         final String text = consoleManager.printPromptAndReadInput();
         final long wordCount = processor.countWords(text);
 
         consoleManager.printNumberOfWords(wordCount);
+    }
+
+    public static void main(final String[] args) {
+        new JavaApplication().run();
     }
 
 }
