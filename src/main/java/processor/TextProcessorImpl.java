@@ -1,19 +1,15 @@
 package processor;
 
-import java.util.regex.Pattern;
+import java.util.Arrays;
 
+import static utils.Constants.SPACE;
 import static utils.Constants.WORD_PATTERN;
 
 public class TextProcessorImpl implements TextProcessor {
 
-    private final Pattern pattern;
-
-    public TextProcessorImpl() {
-        this.pattern = Pattern.compile(WORD_PATTERN);
-    }
 
     public long countWords(final String text) {
-        return pattern.matcher(text).results().count();
+        return Arrays.stream(text.split(SPACE)).filter(w -> w.matches(WORD_PATTERN)).count();
     }
 
 }
