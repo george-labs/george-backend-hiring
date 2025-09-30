@@ -1,9 +1,12 @@
 import cli.ConsoleManager;
 import org.junit.jupiter.api.Test;
+import processor.StopWordsProvider;
 import processor.TextProcessor;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,7 +17,7 @@ public class JavaApplicationTest {
 
     @Test
     void run_callMethod_ShouldCallMethodsOfDependenciesInCorrectOrder() {
-        new JavaApplication(new MockConsoleManager(), new MockTextProcessor()).run();
+        new JavaApplication(new MockConsoleManager(), new MockStopWordsProvider(), new MockTextProcessor()).run();
 
         assertEquals(EXPECTED_METHOD_CALLS, methodCalls);
     }
@@ -23,13 +26,13 @@ public class JavaApplicationTest {
 
         @Override
         public String printPromptAndReadInput() {
-            methodCalls.add(0);
+            methodCalls.add(1);
             return "";
         }
 
         @Override
         public void printNumberOfWords(long num) {
-            methodCalls.add(2);
+            methodCalls.add(3);
         }
     }
 
@@ -39,6 +42,20 @@ public class JavaApplicationTest {
         public long countWords(String text) {
             methodCalls.add(1);
             return 0;
+        }
+    }
+
+    class MockStopWordsProvider implements StopWordsProvider {
+
+        @Override
+        public void init() {
+            methodCalls.add(0);
+        }
+
+        @Override
+        public Set<String> getStopWords() {
+            methodCalls.add(2);
+            return Set.of();
         }
     }
 }

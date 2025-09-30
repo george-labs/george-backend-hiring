@@ -8,4 +8,6 @@ public class Constants {
     public static final String SPACE = " ";
     public static final String WORD_PATTERN = "\\b[a-zA-Z]+\\b";
 
+    public static final String STOPWORDS_RESOURCE_PATH = "/stopwords.txt";
+
 }

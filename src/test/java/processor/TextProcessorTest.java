@@ -2,6 +2,8 @@ package processor;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TextProcessorTest {
@@ -10,7 +12,7 @@ class TextProcessorTest {
     private final String ONE_OF_THE_WORDS_WITH_NUM_STR = "Mary1 1had a l1ittle lamb";
     private final String ONE_OF_THE_WORDS_WITH_SPECIAL_CHAR_STR = "Mary# #had a l#ittle lamb";
 
-    private final TextProcessor processor = new TextProcessorImpl();
+    private final TextProcessor processor = new TextProcessorImpl(new MockStopWordsProvider());
 
     @Test
     void countWords_whenAllValidWords_ShouldReturnNumberOfWords() {
@@ -38,6 +40,18 @@ class TextProcessorTest {
         long actual = processor.countWords("");
 
         assertEquals(0, actual);
+    }
+
+    class MockStopWordsProvider implements StopWordsProvider {
+
+        @Override
+        public void init() {
+        }
+
+        @Override
+        public Set<String> getStopWords() {
+            return Set.of();
+        }
     }
 
 }
