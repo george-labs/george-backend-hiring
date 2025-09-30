@@ -1,20 +1,19 @@
 package processor;
 
-import exception.ApplicationException;
+import exception.StopWordsProviderException;
 
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static utils.Constants.STOPWORDS_RESOURCE_PATH;
+import static utils.Constants.STOP_WORDS_PROVIDER_EXCEPTION_MSG;
 
 public class StopWordsProviderImpl implements StopWordsProvider {
 
     private Set<String> skipWords = new HashSet<>();
 
-    public void init() {
-        skipWords = new String(readResource(STOPWORDS_RESOURCE_PATH))
+    public void init(final String stopWordsResourcePath) {
+        skipWords = new String(readResource(stopWordsResourcePath))
                 .lines()
                 .collect(Collectors.toSet());
     }
@@ -22,8 +21,8 @@ public class StopWordsProviderImpl implements StopWordsProvider {
     private byte[] readResource(final String name) {
         try {
             return this.getClass().getResourceAsStream(name).readAllBytes();
-        } catch (IOException ex) {
-            throw new ApplicationException("Can't read file", ex);
+        } catch (Exception ex) {
+            throw new StopWordsProviderException(STOP_WORDS_PROVIDER_EXCEPTION_MSG, ex);
         }
     }
 

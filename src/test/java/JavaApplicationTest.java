@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Test;
 import processor.StopWordsProvider;
 import processor.TextProcessor;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JavaApplicationTest {
 
-    public final List<Integer> EXPECTED_METHOD_CALLS = List.of(0, 1, 2);
+    private final List<Integer> EXPECTED_METHOD_CALLS = List.of(0, 1, 2, 3, 4);
     private List<Integer> methodCalls = new ArrayList();
 
     @Test
@@ -32,15 +31,15 @@ public class JavaApplicationTest {
 
         @Override
         public void printNumberOfWords(long num) {
-            methodCalls.add(3);
+            methodCalls.add(4);
         }
     }
 
     class MockTextProcessor implements TextProcessor {
 
         @Override
-        public long countWords(String text) {
-            methodCalls.add(1);
+        public long countWords(String text, Set<String> stopWords) {
+            methodCalls.add(3);
             return 0;
         }
     }
@@ -48,7 +47,7 @@ public class JavaApplicationTest {
     class MockStopWordsProvider implements StopWordsProvider {
 
         @Override
-        public void init() {
+        public void init(String stopWordsResourcePath) {
             methodCalls.add(0);
         }
 

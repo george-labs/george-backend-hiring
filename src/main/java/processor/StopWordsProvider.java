@@ -1,11 +1,10 @@
 package processor;
 
-import java.io.IOException;
 import java.util.Set;
 
 public interface StopWordsProvider {
 
-    void init();
+    void init(final String stopWordsResourcePath);
 
     Set<String> getStopWords();
 }

@@ -8,14 +8,7 @@ import static utils.Constants.WORD_PATTERN;
 
 public class TextProcessorImpl implements TextProcessor {
 
-    private StopWordsProvider stopWordsProvider;
-
-    public TextProcessorImpl(final StopWordsProvider stopWordsProvider) {
-        this.stopWordsProvider = stopWordsProvider;
-    }
-
-    public long countWords(final String text) {
-        Set<String> stopWords = stopWordsProvider.getStopWords();
+    public long countWords(final String text, final Set<String> stopWords) {
         return Arrays.stream(text.split(SPACE))
                 .filter(w -> w.matches(WORD_PATTERN))
                 .filter(w -> !stopWords.contains(w))
