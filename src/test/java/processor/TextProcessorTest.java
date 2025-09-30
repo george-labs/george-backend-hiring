@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TextProcessorImplTest {
+class TextProcessorTest {
 
     private final String ALL_VALID_WORDS_STR = "Mary had a little lamb";
     private final String ONE_OF_THE_WORDS_WITH_NUM_STR = "Mary5 had a little lamb";
