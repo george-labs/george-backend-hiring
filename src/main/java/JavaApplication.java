@@ -8,13 +8,14 @@ import processor.TextProcessorImpl;
 import java.io.IOException;
 import java.util.Set;
 
+import static utils.Constants.ROOT;
 import static utils.Constants.STOPWORDS_RESOURCE_PATH;
 
 public class JavaApplication {
 
-    final ConsoleManager consoleManager;
-    final StopWordsProvider stopWordsProvider;
-    final TextProcessor processor;
+    final private ConsoleManager consoleManager;
+    final private StopWordsProvider stopWordsProvider;
+    final private TextProcessor processor;
 
     public JavaApplication() {
         this.consoleManager = new ConsoleManagerImpl();
@@ -29,12 +30,16 @@ public class JavaApplication {
     }
 
     public static void main(final String[] args) throws IOException {
-        new JavaApplication().run();
+        new JavaApplication().run(args);
     }
 
-    public void run() {
-        stopWordsProvider.init(STOPWORDS_RESOURCE_PATH);
-        final String text = consoleManager.printPromptAndReadInput();
+    public void run(final String[] args) {
+        String fileName = (args.length == 0)
+                ? consoleManager.printFileNamePromptAndReadInput()
+                : args[0];
+
+        stopWordsProvider.init(ROOT + fileName);
+        final String text = consoleManager.printTextPromptAndReadInput();
         final Set<String> stopWords = stopWordsProvider.getStopWords();
         final long wordCount = processor.countWords(text, stopWords);
 

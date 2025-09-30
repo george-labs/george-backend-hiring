@@ -28,12 +28,12 @@ public class ConsoleManagerTest {
 
     @Disabled // FIX ME
     @Test
-    void printPromptAndReadInput_whenGivenPrompt_ShouldReadInput() {
+    void printPromptAndReadInput_whenGivenTextPrompt_ShouldReadInput() {
         ByteArrayInputStream testIn = new ByteArrayInputStream(STRING.getBytes());
         System.setIn(testIn);
 
         ConsoleManager consoleManager = new ConsoleManagerImpl();
-        String actual = consoleManager.printPromptAndReadInput();
+        String actual = consoleManager.printTextPromptAndReadInput();
 
         assertEquals(STRING, actual);
     }

@@ -2,8 +2,9 @@ package cli;
 
 public interface ConsoleManager {
 
-    String printPromptAndReadInput();
+    String printTextPromptAndReadInput();
 
     void printNumberOfWords(final long num);
 
+    String printFileNamePromptAndReadInput();
 }

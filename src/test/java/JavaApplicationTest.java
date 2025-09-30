@@ -24,7 +24,7 @@ public class JavaApplicationTest {
     class MockConsoleManager implements ConsoleManager {
 
         @Override
-        public String printPromptAndReadInput() {
+        public String printTextPromptAndReadInput() {
             methodCalls.add(1);
             return "";
         }
