@@ -18,3 +18,24 @@ t6  in: "mary. had-a lil lamb"
 Assumption:
     words are only counted as words if they are containing only stretches of alphabetical letters case insensitive
     words are split by whitespaces
+
+## Iteration 2
+stopwords.txt :
+the, a, on, off, mary
+
+t1: 
+    in: "Mary had a little lamb"
+    out: 3
+
+t2: in: "aaaaa aaaaa bbb"
+    out: 3
+
+t3: in: "MARY had a lil lamb"
+    out: 3
+
+t4: in: "mary had a lil lamb"
+    out 3
+
+
+Assumption:
+    stopwords.txt contains case insensitive words to filter input out
