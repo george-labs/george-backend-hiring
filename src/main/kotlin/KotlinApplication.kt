@@ -6,7 +6,7 @@ fun main(args: Array<String>) {
 
     val wordCounter = WordCounter(StopWordsReader(FILENAME))
     val input = inputReader.read()
-    val count = wordCounter.count(input)
+    val words = wordCounter.count(input)
 
-    println("Number of words: $count")
+    println("Number of words: ${words.filteredCount}, unique: ${words.uniqueFilteredCount}")
 }

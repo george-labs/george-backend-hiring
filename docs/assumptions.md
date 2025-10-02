@@ -60,3 +60,28 @@ t5 stdin: "hi daniel here"
 Assumption:
     words are split by whitespace and newlines if provided via textfile from program argument
     else by Stdin only by whitespaces
+
+## Iteration 4
+
+t1: in: Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.
+    out: 9, 7
+
+t2: in: mary-had a lil lamb
+    out: 4,4
+
+t3: in: mary loves mary
+    out: 3,2
+
+t4: in: mary marries-mary
+    out: 3,2
+
+t5  in: mary. had. a. mary.
+    out: 3,2
+
+
+Assumption:
+    words are split by whitespaces(\s) and dash(-) 
+    a word is still a valid word if the tail of the word consists of a . 
+    duplicates only consist of words with exactly the same chars 
+    so: mary = mary -> true
+        mary. = mary -> false

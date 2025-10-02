@@ -9,69 +9,102 @@ class WordCounterTest {
     private val wordCounter = WordCounter(stopWordsReader)
 
     @ParameterizedTest
-    @CsvSource(value = [
-        "daniel,1",
-        "marry,1",
-        "mar2y,0",
-        "mar.y,0",
-        "mary.,0",
-        "---,0",
-        "'',0"
-    ])
-    fun `only words containing alphabetical letters are allowed`() {
-        assertEquals(1, wordCounter.count("daniel"))
-        assertEquals(1, wordCounter.count("maryy"))
-        assertEquals(0, wordCounter.count("mar2y"))
-        assertEquals(0, wordCounter.count("mar.y"))
-        assertEquals(0, wordCounter.count("mary."))
-        assertEquals(0, wordCounter.count("----"))
-        assertEquals(0, wordCounter.count(""))
+    @CsvSource(
+        value = [
+            "daniel,1",
+            "marry,1",
+            "mar2y,0",
+            "mar.y,0",
+            "mary.,1",
+            "xxxxx,1",
+            "---,0",
+            "'',0"
+        ]
+    )
+    fun `only words containing alphabetical letters are allowed and optional a dot at the end`(
+        input: String,
+        expected: Int
+    ) {
+        assertEquals(expected, wordCounter.count(input).filteredCount)
     }
 
     @ParameterizedTest
-    @CsvSource(value = [
-        "maryy had two lil lambs,5",
-        "maryhad one lil lamb,4",
-        "mar2y had one lil lamb,4",
-        "mar.y had one lil lamb,4",
-        "---- ----,0",
-        "daniel.maryy,0",
-        "'',0"
-    ])
-    fun `words should only be split by whitespaces`(input: String, expected: Int) {
-        assertEquals(expected, wordCounter.count(input))
+    @CsvSource(
+        value = [
+            "maryy had two lil lambs,5",
+            "maryhad one lil lamb,4",
+            "mary-had one lil lamb,4",
+            "mary-had one lil lamb,4",
+            "maryhad one lil lamb,4",
+            "mar2y had one lil lamb,4",
+            "mar.y had one lil lamb,4",
+            "daniel-had one lil lamb,5",
+            "daniel-had one lil daniel,5",
+            "daniel\thad one lil lamb,5",
+            "daniel\rhad one lil lamb,5",
+            "daniel      xx,2",
+            "daniel      daniel,2",
+            "---- ----,0",
+            "daniel.maryy,0",
+            "'',0"
+        ]
+    )
+    fun `words should only be split by whitespaces and dashes`(
+        input: String,
+        expected: Int
+    ) {
+        assertEquals(expected, wordCounter.count(input).filteredCount)
     }
 
     @ParameterizedTest
-    @CsvSource(value = [
-        "mary had a lil lamb,3",
-        "maryhad a lil lamb,3",
-        "daniel is a lamb,3",
-        "maryhad a lil lamb,3",
-        "the lamb daniel had was nice,5",
-        "---- ---,0",
-        "xxxxx,1",
-        "daniel.mary,0",
-        "'',0"
-    ])
+    @CsvSource(
+        value = [
+            "mary had a lil lamb,3",
+            "maryhad a lil lamb,3",
+            "daniel is a lamb,3",
+            "maryhad a lil lamb,3",
+            "the lamb daniel had was nice,5",
+            "daniel mary,1",
+            "mary mary,0",
+        ]
+    )
     fun `words matching stopwords file are filtered`(input: String, expected: Int) {
-        assertEquals(expected, wordCounter.count(input))
+        assertEquals(expected, wordCounter.count(input).filteredCount)
     }
 
     @ParameterizedTest
-    @CsvSource(value = ["MARY had A lil lamb,3",
-        "MARY had A lil lamb,3",
-        "mary had A lil lamb,3",
-        "maryhad a lil lamb,3",
-        "daniel is a lamb,3",
-        "the lamb daniel had was nice,5",
-        "---- ----,0",
-        "xxxxx,1",
-        "daniel.mary,0",
-        "'',0"
-    ])
-    fun `words matching stopwords file are filtered regardless of case`(input: String, expected: Int) {
-        assertEquals(expected, wordCounter.count(input))
+    @CsvSource(
+        value = [
+            "MARY had A lil lamb,3",
+            "MARY had A lil lamb,3",
+            "mary had A lil lamb,3",
+            "maryhad a lil lamb,3",
+            "daniel is a lamb,3",
+            "the lamb daniel had was nice,5",
+        ]
+    )
+    fun `words matching stopwords file are filtered regardless of case sensitivity`(
+        input: String,
+        expected: Int
+    ) {
+        assertEquals(expected, wordCounter.count(input).filteredCount)
+    }
+
+
+    @ParameterizedTest
+    @CsvSource(
+        value = [
+            "mary mary,0",
+            "daniel daniel,1",
+            "daniel. daniel.,1",
+            "daniel. daniel,2",
+            "-- --,0",
+            "da-niel,2",
+            "da-niel daniel,3"
+        ]
+    )
+    fun `words having the same chars should be counted as unique `(input: String, expected: Int) {
+        assertEquals(expected, wordCounter.count(input).uniqueFilteredCount)
     }
 
 

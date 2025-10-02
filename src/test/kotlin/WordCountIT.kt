@@ -17,7 +17,7 @@ class WordCountIT {
             // Convert to string
             val output = outputStream.toString().trim()
 
-            assertEquals(output, "Number of words: 3")
+            assertEquals("Number of words: 3, unique: 3", output)
 
         } finally {
             // Restore original stdout
@@ -27,7 +27,7 @@ class WordCountIT {
 
     @Test
     fun `count words by providing input through stdin`() {
-        val input = "Mary had a little lamb"
+        val input = "Mary had a little mary"
         val inputStream = ByteArrayInputStream(input.toByteArray())
         System.setIn(inputStream)
 
@@ -41,7 +41,7 @@ class WordCountIT {
             // Convert to string
             val output = outputStream.toString().trim()
 
-            assertEquals(output, "Enter text:Number of words: 3")
+            assertEquals("Enter text:Number of words: 2, unique: 2", output)
 
         } finally {
             // Restore original stdout
