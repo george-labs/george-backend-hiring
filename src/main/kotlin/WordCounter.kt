@@ -1,6 +1,6 @@
 class WordCounter(stopWordsReader: ResourceReader) {
 
-    private val wordRegex = "^[a-zA-Z]+[.]?\$".toRegex()
+    private val wordRegex = "^[a-zA-Z]+-?[a-zA-Z]+[.]?$".toRegex()
     private val stopWords = stopWordsReader.provide().map { it.lowercase() }
 
     private fun filterWords(words: List<String>): List<String> {
@@ -12,7 +12,7 @@ class WordCounter(stopWordsReader: ResourceReader) {
     }
 
     private fun splitWords(wordsJoined: String): List<String> {
-        return wordsJoined.split("[\\s-]".toRegex())
+        return wordsJoined.split("\\s".toRegex())
     }
 
     private fun uniqueWords(words: List<String>): Set<String> {

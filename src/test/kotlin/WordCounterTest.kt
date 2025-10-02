@@ -21,7 +21,7 @@ class WordCounterTest {
             "'',0"
         ]
     )
-    fun `only words containing alphabetical letters are allowed and optional a dot at the end`(
+    fun `words containing alphabetical letters are allowed and optional a dot at the end`(
         input: String,
         expected: Int
     ) {
@@ -38,8 +38,8 @@ class WordCounterTest {
             "maryhad one lil lamb,4",
             "mar2y had one lil lamb,4",
             "mar.y had one lil lamb,4",
-            "daniel-had one lil lamb,5",
-            "daniel-had one lil daniel,5",
+            "daniel-had one lil lamb,4",
+            "daniel-had one lil daniel,4",
             "daniel\thad one lil lamb,5",
             "daniel\rhad one lil lamb,5",
             "daniel      xx,2",
@@ -49,7 +49,7 @@ class WordCounterTest {
             "'',0"
         ]
     )
-    fun `words should only be split by whitespaces and dashes`(
+    fun `words should only be split by whitespaces`(
         input: String,
         expected: Int
     ) {
@@ -99,13 +99,30 @@ class WordCounterTest {
             "daniel. daniel.,1",
             "daniel. daniel,2",
             "-- --,0",
-            "da-niel,2",
-            "da-niel daniel,3"
+            "da-niel,1",
+            "da-niel daniel,2"
         ]
     )
     fun `words having the same chars should be counted as unique `(input: String, expected: Int) {
         assertEquals(expected, wordCounter.count(input).uniqueFilteredCount)
     }
+
+    @ParameterizedTest
+    @CsvSource(
+        value = [
+            "a-a,1",
+            "a--,0",
+            "-a,0",
+            "dan-iel daniel,2",
+            "-- --,0",
+            "daniel-daxx,1",
+            "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.,7"
+        ]
+    )
+    fun `words containing a hyphen should count as one word`(input: String, expected: Int) {
+        assertEquals(expected, wordCounter.count(input).filteredCount)
+    }
+
 
 
 }

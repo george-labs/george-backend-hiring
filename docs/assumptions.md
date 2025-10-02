@@ -85,3 +85,29 @@ Assumption:
     duplicates only consist of words with exactly the same chars 
     so: mary = mary -> true
         mary. = mary -> false
+
+## Iteration 5
+
+t1: in: Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.
+    out: 7, 6
+
+t2: in: mary-had a lil lamb
+    out: 3,3
+
+t3: in: mary had a lil lamb
+    out: 4,4
+
+t4: in: a-a
+    out: 1,1
+
+t5: in: a-
+    out: 0,0
+
+t6: in: -a
+    out: 0,0
+
+Assumption: 
+    a word is counted as one word instead of two if it contains a hyphen
+    so if a hyphen is encapsulated by alphabetical letters its counted as one word
+    but only one hyphen
+    words are only split by whitespaces 
