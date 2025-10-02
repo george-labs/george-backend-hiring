@@ -39,7 +39,6 @@ class WordCounterTest {
     ])
     fun `words should only be split by whitespaces`(input: String, expected: Int) {
         assertEquals(expected, wordCounter.count(input))
-
     }
 
     @ParameterizedTest

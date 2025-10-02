@@ -13,4 +13,13 @@ class StdinInputReaderTest{
         System.setIn(inputStream)
         assertEquals(input, reader.read())
     }
+
+    @Test
+    fun `empty input should be read as output`() {
+        val input = ""
+        val inputStream = ByteArrayInputStream(input.toByteArray())
+        System.setIn(inputStream)
+        assertEquals(input, reader.read())
+    }
+
 }

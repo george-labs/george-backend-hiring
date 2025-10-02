@@ -1,9 +1,12 @@
-fun main(){
+fun main(args: Array<String>) {
+    val inputReader = if(args.isNotEmpty())
+        FileInputReader(args[0])
+    else
+        StdinInputReader()
 
-    print("Enter text:")
+    println()
     val wordCounter = WordCounter(StopWordsReader())
-    val stdinInputReader = StdinInputReader()
-    val input = stdinInputReader.read()
+    val input = inputReader.read()
     val count = wordCounter.count(input)
 
     println("Number of words: $count")

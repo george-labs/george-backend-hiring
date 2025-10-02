@@ -39,3 +39,24 @@ t4: in: "mary had a lil lamb"
 
 Assumption:
     stopwords.txt contains case insensitive words to filter input out
+
+## Iteration 3
+
+t1: file in: "Mary had a lil lamb"
+    out: 3
+
+t2: file in: "Mary had \na lil lamb"
+    out: 3
+
+t3: file in: ""
+    out: 0
+
+t4 file in: "\nhi"
+    out: 1
+
+t5 stdin: "hi daniel here"
+    out: 3
+
+Assumption:
+    words are split by whitespace and newlines if provided via textfile from program argument
+    else by Stdin only by whitespaces

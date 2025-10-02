@@ -10,4 +10,12 @@ class StopWordsReaderTest{
         assertNotNull(reader.provide())
         assertTrue(reader.provide().isNotEmpty())
     }
+
+//    @Test
+//    fun `if stopwords resource is not included throws exception`(){
+//        assertNotNull(reader.provide())
+//        assertTrue(reader.provide().isNotEmpty())
+//    }
+//
+
 }
