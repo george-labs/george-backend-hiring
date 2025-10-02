@@ -4,7 +4,8 @@ import org.junit.jupiter.params.provider.CsvSource
 
 class WordCounterTest {
 
-    private val stopWordsReader = StopWordsReader()
+    private val fileName = "stopwords.txt"
+    private val stopWordsReader = StopWordsReader(fileName)
     private val wordCounter = WordCounter(stopWordsReader)
 
     @ParameterizedTest

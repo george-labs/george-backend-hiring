@@ -4,8 +4,7 @@ fun main(args: Array<String>) {
     else
         StdinInputReader()
 
-    println()
-    val wordCounter = WordCounter(StopWordsReader())
+    val wordCounter = WordCounter(StopWordsReader(FILENAME))
     val input = inputReader.read()
     val count = wordCounter.count(input)
 
