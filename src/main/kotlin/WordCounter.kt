@@ -21,14 +21,21 @@ class WordCounter(stopWordsReader: ResourceReader) {
 
     fun count(wordsJoined: String): Words {
         val words = splitWords(wordsJoined)
-        val filterWords = filterWords(words)
-        val matchedFilteredWords = matchWordsWithRegex(filterWords)
+        val matchedFilteredWords = matchWordsWithRegex(filterWords(words))
         val uniqueFilteredMatchedWords = uniqueWords(matchedFilteredWords)
+        val avgWordLength = avgWordLength(matchedFilteredWords)
         return Words(
             filteredCount = matchedFilteredWords.size,
-            uniqueFilteredCount = uniqueFilteredMatchedWords.size
+            uniqueFilteredCount = uniqueFilteredMatchedWords.size,
+            avgWordLength = avgWordLength
         )
+    }
+
+    private fun avgWordLength(words: List<String>): Double {
+        val wordSize = words.size.toDouble()
+        val stringLength = words.joinToString("").length.toDouble()
+        return (stringLength / wordSize)
     }
 }
 
-data class Words(val filteredCount: Int, val uniqueFilteredCount: Int)
+data class Words(val filteredCount: Int, val uniqueFilteredCount: Int, val avgWordLength: Double)

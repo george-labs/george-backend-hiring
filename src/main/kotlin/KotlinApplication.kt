@@ -1,5 +1,5 @@
 fun main(args: Array<String>) {
-    val inputReader = if(args.isNotEmpty())
+    val inputReader = if (args.isNotEmpty())
         FileInputReader(args[0])
     else
         StdinInputReader()
@@ -8,5 +8,5 @@ fun main(args: Array<String>) {
     val input = inputReader.read()
     val words = wordCounter.count(input)
 
-    println("Number of words: ${words.filteredCount}, unique: ${words.uniqueFilteredCount}")
+    OutputFormatter().writeToStdOut(words)
 }

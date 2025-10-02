@@ -111,3 +111,18 @@ Assumption:
     so if a hyphen is encapsulated by alphabetical letters its counted as one word
     but only one hyphen
     words are only split by whitespaces 
+
+
+## Iteration 6
+t1: in: daniel has to count
+    out: 15/4 = 3.75
+
+t2: in: daniel had to count
+    out: 15/4 = 3.75
+
+t3: in: mihai had to watch
+    out: 15/4 = 3.75
+
+Assumption:
+    the calculated average word length should only be printed with 2 decimals max
+    the locale used to represent numbers is US
