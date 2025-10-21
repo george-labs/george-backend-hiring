@@ -1,107 +1,113 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.*;
 
 public class WordCountTest {
 
 
     @Test
-    void testNominal(){
+    void testNominal() {
         String input = "Mary had a little lamb";
         Assertions.assertEquals(4, WordCount.getWordCount(input));
     }
 
     @Test
-    void testEmptyCase(){
+    void testEmptyCase() {
         String input = "";
         Assertions.assertEquals(0, WordCount.getWordCount(input));
     }
 
     @Test
-    void testOneWord(){
+    void testOneWord() {
         String input = "Mary";
         Assertions.assertEquals(1, WordCount.getWordCount(input));
     }
 
     @Test
-    void testNumericChar(){
+    void testNumericChar() {
         String input = "word23";
         Assertions.assertEquals(0, WordCount.getWordCount(input));
     }
 
     @Test
-    void testNumericChar2times(){
+    void testNumericChar2times() {
         String input = "word23 word23";
         Assertions.assertEquals(0, WordCount.getWordCount(input));
     }
 
     @Test
-    void testNumericCharwithnonNumericItem(){
+    void testNumericCharwithnonNumericItem() {
         String input = "word23 word";
         Assertions.assertEquals(1, WordCount.getWordCount(input));
     }
 
     @Test
-    void testNonAlphaNumeric(){
+    void testNonAlphaNumeric() {
         String input = "word'd word";
         Assertions.assertEquals(1, WordCount.getWordCount(input));
     }
 
 
     @Test
-    void testNonAlphaNumericCase2(){
+    void testNonAlphaNumericCase2() {
         String input = "word^d word";
         Assertions.assertEquals(1, WordCount.getWordCount(input));
     }
 
 
     @Test
-    void testMixedCase(){
+    void testMixedCase() {
         String input = "Mary had a little lamb ignore1 ignore@ 123@123 1'&*/11";
         Assertions.assertEquals(4, WordCount.getWordCount(input));
     }
 
 
     @Test
-    void testIncludesAllStopWords(){
+    void testIncludesAllStopWords() {
         String input = "the a on off";
         Assertions.assertEquals(0, WordCount.getWordCount(input));
     }
 
     @Test
-    void testIncludesAllStopWordsWithOneValidWord(){
+    void testIncludesAllStopWordsWithOneValidWord() {
         String input = "the a on off test";
         Assertions.assertEquals(1, WordCount.getWordCount(input));
     }
 
     @Test
-    void testStopWordsWithNumericAndNonAlphaNumericChar(){
+    void testStopWordsWithNumericAndNonAlphaNumericChar() {
         String input = "test the a on off the1 th@e a3 @on o33ffon";
         Assertions.assertEquals(1, WordCount.getWordCount(input));
     }
 
     @Test
-    void testPassingUserInputTxtFile(){
+    void testPassingUserInputTxtFile() {
         String testFileName = "src/test/resources/testMytext.txt";
         String userInput = IOOperationHandler.getUserInputFromFile(testFileName);
         Assertions.assertEquals(4, WordCount.getWordCount(userInput));
     }
 
     @Test
-    void testUserInputWithFile(){
+    void testUserInputWithFile() {
         String testFileName = "src/test/resources/testMytext.txt";
         String[] arg = new String[1];
-        arg[0]=testFileName;
-        IOOperationHandler.getUserInput(arg,null);
+        arg[0] = testFileName;
+        Assertions.assertEquals(4, WordCount.getWordCount(IOOperationHandler.getUserInput(arg, null)));
     }
+
     @Test
-    void testUserInputWithoutFile(){
+    void testUserInputWithoutFile() {
         String[] arg = new String[0];
         String input = "test the a on off the1 th@e a3 @on o33ffon";
         InputStream inputStream = new ByteArrayInputStream(input.getBytes());
-        Assertions.assertEquals(input, IOOperationHandler.getUserInput(arg,inputStream));
+        Assertions.assertEquals(1, WordCount.getWordCount(IOOperationHandler.getUserInput(arg, inputStream)));
+    }
+
+    @Test
+    void test(){
+        String input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall";
+        Assertions.assertEquals(9, WordCount.getWordCount(input));
+
     }
 }
