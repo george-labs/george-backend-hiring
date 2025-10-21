@@ -76,6 +76,6 @@ public class JavaApplicationTest {
     @Test
     void testStopWordsWithNumericAndNonAlphaNumericChar(){
         String input = "test the a on off the1 th@e a3 @on o33ffon";
-        Assertions.assertEquals(1, JavaApplication.getWordCount(input));¬¬
+        Assertions.assertEquals(1, JavaApplication.getWordCount(input));
     }
 }
