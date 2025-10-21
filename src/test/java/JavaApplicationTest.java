@@ -78,4 +78,12 @@ public class JavaApplicationTest {
         String input = "test the a on off the1 th@e a3 @on o33ffon";
         Assertions.assertEquals(1, JavaApplication.getWordCount(input));
     }
+
+    @Test
+    void testPassingUserInputTxtFile(){
+        String testFileName = "src/test/resources/testMytext.txt";
+        String UserInput = JavaApplication.getUserInputFromFile(testFileName);
+        Assertions.assertEquals(4, JavaApplication.getWordCount(UserInput));
+    }
+
 }

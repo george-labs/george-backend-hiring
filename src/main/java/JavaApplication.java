@@ -7,12 +7,32 @@ import java.util.Scanner;
 public class JavaApplication {
 
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        System.out.printf("Enter text: ");
-        String userInput = scan.nextLine();
 
+        String userInput;
+        if(args.length == 0) {
+            Scanner scan = new Scanner(System.in);
+            System.out.printf("Enter text: ");
+            userInput = scan.nextLine();
+        }else {
+            String inputFileName  = args[0];
+            userInput = getUserInputFromFile(inputFileName);
+        }
         int wordCount = getWordCount(userInput);
         System.out.println("Number of words: " + wordCount);
+    }
+
+    public static String getUserInputFromFile(String inputFileName){
+        StringBuilder builder = new StringBuilder();
+        File file = new File( inputFileName);
+        try (BufferedReader reader = new BufferedReader(new FileReader(file));) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                builder.append(line.trim()+" ");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return  builder.toString();
     }
 
     public static int getWordCount(String userInput) {
