@@ -8,3 +8,5 @@ Enter text: Mary had a little lamb
 Number of words: 5
 $
 ```
+
+"Mary had a little lamb".split("[^a-zA-Z]")

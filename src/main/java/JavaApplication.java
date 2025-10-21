@@ -13,9 +13,6 @@ public class JavaApplication {
     }
 
     private static int getWordCount(String userInput) {
-
-        return 5;
-
-
+        return userInput.split("[^a-zA-Z]").length;
     }
 }
