@@ -7,7 +7,7 @@ public class JavaApplicationTest {
     @Test
     void testNominal(){
         String input = "Mary had a little lamb";
-        Assertions.assertEquals(5, JavaApplication.getWordCount(input));
+        Assertions.assertEquals(4, JavaApplication.getWordCount(input));
     }
 
     @Test
@@ -57,9 +57,25 @@ public class JavaApplicationTest {
     @Test
     void testMixedCase(){
         String input = "Mary had a little lamb ignore1 ignore@ 123@123 1'&*/11";
-        Assertions.assertEquals(5, JavaApplication.getWordCount(input));
+        Assertions.assertEquals(4, JavaApplication.getWordCount(input));
     }
 
 
+    @Test
+    void testIncludesAllStopWords(){
+        String input = "the a on off";
+        Assertions.assertEquals(0, JavaApplication.getWordCount(input));
+    }
 
+    @Test
+    void testIncludesAllStopWordsWithOneValidWord(){
+        String input = "the a on off test";
+        Assertions.assertEquals(1, JavaApplication.getWordCount(input));
+    }
+
+    @Test
+    void testStopWordsWithNumericAndNonAlphaNumericChar(){
+        String input = "test the a on off the1 th@e a3 @on o33ffon";
+        Assertions.assertEquals(1, JavaApplication.getWordCount(input));¬¬
+    }
 }
