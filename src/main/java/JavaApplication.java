@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class JavaApplication {
@@ -12,7 +13,12 @@ public class JavaApplication {
         System.out.println("Number of words: " + wordCount);
     }
 
-    private static int getWordCount(String userInput) {
-        return userInput.split("[^a-zA-Z]").length;
+    public static int getWordCount(String userInput) {
+//        return (int) Arrays.stream(userInput.split("[^a-zA-Z]")).filter(token ->  null != token && !token.isEmpty()).count();
+        return (int) Arrays.stream(
+                userInput.split("\\s"))
+                .filter(token -> token.matches("[a-zA-Z]"))
+                .filter(token ->  null != token && !token.isEmpty())
+        .count();
     }
 }
