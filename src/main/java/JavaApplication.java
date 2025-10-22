@@ -1,22 +1,24 @@
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class JavaApplication {
     public static void main(String[] args) {
-        // Read stdin
-        System.out.print("Enter text: ");
 
+        final WordCounter wordCounter = new WordCounter();
+
+        final String queryString = "Enter text: ";
+        System.out.print(queryString);
+        String line = readLine();
+
+        long count = wordCounter.getWordCount(line);
+        String outputMessageFormat = "Number of words: %d";
+        System.out.printf(outputMessageFormat,  count);
+
+    }
+
+    private static String readLine() {
         Scanner input = new Scanner(System.in);
-
         String line = input.nextLine();
-
-        Pattern pattern = Pattern.compile("[^a-zA-Z]+");
-        Matcher matcher = pattern.matcher(line);
-
-        long count = matcher.results().count();
-        System.out.println("Number of words: " + count);
-
         input.close();
+        return line;
     }
 }
