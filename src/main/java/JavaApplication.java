@@ -11,7 +11,7 @@ public class JavaApplication {
         execute(consoleOutputWriter, consoleInputReader, fileInputReader, fileStopWordsReader, args);
     }
 
-    static void execute(OutputWriter outputWriter, InputReader inputReader, FileInputReader fileInputReader, FileStopWordsReader stopWordsReader,
+    static void execute(OutputWriter outputWriter, InputReader inputReader, InputReader fileInputReader, StopWordsReader stopWordsReader,
                         String[] args) {
 
         final WordCounter wordCounter = new WordCounter(stopWordsReader.readStopWords());
@@ -20,7 +20,6 @@ public class JavaApplication {
         if (args.length > 0) {
             String inputFilename = args[0];
             line = fileInputReader.readInput(inputFilename);
-
         } else {
             final String queryString = "Enter text: ";
             outputWriter.writeOutput(queryString);
