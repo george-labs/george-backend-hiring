@@ -1,6 +1,10 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +16,6 @@ public class JavaApplication {
         if (inputStream == null) {
             throw new FileNotFoundException("stopwords.txt not found in resources");
         }
-
         Scanner in = new Scanner(new InputStreamReader(inputStream));
         List<String> stopWords = new ArrayList<>();
         while (in.hasNextLine()) {
@@ -22,14 +25,20 @@ public class JavaApplication {
 
         final WordCounter wordCounter = new WordCounter(stopWords);
 
-        final String queryString = "Enter text: ";
-        System.out.print(queryString);
-        String line = readLine();
+        final String line;
+        if (args.length > 0) {
+            String inputFilename = args[0];
+            line = readLine(inputFilename);
+
+        } else {
+            final String queryString = "Enter text: ";
+            System.out.print(queryString);
+            line = readLine();
+        }
 
         long count = wordCounter.getWordCount(line);
         String outputMessageFormat = "Number of words: %d";
         System.out.printf(outputMessageFormat, count);
-
     }
 
     private static String readLine() {
@@ -37,5 +46,14 @@ public class JavaApplication {
         String line = input.nextLine();
         input.close();
         return line;
+    }
+
+    private static String readLine(String fileName) throws FileNotFoundException {
+        try {
+            final Path path = Paths.get(fileName);
+            return Files.readString(path);
+        } catch (IOException e) {
+            throw new FileNotFoundException("File " + fileName + " not found");
+        }
     }
 }
