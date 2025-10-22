@@ -1,5 +1,4 @@
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -15,13 +14,13 @@ public class JavaApplication {
         }
 
         Scanner in = new Scanner(new InputStreamReader(inputStream));
-        List<String> stopwords = new ArrayList<>();
+        List<String> stopWords = new ArrayList<>();
         while (in.hasNextLine()) {
-            stopwords.add(in.nextLine());
+            stopWords.add(in.nextLine());
         }
         in.close();
 
-        final WordCounter wordCounter = new WordCounter(stopwords);
+        final WordCounter wordCounter = new WordCounter(stopWords);
 
         final String queryString = "Enter text: ";
         System.out.print(queryString);
@@ -29,7 +28,7 @@ public class JavaApplication {
 
         long count = wordCounter.getWordCount(line);
         String outputMessageFormat = "Number of words: %d";
-        System.out.printf(outputMessageFormat,  count);
+        System.out.printf(outputMessageFormat, count);
 
     }
 
