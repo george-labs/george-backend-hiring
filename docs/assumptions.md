@@ -28,3 +28,7 @@ which is the reflection of the actual ".txt" file we will be using when it is pr
 - This iteration requires selecting unique words and elements for each different sentence.
 - Created separate method for collecting the total number of elements and unique values
 
+## Iteration 5
+- The words containing a hypen are no longer separated, compared to the prior solution
+e.g. „Humpty-Dumpty“ will be considered 1 word instead of 2
+- There Regex will require adjustments to make sure it works with the latest needs.

@@ -15,8 +15,8 @@ fun main(args: Array<String>) {
         val inputInformation = inputHandlerService.inputValidation(args)
         val result = counter.collectWordCountElements(inputInformation)
 
-        val total = counter.collectTotalNrOfElements(result)
-        val uniques = counter.collectUniqueNrOfElements(result)
+        val total = counter.totalCount(result)
+        val uniques = counter.uniqueCount(result)
         println("Number of words: $total, unique: $uniques")
     } catch (e: Error) {
         println(e.message)
