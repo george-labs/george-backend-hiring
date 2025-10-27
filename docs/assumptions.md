@@ -14,4 +14,11 @@
   - at the root of repo:  val file = File("stopwords.txt")
   - or in resources: val file = File("src/main/resources/stopwords.txt")
 
+## Iteration 3
+
+- There are 2 different entry points now (The application can be started with)
+    - a filename to read the text from instead of entering it manually.
+    - If no filename is provided, the application will still ask for a text. Sample usage:
+- We have during the run parametrised element named "mytext", 
+which is the reflection of the actual ".txt" file we will be using when it is provided 
 

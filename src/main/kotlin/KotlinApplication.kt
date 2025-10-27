@@ -3,9 +3,11 @@ import service.WordCountService
 import java.io.File
 
 
-fun main() {
+fun main(args: Array<String>) {
     val file = File("src/main/resources/stopwords.txt")
     val counter: WordCountInterface = WordCountService(file)
+
+    println("parameter: ${args.toSet()}")
 
     println("Enter text:")
     val input = readlnOrNull() ?: ""
