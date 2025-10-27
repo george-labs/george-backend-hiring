@@ -17,7 +17,10 @@ fun main(args: Array<String>) {
 
         val total = counter.totalCount(result)
         val uniques = counter.uniqueCount(result)
-        println("Number of words: $total, unique: $uniques")
+        val averageLength = counter.takeAverage(result,total)
+        val averageValue ="%.2f".format( averageLength).toDouble()
+
+        println("Number of words: $total, unique: $uniques, average word length: $averageValue")
     } catch (e: Error) {
         println(e.message)
     }

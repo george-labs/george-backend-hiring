@@ -36,5 +36,10 @@ class WordCountService(stopWordFile: File) : WordCountInterface {
         return result.count()
     }
 
+    override fun takeAverage(result: List<WordCount>, totalCount:Int): Double {
+        val totalValueOfElements =  result.sumOf { it.word.length*it.count }
+        return if(totalCount>0) totalValueOfElements.toDouble()/totalCount else 0.0
+    }
+
 
 }

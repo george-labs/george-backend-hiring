@@ -29,6 +29,15 @@ which is the reflection of the actual ".txt" file we will be using when it is pr
 - Created separate method for collecting the total number of elements and unique values
 
 ## Iteration 5
-- The words containing a hypen are no longer separated, compared to the prior solution
+- The words containing a hyphen are no longer separated, compared to the prior solution
 e.g. „Humpty-Dumpty“ will be considered 1 word instead of 2
 - There Regex will require adjustments to make sure it works with the latest needs.
+
+## Iteration 6
+
+- Alongside collection of the total count of elements, unique ones regardless of hyphen or not, 
+the solution is now calculating average value as well
+- The average word length of counted words is calculated and output, e.g.
+  - Number of words: 14, unique: 10; average word length: 5.63 characters
+  - it is counted by multiplying the nr of characters for the word (length) to on frequency/duplicate.
+  - for the average if the total is >0 then the solution splits it by the nr of elements
