@@ -5,36 +5,37 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import service.WordCountService
 import java.io.File
-import kotlin.collections.listOf
 
 class WordCountIteration1Test {
 
-    val counter: WordCountInterface = WordCountService(File.createTempFile("stopwords",  ".txt"))
+    val counter: WordCountInterface = WordCountService(File.createTempFile("stopwords", ".txt"))
 
     @Test
-    fun `empty word list`(){
+    fun `given emptyString when count then returnsEmptyList`() {
         val emptySet = counter.count("")
         assertTrue(emptySet.isEmpty())
     }
 
 
     @Test
-    fun `same word Different CameCase`(){
+    fun `given mixedCaseWords when count then countsAllAsLowercase`() {
         val result = counter.count("dog Dog DOG")
-        assertEquals(listOf(WordCount("dog",3)),result)
+        assertEquals(listOf(WordCount("dog", 3)), result)
     }
 
 
     @Test
-    fun `iteration 1 test sample using the example`(){
+    fun `given sampleText when count then returnsCorrectCounts`() {
         val result = counter.count("Mary had a little lamb")
-        assertEquals(listOf(
-            WordCount("mary",1),
-            WordCount("had",1),
-            WordCount("a",1),
-            WordCount("little",1),
-            WordCount("lamb",1),
-        ),result)
+        assertEquals(
+            listOf(
+                WordCount("mary", 1),
+                WordCount("had", 1),
+                WordCount("a", 1),
+                WordCount("little", 1),
+                WordCount("lamb", 1),
+            ), result
+        )
     }
 
 }

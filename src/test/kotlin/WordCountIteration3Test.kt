@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import service.WordCountService
 import java.io.File
-import kotlin.collections.listOf
 
 class WordCountIteration3Test {
 
@@ -18,7 +17,7 @@ class WordCountIteration3Test {
 
 
     @Test
-    fun `iteration3 we still filter out elements`() {
+    fun `given textAndStopFile when count then filtersElements`() {
         val stopFile = tempFileCreation(listOf("a"))
         val counter: WordCountInterface = WordCountService(stopFile)
         val result = counter.count("Mary had a little lamb")
@@ -34,7 +33,7 @@ class WordCountIteration3Test {
 
 
     @Test
-    fun `iteration3 test sample using the example ignoring words had and a`() {
+    fun `given sampleTextAndStopFile when count then returnsCorrectCounts`() {
         val stopFile = tempFileCreation(listOf("had", "a"))
         val counter: WordCountInterface = WordCountService(stopFile)
         val result = counter.count("Peter Pan had a brown hat")
@@ -49,7 +48,7 @@ class WordCountIteration3Test {
     }
 
     @Test
-    fun `empty StopFile Iteration 3`() {
+    fun `given textAndEmptyStopFile when count then filtersNothing`() {
         val stopFile = tempFileCreation(emptyList())
         val counter: WordCountInterface = WordCountService(stopFile)
         val result = counter.count("Peter Pan had a brown hat")
@@ -66,15 +65,18 @@ class WordCountIteration3Test {
     }
 
     @Test
-    fun `case where the file presented input is empty Iteration 3`() {
-        val stopFile = tempFileCreation(listOf("had", "a"))
-        val counter: WordCountInterface = WordCountService(stopFile)
-        val inexistingFile = File.createTempFile("testFail",  ".txt")
-
-        val result = counter.count("")
-
-        assertThrows<Error> {if(!inexistingFile.exists()) throw Error("File was not found:$result")  }
-        assertTrue(result.isEmpty())
+    fun `given missingStopFile when serviceInit then throws Error`() {
+        val nonexistentFile = File.createTempFile("testFail", ".txt")
+        nonexistentFile.delete()
+        assertThrows<Error> { WordCountService(nonexistentFile) }
     }
 
+
+    @Test
+    fun `given emptyStringInput when count then returns EmptyList`() {
+        val stopFile = tempFileCreation(listOf("had", "a"))
+        val counter: WordCountInterface = WordCountService(stopFile)
+        val result = counter.count("")
+        assertTrue(result.isEmpty())
+    }
 }
