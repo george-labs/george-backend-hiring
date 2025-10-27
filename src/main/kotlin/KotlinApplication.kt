@@ -5,6 +5,7 @@ import service.WordCountService
 import java.io.File
 
 
+
 fun main(args: Array<String>) {
     try {
         val file = File("src/main/resources/stopwords.txt")
@@ -14,7 +15,9 @@ fun main(args: Array<String>) {
         val inputInformation = inputHandlerService.inputValidation(args)
         val result = counter.count(inputInformation)
 
-        println("Number of words: ${result.sumOf { it.count }}")
+        val total = result.sumOf { it.count }
+        val uniques = result.count()
+        println("Number of words: $total, unique: $uniques")
     } catch (e: Error) {
         println(e.message)
     }

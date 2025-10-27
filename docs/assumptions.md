@@ -21,4 +21,9 @@
     - If no filename is provided, the application will still ask for a text. Sample usage:
 - We have during the run parametrised element named "mytext", 
 which is the reflection of the actual ".txt" file we will be using when it is provided 
+- Extracted the InputHandler into it's own separate service, for handling parameter arguments.
+
+## Iteration 4
+- The solution should keep the total number of words
+- This iteration requires selecting unique words and elements for each different sentence.
 
