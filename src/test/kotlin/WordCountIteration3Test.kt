@@ -15,12 +15,11 @@ class WordCountIteration3Test {
         return tempFile
     }
 
-
     @Test
-    fun `given textAndStopFile when count then filtersElements`() {
+    fun `given textAndStopFile when collectWordCountElements then filtersElements`() {
         val stopFile = tempFileCreation(listOf("a"))
         val counter: WordCountInterface = WordCountService(stopFile)
-        val result = counter.count("Mary had a little lamb")
+        val result = counter.collectWordCountElements("Mary had a little lamb")
         assertEquals(
             listOf(
                 WordCount("mary", 1),
@@ -33,10 +32,10 @@ class WordCountIteration3Test {
 
 
     @Test
-    fun `given sampleTextAndStopFile when count then returnsCorrectCounts`() {
+    fun `given sampleTextAndStopFile when collectWordCountElements then returns CorrectCounts`() {
         val stopFile = tempFileCreation(listOf("had", "a"))
         val counter: WordCountInterface = WordCountService(stopFile)
-        val result = counter.count("Peter Pan had a brown hat")
+        val result = counter.collectWordCountElements("Peter Pan had a brown hat")
         assertEquals(
             listOf(
                 WordCount("peter", 1),
@@ -48,10 +47,10 @@ class WordCountIteration3Test {
     }
 
     @Test
-    fun `given textAndEmptyStopFile when count then filtersNothing`() {
+    fun `given textAndEmptyStopFile when collectWordCountElements then filtersNothing`() {
         val stopFile = tempFileCreation(emptyList())
         val counter: WordCountInterface = WordCountService(stopFile)
-        val result = counter.count("Peter Pan had a brown hat")
+        val result = counter.collectWordCountElements("Peter Pan had a brown hat")
         assertEquals(
             listOf(
                 WordCount("peter", 1),
@@ -65,7 +64,7 @@ class WordCountIteration3Test {
     }
 
     @Test
-    fun `given missingStopFile when serviceInit then throws Error`() {
+    fun `given missing StopFile when collectWordCountElements then throws Error`() {
         val nonexistentFile = File.createTempFile("testFail", ".txt")
         nonexistentFile.delete()
         assertThrows<Error> { WordCountService(nonexistentFile) }
@@ -73,10 +72,10 @@ class WordCountIteration3Test {
 
 
     @Test
-    fun `given emptyStringInput when count then returns EmptyList`() {
+    fun `given emptyStringInput when collectWordCountElements then returns EmptyList`() {
         val stopFile = tempFileCreation(listOf("had", "a"))
         val counter: WordCountInterface = WordCountService(stopFile)
-        val result = counter.count("")
+        val result = counter.collectWordCountElements("")
         assertTrue(result.isEmpty())
     }
 }

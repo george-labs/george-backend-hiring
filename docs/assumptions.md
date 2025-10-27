@@ -26,4 +26,5 @@ which is the reflection of the actual ".txt" file we will be using when it is pr
 ## Iteration 4
 - The solution should keep the total number of words
 - This iteration requires selecting unique words and elements for each different sentence.
+- Created separate method for collecting the total number of elements and unique values
 

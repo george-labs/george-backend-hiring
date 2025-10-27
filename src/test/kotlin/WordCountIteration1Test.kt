@@ -11,22 +11,22 @@ class WordCountIteration1Test {
     val counter: WordCountInterface = WordCountService(File.createTempFile("stopwords", ".txt"))
 
     @Test
-    fun `given emptyString when count then returnsEmptyList`() {
-        val emptySet = counter.count("")
+    fun `given emptyString when collectWordCountElements then returnsEmptyList`() {
+        val emptySet = counter.collectWordCountElements("")
         assertTrue(emptySet.isEmpty())
     }
 
 
     @Test
-    fun `given mixedCaseWords when count then countsAllAsLowercase`() {
-        val result = counter.count("dog Dog DOG")
+    fun `given mixedCaseWords when collectWordCountElements then countsAllAsLowercase`() {
+        val result = counter.collectWordCountElements("dog Dog DOG")
         assertEquals(listOf(WordCount("dog", 3)), result)
     }
 
 
     @Test
-    fun `given sampleText when count then returnsCorrectCounts`() {
-        val result = counter.count("Mary had a little lamb")
+    fun `given sampleText when collectWordCountElements then returnsCorrectCounts`() {
+        val result = counter.collectWordCountElements("Mary had a little lamb")
         assertEquals(
             listOf(
                 WordCount("mary", 1),

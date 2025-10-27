@@ -6,7 +6,7 @@ import java.io.File
 import java.util.Locale.getDefault
 
 class WordCountService(stopWordFile: File) : WordCountInterface {
-    override fun count(input: String): List<WordCount> {
+    override fun collectWordCountElements(input: String): List<WordCount> {
         val words = Regex("[a-zA-Z]+").findAll(input).map { it.value }.toList()
 
         return words
@@ -26,6 +26,14 @@ class WordCountService(stopWordFile: File) : WordCountInterface {
                 .toSet()
         } else
             throw Error("File was not found:$file")
+    }
+
+    override fun collectTotalNrOfElements(result: List<WordCount>): Int {
+        return result.sumOf { it.count }
+    }
+
+    override fun collectUniqueNrOfElements(result: List<WordCount>): Int {
+        return result.count()
     }
 
 

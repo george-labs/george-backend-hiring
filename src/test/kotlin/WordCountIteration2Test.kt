@@ -15,10 +15,10 @@ class WordCountIteration2Test {
 
 
     @Test
-    fun `given textAndStopFileWithA when count then filtersA`() {
+    fun `given textAndStopFileWithA when collectWordCountElements then filtersA`() {
         val stopFile = tempFileCreation(listOf("a"))
         val counter: WordCountInterface = WordCountService(stopFile)
-        val result = counter.count("Mary had a little lamb")
+        val result = counter.collectWordCountElements("Mary had a little lamb")
         assertEquals(
             listOf(
                 WordCount("mary", 1),
@@ -31,10 +31,10 @@ class WordCountIteration2Test {
 
 
     @Test
-    fun `given textAndStopFileWithHadA when count then filtersHadAndA`() {
+    fun `given textAndStopFileWithHadA when collectWordCountElements then filtersHadAndA`() {
         val stopFile = tempFileCreation(listOf("had", "a"))
         val counter: WordCountInterface = WordCountService(stopFile)
-        val result = counter.count("Mary had a little lamb")
+        val result = counter.collectWordCountElements("Mary had a little lamb")
         assertEquals(
             listOf(
                 WordCount("mary", 1),
@@ -45,10 +45,10 @@ class WordCountIteration2Test {
     }
 
     @Test
-    fun `given textAndEmptyStopFile when count then filtersNothing`() {
+    fun `given textAndEmptyStopFile when collectWordCountElements then filtersNothing`() {
         val stopFile = tempFileCreation(emptyList())
         val counter: WordCountInterface = WordCountService(stopFile)
-        val result = counter.count("Mary had a little lamb")
+        val result = counter.collectWordCountElements("Mary had a little lamb")
         assertEquals(
             listOf(
                 WordCount("mary", 1),
