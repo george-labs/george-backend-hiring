@@ -1,24 +1,23 @@
-class WordCounter(val fileReader: FileReader) {
-    fun getStopWords(): Set<String> {
-        val stopWordsContent = fileReader.readFile("src/main/resources/stopwords.txt")
-        return stopWordsContent.split("\n").map { it.trim() }.toSet()
+class WordCounter(val stopWords: Set<String>) {
+    var wordsList = listOf<String>()
+
+    fun setInputText (text: String) {
+        wordsList = getWords(text, stopWords)
     }
 
-    fun getWords(text: String): List<String> {
+    fun countAllWords(): Int {
+        return wordsList.count()
+    }
+
+    fun countUniqueWords(): Int {
+        return wordsList.toSet().count()
+    }
+
+    private fun getWords(text: String, stopWords: Set<String>): List<String> {
         return Regex("[A-Za-z]+")
             .findAll(text)
             .map { it.value.lowercase() }
-            .filter { it.isNotBlank() && it !in getStopWords() }
+            .filter { it.isNotBlank() && it !in stopWords }
             .toList()
     }
-
-    fun countAllWords(list: List<String>): Int {
-        return list.count()
-    }
-
-    fun countUniqueWords(list: List<String>): Int {
-        return list.toSet().count()
-    }
 }
-
-

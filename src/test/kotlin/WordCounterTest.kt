@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class WordCounterTest {
@@ -5,28 +6,29 @@ class WordCounterTest {
         Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.
     """.trimIndent()
 
+    val STOP_WORDS = setOf("a", "on", "off", "the")
+
     val EXPECTED_COUNT = 9
     val EXPECTED_UNIQUE_COUNT = 7
 
-    private val wordCounter = WordCounter(FileReaderImpl())
-
     @Test
     fun testCountWords() {
-        val words = wordCounter.getWords(TEXT)
+        val wordCounter = WordCounter(STOP_WORDS)
+        wordCounter.setInputText(TEXT)
 
-        val noOfWords = wordCounter.countAllWords(words)
-        val noOfUniqueWords = wordCounter.countUniqueWords(words)
+        val noOfWords = wordCounter.countAllWords()
+        val noOfUniqueWords = wordCounter.countUniqueWords()
 
-        assert(noOfWords == EXPECTED_COUNT)
-        assert(noOfUniqueWords == EXPECTED_UNIQUE_COUNT)
+        assertEquals(EXPECTED_COUNT, noOfWords,)
+        assertEquals(EXPECTED_UNIQUE_COUNT, noOfUniqueWords)
     }
 
     @Test
     fun testCountWordsEmpty() {
-        val words = wordCounter.getWords("")
+        val wordCounter = WordCounter(STOP_WORDS)
 
-        val noOfWords = wordCounter.countAllWords(words)
-        val noOfUniqueWords = wordCounter.countUniqueWords(words)
+        val noOfWords = wordCounter.countAllWords()
+        val noOfUniqueWords = wordCounter.countUniqueWords()
 
         assert(noOfWords == 0)
         assert(noOfUniqueWords == 0)
@@ -34,54 +36,13 @@ class WordCounterTest {
 
     @Test
     fun testCountStopWords() {
-        val stopWordsText = wordCounter.getStopWords().joinToString(" ")
-        val words = wordCounter.getWords(stopWordsText)
+        val wordCounter = WordCounter(setOf())
+        wordCounter.setInputText(TEXT)
 
-        val noOfWords = wordCounter.countAllWords(words)
-        val noOfUniqueWords = wordCounter.countUniqueWords(words)
+        val noOfWords = wordCounter.countAllWords()
+        val noOfUniqueWords = wordCounter.countUniqueWords()
 
-        assert(noOfWords == 0)
-        assert(noOfUniqueWords == 0)
-        assert(noOfWords == noOfUniqueWords)
-    }
-
-    @Test
-    fun testCountAllWords() {
-        val wordsList = listOf("apple", "banana", "apple", "orange", "banana", "kiwi")
-        val expectedCount = 6
-
-        val actualCount = wordCounter.countAllWords(wordsList)
-
-        assert(actualCount == expectedCount)
-    }
-
-    @Test
-    fun testCountUniqueWords() {
-        val wordsList = listOf("apple", "banana", "apple", "orange", "banana", "kiwi")
-        val expectedUniqueCount = 4
-
-        val actualUniqueCount = wordCounter.countUniqueWords(wordsList)
-
-        assert(actualUniqueCount == expectedUniqueCount)
-    }
-
-    @Test
-    fun testCountAllWordsIfEmpty() {
-        val wordsList = listOf<String>()
-        val expectedCount = 0
-
-        val actualCount = wordCounter.countAllWords(wordsList)
-
-        assert(actualCount == expectedCount)
-    }
-
-    @Test
-    fun testCountUniqueWordsIfEmpty() {
-        val wordsList = listOf<String>()
-        val expectedUniqueCount = 0
-
-        val actualUniqueCount = wordCounter.countUniqueWords(wordsList)
-
-        assert(actualUniqueCount == expectedUniqueCount)
+        assert(noOfWords == 12)
+        assert(noOfUniqueWords == 9)
     }
 }
