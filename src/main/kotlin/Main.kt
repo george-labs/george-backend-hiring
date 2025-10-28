@@ -1,8 +1,16 @@
-fun main() {
-    println("Enter your text:")
-    val input = readLine() ?: ""
+import java.io.File
 
-    val wordCount = countWords(input)
+fun main(args: Array<String>) {
+    val fileReader = FileReader()
+
+    val input = if (args.isNotEmpty()) {
+        fileReader.readFile(args[0])
+    } else {
+        println("Enter your text:")
+        readlnOrNull() ?: ""
+    }
+
+    val wordCount = WordCounter(fileReader).countWords(input)
 
     println("Word count: $wordCount")
 }
