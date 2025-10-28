@@ -1,7 +1,5 @@
-import java.io.File
-
 fun main(args: Array<String>) {
-    val fileReader = FileReader()
+    val fileReader = FileReaderImpl()
 
     val input = if (args.isNotEmpty()) {
         fileReader.readFile(args[0])
@@ -10,7 +8,11 @@ fun main(args: Array<String>) {
         readlnOrNull() ?: ""
     }
 
-    val wordCount = WordCounter(fileReader).countWords(input)
+    val wordCounter = WordCounter(fileReader);
+    val wordsList = wordCounter.getWords(input)
 
-    println("Word count: $wordCount")
+    println(
+        "Number of words: ${wordCounter.countAllWords(wordsList)}, " +
+                "unique: ${wordCounter.countUniqueWords(wordsList)}"
+    )
 }

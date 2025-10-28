@@ -1,8 +1,11 @@
 import java.io.File
 
-class FileReader {
-    fun readFile(filePath: String): String {
-        val file = File(filePath).readText()
-        return file
+interface FileReader {
+    fun readFile(filePath: String): String
+}
+
+class FileReaderImpl : FileReader {
+    override fun readFile(filePath: String): String {
+        return File(filePath).readText()
     }
 }

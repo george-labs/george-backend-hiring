@@ -6,28 +6,34 @@ import java.io.File
 import java.io.PrintStream
 
 class MainEndToEndTest {
+    val TEXT = """
+        Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.
+    """.trimIndent()
+
+    val EXPECTED = "Number of words: 9, unique: 7"
+
     @Test
     fun testMainWithFileInput() {
         val tempFile = File.createTempFile("test", ".txt")
-        tempFile.writeText("Mary had \na little \nlamb")
+        tempFile.writeText(TEXT)
         val output = ByteArrayOutputStream()
         System.setOut(PrintStream(output))
 
         main(arrayOf(tempFile.absolutePath))
 
-        assertTrue(output.toString().contains("Word count: 4"))
+        assertTrue(output.toString().contains(EXPECTED))
         tempFile.delete()
     }
 
     @Test
     fun testMainWithUserInput() {
-        val input = ByteArrayInputStream("Mary had a little lamb".toByteArray())
+        val input = ByteArrayInputStream(TEXT.toByteArray())
         val output = ByteArrayOutputStream()
         System.setIn(input)
         System.setOut(PrintStream(output))
 
         main(emptyArray())
 
-        assertTrue(output.toString().contains("Word count: 4"))
+        assertTrue(output.toString().contains(EXPECTED))
     }
 }

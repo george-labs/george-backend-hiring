@@ -4,7 +4,7 @@ import org.junit.jupiter.api.assertThrows
 import java.io.FileNotFoundException
 
 class FileReaderTest {
-    private val fileReader = FileReader()
+    private val fileReader = FileReaderImpl()
 
     @Test
     fun testReadFile() {
