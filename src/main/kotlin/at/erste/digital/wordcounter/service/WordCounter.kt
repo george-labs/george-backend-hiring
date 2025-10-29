@@ -1,4 +1,4 @@
-package at.erste.digital.wordcounter
+package at.erste.digital.wordcounter.service
 
 class WordCounter(private val stopWords: List<String> = emptyList()) {
     fun countWords(text: String): Int {
