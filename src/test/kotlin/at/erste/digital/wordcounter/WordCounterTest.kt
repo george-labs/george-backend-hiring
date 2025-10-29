@@ -1,7 +1,7 @@
 package at.erste.digital.wordcounter
 
 import at.erste.digital.wordcounter.service.WordCounter
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.TestInstance
@@ -28,7 +28,8 @@ class WordCounterTest {
             ana has a nice dog
             the dog is a border collie
         """.trimIndent(), 11
-            )
+            ),
+            Arguments.of("bielsko-biala ana bielsko-biala ana", 4),
         )
 
         private fun uniqueWordCountTestWithoutStopWordsArguments() = listOf(
@@ -44,6 +45,7 @@ class WordCounterTest {
             ),
             Arguments.of("test 123 test ana dog ana test", 3),
             Arguments.of("123 123 ana ana", 1),
+            Arguments.of("bielsko-biala ana bielsko-biala ana", 2),
         )
 
         @ParameterizedTest(name = "should return {1} when input is {0}")
@@ -86,6 +88,7 @@ class WordCounterTest {
             the dog is a border collie
         """.trimIndent(), 11
             ),
+            Arguments.of(listOf("ana"), "bielsko-biala ana bielsko-biala ana", 2),
         )
 
         private fun uniqueWordCountTestWithStopWordsArguments() = listOf(
@@ -101,6 +104,7 @@ class WordCounterTest {
             the dog is a border collie
         """.trimIndent(), 9
             ),
+            Arguments.of(listOf("ana"), "bielsko-biala ana a bielsko-biala ana a", 2),
         )
 
         @ParameterizedTest(name = "should return {2} when input is {1} and stop words are {0}")
