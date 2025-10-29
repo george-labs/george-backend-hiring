@@ -1,2 +1,2 @@
-class KotlinApplicationTest {
-}
+import org.junit.jupiter.api.Test
+
