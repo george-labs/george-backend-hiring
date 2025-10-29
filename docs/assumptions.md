@@ -9,3 +9,6 @@ I assume the format of the stopwords.txt file is correct so each word is on its 
 ### Iteration 3
 The user should provide 1 file name as the argument
 The provided file is not considered big data so i work with it in memory
+
+### Iteration 6
+Average will be returned with precision to 2 decimal point
