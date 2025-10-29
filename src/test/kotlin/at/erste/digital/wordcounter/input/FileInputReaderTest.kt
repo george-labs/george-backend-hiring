@@ -8,7 +8,8 @@ class FileInputReaderTest {
     @Test
     fun `should return string from file`() {
         //GIVEN
-        val fileInputReader = FileInputReader(fileName = "src/test/kotlin/at/erste/digital/wordcounter/words.txt")
+        val fileName = "src/test/resources/words.txt"
+        val fileInputReader = FileInputReader(fileName = fileName)
 
         //WHEN
         val result = fileInputReader.readWords().getOrThrow()
