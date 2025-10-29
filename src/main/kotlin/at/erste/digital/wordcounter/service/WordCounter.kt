@@ -13,6 +13,6 @@ class WordCounter(private val stopWords: List<String> = emptyList()) {
 
     private fun getWords(text: String): List<String> = text.trim()
         .split(" ", "\t", "\n")
-        .filter { it.matches("[a-zA-Z]+".toRegex()) }
+        .filter { it.matches("[a-zA-Z]+[-]?[a-zA-Z]{0,}".toRegex()) }
         .filterNot { it in stopWords }
 }
