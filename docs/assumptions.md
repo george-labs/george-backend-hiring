@@ -5,3 +5,7 @@
 - No other white space characters than spaces are allowed in the input
 - If there is an input, then it will be valid according to the specification (only spaces, a-z, A-Z no other characters)
 - Invalid inputs will get IllegalArgumentException
+
+## Iteration 2
+- All the stop words will be case insensitive
+- The stopwords file is optional, not mandatory for backwards compatibility 

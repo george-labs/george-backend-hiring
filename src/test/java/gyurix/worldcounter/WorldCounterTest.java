@@ -2,6 +2,9 @@ package gyurix.worldcounter;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.nio.file.NoSuchFileException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -35,5 +38,51 @@ public class WorldCounterTest {
         wc.doWork();
         int result = wc.getResult();
         assertEquals(5, result);
+    }
+
+    @Test
+    public void testIteration2ExampleInput() throws IOException {
+        WorldCounter wc = new WorldCounter("stopwords.txt");
+        wc.setInput("Mary had a little lamb");
+        wc.doWork();
+        int result = wc.getResult();
+        assertEquals(4, result);
+    }
+
+    @Test
+    public void testIteration2OnlyStopWordsCaseInsensitive() throws IOException {
+        WorldCounter wc = new WorldCounter("stopwords.txt");
+        wc.setInput("The a on off ON OFF");
+        wc.doWork();
+        int result = wc.getResult();
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void testIteration2NullStopWordsFile() {
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> new WorldCounter(null));
+        assertEquals("stopwordsPath is null", exception.getMessage());
+    }
+
+    @Test
+    public void testIteration2InvalidStopWordsFile() {
+        NoSuchFileException exception = assertThrows(NoSuchFileException.class, () -> new WorldCounter("invalid.txt"));
+        assertEquals("invalid.txt", exception.getMessage());
+    }
+
+    @Test
+    public void testIteration2DoWorkTwice() throws IOException {
+        WorldCounter wc = new WorldCounter("stopwords.txt");
+        wc.setInput("Mary had a little lamb");
+        wc.doWork();
+        IllegalStateException exception = assertThrows(IllegalStateException.class, wc::doWork);
+        assertEquals("Work is already complete", exception.getMessage());
+    }
+
+    @Test
+    public void testIteration2NullInput() throws IOException {
+        WorldCounter wc = new WorldCounter("stopwords.txt");
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> wc.setInput(null));
+        assertEquals("Invalid input, only a-z, A-Z and spaces are allowed", exception.getMessage());
     }
 }
