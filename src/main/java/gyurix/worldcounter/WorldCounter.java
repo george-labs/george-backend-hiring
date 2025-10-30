@@ -6,7 +6,8 @@ public class WorldCounter {
     private boolean complete;
 
     public void setInput(String input) {
-        if (input==null || !input.matches("[a-zA-Z ]+")) {
+        this.complete = false;
+        if (input == null || !input.matches("[a-zA-Z ]+")) {
             throw new IllegalArgumentException("Invalid input, only a-z, A-Z and spaces are allowed");
         }
         this.input = input;
