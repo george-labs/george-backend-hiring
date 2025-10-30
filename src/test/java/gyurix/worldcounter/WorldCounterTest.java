@@ -20,7 +20,7 @@ public class WorldCounterTest {
     public void testIteration1InvalidInput() {
         WorldCounter wc = new WorldCounter();
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> wc.setInput("0"));
-        assertEquals("Invalid input, only a-z, A-Z and spaces are allowed", exception.getMessage());
+        assertEquals("Invalid input, only a-z, A-Z and whitespace is allowed", exception.getMessage());
     }
 
     @Test

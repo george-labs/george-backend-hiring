@@ -2,6 +2,7 @@ package gyurix.worldcounter;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,13 +28,22 @@ public class WorldCounter {
         Files.readAllLines(new File(stopwordsPath).toPath()).forEach(line -> stopWords.add(line.trim().toLowerCase()));
     }
 
-    public void setInput(String input) {
+    private void reset(){
         this.complete = false;
         this.result = 0;
-        if (input == null || !input.matches("[a-zA-Z ]+")) {
-            throw new IllegalArgumentException("Invalid input, only a-z, A-Z and spaces are allowed");
+    }
+
+    public void setInput(String input) {
+        reset();
+        if (input == null || !input.matches("[a-zA-Z\\s]+")) {
+            throw new IllegalArgumentException("Invalid input, only a-z, A-Z and whitespace is allowed");
         }
         this.input = input;
+    }
+
+    public void setFileInput(String fileName) throws IOException {
+        reset();
+        this.input = Files.readString(new File(fileName).toPath());
     }
 
     public void doWork() {
