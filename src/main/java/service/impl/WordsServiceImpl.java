@@ -4,7 +4,7 @@ import service.WordsService;
 
 import java.util.List;
 
-public class WordsCountImpl implements WordsService {
+public class WordsServiceImpl implements WordsService {
 
     @Override
     public int countWords(String text) {
@@ -14,7 +14,8 @@ public class WordsCountImpl implements WordsService {
 
         if (text.isBlank()) return 0;
 
-
+        List<String> words = List.of(text.split("\\s+"));
+        return (int) words.stream().filter(word -> word.matches("[a-zA-Z]+")).count();
     }
 
 }
