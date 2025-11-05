@@ -1,7 +1,7 @@
 import input.InputReader;
 import input.impl.ConsoleInputReader;
 import output.OutputWriter;
-import output.impl.OutputWriterImpl;
+import output.impl.ConsoleOutputWriter;
 import service.WordsService;
 import service.impl.WordsServiceImpl;
 
@@ -9,7 +9,7 @@ public class JavaApplication {
 
     public static void main(String[] args) {
         InputReader inputReader = new ConsoleInputReader();
-        OutputWriter outputWriter = new OutputWriterImpl();
+        OutputWriter outputWriter = new ConsoleOutputWriter();
         WordsService wordsService = new WordsServiceImpl();
 
         outputWriter.writeLine("Enter text: ");
