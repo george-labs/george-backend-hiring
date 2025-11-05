@@ -1,10 +1,10 @@
 package input;
 
-import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 import java.util.Set;
 
 public interface StopWordsProvider {
 
-    Set<String> getStopWords(String filename) throws IOException;
+    Set<String> getStopWords(String filename) throws NoSuchFileException;
 
 }
