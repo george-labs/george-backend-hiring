@@ -1,7 +1,9 @@
 package input;
 
+import java.nio.file.NoSuchFileException;
+
 public interface InputReader {
 
-    String readLine();
+    String readInput() throws NoSuchFileException;
 
 }

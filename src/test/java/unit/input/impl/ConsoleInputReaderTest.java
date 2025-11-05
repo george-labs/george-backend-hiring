@@ -17,23 +17,23 @@ public class ConsoleInputReaderTest {
     }
 
     @Test
-    void givenRegularInputText_whenReadLine_thenShouldReturnCorrectInput() {
+    void givenRegularInputText_whenReadInput_thenShouldReturnCorrectInput() {
         String userInputText = "Mary had a little lamb";
         ByteArrayInputStream bais = new ByteArrayInputStream(userInputText.getBytes());
         System.setIn(bais);
 
-        String result = consoleInputReader.readLine();
+        String result = consoleInputReader.readInput();
 
         assertEquals(userInputText, result);
     }
 
     @Test
-    void givenNullInputText_whenReadLine_thenShouldReturnCorrectInput() {
+    void givenNullInputText_whenReadInput_thenShouldReturnCorrectInput() {
         String userInputText = "\n";
         ByteArrayInputStream bais = new ByteArrayInputStream(userInputText.getBytes());
         System.setIn(bais);
 
-        String result = consoleInputReader.readLine();
+        String result = consoleInputReader.readInput();
 
         assertEquals("", result);
     }
