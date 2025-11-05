@@ -1,4 +1,5 @@
 import input.InputReader;
+import input.StopWordsProvider;
 import input.impl.ConsoleInputReader;
 import output.OutputWriter;
 import output.impl.ConsoleOutputWriter;
@@ -11,6 +12,7 @@ public class JavaApplication {
         InputReader inputReader = new ConsoleInputReader();
         OutputWriter outputWriter = new ConsoleOutputWriter();
         WordsService wordsService = new WordsServiceImpl();
+        StopWordsProvider stopWordsProvider = new StopWordsProviderImpl();
 
         outputWriter.writeLine("Enter text: ");
         String inputTextLine = inputReader.readLine();
