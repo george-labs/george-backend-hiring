@@ -12,6 +12,7 @@ class AppTest {
         "'', 'Number of words: 0, unique: 0'",
         "'the a on off NotATheOnOff', 'Number of words: 1, unique: 1'",
         "'1 3 . @ #', 'Number of words: 0, unique: 0'",
+        "'Mary had\n a little\n lamb', 'Number of words: 4, unique: 4'",
         "'Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.', 'Number of words: 7, unique: 6'"
     )
     fun mainLoopTest(input: String, expectedOutput: String) {
