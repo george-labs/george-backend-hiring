@@ -15,7 +15,7 @@ class WordCounterTest {
         "'', 0",
         "'1 3 . @ ', 0",
     )
-    fun countWords(input: String, expectedCount: Int) {
+    fun countWordsTest(input: String, expectedCount: Int) {
 
         val result = tested.countWords(input)
 

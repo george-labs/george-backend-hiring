@@ -1,7 +1,9 @@
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import java.util.concurrent.atomic.AtomicInteger
 
 class AppTest {
 
@@ -9,21 +11,27 @@ class AppTest {
 
     @ParameterizedTest
     @CsvSource(
-        "'Mary had a little lamb', 5",
-        "'Mary . had , a % little lamb', 5",
-        "'Mary 3  had 4  a  little lamb', 5",
-        "'M4ry 3  had 4  a  little lamb', 6",
-        "'', 0",
-        "'1 3 . @ ', 0",
+        "'Mary had a little lamb'",
+        "''",
+        "'1 3 . @ #'",
     )
-    fun mainLoop(input: String) {
+    fun mainLoopTest(input: String) {
+        val inputCounter = AtomicInteger()
+        val outputCounter = AtomicInteger()
         val reader = Reader {
+            inputCounter.incrementAndGet()
             input
         }
-        
-        val writer = Writer {
 
+        val writer = Writer {
+            outputCounter.incrementAndGet()
         }
+
+        tested.mainLoop(reader, writer)
+
+        Assertions.assertEquals(1, inputCounter.get())
+        Assertions.assertEquals(2, outputCounter.get())
+
     }
 
 }
