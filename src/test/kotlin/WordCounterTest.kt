@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import kotlin.sequences.distinct
@@ -27,8 +28,8 @@ class WordCounterTest {
 
         val (foundTotalCount, foundDistinctCount) = tested.countWords(input)
 
-        Assertions.assertEquals(expectedTotalCount, foundTotalCount)
-        Assertions.assertEquals(expectedDistinctCount, foundDistinctCount)
+        assertEquals(expectedTotalCount, foundTotalCount)
+        assertEquals(expectedDistinctCount, foundDistinctCount)
     }
 
 }

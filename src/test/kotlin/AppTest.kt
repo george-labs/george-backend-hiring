@@ -32,9 +32,9 @@ class AppTest {
 
         tested.mainLoop(reader, writer)
 
-        Assertions.assertEquals(1, inputCounter.get())
-        Assertions.assertEquals(2, outputCounter.get())
-        Assertions.assertEquals(expectedOutput, lastOutput)
+        assertEquals(1, inputCounter.get())
+        assertEquals(2, outputCounter.get())
+        assertEquals(expectedOutput, lastOutput)
 
     }
 
