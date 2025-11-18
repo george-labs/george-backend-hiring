@@ -29,7 +29,9 @@ class App() {
         val wordCounter = WordCounter(stopWords)
         writer.write("Enter text: ")
         val input = reader.read()
-        writer.write("Number of words: ${wordCounter.countWords(input)}")
+        //!stopWords.contains(it)
+        val (foundTotalCount, foundDistinctCount) = wordCounter.countWords(input, { it.count() }, {it.distinct().count()})
+        writer.write("Number of words: $foundTotalCount, unique: $foundDistinctCount")
     }
 
 

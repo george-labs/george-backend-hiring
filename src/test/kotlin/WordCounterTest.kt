@@ -1,9 +1,9 @@
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import kotlin.sequences.distinct
 
 class WordCounterTest {
-
     val stopWords: List<String> = listOf(
         "the",
         "a",
@@ -14,18 +14,21 @@ class WordCounterTest {
 
     @ParameterizedTest
     @CsvSource(
-        "'Mary had aa little lamb', 5",
-        "'Mary . had , \n a % little lamb', 4",
-        "'Mary 3  had 4  a  little lamb', 4",
-        "'M4ry 3  had 4  a  little lamb', 5",
-        "'', 0",
-        "'the a on off NotATheOnOff', 1",
-        "'1 3 . @ ', 0",
+        "'Mary had aa little lamb', 5, 5",
+        "'Mary . had , \n a % little lamb', 4, 4",
+        "'Mary 3  had 4  a  little lamb', 4, 4",
+        "'M4ry 3  had 4  a  little lamb', 5, 5",
+        "'', 0, 0",
+        "'the a on off NotATheOnOff', 1, 1",
+        "'1 3 . @ ', 0, 0",
+        "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall, 9, 7"
     )
-    fun countWordsTest(input: String, expectedCount: Int) {
-        val result = tested.countWords(input)
+    fun countWordsTest(input: String, expectedTotalCount: Int, expectedDistinctCount: Int) {
 
-        Assertions.assertEquals(expectedCount, result)
+        val (foundTotalCount, foundDistinctCount) = tested.countWords(input, { it.count() }, {it.distinct().count()})
+
+        Assertions.assertEquals(expectedTotalCount, foundTotalCount)
+        Assertions.assertEquals(expectedDistinctCount, foundDistinctCount)
     }
 
 }

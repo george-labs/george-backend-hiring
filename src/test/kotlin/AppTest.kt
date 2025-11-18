@@ -10,10 +10,10 @@ class AppTest {
 
     @ParameterizedTest
     @CsvSource(
-        "'Mary had a little lamb', 'Number of words: 4'",
-        "'', 'Number of words: 0'",
-        "'the a on off NotATheOnOff', 'Number of words: 1'",
-        "'1 3 . @ #', 'Number of words: 0'",
+        "'Mary had a little lamb lamb', 'Number of words: 5, unique: 4'",
+        "'', 'Number of words: 0, unique: 0'",
+        "'the a on off NotATheOnOff', 'Number of words: 1, unique: 1'",
+        "'1 3 . @ #', 'Number of words: 0, unique: 0'",
     )
     fun mainLoopTest(input: String, expectedOutput: String) {
         val inputCounter = AtomicInteger()
