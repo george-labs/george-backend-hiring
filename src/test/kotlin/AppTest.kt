@@ -6,7 +6,6 @@ import org.junit.jupiter.params.provider.CsvSource
 import java.util.concurrent.atomic.AtomicInteger
 
 class AppTest {
-
     val tested = App()
 
     @ParameterizedTest

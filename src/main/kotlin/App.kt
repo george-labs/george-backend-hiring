@@ -1,4 +1,5 @@
 import java.io.File
+import java.nio.file.Paths
 
 class App() {
     private fun consoleReader() = Reader {
@@ -6,7 +7,7 @@ class App() {
     }
 
     private fun fileReader(fileName: String) = Reader {
-        File(fileName).readText()
+        File( Paths.get("").toAbsolutePath().toString() + "\\$fileName").readText()
     }
 
     val consoleWriter = Writer { output ->
@@ -19,7 +20,7 @@ class App() {
         } else {
             fileReader(fileName)
         }
-        
+
         mainLoop(reader, consoleWriter)
     }
 
