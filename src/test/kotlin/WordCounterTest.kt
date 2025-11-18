@@ -15,7 +15,7 @@ class WordCounterTest {
     @ParameterizedTest
     @CsvSource(
         "'Mary had aa little lamb', 5",
-        "'Mary . had , a % little lamb', 4",
+        "'Mary . had , \n a % little lamb', 4",
         "'Mary 3  had 4  a  little lamb', 4",
         "'M4ry 3  had 4  a  little lamb', 5",
         "'', 0",

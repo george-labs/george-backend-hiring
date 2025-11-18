@@ -1,11 +1,6 @@
-fun main() {
-    val consoleReader = Reader {
-        readln()
-    }
+import java.io.File
 
-    val consoleWriter = Writer { output ->
-        print(output)
-    }
+fun main(fileName:String?) {
 
-    App().mainLoop(consoleReader, consoleWriter)
+    App().runApp(fileName)
 }
