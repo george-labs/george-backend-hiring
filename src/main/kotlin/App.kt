@@ -1,5 +1,7 @@
 import java.io.File
 import java.nio.file.Paths
+import kotlin.collections.component1
+import kotlin.collections.component2
 
 class App() {
     private fun consoleReader() = Reader {
@@ -7,7 +9,7 @@ class App() {
     }
 
     private fun fileReader(fileName: String) = Reader {
-        File( Paths.get("").toAbsolutePath().toString() + "\\$fileName").readText()
+        File(Paths.get("").toAbsolutePath().toString() + "\\$fileName").readText()
     }
 
     val consoleWriter = Writer { output ->
@@ -26,11 +28,10 @@ class App() {
 
     internal fun mainLoop(reader: Reader, writer: Writer) {
         val stopWords = this::class.java.getResourceAsStream("stopwords.txt")!!.bufferedReader().readLines()
-        val wordCounter = WordCounter(stopWords)
+        val wordCounter = WordCounter(listOf(NonStopWordsFilter(stopWords), DistinctFilter()))
         writer.write("Enter text: ")
         val input = reader.read()
-        //!stopWords.contains(it)
-        val (foundTotalCount, foundDistinctCount) = wordCounter.countWords(input, { it.count() }, {it.distinct().count()})
+        val (foundTotalCount, foundDistinctCount) = wordCounter.countWords(input)
         writer.write("Number of words: $foundTotalCount, unique: $foundDistinctCount")
     }
 

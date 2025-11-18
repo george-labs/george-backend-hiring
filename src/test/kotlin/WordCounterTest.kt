@@ -10,7 +10,7 @@ class WordCounterTest {
         "on",
         "off",
     )
-    val tested = WordCounter(stopWords)
+    val tested = WordCounter(listOf(NonStopWordsFilter(stopWords), DistinctFilter()))
 
     @ParameterizedTest
     @CsvSource(
@@ -25,7 +25,7 @@ class WordCounterTest {
     )
     fun countWordsTest(input: String, expectedTotalCount: Int, expectedDistinctCount: Int) {
 
-        val (foundTotalCount, foundDistinctCount) = tested.countWords(input, { it.count() }, {it.distinct().count()})
+        val (foundTotalCount, foundDistinctCount) = tested.countWords(input)
 
         Assertions.assertEquals(expectedTotalCount, foundTotalCount)
         Assertions.assertEquals(expectedDistinctCount, foundDistinctCount)
