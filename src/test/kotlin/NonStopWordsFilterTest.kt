@@ -11,8 +11,8 @@ class NonStopWordsFilterTest {
         "'Mary . had ,4 \n a % little lamb', 'a,on,the',  4",
         "'', 'stuff', 0",
         "'the a on off NotATheOnOff', 'a,on,the', 2",
-        "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall, 'Humpty,dumpty', 10",
-        "Humpty-Dumpty case-test. Humpty-Dumpty case-Test, 'Humpty-Dumpty case', 4"
+        "'Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall', 'Humpty,dumpty', 10",
+        "'Humpty-Dumpty case-test. Humpty-Dumpty case-Test', 'Humpty-Dumpty case', 4"
     )
     fun filter(input: String, stopWords: String, expectedCount: Int) {
         val tested = NonStopWordsFilter(stopWords.split(','))

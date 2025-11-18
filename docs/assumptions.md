@@ -19,5 +19,7 @@ distinct words are compared case-insensitive
 
 ## Iteration 6
 
-sometext.txt in the exaple contains the message form iteration 5:
-Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.
+sometext.txt is not provided, we have no example with 14 words
+letters will be counted after stopWord removal, deduplication, and hypen will count as a letter
+output average assumed to be with 2 decimals
+"average word length: 0" will be put oit if no words are found

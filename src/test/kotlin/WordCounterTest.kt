@@ -1,8 +1,6 @@
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import kotlin.sequences.distinct
 
 class WordCounterTest {
     val stopWords: List<String> = listOf(
@@ -15,21 +13,21 @@ class WordCounterTest {
 
     @ParameterizedTest
     @CsvSource(
-        "'Mary had aa little lamb', 5, 5",
-        "'Mary . had , \n a % little lamb', 4, 4",
-        "'Mary 3  had 4  a  little lamb', 4, 4",
-        "'M4ry 3  had 4  a  little lamb', 5, 5",
-        "'', 0, 0",
-        "'the a on off NotATheOnOff', 1, 1",
-        "'1 3 . @ ', 0, 0",
-        "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall, 9, 7"
+        "'Mary had aa little lamb', 'Mary,had,aa,little,lamb', 'Mary,had,aa,little,lamb'",
+        "'Mary . had , \n a % little lamb', 'Mary,had,little,lamb', 'Mary,had,little,lamb'",
+        "'Mary 3  had 4  a  little lamb', 'Mary,had,little,lamb', 'Mary,had,little,lamb'",
+        "'M4ry 3  had 4  a  little lamb', 'M,ry,had,little,lamb', 'M,ry,had,little,lamb'",
+        "'', '', ''",
+        "'the a on off NotATheOnOff', 'NotATheOnOff', 'NotATheOnOff'",
+        "'1 3 . @ ', '', ''",
+        "'Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall', 'Humpty-Dumpty,sat,wall,Humpty-Dumpty,had,great,fall', 'Humpty-Dumpty,sat,wall,had,great,fall'"
     )
-    fun countWordsTest(input: String, expectedTotalCount: Int, expectedDistinctCount: Int) {
+    fun countWordsTest(input: String, expectedNonStopWords: String, expectedDistinctNonStopWords: String) {
 
-        val (foundTotalCount, foundDistinctCount) = tested.countWords(input)
+        val (nonStopWords, distinctNonStopWords) = tested.countWords(input)
 
-        assertEquals(expectedTotalCount, foundTotalCount)
-        assertEquals(expectedDistinctCount, foundDistinctCount)
+        assertEquals(expectedNonStopWords, nonStopWords.joinToString(","))
+        assertEquals(expectedDistinctNonStopWords, distinctNonStopWords.joinToString(","))
     }
 
 }

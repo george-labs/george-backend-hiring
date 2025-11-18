@@ -1,17 +1,15 @@
 class WordCounter(val filters: List<SequenceFilter>) {
 
     companion object {
-        internal var ACCEPTABLE_LETTERS: Regex = Regex("([a-zA-Z]+)")
+        internal var ACCEPTABLE_LETTERS: Regex = Regex("([a-zA-Z-]+)")
         fun splitWords(input: String) = ACCEPTABLE_LETTERS.findAll(input).map { it.value }
     }
 
-
-    fun countWords(input: String): List<Int> {
+    fun countWords(input: String): List<Sequence<String>> {
         var currentList = splitWords(input)
         val result = filters.map {
-            println(currentList.map { it.length }.average()) //5.63
             currentList = it.filter(currentList)
-            currentList.count()
+            currentList
         }
 
         return result

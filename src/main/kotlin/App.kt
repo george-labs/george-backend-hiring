@@ -1,7 +1,5 @@
 import java.io.File
 import java.nio.file.Paths
-import kotlin.collections.component1
-import kotlin.collections.component2
 
 class App() {
     private fun consoleReader() = Reader {
@@ -31,8 +29,13 @@ class App() {
         val wordCounter = WordCounter(listOf(NonStopWordsFilter(stopWords), DistinctFilter()))
         writer.write("Enter text: ")
         val input = reader.read()
-        val (foundTotalCount, foundDistinctCount) = wordCounter.countWords(input)
-        writer.write("Number of words: $foundTotalCount, unique: $foundDistinctCount")
+        val (nonStopWords, distinctNonStopWords) = wordCounter.countWords(input)
+
+        val lettersAverage =
+            writer.write(
+                "Number of words: ${nonStopWords.count()}, unique: ${distinctNonStopWords.count()}; average word length: " +
+                    "${LetterCounter.averageLettersCount(distinctNonStopWords)}"
+            )
     }
 
 
