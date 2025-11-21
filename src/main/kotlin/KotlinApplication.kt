@@ -1,3 +1,5 @@
+
+
 fun main(args: Array<String>) {
     val ioService = IOService(System.`in`)
     val text = ioService.getInputText(args) ?: return
@@ -10,4 +12,11 @@ fun main(args: Array<String>) {
 
     //   print result
     ioService.msgln("Number of words: $wordsCount, unique: $uniqueCount; average word length: $averageLength characters")
+
+    if (ioService.showIndex(args)) {
+        ioService.msgln("Index:")
+        service.getChunks(text).toSortedSet().forEach {
+            ioService.msgln(it)
+        }
+    }
 }

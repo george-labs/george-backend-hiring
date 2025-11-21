@@ -2,11 +2,12 @@ import java.io.File
 import java.io.InputStream
 import java.util.*
 
-class IOService(val inputStream: InputStream) {
+class IOService(private val inputStream: InputStream) {
     fun getInputText(args: Array<String>): String? {
-        if (args.isNotEmpty()) {
+        val nonReservedArgs = args.filter { s: String -> s != "-index" }
+        if (nonReservedArgs.isNotEmpty()) {
             // Read from file
-            val fileName = args[0]
+            val fileName = nonReservedArgs[0]
             val file = File(fileName)
             if (!file.exists()) {
                 msgln("File $fileName not found!")
@@ -28,4 +29,6 @@ class IOService(val inputStream: InputStream) {
     fun msgln(msg: String) {
         println(msg)
     }
+
+    fun showIndex(args: Array<String>): Boolean = args.any { s: String -> s == "-index" }
 }

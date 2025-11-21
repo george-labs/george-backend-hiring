@@ -43,8 +43,7 @@ class WordService {
             ?.associate { s: String -> s to s }
             .orEmpty()
 
-
-    private fun getChunks(trimmed: String): List<String> {
+    fun getChunks(trimmed: String): List<String> {
         val stopWords = getStopWords()
 
         // Split
