@@ -1,15 +1,11 @@
-import java.util.*
-
-fun main() {
-    // system prompt
-    print("Enter text: ")
-    val scanner = Scanner(System.`in`)
-    val line = scanner.nextLine()
+fun main(args: Array<String>) {
+    val ioService = IOService(System.`in`)
+    val text = ioService.getInputText(args) ?: return
 
     //   call service
     val service = WordService()
-    val wordsCount = service.countWords(line)
+    val wordsCount = service.countWords(text)
 
     //   print result
-    println("Number of words: $wordsCount")
+    ioService.msgln("Number of words: $wordsCount")
 }
