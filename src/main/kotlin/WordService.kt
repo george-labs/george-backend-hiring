@@ -37,6 +37,6 @@ class WordService {
             // Skip empty chunks
             .filter { s: String -> s.isNotEmpty() }
             // Skip stopwords
-            .filterNot { s: String -> stopWords.containsKey(s) }
+            .filterNot { s: String -> stopWords.containsKey(s) || s == "-" }
     }
 }

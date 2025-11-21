@@ -39,5 +39,8 @@ class WordServiceTest {
         val input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."
         assertEquals(7, service.countWords(input))
         assertEquals(6, service.countUnique(input))
+
+        assertEquals(2, service.countWords("some - text"))
+        assertEquals(2, service.countUnique("some - text"))
     }
 }

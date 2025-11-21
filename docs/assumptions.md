@@ -9,3 +9,7 @@
 ## Iteration 3
 
  - src/test/resources/mytext.txt must be there for testing
+
+## Iteration 5
+
+ - a separate hyphen is not a word
