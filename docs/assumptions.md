@@ -6,5 +6,6 @@
  - no limitation on word length
  - KotlinApplication code coverage was discussed: it was suggested to use higher level testing instead of just Units.
 
-## Iteration 2
+## Iteration 3
 
+ - src/test/resources/mytext.txt must be there for testing
