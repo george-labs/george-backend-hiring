@@ -15,7 +15,7 @@ fun main(args: Array<String>) {
 
     if (ioService.showIndex(args)) {
         ioService.msgln("Index:")
-        service.getChunks(text).toSortedSet().forEach {
+        service.getChunks(text).toSortedSet { t1, t2 -> t1.lowercase().compareTo(t2.lowercase()) }.forEach {
             ioService.msgln(it)
         }
     }

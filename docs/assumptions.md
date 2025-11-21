@@ -13,3 +13,7 @@
 ## Iteration 5
 
  - a separate hyphen is not a word
+
+## Iteration 7
+
+ - sorting respects upper-lower case
