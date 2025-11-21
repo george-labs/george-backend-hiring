@@ -5,7 +5,8 @@ fun main(args: Array<String>) {
     //   call service
     val service = WordService()
     val wordsCount = service.countWords(text)
+    val uniqueCount = service.countUnique(text)
 
     //   print result
-    ioService.msgln("Number of words: $wordsCount")
+    ioService.msgln("Number of words: $wordsCount, unique: $uniqueCount")
 }
