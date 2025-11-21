@@ -33,7 +33,7 @@ class WordService {
         val stopWords = getStopWords()
 
         // Split
-        return trimmed.split(Regex("[^a-zA-Z]+"))
+        return trimmed.split(Regex("[^a-zA-Z\\-]+"))
             // Skip empty chunks
             .filter { s: String -> s.isNotEmpty() }
             // Skip stopwords

@@ -27,10 +27,17 @@ class WordServiceTest {
         assertEquals(4, service.countWords("Mary had a little lamb"))
     }
 
-
     @Test
     fun countUnique() {
         val service = WordService()
-        assertEquals(7, service.countUnique("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."))
+        assertEquals(7, service.countUnique("Humpty Dumpty sat on a wall. Humpty Dumpty had a great fall."))
+    }
+
+    @Test
+    fun countWithHyphens() {
+        val service = WordService()
+        val input = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."
+        assertEquals(7, service.countWords(input))
+        assertEquals(6, service.countUnique(input))
     }
 }
