@@ -14,9 +14,12 @@ fun main(args: Array<String>) {
     ioService.msgln("Number of words: $wordsCount, unique: $uniqueCount; average word length: $averageLength characters")
 
     if (ioService.showIndex(args)) {
-        ioService.msgln("Index:")
-        service.getChunks(text).toSortedSet { t1, t2 -> t1.lowercase().compareTo(t2.lowercase()) }.forEach {
-            ioService.msgln(it)
-        }
+        val index = service.getIndex(text, ioService.getDictionaryFileName(args))
+        val unknownCount = index.filter { s: String -> s.endsWith("*") }.count()
+        ioService.msgln("Index (unknown: $unknownCount):")
+        index
+            .forEach {
+                ioService.msgln(it)
+            }
     }
 }

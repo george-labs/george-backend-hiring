@@ -4,7 +4,7 @@ import java.util.*
 
 class IOService(private val inputStream: InputStream) {
     fun getInputText(args: Array<String>): String? {
-        val nonReservedArgs = args.filter { s: String -> s != "-index" }
+        val nonReservedArgs = args.filter { s: String -> s != "-index" && !s.startsWith("-dictionary=") }
         if (nonReservedArgs.isNotEmpty()) {
             // Read from file
             val fileName = nonReservedArgs[0]
@@ -31,4 +31,10 @@ class IOService(private val inputStream: InputStream) {
     }
 
     fun showIndex(args: Array<String>): Boolean = args.any { s: String -> s == "-index" }
+
+    fun getDictionaryFileName(args: Array<String>): String? =
+        args
+            .filter { s: String -> s.startsWith("-dictionary=") }
+            .map { it.replace("-dictionary=", "") }
+            .firstOrNull()
 }

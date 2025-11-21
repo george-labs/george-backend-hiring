@@ -57,4 +57,19 @@ class WordServiceTest {
         assertEquals(4F, service.countAverageLength("test test test"))
         assertEquals(6.428571F, service.countAverageLength("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."))
     }
+
+    @Test
+    fun getIndexNoDictionary() {
+        val service = WordService()
+        val results = service.getIndex("test aaa ff", null)
+        assertEquals(3, results.size)
+    }
+
+    @Test
+    fun getIndexWithDictionary() {
+        val service = WordService()
+        val results = service.getIndex("test small little", "src/test/resources/dict.txt")
+        assertEquals(3, results.size)
+        assertEquals(true, results.containsAll(listOf("test*", "small", "little")))
+    }
 }

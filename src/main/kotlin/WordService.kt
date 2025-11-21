@@ -1,3 +1,5 @@
+import java.io.File
+
 class WordService {
     fun countUnique(input: String): Int {
 
@@ -52,5 +54,21 @@ class WordService {
             .filter { s: String -> s.isNotEmpty() }
             // Skip stopwords
             .filterNot { s: String -> stopWords.containsKey(s) || s == "-" }
+    }
+
+    fun getIndex(input: String, dictionaryFileName: String?): Collection<String> {
+        val dictionary: List<String>
+        if (dictionaryFileName != null) {
+            val file = File(dictionaryFileName)
+            if (!file.exists()) {
+                throw IllegalArgumentException("Dictionary $dictionaryFileName not found!")
+            }
+            dictionary = file.readLines()
+        } else {
+            dictionary = listOf()
+        }
+        return getChunks(input)
+            .toSortedSet { t1, t2 -> t1.lowercase().compareTo(t2.lowercase()) }
+            .map { if (dictionary.contains(it)) { it } else { "$it*" } }
     }
 }
