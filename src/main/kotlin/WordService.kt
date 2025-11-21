@@ -69,6 +69,6 @@ class WordService {
         }
         return getChunks(input)
             .toSortedSet { t1, t2 -> t1.lowercase().compareTo(t2.lowercase()) }
-            .map { if (dictionary.contains(it)) { it } else { "$it*" } }
+            .map { if (dictionaryFileName == null || dictionary.contains(it)) { it } else { "$it*" } }
     }
 }

@@ -63,6 +63,7 @@ class WordServiceTest {
         val service = WordService()
         val results = service.getIndex("test aaa ff", null)
         assertEquals(3, results.size)
+        assertEquals(true, results.containsAll(listOf("test", "aaa", "ff")))
     }
 
     @Test
@@ -71,5 +72,13 @@ class WordServiceTest {
         val results = service.getIndex("test small little", "src/test/resources/dict.txt")
         assertEquals(3, results.size)
         assertEquals(true, results.containsAll(listOf("test*", "small", "little")))
+    }
+
+    @Test
+    fun getIndexWithEmptyDictionary() {
+        val service = WordService()
+        val results = service.getIndex("test small little", "src/test/resources/dict_empty.txt")
+        assertEquals(3, results.size)
+        assertEquals(true, results.containsAll(listOf("test*", "small*", "little*")))
     }
 }
