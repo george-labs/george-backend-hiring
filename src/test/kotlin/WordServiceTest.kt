@@ -47,4 +47,14 @@ class WordServiceTest {
         assertEquals(1, service.countWords("-word-"))
         assertEquals(0, service.countUnique(" - "))
     }
+
+    @Test
+    fun countAverageLength() {
+        val service = WordService()
+        assertEquals(0F, service.countAverageLength(""))
+        assertEquals(0F, service.countAverageLength(" - "))
+        assertEquals(3F, service.countAverageLength("test te"))
+        assertEquals(4F, service.countAverageLength("test test test"))
+        assertEquals(6.428571F, service.countAverageLength("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."))
+    }
 }

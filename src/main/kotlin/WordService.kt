@@ -21,6 +21,21 @@ class WordService {
         return getChunks(trimmed).size
     }
 
+    fun countAverageLength(input: String): Float {
+
+        // Check empty values
+        val trimmed = input.trim()
+        if (trimmed.isEmpty()) {
+            return 0F
+        }
+
+        val chunks = getChunks(trimmed)
+        if (chunks.isEmpty()) {
+            return 0F
+        }
+        return chunks.sumOf { s: String -> s.length }.toFloat() / chunks.size
+    }
+
     private fun getStopWords() =
         WordService::class.java.getResourceAsStream("/stopwords.txt")
             ?.bufferedReader()
