@@ -47,6 +47,8 @@ class IOServiceTest {
     fun dictionary() {
         val service = IOService(System.`in`)
 
+        assertEquals(null, service.getDictionaryFileName(arrayOf("src/test/resources/mytext.txt")))
+        assertEquals("", service.getDictionaryFileName(arrayOf("-dictionary=", "src/test/resources/mytext.txt")))
         assertEquals("mytestfile.txt", service.getDictionaryFileName(arrayOf("-dictionary=mytestfile.txt", "src/test/resources/mytext.txt")))
         assertEquals("mytestfile.txt", service.getDictionaryFileName(arrayOf("src/test/resources/mytext.txt", "-dictionary=mytestfile.txt")))
         assertEquals("mytestfile.txt", service.getDictionaryFileName(arrayOf("src/test/resources/mytext.txt", "-index", "-dictionary=mytestfile.txt")))

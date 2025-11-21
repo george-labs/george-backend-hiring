@@ -15,7 +15,7 @@ fun main(args: Array<String>) {
 
     if (ioService.showIndex(args)) {
         val index = service.getIndex(text, ioService.getDictionaryFileName(args))
-        val unknownCount = index.filter { s: String -> s.endsWith("*") }.count()
+        val unknownCount = index.count { s: String -> s.endsWith("*") }
         ioService.msgln("Index (unknown: $unknownCount):")
         index
             .forEach {
