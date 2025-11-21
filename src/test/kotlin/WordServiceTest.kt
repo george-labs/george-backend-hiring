@@ -42,5 +42,9 @@ class WordServiceTest {
 
         assertEquals(2, service.countWords("some - text"))
         assertEquals(2, service.countUnique("some - text"))
+
+        assertEquals(1, service.countWords("-word "))
+        assertEquals(1, service.countWords("-word-"))
+        assertEquals(0, service.countUnique(" - "))
     }
 }
