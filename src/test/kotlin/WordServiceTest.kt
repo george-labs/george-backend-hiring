@@ -20,4 +20,10 @@ class WordServiceTest {
         assertEquals(0, service.countWords(""))
         assertEquals(1, service.countWords("* word "))
     }
+
+    @Test
+    fun countWordsWithStopwords() {
+        val service = WordService()
+        assertEquals(4, service.countWords("Mary had a little lamb"))
+    }
 }
