@@ -9,3 +9,7 @@ input == "" => 0
 
 ## Iteration 2
 not specified if 'A' and 'A?' should be blocked/allowed. In case 'A' is quick win and it's implemented. Second case (A?) i would see as also required.
+
+
+## Iteration 4
+we count only allowed words

@@ -1,5 +1,6 @@
 package counter.processor;
 
+import counter.model.CountingResult;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,35 +15,36 @@ class StringWordCounterProcessorTest extends AbstractCounterProcessorTest {
 
     @ParameterizedTest
     @MethodSource("testProcessEnd2EndTestCases")
-    void testProcessEnd2End(String input, int expectedCount) {
+    void testProcessEnd2End(String input, CountingResult countingResult) {
         sut = new StringWordCounterProcessor(createTestWordCounter());
 
         String output = sut.process(input);
-        assertEquals(String.format("Number of words: %s", expectedCount), output);
+        assertEquals(String.format("Number of words: %s, unique: %s", countingResult.getTotalWordsCount(), countingResult.getUniqueWordsCount()), output, "Invalid output");
     }
 
     @ParameterizedTest
     @MethodSource("testProcessTestCases")
-    void testProcess(int expectedCount) {
-        sut = new StringWordCounterProcessor(input -> expectedCount);
+    void testProcess(CountingResult countingResult) {
+        sut = new StringWordCounterProcessor(input -> countingResult);
         String output = sut.process("foo");
-        assertEquals(output,  String.format("Number of words: %s", expectedCount), "Invalid output");
+        assertEquals(String.format("Number of words: %s, unique: %s", countingResult.getTotalWordsCount(), countingResult.getUniqueWordsCount()), output, "Invalid output");
     }
 
     public static Stream<Arguments> testProcessTestCases() {
         return Stream.of(
-                Arguments.of(1),
-                Arguments.of(3),
-                Arguments.of(10000)
+                Arguments.of(new CountingResult(1, 1)),
+                Arguments.of(new CountingResult(3, 2)),
+                Arguments.of(new CountingResult(10000, 1))
         );
     }
 
     public static Stream<Arguments> testProcessEnd2EndTestCases() {
         return Stream.of(
-                Arguments.of("Hi, what is your name?", 5),
-                Arguments.of("a what?", 1),
-                Arguments.of("Turn light off", 2),
-                Arguments.of("what with A", 2)
+                Arguments.of("Hi, what is your name?", new CountingResult(5, 5)),
+                Arguments.of("a what?", new CountingResult(1, 1)),
+                Arguments.of("Turn light off", new CountingResult(2, 2)),
+                Arguments.of("what with A", new CountingResult(2, 2)),
+                Arguments.of("what what A", new CountingResult(2, 1))
         );
     }
 }

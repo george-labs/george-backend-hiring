@@ -1,5 +1,7 @@
 package counter;
 
+import counter.model.CountingResult;
+
 public interface WordCounter {
 
     /**
@@ -7,5 +9,5 @@ public interface WordCounter {
      * @param input text to parse
      * @return number of words
      */
-    long countWords(String input);
+    CountingResult countWords(String input);
 }

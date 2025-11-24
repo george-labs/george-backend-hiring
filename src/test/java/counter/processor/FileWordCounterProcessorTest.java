@@ -15,7 +15,7 @@ class FileWordCounterProcessorTest extends AbstractCounterProcessorTest {
 
         final String output = sut.process("src/test/resources/inputwords.txt");
 
-        assertEquals("Number of words: 8", output, "There should be 8 allowed words in file");
+        assertEquals("Number of words: 9, unique: 8", output, "There should be 8 allowed words in file");
     }
 
 }
