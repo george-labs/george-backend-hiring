@@ -18,7 +18,7 @@ public class WordCounterService implements WordCounter {
     }
     public CountingResult countWords(String input) {
         if (input == null || input.isEmpty()) {
-            return new CountingResult(0, 0);
+            return new CountingResult(0, 0, 0);
         }
         List<String> words = new ArrayList<>();
 
@@ -33,8 +33,9 @@ public class WordCounterService implements WordCounter {
 
         final long totalWords = words.size();
         final long uniqueWords = words.stream().map(String::toLowerCase).distinct().count();
+        final double avgWordLength = words.stream().mapToLong(String::length).average().orElse(0);
 
         //T/Q-env: debug/trace strings
-        return new CountingResult(totalWords, uniqueWords);
+        return new CountingResult(totalWords, uniqueWords, avgWordLength);
     }
 }

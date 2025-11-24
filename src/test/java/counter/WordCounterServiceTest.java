@@ -42,6 +42,13 @@ class WordCounterServiceTest {
         assertEquals(expectedUniqueCount, countingResult.getUniqueWordsCount(), String.format("Unique Count should be %s",  expectedUniqueCount));
     }
 
+    @ParameterizedTest
+    @MethodSource("testAvgWordLengthTestCases")
+    void testAvgWordLength(String input, double expectedAvgLength) {
+        CountingResult countingResult = sut.countWords(input);
+        assertEquals(expectedAvgLength, countingResult.getAvgWordLength(), String.format("Avg word length should be %s",  expectedAvgLength));
+    }
+
     public static Stream<Arguments> testCountWordsTestCases() {
         return Stream.of(
                 Arguments.of("Hi", 1, 1),
@@ -54,6 +61,13 @@ class WordCounterServiceTest {
                         asda
                         """, 2, 2),
                 Arguments.of(" Hi there hi    ", 3, 2)
+        );
+    }
+
+    public static Stream<Arguments> testAvgWordLengthTestCases() {
+        return Stream.of(
+                Arguments.of("Hi this", 3.0),
+                Arguments.of(" Hi abc", 2.5)
         );
     }
 
