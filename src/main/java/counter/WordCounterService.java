@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class WordCounterService implements WordCounter {
 
-    public static final Pattern WORD_PATTERN = Pattern.compile("[a-zA-Z]+");
+    public static final Pattern WORD_PATTERN = Pattern.compile("[a-zA-Z]+([a-zA-Z-]+[a-zA-Z])?");
 
     private final StopWordsFilter stopWordsFilter;
 

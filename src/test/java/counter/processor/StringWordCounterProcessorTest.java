@@ -45,7 +45,9 @@ class StringWordCounterProcessorTest extends AbstractCounterProcessorTest {
                 Arguments.of("Turn light off", new CountingResult(2, 2)),
                 Arguments.of("what with A", new CountingResult(2, 2)),
                 Arguments.of("what what A", new CountingResult(2, 1)),
-                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", new CountingResult(9, 7))
+                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", new CountingResult(7, 6)),
+                Arguments.of("Humpty- --- Humpty Humpty-.", new CountingResult(3, 1)),
+                Arguments.of("Humpty- , -Humpty-, Humpty-", new CountingResult(3, 1))
         );
     }
 }
