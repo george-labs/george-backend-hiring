@@ -12,4 +12,5 @@ not specified if 'A' and 'A?' should be blocked/allowed. In case 'A' is quick wi
 
 
 ## Iteration 4
-we count only allowed words
+we count only allowed words.
+word is [a-zA-Z]+

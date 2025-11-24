@@ -47,7 +47,7 @@ class WordCounterServiceTest {
                 Arguments.of("Hi", 1, 1),
                 Arguments.of(" Hi     ", 1, 1),
                 Arguments.of("Hi whats up", 3, 3),
-                Arguments.of("Hi $%^&*(_ up", 3, 3),
+                Arguments.of("Hi $%^&*(_ up", 2, 2),
                 Arguments.of("                ", 0, 0),
                 Arguments.of("""
                         asdasd
