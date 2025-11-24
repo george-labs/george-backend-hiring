@@ -1,7 +1,13 @@
-package counter;
+package counter.processor;
 
-public class WordCounterProcessor {
+import counter.WordCounter;
+
+public abstract class AbstractProcessor implements WordCounterProcessor {
     private final WordCounter wordCounter;
+
+    public AbstractProcessor(WordCounter wordCounter) {
+        this.wordCounter = wordCounter;
+    }
 
     /**
      * Message returned to GUI.
@@ -9,11 +15,7 @@ public class WordCounterProcessor {
      */
     private String message = "Number of words: %s";
 
-    public WordCounterProcessor(WordCounter wordCounter) {
-        this.wordCounter = wordCounter;
-    }
-
-    public String process(String input) {
+    public String processInternal(String input) {
         final long countWords = wordCounter.countWords(input);
         return String.format(message, countWords);
     }

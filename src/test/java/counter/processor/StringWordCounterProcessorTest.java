@@ -1,8 +1,5 @@
-package counter;
+package counter.processor;
 
-import counter.filter.FileStopWordsFilter;
-import counter.filter.StopWordsFilter;
-import java.nio.file.Path;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -11,17 +8,14 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class WordCounterProcessorTest {
+class StringWordCounterProcessorTest extends AbstractCounterProcessorTest {
 
     WordCounterProcessor sut;
 
     @ParameterizedTest
     @MethodSource("testProcessEnd2EndTestCases")
     void testProcessEnd2End(String input, int expectedCount) {
-        Path stopWordsFile = Path.of("src/test/resources/stopwords.txt");
-        final StopWordsFilter wordsFilter = new FileStopWordsFilter(stopWordsFile);
-        final WordCounter wordCounter = new WordCounterService(wordsFilter);
-        sut = new  WordCounterProcessor(wordCounter);
+        sut = new StringWordCounterProcessor(createTestWordCounter());
 
         String output = sut.process(input);
         assertEquals(String.format("Number of words: %s", expectedCount), output);
@@ -30,7 +24,7 @@ class WordCounterProcessorTest {
     @ParameterizedTest
     @MethodSource("testProcessTestCases")
     void testProcess(int expectedCount) {
-        sut = new WordCounterProcessor(input -> expectedCount);
+        sut = new StringWordCounterProcessor(input -> expectedCount);
         String output = sut.process("foo");
         assertEquals(output,  String.format("Number of words: %s", expectedCount), "Invalid output");
     }
