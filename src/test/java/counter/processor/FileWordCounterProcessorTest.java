@@ -1,9 +1,7 @@
 package counter.processor;
 
+import counter.model.CountingResult;
 import org.junit.jupiter.api.Test;
-
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FileWordCounterProcessorTest extends AbstractCounterProcessorTest {
 
@@ -14,8 +12,8 @@ class FileWordCounterProcessorTest extends AbstractCounterProcessorTest {
         sut = new FileWordCounterProcessor(createTestWordCounter());
 
         final String output = sut.process("src/test/resources/inputwords.txt");
-
-        assertEquals("Number of words: 9, unique: 8", output, "There should be 8 allowed words in file");
+        CountingResult countingResult = new CountingResult(9, 8, 3.67);
+        assertCounterMessage(output, countingResult, "There should be 8 allowed words in file");
     }
 
 }

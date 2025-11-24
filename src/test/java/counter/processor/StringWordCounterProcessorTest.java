@@ -6,9 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class StringWordCounterProcessorTest extends AbstractCounterProcessorTest {
 
     WordCounterProcessor sut;
@@ -19,7 +16,7 @@ class StringWordCounterProcessorTest extends AbstractCounterProcessorTest {
         sut = new StringWordCounterProcessor(createTestWordCounter());
 
         String output = sut.process(input);
-        assertEquals(String.format("Number of words: %s, unique: %s", countingResult.getTotalWordsCount(), countingResult.getUniqueWordsCount()), output, "Invalid output");
+        assertCounterMessage(output, countingResult);
     }
 
     @ParameterizedTest
@@ -27,7 +24,7 @@ class StringWordCounterProcessorTest extends AbstractCounterProcessorTest {
     void testProcess(CountingResult countingResult) {
         sut = new StringWordCounterProcessor(input -> countingResult);
         String output = sut.process("foo");
-        assertEquals(String.format("Number of words: %s, unique: %s", countingResult.getTotalWordsCount(), countingResult.getUniqueWordsCount()), output, "Invalid output");
+        assertCounterMessage(output, countingResult);
     }
 
     public static Stream<Arguments> testProcessTestCases() {
@@ -40,14 +37,14 @@ class StringWordCounterProcessorTest extends AbstractCounterProcessorTest {
 
     public static Stream<Arguments> testProcessEnd2EndTestCases() {
         return Stream.of(
-                Arguments.of("Hi, what is your name?", new CountingResult(5, 5)),
-                Arguments.of("a what?", new CountingResult(1, 1)),
-                Arguments.of("Turn light off", new CountingResult(2, 2)),
-                Arguments.of("what with A", new CountingResult(2, 2)),
-                Arguments.of("what what A", new CountingResult(2, 1)),
-                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", new CountingResult(7, 6)),
-                Arguments.of("Humpty- --- Humpty Humpty-.", new CountingResult(3, 1)),
-                Arguments.of("Humpty- , -Humpty-, Humpty-", new CountingResult(3, 1))
+                Arguments.of("Hi, what is your name?", new CountingResult(5, 5, 3.20)),
+                Arguments.of("a what?", new CountingResult(1, 1, 4.0)),
+                Arguments.of("Turn light off", new CountingResult(2, 2, 4.5)),
+                Arguments.of("what with A", new CountingResult(2, 2, 4.0)),
+                Arguments.of("what what A", new CountingResult(2, 1, 4.0)),
+                Arguments.of("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", new CountingResult(7, 6, 6.43)),
+                Arguments.of("Humpty- --- Humpty Humpty-.", new CountingResult(3, 1, 6.0)),
+                Arguments.of("Humpty- , -Humpty-, Humpty-", new CountingResult(3, 1, 6.0))
         );
     }
 }
