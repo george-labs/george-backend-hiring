@@ -16,7 +16,7 @@ class WordCounterServiceTest {
 
     @BeforeEach
     void setUp() {
-        sut = new WordCounterService();
+        sut = new WordCounterService(word -> true);
     }
 
     @Test
