@@ -5,16 +5,15 @@ fun main(args: Array<String>) {
     val fileReader = FileReader()
     var words = fileReader.readWords(args.asList().firstOrNull { !it.contains("-index") })
     val index = args.asList().contains("-index")
-    val dictionaryFlag = args.asList().filter { it.contains("-dictionary")}
+    val dictionary = fileReader.readDictionary(args.asList().first { it.contains("-dictionary=", false) }.split("=").last())
     val stopWords = fileReader.readStopWords()
-    val dictionary = fileReader.readDictionary()
     if (words == null) {
         print("Enter text: ")
         words = readln().getDividedWords()
     }
 
     val filteredWords = words.getFilteredWords(stopWords)
-    val unknownWords = filteredWords.filter { dictionary?.contains(it) == false }
+    val unknownWords = filteredWords.getUnknownWords(dictionary)
 
     print("Number of words: ")
     print(filteredWords.countWords())

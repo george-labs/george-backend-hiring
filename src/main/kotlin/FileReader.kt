@@ -12,8 +12,8 @@ class FileReader {
         return readFromFile(fileName)
     }
 
-    fun readDictionary(): List<String>? {
-        return readFromFile(dictionaryFileName)
+    fun readDictionary(fileName: String?): List<String>? {
+        return readFromFile(fileName)
     }
 
     private fun readFromFile(fileName: String?): List<String>? {

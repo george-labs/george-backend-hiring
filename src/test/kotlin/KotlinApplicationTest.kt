@@ -17,6 +17,8 @@ class KotlinApplicationTest {
         "fall", "great", "had", "Humpty-Dumpty", "Humpty-Dumpty", "sat", "wall"
     )
 
+    private val dictionaryFileName = "dict.txt"
+
     @Test
     fun dummyTest() {
         assert("dummy".isNotBlank())
@@ -98,6 +100,15 @@ class KotlinApplicationTest {
         assertEquals(
             testUniqueWordsSorted,
             FileReader().readWords(wordsUniqueFileName)?.getFilteredWords(FileReader().readStopWords())?.sortWords()
+        )
+    }
+
+    @Test
+    fun testUnknownMyTextStopWords() {
+        assertEquals(
+            6,
+            FileReader().readWords(wordsUniqueFileName)?.getFilteredWords(FileReader().readStopWords())
+                ?.getUnknownWords(FileReader().readDictionary(dictionaryFileName))?.size
         )
     }
 }

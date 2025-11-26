@@ -13,6 +13,7 @@ fun List<String>.getFilteredWords(stopWords: List<String>?) = filter { word ->
 fun List<String>.countWords(): Int = size
 fun List<String>.countUnique(): Int = toSet().count()
 fun List<String>.countAverageWordLength(): String = String.format("%.2f", toString().length.toDouble().div(size.toDouble()))
+fun List<String>.getUnknownWords(dictionary: List<String>?): List<String> = filter { dictionary?.contains(it) == false }
 
 
 fun List<String>.sortWords() =
