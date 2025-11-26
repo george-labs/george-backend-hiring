@@ -3,17 +3,17 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class KotlinApplicationTest {
-    val testWords = "Mary had a little lamb"
-    val notWords = "123 )(* +| 45 !"
+    private val testWords = "Mary had a little lamb"
+    private val notWords = "123 )(* +| 45 !"
 
-    val notWordsStop = "123 )(* +| 45 ! the"
+    private val notWordsStop = "123 )(* +| 45 ! the"
 
-    val wordsFileName = "mytext.txt"
-    val notWordsFileName = "mynottext.txt"
+    private val wordsFileName = "mytext.txt"
+    private val notWordsFileName = "mynottext.txt"
 
-    val wordsUniqueFileName = "myuniquetext.txt"
-    val testUniqueWords = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."
-    val testUniqueWordsSorted = listOf(
+    private val wordsUniqueFileName = "myuniquetext.txt"
+    private val testUniqueWords = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."
+    private val testUniqueWordsSorted = listOf(
         "fall", "great", "had", "Humpty-Dumpty", "Humpty-Dumpty", "sat", "wall"
     )
 

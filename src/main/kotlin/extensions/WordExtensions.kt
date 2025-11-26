@@ -19,7 +19,7 @@ fun List<String>.countAverageWordLength(stopWords: List<String>? = emptyList()):
 
 fun List<String>.sortWords(stopWords: List<String>? = emptyList()) =
     getFilteredWords(stopWords).sortedWith(
-        compareBy(String.CASE_INSENSITIVE_ORDER, { it })
+        compareBy(String.CASE_INSENSITIVE_ORDER) { it }
     )
 
 

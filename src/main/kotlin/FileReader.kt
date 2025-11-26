@@ -1,7 +1,7 @@
 import extensions.getDividedWords
 
 class FileReader {
-    val stopWordFileName = "stopwords.txt"
+    private val stopWordFileName = "stopwords.txt"
 
     fun readStopWords(): List<String>? {
         return readFromFile(stopWordFileName)
