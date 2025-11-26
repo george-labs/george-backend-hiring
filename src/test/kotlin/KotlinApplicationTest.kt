@@ -1,3 +1,4 @@
+import extensions.countUnique
 import extensions.countWords
 import extensions.getDividedWords
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -11,6 +12,9 @@ class KotlinApplicationTest {
 
     val wordsFileName = "mytext.txt"
     val notWordsFileName = "mynottext.txt"
+
+    val wordsUniqueFileName = "myuniquetext.txt"
+    val testUniqueWords = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."
 
 
     @Test
@@ -45,6 +49,26 @@ class KotlinApplicationTest {
 
     @Test
     fun testNotWordCountMyTextStopWords() {
+        assertEquals(0, FileReader().readWords(notWordsFileName)?.countWords(FileReader().readStopWords()))
+    }
+
+    @Test
+    fun testWordCountUniqueInputStopWords() {
+        assertEquals(9, testUniqueWords.getDividedWords().countWords(FileReader().readStopWords()))
+    }
+
+    @Test
+    fun testUniqueWordCountStopWords() {
+        assertEquals(7, testUniqueWords.getDividedWords().countUnique(FileReader().readStopWords()))
+    }
+
+    @Test
+    fun testUniqueWordCountMyTextStopWords() {
+        assertEquals(7, FileReader().readWords(wordsUniqueFileName)?.countUnique(FileReader().readStopWords()))
+    }
+
+    @Test
+    fun testUniqueNotWordCountMyTextStopWords() {
         assertEquals(0, FileReader().readWords(notWordsFileName)?.countWords(FileReader().readStopWords()))
     }
 }

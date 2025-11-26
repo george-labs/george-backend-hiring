@@ -1,3 +1,4 @@
+import extensions.countUnique
 import extensions.countWords
 import extensions.getDividedWords
 
@@ -12,6 +13,8 @@ fun main(args: Array<String>) {
     }
 
     print("Number of words: ")
-    println(words.countWords(stopWords))
+    print(words.countWords(stopWords))
+    print(", unique: ")
+    print(words.countUnique(stopWords))
 
 }
