@@ -79,9 +79,17 @@ class KotlinApplicationTest {
     }
 
     @Test
+    fun testAverageWordCountMaryStopWords() {
+        assertEquals(
+            "4,25",
+            testWords.getDividedWords().getFilteredWords(FileReader().readStopWords()).countAverageWordLength()
+        )
+    }
+
+    @Test
     fun testAverageWordCountStopWords() {
         assertEquals(
-            "8,43",
+            "6,43",
             testUniqueWords.getDividedWords().getFilteredWords(FileReader().readStopWords()).countAverageWordLength()
         )
     }
@@ -89,7 +97,7 @@ class KotlinApplicationTest {
     @Test
     fun testAverageWordCountMyTextStopWords() {
         assertEquals(
-            "8,43",
+            "6,43",
             FileReader().readWords(wordsUniqueFileName)?.getFilteredWords(FileReader().readStopWords())
                 ?.countAverageWordLength()
         )
@@ -105,6 +113,15 @@ class KotlinApplicationTest {
 
     @Test
     fun testUnknownMyTextStopWords() {
+        assertEquals(
+            6,
+            FileReader().readWords(wordsUniqueFileName)?.getFilteredWords(FileReader().readStopWords())
+                ?.getUnknownWords(FileReader().readDictionary(dictionaryFileName))?.size
+        )
+    }
+
+    @Test
+    fun testWordAnalysis() {
         assertEquals(
             6,
             FileReader().readWords(wordsUniqueFileName)?.getFilteredWords(FileReader().readStopWords())

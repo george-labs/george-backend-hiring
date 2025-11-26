@@ -10,9 +10,15 @@ fun List<String>.getFilteredWords(stopWords: List<String>?) = filter { word ->
     stopWords.filterStopWords(word) && word.isWord()
 }
 
+fun List<String>.countCharacters() =
+    sumOf { it.length }
+
+
 fun List<String>.countWords(): Int = size
 fun List<String>.countUnique(): Int = toSet().count()
-fun List<String>.countAverageWordLength(): String = String.format("%.2f", toString().length.toDouble().div(size.toDouble()))
+fun List<String>.countAverageWordLength(): String =
+    String.format("%.2f", countCharacters().toDouble().div(size.toDouble()))
+
 fun List<String>.getUnknownWords(dictionary: List<String>?): List<String> = filter { dictionary?.contains(it) == false }
 
 
