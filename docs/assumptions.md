@@ -1,3 +1,4 @@
 # Assumptions per iteration
 
-## Iteration 1
+## Iteration 3
+We assume that the myWords.txt will be in the same place everytime

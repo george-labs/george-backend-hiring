@@ -1,3 +1,5 @@
+import extensions.getDividedWords
+
 class FileReader {
     val stopWordFileName = "stopwords.txt"
 
@@ -5,9 +7,13 @@ class FileReader {
         return readFromFile(stopWordFileName)
     }
 
-    private fun readFromFile(fileName: String): List<String>? {
-        val file = getResourceAsText(fileName)
-        return file?.lines()
+    fun readWords(fileName: String?): List<String>? {
+        return readFromFile(fileName)
+    }
+
+    private fun readFromFile(fileName: String?): List<String>? {
+        val file = fileName?.let { getResourceAsText(fileName) }
+        return file?.lines()?.flatMap { it.getDividedWords() }
     }
 
     private fun getResourceAsText(path: String): String? =
