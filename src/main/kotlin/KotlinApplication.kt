@@ -1,6 +1,10 @@
+import extensions.countWords
+import extensions.getDividedWords
+
+
 fun main(args: Array<String>) {
     print("Enter text: ")
-    val words = readln().split(" ")
+    val words = readln().getDividedWords()
     print("Number of words: ")
-    println(words.filter { it.matches("[A-Za-z]+".toRegex()) }.size)
+    println(words.countWords())
 }
