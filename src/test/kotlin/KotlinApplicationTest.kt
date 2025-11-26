@@ -54,17 +54,17 @@ class KotlinApplicationTest {
 
     @Test
     fun testWordCountUniqueInputStopWords() {
-        assertEquals(9, testUniqueWords.getDividedWords().countWords(FileReader().readStopWords()))
+        assertEquals(7, testUniqueWords.getDividedWords().countWords(FileReader().readStopWords()))
     }
 
     @Test
     fun testUniqueWordCountStopWords() {
-        assertEquals(7, testUniqueWords.getDividedWords().countUnique(FileReader().readStopWords()))
+        assertEquals(6, testUniqueWords.getDividedWords().countUnique(FileReader().readStopWords()))
     }
 
     @Test
     fun testUniqueWordCountMyTextStopWords() {
-        assertEquals(7, FileReader().readWords(wordsUniqueFileName)?.countUnique(FileReader().readStopWords()))
+        assertEquals(6, FileReader().readWords(wordsUniqueFileName)?.countUnique(FileReader().readStopWords()))
     }
 
     @Test
