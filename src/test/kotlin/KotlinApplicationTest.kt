@@ -17,10 +17,6 @@ class KotlinApplicationTest {
         "fall", "great", "had", "Humpty-Dumpty", "Humpty-Dumpty", "sat", "wall"
     )
 
-    init {
-
-    }
-
     @Test
     fun dummyTest() {
         assert("dummy".isNotBlank())
