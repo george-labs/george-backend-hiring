@@ -13,6 +13,6 @@ class FileReader {
         return file?.lines()
     }
 
-    fun getResourceAsText(path: String): String? =
+    private fun getResourceAsText(path: String): String? =
         object {}.javaClass.getResource(path)?.readText()
 }
