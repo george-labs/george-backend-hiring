@@ -1,7 +1,4 @@
-import extensions.countAverageWordLength
-import extensions.countUnique
-import extensions.countWords
-import extensions.getDividedWords
+import extensions.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -16,6 +13,9 @@ class KotlinApplicationTest {
 
     val wordsUniqueFileName = "myuniquetext.txt"
     val testUniqueWords = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."
+    val testUniqueWordsSorted = listOf(
+        "fall", "great", "had", "Humpty-Dumpty", "Humpty-Dumpty", "sat", "wall"
+    )
 
 
     @Test
@@ -75,6 +75,17 @@ class KotlinApplicationTest {
 
     @Test
     fun testAverageWordCountMyTextStopWords() {
-        assertEquals("8,43", FileReader().readWords(wordsUniqueFileName)?.countAverageWordLength(FileReader().readStopWords()))
+        assertEquals(
+            "8,43",
+            FileReader().readWords(wordsUniqueFileName)?.countAverageWordLength(FileReader().readStopWords())
+        )
+    }
+
+    @Test
+    fun testSortMyTextStopWords() {
+        assertEquals(
+            testUniqueWordsSorted,
+            FileReader().readWords(wordsUniqueFileName)?.sortWords(FileReader().readStopWords())
+        )
     }
 }

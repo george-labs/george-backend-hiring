@@ -1,12 +1,10 @@
-import extensions.countAverageWordLength
-import extensions.countUnique
-import extensions.countWords
-import extensions.getDividedWords
+import extensions.*
 
 
 fun main(args: Array<String>) {
     val fileReader = FileReader()
-    var words = fileReader.readWords(args.asList().firstOrNull())
+    var words = fileReader.readWords(args.asList().firstOrNull { !it.contains("-index") })
+    var index = args.asList().contains("-index")
     val stopWords = fileReader.readStopWords()
     if (words == null) {
         print("Enter text: ")
@@ -19,7 +17,11 @@ fun main(args: Array<String>) {
     print(words.countUnique(stopWords))
     print("; average word length: ")
     print(words.countAverageWordLength(stopWords))
-    print(" characters")
-    println()
-
+    println(" characters")
+    if (index) {
+        println("Index:")
+        words.sortWords(stopWords).forEach { println(it) }
+    } else {
+        println()
+    }
 }
