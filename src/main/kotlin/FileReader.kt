@@ -1,6 +1,3 @@
-import extensions.getDividedWords
-import java.io.File
-
 class FileReader {
     val stopWordFileName = "stopwords.txt"
 
