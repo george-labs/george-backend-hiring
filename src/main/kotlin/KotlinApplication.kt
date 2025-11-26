@@ -11,16 +11,18 @@ fun main(args: Array<String>) {
         words = readln().getDividedWords()
     }
 
+    val filteredWords=words.getFilteredWords(stopWords)
+
     print("Number of words: ")
-    print(words.countWords(stopWords))
+    print(filteredWords.countWords())
     print(", unique: ")
-    print(words.countUnique(stopWords))
+    print(filteredWords.countUnique())
     print("; average word length: ")
-    print(words.countAverageWordLength(stopWords))
+    print(filteredWords.countAverageWordLength())
     println(" characters")
     if (index) {
         println("Index:")
-        words.sortWords(stopWords).forEach { println(it) }
+        filteredWords.sortWords().forEach { println(it) }
     } else {
         println()
     }

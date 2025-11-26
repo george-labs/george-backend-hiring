@@ -17,6 +17,9 @@ class KotlinApplicationTest {
         "fall", "great", "had", "Humpty-Dumpty", "Humpty-Dumpty", "sat", "wall"
     )
 
+    init {
+
+    }
 
     @Test
     fun dummyTest() {
@@ -35,49 +38,62 @@ class KotlinApplicationTest {
 
     @Test
     fun testWordCountStopWords() {
-        assertEquals(4, testWords.getDividedWords().countWords(FileReader().readStopWords()))
+        assertEquals(4, testWords.getDividedWords().getFilteredWords(FileReader().readStopWords()).countWords())
     }
 
     @Test
     fun testNotWordCountStopWords() {
-        assertEquals(0, notWordsStop.getDividedWords().countWords(FileReader().readStopWords()))
+        assertEquals(0, notWordsStop.getDividedWords().getFilteredWords(FileReader().readStopWords()).countWords())
     }
 
     @Test
     fun testWordCountMyTextStopWords() {
-        assertEquals(4, FileReader().readWords(wordsFileName)?.countWords(FileReader().readStopWords()))
+        assertEquals(
+            4,
+            FileReader().readWords(wordsFileName)?.getFilteredWords(FileReader().readStopWords())?.countWords()
+        )
     }
 
     @Test
     fun testNotWordCountMyTextStopWords() {
-        assertEquals(0, FileReader().readWords(notWordsFileName)?.countWords(FileReader().readStopWords()))
+        assertEquals(
+            0,
+            FileReader().readWords(notWordsFileName)?.getFilteredWords(FileReader().readStopWords())?.countWords()
+        )
     }
 
     @Test
     fun testWordCountUniqueInputStopWords() {
-        assertEquals(7, testUniqueWords.getDividedWords().countWords(FileReader().readStopWords()))
+        assertEquals(7, testUniqueWords.getDividedWords().getFilteredWords(FileReader().readStopWords()).countWords())
     }
 
     @Test
     fun testUniqueWordCountStopWords() {
-        assertEquals(6, testUniqueWords.getDividedWords().countUnique(FileReader().readStopWords()))
+        assertEquals(6, testUniqueWords.getDividedWords().getFilteredWords(FileReader().readStopWords()).countUnique())
     }
 
     @Test
     fun testUniqueWordCountMyTextStopWords() {
-        assertEquals(6, FileReader().readWords(wordsUniqueFileName)?.countUnique(FileReader().readStopWords()))
+        assertEquals(
+            6,
+            FileReader().readWords(wordsUniqueFileName)?.getFilteredWords(FileReader().readStopWords())?.countUnique()
+        )
     }
 
     @Test
     fun testAverageWordCountStopWords() {
-        assertEquals("8,43", testUniqueWords.getDividedWords().countAverageWordLength(FileReader().readStopWords()))
+        assertEquals(
+            "8,43",
+            testUniqueWords.getDividedWords().getFilteredWords(FileReader().readStopWords()).countAverageWordLength()
+        )
     }
 
     @Test
     fun testAverageWordCountMyTextStopWords() {
         assertEquals(
             "8,43",
-            FileReader().readWords(wordsUniqueFileName)?.countAverageWordLength(FileReader().readStopWords())
+            FileReader().readWords(wordsUniqueFileName)?.getFilteredWords(FileReader().readStopWords())
+                ?.countAverageWordLength()
         )
     }
 
@@ -85,7 +101,7 @@ class KotlinApplicationTest {
     fun testSortMyTextStopWords() {
         assertEquals(
             testUniqueWordsSorted,
-            FileReader().readWords(wordsUniqueFileName)?.sortWords(FileReader().readStopWords())
+            FileReader().readWords(wordsUniqueFileName)?.getFilteredWords(FileReader().readStopWords())?.sortWords()
         )
     }
 }

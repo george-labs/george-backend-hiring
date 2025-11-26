@@ -10,15 +10,13 @@ fun List<String>.getFilteredWords(stopWords: List<String>?) = filter { word ->
     stopWords.filterStopWords(word) && word.isWord()
 }
 
-fun List<String>.countWords(stopWords: List<String>? = emptyList()): Int = getFilteredWords(stopWords).size
-fun List<String>.countUnique(stopWords: List<String>? = emptyList()): Int = getFilteredWords(stopWords).toSet().count()
-fun List<String>.countAverageWordLength(stopWords: List<String>? = emptyList()): String {
-    val words = getFilteredWords(stopWords)
-    return String.format("%.2f", words.toString().length.toDouble().div(words.size.toDouble()))
-}
+fun List<String>.countWords(): Int = size
+fun List<String>.countUnique(): Int = toSet().count()
+fun List<String>.countAverageWordLength(): String = String.format("%.2f", toString().length.toDouble().div(size.toDouble()))
 
-fun List<String>.sortWords(stopWords: List<String>? = emptyList()) =
-    getFilteredWords(stopWords).sortedWith(
+
+fun List<String>.sortWords() =
+    sortedWith(
         compareBy(String.CASE_INSENSITIVE_ORDER) { it }
     )
 
