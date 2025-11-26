@@ -1,3 +1,4 @@
+import extensions.countAverageWordLength
 import extensions.countUnique
 import extensions.countWords
 import extensions.getDividedWords
@@ -16,5 +17,9 @@ fun main(args: Array<String>) {
     print(words.countWords(stopWords))
     print(", unique: ")
     print(words.countUnique(stopWords))
+    print("; average word length: ")
+    print(words.countAverageWordLength(stopWords))
+    print(" characters")
+    println()
 
 }

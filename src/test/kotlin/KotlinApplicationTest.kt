@@ -1,3 +1,4 @@
+import extensions.countAverageWordLength
 import extensions.countUnique
 import extensions.countWords
 import extensions.getDividedWords
@@ -68,7 +69,12 @@ class KotlinApplicationTest {
     }
 
     @Test
-    fun testUniqueNotWordCountMyTextStopWords() {
-        assertEquals(0, FileReader().readWords(notWordsFileName)?.countWords(FileReader().readStopWords()))
+    fun testAverageWordCountStopWords() {
+        assertEquals("8,43", testUniqueWords.getDividedWords().countAverageWordLength(FileReader().readStopWords()))
+    }
+
+    @Test
+    fun testAverageWordCountMyTextStopWords() {
+        assertEquals("8,43", FileReader().readWords(wordsUniqueFileName)?.countAverageWordLength(FileReader().readStopWords()))
     }
 }
