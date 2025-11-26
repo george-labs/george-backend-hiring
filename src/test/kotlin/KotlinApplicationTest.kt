@@ -15,11 +15,11 @@ class KotlinApplicationTest {
 
     @Test
     fun testWordCount(){
-        assertEquals(5, testWords.getDividedWords().countWords())
+        assertEquals(5, testWords.getDividedWords().countWords(FileReader().readStopWords()))
     }
 
     @Test
     fun testNotWordCount(){
-        assertEquals(0, notWords.getDividedWords().countWords())
+        assertEquals(0, notWords.getDividedWords().countWords(FileReader().readStopWords()))
     }
 }
