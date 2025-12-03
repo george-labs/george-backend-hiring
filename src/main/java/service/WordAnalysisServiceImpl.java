@@ -1,19 +1,22 @@
 package service;
 
 import dto.ResultOutput;
-import exception.InvalidInputException;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class WordAnalysisServiceImpl implements WordAnalysisService {
 
+    private StopWordService stopWordService;
+
+    public WordAnalysisServiceImpl(StopWordService stopWordService) {
+        this.stopWordService = stopWordService;
+    }
+
+
     @Override
     public ResultOutput analyze(String inputString) {
-        List<String> ignorableWords = readIgnorableWords();
+        List<String> ignorableWords = stopWordService.getIgnoredWords();
 
         List<String> words = getWords(sanitizeString(inputString))
                 .stream()
@@ -26,15 +29,12 @@ public class WordAnalysisServiceImpl implements WordAnalysisService {
                 .Builder()
                 .withWordCount(words.size())
                 .withWords(words)
+                .withUniqueCount(getUniques(words))
                 .build();
     }
 
-    private List<String> readIgnorableWords() {
-       try {
-         return Files.readAllLines(Path.of("stopwords.txt"));
-       } catch (IOException e) {
-               throw new InvalidInputException("File could not be found");
-       }
+    private int getUniques(List<String> words) {
+        return new HashSet<>(words).size();
     }
 
     private String sanitizeString(String inputString) {

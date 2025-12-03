@@ -3,11 +3,13 @@ import exception.InvalidInputException;
 import service.*;
 
 public class JavaApplication {
+
     public static void main(String[] args) {
+        String stopWordPath = "stopwords.txt";
         ValidationService validationService = new ValidationServiceImpl();
-        WordAnalysisService wordAnalysisService = new WordAnalysisServiceImpl();
+        WordAnalysisService wordAnalysisService = new WordAnalysisServiceImpl(new StopWordServiceImpl(stopWordPath));
         String argument = args.length > 0 ? args[0] : null;
-        UserInputService userInputService = getUserInputService(argument);
+        UserInputService userInputService = UserInputServiceFactory.create(argument);
 
         String inputString = userInputService.getUserInput();
 
@@ -19,14 +21,6 @@ public class JavaApplication {
         }
 
         ResultOutput result = wordAnalysisService.analyze(inputString);
-        System.out.println("Number of words: " + result.getWordCount());
-    }
-
-    public static UserInputService getUserInputService(String stringArgument) {
-        if (stringArgument == null) {
-            return new CommandService(System.in, System.out);
-        } else {
-            return new FileInputService(stringArgument);
-        }
+        System.out.printf("Number of words: %s, unique: %s", result.getWordCount(), result.getUniqueCount());
     }
 }
