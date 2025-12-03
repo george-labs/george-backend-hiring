@@ -2,8 +2,6 @@ import dto.ResultOutput;
 import exception.InvalidInputException;
 import service.*;
 
-
-
 public class JavaApplication {
     public static void main(String[] args) {
         ValidationService validationService = new ValidationServiceImpl();
@@ -11,9 +9,7 @@ public class JavaApplication {
         String argument = args.length > 0 ? args[0] : null;
         UserInputService userInputService = getUserInputService(argument);
 
-
         String inputString = userInputService.getUserInput();
-
 
         try {
             validationService.validate(inputString);
@@ -23,13 +19,12 @@ public class JavaApplication {
         }
 
         ResultOutput result = wordAnalysisService.analyze(inputString);
-
         System.out.println("Number of words: " + result.getWordCount());
     }
 
     public static UserInputService getUserInputService(String stringArgument) {
         if (stringArgument == null) {
-            return new CommandService();
+            return new CommandService(System.in, System.out);
         } else {
             return new FileInputService(stringArgument);
         }

@@ -1,4 +1,5 @@
 import dto.ResultOutput;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import service.WordAnalysisService;
 import service.WordAnalysisServiceImpl;
@@ -11,7 +12,7 @@ public class WordAnalysisServiceTest {
         String inputString = "This is a test";
         ResultOutput resultOutput = wordAnalysisService.analyze(inputString);
 
-        assert resultOutput.getWordCount() == 3;
+        Assertions.assertEquals(3, resultOutput.getWordCount());
     }
 
     @Test
@@ -20,21 +21,21 @@ public class WordAnalysisServiceTest {
 
         ResultOutput resultOutput = wordAnalysisService.analyze(inputString);
 
-        assert resultOutput.getWordCount() == 4;
+        Assertions.assertEquals(4, resultOutput.getWordCount());
     }
 
     @Test
     public void testAnalyzeWithManyCharacters() {
         String inputString = "www ..  ... wwww";
         ResultOutput resultOutput = wordAnalysisService.analyze(inputString);
-        assert resultOutput.getWordCount() == 2;
+        Assertions.assertEquals(2, resultOutput.getWordCount());
     }
 
     @Test
     public void testAnalyzeWithManyWords() {
         String inputString = "hey faemkaemfa..... $%%%% weirdo... hello";
         ResultOutput resultOutput = wordAnalysisService.analyze(inputString);
-        assert resultOutput.getWordCount() == 4;
+        Assertions.assertEquals(4, resultOutput.getWordCount());
     }
 
 }
