@@ -1,22 +1,19 @@
 import dto.ResultOutput;
 import exception.InvalidInputException;
-import service.ValidationService;
-import service.ValidationServiceImpl;
-import service.WordAnalysisService;
-import service.WordAnalysisServiceImpl;
+import service.*;
 
-import java.util.Scanner;
 
 
 public class JavaApplication {
     public static void main(String[] args) {
         ValidationService validationService = new ValidationServiceImpl();
         WordAnalysisService wordAnalysisService = new WordAnalysisServiceImpl();
+        String argument = args.length > 0 ? args[0] : null;
+        UserInputService userInputService = getUserInputService(argument);
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter text: ");
 
-        String inputString = scanner.nextLine();
+        String inputString = userInputService.getUserInput();
+
 
         try {
             validationService.validate(inputString);
@@ -28,5 +25,13 @@ public class JavaApplication {
         ResultOutput result = wordAnalysisService.analyze(inputString);
 
         System.out.println("Number of words: " + result.getWordCount());
+    }
+
+    public static UserInputService getUserInputService(String stringArgument) {
+        if (stringArgument == null) {
+            return new CommandService();
+        } else {
+            return new FileInputService(stringArgument);
+        }
     }
 }
