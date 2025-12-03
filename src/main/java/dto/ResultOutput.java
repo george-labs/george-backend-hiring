@@ -1,10 +1,14 @@
 package dto;
 
+import java.util.List;
+
 public class ResultOutput {
     private int wordCount;
+    private List<String> words;
 
-    public ResultOutput(int wordCount) {
+    public ResultOutput(int wordCount, List<String> words) {
         this.wordCount = wordCount;
+        this.words = words;
     }
 
     public ResultOutput() {
@@ -20,14 +24,20 @@ public class ResultOutput {
 
     public static class Builder {
         int wordCount;
+        List<String> words;
 
-        Builder withWorCount(int wordCount) {
+       public Builder withWordCount(int wordCount) {
             this.wordCount = wordCount;
             return this;
         }
 
-        ResultOutput build() {
-            return new ResultOutput(wordCount);
+        public Builder withWords(List<String> words) {
+           this.words = words;
+           return this;
+        }
+
+        public ResultOutput build() {
+            return new ResultOutput(wordCount, words);
         }
     }
 }

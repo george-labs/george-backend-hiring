@@ -1,11 +1,11 @@
 package service;
 
+import dto.ResultOutput;
+
 import java.util.List;
 
 public interface WordAnalysisService {
 
-    String sanitizeString(String inputString);
-
-    List<String> getWords(String inputString);
+    ResultOutput analyze(String inputString);
 
 }
