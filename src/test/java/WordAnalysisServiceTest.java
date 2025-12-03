@@ -11,6 +11,15 @@ public class WordAnalysisServiceTest {
         String inputString = "This is a test";
         ResultOutput resultOutput = wordAnalysisService.analyze(inputString);
 
+        assert resultOutput.getWordCount() == 3;
+    }
+
+    @Test
+    public void testAnalyzeWithMultipleIgnorableWords() {
+        String inputString = "This is a a of test the";
+
+        ResultOutput resultOutput = wordAnalysisService.analyze(inputString);
+
         assert resultOutput.getWordCount() == 4;
     }
 
@@ -27,4 +36,5 @@ public class WordAnalysisServiceTest {
         ResultOutput resultOutput = wordAnalysisService.analyze(inputString);
         assert resultOutput.getWordCount() == 4;
     }
+
 }
