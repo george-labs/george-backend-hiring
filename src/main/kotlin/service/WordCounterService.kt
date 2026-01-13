@@ -1,14 +1,19 @@
 package service
 
+import model.WordCounterResult
+
 private val WORD_REGEX_PATTERN = "[a-zA-Z]+".toRegex()
 
 class WordCounterService(
     val stopWords: List<String> = emptyList(),
 ) {
-    fun countWords(text: String): Int {
-        return splitWords(text)
+    fun countWords(text: String): WordCounterResult {
+        val filteredWords = splitWords(text)
             .filterWithStopWords()
-            .size
+        return WordCounterResult(
+            totalWords = filteredWords.size,
+            uniqueWords = filteredWords.distinct().size,
+        )
     }
 
     private fun splitWords(text: String): List<String> {

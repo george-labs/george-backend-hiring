@@ -15,16 +15,31 @@ class WordCounterServiceTest {
     @ParameterizedTest
     @MethodSource("countWordsSource")
     fun `wordCounter should calculate words correctly`(inputLine: String, expectedWordCount: Int) {
-        val actual = wordCounterService.countWords(inputLine)
+        val actual = wordCounterService.countWords(inputLine).totalWords
         assertEquals(expectedWordCount, actual)
     }
 
     @ParameterizedTest
     @MethodSource("countWordsWithStopWordsExamples")
-    fun `wordCounter should calculate words correctly`(input: Pair<InputString, StopWordsStringList>, expectedWordCount: Int) {
+    fun `wordCounter should calculate words correctly`(
+        input: Pair<InputString, StopWordsStringList>,
+        expectedWordCount: Int
+    ) {
         val (inputLine, stopWords) = input
         val wordCounterService = WordCounterService(stopWords = stopWords)
-        val actual = wordCounterService.countWords(inputLine)
+        val actual = wordCounterService.countWords(inputLine).totalWords
+        assertEquals(expectedWordCount, actual)
+    }
+
+    @ParameterizedTest
+    @MethodSource("countWordsWithUniqueWordsSource")
+    fun `wordCounter should calculate unique words correctly`(
+        input: InputString,
+        stopWords: StopWordsStringList,
+        expectedWordCount: Int
+    ) {
+        val wordCounterService = WordCounterService(stopWords = stopWords)
+        val actual = wordCounterService.countWords(input).uniqueWords
         assertEquals(expectedWordCount, actual)
     }
 
@@ -58,5 +73,16 @@ class WordCounterServiceTest {
             Pair("word word", listOf("word")) to 0,
             Pair("word word2d", emptyList<String>()) to 3,
         ).entries.stream().map { Arguments.of(it.key, it.value) }
+
+        @JvmStatic
+        fun countWordsWithUniqueWordsSource(): Stream<Arguments> = listOf(
+            Triple("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", listOf("the", "a", "on", "off"), 7),
+            Triple("Hello hello world", emptyList(), 3),
+            Triple("hello hello world", emptyList(), 2),
+            Triple("word word word", emptyList(), 1),
+            Triple("", emptyList(), 0),
+            Triple("One", emptyList(), 1),
+            Triple("Hello word", emptyList(), 2),
+        ).stream().map { Arguments.of(it.first, it.second, it.third) }
     }
 }

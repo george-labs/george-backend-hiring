@@ -1,6 +1,7 @@
 package controller
 
 import model.ArgumentsStore
+import model.WordCounterResult
 import reader.FileReader
 import service.WordCounterService
 
@@ -16,21 +17,21 @@ class WordCounterController(
     ),
 ) {
     fun start() {
-        val wordCount = if (arguments.filePath != null) {
+        val wordCountResult = if (arguments.filePath != null) {
             startWithFileInput(arguments.filePath)
         } else {
             startWithUserInput()
         }
-        println("Number of words: $wordCount")
+        println("Number of words: ${wordCountResult.totalWords}, unique: ${wordCountResult.uniqueWords}")
     }
 
-    private fun startWithUserInput(): Int {
+    private fun startWithUserInput(): WordCounterResult {
         print("Enter text: ")
         val inputText = readln()
         return wordCounterService.countWords(inputText)
     }
 
-    private fun startWithFileInput(filePath: String): Int {
+    private fun startWithFileInput(filePath: String): WordCounterResult {
         return wordCounterService.countWords(fileReader.readFileToString(filePath))
     }
 }

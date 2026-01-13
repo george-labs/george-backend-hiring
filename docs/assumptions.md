@@ -14,3 +14,6 @@ I will assume the application is case-sensitive when comparing any words.
 
 ## Iteration 3
 I will assume if the input file is not exist or not readable, the application should stop processing.
+
+## Iteration 4
+I will assume unique words are case-sensitive, e.g., "Word" and "word" are considered not the same word.
