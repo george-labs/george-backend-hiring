@@ -5,7 +5,7 @@ import java.io.ByteArrayInputStream
 class KotlinApplicationTest {
     @Test
     fun `main should not throw any exceptions`() {
-        val simulatedInput = "hello world\n"
+        val simulatedInput = "Mary had a little lamb\n"
         val inputStream = ByteArrayInputStream(simulatedInput.toByteArray())
         val originalIn = System.`in`
 

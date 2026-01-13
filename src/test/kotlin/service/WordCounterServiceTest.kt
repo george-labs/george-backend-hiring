@@ -6,13 +6,25 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
+typealias InputString = String
+typealias StopWordsStringList = List<String>
+
 class WordCounterServiceTest {
-    private val wordCounterService = WordCounterService()
+    val wordCounterService = WordCounterService()
 
     @ParameterizedTest
     @MethodSource("countWordsSource")
-    fun `wordCounter should calculate words correctly`(line: String, expectedWordCount: Int) {
-        val actual = wordCounterService.countWords(line)
+    fun `wordCounter should calculate words correctly`(inputLine: String, expectedWordCount: Int) {
+        val actual = wordCounterService.countWords(inputLine)
+        assertEquals(expectedWordCount, actual)
+    }
+
+    @ParameterizedTest
+    @MethodSource("countWordsWithStopWordsExamples")
+    fun `wordCounter should calculate words correctly`(input: Pair<InputString, StopWordsStringList>, expectedWordCount: Int) {
+        val (inputLine, stopWords) = input
+        val wordCounterService = WordCounterService(stopWords = stopWords)
+        val actual = wordCounterService.countWords(inputLine)
         assertEquals(expectedWordCount, actual)
     }
 
@@ -33,6 +45,18 @@ class WordCounterServiceTest {
             "Special_characters!@#" to 2,
             "Mix3d content with numb3rs and lett3rs" to 9,
             "Word,,, , with punctuation." to 3,
+        ).entries.stream().map { Arguments.of(it.key, it.value) }
+
+        @JvmStatic
+        fun countWordsWithStopWordsExamples(): Stream<Arguments> = mapOf<Pair<InputString, StopWordsStringList>, Int>(
+            Pair("Mary had a little lamb", listOf("the", "a", "on", "off")) to 4,
+            Pair("Mary had no little lamb", listOf("the", "a", "on", "off")) to 5,
+            Pair("Hello world", listOf("hello")) to 2,
+            Pair("hello world", listOf("hello")) to 1,
+            Pair("", listOf("word")) to 0,
+            Pair("word", listOf("word")) to 0,
+            Pair("word word", listOf("word")) to 0,
+            Pair("word word2d", emptyList<String>()) to 3,
         ).entries.stream().map { Arguments.of(it.key, it.value) }
     }
 }
