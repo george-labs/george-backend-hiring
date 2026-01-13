@@ -16,13 +16,21 @@ class WordCounterController(
     ),
 ) {
     fun start() {
-       val wordCount = startWithUserInput()
+        val wordCount = if (arguments.filePath != null) {
+            startWithFileInput(arguments.filePath)
+        } else {
+            startWithUserInput()
+        }
         println("Number of words: $wordCount")
     }
 
-    fun startWithUserInput(): Int {
+    private fun startWithUserInput(): Int {
         print("Enter text: ")
         val inputText = readln()
         return wordCounterService.countWords(inputText)
+    }
+
+    private fun startWithFileInput(filePath: String): Int {
+        return wordCounterService.countWords(fileReader.readFileToString(filePath))
     }
 }

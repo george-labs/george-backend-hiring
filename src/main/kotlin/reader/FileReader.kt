@@ -12,7 +12,7 @@ class FileReader() {
     }
 
     fun readFileToString(filePath: String): String {
-        if (!isFileExists(filePath)) return ""
+        if (!isFileExists(filePath)) throw FileReaderException("File: $filePath is blank, empty or does not exist. It cannot be read.")
         return runCatching { File(filePath).readText() }.getOrElse {
             throwFileReaderExceptionAndPrintMessage(filePath, it)
         }

@@ -11,3 +11,6 @@ I will assume the empty stopwords.txt file is valid and means no stop words.
 I will assume the unreachable stopwords.txt file is invalid and means application should stop processing.
 
 I will assume the application is case-sensitive when comparing any words.
+
+## Iteration 3
+I will assume if the input file is not exist or not readable, the application should stop processing.

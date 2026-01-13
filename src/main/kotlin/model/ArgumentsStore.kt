@@ -3,7 +3,7 @@ package model
 data class ArgumentsStore(
     val filePath: String? = null,
 ) {
-    fun isFileProvided(): Boolean = !filePath.isNullOrBlank()
+    fun isFileProvided() = !filePath.isNullOrBlank()
 }
 
 fun Array<String>.toArgumentsStore(): ArgumentsStore {
