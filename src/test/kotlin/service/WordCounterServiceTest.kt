@@ -43,6 +43,13 @@ class WordCounterServiceTest {
         assertEquals(expectedWordCount, actual)
     }
 
+    @ParameterizedTest
+    @MethodSource("countWordsAverageLengthSource")
+    fun `wordCounter should calculate words average length correctly`(inputLine: String, expectedWordLength: Double) {
+        val actual = wordCounterService.countWords(inputLine).averageWordsLength
+        assertEquals(expectedWordLength, actual)
+    }
+
     companion object {
         @JvmStatic
         fun countWordsSource(): Stream<Arguments> = mapOf(
@@ -94,5 +101,13 @@ class WordCounterServiceTest {
             Triple("One", emptyList(), 1),
             Triple("Hello word", emptyList(), 2),
         ).stream().map { Arguments.of(it.first, it.second, it.third) }
+
+        @JvmStatic
+        fun countWordsAverageLengthSource(): Stream<Arguments> = mapOf(
+            "Mary had a little lamb" to 3.6,
+            "Hello world" to 5.0,
+            "a a" to 1.0,
+            "" to 0.0,
+        ).entries.stream().map { Arguments.of(it.key, it.value) }
     }
 }

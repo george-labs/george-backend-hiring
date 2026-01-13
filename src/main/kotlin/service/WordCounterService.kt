@@ -13,7 +13,13 @@ class WordCounterService(
         return WordCounterResult(
             totalWords = filteredWords.size,
             uniqueWords = filteredWords.distinct().size,
+            averageWordsLength = calculateAverageWordLength(filteredWords),
         )
+    }
+
+    private fun calculateAverageWordLength(filteredWords: List<String>): Double {
+        if (filteredWords.isEmpty()) return 0.0
+        return filteredWords.sumOf { it.length }.toDouble() / filteredWords.size
     }
 
     private fun splitWords(text: String): List<String> {

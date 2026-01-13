@@ -22,7 +22,11 @@ class WordCounterController(
         } else {
             startWithUserInput()
         }
-        println("Number of words: ${wordCountResult.totalWords}, unique: ${wordCountResult.uniqueWords}")
+        println(
+            "Number of words: ${wordCountResult.totalWords}, " +
+                    "unique: ${wordCountResult.uniqueWords}; " +
+                    "average word length: ${"%.2f".format(wordCountResult.averageWordsLength)} characters"
+        )
     }
 
     private fun startWithUserInput(): WordCounterResult {
