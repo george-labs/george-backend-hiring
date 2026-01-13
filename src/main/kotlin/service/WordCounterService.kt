@@ -7,6 +7,7 @@ private val WORD_REGEX_PATTERN = "[a-zA-Z]+(-[a-zA-Z]+)*".toRegex()
 class WordCounterService(
     val stopWords: List<String> = emptyList(),
     val indexed: Boolean = false,
+    val dictionaryWords: List<String>? = null,
 ) {
     fun countWords(text: String): WordCounterResult {
         val filteredWords = splitWords(text)
@@ -16,7 +17,7 @@ class WordCounterService(
             .totalWords(filteredWords.size)
             .uniqueWords(uniqueWords.size)
             .averageWordsLength(calculateAverageWordLength(filteredWords))
-            .addIndexedWordsIfNeeded(uniqueWords)
+            .addIndexedAndUnknownWordsIfNeeded(uniqueWords)
             .build()
     }
 
@@ -33,8 +34,16 @@ class WordCounterService(
         return takeIf { stopWords.isEmpty() } ?: filterNot { it in stopWords }
     }
 
-    private fun WordCounterResult.Companion.Builder.addIndexedWordsIfNeeded(words: List<String>) = apply {
-        if (indexed) indexedWords(words.sortedWith(compareBy<String> { it.lowercase() }.thenBy { it[0].isUpperCase() }))
+    private fun WordCounterResult.Companion.Builder.addIndexedAndUnknownWordsIfNeeded(words: List<String>) = apply {
+        if (!indexed) return this
+        val sortedWords = words.sortedWith(compareBy<String> { it.lowercase() }.thenBy { it[0].isUpperCase() })
+
+        val indexedWords = dictionaryWords
+            ?.let { dictWords -> words.filter { it !in dictWords } }
+            ?.also { unknownWords -> sortedWords.map { if (it in unknownWords) "$it*" else it } }
+            ?: sortedWords
+
+        indexedWords(indexedWords)
     }
 }
 

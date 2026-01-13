@@ -73,5 +73,26 @@ class ArgumentsStoreTest {
             assertTrue(argumentsStore.indexed)
             assertEquals("path/to/file.txt", argumentsStore.filePath)
         }
+
+        @Test
+        fun `toArgumentsStore should parse dictionaryFilePath when -dictionary flag is present`() {
+            val args = arrayOf("path/to/file.txt", "-index", "-dictionary=path/to/dictionary.txt")
+            val argumentsStore = args.toArgumentsStore()
+            assertEquals("path/to/dictionary.txt", argumentsStore.dictionaryFilePath)
+        }
+
+        @Test
+        fun `toArgumentsStore should set dictionaryFilePath to null when -dictionary flag is absent`() {
+            val args = arrayOf("path/to/file.txt", "-index")
+            val argumentsStore = args.toArgumentsStore()
+            assertNull(argumentsStore.dictionaryFilePath)
+        }
+
+        @Test
+        fun `toArgumentsStore should ignore dictionary flag if index flag is not provided`() {
+            val args = arrayOf("path/to/file.txt", "-dictionary=path/to/dictionary.txt")
+            val argumentsStore = args.toArgumentsStore()
+            assertNull(argumentsStore.dictionaryFilePath)
+        }
     }
 }

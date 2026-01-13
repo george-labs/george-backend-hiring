@@ -5,6 +5,7 @@ class WordCounterResult private constructor(
     val uniqueWords: Int,
     val averageWordsLength: Double,
     val indexedWords: List<String>?,
+    val unknownWords: Int?,
 ) {
     companion object {
         class Builder {
@@ -12,17 +13,20 @@ class WordCounterResult private constructor(
             private var uniqueWords: Int? = null
             private var averageWordsLength: Double? = null
             private var indexedWords: List<String>? = null
+            private var unknownWords: Int? = null
 
             fun totalWords(totalWords: Int) = apply { this.totalWords = totalWords }
             fun uniqueWords(uniqueWords: Int) = apply { this.uniqueWords = uniqueWords }
             fun averageWordsLength(averageWordsLength: Double) = apply { this.averageWordsLength = averageWordsLength }
             fun indexedWords(indexedWords: List<String>?) = apply { this.indexedWords = indexedWords }
+            fun unknownWords(unknownWords: Int) = apply { this.unknownWords = unknownWords }
 
             fun build() = WordCounterResult(
                 totalWords = requireNotNull(totalWords),
                 uniqueWords = requireNotNull(uniqueWords),
                 averageWordsLength = requireNotNull(averageWordsLength),
                 indexedWords = indexedWords,
+                unknownWords = unknownWords,
             )
         }
     }

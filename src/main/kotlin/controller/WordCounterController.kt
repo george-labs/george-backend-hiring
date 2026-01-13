@@ -10,13 +10,9 @@ private const val STOPWORDS_FILE_PATH = "src/main/resources/stopwords.txt"
 class WordCounterController(
     private val arguments: ArgumentsStore = ArgumentsStore(),
     private val fileReader: FileReader = FileReader(),
-    private val wordCounterService: WordCounterService = WordCounterService(
-        stopWords = fileReader.readFileByLine(
-            STOPWORDS_FILE_PATH,
-        ),
-        indexed = arguments.indexed,
-    ),
 ) {
+    private val wordCounterService: WordCounterService = initializeWordCounterService()
+
     fun start() {
         val wordCountResult = if (arguments.filePath != null) {
             startWithFileInput(arguments.filePath)
@@ -42,5 +38,19 @@ class WordCounterController(
 
     private fun startWithFileInput(filePath: String): WordCounterResult {
         return wordCounterService.countWords(fileReader.readFileToString(filePath))
+    }
+
+    private fun initializeWordCounterService(): WordCounterService {
+        val dictionaryWords = arguments.dictionaryFilePath?.let {
+            fileReader.readFileByLine(it)
+        }
+
+        return WordCounterService(
+            stopWords = fileReader.readFileByLine(
+                STOPWORDS_FILE_PATH,
+            ),
+            indexed = arguments.indexed,
+            dictionaryWords = dictionaryWords,
+        )
     }
 }
