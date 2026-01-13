@@ -60,6 +60,15 @@ class WordCounterServiceTest {
             "Special_characters!@#" to 2,
             "Mix3d content with numb3rs and lett3rs" to 9,
             "Word,,, , with punctuation." to 3,
+            "hi-fi" to 1,
+            "-hi-fi" to 1,
+            "hi-fi-" to 1,
+            "hi -fi" to 2,
+            "hi- fi" to 2,
+            "-" to 0,
+            "-hi" to 1,
+            "hi--fi" to 2,
+            "tet-a-tet" to 1,
         ).entries.stream().map { Arguments.of(it.key, it.value) }
 
         @JvmStatic
@@ -72,11 +81,12 @@ class WordCounterServiceTest {
             Pair("word", listOf("word")) to 0,
             Pair("word word", listOf("word")) to 0,
             Pair("word word2d", emptyList<String>()) to 3,
+            Pair("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", listOf("the", "a", "on", "off")) to 7,
         ).entries.stream().map { Arguments.of(it.key, it.value) }
 
         @JvmStatic
         fun countWordsWithUniqueWordsSource(): Stream<Arguments> = listOf(
-            Triple("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", listOf("the", "a", "on", "off"), 7),
+            Triple("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", listOf("the", "a", "on", "off"), 6),
             Triple("Hello hello world", emptyList(), 3),
             Triple("hello hello world", emptyList(), 2),
             Triple("word word word", emptyList(), 1),

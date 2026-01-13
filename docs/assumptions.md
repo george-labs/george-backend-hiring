@@ -17,3 +17,6 @@ I will assume if the input file is not exist or not readable, the application sh
 
 ## Iteration 4
 I will assume unique words are case-sensitive, e.g., "Word" and "word" are considered not the same word.
+
+## Iteration 4
+I will assume hyphen is a symbol in between words, e.g., "Humpty-Dumpty". Illegal hyphen usage like "-word" or "word-" or " - " "a--b" will be treated as a splitter.

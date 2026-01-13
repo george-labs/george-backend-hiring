@@ -2,7 +2,7 @@ package service
 
 import model.WordCounterResult
 
-private val WORD_REGEX_PATTERN = "[a-zA-Z]+".toRegex()
+private val WORD_REGEX_PATTERN = "[a-zA-Z]+(-[a-zA-Z]+)*".toRegex()
 
 class WordCounterService(
     val stopWords: List<String> = emptyList(),
