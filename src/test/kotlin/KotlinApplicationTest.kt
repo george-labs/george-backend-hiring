@@ -11,7 +11,7 @@ class KotlinApplicationTest {
 
         runCatching {
             System.setIn(inputStream)
-            assertDoesNotThrow { main() }
+            assertDoesNotThrow { main(emptyArray()) }
         }
         System.setIn(originalIn)
     }
