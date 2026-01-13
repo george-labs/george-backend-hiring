@@ -1,3 +1,5 @@
 fun main() {
-    println("Hello, Kotlin!")
+    val wordCounterService = service.WordCounterService()
+    val wordCounterController = controller.WordCounterController(wordCounterService)
+    wordCounterController.start()
 }
