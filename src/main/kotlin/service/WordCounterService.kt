@@ -10,11 +10,11 @@ class WordCounterService(
     fun countWords(text: String): WordCounterResult {
         val filteredWords = splitWords(text)
             .filterWithStopWords()
-        return WordCounterResult(
-            totalWords = filteredWords.size,
-            uniqueWords = filteredWords.distinct().size,
-            averageWordsLength = calculateAverageWordLength(filteredWords),
-        )
+        return WordCounterResult.Companion.Builder()
+            .totalWords(filteredWords.size)
+            .uniqueWords(filteredWords.distinct().size)
+            .averageWordsLength(calculateAverageWordLength(filteredWords))
+            .build()
     }
 
     private fun calculateAverageWordLength(filteredWords: List<String>): Double {
