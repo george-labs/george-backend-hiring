@@ -25,4 +25,5 @@ I will assume hyphen is a symbol in between words, e.g., "Humpty-Dumpty". Illega
 I will assume average word length for empty input file is 0.0 characters.
 
 ## Iteration 7
-Flags are case insensitive, e.g., "-INDEX" and "-index" are considered the same flag.
+Flags are case-insensitive, e.g., "-INDEX" and "-index" are considered the same flag.
+I will assume the index is printed in ascending alphabetical order (regular is going before capital).

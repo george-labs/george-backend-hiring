@@ -11,9 +11,10 @@ class WordCounterController(
     private val arguments: ArgumentsStore = ArgumentsStore(),
     private val fileReader: FileReader = FileReader(),
     private val wordCounterService: WordCounterService = WordCounterService(
-        fileReader.readFileByLine(
-            STOPWORDS_FILE_PATH
-        )
+        stopWords = fileReader.readFileByLine(
+            STOPWORDS_FILE_PATH,
+        ),
+        indexed = arguments.indexed,
     ),
 ) {
     fun start() {
@@ -27,6 +28,10 @@ class WordCounterController(
                     "unique: ${wordCountResult.uniqueWords}; " +
                     "average word length: ${"%.2f".format(wordCountResult.averageWordsLength)} characters"
         )
+        if (arguments.indexed) {
+            println("Index:")
+            wordCountResult.indexedWords?.forEach { println(it) }
+        }
     }
 
     private fun startWithUserInput(): WordCounterResult {

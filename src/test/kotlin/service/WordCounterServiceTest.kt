@@ -1,6 +1,7 @@
 package service
 
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -48,6 +49,20 @@ class WordCounterServiceTest {
     fun `wordCounter should calculate words average length correctly`(inputLine: String, expectedWordLength: Double) {
         val actual = wordCounterService.countWords(inputLine).averageWordsLength
         assertEquals(expectedWordLength, actual)
+    }
+
+    @ParameterizedTest
+    @MethodSource("indexedWordsSource")
+    fun `wordCounter should calculate index correctly`(inputLine: String, expectedIndexes: List<String>) {
+        val wordCounterService = WordCounterService(indexed = true)
+        val actual = wordCounterService.countWords(inputLine).indexedWords
+        assertEquals(expectedIndexes, actual)
+    }
+
+    @Test
+    fun `wordCounter should return null for indexedWords when indexing is disabled`() {
+        val actual = wordCounterService.countWords("Mary had a little lamb").indexedWords
+        assertNull(actual)
     }
 
     companion object {
@@ -109,5 +124,16 @@ class WordCounterServiceTest {
             "a a" to 1.0,
             "" to 0.0,
         ).entries.stream().map { Arguments.of(it.key, it.value) }
+
+        @JvmStatic
+        fun indexedWordsSource(): Stream<Arguments> = mapOf(
+            "Mary had a little lamb" to listOf("a", "had","lamb","little","Mary"),
+            "" to emptyList(),
+            "a a a" to listOf("a"),
+            "a bb cc" to listOf("a","bb","cc"),
+            "a, A, b, B, c, C" to listOf("a", "A", "b", "B", "c", "C"),
+            "a, A, b, B, C, c" to listOf("a", "A", "b", "B", "c", "C"),
+
+            ).entries.stream().map { Arguments.of(it.key, it.value) }
     }
 }

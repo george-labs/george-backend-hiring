@@ -6,14 +6,17 @@ private val WORD_REGEX_PATTERN = "[a-zA-Z]+(-[a-zA-Z]+)*".toRegex()
 
 class WordCounterService(
     val stopWords: List<String> = emptyList(),
+    val indexed: Boolean = false,
 ) {
     fun countWords(text: String): WordCounterResult {
         val filteredWords = splitWords(text)
             .filterWithStopWords()
+        val uniqueWords = filteredWords.distinct()
         return WordCounterResult.Companion.Builder()
             .totalWords(filteredWords.size)
-            .uniqueWords(filteredWords.distinct().size)
+            .uniqueWords(uniqueWords.size)
             .averageWordsLength(calculateAverageWordLength(filteredWords))
+            .addIndexedWordsIfNeeded(uniqueWords)
             .build()
     }
 
@@ -29,4 +32,9 @@ class WordCounterService(
     private fun List<String>.filterWithStopWords(): List<String> {
         return takeIf { stopWords.isEmpty() } ?: filterNot { it in stopWords }
     }
+
+    private fun WordCounterResult.Companion.Builder.addIndexedWordsIfNeeded(words: List<String>) = apply {
+        if (indexed) indexedWords(words.sortedWith(compareBy<String> { it.lowercase() }.thenBy { it[0].isUpperCase() }))
+    }
 }
+
