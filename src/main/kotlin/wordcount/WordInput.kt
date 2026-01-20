@@ -24,7 +24,7 @@ class WordInput(val input: String?) {
                     .use { reader ->
                         reader.readText()
                     }
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 println("File $fileName could not be read.")
                 return WordInput(null)
             }

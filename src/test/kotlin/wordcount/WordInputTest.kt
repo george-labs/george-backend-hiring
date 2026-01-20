@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource
 import reader.InputReader
 
 class TestCmdReader : InputReader {
-    override fun readInput(): String? = "Input from command line"
+    override fun readInput(): String = "Input from command line"
 }
 
 class WordInputTest {
