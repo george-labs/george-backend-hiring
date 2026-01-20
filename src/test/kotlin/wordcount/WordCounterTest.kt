@@ -70,4 +70,17 @@ class WordCounterTest {
         assertEquals(6, res.unique)
     }
 
+    @CsvSource(
+        "Mary had a littl, 4.0",
+        "Mary had a little lamb, 4.25"
+    )
+    @ParameterizedTest
+    fun `wordcounter should calculate average word length`(input: String, expectedWordLength: Double) {
+        val wordCounter = WordCounter(stopwords)
+
+        val res = wordCounter.countWords(input)
+
+        assertEquals(expectedWordLength, res.averageLength)
+    }
+
 }
