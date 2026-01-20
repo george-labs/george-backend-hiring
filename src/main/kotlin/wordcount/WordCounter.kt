@@ -2,13 +2,18 @@ package wordcount
 
 class WordCounter(private val stopwords: Stopwords) {
 
-    fun countWords(input: String?): Int {
-        if (input == null) return 0
+    fun countWords(input: String?): WordCountResult {
+        if (input == null) return WordCountResult()
 
-        return input
+        val filteredWords = input
             .trim()
             .split(Regex("[^A-Za-z]+"))
+            .map { it.lowercase().trim() }
             .filter { it.isNotBlank() && !stopwords.isStopword(it) }
-            .size
+
+        return WordCountResult(
+            numWords = filteredWords.size,
+            unique = filteredWords.distinct().size,
+        )
     }
 }

@@ -1,3 +1,4 @@
+import output.OutputWriter
 import reader.CmdReader
 import wordcount.Stopwords
 import wordcount.WordCounter
@@ -14,12 +15,8 @@ object KotlinApplication {
 
         val wordCounter = WordCounter(stopwords)
 
-        val wordCount = wordCounter.countWords(wordInput.input)
+        val result = wordCounter.countWords(wordInput.input)
 
-        printOutput(wordCount)
-    }
-
-    fun printOutput(wordCount: Int) {
-        println("Number of words: $wordCount")
+        OutputWriter().writeOutput(result)
     }
 }

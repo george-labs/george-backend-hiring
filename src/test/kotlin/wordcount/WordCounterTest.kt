@@ -1,6 +1,7 @@
 package wordcount
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -26,7 +27,7 @@ class WordCounterTest {
 
         val res = wordCounter.countWords(input)
 
-        assertEquals(expectedWordCount, res)
+        assertEquals(expectedWordCount, res.numWords)
     }
 
     @ParameterizedTest
@@ -45,7 +46,17 @@ class WordCounterTest {
 
         val res = wordCounter.countWords("Hello Mary had a little lamb")
 
-        assertEquals(expectedWordCount, res)
+        assertEquals(expectedWordCount, res.numWords)
+    }
+
+    @Test
+    fun `wordcounter should return both unique and total word count`() {
+        val wordCounter = WordCounter(stopwords)
+
+        val res = wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-DUMPTY had a great fall")
+
+        assertEquals(9, res.numWords)
+        assertEquals(7, res.unique)
     }
 
 }
