@@ -83,4 +83,20 @@ class WordCounterTest {
         assertEquals(expectedWordLength, res.averageLength)
     }
 
+    @Test
+    fun `wordcounter should construct the index properly`() {
+        val wordCounter = WordCounter(stopwords)
+
+        val res = wordCounter.countWords("Mary had a little the mary lamb LAMB")
+
+        assertEquals(
+            listOf(
+                "Mary",
+                "had",
+                "little",
+                "lamb"
+            ), res.index
+        )
+    }
+
 }

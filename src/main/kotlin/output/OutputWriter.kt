@@ -12,7 +12,7 @@ class OutputWriter(
 
         if (includeIndex) {
             printer.print("Index:")
-            index.sorted().forEach { printer.print(it) }
+            index.sortedBy { it.lowercase() }.forEach { printer.print(it) }
         }
     }
 }

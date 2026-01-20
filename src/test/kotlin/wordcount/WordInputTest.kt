@@ -28,6 +28,38 @@ class WordInputTest {
 
         assertEquals(expected, input)
     }
-}
 
+    @ParameterizedTest
+    @CsvSource(
+        // Should read from a file + index
+        "mytext.txt, Mary had a little lamb, false",
+        // Should read from a file + index
+        "mytext.txt -index, Mary had a little lamb, true",
+//        // Unknown file, should fallback to null input
+        "unknown.txt, , false",
+        // Unknown file, should fallback to null input + index
+        "unknown.txt -index, ,true",
+        // No argument, should read from command line
+        " , Input from command line, false",
+        // No argument, should read from command line + index
+        "-index, Input from command line, true"
+    )
+    fun `should parse argument correctly`(
+        arguments: String?,
+        expectedInput: String?,
+        expectedIndexOption: Boolean
+    ) {
+        val args = arguments?.split(" ")?.toTypedArray() ?: emptyArray()
+
+        val wordInput = WordInput
+            .fromArguments(args, TestCmdReader())
+
+        val input = wordInput
+            .input
+            ?.replace(Regex("[\\r\\n]+"), " ")
+
+        assertEquals(expectedInput, input)
+        assertEquals(expectedIndexOption, wordInput.includeIndex)
+    }
+}
 
