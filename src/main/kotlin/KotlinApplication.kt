@@ -12,13 +12,13 @@ object KotlinApplication {
 
         val stopwords = Stopwords.fromResource("stopwords.txt")
 
-        val wordInput = WordInput.fromFileOrCmd(args.firstOrNull(), CmdReader())
+        val wordInput = WordInput.fromArguments(args, CmdReader())
 
         val wordCounterConfig = WordCounterConfig("[^A-Za-z-]+")
         val wordCounter = WordCounter(stopwords, wordCounterConfig)
 
         val result = wordCounter.countWords(wordInput.input)
 
-        OutputWriter().writeOutput(result)
+        OutputWriter().writeOutput(result, wordInput.includeIndex)
     }
 }

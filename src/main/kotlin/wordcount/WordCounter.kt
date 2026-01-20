@@ -19,7 +19,8 @@ class WordCounter(
         return WordCountResult(
             numWords = filteredWords.size,
             unique = filteredWords.distinct().size,
-            averageLength = averageLength
+            averageLength = averageLength,
+            index = filteredWords.distinct()
         )
     }
 }

@@ -3,21 +3,34 @@ package wordcount
 import reader.InputReader
 import java.io.File
 
-class WordInput(val input: String?) {
+class WordInput(
+    val input: String?,
+    val includeIndex: Boolean = false
+) {
 
     companion object {
 
-        fun fromFileOrCmd(argument: String?, inputReader: InputReader): WordInput {
-            return argument?.let { fromFile(it) } ?: fromInput(inputReader)
+        fun fromArguments(args: Array<String>, inputReader: InputReader): WordInput {
+            val includeIndex: Boolean = args.any { it == "-index" }
+            val inputFile = args.filter { !it.startsWith("-") }.firstOrNull()
+
+            val input = inputFile?.let { fromFile(it) } ?: fromInput(inputReader)
+
+            return WordInput(input, includeIndex)
         }
 
-        private fun fromInput(inputReader: InputReader): WordInput {
-            print("Enter text: ")
-            val input = inputReader.readInput()
+        fun fromFileOrCmd(argument: String?, inputReader: InputReader): WordInput {
+            val input = argument?.let { fromFile(it) } ?: fromInput(inputReader)
             return WordInput(input)
         }
 
-        private fun fromFile(fileName: String): WordInput {
+        private fun fromInput(inputReader: InputReader): String? {
+            print("Enter text: ")
+            val input = inputReader.readInput()
+            return input
+        }
+
+        private fun fromFile(fileName: String): String? {
             val input = try {
                 File(fileName)
                     .bufferedReader()
@@ -26,10 +39,10 @@ class WordInput(val input: String?) {
                     }
             } catch (_: Exception) {
                 println("File $fileName could not be read.")
-                return WordInput(null)
+                return null
             }
 
-            return WordInput(input)
+            return input
         }
     }
 }
