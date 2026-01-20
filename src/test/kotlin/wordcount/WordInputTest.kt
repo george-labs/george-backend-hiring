@@ -1,26 +1,33 @@
 package wordcount
 
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertThrows
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import java.io.FileNotFoundException
+import reader.InputReader
+
+class TestCmdReader : InputReader {
+    override fun readInput(): String? = "Input from command line"
+}
 
 class WordInputTest {
 
-    @Test
-    fun `should read input from file`() {
-        val input = WordInput.fromFile("mytext.txt")
+    @ParameterizedTest
+    @CsvSource(
+        // Should read from a file
+        "mytext.txt, Mary had a little lamb",
+        // Unknown file, should fallback to null input
+        "unknown.txt, ",
+        // No argument, should read from command line
+        ", Input from command line"
+    )
+    fun `should read input based on argument`(argument: String?, expected: String?) {
+        val input = WordInput
+            .fromFileOrCmd(argument, TestCmdReader())
             .input
-            .replace(Regex("[\\r\\n]+"), " ")
+            ?.replace(Regex("[\\r\\n]+"), " ")
 
-        assertEquals("Mary had a little lamb", input)
-    }
-
-    @Test
-    fun `should throw error if file does not exist`() {
-        assertThrows<FileNotFoundException>({ WordInput.fromFile("mytext.txt").input })
+        assertEquals(expected, input)
     }
 }
+
+
