@@ -25,7 +25,7 @@ class WordCounterTest {
     fun `wordcounter should print correct number of words`(input: String?, expectedWordCount: Int) {
         val wordCounter = WordCounter(stopwords)
 
-        val res = wordCounter.countWords(input)
+        val res = wordCounter.countWords(input, WordCounterConfig("[^A-Za-z]+"))
 
         assertEquals(expectedWordCount, res.numWords)
     }

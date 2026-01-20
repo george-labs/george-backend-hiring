@@ -2,6 +2,7 @@ import output.OutputWriter
 import reader.CmdReader
 import wordcount.Stopwords
 import wordcount.WordCounter
+import wordcount.WordCounterConfig
 import wordcount.WordInput
 
 object KotlinApplication {
@@ -13,9 +14,10 @@ object KotlinApplication {
 
         val wordInput = WordInput.fromFileOrCmd(args.firstOrNull(), CmdReader())
 
+        val wordCounterConfig = WordCounterConfig("[^A-Za-z-]+")
         val wordCounter = WordCounter(stopwords)
 
-        val result = wordCounter.countWords(wordInput.input)
+        val result = wordCounter.countWords(wordInput.input, wordCounterConfig)
 
         OutputWriter().writeOutput(result)
     }
