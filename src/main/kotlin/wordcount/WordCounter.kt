@@ -1,8 +1,11 @@
 package wordcount
 
-class WordCounter(private val stopwords: Stopwords) {
+class WordCounter(
+    private val stopwords: Stopwords,
+    private val config: WordCounterConfig = WordCounterConfig()
+) {
 
-    fun countWords(input: String?, config: WordCounterConfig): WordCountResult {
+    fun countWords(input: String?): WordCountResult {
         if (input == null) return WordCountResult()
 
         val filteredWords = input

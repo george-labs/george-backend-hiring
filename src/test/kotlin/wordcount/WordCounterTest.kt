@@ -25,7 +25,7 @@ class WordCounterTest {
     fun `wordcounter should print correct number of words`(input: String?, expectedWordCount: Int) {
         val wordCounter = WordCounter(stopwords)
 
-        val res = wordCounter.countWords(input, WordCounterConfig("[^A-Za-z]+"))
+        val res = wordCounter.countWords(input)
 
         assertEquals(expectedWordCount, res.numWords)
     }
@@ -57,6 +57,17 @@ class WordCounterTest {
 
         assertEquals(9, res.numWords)
         assertEquals(7, res.unique)
+    }
+
+    @Test
+    fun `wordcounter should not split words on hyphen`() {
+        val config = WordCounterConfig("[^A-Za-z-]+")
+        val wordCounter = WordCounter(stopwords, config)
+
+        val res = wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-DUMPTY had a great fall")
+
+        assertEquals(7, res.numWords)
+        assertEquals(6, res.unique)
     }
 
 }

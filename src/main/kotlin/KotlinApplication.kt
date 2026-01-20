@@ -15,9 +15,9 @@ object KotlinApplication {
         val wordInput = WordInput.fromFileOrCmd(args.firstOrNull(), CmdReader())
 
         val wordCounterConfig = WordCounterConfig("[^A-Za-z-]+")
-        val wordCounter = WordCounter(stopwords)
+        val wordCounter = WordCounter(stopwords, wordCounterConfig)
 
-        val result = wordCounter.countWords(wordInput.input, wordCounterConfig)
+        val result = wordCounter.countWords(wordInput.input)
 
         OutputWriter().writeOutput(result)
     }
