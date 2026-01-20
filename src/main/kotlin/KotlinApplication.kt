@@ -1,10 +1,12 @@
+import wordcount.Stopwords
 import wordcount.WordCounter
 
 object KotlinApplication {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val wordCounter = WordCounter()
+        val stopwords = Stopwords.fromResource("stopwords.txt")
+        val wordCounter = WordCounter(stopwords)
 
         val input = readInput()
 
