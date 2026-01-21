@@ -13,3 +13,6 @@
 
 ## Iteration 3
 - If file is not found we fallback to empty input
+
+## Iteration 4
+- The uniqueness of words is checked case-insensitive 
