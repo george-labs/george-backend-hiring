@@ -8,7 +8,7 @@
 - Blank spaces are trimmed
 
 ## Iteration 2
-- Stopwords are filtered case insensitive
+- Stopwords are filtered case-insensitive
 - If a list of stopwords is not provided or empty, all words are considered
 
 ## Iteration 3
@@ -16,3 +16,7 @@
 
 ## Iteration 4
 - The uniqueness of words is checked case-insensitive 
+
+## Iteration 6
+- The average word length is calculated on filtered words
+- The average word length is calculated on all words, not the unique ones 

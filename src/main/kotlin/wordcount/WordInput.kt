@@ -11,13 +11,13 @@ class WordInput(val input: String?) {
             return argument?.let { fromFile(it) } ?: fromInput(inputReader)
         }
 
-        fun fromInput(inputReader: InputReader): WordInput {
+        private fun fromInput(inputReader: InputReader): WordInput {
             print("Enter text: ")
             val input = inputReader.readInput()
             return WordInput(input)
         }
 
-        fun fromFile(fileName: String): WordInput {
+        private fun fromFile(fileName: String): WordInput {
             val input = try {
                 File(fileName)
                     .bufferedReader()

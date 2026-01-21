@@ -14,9 +14,12 @@ class WordCounter(
             .map { it.lowercase().trim() }
             .filter { it.isNotBlank() && !stopwords.isStopword(it) }
 
+        val averageLength = filteredWords.map { it.length }.average()
+
         return WordCountResult(
             numWords = filteredWords.size,
             unique = filteredWords.distinct().size,
+            averageLength = averageLength
         )
     }
 }
