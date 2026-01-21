@@ -1,6 +1,7 @@
 # Assumptions per iteration
 
 ## Iteration 1
+
 - We do consider non-english words as input, for example:
   input "word wor2d" results in 3
 - Diacricits should split the words in input, for example:
@@ -8,15 +9,25 @@
 - Blank spaces are trimmed
 
 ## Iteration 2
+
 - Stopwords are filtered case-insensitive
 - If a list of stopwords is not provided or empty, all words are considered
 
 ## Iteration 3
+
 - If file is not found we fallback to empty input
 
 ## Iteration 4
-- The uniqueness of words is checked case-insensitive 
+
+- The uniqueness of words is checked case-insensitive
 
 ## Iteration 6
+
 - The average word length is calculated on filtered words
-- The average word length is calculated on all words, not the unique ones 
+- The average word length is calculated on all words, not the unique ones
+
+## Iteration 7
+
+- The index handles two casing versions of the same word as one word only.
+- Only the first occurrence of a word is presented in the output index
+- For example "Mary MARY mary" will be presented in the output index as "Mary" 

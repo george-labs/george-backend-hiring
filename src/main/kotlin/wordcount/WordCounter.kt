@@ -1,5 +1,8 @@
 package wordcount
 
+/**
+ * Main service that is responsible for counting words in a given input string
+ */
 class WordCounter(
     private val stopwords: Stopwords,
     private val config: WordCounterConfig = WordCounterConfig()
@@ -11,15 +14,16 @@ class WordCounter(
         val filteredWords = input
             .trim()
             .split(Regex(config.splitPattern))
-            .map { it.lowercase().trim() }
-            .filter { it.isNotBlank() && !stopwords.isStopword(it) }
+            .map { Pair(it.lowercase().trim(), it) }
+            .filter { it.first.isNotBlank() && !stopwords.isStopword(it.first) }
 
-        val averageLength = filteredWords.map { it.length }.average()
+        val averageLength = filteredWords.map { it.first.length }.average()
 
         return WordCountResult(
             numWords = filteredWords.size,
-            unique = filteredWords.distinct().size,
-            averageLength = averageLength
+            unique = filteredWords.map { it.first }.distinct().size,
+            averageLength = averageLength,
+            index = filteredWords.distinctBy { it.first }.map { it.second }
         )
     }
 }
