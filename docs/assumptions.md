@@ -10,3 +10,6 @@
 ## Iteration 2
 - Stopwords are filtered case insensitive
 - If a list of stopwords is not provided or empty, all words are considered
+
+## Iteration 3
+- If file is not found we fallback to empty input

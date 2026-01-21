@@ -1,27 +1,25 @@
+import reader.CmdReader
 import wordcount.Stopwords
 import wordcount.WordCounter
+import wordcount.WordInput
 
 object KotlinApplication {
 
     @JvmStatic
     fun main(args: Array<String>) {
+
         val stopwords = Stopwords.fromResource("stopwords.txt")
+
+        val wordInput = WordInput.fromFileOrCmd(args.firstOrNull(), CmdReader())
+
         val wordCounter = WordCounter(stopwords)
 
-        val input = readInput()
-
-        val wordCount = wordCounter.countWords(input)
+        val wordCount = wordCounter.countWords(wordInput.input)
 
         printOutput(wordCount)
-    }
-
-    fun readInput(): String {
-        println("Enter text:")
-        return readLine() ?: throw Exception("Input can't be empty")
     }
 
     fun printOutput(wordCount: Int) {
         println("Number of words: $wordCount")
     }
-
 }
