@@ -7,3 +7,6 @@
   input "Helálo hello" results in 3
 - Blank spaces are trimmed
 
+## Iteration 2
+- Stopwords are filtered case insensitive
+- If a list of stopwords is not provided or empty, all words are considered
