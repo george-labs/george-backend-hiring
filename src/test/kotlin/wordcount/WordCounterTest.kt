@@ -59,4 +59,15 @@ class WordCounterTest {
         assertEquals(7, res.unique)
     }
 
+    @Test
+    fun `wordcounter should not split words on hyphen`() {
+        val config = WordCounterConfig("[^A-Za-z-]+")
+        val wordCounter = WordCounter(stopwords, config)
+
+        val res = wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-DUMPTY had a great fall")
+
+        assertEquals(7, res.numWords)
+        assertEquals(6, res.unique)
+    }
+
 }
